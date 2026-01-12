@@ -25,6 +25,7 @@
         "mpg": 51,
         "maintenanceCostPerMile": 0.1104,
         "avgGasPrice": 3.50,
+        "depreciationCostPerMile": 0.09,
         "description": "Premium comfort - 51 MPG",
         "icon": "🚗"
     },
@@ -35,6 +36,7 @@
         "mpg": 48,
         "maintenanceCostPerMile": 0.1104,
         "avgGasPrice": 3.50,
+        "depreciationCostPerMile": 0.09,
         "description": "Smooth ride - 48 MPG",
         "icon": "🚗"
     },
@@ -45,6 +47,7 @@
         "mpg": 52,
         "maintenanceCostPerMile": 0.1104,
         "avgGasPrice": 3.50,
+        "depreciationCostPerMile": 0.08,
         "description": "Compact efficient - 52 MPG",
         "icon": "🚗"
     },
@@ -55,6 +58,7 @@
         "mpg": 47,
         "maintenanceCostPerMile": 0.1104,
         "avgGasPrice": 3.50,
+        "depreciationCostPerMile": 0.09,
         "description": "Stylish value - 47 MPG",
         "icon": "🚗"
     },
@@ -65,6 +69,7 @@
         "mpg": 35,
         "maintenanceCostPerMile": 0.1104,
         "avgGasPrice": 3.50,
+        "depreciationCostPerMile": 0.09,
         "description": "Popular budget choice - 35 MPG",
         "icon": "🚙"
     },
@@ -75,6 +80,7 @@
         "mpg": 34,
         "maintenanceCostPerMile": 0.1104,
         "avgGasPrice": 3.50,
+        "depreciationCostPerMile": 0.09,
         "description": "Legendary reliability - 34 MPG",
         "icon": "🚙"
     },
@@ -130,6 +136,7 @@
         "mpg": 39,
         "maintenanceCostPerMile": 0.1104,
         "avgGasPrice": 3.50,
+        "depreciationCostPerMile": 0.10,
         "description": "SUV space - 39 MPG",
         "icon": "🚐"
     },

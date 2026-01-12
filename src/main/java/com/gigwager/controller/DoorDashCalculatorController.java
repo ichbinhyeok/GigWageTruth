@@ -23,12 +23,13 @@ public class DoorDashCalculatorController {
         model.addAttribute("initialGross", gross);
         model.addAttribute("initialMiles", miles);
         model.addAttribute("initialHours", hours);
+        model.addAttribute("app", "doordash");
 
         // Dynamic SEO Title
         // Simple calculation for title context (approximate)
         model.addAttribute("customTitle",
                 "DoorDash Truth: I made $" + gross.intValue() + "... but the real wage is shocking.");
 
-        return "doordash";
+        return "calculator";
     }
 }

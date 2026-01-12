@@ -66,7 +66,7 @@
                             
                             <!-- Total Earnings -->
                             <div class="space-y-2">
-                                <label class="text-xs font-bold text-slate-900 uppercase tracking-wide">Total Earnings</label>
+                                <label class="text-xs font-bold text-slate-900 uppercase tracking-wide">Total Weekly Earnings (Payout)</label>
                                 <p class="text-xs text-slate-500">Week, month, or any period</p>
                                 <div class="relative group">
                                     <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-lg font-medium group-focus-within:text-emerald-600 transition-colors">$</span>
@@ -77,7 +77,9 @@
                             <div class="grid grid-cols-2 gap-6">
                                 <!-- Miles -->
                                 <div class="space-y-2">
-                                    <label class="text-xs font-bold text-slate-900 uppercase tracking-wide">Miles Driven</label>
+                                    <div class="flex justify-between items-baseline">
+                                        <label class="text-xs font-bold text-slate-900 uppercase tracking-wide">Miles Driven</label>
+                                    </div>
                                     <div class="relative group">
                                         <input type="number" name="miles" required placeholder="800" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-4 px-4 text-xl font-bold text-slate-900 outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all placeholder:text-slate-300">
                                         <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-medium">mi</span>
@@ -86,7 +88,10 @@
 
                                 <!-- Hours -->
                                 <div class="space-y-2">
-                                    <label class="text-xs font-bold text-slate-900 uppercase tracking-wide">Total Hours</label>
+                                    <div class="flex justify-between items-baseline">
+                                        <label class="text-xs font-bold text-slate-900 uppercase tracking-wide">Total Online Time</label>
+                                        <span class="text-[10px] text-red-500 font-bold">NO Active Time</span>
+                                    </div>
                                     <div class="relative group">
                                         <input type="number" name="hours" required placeholder="40" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-4 px-4 text-xl font-bold text-slate-900 outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all placeholder:text-slate-300">
                                         <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-medium">hr</span>
@@ -97,7 +102,8 @@
                             <!-- Helper: Where to find -->
                             <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-3">
                                 <p class="text-xs text-emerald-800">
-                                    <span class="font-bold">💡 Where to find:</span> Uber/Lyft app → Earnings tab
+                                    <span class="font-bold">💡 Where to find:</span> 
+                                    <span x-text="app === 'rideshare' ? 'Uber/Lyft app → Earnings tab' : 'Earnings tab → Dash Time (Not Active Time)'"></span>
                                 </p>
                             </div>
 

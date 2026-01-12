@@ -262,7 +262,7 @@
                             <h3 class="text-base font-semibold text-slate-900">Breakdown</h3>
                             <div class="bg-slate-50 rounded-2xl p-6 space-y-4">
                                 <div class="flex justify-between text-sm">
-                                    <span class="text-slate-600">Gross Earnings</span>
+                                    <span class="text-slate-600">Total Weekly Earnings</span>
                                     <span class="font-medium text-slate-900">$<span x-text="gross.toFixed(2)"></span></span>
                                 </div>
                                 <div class="flex justify-between text-sm">
@@ -382,7 +382,7 @@
                                 <span class="font-medium text-slate-900" x-text="effectiveMiles.toFixed(1)"></span>
                             </div>
                             <div class="flex justify-between text-sm">
-                                <span class="text-slate-500">Hours worked</span>
+                                <span class="text-slate-500">Online Time</span>
                                 <span class="font-medium text-slate-900" x-text="hours"></span>
                             </div>
                             <div class="flex justify-between text-sm">

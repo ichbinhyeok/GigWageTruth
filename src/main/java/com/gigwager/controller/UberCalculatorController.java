@@ -28,11 +28,12 @@ public class UberCalculatorController {
         model.addAttribute("initialGross", gross);
         model.addAttribute("initialMiles", miles);
         model.addAttribute("initialHours", hours);
+        model.addAttribute("app", "uber");
 
         // Dynamic SEO Title
         // Simple calculation for title context (approximate)
         model.addAttribute("customTitle", "I thought I made $" + gross.intValue() + "... The truth is shocking.");
 
-        return "uber";
+        return "calculator";
     }
 }
