@@ -41,28 +41,28 @@
                 <div class="w-full max-w-lg space-y-8">
                     
                     <!-- Form Container -->
-                    <div class="bg-white rounded-3xl border-2 border-slate-100 shadow-2xl shadow-slate-200/50 p-6 md:p-10 relative">
+                    <div x-data="{ app: 'rideshare', actionUrl: '/uber' }" class="bg-white rounded-3xl border-2 border-slate-100 shadow-2xl shadow-slate-200/50 p-6 md:p-10 relative">
                         
                         <!-- Trust Badge -->
                         <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow-lg flex items-center gap-1 whitespace-nowrap">
                             <span>🔒</span> 100% Anonymous & No Sign-up
                         </div>
 
-                        <!-- App Tabs (Visual only for now, both go to same calc) -->
-                        <div x-data="{ app: 'rideshare' }" class="grid grid-cols-2 gap-2 mb-8 p-1 bg-slate-100 rounded-xl">
-                            <button @click="app = 'rideshare'" 
+                        <!-- App Tabs -->
+                        <div class="grid grid-cols-2 gap-2 mb-8 p-1 bg-slate-100 rounded-xl">
+                            <button @click="app = 'rideshare'; actionUrl = '/uber'" 
                                     :class="app === 'rideshare' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'"
                                     class="py-2.5 text-sm font-bold rounded-lg transition-all flex items-center justify-center gap-2">
                                 <span>🚗</span> Uber / Lyft
                             </button>
-                            <button @click="app = 'delivery'" 
+                            <button @click="app = 'delivery'; actionUrl = '/doordash'" 
                                     :class="app === 'delivery' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'"
                                     class="py-2.5 text-sm font-bold rounded-lg transition-all flex items-center justify-center gap-2">
                                 <span>🍔</span> DoorDash
                             </button>
                         </div>
 
-                        <form action="/uber" method="GET" class="space-y-6">
+                        <form :action="actionUrl" method="GET" class="space-y-6">
                             
                             <!-- Total Earnings -->
                             <div class="space-y-2">
