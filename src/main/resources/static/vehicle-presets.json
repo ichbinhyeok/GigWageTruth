@@ -13,6 +13,7 @@
         "type": "hybrid",
         "mpg": 57,
         "maintenanceCostPerMile": 0.1104,
+        "depreciationCostPerMile": 0.08,
         "avgGasPrice": 3.50,
         "description": "Industry standard - 57 MPG, ultra reliable",
         "icon": "🔥"
@@ -83,6 +84,7 @@
         "type": "sedan",
         "mpg": 33,
         "maintenanceCostPerMile": 0.1104,
+        "depreciationCostPerMile": 0.10,
         "avgGasPrice": 3.50,
         "description": "Affordable reliable - 33 MPG",
         "icon": "🚙"
@@ -94,6 +96,7 @@
         "mpgEquivalent": 130,
         "maintenanceCostPerMile": 0.1104,
         "avgElectricityCost": 0.15,
+        "depreciationCostPerMile": 0.12,
         "kwhPer100Miles": 24,
         "description": "Zero gas cost - 130 MPGe",
         "icon": "⚡"
@@ -136,6 +139,7 @@
         "type": "hybrid-suv",
         "mpg": 43,
         "maintenanceCostPerMile": 0.1104,
+        "depreciationCostPerMile": 0.09,
         "avgGasPrice": 3.50,
         "description": "Versatile SUV - 43 MPG",
         "icon": "🚐"

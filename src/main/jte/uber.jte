@@ -30,6 +30,7 @@
                     vehiclePresets: [],
                     customMpg: 25,
                     customMaintenance: 0.12,
+                    customDepreciation: 0.15,
                     gasPrice: 3.50,
                     targetWeeklyIncome: 1200,
                     
@@ -41,6 +42,7 @@
                     // UI State
                     showTargetHustle: false,
                     showAdvancedOptions: false,
+                    isRoundTrip: false,
                     
                     async init() {
                         try {
@@ -57,32 +59,37 @@
                     
                     get deductionCost() {
                         if (this.calculationMode === 'standard') {
-                            return this.miles * ${AppConstants.IRS_MILEAGE_RATE_2024};
+                            return this.effectiveMiles * ${AppConstants.IRS_MILEAGE_RATE_2024};
                         } else {
                             const vehicle = this.selectedVehicle;
-                            if (!vehicle || vehicle.id === 'irs-standard') return this.miles * 0.725;
+                            if (!vehicle || vehicle.id === 'irs-standard') return this.effectiveMiles * 0.725;
                             
                             let cost = 0;
                             if (vehicle.type === 'electric') {
-                                const kwhUsed = (this.miles / 100) * vehicle.kwhPer100Miles;
+                                const kwhUsed = (this.effectiveMiles / 100) * vehicle.kwhPer100Miles;
                                 cost += kwhUsed * vehicle.avgElectricityCost;
                             } else {
-                                const mpg = vehicle.id === 'custom' ? this.customMpg : vehicle.mpg;
-                                cost += (this.miles / mpg) * this.gasPrice;
+                                const mpg = vehicle.id === 'custom' ? Number(this.customMpg) : vehicle.mpg;
+                                cost += (this.effectiveMiles / mpg) * Number(this.gasPrice);
                             }
-                            const maintenanceCost = vehicle.id === 'custom' ? this.customMaintenance : vehicle.maintenanceCostPerMile;
-                            cost += this.miles * maintenanceCost;
+                            const maintenanceCost = vehicle.id === 'custom' ? Number(this.customMaintenance) : vehicle.maintenanceCostPerMile;
+                            const depreciationCost = vehicle.id === 'custom' ? Number(this.customDepreciation) : (vehicle.depreciationCostPerMile || 0);
+                            cost += this.effectiveMiles * (maintenanceCost + depreciationCost);
                             return cost;
                         }
                     },
                     
+                    get effectiveMiles() {
+                         return this.isRoundTrip ? this.miles * 2 : this.miles;
+                    },
+                    
                     // Phase 3: Advanced Calculations
                     get totalEarnings() {
-                        return this.gross + this.tips + this.bonuses;
+                        return this.gross + Number(this.tips) + Number(this.bonuses);
                     },
                     
                     get activeDriveTime() {
-                        return Math.max(0, this.hours - this.waitTime);
+                        return Math.max(0, this.hours - Number(this.waitTime));
                     },
                     
                     get taxCost() {
@@ -103,12 +110,12 @@
                     },
                     
                     get hasAdvancedData() {
-                        return this.tips > 0 || this.bonuses > 0 || this.waitTime > 0;
+                        return Number(this.tips) > 0 || Number(this.bonuses) > 0 || Number(this.waitTime) > 0;
                     },
                     
                     get remainingHours() {
                         if (this.netHourly <= 0) return 0;
-                        const needed = Math.max(0, this.targetWeeklyIncome - this.gross);
+                        const needed = Math.max(0, Number(this.targetWeeklyIncome) - this.gross);
                         return Math.ceil(needed / this.netHourly);
                     },
                     
@@ -117,9 +124,9 @@
                         
                         if (wage < 12) {
                             const messages = [
-                                { emoji: '💀', text: "You're making $" + (15 - wage).toFixed(2) + " LESS than McDonald's ($15/hr)" },
-                                { emoji: '🍔', text: "Burger King cashiers ($15) earn more than you ($" + wage.toFixed(2) + ")" },
-                                { emoji: '😱', text: "Target starts at $15. You're at $" + wage.toFixed(2) },
+                                { emoji: '💀', text: "You're making $" + (15 - wage).toFixed(2) + " LESS than McDonald's ($15/hr) + NO benefits" },
+                                { emoji: '🍔', text: "Burger King cashiers ($15) earn more + get paid time off" },
+                                { emoji: '😱', text: "Target starts at $15. No vehicle depreciation there." },
                                 { emoji: '💔', text: "Even Walmart pays $14-16. This is rough." }
                             ];
                             return messages[Math.floor(Math.random() * messages.length)];
@@ -127,9 +134,9 @@
                         
                         if (wage < 15) {
                             const messages = [
-                                { emoji: '⚠️', text: "Below CA/NY minimum wage ($15-16/hr)" },
-                                { emoji: '🎯', text: "Barely keeping up with inflation" },
-                                { emoji: '💸', text: "Fast food workers are catching up to you" }
+                                { emoji: '⚠️', text: "Below CA/NY minimum wage ($15-16/hr) and 0 benefits" },
+                                { emoji: '🎯', text: "Barely keeping up with inflation + car depreciation" },
+                                { emoji: '💸', text: "Fast food workers are catching up + have health insurance" }
                             ];
                             return messages[Math.floor(Math.random() * messages.length)];
                         }
@@ -299,14 +306,26 @@
                                     </template>
                                 </select>
                                 <div x-show="selectedVehicleId === 'custom'">
-                                    <input type="number" x-model.number="customMpg" placeholder="MPG" 
+                                    <input type="number" x-model="customMpg" placeholder="MPG" 
                                            class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:border-slate-400 focus:outline-none">
+                                    <div class="mt-2 grid grid-cols-2 gap-2">
+                                        <div>
+                                            <label class="text-[10px] text-slate-500 uppercase tracking-wide font-semibold">Maint ($/mi)</label>
+                                            <input type="number" x-model="customMaintenance" step="0.01" 
+                                                class="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:border-slate-400 focus:outline-none">
+                                        </div>
+                                        <div>
+                                            <label class="text-[10px] text-slate-500 uppercase tracking-wide font-semibold">Depr ($/mi)</label>
+                                            <input type="number" x-model="customDepreciation" step="0.01" 
+                                                class="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:border-slate-400 focus:outline-none">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div x-show="selectedVehicle?.type !== 'electric'" class="flex items-center gap-3">
                                     <span class="text-xs text-slate-500 shrink-0">Gas Price</span>
                                     <input type="range" x-model.number="gasPrice" min="2.00" max="7.00" step="0.10"
                                            class="flex-1 h-1 bg-slate-200 rounded-full accent-slate-900">
-                                    <span class="text-sm font-medium text-slate-900 shrink-0">$<span x-text="gasPrice.toFixed(2)"></span></span>
+                                    <span class="text-sm font-medium text-slate-900 shrink-0">$<span x-text="Number(gasPrice).toFixed(2)"></span></span>
                                 </div>
                             </div>
                         </div>
@@ -328,7 +347,7 @@
                             <div x-show="showTargetHustle" x-collapse class="px-6 pb-6 space-y-4">
                                 <div class="flex justify-between items-baseline">
                                     <span class="text-xs text-slate-500">Target</span>
-                                    <span class="text-xl font-semibold text-slate-900">$<span x-text="targetWeeklyIncome"></span></span>
+                                    <span class="text-xl font-semibold text-slate-900">$<span x-text="Number(targetWeeklyIncome)"></span></span>
                                 </div>
                                 <input type="range" x-model.number="targetWeeklyIncome" min="500" max="3000" step="50" 
                                        class="w-full h-1 bg-slate-200 rounded-full accent-slate-900">
@@ -348,8 +367,15 @@
                         <!-- Quick Stats -->
                         <div class="bg-slate-50 rounded-2xl p-6 space-y-3">
                             <div class="flex justify-between text-sm">
-                                <span class="text-slate-500">Miles driven</span>
-                                <span class="font-medium text-slate-900" x-text="miles"></span>
+                                <span class="text-slate-500 flex items-center gap-1">
+                                    Miles driven
+                                    <button @click="isRoundTrip = !isRoundTrip" 
+                                            class="text-[10px] px-1.5 py-0.5 rounded border transition-colors"
+                                            :class="isRoundTrip ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-slate-500 border-slate-200 hover:border-slate-300'">
+                                        x2 Return
+                                    </button>
+                                </span>
+                                <span class="font-medium text-slate-900" x-text="effectiveMiles.toFixed(1)"></span>
                             </div>
                             <div class="flex justify-between text-sm">
                                 <span class="text-slate-500">Hours worked</span>
@@ -376,17 +402,17 @@
                             <div x-show="showAdvancedOptions" x-collapse class="px-6 pb-6 space-y-4">
                                 <div>
                                     <label class="block text-xs font-medium text-slate-700 mb-2">💰 Tips & Cash</label>
-                                    <input type="number" x-model.number="tips" placeholder="$0" min="0" step="10"
+                                    <input type="number" x-model="tips" placeholder="$0" min="0" step="1"
                                            class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:border-slate-400 focus:outline-none">
                                 </div>
                                 <div>
                                     <label class="block text-xs font-medium text-slate-700 mb-2">🎁 Bonuses & Promos</label>
-                                    <input type="number" x-model.number="bonuses" placeholder="$0" min="0" step="10"
+                                    <input type="number" x-model="bonuses" placeholder="$0" min="0" step="1"
                                            class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:border-slate-400 focus:outline-none">
                                 </div>
                                 <div>
                                     <label class="block text-xs font-medium text-slate-700 mb-2">⏱️ Wait Time (hours)</label>
-                                    <input type="number" x-model.number="waitTime" placeholder="0" min="0" max="40" step="0.5"
+                                    <input type="number" x-model="waitTime" placeholder="0" min="0" max="40" step="0.5"
                                            class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:border-slate-400 focus:outline-none">
                                     <p class="text-xs text-slate-400 mt-1">Time not actively driving</p>
                                 </div>
