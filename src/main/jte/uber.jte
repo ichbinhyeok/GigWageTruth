@@ -117,46 +117,46 @@
                         
                         if (wage < 12) {
                             const messages = [
-                                { emoji: '💀', text: `You're making $${(15 - wage).toFixed(2)} LESS than McDonald's ($15/hr)` },
-                                { emoji: '🍔', text: `Burger King cashiers ($15) earn more than you ($${wage.toFixed(2)})` },
-                                { emoji: '😱', text: `Target starts at $15. You're at $${wage.toFixed(2)}` },
-                                { emoji: '💔', text: `Even Walmart pays $14-16. This is rough.` }
+                                { emoji: '💀', text: "You're making $" + (15 - wage).toFixed(2) + " LESS than McDonald's ($15/hr)" },
+                                { emoji: '🍔', text: "Burger King cashiers ($15) earn more than you ($" + wage.toFixed(2) + ")" },
+                                { emoji: '😱', text: "Target starts at $15. You're at $" + wage.toFixed(2) },
+                                { emoji: '💔', text: "Even Walmart pays $14-16. This is rough." }
                             ];
                             return messages[Math.floor(Math.random() * messages.length)];
                         }
                         
                         if (wage < 15) {
                             const messages = [
-                                { emoji: '⚠️', text: `Below CA/NY minimum wage ($15-16/hr)` },
-                                { emoji: '🎯', text: `Barely keeping up with inflation` },
-                                { emoji: '💸', text: `Fast food workers are catching up to you` }
+                                { emoji: '⚠️', text: "Below CA/NY minimum wage ($15-16/hr)" },
+                                { emoji: '🎯', text: "Barely keeping up with inflation" },
+                                { emoji: '💸', text: "Fast food workers are catching up to you" }
                             ];
                             return messages[Math.floor(Math.random() * messages.length)];
                         }
                         
                         if (wage < 18) {
                             const messages = [
-                                { emoji: '📊', text: `Beating minimum wage, but barely` },
-                                { emoji: '🤔', text: `Chick-fil-A pays $17-19. Worth the switch?` },
-                                { emoji: '💪', text: `Hanging in there, but not thriving` }
+                                { emoji: '📊', text: "Beating minimum wage, but barely" },
+                                { emoji: '🤔', text: "Chick-fil-A pays $17-19. Worth the switch?" },
+                                { emoji: '💪', text: "Hanging in there, but not thriving" }
                             ];
                             return messages[Math.floor(Math.random() * messages.length)];
                         }
                         
                         if (wage < 25) {
                             const messages = [
-                                { emoji: '✅', text: `Solid wage! Above most gig workers` },
-                                { emoji: '🎉', text: `You're doing better than 60% of drivers` },
-                                { emoji: '💼', text: `Respectable hustle money` }
+                                { emoji: '✅', text: "Solid wage! Above most gig workers" },
+                                { emoji: '🎉', text: "You're doing better than 60% of drivers" },
+                                { emoji: '💼', text: "Respectable hustle money" }
                             ];
                             return messages[Math.floor(Math.random() * messages.length)];
                         }
                         
                         if (wage < 35) {
-                            return { emoji: '🔥', text: `Top 20% of gig drivers! Keep it up!` };
+                            return { emoji: '🔥', text: "Top 20% of gig drivers! Keep it up!" };
                         }
                         
-                        return { emoji: '🚀', text: `Crushing it! Top 5% wage` };
+                        return { emoji: '🚀', text: "Crushing it! Top 5% wage" };
                     },
                     
                     setMode(mode) {
@@ -294,7 +294,7 @@
                             <div x-show="calculationMode === 'advanced'" x-transition class="space-y-3 pt-2">
                                 <select x-model="selectedVehicleId" 
                                         class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-sm focus:border-slate-400 focus:outline-none">
-                                    <template x-for="vehicle in vehiclePresets.filter(v => v.id !== 'irs-standard')" :key="vehicle.id">
+                                    <template x-for="vehicle in vehiclePresets.filter(v => v.id !== 'irs-standard' && v.type !== 'bike' && v.type !== 'walker')" :key="vehicle.id">
                                         <option :value="vehicle.id" x-text="vehicle.icon + ' ' + vehicle.name"></option>
                                     </template>
                                 </select>

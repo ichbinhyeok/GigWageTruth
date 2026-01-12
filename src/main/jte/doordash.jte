@@ -67,6 +67,8 @@
                             if (vehicle.type === 'electric') {
                                 const kwhUsed = (this.miles / 100) * vehicle.kwhPer100Miles;
                                 cost += kwhUsed * vehicle.avgElectricityCost;
+                            } else if (vehicle.type === 'bike' || vehicle.type === 'walker') {
+                                cost += 0; // No fuel cost
                             } else {
                                 const mpg = vehicle.id === 'custom' ? this.customMpg : vehicle.mpg;
                                 cost += (this.miles / mpg) * this.gasPrice;
@@ -118,46 +120,46 @@
                         
                         if (wage < 12) {
                             const messages = [
-                                { emoji: '💀', text: \`You're making $\${(15 - wage).toFixed(2)} LESS than McDonald's ($15/hr)\` },
-                                { emoji: '🍟', text: \`Even the fry cook at McDonald's beats this wage\` },
-                                { emoji: '🛑', text: \`STOP! Walmart Greeters make $14+\` },
-                                { emoji: '📉', text: \`Basically volunteering after vehicle costs\` }
+                                { emoji: '💀', text: "You're making $" + (15 - wage).toFixed(2) + " LESS than McDonald's ($15/hr)" },
+                                { emoji: '🍟', text: "Even the fry cook at McDonald's beats this wage" },
+                                { emoji: '🛑', text: "STOP! Walmart Greeters make $14+" },
+                                { emoji: '📉', text: "Basically volunteering after vehicle costs" }
                             ];
                             return messages[Math.floor(Math.random() * messages.length)];
                         }
                         
                         if (wage < 15) {
                             const messages = [
-                                { emoji: '⚠️', text: \`Below minimum wage in many states\` },
-                                { emoji: '🚲', text: \`Consider e-bike delivery to save gas costs?\` },
-                                { emoji: '💸', text: \`Fast food pays better & has free food\` }
+                                { emoji: '⚠️', text: "Below minimum wage in many states" },
+                                { emoji: '🚲', text: "Consider e-bike delivery to save gas costs?" },
+                                { emoji: '💸', text: "Fast food pays better & has free food" }
                             ];
                             return messages[Math.floor(Math.random() * messages.length)];
                         }
                         
                         if (wage < 18) {
                             const messages = [
-                                { emoji: '📊', text: \`Beating minimum wage, but restaurant wait times kill profit\` },
-                                { emoji: '🤔', text: \`Chick-fil-A managers make $19+\` },
-                                { emoji: '💪', text: \`Okay for a side hustle, tough for a living\` }
+                                { emoji: '📊', text: "Beating minimum wage, but restaurant wait times kill profit" },
+                                { emoji: '🤔', text: "Chick-fil-A managers make $19+" },
+                                { emoji: '💪', text: "Okay for a side hustle, tough for a living" }
                             ];
                             return messages[Math.floor(Math.random() * messages.length)];
                         }
                         
                         if (wage < 25) {
                             const messages = [
-                                { emoji: '✅', text: \`Solid DoorDash wage! Effective cherry picking?\` },
-                                { emoji: '🎉', text: \`Better than 70% of Dashers\` },
-                                { emoji: '🛵', text: \`Respectable hustle money\` }
+                                { emoji: '✅', text: "Solid DoorDash wage! Effective cherry picking?" },
+                                { emoji: '🎉', text: "Better than 70% of Dashers" },
+                                { emoji: '🛵', text: "Respectable hustle money" }
                             ];
                             return messages[Math.floor(Math.random() * messages.length)];
                         }
                         
                         if (wage < 35) {
-                            return { emoji: '🔥', text: \`Top Tier Dasher! Great strategy!\` };
+                            return { emoji: '🔥', text: "Top Tier Dasher! Great strategy!" };
                         }
                         
-                        return { emoji: '🚀', text: \`Unicorn status! Top 1% Dasher wage\` };
+                        return { emoji: '🚀', text: "Unicorn status! Top 1% Dasher wage" };
                     },
                     
                     setMode(mode) {
@@ -303,7 +305,7 @@
                                     <input type="number" x-model.number="customMpg" placeholder="MPG" 
                                            class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:border-slate-400 focus:outline-none">
                                 </div>
-                                <div x-show="selectedVehicle?.type !== 'electric'" class="flex items-center gap-3">
+                                <div x-show="selectedVehicle?.type !== 'electric' && selectedVehicle?.type !== 'bike' && selectedVehicle?.type !== 'walker'" class="flex items-center gap-3">
                                     <span class="text-xs text-slate-500 shrink-0">Gas Price</span>
                                     <input type="range" x-model.number="gasPrice" min="2.00" max="7.00" step="0.10"
                                            class="flex-1 h-1 bg-slate-200 rounded-full accent-slate-900">

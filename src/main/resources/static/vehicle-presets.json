@@ -141,6 +141,26 @@
         "icon": "🚐"
     },
     {
+        "id": "ebike",
+        "name": "E-Bike / Bicycle",
+        "type": "bike",
+        "mpg": 9999,
+        "maintenanceCostPerMile": 0.03,
+        "avgGasPrice": 0,
+        "description": "Low cost, delivery only",
+        "icon": "🚲"
+    },
+    {
+        "id": "walker",
+        "name": "Walker / Foot",
+        "type": "walker",
+        "mpg": 9999,
+        "maintenanceCostPerMile": 0.01,
+        "avgGasPrice": 0,
+        "description": "Zero vehicle cost",
+        "icon": "👟"
+    },
+    {
         "id": "custom",
         "name": "Custom Vehicle",
         "type": "custom",

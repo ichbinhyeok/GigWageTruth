@@ -14,8 +14,6 @@ public class DoorDashCalculatorController {
             @RequestParam(required = false) Double hours,
             Model model) {
 
-        System.out.println("DEBUG: DoorDash Request. Gross=" + gross + ", Miles=" + miles + ", Hours=" + hours);
-
         // Strict 2-Page Flow: If no params, go back to Gateway (Index)
         if (gross == null || miles == null || hours == null) {
             return "redirect:/";
