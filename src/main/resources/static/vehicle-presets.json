@@ -12,10 +12,10 @@
         "name": "Toyota Prius (Hybrid)",
         "type": "hybrid",
         "mpg": 57,
-        "maintenanceCost PerMile": 0.1104,
+        "maintenanceCostPerMile": 0.1104,
         "avgGasPrice": 3.50,
-        "description": "Top rideshare choice - excellent MPG",
-        "icon": "🚗"
+        "description": "Industry standard - 57 MPG, ultra reliable",
+        "icon": "🔥"
     },
     {
         "id": "camry-hybrid",
@@ -24,7 +24,7 @@
         "mpg": 51,
         "maintenanceCostPerMile": 0.1104,
         "avgGasPrice": 3.50,
-        "description": "Comfortable, reliable, efficient",
+        "description": "Premium comfort - 51 MPG",
         "icon": "🚗"
     },
     {
@@ -34,7 +34,27 @@
         "mpg": 48,
         "maintenanceCostPerMile": 0.1104,
         "avgGasPrice": 3.50,
-        "description": "Roomy cabin, great balance",
+        "description": "Smooth ride - 48 MPG",
+        "icon": "🚗"
+    },
+    {
+        "id": "corolla-hybrid",
+        "name": "Toyota Corolla Hybrid",
+        "type": "hybrid",
+        "mpg": 52,
+        "maintenanceCostPerMile": 0.1104,
+        "avgGasPrice": 3.50,
+        "description": "Compact efficient - 52 MPG",
+        "icon": "🚗"
+    },
+    {
+        "id": "sonata-hybrid",
+        "name": "Hyundai Sonata Hybrid",
+        "type": "hybrid",
+        "mpg": 47,
+        "maintenanceCostPerMile": 0.1104,
+        "avgGasPrice": 3.50,
+        "description": "Stylish value - 47 MPG",
         "icon": "🚗"
     },
     {
@@ -44,7 +64,7 @@
         "mpg": 35,
         "maintenanceCostPerMile": 0.1104,
         "avgGasPrice": 3.50,
-        "description": "Reliable and affordable",
+        "description": "Popular budget choice - 35 MPG",
         "icon": "🚙"
     },
     {
@@ -54,7 +74,17 @@
         "mpg": 34,
         "maintenanceCostPerMile": 0.1104,
         "avgGasPrice": 3.50,
-        "description": "Budget-friendly, dependable",
+        "description": "Legendary reliability - 34 MPG",
+        "icon": "🚙"
+    },
+    {
+        "id": "elantra",
+        "name": "Hyundai Elantra",
+        "type": "sedan",
+        "mpg": 33,
+        "maintenanceCostPerMile": 0.1104,
+        "avgGasPrice": 3.50,
+        "description": "Affordable reliable - 33 MPG",
         "icon": "🚙"
     },
     {
@@ -65,7 +95,29 @@
         "maintenanceCostPerMile": 0.1104,
         "avgElectricityCost": 0.15,
         "kwhPer100Miles": 24,
-        "description": "Lowest fuel cost, zero gas",
+        "description": "Zero gas cost - 130 MPGe",
+        "icon": "⚡"
+    },
+    {
+        "id": "bolt-ev",
+        "name": "Chevy Bolt EV",
+        "type": "electric",
+        "mpgEquivalent": 120,
+        "maintenanceCostPerMile": 0.1104,
+        "avgElectricityCost": 0.15,
+        "kwhPer100Miles": 28,
+        "description": "Affordable EV - 120 MPGe",
+        "icon": "⚡"
+    },
+    {
+        "id": "nissan-leaf",
+        "name": "Nissan Leaf (EV)",
+        "type": "electric",
+        "mpgEquivalent": 111,
+        "maintenanceCostPerMile": 0.1104,
+        "avgElectricityCost": 0.15,
+        "kwhPer100Miles": 30,
+        "description": "Popular budget EV - 111 MPGe",
         "icon": "⚡"
     },
     {
@@ -75,7 +127,7 @@
         "mpg": 39,
         "maintenanceCostPerMile": 0.1104,
         "avgGasPrice": 3.50,
-        "description": "SUV space with hybrid efficiency",
+        "description": "SUV space - 39 MPG",
         "icon": "🚐"
     },
     {
@@ -85,7 +137,7 @@
         "mpg": 43,
         "maintenanceCostPerMile": 0.1104,
         "avgGasPrice": 3.50,
-        "description": "Cargo space, great safety",
+        "description": "Versatile SUV - 43 MPG",
         "icon": "🚐"
     },
     {
