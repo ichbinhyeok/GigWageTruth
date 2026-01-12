@@ -112,6 +112,53 @@
                         return Math.ceil(needed / this.netHourly);
                     },
                     
+                    get shockMessage() {
+                        const wage = this.netHourly;
+                        
+                        if (wage < 12) {
+                            const messages = [
+                                { emoji: '💀', text: `You're making $${(15 - wage).toFixed(2)} LESS than McDonald's ($15/hr)` },
+                                { emoji: '🍔', text: `Burger King cashiers ($15) earn more than you ($${wage.toFixed(2)})` },
+                                { emoji: '😱', text: `Target starts at $15. You're at $${wage.toFixed(2)}` },
+                                { emoji: '💔', text: `Even Walmart pays $14-16. This is rough.` }
+                            ];
+                            return messages[Math.floor(Math.random() * messages.length)];
+                        }
+                        
+                        if (wage < 15) {
+                            const messages = [
+                                { emoji: '⚠️', text: `Below CA/NY minimum wage ($15-16/hr)` },
+                                { emoji: '🎯', text: `Barely keeping up with inflation` },
+                                { emoji: '💸', text: `Fast food workers are catching up to you` }
+                            ];
+                            return messages[Math.floor(Math.random() * messages.length)];
+                        }
+                        
+                        if (wage < 18) {
+                            const messages = [
+                                { emoji: '📊', text: `Beating minimum wage, but barely` },
+                                { emoji: '🤔', text: `Chick-fil-A pays $17-19. Worth the switch?` },
+                                { emoji: '💪', text: `Hanging in there, but not thriving` }
+                            ];
+                            return messages[Math.floor(Math.random() * messages.length)];
+                        }
+                        
+                        if (wage < 25) {
+                            const messages = [
+                                { emoji: '✅', text: `Solid wage! Above most gig workers` },
+                                { emoji: '🎉', text: `You're doing better than 60% of drivers` },
+                                { emoji: '💼', text: `Respectable hustle money` }
+                            ];
+                            return messages[Math.floor(Math.random() * messages.length)];
+                        }
+                        
+                        if (wage < 35) {
+                            return { emoji: '🔥', text: `Top 20% of gig drivers! Keep it up!` };
+                        }
+                        
+                        return { emoji: '🚀', text: `Crushing it! Top 5% wage` };
+                    },
+                    
                     setMode(mode) {
                         this.calculationMode = mode;
                         if (mode === 'standard') {
@@ -169,6 +216,16 @@
                                 <span class="text-3xl font-medium text-slate-400">/hr</span>
                             </div>
                             <p class="text-xs text-slate-400 mt-2">Based on your entered period</p>
+                            
+                            <!-- Shock Message -->
+                            <div class="mt-6 p-4 bg-slate-50 border-l-4 rounded-r-xl" 
+                                 :class="netHourly < 15 ? 'border-red-500 bg-red-50' : netHourly < 25 ? 'border-yellow-500 bg-yellow-50' : 'border-green-500 bg-green-50'">
+                                <p class="text-sm font-medium flex items-center gap-2">
+                                    <span class="text-2xl" x-text="shockMessage.emoji"></span>
+                                    <span :class="netHourly < 15 ? 'text-red-800' : netHourly < 25 ? 'text-yellow-800' : 'text-green-800'" x-text="shockMessage.text"></span>
+                                </p>
+                            </div>
+                            
                             <p class="text-sm text-slate-600 mt-4" x-show="netHourly < 15">
                                 <span class="font-semibold text-red-600">$<span x-text="(15 - netHourly).toFixed(2)"></span> less</span> than minimum wage
                             </p>
@@ -179,6 +236,13 @@
                             <div class="flex items-baseline justify-center gap-2">
                                 <span class="text-6xl font-semibold" :class="netHourly < 0 ? 'text-red-600' : 'text-slate-900'">$<span x-text="netHourly.toFixed(2)"></span></span>
                                 <span class="text-2xl text-slate-400">/hr</span>
+                            </div>
+                            <div class="mt-4 p-3 bg-slate-50 border-l-4 rounded-r-xl mx-4" 
+                                 :class="netHourly < 15 ? 'border-red-500 bg-red-50' : netHourly < 25 ? 'border-yellow-500 bg-yellow-50' : 'border-green-500 bg-green-50'">
+                                <p class="text-xs font-medium flex items-center gap-2">
+                                    <span class="text-xl" x-text="shockMessage.emoji"></span>
+                                    <span :class="netHourly < 15 ? 'text-red-800' : netHourly < 25 ? 'text-yellow-800' : 'text-green-800'" x-text="shockMessage.text"></span>
+                                </p>
                             </div>
                         </div>
 
