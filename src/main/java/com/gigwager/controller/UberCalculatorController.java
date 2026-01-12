@@ -13,10 +13,23 @@ public class UberCalculatorController {
     }
 
     @GetMapping("/uber")
-    public String uber(Model model) {
-        // Since the interactive logic is client-side implementation (Alpine.js) for
-        // dwell time,
-        // we just render the template. The layout handles the defaults.
+    public String uber(@RequestParam(required = false) Double gross,
+            @RequestParam(required = false) Double miles,
+            @RequestParam(required = false) Double hours,
+            Model model) {
+
+        // Pass params to view for Alpine JS initialization
+        model.addAttribute("initialGross", gross != null ? gross : 1000);
+        model.addAttribute("initialMiles", miles != null ? miles : 800);
+        model.addAttribute("initialHours", hours != null ? hours : 40);
+
+        // Dynamic SEO Title
+        if (gross != null && miles != null && hours != null) {
+            // Simple calculation for title context (approximate)
+            // Note: Exact calc happens in JS, this is just for the hook.
+            model.addAttribute("customTitle", "I thought I made $" + gross.intValue() + "... The truth is shocking.");
+        }
+
         return "uber";
     }
 }
