@@ -1,10 +1,10 @@
 [
     {
         "id": "irs-standard",
-        "name": "IRS Standard Rate (Recommended)",
+        "name": "IRS Standard Rate 2026 (Recommended)",
         "type": "standard",
-        "costPerMile": 0.67,
-        "description": "Official IRS rate - includes all vehicle costs",
+        "costPerMile": 0.725,
+        "description": "Official IRS 2026 rate - includes all vehicle costs",
         "icon": "📋"
     },
     {
@@ -12,7 +12,7 @@
         "name": "Toyota Prius (Hybrid)",
         "type": "hybrid",
         "mpg": 57,
-        "maintenanceCostPerMile": 0.0966,
+        "maintenanceCost PerMile": 0.1104,
         "avgGasPrice": 3.50,
         "description": "Top rideshare choice - excellent MPG",
         "icon": "🚗"
@@ -22,7 +22,7 @@
         "name": "Toyota Camry Hybrid",
         "type": "hybrid",
         "mpg": 51,
-        "maintenanceCostPerMile": 0.0966,
+        "maintenanceCostPerMile": 0.1104,
         "avgGasPrice": 3.50,
         "description": "Comfortable, reliable, efficient",
         "icon": "🚗"
@@ -32,7 +32,7 @@
         "name": "Honda Accord Hybrid",
         "type": "hybrid",
         "mpg": 48,
-        "maintenanceCostPerMile": 0.0966,
+        "maintenanceCostPerMile": 0.1104,
         "avgGasPrice": 3.50,
         "description": "Roomy cabin, great balance",
         "icon": "🚗"
@@ -42,7 +42,7 @@
         "name": "Honda Civic",
         "type": "sedan",
         "mpg": 35,
-        "maintenanceCostPerMile": 0.1013,
+        "maintenanceCostPerMile": 0.1104,
         "avgGasPrice": 3.50,
         "description": "Reliable and affordable",
         "icon": "🚙"
@@ -52,7 +52,7 @@
         "name": "Toyota Corolla",
         "type": "sedan",
         "mpg": 34,
-        "maintenanceCostPerMile": 0.1013,
+        "maintenanceCostPerMile": 0.1104,
         "avgGasPrice": 3.50,
         "description": "Budget-friendly, dependable",
         "icon": "🚙"
@@ -62,10 +62,10 @@
         "name": "Tesla Model 3 (EV)",
         "type": "electric",
         "mpgEquivalent": 130,
-        "maintenanceCostPerMile": 0.0789,
+        "maintenanceCostPerMile": 0.1104,
         "avgElectricityCost": 0.15,
         "kwhPer100Miles": 24,
-        "description": "Lowest maintenance, zero gas",
+        "description": "Lowest fuel cost, zero gas",
         "icon": "⚡"
     },
     {
@@ -73,7 +73,7 @@
         "name": "Toyota RAV4 Hybrid (SUV)",
         "type": "hybrid-suv",
         "mpg": 39,
-        "maintenanceCostPerMile": 0.1013,
+        "maintenanceCostPerMile": 0.1104,
         "avgGasPrice": 3.50,
         "description": "SUV space with hybrid efficiency",
         "icon": "🚐"
@@ -83,7 +83,7 @@
         "name": "Honda CR-V Hybrid (SUV)",
         "type": "hybrid-suv",
         "mpg": 43,
-        "maintenanceCostPerMile": 0.1013,
+        "maintenanceCostPerMile": 0.1104,
         "avgGasPrice": 3.50,
         "description": "Cargo space, great safety",
         "icon": "🚐"

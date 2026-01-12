@@ -8,8 +8,8 @@ package com.gigwager.util;
  */
 public class AppConstants {
 
-    // Financial Constants (2024-2025)
-    public static final double IRS_MILEAGE_RATE_2024 = 0.67;
+    // Financial Constants (2026)
+    public static final double IRS_MILEAGE_RATE_2024 = 0.725; // 2026 IRS Standard Mileage Rate
     public static final double SELF_EMPLOYMENT_TAX_RATE = 0.153; // 15.3% (Social Security + Medicare)
 
     // Comparison Benchmarks
