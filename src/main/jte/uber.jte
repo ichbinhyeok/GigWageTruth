@@ -168,6 +168,7 @@
                                 <span class="text-7xl font-semibold tracking-tight" :class="netHourly < 0 ? 'text-red-600' : 'text-slate-900'">$<span x-text="netHourly.toFixed(2)"></span></span>
                                 <span class="text-3xl font-medium text-slate-400">/hr</span>
                             </div>
+                            <p class="text-xs text-slate-400 mt-2">Based on your entered period</p>
                             <p class="text-sm text-slate-600 mt-4" x-show="netHourly < 15">
                                 <span class="font-semibold text-red-600">$<span x-text="(15 - netHourly).toFixed(2)"></span> less</span> than minimum wage
                             </p>

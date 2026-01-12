@@ -64,9 +64,10 @@
 
                         <form action="/uber" method="GET" class="space-y-6">
                             
-                            <!-- Weekly Pay -->
+                            <!-- Total Earnings -->
                             <div class="space-y-2">
-                                <label class="text-xs font-bold text-slate-900 uppercase tracking-wide">Weekly Pay</label>
+                                <label class="text-xs font-bold text-slate-900 uppercase tracking-wide">Total Earnings</label>
+                                <p class="text-xs text-slate-500">Week, month, or any period</p>
                                 <div class="relative group">
                                     <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-lg font-medium group-focus-within:text-emerald-600 transition-colors">$</span>
                                     <input type="number" name="gross" required placeholder="1000" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-4 pl-10 pr-4 text-xl font-bold text-slate-900 outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all placeholder:text-slate-300">
@@ -91,6 +92,13 @@
                                         <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-medium">hr</span>
                                     </div>
                                 </div>
+                            </div>
+
+                            <!-- Helper: Where to find -->
+                            <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-3">
+                                <p class="text-xs text-emerald-800">
+                                    <span class="font-bold">💡 Where to find:</span> Uber/Lyft app → Earnings tab
+                                </p>
                             </div>
 
                             <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xl py-5 rounded-xl shadow-lg shadow-emerald-200 transform transition active:scale-[0.98] hover:-translate-y-1">
