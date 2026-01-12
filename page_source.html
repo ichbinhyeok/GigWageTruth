@@ -1,58 +1,118 @@
-@import com.gigwager.util.AppConstants
-@param Double initialGross
-@param Double initialMiles
-@param Double initialHours
-@param String customTitle = null
+﻿
 
-@template.layout.main(
-    seoMeta = new com.gigwager.model.SeoMeta(
-        customTitle != null ? customTitle : "My Real Hourly Wage - The Shocking Truth",
-        "See exactly how much I make after gas, taxes, and depreciation. The number will surprise you.",
-        "https://gigwagetruth.com/uber",
-        "https://gigwagetruth.com/og-image.jpg"
-    ),
-    content = @`
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>My Real Hourly Wage - The Shocking Truth</title>
+    <meta name="description" content="See exactly how much I make after gas, taxes, and depreciation. The number will surprise you.">
+    <link rel="canonical" href="https://gigwagetruth.com/uber">
+    
+    <meta property="og:title" content="My Real Hourly Wage - The Shocking Truth">
+    <meta property="og:description" content="See exactly how much I make after gas, taxes, and depreciation. The number will surprise you.">
+    <meta property="og:image" content="https://gigwagetruth.com/og-image.jpg">
+    <meta property="og:type" content="website">
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: '#10B981', 
+                        primary: '#0F172A', 
+                        secondary: '#64748B', 
+                        surface: '#FFFFFF',
+                        background: '#F8FAFC', 
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen bg-slate-50 text-slate-900 antialiased font-sans">
+
+    
+    <header class="w-full bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex justify-between items-center">
+            
+            <a href="/" class="flex items-center space-x-2 group">
+                <span class="text-xl font-bold tracking-tight text-slate-900 group-hover:text-emerald-600 transition-colors">
+                    GigWageTruth
+                </span>
+            </a>
+
+            
+            <nav class="hidden md:flex space-x-8 text-sm font-medium text-slate-600">
+                <a href="#calculator" class="hover:text-emerald-600 transition">Calculator</a>
+                <a href="#methodology" class="hover:text-emerald-600 transition">Methodology</a>
+                <a href="/blog" class="hover:text-emerald-600 transition">Blog</a>
+            </nav>
+        </div>
+    </header>
+
+    
+    <main class="flex-grow w-full">
+        
         <script>
             function calculator() {
-                console.log("Calculator Initialized. Gross:", '${initialGross}');
+                console.log("Calculator Initialized. Gross:", );
                 return {
                     selectedApp: 'Uber',
                     
-                    // Inputs (Guaranteed by Controller)
-                    gross: Number('${initialGross}'),
-                    miles: Number('${initialMiles}'),
-                    hours: Number('${initialHours}'),
                     
-                    // Simulation Vars
+                    gross: Number(),
+                    miles: Number(),
+                    hours: Number(),
+                    
+                    
                     gasPrice: 3.50,
                     mpg: 25,
                     
                     get irsCost() {
-                        return this.miles * ${AppConstants.IRS_MILEAGE_RATE_2024};
+                        return (this.miles * 0.67).toFixed(2);
                     },
                     
                     get gasCost() {
                         if(this.mpg <= 0) return 0;
-                        return (this.miles / this.mpg) * this.gasPrice;
+                        return ((this.miles / this.mpg) * this.gasPrice).toFixed(2);
                     },
                     
                     get taxCost() {
                         const profitForTax = this.gross - this.irsCost;
-                        if(profitForTax <= 0) return 0;
-                        return profitForTax * ${AppConstants.SELF_EMPLOYMENT_TAX_RATE};
+                        if(profitForTax <= 0) return (0).toFixed(2);
+                        return (profitForTax * 0.153).toFixed(2);
                     },
                     
                     get totalNet() {
-                        return this.gross - this.irsCost - this.taxCost;
+                        const net = this.gross - this.irsCost - this.taxCost;
+                        return net.toFixed(2);
                     },
                     
                     get netHourly() {
                         if(this.hours <= 0) return 0;
-                        return this.totalNet / this.hours;
+                        return (this.totalNet / this.hours).toFixed(2);
                     },
                     
                     shareResult() {
-                        const text = 'I thought I was making money on ' + this.selectedApp + ', but my real wage is only $' + this.netHourly.toFixed(2) + '/hr. Check yours at GigWageTruth.com';
+                        const text = 'I thought I was making money on ' + this.selectedApp + ', but my real wage is only $' + this.netHourly + '/hr. Check yours at GigWageTruth.com';
                         navigator.clipboard.writeText(text);
                         alert("Copied to clipboard!");
                     }
@@ -62,10 +122,10 @@
 
         <div x-data="calculator()" class="min-h-screen bg-slate-50 relative pb-20">
             
-            <!-- VERDICT LAB (Always Visible) -->
+            
             <div class="max-w-4xl mx-auto px-4 py-12 space-y-12">
                 
-                <!-- Verdict Card -->
+                
                 <div class="relative overflow-hidden rounded-3xl bg-white border border-slate-200 shadow-2xl">
                     <div class="bg-slate-50 border-b border-slate-100 p-4 flex justify-between">
                         <div class="flex items-center space-x-2">
@@ -78,7 +138,7 @@
                         <h2 class="text-slate-400 font-medium text-lg uppercase tracking-wide">Your Real Hourly Wage</h2>
                         <div class="flex items-center justify-center gap-2 text-slate-900">
                              <span class="text-6xl md:text-8xl font-black tracking-tighter" :class="netHourly < 0 ? 'text-red-600' : 'text-slate-900'">$</span>
-                             <span class="text-6xl md:text-8xl font-black tracking-tighter" :class="netHourly < 0 ? 'text-red-600' : 'text-slate-900'" x-text="netHourly.toFixed(2)"></span>
+                             <span class="text-6xl md:text-8xl font-black tracking-tighter" :class="netHourly < 0 ? 'text-red-600' : 'text-slate-900'" x-text="netHourly"></span>
                              <span class="text-2xl text-slate-400 font-medium">/hr</span>
                         </div>
                          
@@ -92,7 +152,7 @@
                         </div>
                     </div>
                     
-                    <!-- Share Bar -->
+                    
                     <div class="bg-slate-900 p-4 flex justify-center">
                         <button @click="shareResult()" class="flex items-center space-x-2 text-white font-bold hover:text-emerald-400 transition-colors">
                             <span>📤 Share This Tragedy</span>
@@ -100,47 +160,47 @@
                     </div>
                 </div>
 
-                <!-- Simulation & Breakdown Grid -->
+                
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <!-- Simulator -->
+                    
                     <div class="lg:col-span-2 bg-white border border-slate-200 rounded-3xl p-8 space-y-8">
                         <h3 class="text-xl font-bold text-slate-900 flex items-center gap-2"><span>🎛️</span> What-If Simulator</h3>
                         <div class="space-y-6">
-                            <!-- Fuel -->
+                            
                             <div class="space-y-2">
                                 <label class="flex justify-between text-sm font-bold text-slate-700">
                                     <span>Fuel Price</span>
-                                    <span class="text-emerald-600">$<span x-text="gasPrice.toFixed(2)"></span></span>
+                                    <span class="text-emerald-600">$<span x-text="gasPrice"></span></span>
                                 </label>
-                                <input type="range" min="2.00" max="7.00" step="0.10" x-model.number="gasPrice" class="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-slate-900">
+                                <input type="range" min="2.00" max="7.00" step="0.10" x-model="gasPrice" class="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-slate-900">
                                 <p class="text-xs text-slate-400">Doesn't affect "Real Wage" calc (IRS rate fixed), but shows cash flow impact.</p>
                             </div>
-                            <!-- MPG -->
+                            
                             <div class="space-y-2">
                                 <label class="flex justify-between text-sm font-bold text-slate-700">
                                     <span>Vehicle MPG</span>
                                     <span class="text-emerald-600"><span x-text="mpg"></span> MPG</span>
                                 </label>
-                                <input type="range" min="10" max="60" step="1" x-model.number="mpg" class="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-slate-900">
+                                <input type="range" min="10" max="60" step="1" x-model="mpg" class="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-slate-900">
                             </div>
                         </div>
                     </div>
 
-                    <!-- Breakdown -->
+                    
                     <div class="lg:col-span-1 bg-white border border-slate-200 rounded-3xl p-8">
                         <h3 class="text-xl font-bold text-slate-900 mb-6">Profit Leak</h3>
                         <div class="space-y-3 text-sm">
                              <div class="flex justify-between items-center text-slate-500">
                                  <span>IRS Deduction</span>
-                                 <span class="font-mono text-slate-900 font-bold">-$<span x-text="irsCost.toFixed(2)"></span></span>
+                                 <span class="font-mono text-slate-900 font-bold">-$<span x-text="irsCost"></span></span>
                              </div>
                               <div class="flex justify-between items-center text-slate-500">
                                  <span>Tax (15.3%)</span>
-                                 <span class="font-mono text-slate-900 font-bold">-$<span x-text="taxCost.toFixed(2)"></span></span>
+                                 <span class="font-mono text-slate-900 font-bold">-$<span x-text="taxCost"></span></span>
                              </div>
                              <div class="pt-4 border-t border-slate-100 flex justify-between font-black text-lg text-emerald-600">
                                  <span>Net Profit</span>
-                                 <span>$<span x-text="totalNet.toFixed(2)"></span></span>
+                                 <span>$<span x-text="totalNet"></span></span>
                              </div>
                         </div>
                     </div>
@@ -148,5 +208,24 @@
 
             </div>
         </div>
-    `
-)
+    
+    </main>
+
+    
+    <footer class="bg-white border-t border-slate-200 py-12 mt-12">
+        <div class="max-w-5xl mx-auto px-4 text-center">
+            <p class="text-slate-900 font-semibold mb-2">GigWageTruth</p>
+            <p class="text-slate-500 text-sm mb-4">
+                Revealing the true cost of the gig economy.
+            </p>
+            <p class="text-xs text-slate-400">
+                &copy; 2026 GigWageTruth. All rights reserved. <br>
+                Calculations based on 2026 IRS Standard Mileage Rate ($0.67/mile). Not financial advice.
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
+
+

@@ -3,6 +3,7 @@ package com.gigwager.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UberCalculatorController {
@@ -18,17 +19,21 @@ public class UberCalculatorController {
             @RequestParam(required = false) Double hours,
             Model model) {
 
+        System.out.println("DEBUG: Uber Request. Gross=" + gross + ", Miles=" + miles + ", Hours=" + hours);
+
+        // Strict 2-Page Flow: If no params, go back to Gateway (Index)
+        if (gross == null || miles == null || hours == null) {
+            return "redirect:/";
+        }
+
         // Pass params to view for Alpine JS initialization
-        model.addAttribute("initialGross", gross != null ? gross : 1000);
-        model.addAttribute("initialMiles", miles != null ? miles : 800);
-        model.addAttribute("initialHours", hours != null ? hours : 40);
+        model.addAttribute("initialGross", gross);
+        model.addAttribute("initialMiles", miles);
+        model.addAttribute("initialHours", hours);
 
         // Dynamic SEO Title
-        if (gross != null && miles != null && hours != null) {
-            // Simple calculation for title context (approximate)
-            // Note: Exact calc happens in JS, this is just for the hook.
-            model.addAttribute("customTitle", "I thought I made $" + gross.intValue() + "... The truth is shocking.");
-        }
+        // Simple calculation for title context (approximate)
+        model.addAttribute("customTitle", "I thought I made $" + gross.intValue() + "... The truth is shocking.");
 
         return "uber";
     }
