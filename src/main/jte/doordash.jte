@@ -10,8 +10,8 @@
     seoMeta = new SeoMeta(
         customTitle != null ? customTitle : "DoorDash Truth - My Real Hourly Wage",
         "See exactly how much you make on DoorDash after gas, vehicle destruction, and taxes. The truth is shocking.",
-        "https://gigwagetruth.com/doordash",
-        "https://gigwagetruth.com/og-image.jpg"
+        "https://www.gigverdict.com/doordash",
+        "https://www.gigverdict.com/og-image.jpg"
     ),
     content = @`
         <script src="/js/calculator-core.js?v=${AppConstants.CACHE_VERSION}"></script>
@@ -508,7 +508,7 @@
               "@context": "https://schema.org",
               "@type": "WebApplication",
               "name": "Real DoorDash Pay Calculator",
-              "url": "https://gigwagetruth.com/doordash",
+              "url": "https://www.gigverdict.com/doordash",
               "applicationCategory": "FinanceApplication",
               "operatingSystem": "Any",
               "description": "Calculate your true net profit as a DoorDash driver after gas, depreciation, and taxes.",

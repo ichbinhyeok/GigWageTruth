@@ -1,6 +1,7 @@
 package com.gigwager.controller;
 
 import com.gigwager.model.CityData;
+import com.gigwager.util.AppConstants;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,32 +18,32 @@ public class SitemapController {
         String today = java.time.LocalDate.now().toString();
 
         // Main pages
-        addUrl(xml, "https://www.gigwagetruth.com/", today, "weekly", "1.0");
-        addUrl(xml, "https://www.gigwagetruth.com/uber", today, "weekly", "0.9");
-        addUrl(xml, "https://www.gigwagetruth.com/doordash", today, "weekly", "0.9");
+        addUrl(xml, AppConstants.BASE_URL + "/", today, "weekly", "1.0");
+        addUrl(xml, AppConstants.BASE_URL + "/uber", today, "weekly", "0.9");
+        addUrl(xml, AppConstants.BASE_URL + "/doordash", today, "weekly", "0.9");
 
         // Salary directory
-        addUrl(xml, "https://www.gigwagetruth.com/salary/directory", today, "weekly", "0.8");
+        addUrl(xml, AppConstants.BASE_URL + "/salary/directory", today, "weekly", "0.8");
 
         // Programmatic SEO: City pages (2 apps × 10 cities = 20 pages)
         for (CityData city : CityData.values()) {
-            String uberUrl = "https://www.gigwagetruth.com/salary/uber/" + city.getSlug();
-            String doordashUrl = "https://www.gigwagetruth.com/salary/doordash/" + city.getSlug();
+            String uberUrl = AppConstants.BASE_URL + "/salary/uber/" + city.getSlug();
+            String doordashUrl = AppConstants.BASE_URL + "/salary/doordash/" + city.getSlug();
 
             addUrl(xml, uberUrl, today, "monthly", "0.7");
             addUrl(xml, doordashUrl, today, "monthly", "0.7");
         }
 
         // Blog
-        addUrl(xml, "https://www.gigwagetruth.com/blog", today, "daily", "0.8");
-        addUrl(xml, "https://www.gigwagetruth.com/blog/multi-apping-guide", today, "monthly", "0.7");
-        addUrl(xml, "https://www.gigwagetruth.com/blog/tax-guide", today, "monthly", "0.7");
-        addUrl(xml, "https://www.gigwagetruth.com/blog/uber-vs-doordash", today, "monthly", "0.7");
-        addUrl(xml, "https://www.gigwagetruth.com/blog/hidden-costs", today, "monthly", "0.7");
+        addUrl(xml, AppConstants.BASE_URL + "/blog", today, "daily", "0.8");
+        addUrl(xml, AppConstants.BASE_URL + "/blog/multi-apping-guide", today, "monthly", "0.7");
+        addUrl(xml, AppConstants.BASE_URL + "/blog/tax-guide", today, "monthly", "0.7");
+        addUrl(xml, AppConstants.BASE_URL + "/blog/uber-vs-doordash", today, "monthly", "0.7");
+        addUrl(xml, AppConstants.BASE_URL + "/blog/hidden-costs", today, "monthly", "0.7");
 
         // Static pages
-        addUrl(xml, "https://www.gigwagetruth.com/about", today, "yearly", "0.5");
-        addUrl(xml, "https://www.gigwagetruth.com/methodology", today, "yearly", "0.5");
+        addUrl(xml, AppConstants.BASE_URL + "/about", today, "yearly", "0.5");
+        addUrl(xml, AppConstants.BASE_URL + "/methodology", today, "yearly", "0.5");
 
         xml.append("</urlset>");
         return xml.toString();

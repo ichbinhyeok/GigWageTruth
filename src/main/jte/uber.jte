@@ -10,8 +10,8 @@
     seoMeta = new SeoMeta(
         customTitle != null ? customTitle : "My Real Hourly Wage - The Shocking Truth",
         "See exactly how much I make after gas, taxes, and depreciation. The number will surprise you.",
-        "https://gigwagetruth.com/uber",
-        "https://gigwagetruth.com/og-image.jpg"
+        "https://www.gigverdict.com/uber",
+        "https://www.gigverdict.com/og-image.jpg"
     ),
     content = @`
         <script src="/js/calculator-core.js?v=${AppConstants.CACHE_VERSION}"></script>

@@ -63,7 +63,7 @@ public class ProgrammaticSeoController {
                                         appName, city.getCityName(), gasPrice, hourly);
                 }
 
-                String canonicalUrl = String.format("https://www.gigwagetruth.com/salary/%s/%s", app, citySlug);
+                String canonicalUrl = String.format("%s/salary/%s/%s", AppConstants.BASE_URL, app, citySlug);
 
                 // Freshness signal
                 String lastUpdated = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy")
@@ -76,7 +76,7 @@ public class ProgrammaticSeoController {
                 model.addAttribute("featuredScenario", featuredScenario);
                 model.addAttribute("lastUpdated", lastUpdated);
                 model.addAttribute("seoMeta", new SeoMeta(title, description, canonicalUrl,
-                                "https://www.gigwagetruth.com/og-image.jpg"));
+                                AppConstants.BASE_URL + "/og-image.jpg"));
 
                 return "salary/city-report";
         }
