@@ -34,6 +34,6 @@ public class UberCalculatorController {
         // Simple calculation for title context (approximate)
         model.addAttribute("customTitle", "I thought I made $" + gross.intValue() + "... The truth is shocking.");
 
-        return "uber";
+        return "pages/calculator";
     }
 }

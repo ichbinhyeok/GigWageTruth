@@ -83,7 +83,7 @@
     <footer class="bg-white border-t border-slate-200 py-12 mt-12">
         <div class="max-w-5xl mx-auto px-4 text-center">
             <p class="text-slate-900 font-semibold mb-2">GigWageTruth</p>
-            <div class="flex justify-center space-x-6 mb-6 text-sm text-slate-500">
+            <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 mb-6 text-sm text-slate-500">
                 <a href="/about" class="hover:text-emerald-600 transition">About (Gabi)</a>
                 <a href="/blog" class="hover:text-emerald-600 transition">Blog</a>
                 <a href="/methodology" class="hover:text-emerald-600 transition">Methodology</a>

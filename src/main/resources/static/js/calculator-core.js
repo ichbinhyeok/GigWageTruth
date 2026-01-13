@@ -161,6 +161,13 @@ window.createGigCalculator = function (initialData) {
             return this.otherCost * 50;
         },
 
+        get hoursToGoal() {
+            const remaining = this.targetWeeklyIncome - this.totalNet;
+            if (remaining <= 0) return 0;
+            if (this.netHourly <= 0) return 999; // Infinite if losing money
+            return remaining / this.netHourly;
+        },
+
         get shockMessage() {
             const wage = this.netHourly;
             const messages = initialData.shockMessages;

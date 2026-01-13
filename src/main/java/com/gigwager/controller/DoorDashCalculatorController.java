@@ -30,6 +30,6 @@ public class DoorDashCalculatorController {
         model.addAttribute("customTitle",
                 "DoorDash Truth: I made $" + gross.intValue() + "... but the real wage is shocking.");
 
-        return "doordash";
+        return "pages/calculator";
     }
 }

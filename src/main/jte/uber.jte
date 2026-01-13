@@ -1,5 +1,5 @@
 @import com.gigwager.model.SeoMeta
-
+@import com.gigwager.util.AppConstants
 
 @param Double initialGross
 @param Double initialMiles  
@@ -14,7 +14,7 @@
         "https://gigwagetruth.com/og-image.jpg"
     ),
     content = @`
-        <script src="/js/calculator-core.js?v=5"></script>
+        <script src="/js/calculator-core.js?v=${AppConstants.CACHE_VERSION}"></script>
         
         <script>
             function calculator() {
@@ -127,6 +127,17 @@
 
                         <!-- Main Inputs Card -->
                         <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
+                             
+                             <!-- App Switcher Tabs -->
+                             <div class="flex p-1 bg-slate-100 rounded-xl mb-8">
+                                <button class="flex-1 py-3 text-sm font-bold rounded-lg shadow-sm bg-white text-slate-900 flex items-center justify-center gap-2">
+                                    <span>🚗</span> Uber / Lyft
+                                </button>
+                                <a href="/doordash" class="flex-1 py-3 text-sm font-bold rounded-lg text-slate-500 hover:text-slate-900 hover:bg-white/50 transition flex items-center justify-center gap-2">
+                                    <span>🍔</span> DoorDash
+                                </a>
+                             </div>
+
                              <h3 class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2">
                                 <span class="flex items-center justify-center w-6 h-6 rounded-full bg-slate-100 text-xs text-slate-600">1</span>
                                 Enter Your Weekly Stats
@@ -134,7 +145,9 @@
                             <div class="grid md:grid-cols-3 gap-6">
                                 <!-- Gross Income -->
                                 <div class="space-y-2">
-                                    <label class="text-xs font-semibold uppercase tracking-wide text-slate-500">Total Pay ($)</label>
+                                    <div class="flex justify-between items-end h-5">
+                                        <label class="text-xs font-semibold uppercase tracking-wide text-slate-500 leading-none">Total Pay ($)</label>
+                                    </div>
                                     <div class="relative">
                                         <span class="absolute left-4 top-3.5 text-slate-400 font-medium">$</span>
                                         <input type="number" x-model="rawGross" 
@@ -143,11 +156,11 @@
                                 </div>
                                 <!-- Miles Driven -->
                                 <div class="space-y-2">
-                                    <div class="flex justify-between items-end mb-2">
-                                        <label class="text-xs font-semibold uppercase tracking-wide text-slate-500">Miles Driven</label>
-                                        <label class="flex items-center gap-2 cursor-pointer group">
+                                    <div class="flex justify-between items-end h-5">
+                                        <label class="text-xs font-semibold uppercase tracking-wide text-slate-500 leading-none">Miles Driven</label>
+                                        <label class="flex items-center gap-2 cursor-pointer group leading-none">
                                             <span class="text-xs text-slate-400 group-hover:text-emerald-600 transition">Round Trip x2</span>
-                                            <input type="checkbox" x-model="isRoundTrip" class="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500">
+                                            <input type="checkbox" x-model="isRoundTrip" class="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-3.5 h-3.5">
                                         </label>
                                     </div>
                                     <div class="relative">
@@ -158,7 +171,9 @@
                                 </div>
                                 <!-- Hours Worked -->
                                 <div class="space-y-2">
-                                    <label class="text-xs font-semibold uppercase tracking-wide text-slate-500">Total Time Online</label>
+                                    <div class="flex justify-between items-end h-5">
+                                        <label class="text-xs font-semibold uppercase tracking-wide text-slate-500 leading-none">Total Time Online</label>
+                                    </div>
                                     <div class="relative">
                                         <input type="number" x-model="rawHours" 
                                                class="w-full pl-4 pr-12 py-3 bg-slate-50 border border-slate-200 rounded-xl text-lg font-bold text-slate-900 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 focus:outline-none transition-all">
@@ -206,7 +221,7 @@
                                                 <div class="w-full bg-slate-200 rounded-full h-2.5 mb-2">
                                                     <div class="bg-emerald-500 h-2.5 rounded-full transition-all duration-500" :style="'width: ' + Math.min(100, (totalNet / targetWeeklyIncome) * 100) + '%'"></div>
                                                 </div>
-                                                <p class="text-sm text-slate-600" x-text="(targetWeeklyIncome - totalNet) > 0 ? '$' + (targetWeeklyIncome - totalNet).toFixed(0) + ' more to hit goal!' : 'Goal smashed! 🎉'"></p>
+                                                <p class="text-sm text-slate-600" x-text="(targetWeeklyIncome - totalNet) > 0 ? '$' + (targetWeeklyIncome - totalNet).toFixed(0) + ' (' + hoursToGoal.toFixed(1) + ' hrs) to go!' : 'Goal smashed! 🎉'"></p>
                                             </div>
                                         </template>
                                         <template x-if="targetWeeklyIncome <= 0">

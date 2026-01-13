@@ -20,4 +20,7 @@ public class AppConstants {
     // SEO & Meta
     public static final String SITE_NAME = "GigWageTruth";
     public static final String DEFAULT_DESCRIPTION = "Discover your TRUE hourly wage as a gig worker. Don't let gross revenue fool you.";
+
+    // Asset Versioning (Updates on every restart to bust cache)
+    public static final String CACHE_VERSION = String.valueOf(System.currentTimeMillis());
 }
