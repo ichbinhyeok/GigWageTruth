@@ -25,6 +25,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- Alpine.js -->
+    <!-- Alpine Plugins -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     
     <!-- Tailwind CSS -->
@@ -55,7 +59,7 @@
 
     <!-- Header -->
     <header class="w-full bg-white border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex justify-between items-center">
+        <div class="w-full px-8 h-16 flex justify-between items-center">
             <!-- Logo -->
             <a href="/" class="flex items-center space-x-2 group">
                 <span class="text-xl font-bold tracking-tight text-slate-900 group-hover:text-emerald-600 transition-colors">
@@ -65,9 +69,7 @@
 
             <!-- Simple Menu -->
             <nav class="hidden md:flex space-x-8 text-sm font-medium text-slate-600">
-                <a href="#calculator" class="hover:text-emerald-600 transition">Calculator</a>
-                <a href="#methodology" class="hover:text-emerald-600 transition">Methodology</a>
-                <a href="/blog" class="hover:text-emerald-600 transition">Blog</a>
+                <a href="/" class="hover:text-emerald-600 transition">Calculator</a>
             </nav>
         </div>
     </header>
@@ -81,12 +83,20 @@
     <footer class="bg-white border-t border-slate-200 py-12 mt-12">
         <div class="max-w-5xl mx-auto px-4 text-center">
             <p class="text-slate-900 font-semibold mb-2">GigWageTruth</p>
+            <div class="flex justify-center space-x-6 mb-6 text-sm text-slate-500">
+                <a href="/about" class="hover:text-emerald-600 transition">About (Gabi)</a>
+                <a href="/blog" class="hover:text-emerald-600 transition">Blog</a>
+                <a href="/methodology" class="hover:text-emerald-600 transition">Methodology</a>
+                <a href="/privacy" class="hover:text-emerald-600 transition">Privacy</a>
+                <a href="/terms" class="hover:text-emerald-600 transition">Terms</a>
+                <a href="/contact" class="hover:text-emerald-600 transition">Contact</a>
+            </div>
             <p class="text-slate-500 text-sm mb-4">
                 Revealing the true cost of the gig economy.
             </p>
             <p class="text-xs text-slate-400">
                 &copy; 2026 GigWageTruth. All rights reserved. <br>
-                Calculations based on 2026 IRS Standard Mileage Rate ($0.67/mile). Not financial advice.
+                Calculations based on 2026 IRS Standard Mileage Rate ($0.725/mile). Not financial advice.
             </p>
         </div>
     </footer>

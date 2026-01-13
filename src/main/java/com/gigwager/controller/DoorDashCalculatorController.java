@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class DoorDashCalculatorController {
 
     @GetMapping("/doordash")
-    public String doordash(@RequestParam(required = false) Double gross,
-            @RequestParam(required = false) Double miles,
-            @RequestParam(required = false) Double hours,
+    public String doordash(@RequestParam(name = "gross", required = false) Double gross,
+            @RequestParam(name = "miles", required = false) Double miles,
+            @RequestParam(name = "hours", required = false) Double hours,
             Model model) {
 
         // Strict 2-Page Flow: If no params, go back to Gateway (Index)
@@ -30,6 +30,6 @@ public class DoorDashCalculatorController {
         model.addAttribute("customTitle",
                 "DoorDash Truth: I made $" + gross.intValue() + "... but the real wage is shocking.");
 
-        return "calculator";
+        return "doordash";
     }
 }
