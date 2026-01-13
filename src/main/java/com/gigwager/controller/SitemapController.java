@@ -14,33 +14,35 @@ public class SitemapController {
         xml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
         xml.append("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n");
 
+        String today = java.time.LocalDate.now().toString();
+
         // Main pages
-        addUrl(xml, "https://www.gigwagetruth.com/", "2026-01-13", "weekly", "1.0");
-        addUrl(xml, "https://www.gigwagetruth.com/uber", "2026-01-13", "weekly", "0.9");
-        addUrl(xml, "https://www.gigwagetruth.com/doordash", "2026-01-13", "weekly", "0.9");
+        addUrl(xml, "https://www.gigwagetruth.com/", today, "weekly", "1.0");
+        addUrl(xml, "https://www.gigwagetruth.com/uber", today, "weekly", "0.9");
+        addUrl(xml, "https://www.gigwagetruth.com/doordash", today, "weekly", "0.9");
 
         // Salary directory
-        addUrl(xml, "https://www.gigwagetruth.com/salary/directory", "2026-01-13", "weekly", "0.8");
+        addUrl(xml, "https://www.gigwagetruth.com/salary/directory", today, "weekly", "0.8");
 
         // Programmatic SEO: City pages (2 apps × 10 cities = 20 pages)
         for (CityData city : CityData.values()) {
             String uberUrl = "https://www.gigwagetruth.com/salary/uber/" + city.getSlug();
             String doordashUrl = "https://www.gigwagetruth.com/salary/doordash/" + city.getSlug();
 
-            addUrl(xml, uberUrl, "2026-01-13", "monthly", "0.7");
-            addUrl(xml, doordashUrl, "2026-01-13", "monthly", "0.7");
+            addUrl(xml, uberUrl, today, "monthly", "0.7");
+            addUrl(xml, doordashUrl, today, "monthly", "0.7");
         }
 
         // Blog
-        addUrl(xml, "https://www.gigwagetruth.com/blog", "2026-01-13", "daily", "0.8");
-        addUrl(xml, "https://www.gigwagetruth.com/blog/multi-apping-guide", "2026-01-13", "monthly", "0.7");
-        addUrl(xml, "https://www.gigwagetruth.com/blog/tax-guide", "2026-01-13", "monthly", "0.7");
-        addUrl(xml, "https://www.gigwagetruth.com/blog/uber-vs-doordash", "2026-01-13", "monthly", "0.7");
-        addUrl(xml, "https://www.gigwagetruth.com/blog/hidden-costs", "2026-01-13", "monthly", "0.7");
+        addUrl(xml, "https://www.gigwagetruth.com/blog", today, "daily", "0.8");
+        addUrl(xml, "https://www.gigwagetruth.com/blog/multi-apping-guide", today, "monthly", "0.7");
+        addUrl(xml, "https://www.gigwagetruth.com/blog/tax-guide", today, "monthly", "0.7");
+        addUrl(xml, "https://www.gigwagetruth.com/blog/uber-vs-doordash", today, "monthly", "0.7");
+        addUrl(xml, "https://www.gigwagetruth.com/blog/hidden-costs", today, "monthly", "0.7");
 
         // Static pages
-        addUrl(xml, "https://www.gigwagetruth.com/about", "2026-01-13", "yearly", "0.5");
-        addUrl(xml, "https://www.gigwagetruth.com/methodology", "2026-01-13", "yearly", "0.5");
+        addUrl(xml, "https://www.gigwagetruth.com/about", today, "yearly", "0.5");
+        addUrl(xml, "https://www.gigwagetruth.com/methodology", today, "yearly", "0.5");
 
         xml.append("</urlset>");
         return xml.toString();

@@ -39,17 +39,42 @@ public class ProgrammaticSeoController {
                 String appName = app.equals("uber") ? "Uber" : "DoorDash";
                 String title = String.format("Real %s Earnings in %s, %s (2026 Truth)",
                                 appName, city.getCityName(), city.getState());
-                String description = String.format(
-                                "Calculate your true hourly wage as a %s driver in %s after gas ($%.2f/gal), " +
-                                                "depreciation, and taxes. Estimated take-home: $%.2f/hr.",
-                                appName, city.getCityName(), city.getGasPrice(), featuredScenario.getNetHourly());
+
+                // Branching Meta Description Logic (Anti-Pattern Detection)
+                String description;
+                double hourly = featuredScenario.getNetHourly();
+                String gasPrice = String.format("$%.2f", city.getGasPrice());
+
+                if (city.isHighTraffic()) {
+                        description = String.format(
+                                        "Stop traffic killing your hourly rate. See how %s drivers in %s navigate congestion to earn $%.2f/hr net after expenses.",
+                                        appName, city.getCityName(), hourly);
+                } else if (city.isCheapGas()) {
+                        description = String.format(
+                                        "Gas is cheap in %s (%s/gal), but are rates high enough? See the real take-home pay for %s drivers in 2026.",
+                                        city.getCityName(), gasPrice, appName);
+                } else if (city.isHighCost()) {
+                        description = String.format(
+                                        "Is %s worth it in %s given the high cost of living? We calculated the exact net hourly wage ($%.2f/hr) for local drivers.",
+                                        appName, city.getCityName(), hourly);
+                } else {
+                        description = String.format(
+                                        "Calculate your true hourly wage as a %s driver in %s after gas (%s/gal), vehicle depreciation, and taxes. Est: $%.2f/hr.",
+                                        appName, city.getCityName(), gasPrice, hourly);
+                }
+
                 String canonicalUrl = String.format("https://www.gigwagetruth.com/salary/%s/%s", app, citySlug);
+
+                // Freshness signal
+                String lastUpdated = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy")
+                                .format(java.time.LocalDate.now());
 
                 model.addAttribute("app", app);
                 model.addAttribute("appName", appName);
                 model.addAttribute("city", city);
                 model.addAttribute("scenarios", scenarios);
                 model.addAttribute("featuredScenario", featuredScenario);
+                model.addAttribute("lastUpdated", lastUpdated);
                 model.addAttribute("seoMeta", new SeoMeta(title, description, canonicalUrl,
                                 "https://www.gigwagetruth.com/og-image.jpg"));
 

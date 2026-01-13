@@ -9,6 +9,7 @@
 @param CityData city
 @param List<CityScenario> scenarios
 @param CityScenario featuredScenario
+@param String lastUpdated
 
 @template.layout.main(
     seoMeta = seoMeta,
@@ -16,8 +17,11 @@
         <!-- Hero Section -->
         <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 pt-20 pb-24 px-6">
             <div class="max-w-4xl mx-auto">
-                <div class="inline-block px-4 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-full mb-6">
-                    <span class="text-emerald-400 text-sm font-bold uppercase tracking-wider">${city.getCityName()}, ${city.getState()}</span>
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="inline-block px-4 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-full">
+                        <span class="text-emerald-400 text-sm font-bold uppercase tracking-wider">${city.getCityName()}, ${city.getState()}</span>
+                    </div>
+                    <span class="text-slate-400 text-xs font-medium uppercase tracking-wider">Last Updated: ${lastUpdated}</span>
                 </div>
                 
                 <h1 class="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
@@ -153,6 +157,98 @@
                     Actual results vary by vehicle efficiency, cherry-picking skill, and surge timing.
                 </p>
             </section>
+
+            <!-- New Content: Best Times and Areas -->
+            <section class="bg-white rounded-2xl p-8 border border-slate-200">
+                <h2 class="text-2xl font-bold text-slate-900 mb-4">Best Times and Areas to Drive in ${city.getCityName()}</h2>
+                <div class="prose prose-slate max-w-none text-slate-700">
+                    @if(city.isHighTraffic())
+                        <p>
+                            <strong>Avoid the Gridlock:</strong> ${city.getCityName()} is notorious for congestion.
+                            Driving during rush hour (7-9 AM and 4-6 PM) will kill your hourly rate due to idling and low mileage.
+                            Focus on <strong>early mornings</strong> or <strong>late-night weekends</strong> when streets are clearer.
+                        </p>
+                    @elseif(city.isCheapGas())
+                        <p>
+                            <strong>Distance is Your Friend:</strong> With gas prices at $${String.format("%.2f", city.getGasPrice())}/gal,
+                            you have an advantage. Don't be afraid to take longer highway trips to suburbs where tipping might be better.
+                            The math works out in your favor compared to high-gas cities.
+                        </p>
+                    @elseif(city.isHighCost())
+                        <p>
+                            <strong>Chase the Surge:</strong> In a high-cost market like ${city.getCityName()}, base rates often aren't enough.
+                            You need to be aggressive about positioning yourself in <strong>premium zones</strong> and only driving during
+                            peak surge/promo windows to make the living wage numbers work.
+                        </p>
+                    @else
+                        <p>
+                            <strong>Follow the Demand:</strong> Focus on high-density commercial/restaurant districts during lunch (11 AM - 1 PM)
+                            and dinner (5 PM - 8 PM) rushes. In ${city.getCityName()}, consistency is key—stick to areas with
+                            proven order volume rather than chasing "hot spots" that disappear quickly.
+                        </p>
+                    @endif
+                </div>
+            </section>
+
+            <!-- New Content: Common Expenses -->
+            <section class="bg-slate-50 rounded-2xl p-8 border border-slate-200">
+                <h2 class="text-2xl font-bold text-slate-900 mb-4">Common Expenses ${appName} Drivers in ${city.getCityName()} Overlook</h2>
+                <ul class="space-y-3 text-slate-700 list-disc pl-5">
+                    @if(city.isHighTraffic() || city.isHighCost())
+                        <li>
+                            <strong>Parking Tickets:</strong> In dense areas of ${city.getCityName()}, one $50 ticket can wipe out 3 hours of profit.
+                            Always factor in legal parking time or commercial loading zones.
+                        </li>
+                        <li>
+                            <strong>Brake & Transmission Wear:</strong> Stop-and-go traffic accelerates wear.
+                            Budget 20% more for maintenance than highway drivers.
+                        </li>
+                    @else
+                        <li>
+                            <strong>Highway Miles:</strong> You'll rack up miles faster in ${city.getCityName()}.
+                            Tires and oil changes will come around more frequently than you expect.
+                        </li>
+                    @endif
+                    <li>
+                        <strong>Rideshare Insurance:</strong> Personal auto policies often deny coverage for gig work accidents.
+                        Make sure you have a gap endorsement.
+                    </li>
+                    <li>
+                        <strong>The Tax Bill:</strong> Remember, the numbers above include 15.3% self-employment tax.
+                        If you don't save this, tax season will be a shock.
+                    </li>
+                </ul>
+            </section>
+
+            <!-- FAQ Schema JSON-LD -->
+            <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [{
+                "@type": "Question",
+                "name": "How are these ${appName} earnings calculated?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "We calculate 'real' net profit by starting with estimated gross income levels for ${city.getMarketTier()} markets, then subtracting fuel costs ($${String.format("%.2f", city.getGasPrice())}/gal), vehicle depreciation (using the IRS standard rate of 72.5 cents/mile), and estimated self-employment taxes (15.3%). This reveals your true take-home pay."
+                }
+              }, {
+                "@type": "Question",
+                "name": "Why do earnings in ${city.getCityName()} differ from other cities?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Earnings vary due to local factors. ${city.getCityName()} has specific gas prices ($${String.format("%.2f", city.getGasPrice())}/gal), traffic conditions, and market demand tiers (${city.getMarketTier()}). High-cost cities often have higher gross pay but also higher expenses, while lower-cost cities might offer better effective margins."
+                }
+              }, {
+                "@type": "Question",
+                "name": "Do these numbers include taxes?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. Our models deduct the standardized IRS mileage deduction from your gross income to find taxable profit, then apply a 15.3% self-employment tax estimate. This is crucial because gig drivers are independent contractors (1099), not employees."
+                }
+              }]
+            }
+            </script>
 
             <!-- CTA: Deep Calculator -->
             <section class="bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-2xl p-10 text-center shadow-xl">
