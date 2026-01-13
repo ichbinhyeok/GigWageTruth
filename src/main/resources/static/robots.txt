@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://www.gigverdict.com/sitemap.xml
+Sitemap: https://gigverdict.com/sitemap.xml

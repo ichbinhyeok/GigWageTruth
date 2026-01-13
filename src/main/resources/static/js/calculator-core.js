@@ -226,7 +226,7 @@ window.createGigCalculator = function (initialData) {
                 navigator.share({
                     title: 'My Real Gig Wage',
                     text: this.viralText,
-                    url: 'https://www.gigverdict.com'
+                    url: 'https://gigverdict.com'
                 }).catch((err) => {
                     console.log('Native share dismissed/failed', err);
                     // Fallback to modal if native share fails/is cancelled
@@ -240,7 +240,7 @@ window.createGigCalculator = function (initialData) {
 
         shareTo(platform) {
             const text = encodeURIComponent(this.viralText);
-            const url = encodeURIComponent("https://www.gigverdict.com");
+            const url = encodeURIComponent("https://gigverdict.com");
             let shareUrl = "";
 
             switch (platform) {
@@ -255,7 +255,7 @@ window.createGigCalculator = function (initialData) {
                     break;
                 case 'copy':
                     if (navigator.clipboard) {
-                        navigator.clipboard.writeText(this.viralText + " https://www.gigverdict.com")
+                        navigator.clipboard.writeText(this.viralText + " https://gigverdict.com")
                             .then(() => {
                                 alert("Copied to clipboard!"); // Simple feedback for now
                             });

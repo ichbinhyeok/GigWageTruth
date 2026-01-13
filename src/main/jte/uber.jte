@@ -10,8 +10,8 @@
     seoMeta = new SeoMeta(
         customTitle != null ? customTitle : "My Real Hourly Wage - The Shocking Truth",
         "See exactly how much I make after gas, taxes, and depreciation. The number will surprise you.",
-        "https://www.gigverdict.com/uber",
-        "https://www.gigverdict.com/og-image.jpg"
+        "https://gigverdict.com/uber",
+        "https://gigverdict.com/og-image.jpg"
     ),
     content = @`
         <script src="/js/calculator-core.js?v=${AppConstants.CACHE_VERSION}"></script>
@@ -512,7 +512,7 @@
               "@context": "https://schema.org",
               "@type": "WebApplication",
               "name": "Real Uber Driver Pay Calculator",
-              "url": "https://gigwagetruth.com/uber",
+              "url": "https://gigverdict.com/uber",
               "applicationCategory": "FinanceApplication",
               "operatingSystem": "Any",
               "description": "Calculate your true net profit as an Uber driver after gas, depreciation, and taxes.",

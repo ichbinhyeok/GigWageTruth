@@ -2,8 +2,8 @@
     seoMeta = new com.gigwager.model.SeoMeta(
         "GigWageTruth - The Only Real Net Profit Calculator for Gig Workers",
         "Stop driving blind. Calculate your true hourly wage for Uber, Lyft, and DoorDash after hidden costs.",
-        "https://www.gigverdict.com",
-        "https://www.gigverdict.com/og-image.jpg"
+        "https://gigverdict.com",
+        "https://gigverdict.com/og-image.jpg"
     ),
     content = @`
         <div class="lg:h-[calc(100vh-4rem)] flex flex-col lg:flex-row overflow-hidden">
