@@ -9,7 +9,7 @@ window.createGigCalculator = function (initialData) {
         rawHours: initialData.hours,
         rawTips: 0,
         rawBonuses: 0,
-        rawWaitTime: 0,
+        rawActiveTime: 0,
         rawCustomMpg: 25,
         rawCustomMaintenance: 0.12,
         rawCustomDepreciation: 0.15,
@@ -22,7 +22,11 @@ window.createGigCalculator = function (initialData) {
         get hours() { return Number(this.rawHours) || 0; },
         get tips() { return Number(this.rawTips) || 0; },
         get bonuses() { return Number(this.rawBonuses) || 0; },
-        get waitTime() { return Number(this.rawWaitTime) || 0; },
+        get activeTime() { return Number(this.rawActiveTime) || 0; },
+        get waitTime() {
+            // Auto-calculate: if user enters active time, wait = total - active
+            return this.activeTime > 0 ? Math.max(0, this.hours - this.activeTime) : 0;
+        },
         get customMpg() { return Number(this.rawCustomMpg) || 0; },
         get customMaintenance() { return Number(this.rawCustomMaintenance) || 0; },
         get customDepreciation() { return Number(this.rawCustomDepreciation) || 0; },
@@ -58,6 +62,7 @@ window.createGigCalculator = function (initialData) {
 
             // Watch for vehicle changes to update suggestions
             this.$watch('selectedVehicleId', () => this.updateGasPriceFromPreset());
+            console.log("GigWageTruth Calculator Loaded: v2 (Features Active)");
         },
 
         updateGasPriceFromPreset() {
@@ -134,7 +139,8 @@ window.createGigCalculator = function (initialData) {
         },
 
         get activeDriveTime() {
-            return Math.max(0, this.hours - this.waitTime);
+            // If user provided active time, use it. Otherwise use total hours.
+            return this.activeTime > 0 ? this.activeTime : this.hours;
         },
 
         get taxCost() {
@@ -159,6 +165,26 @@ window.createGigCalculator = function (initialData) {
                 return (this.otherCost * 0.40) * 50;
             }
             return this.otherCost * 50;
+        },
+
+        // New Engagement Metrics
+        get w2Equivalent() {
+            // W-2 jobs offer benefits (health, PTO, 401k match, unemployment insurance)
+            // typically valued at 30% of salary. Gig work has none.
+            // Formula: Net Hourly / 1.25 (roughly 20-25% discount for lack of benefits)
+            return Math.max(0, this.netHourly / 1.25);
+        },
+
+        get activeHourly() {
+            return this.activeDriveTime <= 0 ? 0 : this.totalNet / this.activeDriveTime;
+        },
+
+        get requiredGrossForGoal() {
+            if (this.targetWeeklyIncome <= 0 || this.gross <= 0 || this.totalNet <= 0) return 0;
+            // Calculate current "Net Profit Margin"
+            const margin = this.totalNet / this.gross;
+            // Required Gross = Target Net / Margin
+            return this.targetWeeklyIncome / margin;
         },
 
         get hoursToGoal() {

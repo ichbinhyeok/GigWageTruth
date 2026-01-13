@@ -188,7 +188,11 @@
                                             <div class="w-full bg-slate-200 rounded-full h-2.5 mb-2">
                                                 <div class="bg-${themeColor}-500 h-2.5 rounded-full transition-all duration-500" :style="'width: ' + Math.min(100, (totalNet / targetWeeklyIncome) * 100) + '%'"></div>
                                             </div>
-                                            <p class="text-sm text-slate-600" x-text="(targetWeeklyIncome - totalNet) > 0 ? '$' + (targetWeeklyIncome - totalNet).toFixed(0) + ' (' + hoursToGoal.toFixed(1) + ' hrs) to go!' : 'Goal smashed! 🎉'"></p>
+                                            <div class="mt-2 text-xs text-slate-500 bg-slate-100 p-2 rounded-lg">
+                                                <span>💡 To pocket <strong>$<span x-text="targetWeeklyIncome"></span></strong>, your <span x-text="selectedApp"></span> Earnings needs to show <strong>$<span x-text="requiredGrossForGoal.toFixed(0)"></span></strong>.</span>
+                                                <span class="block text-[10px] text-slate-400 mt-1">(Based on your current expense ratio)</span>
+                                            </div>
+                                            <p class="text-sm text-slate-600 mt-2" x-text="(targetWeeklyIncome - totalNet) > 0 ? '$' + (targetWeeklyIncome - totalNet).toFixed(0) + ' (' + hoursToGoal.toFixed(1) + ' hrs) to go!' : 'Goal smashed! 🎉'"></p>
                                         </div>
                                     </template>
                                     <template x-if="targetWeeklyIncome <= 0">
@@ -269,13 +273,15 @@
                         <div x-show="showAdvancedOptions" x-collapse class="mt-6 border-t border-slate-100 pt-6">
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div>
-                                    <label class="block text-xs font-semibold uppercase tracking-wide text-slate-500 mb-2">Unpaid Wait Time (hrs)</label>
+                                    <label class="block text-xs font-semibold uppercase tracking-wide text-slate-500 mb-2">Active Time (Optional)</label>
                                     <div class="relative">
-                                        <input type="number" x-model="rawWaitTime" 
+                                        <input type="number" x-model="rawActiveTime" 
+                                            :max="hours"
+                                            step="0.1"
                                             class="w-full pr-12 pl-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900 focus:ring-2 focus:ring-${themeColor}-500 focus:border-${themeColor}-500">
                                         <span class="absolute right-4 top-3.5 text-slate-400 font-medium text-sm">hrs</span>
                                     </div>
-                                    <p class="text-[10px] text-slate-400 mt-1">Time spent waiting for pings.</p>
+                                    <p class="text-[10px] text-slate-400 mt-1">Time actually driving/delivering (from your app). Shows "busy hours" illusion.</p>
                                 </div>
                                 <div>
                                     <label class="block text-xs font-semibold uppercase tracking-wide text-slate-500 mb-2">Cash Tips / Bonuses</label>
@@ -296,10 +302,10 @@
                 <div class="lg:col-span-4 space-y-6">
                     
                     <!-- Breakdown Card -->
-                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 sticky top-24">
-                        <h3 class="text-base font-bold text-slate-900 mb-6">Weekly Breakdown</h3>
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 sticky top-24">
+                        <h3 class="text-base font-bold text-slate-900 mb-4">Weekly Breakdown</h3>
                         
-                        <div class="space-y-4">
+                        <div class="space-y-3">
                             <div class="flex justify-between items-center py-3 border-b border-slate-100">
                                 <span class="text-slate-600">Gross Pay</span>
                                 <span class="font-bold text-slate-900">$<span x-text="gross.toFixed(2)"></span></span>
@@ -330,20 +336,20 @@
                                 </div>
                             </template>
 
-                            <div class="flex justify-between items-center py-3 border-b border-slate-100">
+                            <div class="flex justify-between items-center py-2 border-b border-slate-100">
                                 <div class="flex flex-col">
                                     <span class="text-slate-600">Est. Taxes</span>
                                     <span class="text-xs text-slate-400">15.3% SE Tax</span>
                                 </div>
                                 <span class="font-bold text-red-500">-$<span x-text="taxCost.toFixed(2)"></span></span>
                             </div>
-                            <div class="flex justify-between items-center pt-4">
+                            <div class="flex justify-between items-center pt-2">
                                 <span class="text-lg font-bold text-slate-900">Net Profit</span>
-                                <span class="text-2xl font-bold" :class="(totalNet >= 0) ? 'text-emerald-600' : 'text-red-500'">$<span x-text="totalNet.toFixed(2)"></span></span>
+                                <span class="text-xl font-bold" :class="(totalNet >= 0) ? 'text-emerald-600' : 'text-red-500'">$<span x-text="totalNet.toFixed(2)"></span></span>
                             </div>
                         </div>
 
-                        <div class="mt-8 bg-slate-50 rounded-xl p-4 border border-slate-200">
+                        <div class="mt-6 bg-slate-50 rounded-xl p-4 border border-slate-200">
                             <div class="flex justify-between items-center mb-1">
                                 <span class="text-xs font-bold uppercase text-slate-500">Real Hourly Wage</span>
                             </div>
@@ -351,6 +357,38 @@
                                 <span class="text-4xl font-bold text-slate-900">$<span x-text="netHourly.toFixed(2)"></span></span>
                                 <span class="text-sm font-medium text-slate-400">/hr</span>
                             </div>
+
+                             <!-- W-2 Equivalent (New Feature) -->
+                            <div class="mb-3 flex items-center justify-between text-xs bg-slate-100 p-2 rounded-lg border border-slate-200">
+                                <span class="font-semibold text-slate-600">🆚 W-2 Job Equiv:</span>
+                                <span class="font-bold text-slate-800">$<span x-text="w2Equivalent.toFixed(2)"></span>/hr</span>
+                            </div>
+                            <p class="text-[10px] text-slate-400 mb-3 leading-tight">
+                                *Comparing to a job with benefits (Health, PTO), your gig wage is worth less.
+                            </p>
+
+                             <!-- Wait Time Analysis (Only if wait time entered) -->
+                            <template x-if="waitTime > 0">
+                                <div class="mb-4 bg-orange-50 rounded-lg p-3 border border-orange-100">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="text-xs font-bold uppercase text-orange-600">The "Active" Illusion</span>
+                                    </div>
+                                    <div class="flex justify-between items-end">
+                                        <div class="text-right">
+                                            <span class="block text-xs text-slate-500">Only Driving</span>
+                                            <span class="block font-bold text-slate-900">$<span x-text="activeHourly.toFixed(2)"></span>/hr</span>
+                                        </div>
+                                        <div class="text-xs text-orange-400 font-bold px-2 mb-1">vs</div>
+                                        <div>
+                                            <span class="block text-xs text-slate-500">Real Reality</span>
+                                            <span class="block font-bold text-red-600">$<span x-text="netHourly.toFixed(2)"></span>/hr</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-[10px] text-orange-700 mt-2 leading-tight">
+                                        You spent <strong x-text="waitTime"></strong> hrs waiting for free. That unpaid time dragged your wage down by $<span x-text="(activeHourly - netHourly).toFixed(2)"></span>/hr.
+                                    </p>
+                                </div>
+                            </template>
 
                              <!-- Shock Message (Verdict) - Redesigned as a "Fact Check Box" -->
                             <div class="mt-4 rounded-lg p-4 border transition-colors duration-300" 
