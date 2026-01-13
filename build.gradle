@@ -45,6 +45,20 @@ jte {
     binaryStaticContent = true
 }
 
+// Ensure generated JTE sources are included in the compilation
+sourceSets {
+    main {
+        java {
+            srcDirs += 'build/generated-sources/jte'
+        }
+    }
+}
+
+// Ensure JTE generation happens before Java compilation
+tasks.named('compileJava') {
+    dependsOn tasks.named('generateJte')
+}
+
 tasks.named('test') {
     useJUnitPlatform()
 }
