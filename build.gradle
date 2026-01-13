@@ -62,3 +62,9 @@ tasks.named('compileJava') {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+// Enable JTE development mode only for local bootRun
+tasks.named('bootRun') {
+    systemProperty 'gg.jte.developmentMode', 'true'
+    systemProperty 'gg.jte.usePrecompiledTemplates', 'false'
+}
