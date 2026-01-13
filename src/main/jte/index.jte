@@ -12,9 +12,20 @@
             <!-- Order-2 on mobile (appears below form), Order-1 on desktop -->
             <div class="order-2 lg:order-1 lg:w-1/2 bg-slate-50 border-r border-slate-200 p-8 lg:p-20 flex flex-col justify-end relative">
                 <!-- Decorative Abstract shapes -->
-                <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-50">
-                     <div class="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-slate-200/50 rounded-full blur-3xl"></div>
+                 <div class="absolute top-0 left-0 w-full h-full overflow-hidden flex items-center justify-center opacity-80 pointer-events-none">
+                     <canvas
+                         id="cobe"
+                         style="width: 100%; height: 100%; max-width: 600px; max-height: 600px;"
+                         width="1000"
+                         height="1000"
+                     ></canvas>
                 </div>
+                
+                <script type="module">
+                    import { initGlobe } from '/js/globe-component.js';
+                    const canvas = document.getElementById('cobe');
+                    initGlobe(canvas);
+                </script>
 
                 <div class="relative z-10 space-y-6">
                     <h1 class="text-6xl lg:text-8xl font-black tracking-tighter text-slate-900 leading-[0.9]">
