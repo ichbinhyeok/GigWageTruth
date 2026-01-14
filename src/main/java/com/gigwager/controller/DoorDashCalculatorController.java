@@ -1,5 +1,6 @@
 package com.gigwager.controller;
 
+import com.gigwager.service.VerdictService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +8,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class DoorDashCalculatorController {
+
+    private final VerdictService verdictService;
+
+    public DoorDashCalculatorController(VerdictService verdictService) {
+        this.verdictService = verdictService;
+    }
 
     @GetMapping("/doordash")
     public String doordash(@RequestParam(name = "gross", required = false) Double gross,
@@ -24,6 +31,10 @@ public class DoorDashCalculatorController {
         model.addAttribute("initialMiles", miles);
         model.addAttribute("initialHours", hours);
         model.addAttribute("app", "doordash");
+
+        // Calculate Verdict
+        var verdict = verdictService.calculateVerdict(gross, miles, hours, "DoorDash");
+        model.addAttribute("verdict", verdict);
 
         // Dynamic SEO Title
         // Simple calculation for title context (approximate)

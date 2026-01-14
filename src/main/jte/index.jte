@@ -9,8 +9,8 @@
         <div class="lg:h-[calc(100vh-4rem)] flex flex-col lg:flex-row overflow-hidden">
             
             <!-- LEFT COLUMN: The Hook (Text) -->
-            <!-- Order-2 on mobile (appears below form), Order-1 on desktop -->
-            <div class="order-2 lg:order-1 lg:w-1/2 bg-slate-50 border-r border-slate-200 p-8 lg:p-20 flex flex-col justify-end relative">
+            <!-- Order-1 on mobile (appears first), Order-1 on desktop (Left) -->
+            <div class="order-1 lg:order-1 lg:w-1/2 bg-slate-50 border-r border-slate-200 p-8 lg:p-20 flex flex-col justify-end relative">
                 <!-- Decorative Abstract shapes -->
                  <div class="absolute top-0 left-0 w-full h-full overflow-hidden flex items-center justify-center opacity-80 pointer-events-none">
                      <canvas
@@ -47,8 +47,8 @@
             </div>
 
             <!-- RIGHT COLUMN: The Gateway (Input Form) -->
-            <!-- Order-1 on mobile (appears first), Order-2 on desktop -->
-            <div class="order-1 lg:order-2 lg:w-1/2 bg-white p-6 lg:p-20 flex items-center justify-center overflow-y-auto">
+            <!-- Order-2 on mobile (appears below hero), Order-2 on desktop (Right) -->
+            <div class="order-2 lg:order-2 lg:w-1/2 bg-white p-6 lg:p-20 flex items-center justify-center overflow-y-auto">
                 <div class="w-full max-w-lg space-y-8">
                     
                     <!-- Form Container -->
@@ -85,7 +85,7 @@
                                 </div>
                             </div>
 
-                            <div class="grid grid-cols-2 gap-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                 <!-- Miles -->
                                 <div class="space-y-2">
                                     <div class="flex justify-between items-baseline">

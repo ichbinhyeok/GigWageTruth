@@ -1,5 +1,6 @@
 package com.gigwager.controller;
 
+import com.gigwager.service.VerdictService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +8,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UberCalculatorController {
+
+    private final VerdictService verdictService;
+
+    public UberCalculatorController(VerdictService verdictService) {
+        this.verdictService = verdictService;
+    }
 
     @GetMapping("/")
     public String index(Model model) {
@@ -29,6 +36,10 @@ public class UberCalculatorController {
         model.addAttribute("initialMiles", miles);
         model.addAttribute("initialHours", hours);
         model.addAttribute("app", "uber");
+
+        // Calculate Verdict
+        var verdict = verdictService.calculateVerdict(gross, miles, hours, "Uber");
+        model.addAttribute("verdict", verdict);
 
         // Dynamic SEO Title
         // Simple calculation for title context (approximate)
