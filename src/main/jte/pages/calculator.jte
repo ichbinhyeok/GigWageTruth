@@ -1,11 +1,13 @@
 @import com.gigwager.model.SeoMeta
 @import com.gigwager.util.AppConstants
+@import com.gigwager.model.Verdict
 
 @param Double initialGross
 @param Double initialMiles  
 @param Double initialHours
 @param String app
 @param String customTitle
+@param Verdict verdict
 
 @template.layout.main(
     seoMeta = new SeoMeta(
@@ -20,7 +22,7 @@
         <script src="/js/calculator-core.js?v=${AppConstants.CACHE_VERSION}"></script>
 
         <!-- Global State for Tab Switching -->
-        <div x-data="{ activeTab: '${app}' }" @toggle-app="activeTab = $event.detail">
+        <div x-data="{ activeTab: '${app}' }" @toggle-app="activeTab = $event.detail" class="min-h-screen bg-slate-50">
 
             <!-- Uber Container -->
             <div x-show="activeTab === 'uber'" style="display: none;">
@@ -35,9 +37,16 @@
                     defaultVehicle = "prius",
                     switchAction = "$dispatch('toggle-app', 'doordash')",
                     activeTabName = "uber",
+                    verdictContainerId = "uber-verdict-container",
                     content = @`
-                        <!-- Uber Specific Content -->
+                        <!-- Verdict Content Output -->
                         <article class="max-w-4xl mx-auto px-6 mt-12 space-y-16">
+                            
+                            <div id="uber-verdict-container">
+                            @if(verdict != null)
+@template.components.verdict_card(verdict = verdict)
+                            @else
+                            <!-- Fallback/Default Content if no calculation runs (e.g. direct load without params) -->
                             <section>
                                 <h2 class="text-2xl font-bold text-slate-900 mb-4">Why is your real wage so low?</h2>
                                 <div class="prose prose-slate max-w-none text-slate-600">
@@ -46,6 +55,8 @@
                                     <p>This calculator uses the <strong>2026 IRS Standard Mileage Rate of $0.725/mile</strong> as a baseline, which includes all these factors plus insurance. This is the most accurate way to understand your true "take-home" pay.</p>
                                 </div>
                             </section>
+                            @endif
+                            </div>
 
                             <section>
                                 <h2 class="text-2xl font-bold text-slate-900 mb-6">Frequently Asked Questions</h2>
@@ -151,9 +162,15 @@
                     defaultVehicle = "civic",
                     switchAction = "$dispatch('toggle-app', 'uber')",
                     activeTabName = "doordash",
+                    verdictContainerId = "doordash-verdict-container",
                     content = @`
                          <!-- DoorDash Specific Content -->
                         <article class="max-w-4xl mx-auto px-6 mt-12 space-y-16">
+                            
+                            <div id="doordash-verdict-container">
+                            @if(verdict != null)
+@template.components.verdict_card(verdict = verdict)
+                            @else
                             <section>
                                 <h2 class="text-2xl font-bold text-slate-900 mb-4">Why Dashers earned less than minimum wage in 2026</h2>
                                 <div class="prose prose-slate max-w-none text-slate-600">
@@ -162,6 +179,8 @@
                                     <p>This calculator reveals the truth. We deduct the IRS Standard Mileage Rate ($0.725/mi), which accounts for the invisible depreciation of your car. If you are driving a new car for $2 deliveries, you are likely <strong>losing money</strong>.</p>
                                 </div>
                             </section>
+                            @endif
+                            </div>
 
                             <section>
                                 <h2 class="text-2xl font-bold text-slate-900 mb-6">Dasher FAQ</h2>
@@ -205,7 +224,7 @@
                                     <p>DoorDash "Active Time" is a vanity metric. GigWageTruth calculates your <strong>Real Hourly Wage</strong> by accounting for the full picture.</p>
                                     <ul class="grid md:grid-cols-2 gap-4 mt-4">
                                         <li class="flex flex-col md:flex-row md:items-start gap-1 md:gap-2"><span class="font-bold text-slate-900 md:min-w-[4rem]">Revenue:</span><span>Your gross payout from DoorDash (base pay + tips).</span></li>
-                                        <li class="flex flex-col md:flex-row md:items-start gap-1 md:gap-2"><span class="font-bold text-slate-900 md:min-w-[4rem]">Expenses:</span><span>We use the <strong>2026 IRS Standard Mileage Rate ($0.725/mi)</strong>. This deduction is critical because city driving (stop-and-go) destroys brakes and transmissions faster than highway miles.</span></li>
+                                        <li class="flex flex-col md:flex-row md:items-start gap-1 md:gap-2"><span class="font-bold text-slate-900 md:min-w-[4rem]">Expenses:</span><span>We use the <strong>2026 IRS Standard Mileage Rate ($0.725/mi)</strong>. This deduction is critical because city driving (stop-and-go) destroys brakes and tires faster than highway miles.</span></li>
                                         <li class="flex flex-col md:flex-row md:items-start gap-1 md:gap-2"><span class="font-bold text-slate-900 md:min-w-[4rem]">Taxes:</span><span>Estimated <strong>15.3% Self-Employment Tax</strong>. This is the "employer portion" of Social Security and Medicare that W-2 employees don't see, but you must pay.</span></li>
                                         <li class="flex flex-col md:flex-row md:items-start gap-1 md:gap-2"><span class="font-bold text-slate-900 md:min-w-[4rem]">Real Wage:</span><span>(Revenue - Expenses - Taxes) / Total Dash Time. We use "Total Time" because waiting in a parking lot is still work.</span></li>
                                     </ul>

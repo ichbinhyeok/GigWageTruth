@@ -48,6 +48,9 @@ window.createGigCalculator = function (initialData) {
         showShareModal: false,
         shareBtnLabel: 'Share Result',
 
+        verdictContainerId: initialData.verdictContainerId,
+        debounceTimer: null,
+
         async init() {
             try {
                 const response = await fetch('/vehicle-presets.json');
@@ -62,7 +65,43 @@ window.createGigCalculator = function (initialData) {
 
             // Watch for vehicle changes to update suggestions
             this.$watch('selectedVehicleId', () => this.updateGasPriceFromPreset());
+
+            // Watch for input changes to update Verdict
+            this.$watch('rawGross', () => this.debouncedFetchVerdict());
+            this.$watch('rawMiles', () => this.debouncedFetchVerdict());
+            this.$watch('rawHours', () => this.debouncedFetchVerdict());
+
             console.log("GigWageTruth Calculator Loaded: v2 (Features Active)");
+        },
+
+        debouncedFetchVerdict() {
+            if (this.debounceTimer) clearTimeout(this.debounceTimer);
+            this.debounceTimer = setTimeout(() => this.fetchVerdict(), 500);
+        },
+
+        async fetchVerdict() {
+            if (!this.verdictContainerId) return;
+
+            const params = new URLSearchParams({
+                gross: this.gross,
+                miles: this.miles,
+                hours: this.hours,
+                app: this.selectedApp
+            });
+
+            try {
+                const response = await fetch(`/api/verdict-fragment?${params.toString()}`);
+                if (response.ok) {
+                    const html = await response.text();
+                    const container = document.getElementById(this.verdictContainerId);
+                    if (container) {
+                        // HTMX-style swap
+                        container.innerHTML = html;
+                    }
+                }
+            } catch (e) {
+                console.error("Failed to fetch verdict fragment", e);
+            }
         },
 
         updateGasPriceFromPreset() {

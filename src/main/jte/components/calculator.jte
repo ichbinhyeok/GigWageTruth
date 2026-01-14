@@ -12,9 +12,11 @@
 @param Content content
 @param String switchAction
 @param String activeTabName
+@param String verdictContainerId
 
 <div x-data="window.createGigCalculator({
     appName: '${appName}',
+    verdictContainerId: '${verdictContainerId}',
     gross: '${initialGross}',
     miles: '${initialMiles}',
     hours: '${initialHours}',
