@@ -1,0 +1,17 @@
+> Task :cleanGenerateJte
+> Task :cleanPrecompileJte UP-TO-DATE
+> Task :clean
+> Task :generateJte
+
+> Task :compileJava
+Note: C:\Development\Owner\GigWageTruth\build\generated-sources\jte\gg\jte\generated\precompiled\salary\JtecityreportGenerated.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :processResources
+> Task :classes
+
+[Incubating] Problems report is available at: file:///C:/Development/Owner/GigWageTruth/build/reports/problems/problems-report.html
+
+BUILD SUCCESSFUL in 4s
+6 actionable tasks: 5 executed, 1 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.2.1/userguide/configuration_cache_enabling.html

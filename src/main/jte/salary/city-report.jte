@@ -34,6 +34,13 @@
                     gas prices ($${String.format("%.2f", city.getGasPrice())}/gal), vehicle costs, and taxes.
                 </p>
 
+                <!-- AD SLOT 1: High Visibility (Top) -->
+                <div class="mb-8 p-4 bg-slate-800/50 rounded-xl border border-white/10 text-center min-h-[100px] flex items-center justify-center">
+                    <span class="text-xs text-slate-500 font-mono tracking-widest uppercase">Sponsored</span>
+                    <!-- AdSense Code Placeholder for Top Slot -->
+                    <!-- <ins class="adsbygoogle" style="display:block" ... ></ins> -->
+                </div>
+
                 <!-- Featured Scenario Card -->
                 <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
                     <div class="flex items-baseline gap-3 mb-2">
@@ -95,6 +102,12 @@
                     </div>
                 @endif
             </section>
+
+            <!-- AD SLOT 2: In-Content (Middle) -->
+            <div class="w-full bg-slate-50 rounded-xl border border-slate-200 text-center min-h-[150px] flex flex-col items-center justify-center overflow-hidden">
+                <span class="text-[10px] text-slate-300 font-mono tracking-widest uppercase mb-2">Advertisement</span>
+                <!-- Google AdSense Auto Ads Filler -->
+            </div>
 
             <!-- App-Specific Narrative -->
             <section class="bg-slate-50 rounded-2xl p-8 border border-slate-200">
@@ -249,6 +262,11 @@
               }]
             }
             </script>
+
+            <!-- AD SLOT 3: Bottom (Before CTA) -->
+            <div class="w-full bg-white rounded-xl border border-slate-200 text-center min-h-[150px] flex flex-col items-center justify-center overflow-hidden mb-8">
+                <span class="text-[10px] text-slate-300 font-mono tracking-widest uppercase mb-2">Sponsored Content</span>
+            </div>
 
             <!-- CTA: Deep Calculator -->
             <section class="bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-2xl p-10 text-center shadow-xl">
