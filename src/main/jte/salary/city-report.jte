@@ -69,7 +69,7 @@
                     What Makes ${city.getCityName()} Different?
                 </h2>
                 <p class="text-slate-700 leading-relaxed mb-4">
-                    ${city.getMarketDescription()}
+                    $unsafe{city.getMarketDescription()}
                 </p>
                 
                 <!-- Narrative Branching: Cost Context -->
