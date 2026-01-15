@@ -3,6 +3,7 @@ package com.gigwager.controller;
 import com.gigwager.model.CityData;
 import com.gigwager.model.CityScenario;
 import com.gigwager.model.SeoMeta;
+import com.gigwager.model.WorkLevel;
 import com.gigwager.util.AppConstants;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,8 +17,8 @@ import java.util.List;
 public class ProgrammaticSeoController {
 
         @GetMapping("/salary/{app}/{citySlug}")
-        public String citySalaryPage(@PathVariable String app,
-                        @PathVariable String citySlug,
+        public String citySalaryPage(@PathVariable("app") String app,
+                        @PathVariable("citySlug") String citySlug,
                         Model model) {
 
                 // Validate app
@@ -65,6 +66,11 @@ public class ProgrammaticSeoController {
 
                 String canonicalUrl = String.format("%s/salary/%s/%s", AppConstants.BASE_URL, app, citySlug);
 
+                // Cross-App Silo: Generate link to the other app
+                String otherApp = app.equals("uber") ? "doordash" : "uber";
+                String otherAppName = app.equals("uber") ? "DoorDash" : "Uber";
+                String otherAppUrl = String.format("/salary/%s/%s", otherApp, citySlug);
+
                 // Freshness signal
                 String lastUpdated = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy")
                                 .format(java.time.LocalDate.now());
@@ -75,10 +81,113 @@ public class ProgrammaticSeoController {
                 model.addAttribute("scenarios", scenarios);
                 model.addAttribute("featuredScenario", featuredScenario);
                 model.addAttribute("lastUpdated", lastUpdated);
+                model.addAttribute("otherApp", otherApp);
+                model.addAttribute("otherAppName", otherAppName);
+                model.addAttribute("otherAppUrl", otherAppUrl);
                 model.addAttribute("seoMeta", new SeoMeta(title, description, canonicalUrl,
                                 AppConstants.BASE_URL + "/og-image.jpg"));
 
                 return "salary/city-report";
+        }
+
+        /**
+         * Work-Level Deep Dive Pages
+         * Separate URLs for part-time, side-hustle, full-time scenarios
+         */
+        @GetMapping("/salary/{app}/{citySlug}/{workLevelSlug}")
+        public String workLevelDeepDive(@PathVariable("app") String app,
+                        @PathVariable("citySlug") String citySlug,
+                        @PathVariable("workLevelSlug") String workLevelSlug,
+                        Model model) {
+
+                // Validate app
+                if (!app.equals("uber") && !app.equals("doordash")) {
+                        return "redirect:/";
+                }
+
+                // Resolve city from slug
+                CityData city = CityData.fromSlug(citySlug)
+                                .orElseThrow(() -> new IllegalArgumentException("City not found: " + citySlug));
+
+                // Resolve work level from slug
+                WorkLevel workLevel;
+                try {
+                        workLevel = WorkLevel.fromSlug(workLevelSlug);
+                } catch (IllegalArgumentException e) {
+                        return "redirect:/salary/" + app + "/" + citySlug;
+                }
+
+                // Generate scenario for this specific work level
+                CityScenario scenario = generateScenarioByWorkLevel(city, app, workLevel);
+
+                // Build unique SEO meta
+                String appName = app.equals("uber") ? "Uber" : "DoorDash";
+                String title = String.format("%s %s Earnings in %s, %s: %s Guide (2026)",
+                                workLevel.getDisplayName(), appName, city.getCityName(), city.getState(),
+                                workLevel.getDisplayName());
+
+                String description = String.format(
+                                "Deep dive into %s %s earnings in %s for %s drivers. Real take-home pay: $%.2f/hr. " +
+                                                "Includes tax strategy, time management, and %s-specific tips for %s.",
+                                appName, workLevel.getDisplayName().toLowerCase(), city.getCityName(),
+                                workLevel.getDisplayName().toLowerCase(), scenario.getNetHourly(),
+                                workLevel.getDisplayName().toLowerCase(), city.getCityName());
+
+                String canonicalUrl = String.format("%s/salary/%s/%s/%s", AppConstants.BASE_URL, app, citySlug,
+                                workLevelSlug);
+
+                // Cross-App Silo
+                String otherApp = app.equals("uber") ? "doordash" : "uber";
+                String otherAppName = app.equals("uber") ? "DoorDash" : "Uber";
+                String otherAppUrl = String.format("/salary/%s/%s/%s", otherApp, citySlug, workLevelSlug);
+
+                // Parent page (main city report) for breadcrumb
+                String parentPageUrl = String.format("/salary/%s/%s", app, citySlug);
+
+                // Freshness signal
+                String lastUpdated = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy")
+                                .format(java.time.LocalDate.now());
+
+                // Generate unique content sections
+                String workLevelMeaning = workLevel.getWorkLevelMeaning(appName, city.getCityName());
+                String taxStrategy = workLevel.getTaxStrategy(appName, city.getCityName());
+                String dayInTheLife = workLevel.getDayInTheLife(appName, city.getCityName(), city);
+                String bestPractices = workLevel.getBestPractices(appName, city.getCityName(), city);
+
+                model.addAttribute("app", app);
+                model.addAttribute("appName", appName);
+                model.addAttribute("city", city);
+                model.addAttribute("workLevel", workLevel);
+                model.addAttribute("scenario", scenario);
+                model.addAttribute("lastUpdated", lastUpdated);
+                model.addAttribute("otherApp", otherApp);
+                model.addAttribute("otherAppName", otherAppName);
+                model.addAttribute("otherAppUrl", otherAppUrl);
+                model.addAttribute("parentPageUrl", parentPageUrl);
+
+                // Unique content sections
+                model.addAttribute("workLevelMeaning", workLevelMeaning);
+                model.addAttribute("taxStrategy", taxStrategy);
+                model.addAttribute("dayInTheLife", dayInTheLife);
+                model.addAttribute("bestPractices", bestPractices);
+
+                // JobPosting Schema Automation
+                String validThrough = java.time.LocalDate.now().plusDays(180)
+                                .format(java.time.format.DateTimeFormatter.ISO_LOCAL_DATE);
+                String datePosted = java.time.LocalDate.now()
+                                .format(java.time.format.DateTimeFormatter.ISO_LOCAL_DATE);
+
+                // Escape HTML for JSON-LD description
+                String schemaDescription = workLevelMeaning.replace("\"", "\\\"").replace("\n", " ");
+
+                model.addAttribute("validThrough", validThrough);
+                model.addAttribute("datePosted", datePosted);
+                model.addAttribute("schemaDescription", schemaDescription);
+
+                model.addAttribute("seoMeta", new SeoMeta(title, description, canonicalUrl,
+                                AppConstants.BASE_URL + "/og-image.jpg"));
+
+                return "salary/city-work-level";
         }
 
         private List<CityScenario> generateScenarios(CityData city, String app) {
@@ -98,6 +207,28 @@ public class ProgrammaticSeoController {
                                 400, 40, city.getGasPrice()));
 
                 return scenarios;
+        }
+
+        private CityScenario generateScenarioByWorkLevel(CityData city, String app, WorkLevel workLevel) {
+                CityData.MarketTier tier = city.getMarketTier();
+
+                return switch (workLevel) {
+                        case PART_TIME -> calculateScenario(
+                                        workLevel.getDisplayName() + " (" + workLevel.getHoursPerWeek() + " hrs/wk)",
+                                        tier.getPartTimeGross(), workLevel.getMilesPerWeek(),
+                                        workLevel.getHoursPerWeek(),
+                                        city.getGasPrice());
+                        case SIDE_HUSTLE -> calculateScenario(
+                                        workLevel.getDisplayName() + " (" + workLevel.getHoursPerWeek() + " hrs/wk)",
+                                        tier.getSideHustleGross(), workLevel.getMilesPerWeek(),
+                                        workLevel.getHoursPerWeek(),
+                                        city.getGasPrice());
+                        case FULL_TIME -> calculateScenario(
+                                        workLevel.getDisplayName() + " (" + workLevel.getHoursPerWeek() + " hrs/wk)",
+                                        tier.getFullTimeGross(), workLevel.getMilesPerWeek(),
+                                        workLevel.getHoursPerWeek(),
+                                        city.getGasPrice());
+                };
         }
 
         private CityScenario calculateScenario(String name, int gross, int miles, int hours, double gasPrice) {
