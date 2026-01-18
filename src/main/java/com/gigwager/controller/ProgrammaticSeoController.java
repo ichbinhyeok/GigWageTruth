@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class ProgrammaticSeoController {
@@ -38,7 +41,8 @@ public class ProgrammaticSeoController {
 
                 // Build unique SEO meta
                 String appName = app.equals("uber") ? "Uber" : "DoorDash";
-                String title = String.format("Real %s Earnings in %s, %s (2026 Truth)",
+                // Question-based title for better CTR
+                String title = String.format("How much do %s Drivers make in %s, %s? (2026 Real Numbers)",
                                 appName, city.getCityName(), city.getState());
 
                 // Branching Meta Description Logic (Anti-Pattern Detection)
@@ -87,6 +91,16 @@ public class ProgrammaticSeoController {
                 model.addAttribute("seoMeta", new SeoMeta(title, description, canonicalUrl,
                                 AppConstants.BASE_URL + "/og-image.jpg"));
 
+                // Internal Linking Silo: 3 random cities with same MarketTier
+                List<CityData> similarCities = Arrays.stream(CityData.values())
+                                .filter(c -> c.getMarketTier() == city.getMarketTier()) // Same Economy Tier
+                                .filter(c -> !c.equals(city)) // Exclude current city
+                                .collect(Collectors.collectingAndThen(Collectors.toList(), collected -> {
+                                        Collections.shuffle(collected); // Randomize for variety
+                                        return collected.stream().limit(3).collect(Collectors.toList());
+                                }));
+                model.addAttribute("similarCities", similarCities);
+
                 return "salary/city-report";
         }
 
@@ -122,9 +136,9 @@ public class ProgrammaticSeoController {
 
                 // Build unique SEO meta
                 String appName = app.equals("uber") ? "Uber" : "DoorDash";
-                String title = String.format("%s %s Earnings in %s, %s: %s Guide (2026)",
-                                workLevel.getDisplayName(), appName, city.getCityName(), city.getState(),
-                                workLevel.getDisplayName());
+                // Question-based title for better CTR
+                String title = String.format("How much do %s Drivers make in %s? (%s Guide 2026)",
+                                appName, city.getCityName(), workLevel.getDisplayName());
 
                 String description = String.format(
                                 "Deep dive into %s %s earnings in %s for %s drivers. Real take-home pay: $%.2f/hr. " +
@@ -186,6 +200,16 @@ public class ProgrammaticSeoController {
 
                 model.addAttribute("seoMeta", new SeoMeta(title, description, canonicalUrl,
                                 AppConstants.BASE_URL + "/og-image.jpg"));
+
+                // Internal Linking Silo: 3 random cities with same MarketTier
+                List<CityData> similarCities = Arrays.stream(CityData.values())
+                                .filter(c -> c.getMarketTier() == city.getMarketTier()) // Same Economy Tier
+                                .filter(c -> !c.equals(city)) // Exclude current city
+                                .collect(Collectors.collectingAndThen(Collectors.toList(), collected -> {
+                                        Collections.shuffle(collected); // Randomize for variety
+                                        return collected.stream().limit(3).collect(Collectors.toList());
+                                }));
+                model.addAttribute("similarCities", similarCities);
 
                 return "salary/city-work-level";
         }

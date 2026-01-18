@@ -13,7 +13,7 @@ window.createGigCalculator = function (initialData) {
         rawCustomMpg: 25,
         rawCustomMaintenance: 0.12,
         rawCustomDepreciation: 0.15,
-        rawGasPrice: 3.50,
+        rawGasPrice: initialData.gasPrice || 3.50,
         rawTargetWeeklyIncome: initialData.targetWeeklyIncome || 1000,
 
         // Safe Getters helpers
@@ -105,6 +105,11 @@ window.createGigCalculator = function (initialData) {
         },
 
         updateGasPriceFromPreset() {
+            // Priority: 1. Custom URL Param (initial), 2. Preset, 3. Default
+            if (initialData.gasPrice) {
+                this.rawGasPrice = initialData.gasPrice;
+                return;
+            }
             const v = this.selectedVehicle;
             if (v && v.avgGasPrice) {
                 this.rawGasPrice = v.avgGasPrice;

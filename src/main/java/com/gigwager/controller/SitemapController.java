@@ -1,6 +1,7 @@
 package com.gigwager.controller;
 
 import com.gigwager.model.CityData;
+import com.gigwager.model.WorkLevel;
 import com.gigwager.util.AppConstants;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,23 +16,39 @@ public class SitemapController {
         xml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
         xml.append("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n");
 
-        String today = java.time.LocalDate.now().toString();
+        // Freshness Signal: Set lastmod to the 1st day of the current month
+        // This creates a "Monthly Report" trust signal rather than a "Daily Spam"
+        // signal
+        String today = java.time.YearMonth.now().atDay(1).toString();
 
         // Main pages
         addUrl(xml, AppConstants.BASE_URL + "/", today, "weekly", "1.0");
         addUrl(xml, AppConstants.BASE_URL + "/uber", today, "weekly", "0.9");
         addUrl(xml, AppConstants.BASE_URL + "/doordash", today, "weekly", "0.9");
 
-        // Salary directory
-        addUrl(xml, AppConstants.BASE_URL + "/salary/directory", today, "weekly", "0.8");
+        // Salary directory (Hub page - highest priority)
+        addUrl(xml, AppConstants.BASE_URL + "/salary/directory", today, "weekly", "0.9");
 
-        // Programmatic SEO: City pages (2 apps × 10 cities = 20 pages)
+        // Programmatic SEO: Main City pages (2 apps × 50 cities = 100 pages)
         for (CityData city : CityData.values()) {
             String uberUrl = AppConstants.BASE_URL + "/salary/uber/" + city.getSlug();
             String doordashUrl = AppConstants.BASE_URL + "/salary/doordash/" + city.getSlug();
 
-            addUrl(xml, uberUrl, today, "monthly", "0.7");
-            addUrl(xml, doordashUrl, today, "monthly", "0.7");
+            addUrl(xml, uberUrl, today, "monthly", "0.8");
+            addUrl(xml, doordashUrl, today, "monthly", "0.8");
+        }
+
+        // Programmatic SEO: Work-Level Deep-Dives (2 apps × 50 cities × 3 levels = 300
+        // pages)
+        for (CityData city : CityData.values()) {
+            for (WorkLevel level : WorkLevel.values()) {
+                String uberWorkUrl = AppConstants.BASE_URL + "/salary/uber/" + city.getSlug() + "/" + level.getSlug();
+                String doordashWorkUrl = AppConstants.BASE_URL + "/salary/doordash/" + city.getSlug() + "/"
+                        + level.getSlug();
+
+                addUrl(xml, uberWorkUrl, today, "monthly", "0.6");
+                addUrl(xml, doordashWorkUrl, today, "monthly", "0.6");
+            }
         }
 
         // Blog

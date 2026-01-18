@@ -19,6 +19,7 @@ public class DoorDashCalculatorController {
     public String doordash(@RequestParam(name = "gross", required = false) Double gross,
             @RequestParam(name = "miles", required = false) Double miles,
             @RequestParam(name = "hours", required = false) Double hours,
+            @RequestParam(name = "gasPrice", required = false) Double gasPrice,
             Model model) {
 
         // Strict 2-Page Flow: If no params, go back to Gateway (Index)
@@ -30,6 +31,7 @@ public class DoorDashCalculatorController {
         model.addAttribute("initialGross", gross);
         model.addAttribute("initialMiles", miles);
         model.addAttribute("initialHours", hours);
+        model.addAttribute("initialGasPrice", gasPrice);
         model.addAttribute("app", "doordash");
 
         // Calculate Verdict

@@ -8,6 +8,7 @@
 @param Double initialGross
 @param Double initialMiles
 @param Double initialHours
+@param Double initialGasPrice
 @param String defaultVehicle
 @param Content content
 @param String switchAction
@@ -20,6 +21,7 @@
     gross: '${initialGross}',
     miles: '${initialMiles}',
     hours: '${initialHours}',
+    gasPrice: '${initialGasPrice}',
     defaultVehicle: '${defaultVehicle}',
     targetWeeklyIncome: 1000,
     shockMessages: ${appName.equals("Uber") ? 

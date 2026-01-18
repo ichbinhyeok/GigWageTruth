@@ -22,6 +22,7 @@
 @param String validThrough
 @param String datePosted
 @param String schemaDescription
+@param java.util.List<com.gigwager.model.CityData> similarCities
 
 @template.layout.main(
     seoMeta = seoMeta,
@@ -31,7 +32,7 @@
         {
           "@context": "https://schema.org/",
           "@type": "JobPosting",
-          "title": "${appName} Driver in ${city.getCityName()}",
+          "title": "${appName} Driver in ${city.getCityName()} (${workLevel.getDisplayName()})",
           "description": "$unsafe{schemaDescription} Find out if driving for ${appName} in ${city.getCityName()} is worth it with GigWageTruth's real earnings data.",
           "identifier": {
             "@type": "PropertyValue",
@@ -47,24 +48,44 @@
             "sameAs" : "${AppConstants.BASE_URL}",
             "logo" : "${AppConstants.BASE_URL}/favicon.png"
           },
-          "jobLocation": {
-            "@type": "Place",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "${city.getCityName()}",
-              "addressRegion": "${city.getState()}",
-              "addressCountry": "US"
-            }
+          "jobLocationType": "TELECOMMUTE",
+          "applicantLocationRequirements": {
+            "@type": "Country",
+            "name": "US"
           },
           "baseSalary": {
             "@type": "MonetaryAmount",
             "currency": "USD",
             "value": {
               "@type": "QuantitativeValue",
-              "value": ${scenario.getNetHourly()},
+              "minValue": ${String.format("%.2f", scenario.getNetHourly() * 0.90)},
+              "maxValue": ${String.format("%.2f", scenario.getNetHourly() * 1.15)},
               "unitText": "HOUR"
             }
           }
+        }
+        </script>
+        
+        <!-- Aggressive FAQ Schema for SERP Real Estate -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [{
+            "@type": "Question",
+            "name": "How much does ${appName} really pay in ${city.getCityName()}?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "In 2026, the real net earnings for ${appName} drivers in ${city.getCityName()} are approximately $${String.format("%.2f", scenario.getNetHourly())}/hour after accounting for gas ($${String.format("%.2f", city.getGasPrice())}/gal), vehicle depreciation, and taxes. Gross earnings are typically higher, but expenses eat up about 30-40% of revenue."
+            }
+          }, {
+            "@type": "Question",
+            "name": "Is doing ${appName} in ${city.getCityName()} worth it?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It depends on your vehicle. With local gas prices at $${String.format("%.2f", city.getGasPrice())}/gal, driving a gas-guzzler will significantly lower your hourly wage. ${workLevel.getDisplayName()} drivers in ${city.getCityName()} typically see the best results by ${city.isHighTraffic() ? "avoiding peak traffic hours" : "focusing on peak dining hours"}."
+            }
+          }]
         }
         </script>
 
@@ -222,6 +243,29 @@
                             View ${otherAppName} ${workLevel.getDisplayName()} Report →
                         </a>
                     </div>
+                </div>
+            </section>
+
+            <!-- Internal Linking Silo: Similar Cities -->
+            <section class="mt-8 pt-8 border-t border-slate-200">
+                <h4 class="text-sm font-bold text-slate-500 uppercase tracking-wider mb-6">
+                    Other High-Demand ${city.getMarketTier()} Markets
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    @for(com.gigwager.model.CityData simCity : similarCities)
+                        <a href="/salary/${app}/${simCity.getSlug()}/${workLevel.getSlug()}" 
+                           class="flex items-center gap-3 p-4 bg-white rounded-xl border border-slate-200 hover:border-emerald-400 hover:shadow-md transition group">
+                            <span class="text-2xl">📍</span>
+                            <div class="flex flex-col">
+                                <span class="text-sm font-bold text-slate-900 group-hover:text-emerald-700">
+                                    ${simCity.getCityName()}
+                                </span>
+                                <span class="text-xs text-slate-500">
+                                    ${appName} ${workLevel.getDisplayName()}
+                                </span>
+                            </div>
+                        </a>
+                    @endfor
                 </div>
             </section>
 

@@ -5,6 +5,7 @@
 @param Double initialGross
 @param Double initialMiles  
 @param Double initialHours
+@param Double initialGasPrice
 @param String app
 @param String customTitle
 @param Verdict verdict
@@ -34,6 +35,7 @@
                     initialGross = initialGross,
                     initialMiles = initialMiles,
                     initialHours = initialHours,
+                    initialGasPrice = initialGasPrice,
                     defaultVehicle = "prius",
                     switchAction = "$dispatch('toggle-app', 'doordash')",
                     activeTabName = "uber",
@@ -98,12 +100,26 @@
                                 </h3>
                                 <div class="prose prose-sm text-slate-600 max-w-none">
                                     <p>Most earning calculators are misleading because they only subtract gas. GigWageTruth uses a comprehensive <strong>Total Cost of Ownership (TCO)</strong> model.</p>
-                                    <ul class="grid md:grid-cols-2 gap-4 mt-4">
-                                        <li class="flex flex-col md:flex-row md:items-start gap-1 md:gap-2"><span class="font-bold text-slate-900 md:min-w-[4rem]">Revenue:</span><span>Your gross payout from Uber (fares + tips + bonuses).</span></li>
-                                        <li class="flex flex-col md:flex-row md:items-start gap-1 md:gap-2"><span class="font-bold text-slate-900 md:min-w-[4rem]">Expenses:</span><span>We use the <strong>2026 IRS Standard Mileage Rate ($0.725/mi)</strong> unless you select a custom vehicle. This covers gas, insurance, tires, maintenance, and depreciation.</span></li>
-                                        <li class="flex flex-col md:flex-row md:items-start gap-1 md:gap-2"><span class="font-bold text-slate-900 md:min-w-[4rem]">Taxes:</span><span>We estimate the <strong>15.3% Self-Employment Tax</strong> on your net profit. Note: This does not include Federal/State income tax, which varies by person.</span></li>
-                                        <li class="flex flex-col md:flex-row md:items-start gap-1 md:gap-2"><span class="font-bold text-slate-900 md:min-w-[4rem]">Net Hourly:</span><span>(Revenue - Expenses - Taxes) / Total Hours Online. This is your true "take-home" wage.</span></li>
-                                    </ul>
+                                    <table class="w-full mt-4 text-left border-collapse">
+                                        <tbody class="align-top">
+                                            <tr class="border-b border-slate-100 last:border-0">
+                                                <td class="py-2 pr-4 font-bold text-slate-900 w-24 shrink-0 whitespace-nowrap">Revenue:</td>
+                                                <td class="py-2 text-slate-600">Your gross payout from ${app} (fares + tips + bonuses).</td>
+                                            </tr>
+                                            <tr class="border-b border-slate-100 last:border-0">
+                                                <td class="py-2 pr-4 font-bold text-slate-900 w-24 shrink-0 whitespace-nowrap">Expenses:</td>
+                                                <td class="py-2 text-slate-600">We use the <strong>2026 IRS Standard Mileage Rate ($0.725/mi)</strong> unless you select a custom vehicle. This covers gas, insurance, tires, maintenance, and depreciation.</td>
+                                            </tr>
+                                            <tr class="border-b border-slate-100 last:border-0">
+                                                <td class="py-2 pr-4 font-bold text-slate-900 w-24 shrink-0 whitespace-nowrap">Taxes:</td>
+                                                <td class="py-2 text-slate-600">We estimate the <strong>15.3% Self-Employment Tax</strong> on your net profit. Note: This does not include Federal/State income tax, which varies by person.</td>
+                                            </tr>
+                                            <tr class="border-b border-slate-100 last:border-0">
+                                                <td class="py-2 pr-4 font-bold text-slate-900 w-24 shrink-0 whitespace-nowrap">Net Hourly:</td>
+                                                <td class="py-2 text-slate-600">(Revenue - Expenses - Taxes) / Total Hours Online. This is your true "take-home" wage.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </section>
 
@@ -159,6 +175,7 @@
                     initialGross = initialGross,
                     initialMiles = initialMiles,
                     initialHours = initialHours,
+                    initialGasPrice = initialGasPrice,
                     defaultVehicle = "civic",
                     switchAction = "$dispatch('toggle-app', 'uber')",
                     activeTabName = "doordash",
@@ -222,12 +239,26 @@
                                 </h3>
                                 <div class="prose prose-sm text-slate-600 max-w-none">
                                     <p>DoorDash "Active Time" is a vanity metric. GigWageTruth calculates your <strong>Real Hourly Wage</strong> by accounting for the full picture.</p>
-                                    <ul class="grid md:grid-cols-2 gap-4 mt-4">
-                                        <li class="flex flex-col md:flex-row md:items-start gap-1 md:gap-2"><span class="font-bold text-slate-900 md:min-w-[4rem]">Revenue:</span><span>Your gross payout from DoorDash (base pay + tips).</span></li>
-                                        <li class="flex flex-col md:flex-row md:items-start gap-1 md:gap-2"><span class="font-bold text-slate-900 md:min-w-[4rem]">Expenses:</span><span>We use the <strong>2026 IRS Standard Mileage Rate ($0.725/mi)</strong>. This deduction is critical because city driving (stop-and-go) destroys brakes and tires faster than highway miles.</span></li>
-                                        <li class="flex flex-col md:flex-row md:items-start gap-1 md:gap-2"><span class="font-bold text-slate-900 md:min-w-[4rem]">Taxes:</span><span>Estimated <strong>15.3% Self-Employment Tax</strong>. This is the "employer portion" of Social Security and Medicare that W-2 employees don't see, but you must pay.</span></li>
-                                        <li class="flex flex-col md:flex-row md:items-start gap-1 md:gap-2"><span class="font-bold text-slate-900 md:min-w-[4rem]">Real Wage:</span><span>(Revenue - Expenses - Taxes) / Total Dash Time. We use "Total Time" because waiting in a parking lot is still work.</span></li>
-                                    </ul>
+                                    <table class="w-full mt-4 text-left border-collapse">
+                                        <tbody class="align-top">
+                                            <tr class="border-b border-slate-100 last:border-0">
+                                                <td class="py-2 pr-4 font-bold text-slate-900 w-24 shrink-0 whitespace-nowrap">Revenue:</td>
+                                                <td class="py-2 text-slate-600">Your gross payout from DoorDash (base pay + tips).</td>
+                                            </tr>
+                                            <tr class="border-b border-slate-100 last:border-0">
+                                                <td class="py-2 pr-4 font-bold text-slate-900 w-24 shrink-0 whitespace-nowrap">Expenses:</td>
+                                                <td class="py-2 text-slate-600">We use the <strong>2026 IRS Standard Mileage Rate ($0.725/mi)</strong>. This deduction is critical because city driving (stop-and-go) destroys brakes and tires faster than highway miles.</td>
+                                            </tr>
+                                            <tr class="border-b border-slate-100 last:border-0">
+                                                <td class="py-2 pr-4 font-bold text-slate-900 w-24 shrink-0 whitespace-nowrap">Taxes:</td>
+                                                <td class="py-2 text-slate-600">Estimated <strong>15.3% Self-Employment Tax</strong>. This is the "employer portion" of Social Security and Medicare that W-2 employees don't see, but you must pay.</td>
+                                            </tr>
+                                            <tr class="border-b border-slate-100 last:border-0">
+                                                <td class="py-2 pr-4 font-bold text-slate-900 w-24 shrink-0 whitespace-nowrap">Real Wage:</td>
+                                                <td class="py-2 text-slate-600">(Revenue - Expenses - Taxes) / Total Dash Time. We use "Total Time" because waiting in a parking lot is still work.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </section>
 

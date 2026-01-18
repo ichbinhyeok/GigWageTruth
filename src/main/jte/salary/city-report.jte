@@ -10,6 +10,10 @@
 @param List<CityScenario> scenarios
 @param CityScenario featuredScenario
 @param String lastUpdated
+@param String otherApp
+@param String otherAppName
+@param String otherAppUrl
+@param java.util.List<com.gigwager.model.CityData> similarCities
 
 @template.layout.main(
     seoMeta = seoMeta,
@@ -17,6 +21,14 @@
         <!-- Hero Section -->
         <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 pt-20 pb-24 px-6">
             <div class="max-w-4xl mx-auto">
+                <!-- Breadcrumb Navigation (Hub & Spoke Silo) -->
+                <nav class="text-sm text-slate-400 mb-4 flex items-center gap-2">
+                    <a href="/" class="hover:text-emerald-400 transition">Home</a>
+                    <span class="text-slate-600">›</span>
+                    <a href="/salary/directory" class="hover:text-emerald-400 transition">Salary Directory</a>
+                    <span class="text-slate-600">›</span>
+                    <span class="text-white">${city.getCityName()} ${appName} Earnings</span>
+                </nav>
                 <div class="flex items-center gap-4 mb-6">
                     <div class="inline-block px-4 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-full">
                         <span class="text-emerald-400 text-sm font-bold uppercase tracking-wider">${city.getCityName()}, ${city.getState()}</span>
@@ -268,13 +280,120 @@
                 <span class="text-[10px] text-slate-300 font-mono tracking-widest uppercase mb-2">Sponsored Content</span>
             </div>
 
+            <!-- Work-Level Deep-Dive Links (Internal Silo) -->
+            <section class="bg-white rounded-2xl p-8 border border-slate-200 mb-8">
+                <h3 class="text-2xl font-bold text-slate-900 mb-3">
+                    📊 Want a Deep-Dive for Your Work Level?
+                </h3>
+                <p class="text-slate-600 mb-6">
+                    The table above shows all three scenarios. Choose yours below for tax strategy, time optimization, and work-level specific insights.
+                </p>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <a href="/salary/${app}/${city.getSlug()}/part-time" 
+                       class="block p-6 bg-emerald-50 border-2 border-emerald-200 rounded-xl hover:shadow-lg hover:border-emerald-400 transition group">
+                        <div class="text-4xl mb-3">⏰</div>
+                        <div class="font-bold text-lg text-slate-900 group-hover:text-emerald-700 transition">Part-Time ${appName} in ${city.getCityName()}</div>
+                        <p class="text-sm text-slate-600 mt-2">10 hrs/week strategy, tax tips, best hours to drive</p>
+                    </a>
+
+                    <a href="/salary/${app}/${city.getSlug()}/side-hustle" 
+                       class="block p-6 bg-amber-50 border-2 border-amber-200 rounded-xl hover:shadow-lg hover:border-amber-400 transition group">
+                        <div class="text-4xl mb-3">💼</div>
+                        <div class="font-bold text-lg text-slate-900 group-hover:text-amber-700 transition">Side-Hustle ${appName} in ${city.getCityName()}</div>
+                        <p class="text-sm text-slate-600 mt-2">25 hrs/week balance, quarterly taxes, vehicle strategy</p>
+                    </a>
+
+                    <a href="/salary/${app}/${city.getSlug()}/full-time" 
+                       class="block p-6 bg-blue-50 border-2 border-blue-200 rounded-xl hover:shadow-lg hover:border-blue-400 transition group">
+                        <div class="text-4xl mb-3">🚗</div>
+                        <div class="font-bold text-lg text-slate-900 group-hover:text-blue-700 transition">Full-Time ${appName} in ${city.getCityName()}</div>
+                        <p class="text-sm text-slate-600 mt-2">40 hrs/week reality, health insurance, retirement planning</p>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Cross-App Comparison "VS" Table (Higher Engagement) -->
+            <section class="bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl p-8 border-2 border-slate-300 shadow-sm mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
+                        <span class="text-3xl">🥊</span> ${appName} vs ${otherAppName} in ${city.getCityName()}
+                    </h3>
+                    <span class="px-3 py-1 bg-slate-900 text-white text-xs font-bold rounded-full uppercase tracking-wider">Analysis</span>
+                </div>
+                
+                <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200">
+                    <table class="w-full">
+                        <thead class="bg-slate-50 border-b border-slate-200">
+                            <tr>
+                                <th class="px-4 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Feature</th>
+                                <th class="px-4 py-3 text-center text-xs font-bold text-slate-900 uppercase tracking-wider bg-emerald-50/50">${appName}</th>
+                                <th class="px-4 py-3 text-center text-xs font-bold text-slate-500 uppercase tracking-wider">${otherAppName}</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr>
+                                <td class="px-4 py-4 text-sm font-medium text-slate-900">Market Tier</td>
+                                <td class="px-4 py-4 text-center text-sm font-bold text-emerald-700 bg-emerald-50/30">${city.getMarketTier()}</td>
+                                <td class="px-4 py-4 text-center text-sm text-slate-500">${city.getMarketTier()}</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-4 text-sm font-medium text-slate-900">Traffic Impact</td>
+                                <td class="px-4 py-4 text-center text-sm font-bold bg-emerald-50/30 text-slate-700">
+                                    ${city.isHighTraffic() ? "High (Start/Stop)" : "Moderate"}
+                                </td>
+                                <td class="px-4 py-4 text-center text-sm text-slate-500">
+                                    ${city.isHighTraffic() ? "High (Delays)" : "Moderate"}
+                                </td>
+                            </tr>
+                            <tr class="bg-slate-50/50">
+                                <td class="px-4 py-4 text-sm font-bold text-slate-900">Verdict</td>
+                                <td class="px-4 py-4 text-center bg-emerald-50/50">
+                                    <span class="inline-block px-2 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded">Active View</span>
+                                </td>
+                                <td class="px-4 py-4 text-center">
+                                    <a href="${otherAppUrl}" class="text-emerald-600 hover:text-emerald-800 font-bold text-sm underline decoration-2">
+                                        Check Rates &rarr;
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-6 text-center">
+                     <p class="text-slate-600 mb-4 text-sm">
+                        Curious if ${otherAppName} pays better in ${city.getCityName()}?
+                    </p>
+                    <a href="${otherAppUrl}" 
+                       class="inline-block px-6 py-3 bg-white border border-slate-300 text-slate-900 font-bold rounded-lg hover:bg-slate-50 transition shadow-sm">
+                        Compare with ${otherAppName} in ${city.getCityName()} now &rarr;
+                    </a>
+                </div>
+            </section>
+
+            <!-- Internal Linking Silo (Bottom) -->
+            <section class="mb-12">
+                <h4 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4 border-b border-slate-200 pb-2">
+                    Other High-Demand ${city.getMarketTier()} Markets
+                </h4>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    @for(com.gigwager.model.CityData simCity : similarCities)
+                        <a href="/salary/${app}/${simCity.getSlug()}" 
+                           class="block p-3 bg-white rounded-lg border border-slate-100 hover:border-emerald-300 hover:shadow-sm transition text-center">
+                            <div class="text-xl mb-1">📍</div>
+                            <div class="text-xs font-bold text-slate-700">${simCity.getCityName()}</div>
+                            <div class="text-[10px] text-slate-400">View Earnings</div>
+                        </a>
+                    @endfor
+                </div>
+            </section>
+
             <!-- CTA: Deep Calculator -->
             <section class="bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-2xl p-10 text-center shadow-xl">
                 <h3 class="text-2xl font-bold text-white mb-3">Calculate YOUR Exact Take-Home</h3>
                 <p class="text-emerald-100 mb-6 max-w-xl mx-auto">
                     These scenarios use averages. Want precision? Enter your exact miles, hours, and vehicle type.
                 </p>
-                <a href="/${app}?gross=${featuredScenario.getGrossWeekly()}&miles=${featuredScenario.getMiles()}&hours=${featuredScenario.getHours()}" 
+                <a href="/${app}?gross=${featuredScenario.getGrossWeekly()}&miles=${featuredScenario.getMiles()}&hours=${featuredScenario.getHours()}&gasPrice=${city.getGasPrice()}" 
                    class="inline-block px-8 py-4 bg-white text-emerald-700 font-bold text-lg rounded-xl hover:bg-emerald-50 transition shadow-lg">
                     Adjust These Numbers &rarr;
                 </a>
