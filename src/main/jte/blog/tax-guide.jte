@@ -1,4 +1,5 @@
 @import com.gigwager.model.SeoMeta
+@import com.gigwager.util.AppConstants
 
 @param String customTitle
 
@@ -6,8 +7,8 @@
     seoMeta = new SeoMeta(
         customTitle != null ? customTitle : "Gig Worker Tax Guide 2026",
         "Stop overpaying the IRS. Learn the difference between Standard Mileage Rate and Actual Expenses, and how to track deductions correctly.",
-        "https://gigwagetruth.com/blog/tax-guide",
-        "https://gigwagetruth.com/og-image-tax.jpg"
+        AppConstants.BASE_URL + "/blog/tax-guide",
+        AppConstants.BASE_URL + "/og-image-tax.jpg"
     ),
     content = @`
         <div class="bg-white min-h-screen pb-24">
@@ -100,7 +101,7 @@
                         <div class="bg-emerald-50 rounded-xl p-8 text-center border border-emerald-100">
                             <h3 class="text-2xl font-bold text-emerald-900 mb-4">Check Your Net Profit Now</h3>
                             <p class="text-emerald-800 mb-6">Our calculator applies the Standard Mileage Rate automatically.</p>
-                            <a href="/uber" class="inline-block px-8 py-4 bg-emerald-600 text-white font-bold rounded-lg hover:bg-emerald-700 transition shadow-lg shadow-emerald-500/30">
+                            <a href="/" class="inline-block px-8 py-4 bg-emerald-600 text-white font-bold rounded-lg hover:bg-emerald-700 transition shadow-lg shadow-emerald-500/30">
                                 Open Calculator
                             </a>
                         </div>

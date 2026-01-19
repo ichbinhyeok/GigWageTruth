@@ -1,4 +1,5 @@
 @import com.gigwager.model.SeoMeta
+@import com.gigwager.util.AppConstants
 
 @param String customTitle
 
@@ -6,8 +7,8 @@
     seoMeta = new SeoMeta(
         customTitle != null ? customTitle : "Multi-Apping Guide 2026: Double Your Hourly Wage",
         "Learn the professional strategy of running Uber, DoorDash, and Lyft simultaneously to minimize downtime and maximize profit.",
-        "https://gigwagetruth.com/blog/multi-apping-guide",
-        "https://gigwagetruth.com/og-image-multiapp.jpg"
+        AppConstants.BASE_URL + "/blog/multi-apping-guide",
+        AppConstants.BASE_URL + "/og-image-multiapp.jpg"
     ),
     content = @`
         <div class="bg-white min-h-screen pb-24">
@@ -115,8 +116,8 @@
                             <h3 class="text-2xl font-bold mb-4">Calculate Your True Hourly Wage</h3>
                             <p class="text-slate-300 mb-6">Are you really making money, or just trading your car's equity for cash?</p>
                             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                                <a href="/uber" class="px-6 py-3 bg-white text-slate-900 font-bold rounded-lg hover:bg-slate-100 transition">Uber Calc</a>
-                                <a href="/doordash" class="px-6 py-3 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition">DoorDash Calc</a>
+                                <a href="/" class="px-6 py-3 bg-white text-slate-900 font-bold rounded-lg hover:bg-slate-100 transition">Uber Calc</a>
+                                <a href="/" class="px-6 py-3 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition">DoorDash Calc</a>
                             </div>
                         </div>
                     </div>

@@ -1,9 +1,10 @@
+@import com.gigwager.util.AppConstants
 @template.layout.main(
     seoMeta = new com.gigwager.model.SeoMeta(
         "GigWageTruth - The Only Real Net Profit Calculator for Gig Workers",
         "Stop driving blind. Calculate your true hourly wage for Uber, Lyft, and DoorDash after hidden costs.",
-        "https://gigverdict.com",
-        "https://gigverdict.com/og-image.jpg"
+        AppConstants.BASE_URL,
+        AppConstants.BASE_URL + "/og-image.jpg"
     ),
     content = @`
         <div class="lg:h-[calc(100vh-4rem)] flex flex-col lg:flex-row overflow-hidden">

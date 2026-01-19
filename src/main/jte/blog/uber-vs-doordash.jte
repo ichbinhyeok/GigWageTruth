@@ -1,4 +1,5 @@
 @import com.gigwager.model.SeoMeta
+@import com.gigwager.util.AppConstants
 
 @param String customTitle
 
@@ -6,8 +7,8 @@
     seoMeta = new SeoMeta(
         customTitle != null ? customTitle : "Uber vs DoorDash 2026: The Ultimate Comparison",
         "Data-driven comparison of earnings, stress, and vehicle wear between Uber Rideshare and DoorDash delivery.",
-        "https://gigwagetruth.com/blog/uber-vs-doordash",
-        "https://gigwagetruth.com/og-image-versus.jpg"
+        AppConstants.BASE_URL + "/blog/uber-vs-doordash",
+        AppConstants.BASE_URL + "/og-image-versus.jpg"
     ),
     content = @`
         <div class="bg-white min-h-screen pb-24">

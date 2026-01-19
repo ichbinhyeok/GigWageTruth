@@ -133,7 +133,7 @@
                                 <button class="flex-1 py-3 text-sm font-bold rounded-lg shadow-sm bg-white text-slate-900 flex items-center justify-center gap-2">
                                     <span>🚗</span> Uber / Lyft
                                 </button>
-                                <a href="/doordash" class="flex-1 py-3 text-sm font-bold rounded-lg text-slate-500 hover:text-slate-900 hover:bg-white/50 transition flex items-center justify-center gap-2">
+                                <a href="/" class="flex-1 py-3 text-sm font-bold rounded-lg text-slate-500 hover:text-slate-900 hover:bg-white/50 transition flex items-center justify-center gap-2">
                                     <span>🍔</span> DoorDash
                                 </a>
                              </div>
