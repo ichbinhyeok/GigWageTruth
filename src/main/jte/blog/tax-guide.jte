@@ -101,7 +101,7 @@
                         <div class="bg-emerald-50 rounded-xl p-8 text-center border border-emerald-100">
                             <h3 class="text-2xl font-bold text-emerald-900 mb-4">Check Your Net Profit Now</h3>
                             <p class="text-emerald-800 mb-6">Our calculator applies the Standard Mileage Rate automatically.</p>
-                            <a href="/" class="inline-block px-8 py-4 bg-emerald-600 text-white font-bold rounded-lg hover:bg-emerald-700 transition shadow-lg shadow-emerald-500/30">
+                            <a href="/uber" class="inline-block px-8 py-4 bg-emerald-600 text-white font-bold rounded-lg hover:bg-emerald-700 transition shadow-lg shadow-emerald-500/30">
                                 Open Calculator
                             </a>
                         </div>

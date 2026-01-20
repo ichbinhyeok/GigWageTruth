@@ -1,8 +1,11 @@
 @import com.gigwager.model.SeoMeta
 @import gg.jte.Content
+@import com.gigwager.util.AppConstants
 
 @param Content content
 @param SeoMeta seoMeta
+@param gg.jte.Content headContent = null
+@param gg.jte.Content headContent = null
 
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
@@ -68,6 +71,7 @@
     <style>
         [x-cloak] { display: none !important; }
     </style>
+    ${headContent}
 </head>
 <body class="flex flex-col min-h-screen bg-slate-50 text-slate-900 antialiased font-sans">
 
@@ -110,8 +114,8 @@
                 Revealing the true cost of the gig economy.
             </p>
             <p class="text-xs text-slate-400">
-                &copy; 2026 GigWageTruth. All rights reserved. <br>
-                Calculations based on 2026 IRS Standard Mileage Rate ($0.725/mile). Not financial advice.
+                &copy; ${AppConstants.CURRENT_YEAR} GigWageTruth. All rights reserved. <br>
+                Calculations based on ${AppConstants.CURRENT_YEAR} IRS Standard Mileage Rate ($0.725/mile). Not financial advice.
             </p>
         </div>
     </footer>

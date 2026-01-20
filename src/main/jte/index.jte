@@ -82,7 +82,7 @@
                                 <p class="text-xs text-slate-500">Week, month, or any period</p>
                                 <div class="relative group">
                                     <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-lg font-medium group-focus-within:text-emerald-600 transition-colors">$</span>
-                                    <input type="number" name="gross" required placeholder="1000" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-4 pl-10 pr-4 text-xl font-bold text-slate-900 outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all placeholder:text-slate-300">
+                                    <input type="number" inputmode="decimal" name="gross" required placeholder="1000" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-4 pl-10 pr-4 text-xl font-bold text-slate-900 outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all placeholder:text-slate-300">
                                 </div>
                             </div>
 
@@ -93,7 +93,7 @@
                                         <label class="text-xs font-bold text-slate-900 uppercase tracking-wide">Miles Driven</label>
                                     </div>
                                     <div class="relative group">
-                                        <input type="number" name="miles" required placeholder="800" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-4 px-4 text-xl font-bold text-slate-900 outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all placeholder:text-slate-300">
+                                        <input type="number" inputmode="decimal" name="miles" required placeholder="800" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-4 px-4 text-xl font-bold text-slate-900 outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all placeholder:text-slate-300">
                                         <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-medium">mi</span>
                                     </div>
                                 </div>
@@ -105,7 +105,7 @@
                                         <span class="text-[10px] text-red-500 font-bold">NO Active Time</span>
                                     </div>
                                     <div class="relative group">
-                                        <input type="number" name="hours" required placeholder="40" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-4 px-4 text-xl font-bold text-slate-900 outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all placeholder:text-slate-300">
+                                        <input type="number" inputmode="decimal" name="hours" required placeholder="40" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-4 px-4 text-xl font-bold text-slate-900 outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all placeholder:text-slate-300">
                                         <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-medium">hr</span>
                                     </div>
                                 </div>

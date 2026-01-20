@@ -156,26 +156,29 @@
             <section>
                 <h2 class="text-2xl font-bold text-slate-900 mb-6">Estimated Earnings by Work Level</h2>
                 <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+                    <!-- Mobile: Enable horizontal scroll -->
+                    <div class="overflow-x-auto">
                     <table class="w-full">
                         <thead class="bg-slate-900 text-white">
                             <tr>
-                                <th class="px-6 py-4 text-left text-sm font-bold uppercase">Work Level</th>
-                                <th class="px-6 py-4 text-right text-sm font-bold uppercase">Gross/Week</th>
-                                <th class="px-6 py-4 text-right text-sm font-bold uppercase">Net Profit</th>
-                                <th class="px-6 py-4 text-right text-sm font-bold uppercase">Real $/hr</th>
+                                <th class="px-3 md:px-6 py-3 md:py-4 text-left text-xs md:text-sm font-bold uppercase whitespace-nowrap">Work Level</th>
+                                <th class="px-3 md:px-6 py-3 md:py-4 text-right text-xs md:text-sm font-bold uppercase whitespace-nowrap">Gross/Week</th>
+                                <th class="px-3 md:px-6 py-3 md:py-4 text-right text-xs md:text-sm font-bold uppercase whitespace-nowrap">Net Profit</th>
+                                <th class="px-3 md:px-6 py-3 md:py-4 text-right text-xs md:text-sm font-bold uppercase whitespace-nowrap">Real $/hr</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-200">
                             @for(var scenario : scenarios)
                                 <tr class="hover:bg-slate-50 transition">
-                                    <td class="px-6 py-4 font-medium text-slate-900">${scenario.getName()}</td>
-                                    <td class="px-6 py-4 text-right text-slate-700">$${scenario.getGrossWeekly()}</td>
-                                    <td class="px-6 py-4 text-right font-bold text-emerald-600">$${String.format("%.2f", scenario.getNetProfit())}</td>
-                                    <td class="px-6 py-4 text-right text-xl font-bold text-slate-900">$${String.format("%.2f", scenario.getNetHourly())}</td>
+                                    <td class="px-3 md:px-6 py-3 md:py-4 font-medium text-slate-900 text-sm md:text-base whitespace-nowrap">${scenario.getName()}</td>
+                                    <td class="px-3 md:px-6 py-3 md:py-4 text-right text-slate-700 text-sm md:text-base whitespace-nowrap">$${scenario.getGrossWeekly()}</td>
+                                    <td class="px-3 md:px-6 py-3 md:py-4 text-right font-bold text-emerald-600 text-sm md:text-base whitespace-nowrap">$${String.format("%.2f", scenario.getNetProfit())}</td>
+                                    <td class="px-3 md:px-6 py-3 md:py-4 text-right text-lg md:text-xl font-bold text-slate-900 whitespace-nowrap">$${String.format("%.2f", scenario.getNetHourly())}</td>
                                 </tr>
                             @endfor
                         </tbody>
                     </table>
+                    </div>
                 </div>
                 <p class="text-xs text-slate-500 mt-4">
                     <strong>Note:</strong> These are estimated scenarios based on typical ${city.getCityName()} conditions. 

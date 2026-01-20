@@ -9,10 +9,57 @@
 @template.layout.main(
     seoMeta = new SeoMeta(
         customTitle != null ? customTitle : "My Real Hourly Wage - The Shocking Truth",
-        "See exactly how much I make after gas, taxes, and depreciation. The number will surprise you.",
+        "Calculate Uber/Lyft rideshare profit after mileage deduction, depreciation, and taxes. Discover your true hourly wage.",
         "https://gigverdict.com/uber",
         "https://gigverdict.com/og-image.jpg"
     ),
+    headContent = @`
+        <!-- Structured Data (JSON-LD) -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Real Uber Driver Pay Calculator",
+          "url": "https://gigverdict.com/uber",
+          "applicationCategory": "FinanceApplication",
+          "operatingSystem": "Any",
+          "description": "Calculate your true net profit as an Uber driver after gas, depreciation, and taxes.",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        }
+        </script>
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [{
+            "@type": "Question",
+            "name": "What is the IRS Standard Mileage Rate for 2026?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The 2026 IRS Standard Mileage Rate is projected to be 67 cents to 72.5 cents per mile. This rate covers gas, insurance, wear and tear, and depreciation. We use $0.725/mile in our Standard calculation to be safe."
+            }
+          }, {
+            "@type": "Question",
+            "name": "Is Uber driving worth it in 2026?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It depends on your vehicle efficiency. If you drive a hybrid (50+ MPG) and work during peak surge hours, you can earn $25-30/hr net. However, driving a gas-guzzling SUV often results in net earnings below $10/hr."
+            }
+          }, {
+            "@type": "Question",
+            "name": "Do I really need to pay taxes on Uber income?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Uber treats you as an independent contractor. You must pay roughly 15.3% Self-Employment Tax on your profit. This calculator estimates that tax for you so you can save accordingly."
+            }
+          }]
+        }
+        </script>
+    `,
     content = @`
         <script src="/js/calculator-core.js?v=${AppConstants.CACHE_VERSION}"></script>
         
@@ -58,7 +105,7 @@
             <div class="bg-slate-900 pt-16 pb-24 text-center px-6">
                 <h1 class="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight">
                     <span x-text="heroTitle"></span>
-                    <span class="text-emerald-400" x-show="!heroTitle.includes('Week')">(2026)</span>
+                    <span class="text-emerald-400" x-show="!heroTitle.includes('Week')">(${AppConstants.CURRENT_YEAR})</span>
                 </h1>
                 <p class="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto" x-html="heroSubtitle">
                 </p>
@@ -133,7 +180,7 @@
                                 <button class="flex-1 py-3 text-sm font-bold rounded-lg shadow-sm bg-white text-slate-900 flex items-center justify-center gap-2">
                                     <span>🚗</span> Uber / Lyft
                                 </button>
-                                <a href="/" class="flex-1 py-3 text-sm font-bold rounded-lg text-slate-500 hover:text-slate-900 hover:bg-white/50 transition flex items-center justify-center gap-2">
+                                <a href="/doordash" class="flex-1 py-3 text-sm font-bold rounded-lg text-slate-500 hover:text-slate-900 hover:bg-white/50 transition flex items-center justify-center gap-2">
                                     <span>🍔</span> DoorDash
                                 </a>
                              </div>
@@ -150,7 +197,7 @@
                                     </div>
                                     <div class="relative">
                                         <span class="absolute left-4 top-3.5 text-slate-400 font-medium">$</span>
-                                        <input type="number" x-model="rawGross" 
+                                        <input type="number" inputmode="decimal" x-model="rawGross" 
                                                class="w-full pl-8 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-lg font-bold text-slate-900 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 focus:outline-none transition-all">
                                     </div>
                                 </div>
@@ -164,7 +211,7 @@
                                         </label>
                                     </div>
                                     <div class="relative">
-                                        <input type="number" x-model="rawMiles" 
+                                        <input type="number" inputmode="decimal" x-model="rawMiles" 
                                                class="w-full pl-4 pr-12 py-3 bg-slate-50 border border-slate-200 rounded-xl text-lg font-bold text-slate-900 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 focus:outline-none transition-all">
                                         <span class="absolute right-4 top-3.5 text-slate-400 font-medium text-sm">mi</span>
                                     </div>
@@ -175,7 +222,7 @@
                                         <label class="text-xs font-semibold uppercase tracking-wide text-slate-500 leading-none">Total Time Online</label>
                                     </div>
                                     <div class="relative">
-                                        <input type="number" x-model="rawHours" 
+                                        <input type="number" inputmode="decimal" x-model="rawHours" 
                                                class="w-full pl-4 pr-12 py-3 bg-slate-50 border border-slate-200 rounded-xl text-lg font-bold text-slate-900 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 focus:outline-none transition-all">
                                         <span class="absolute right-4 top-3.5 text-slate-400 font-medium text-sm">hrs</span>
                                     </div>
@@ -505,52 +552,6 @@
                 </div>
 
             </article>
-
-            <!-- Structured Data (JSON-LD) -->
-            <script type="application/ld+json">
-            {
-              "@context": "https://schema.org",
-              "@type": "WebApplication",
-              "name": "Real Uber Driver Pay Calculator",
-              "url": "https://gigverdict.com/uber",
-              "applicationCategory": "FinanceApplication",
-              "operatingSystem": "Any",
-              "description": "Calculate your true net profit as an Uber driver after gas, depreciation, and taxes.",
-              "offers": {
-                "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "USD"
-              }
-            }
-            </script>
-            <script type="application/ld+json">
-            {
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              "mainEntity": [{
-                "@type": "Question",
-                "name": "What is the IRS Standard Mileage Rate for 2026?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "The 2026 IRS Standard Mileage Rate is projected to be 67 cents to 72.5 cents per mile. This rate covers gas, insurance, wear and tear, and depreciation. We use $0.725/mile in our Standard calculation to be safe."
-                }
-              }, {
-                "@type": "Question",
-                "name": "Is Uber driving worth it in 2026?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "It depends on your vehicle efficiency. If you drive a hybrid (50+ MPG) and work during peak surge hours, you can earn $25-30/hr net. However, driving a gas-guzzling SUV often results in net earnings below $10/hr."
-                }
-              }, {
-                "@type": "Question",
-                "name": "Do I really need to pay taxes on Uber income?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Yes. Uber treats you as an independent contractor. You must pay roughly 15.3% Self-Employment Tax on your profit. This calculator estimates that tax for you so you can save accordingly."
-                }
-              }]
-            }
-            </script>
 
             <!-- Viral Share Modal -->
             <div x-show="showShareModal" 

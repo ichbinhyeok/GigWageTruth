@@ -9,10 +9,57 @@
 @template.layout.main(
     seoMeta = new SeoMeta(
         customTitle != null ? customTitle : "DoorDash Truth - My Real Hourly Wage",
-        "See exactly how much you make on DoorDash after gas, vehicle destruction, and taxes. The truth is shocking.",
+        "Calculate DoorDash delivery profit after gas, stop-and-go vehicle wear, and taxes. See your real food delivery earnings.",
         "https://gigverdict.com/doordash",
         "https://gigverdict.com/og-image.jpg"
     ),
+    headContent = @`
+        <!-- Structured Data (JSON-LD) -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Real DoorDash Pay Calculator",
+          "url": "https://gigverdict.com/doordash",
+          "applicationCategory": "FinanceApplication",
+          "operatingSystem": "Any",
+          "description": "Calculate your true net profit as a DoorDash driver after gas, depreciation, and taxes.",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        }
+        </script>
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [{
+            "@type": "Question",
+            "name": "Can I write off gas on my taxes?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You have two choices: Standard Mileage Deduction OR Actual Expenses (gas, repairs, insurance). You cannot pick both. For most Dashers, the Standard Mileage Deduction ($0.725/mi) saves more money and is easier to track."
+            }
+          }, {
+            "@type": "Question",
+            "name": "Does Acceptance Rate matter for earnings?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It's controversial. \"Top Dashers\" get priority, but they often take money-losing orders ($2.50) to keep their stats up. Cherry-picking (only taking profitable orders) often yields a higher net hourly wage even if you sit idle more often."
+            }
+          }, {
+            "@type": "Question",
+            "name": "Should I DoorDash with a brand new car?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Generally, NO. The depreciation hit on a new car is massive. Dashing puts thousands of hard city miles on a vehicle. It's usually best to use an older, reliable hybrid (like a Prius) or an e-bike to maximize profit."
+            }
+          }]
+        }
+        </script>
+    `,
     content = @`
         <script src="/js/calculator-core.js?v=${AppConstants.CACHE_VERSION}"></script>
 
@@ -26,16 +73,16 @@
                     defaultVehicle: 'civic',
                     targetWeeklyIncome: 1000,
                     shockMessages: {
-                        tier1: [
-                             { emoji: '💀', text: "You're making LESS than a Target cashier ($15/hr)" },
-                             { emoji: '🩸', text: "Bleeding money after car replacement costs" },
-                             { emoji: '👮', text: "Illegal wage level in most industries" }
-                        ],
-                         tier2: [
-                             { emoji: '⚠️', text: "Below minimum wage in CA/NY (after expenses)" },
-                             { emoji: '🍔', text: "Flipping burgers pays more + has benefits" },
-                             { emoji: '📉', text: "Not sustainable long-term" }
-                        ],
+                         tier1: [
+                              { emoji: '💀', text: "Earning LESS than fast food workers ($15/hr)" },
+                              { emoji: '⛽', text: "Gas costs more than your tips" },
+                              { emoji: '🚗', text: "Destroying your car for $2 orders" }
+                         ],
+                          tier2: [
+                              { emoji: '⚠️', text: "Tips don't cover brake wear from stop-and-go" },
+                              { emoji: '🍔', text: "Restaurant workers get hourly + tips" },
+                              { emoji: '📉', text: "Waiting > Driving. Time is bleeding away" }
+                         ],
                         tier3: [
                              { emoji: '✅', text: "Decent side hustle money" },
                              { emoji: '🤔', text: "Comparable to warehouse work (no benefits)" },
@@ -58,7 +105,7 @@
             <div class="bg-red-600 pt-16 pb-24 text-center px-6">
                 <h1 class="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight">
                     <span x-text="heroTitle"></span>
-                    <span class="text-red-200" x-show="!heroTitle.includes('Week')">(2026)</span>
+                    <span class="text-red-200" x-show="!heroTitle.includes('Week')">(${AppConstants.CURRENT_YEAR})</span>
                 </h1>
                 <p class="text-lg md:text-xl text-white/80 max-w-2xl mx-auto" x-html="heroSubtitle">
                 </p>
@@ -130,7 +177,7 @@
 
                              <!-- App Switcher Tabs -->
                              <div class="flex p-1 bg-slate-100 rounded-xl mb-8">
-                                <a href="/" class="flex-1 py-3 text-sm font-bold rounded-lg text-slate-500 hover:text-slate-900 hover:bg-white/50 transition flex items-center justify-center gap-2">
+                                <a href="/uber" class="flex-1 py-3 text-sm font-bold rounded-lg text-slate-500 hover:text-slate-900 hover:bg-white/50 transition flex items-center justify-center gap-2">
                                     <span>🚗</span> Uber / Lyft
                                 </a>
                                 <button class="flex-1 py-3 text-sm font-bold rounded-lg shadow-sm bg-white text-slate-900 flex items-center justify-center gap-2">
@@ -150,7 +197,7 @@
                                     </div>
                                     <div class="relative">
                                         <span class="absolute left-4 top-3.5 text-slate-400 font-medium">$</span>
-                                        <input type="number" x-model="rawGross" 
+                                        <input type="number" inputmode="decimal" x-model="rawGross" 
                                                class="w-full pl-8 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-lg font-bold text-slate-900 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 focus:outline-none transition-all">
                                     </div>
                                 </div>
@@ -164,7 +211,7 @@
                                         </label>
                                     </div>
                                     <div class="relative">
-                                        <input type="number" x-model="rawMiles" 
+                                        <input type="number" inputmode="decimal" x-model="rawMiles" 
                                                class="w-full pl-4 pr-12 py-3 bg-slate-50 border border-slate-200 rounded-xl text-lg font-bold text-slate-900 focus:ring-2 focus:ring-red-500 focus:border-red-500 focus:outline-none transition-all">
                                         <span class="absolute right-4 top-3.5 text-slate-400 font-medium text-sm">mi</span>
                                     </div>
@@ -175,7 +222,7 @@
                                         <label class="text-xs font-semibold uppercase tracking-wide text-slate-500 leading-none">Total Dash Time</label>
                                     </div>
                                     <div class="relative">
-                                        <input type="number" x-model="rawHours" 
+                                        <input type="number" inputmode="decimal" x-model="rawHours" 
                                                class="w-full pl-4 pr-12 py-3 bg-slate-50 border border-slate-200 rounded-xl text-lg font-bold text-slate-900 focus:ring-2 focus:ring-red-500 focus:border-red-500 focus:outline-none transition-all">
                                         <span class="absolute right-4 top-3.5 text-slate-400 font-medium text-sm">hrs</span>
                                     </div>
@@ -501,52 +548,6 @@
                 </div>
 
             </article>
-
-            <!-- Structured Data (JSON-LD) -->
-            <script type="application/ld+json">
-            {
-              "@context": "https://schema.org",
-              "@type": "WebApplication",
-              "name": "Real DoorDash Pay Calculator",
-              "url": "https://gigverdict.com/doordash",
-              "applicationCategory": "FinanceApplication",
-              "operatingSystem": "Any",
-              "description": "Calculate your true net profit as a DoorDash driver after gas, depreciation, and taxes.",
-              "offers": {
-                "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "USD"
-              }
-            }
-            </script>
-            <script type="application/ld+json">
-            {
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              "mainEntity": [{
-                "@type": "Question",
-                "name": "Can I write off gas on my taxes?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "You have two choices: Standard Mileage Deduction OR Actual Expenses (gas, repairs, insurance). You cannot pick both. For most Dashers, the Standard Mileage Deduction ($0.725/mi) saves more money and is easier to track."
-                }
-              }, {
-                "@type": "Question",
-                "name": "Does Acceptance Rate matter for earnings?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "It's controversial. \"Top Dashers\" get priority, but they often take money-losing orders ($2.50) to keep their stats up. Cherry-picking (only taking profitable orders) often yields a higher net hourly wage even if you sit idle more often."
-                }
-              }, {
-                "@type": "Question",
-                "name": "Should I DoorDash with a brand new car?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Generally, NO. The depreciation hit on a new car is massive. Dashing puts thousands of hard city miles on a vehicle. It's usually best to use an older, reliable hybrid (like a Prius) or an e-bike to maximize profit."
-                }
-              }]
-            }
-            </script>
 
             <!-- Viral Share Modal -->
             <div x-show="showShareModal" 
