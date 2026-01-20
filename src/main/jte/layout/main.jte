@@ -5,7 +5,7 @@
 @param Content content
 @param SeoMeta seoMeta
 @param gg.jte.Content headContent = null
-@param gg.jte.Content headContent = null
+
 
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
