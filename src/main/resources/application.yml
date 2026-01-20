@@ -1,0 +1,21 @@
+server:
+  port: 8080
+  error:
+    include-message: never
+    include-stacktrace: never
+    include-exception: false
+
+spring:
+  main:
+    banner-mode: "off"
+
+logging:
+  level:
+    root: INFO
+    com.gigwager: INFO
+
+gg:
+  jte:
+    developmentMode: false
+    templateLocation: src/main/jte
+    usePrecompiledTemplates: true
