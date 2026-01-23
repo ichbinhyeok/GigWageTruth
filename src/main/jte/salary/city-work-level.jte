@@ -53,16 +53,7 @@
             "@type": "Country",
             "name": "US"
           },
-          "baseSalary": {
-            "@type": "MonetaryAmount",
-            "currency": "USD",
-            "value": {
-              "@type": "QuantitativeValue",
-              "minValue": ${String.format("%.2f", scenario.getNetHourly() * 0.90)},
-              "maxValue": ${String.format("%.2f", scenario.getNetHourly() * 1.15)},
-              "unitText": "HOUR"
-            }
-          }
+
         }
         </script>
         

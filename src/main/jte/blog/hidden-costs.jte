@@ -6,28 +6,35 @@
 @template.layout.main(
     seoMeta = new SeoMeta(
         customTitle != null ? customTitle : "The Hidden Cost of Depreciation: Why Your $100 Day is Actually $60",
-        "Depreciation is the silent killer of gig worker profits. Learn how to calculate it and why the IRS mileage rate exists.",
+        "Depreciation is the silent killer of gig worker profits. Learn the math of why every mile you drive is a slice of your car's value disappearing.",
         AppConstants.BASE_URL + "/blog/hidden-costs",
         AppConstants.BASE_URL + "/og-image-depreciation.jpg"
     ),
     content = @`
         <div class="bg-white min-h-screen pb-24">
             
+            <!-- Breadcrumbs -->
+            <div class="max-w-3xl mx-auto px-6 pt-8">
+                <a href="/blog" class="text-sm font-bold text-slate-400 hover:text-red-600 transition flex items-center gap-2">
+                    &larr; Back to Blog
+                </a>
+            </div>
+            
             <!-- Article Header -->
             <header class="bg-slate-900 py-20 text-center px-6">
                 <div class="max-w-3xl mx-auto">
-                    <div class="inline-block bg-emerald-500/20 text-emerald-300 text-xs font-bold px-3 py-1 rounded-full mb-4 border border-emerald-500/30">
-                        FINANCE
+                    <div class="inline-block bg-red-500/20 text-red-300 text-xs font-bold px-3 py-1 rounded-full mb-4 border border-red-500/30">
+                        VEHICLE ECONOMICS
                     </div>
                     <h1 class="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
-                        The Silent Killer: Why Your "$100 Day" is Actually Only $60
+                        The Silent Killer:<br>Why Your "$100 Day" is Actually Only $60
                     </h1>
                     <div class="flex justify-center items-center gap-4 text-slate-400 text-sm">
                         <span>By Gabi</span>
                         <span>•</span>
-                        <span>Jan 13, 2026</span>
+                        <span>Jan 23, 2026</span>
                         <span>•</span>
-                        <span>6 min read</span>
+                        <span>9 min read</span>
                     </div>
                 </div>
             </header>
@@ -38,87 +45,66 @@
                     
                     <div class="prose prose-slate prose-lg max-w-none">
                         <p class="lead text-xl text-slate-600 font-medium mb-8">
-                            You drive 100 miles. You make $100. You put $20 in gas. You think you made $80 profit. <strong>You are wrong.</strong> You actually made about $60, and I can prove it.
+                            You drive 100 miles. You make $100. You put $20 in gas. You think you made $80 profit. <strong>You are wrong.</strong> You actually made about $60, and I can prove it with one word: **Depreciation.**
                         </p>
 
-                        <h2>The Invisible Expense: Depreciation</h2>
+                        <h2>👻 The Invisible Expense</h2>
                         <p>
-                            Most gig drivers treat their car like a free resource. It is not. Every mile you drive is a tiny slice of your car's value disappearing forever.
+                            Most gig drivers treat their car like a free resource. It is not. It is a **depreciating asset**. Every mile you drive is a tiny slice of your car's resale value disappearing forever.
                         </p>
                         <p>
-                            Think about it:
+                            Think about it this way:
                         </p>
-                        <ul>
-                            <li>A car with 50,000 miles is worth $15,000.</li>
-                            <li>That same car with 150,000 miles is worth $5,000.</li>
+                        <ul class="list-none pl-0">
+                            <li class="bg-slate-50 p-4 rounded-lg mb-2">🚗 A car with <strong>50,000 miles</strong> is worth $15,000.</li>
+                            <li class="bg-slate-50 p-4 rounded-lg">🚗 That same car with <strong>150,000 miles</strong> is worth $5,000.</li>
                         </ul>
                         <p>
-                            That $10,000 difference didn't just vanish. <strong>You sold it to Uber, one mile at a time.</strong>
+                            That $10,000 difference didn't just vanish. **You sold it to Uber, one mile at a time.**
                         </p>
 
-                        <h2>The Math of Destruction</h2>
+                        <h2>📉 The "50k Mile Cliff"</h2>
                         <p>
-                            According to AAA and the IRS, the average cost to operate a vehicle in 2026 is around <strong>72 cents per mile</strong>.
+                            Cars don't lose value linearly. There are "cliffs" where the value drops significantly:
                         </p>
-                        <p>
-                            "That's too high!" you say. "My Prius is efficient!"
-                        </p>
-                        <p>
-                            Okay, let's look at the costs you <em>don't</em> pay at the pump:
-                        </p>
-                        <ul class="list-disc pl-5 space-y-2">
-                            <li><strong>Tires:</strong> $800 every 40k miles = $0.02/mile</li>
-                            <li><strong>Brakes:</strong> $400 every 30k miles = $0.013/mile</li>
-                            <li><strong>Oil & Fluids:</strong> $80 every 5k miles = $0.016/mile</li>
-                            <li><strong>Major Repairs:</strong> Alternator, Starter, Belts... it adds up.</li>
-                            <li><strong>Insurance:</strong> Rideshare endorsement adds cost.</li>
+                        <ul class="list-disc pl-5">
+                            <li><strong>36,000 Miles:</strong> Most bumper-to-bumper warranties expires. Value drops.</li>
+                            <li><strong>60,000 Miles:</strong> Major powertrain warranties expire. Value drops.</li>
+                            <li><strong>100,000 Miles:</strong> In the eyes of a buyer, the car is now "high mileage." Value plummets.</li>
                         </ul>
+                        <p>
+                            If you are driving a car with 95,000 miles, every delivery you take is pushing you closer to that 100k mark. That single $5 burrito delivery might cost you $500 in resale value if it's the one that flips the odometer.
+                        </p>
 
-                        <div class="bg-slate-100 p-6 rounded-xl my-8 not-prose border-l-4 border-slate-900">
-                            <h4 class="font-bold text-slate-900 mb-2">The Real Calculation</h4>
-                            <ul class="space-y-1 text-sm text-slate-700">
-                                <li><strong>Gross Earnings:</strong> $100.00</li>
-                                <li><strong>Miles Driven:</strong> 100 miles</li>
-                                <li><strong>IRS Deduction Cost:</strong> -$72.50 (100mi * $0.725)</li>
-                                <li><strong>Taxable Profit:</strong> $27.50</li>
-                            </ul>
-                            <p class="mt-4 text-xs text-slate-500">
-                                *Note: While the IRS number is a tax deduction, it closely mirrors real-world costs for standard sedans. Even if your cash cost is lower, the <em>value</em> loss is real.
+                        <div class="bg-red-50 p-6 rounded-xl border-l-4 border-red-500 my-8 not-prose">
+                            <h4 class="font-bold text-red-900 mb-2">The Real Math of Destruction</h4>
+                            <p class="text-red-800 text-sm">
+                                According to the IRS, it costs <strong>72.5 cents per mile</strong> to operate a vehicle in 2026. If you drive 1,000 miles a week, that's $725 in *real* economic cost. If you only made $1,000 that week, you didn't "earn" $1,000. You earned $275.
                             </p>
                         </div>
 
-                        <h2>Borrowing From Your Future Self</h2>
+                        <h2>🛡️ How to Fight Back</h2>
                         <p>
-                            When you ignore depreciation, you are essentially taking a <strong>high-interest loan from your car's future value</strong>.
+                            Is it impossible to make money? No. But you have to be smart:
                         </p>
-                        <p>
-                            You get cash today ($100), but you are left with a worthless car sooner. When your transmission fails at 120k miles, that $3,000 repair bill is just all those "profits" coming back to haunt you at once.
-                        </p>
-
-                        <h2>How to Fight Back</h2>
                         <ol>
-                            <li><strong>Track Every Mile:</strong> Use our <a href="/blog/tax-guide">Tax Guide</a> to ensure you claim every cent of the Standard Mileage Deduction.</li>
-                            <li><strong>Drive the Right Car:</strong> Never DoorDash in a new car. Use a 10-year-old Toyota or Honda that has already depreciated.</li>
-                            <li><strong>Cherry Pick:</strong> Don't move your car for less than $1.50/mile. If the offer is $5 for 10 miles, you are literally paying to work.</li>
+                            <li><strong>🛠️ Drive the "Bottom of the Curve":</strong> Don't use a new car. Use a car that has already lost most of its value (e.g., a 10-year-old Toyota). If the car is only worth $4,000, it can't lose much more.</li>
+                            <li><strong>📅 Maintain religiously:</strong> A well-documented maintenance history can mitigate the loss of value when you eventually sell the car.</li>
+                            <li><strong>👀 Watch the Odometer:</strong> If you are near a major milestone (60k, 100k), consider trading the car in *before* you hit it.</li>
                         </ol>
 
                         <h2>Conclusion</h2>
                         <p>
-                            Don't let the apps fool you with "Revenue." Focus on "Profit." 
+                            Don't let the apps fool you with "Gross Revenue." Focus on your **Net Profit**. Your car is a tool, not a toy. Treat it like a business expense, because that's exactly what it is.
                         </p>
-                    </div> 
 
-                    <!-- CTA -->
-                    <div class="mt-16 pt-8 border-t border-slate-200">
-                        <div class="bg-slate-900 rounded-xl p-8 text-center text-white">
-                            <h3 class="text-2xl font-bold mb-4">See Your Real Profit</h3>
-                            <p class="text-slate-300 mb-6">Our calculator subtracts 2026 depreciation automatically.</p>
-                            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                                <a href="/" class="px-6 py-3 bg-white text-slate-900 font-bold rounded-lg hover:bg-slate-100 transition">Uber Calc</a>
-                                <a href="/" class="px-6 py-3 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition">DoorDash Calc</a>
-                            </div>
+                        <div class="mt-12 text-center">
+                            <p class="text-sm text-slate-500 mb-6 italic">Want to see how much your car is actually losing? Use our specialized profit calculator.</p>
+                            <a href="/" class="inline-block bg-slate-900 text-white px-10 py-4 rounded-full font-bold hover:bg-slate-800 transition shadow-xl">
+                                Calculate My Real Hourly Wage
+                            </a>
                         </div>
-                    </div>
+                    </div> 
 
                 </div>
             </article>

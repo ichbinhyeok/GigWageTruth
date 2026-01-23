@@ -114,6 +114,23 @@
                     </div>
                 @endif
             </section>
+            
+            <!-- Internal Link: The Hidden Truth (Orphan Defense) -->
+            <section class="bg-red-50 rounded-2xl p-8 border-2 border-red-200 shadow-sm relative overflow-hidden group">
+                <div class="absolute -right-4 -top-4 text-8xl text-red-500/10 font-black group-hover:scale-110 transition-transform">TRUTH</div>
+                <div class="relative z-10">
+                    <h3 class="text-xl font-bold text-red-900 mb-3 flex items-center gap-2">
+                        <span>📉</span> The Hidden Cost of Driving in ${city.getCityName()}
+                    </h3>
+                    <p class="text-red-800 mb-6">
+                        Your car is losing value every mile you drive. Most drivers in ${city.getCityName()} ignore depreciation until it's too late.
+                        Read our deep dive on why your "$100 day" is actually closer to $60.
+                    </p>
+                    <a href="/blog/hidden-costs" class="inline-block px-6 py-3 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition shadow-md">
+                        Read the Truth &rarr;
+                    </a>
+                </div>
+            </section>
 
             <!-- AD SLOT 2: In-Content (Middle) -->
             <div class="w-full bg-slate-50 rounded-xl border border-slate-200 text-center min-h-[150px] flex flex-col items-center justify-center overflow-hidden">

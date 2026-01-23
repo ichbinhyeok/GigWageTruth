@@ -5,110 +5,124 @@
 
 @template.layout.main(
     seoMeta = new SeoMeta(
-        customTitle != null ? customTitle : "Uber vs DoorDash 2026: The Ultimate Comparison",
-        "Data-driven comparison of earnings, stress, and vehicle wear between Uber Rideshare and DoorDash delivery.",
+        customTitle != null ? customTitle : "Uber vs DoorDash 2026: Which App Actually Pays More?",
+        "Don't just look at the gross pay. We compare stress, vehicle wear, and hidden expenses to see which app is better for your personality.",
         AppConstants.BASE_URL + "/blog/uber-vs-doordash",
-        AppConstants.BASE_URL + "/og-image-versus.jpg"
+        AppConstants.BASE_URL + "/og-image-comparison.jpg"
     ),
     content = @`
         <div class="bg-white min-h-screen pb-24">
             
+            <!-- Breadcrumbs -->
+            <div class="max-w-3xl mx-auto px-6 pt-8">
+                <a href="/blog" class="text-sm font-bold text-slate-400 hover:text-blue-600 transition flex items-center gap-2">
+                    &larr; Back to Blog
+                </a>
+            </div>
+            
             <!-- Article Header -->
-            <header class="bg-white py-20 text-center px-6 border-b border-slate-100">
+            <header class="bg-slate-900 py-20 text-center px-6">
                 <div class="max-w-3xl mx-auto">
-                    <div class="inline-block bg-slate-100 text-slate-600 text-xs font-bold px-3 py-1 rounded-full mb-4">
-                        APP BATTLE
+                    <div class="inline-block bg-blue-500/20 text-blue-300 text-xs font-bold px-3 py-1 rounded-full mb-4 border border-blue-500/30">
+                        COMPARISON
                     </div>
-                    <h1 class="text-3xl md:text-5xl font-bold text-slate-900 mb-6 leading-tight">
-                        Uber vs. DoorDash: Which Pays Better in 2026?
+                    <h1 class="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                        Uber vs. DoorDash:<br>Food Doesn't Complain, But People Pay More
                     </h1>
-                    <div class="flex justify-center items-center gap-4 text-slate-500 text-sm">
+                    <div class="flex justify-center items-center gap-4 text-slate-400 text-sm">
                         <span>By Gabi</span>
                         <span>•</span>
-                        <span>Jan 13, 2026</span>
+                        <span>Jan 18, 2026</span>
                         <span>•</span>
-                        <span>12 min read</span>
+                        <span>7 min read</span>
                     </div>
                 </div>
             </header>
 
             <!-- Article Content -->
-            <article class="max-w-3xl mx-auto px-6 mt-12">
-                
-                <div class="prose prose-slate prose-lg max-w-none">
-                    <p class="lead text-xl text-slate-600 font-medium mb-8">
-                        It's the classic debate: invite strangers into your car (Uber) or deal with cold burritos and apartment gates (DoorDash). I've done both for 5,000+ trips. Here is the honest breakdown.
-                    </p>
-
-                    <h2>1. Earning Potential</h2>
+            <article class="max-w-3xl mx-auto px-6 -mt-10 relative z-10">
+                <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-slate-100">
                     
-                    <h3>Uber (Rideshare)</h3>
-                    <p>
-                        <strong>Ceiling: High ($30-40/hr).</strong><br>
-                        During Friday/Saturday nights or events, surges can be insane. You are essentially a taxi during peak demand.
-                    </p>
+                    <div class="prose prose-slate prose-lg max-w-none">
+                        <p class="lead text-xl text-slate-600 font-medium mb-8">
+                            It's the classic gig worker deliema: Do you want to drive strangers around in your car, or do you want to deliver lukewarm tacos? One pays more per hour, but the other lets you listen to your own music in peace.
+                        </p>
 
-                    <h3>DoorDash (Delivery)</h3>
-                    <p>
-                        <strong>Ceiling: Medium ($20-25/hr).</strong><br>
-                        Tips are generally steady, but "unicorns" ($50+ tips) are rare compared to a massive Uber surge ride.
-                    </p>
-                    
-                    <p><strong>Winner: Uber (if you work weekends).</strong></p>
+                        <h2>💰 The Gross Income Reality</h2>
+                        <p>
+                            Historically, **Uber (Rideshare) pays 20-30% more in gross revenue** than DoorDash. Why? Because people are more expensive to move than packages. 
+                        </p>
+                        <p>
+                            In a market like Austin or Chicago, a seasoned Uber driver can gross $30-$35/hr during peak times. A DoorDash "Top Dasher" is lucky to hit $25/hr in the same window. But as we always say here: **Gross is a vanity metric. Net is sanity.**
+                        </p>
 
-                    <h2>2. Vehicle Wear & Tear</h2>
-                    <p>
-                        This is where it gets interesting. 
-                    </p>
-                    <ul>
-                        <li><strong>Uber:</strong> Mostly highway miles. Easier on brakes/transmission.</li>
-                        <li><strong>DoorDash:</strong> Brutal setup. Start, stop, park illegally, restart engine, speed bumps in apartments.</li>
-                    </ul>
-                    <p><strong>Winner: Uber.</strong> Your car will last longer doing highway runs to the airport than delivering Starbucks 50 times a day.</p>
-
-                    <h2>3. Stress & Safety</h2>
-                    <p>
-                        <strong>Uber:</strong> You have a stranger behind you. You have to maintain conversation (or read the room), keep the car spotless, and deal with drunk passengers.
-                    </p>
-                    <p>
-                        <strong>DoorDash:</strong> You are alone. You can listen to podcasts, talk on the phone, or curse at traffic. The bag of Five Guys won't vomit in your back seat.
-                    </p>
-                    <p><strong>Winner: DoorDash (by a mile).</strong></p>
-
-                    <h2>4. Barrier to Entry</h2>
-                    <p>
-                        <strong>Uber:</strong> Strict. newer car (usually < 15 years), strict background check, vehicle inspection.
-                    </p>
-                    <p>
-                        <strong>DoorDash:</strong> Lenient. You can use a beater car, a scooter, or even a bicycle.
-                    </p>
-                    <p><strong>Winner: DoorDash.</strong></p>
-
-                    <h2>The Verdict</h2>
-                    <div class="grid md:grid-cols-2 gap-6 not-prose my-8">
-                        <div class="bg-slate-900 text-white p-6 rounded-xl">
-                            <h4 class="text-xl font-bold mb-2">Choose Uber If:</h4>
-                            <ul class="space-y-2 text-sm text-slate-300">
-                                <li>• You have a newer, clean car (Prius/Camry).</li>
-                                <li>• You are an extrovert.</li>
-                                <li>• You want maximum hourly earnings.</li>
-                            </ul>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-10 not-prose">
+                            <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                                <h3 class="font-bold text-slate-900 mb-2">🚗 Uber Pros/Cons</h3>
+                                <ul class="text-sm space-y-2 text-slate-700">
+                                    <li>✅ Higher hourly gross potential</li>
+                                    <li>✅ Longer trips = less downtime</li>
+                                    <li>❌ Passengers can be rude/messy</li>
+                                    <li>❌ High vehicle requirements (4-door, new-ish)</li>
+                                    <li>❌ Constant need to keep car pristine</li>
+                                </ul>
+                            </div>
+                            <div class="bg-red-50 p-6 rounded-xl border border-red-100">
+                                <h3 class="font-bold text-red-900 mb-2">🍔 DoorDash Pros/Cons</h3>
+                                <ul class="text-sm space-y-2 text-red-800">
+                                    <li>✅ No strangers in your car</li>
+                                    <li>✅ Low vehicle standards (beaters welcome)</li>
+                                    <li>✅ Dress however you want</li>
+                                    <li>❌ Constant parking/traffic headaches</li>
+                                    <li>❌ High engine wear (frequent stop/start)</li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="bg-red-600 text-white p-6 rounded-xl">
-                            <h4 class="text-xl font-bold mb-2">Choose DoorDash If:</h4>
-                            <ul class="space-y-2 text-red-100">
-                                <li>• You value peace and privacy.</li>
-                                <li>• Your car is older or "well-loved".</li>
-                                <li>• You want to listen to audiobooks all day.</li>
-                            </ul>
+
+                        <h2>👤 The Hidden Cost of "People"</h2>
+                        <p>
+                            When you drive for Uber, you aren't just a driver; you're a hospitality worker. 
+                        </p>
+                        <p>
+                            If a passenger spills a drink, your shift is over. If they rate you 1-star because they didn't like your air freshener, your account is at risk. You also have to pay for higher-tier insurance (Rideshare Endorsement) which is often more expensive for passengers than for food delivery.
+                        </p>
+
+                        <h2>📦 The Hidden Cost of "Food"</h2>
+                        <p>
+                            DoorDash kills your car in a different way: **Short-trip thermal cycles.** 
+                        </p>
+                        <p>
+                            You turn your engine on and off 30 times a day. You're constantly idling in drive-thrus. You're parking illegally in red zones hoping you don't get a $60 ticket that wipes out your entire day's earnings.
+                        </p>
+
+                        <h2>🤔 Which One Should You Choose?</h2>
+                        <p>
+                            Take our advice: **Introverts drive food, Extroverts drive people.**
+                        </p>
+                        <p>
+                            If you have a 2024 Toyota Camry and you enjoy chatting, Uber will make you more money. If you have a 2012 Honda Civic and you want to listen to podcasts without being interrupted, stick to DoorDash.
+                        </p>
+
+                        <div class="bg-slate-900 p-8 rounded-2xl text-white my-12 text-center">
+                            <h4 class="text-2xl font-bold mb-4">Are you actually making a profit?</h4>
+                                <p class="text-slate-400 mb-6">Our calculator knows the difference between Uber's insurance costs and DoorDash's gas consumption.</p>
+                                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                                    <a href="/salary/uber/austin" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-bold transition">Uber Profit Calc</a>
+                                    <a href="/salary/doordash/austin" class="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-lg font-bold transition">DoorDash Profit Calc</a>
+                                </div>
                         </div>
-                    </div>
 
-                    <p>
-                        Ultimately, the best strategy is usually to have BOTH. Be ready to pivot. If it's raining, people order food (DoorDash). If it's a concert night, people need rides (Uber).
-                    </p>
-                </div> 
+                        <h2>The Pro Move: The Hybrid Strategy</h2>
+                        <p>
+                            The most successful gig workers in 2026 don't choose. They use **Uber for the morning commute** (high surges) and **DoorDash for the dinner rush** (high tips, consistent volume). 
+                        </p>
+                        <p>
+                            Check out our <a href="/blog/multi-apping-guide">Multi-Apping Guide</a> to see how to run both simultaneously without getting deactivated.
+                        </p>
 
+                    </div> 
+
+                </div>
             </article>
 
         </div>

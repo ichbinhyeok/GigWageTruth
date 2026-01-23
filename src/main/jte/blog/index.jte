@@ -36,12 +36,12 @@
                                 The Silent Killer: Why Your "$100 Day" is Actually Only $60
                             </h2>
                             <p class="text-slate-600 text-sm mb-4 line-clamp-3">
-                                Depreciation is invisible until your car dies. We do the math on what 100 miles really costs you in 2026.
+                                Depreciation is the silent killer of gig worker profits. Learn the math of why every mile you drive is a slice of your car's value disappearing.
                             </p>
                             <div class="mt-auto flex items-center gap-2 text-xs text-slate-400 font-medium">
-                                <span>6 min read</span>
+                                <span>9 min read</span>
                                 <span>•</span>
-                                <span>Jan 2026</span>
+                                <span>Jan 23, 2026</span>
                             </div>
                         </div>
                     </a>
@@ -55,15 +55,15 @@
                         </div>
                         <div class="p-6 flex-1 flex flex-col">
                             <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-emerald-600 transition-colors">
-                                Multi-Apping Guide 2026: How to Double Your Hourly Wage
+                                Multi-Apping Masterclass 2026: Double Your Income
                             </h2>
                             <p class="text-slate-600 text-sm mb-4 line-clamp-3">
-                                Stop relying on one app. Learn the art of "stacking" orders from Uber, DoorDash, and GrubHub without getting deactivated.
+                                The secret to a $30/hr gig career isn't working harder. It's working smarter. Learn the Clean Stacking strategy to maximize every mile.
                             </p>
                             <div class="mt-auto flex items-center gap-2 text-xs text-slate-400 font-medium">
                                 <span>10 min read</span>
                                 <span>•</span>
-                                <span>Jan 2026</span>
+                                <span>Jan 21, 2026</span>
                             </div>
                         </div>
                     </a>
@@ -77,15 +77,15 @@
                         </div>
                         <div class="p-6 flex-1 flex flex-col">
                             <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
-                                Gig Worker Tax 101: Don't Overpay the IRS
+                                Gig Worker Tax Guide 2026: Don't Overpay the IRS
                             </h2>
                             <p class="text-slate-600 text-sm mb-4 line-clamp-3">
-                                Standard Mileage vs. Actual Expenses. Learn which method saves you thousands and avoids an audit nightmare.
+                                The 2026 IRS mileage rate is 72.5 cents. Learn exactly how to deduct your car, phone, and hot bags to pay zero taxes legally.
                             </p>
                             <div class="mt-auto flex items-center gap-2 text-xs text-slate-400 font-medium">
                                 <span>8 min read</span>
                                 <span>•</span>
-                                <span>Jan 2026</span>
+                                <span>Jan 15, 2026</span>
                             </div>
                         </div>
                     </a>
@@ -99,15 +99,15 @@
                         </div>
                         <div class="p-6 flex-1 flex flex-col">
                             <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-red-600 transition-colors">
-                                Uber vs. DoorDash: Which App Pays More in 2026?
+                                Uber vs. DoorDash 2026: Which App Actually Pays More?
                             </h2>
                             <p class="text-slate-600 text-sm mb-4 line-clamp-3">
-                                Rideshare vs. Delivery. We analyze earnings, vehicle wear, and stress levels to help you choose the right hustle.
+                                Don't just look at the gross pay. We compare stress, vehicle wear, and hidden expenses to see which app is better for your personality.
                             </p>
                             <div class="mt-auto flex items-center gap-2 text-xs text-slate-400 font-medium">
-                                <span>12 min read</span>
+                                <span>7 min read</span>
                                 <span>•</span>
-                                <span>Jan 2026</span>
+                                <span>Jan 18, 2026</span>
                             </div>
                         </div>
                     </a>

@@ -86,8 +86,10 @@
             </a>
 
             <!-- Simple Menu -->
-            <nav class="hidden md:flex space-x-8 text-sm font-medium text-slate-600">
+            <nav class="flex space-x-6 text-sm font-medium text-slate-600">
+                <a href="/salary/directory" class="hover:text-emerald-600 transition hidden sm:inline-block">Directory</a>
                 <a href="/" class="hover:text-emerald-600 transition">Calculator</a>
+                <a href="/blog" class="hover:text-emerald-600 transition">Blog</a>
             </nav>
         </div>
     </header>
@@ -101,10 +103,10 @@
     <footer class="bg-white border-t border-slate-200 py-12 mt-12">
         <div class="max-w-5xl mx-auto px-4 text-center">
             <p class="text-slate-900 font-semibold mb-2">GigWageTruth</p>
-            <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 mb-6 text-sm text-slate-500">
-                <a href="/about" class="hover:text-emerald-600 transition">About (Gabi)</a>
-                <a href="/blog" class="hover:text-emerald-600 transition">Blog</a>
+            <div class="flex flex-col md:flex-row flex-wrap justify-center items-center gap-x-6 gap-y-3 mb-6 text-sm text-slate-500">
                 <a href="/salary/directory" class="hover:text-emerald-600 transition">Salary by City</a>
+                <a href="/blog" class="hover:text-emerald-600 transition border-b-2 border-emerald-500/20 md:border-0">Blog</a>
+                <a href="/about" class="hover:text-emerald-600 transition">About</a>
                 <a href="/methodology" class="hover:text-emerald-600 transition">Methodology</a>
                 <a href="/privacy" class="hover:text-emerald-600 transition">Privacy</a>
                 <a href="/terms" class="hover:text-emerald-600 transition">Terms</a>

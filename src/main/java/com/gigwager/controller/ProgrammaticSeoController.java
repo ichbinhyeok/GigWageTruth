@@ -30,8 +30,11 @@ public class ProgrammaticSeoController {
                 }
 
                 // Resolve city from slug
-                CityData city = CityData.fromSlug(citySlug)
-                                .orElseThrow(() -> new IllegalArgumentException("City not found: " + citySlug));
+                // FIX: Redirect to directory if city not found (Traffic Retention)
+                CityData city = CityData.fromSlug(citySlug).orElse(null);
+                if (city == null) {
+                        return "redirect:/salary/directory";
+                }
 
                 // Generate 3 scenarios based on MarketTier
                 List<CityScenario> scenarios = generateScenarios(city, app);
@@ -39,33 +42,42 @@ public class ProgrammaticSeoController {
                 // Select "Featured" scenario (side-hustle level)
                 CityScenario featuredScenario = scenarios.get(1);
 
+                // Dynamic Date (Freshness Signal) - Force US Locale
+                // Dynamic Date (Freshness Signal) - Force US Locale
+                java.time.LocalDate now = java.time.LocalDate.now();
+                String monthYear = java.time.format.DateTimeFormatter.ofPattern("yyyy", java.util.Locale.US)
+                                .format(now);
+                String fullDate = java.time.format.DateTimeFormatter.ofPattern("yyyy", java.util.Locale.US)
+                                .format(now);
+
                 // Build unique SEO meta
                 String appName = app.equals("uber") ? "Uber" : "DoorDash";
-                // Question-based title for better CTR
-                String title = String.format("How much do %s Drivers make in %s, %s? (2026 Real Numbers)",
-                                appName, city.getCityName(), city.getState());
 
-                // Branching Meta Description Logic (Anti-Pattern Detection)
+                // CTR Strategy: Utility Gap + Curiosity Gap (No specific numbers in Title)
+                // "Uber in Austin: Net Pay Calculator (Jan 2026) - Is It Worth It?"
+                String title = String.format("%s in %s: Net Pay Calculator (%s) - Is It Worth It?",
+                                appName, city.getCityName(), monthYear);
+
+                // Meta Description: Fear/Loss Marketing + Utility Focus
                 String description;
-                double hourly = featuredScenario.getNetHourly();
                 String gasPrice = String.format("$%.2f", city.getGasPrice());
 
                 if (city.isHighTraffic()) {
                         description = String.format(
-                                        "Stop traffic killing your hourly rate. See how %s drivers in %s navigate congestion to earn $%.2f/hr net after expenses.",
-                                        appName, city.getCityName(), hourly);
+                                        "Don't drive blind in %s. Traffic congestion thrives here. Calculate your TRUE liquid hourly wage after gas (%s/gal) and depreciation. See if you're actually making money.",
+                                        city.getCityName(), gasPrice);
                 } else if (city.isCheapGas()) {
                         description = String.format(
-                                        "Gas is cheap in %s (%s/gal), but are rates high enough? See the real take-home pay for %s drivers in 2026.",
+                                        "Gas is cheap in %s (%s/gal), but are you actually profiting? Don't be fooled by gross numbers. Use our %s Net Pay Calculator to reveal your real take-home pay.",
                                         city.getCityName(), gasPrice, appName);
                 } else if (city.isHighCost()) {
                         description = String.format(
-                                        "Is %s worth it in %s given the high cost of living? We calculated the exact net hourly wage ($%.2f/hr) for local drivers.",
-                                        appName, city.getCityName(), hourly);
+                                        "Is %s worth it in %s's high-cost market? Don't drive blind. We calculated the exact breakdown of Expenses vs. Profit for %s drivers. See the truth.",
+                                        appName, city.getCityName(), appName);
                 } else {
                         description = String.format(
-                                        "Calculate your true hourly wage as a %s driver in %s after gas (%s/gal), vehicle depreciation, and taxes. Est: $%.2f/hr.",
-                                        appName, city.getCityName(), gasPrice, hourly);
+                                        "Stop guessing. Calculate your true hourly wage as a %s driver in %s. We deduct gas (%s/gal), taxes, and wear & tear to show your REAL profit.",
+                                        appName, city.getCityName(), gasPrice);
                 }
 
                 String canonicalUrl = String.format("%s/salary/%s/%s", AppConstants.BASE_URL, app, citySlug);
@@ -75,19 +87,17 @@ public class ProgrammaticSeoController {
                 String otherAppName = app.equals("uber") ? "DoorDash" : "Uber";
                 String otherAppUrl = String.format("/salary/%s/%s", otherApp, citySlug);
 
-                // Freshness signal
-                String lastUpdated = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy")
-                                .format(java.time.LocalDate.now());
-
                 model.addAttribute("app", app);
                 model.addAttribute("appName", appName);
                 model.addAttribute("city", city);
                 model.addAttribute("scenarios", scenarios);
                 model.addAttribute("featuredScenario", featuredScenario);
-                model.addAttribute("lastUpdated", lastUpdated);
+                model.addAttribute("lastUpdated", monthYear);
                 model.addAttribute("otherApp", otherApp);
                 model.addAttribute("otherAppName", otherAppName);
                 model.addAttribute("otherAppUrl", otherAppUrl);
+
+                // Pass raw description to template if needed, or rely on SeoMeta
                 model.addAttribute("seoMeta", new SeoMeta(title, description, canonicalUrl,
                                 AppConstants.BASE_URL + "/og-image.jpg"));
 
@@ -120,8 +130,11 @@ public class ProgrammaticSeoController {
                 }
 
                 // Resolve city from slug
-                CityData city = CityData.fromSlug(citySlug)
-                                .orElseThrow(() -> new IllegalArgumentException("City not found: " + citySlug));
+                // FIX: Redirect to directory if city not found
+                CityData city = CityData.fromSlug(citySlug).orElse(null);
+                if (city == null) {
+                        return "redirect:/salary/directory";
+                }
 
                 // Resolve work level from slug
                 WorkLevel workLevel;
@@ -134,18 +147,24 @@ public class ProgrammaticSeoController {
                 // Generate scenario for this specific work level
                 CityScenario scenario = generateScenarioByWorkLevel(city, app, workLevel);
 
+                // Dynamic Date (Freshness Signal) - Force US Locale
+                // Dynamic Date (Freshness Signal) - Force US Locale
+                java.time.LocalDate now = java.time.LocalDate.now();
+                String monthYear = java.time.format.DateTimeFormatter.ofPattern("yyyy", java.util.Locale.US)
+                                .format(now);
+
                 // Build unique SEO meta
                 String appName = app.equals("uber") ? "Uber" : "DoorDash";
-                // Question-based title for better CTR
-                String title = String.format("How much do %s Drivers make in %s? (%s Guide 2026)",
-                                appName, city.getCityName(), workLevel.getDisplayName());
 
+                // CTR Strategy: Utility Gap + Curiosity Gap
+                // "Uber Part-Time in Austin: Net Pay Calculator (Jan 2026) - Is It Worth It?"
+                String title = String.format("%s %s in %s: Net Pay Calculator (%s) - Is It Worth It?",
+                                appName, workLevel.getDisplayName(), city.getCityName(), monthYear);
+
+                // Meta Description: Utility Focused
                 String description = String.format(
-                                "Deep dive into %s %s earnings in %s for %s drivers. Real take-home pay: $%.2f/hr. " +
-                                                "Includes tax strategy, time management, and %s-specific tips for %s.",
-                                appName, workLevel.getDisplayName().toLowerCase(), city.getCityName(),
-                                workLevel.getDisplayName().toLowerCase(), scenario.getNetHourly(),
-                                workLevel.getDisplayName().toLowerCase(), city.getCityName());
+                                "Using the %s strategy (%s hrs/wk) in %s? Use our calculator to see your real net profit after self-employment tax and gas. Don't rely on gross numbers.",
+                                workLevel.getDisplayName(), workLevel.getHoursPerWeek(), city.getCityName());
 
                 String canonicalUrl = String.format("%s/salary/%s/%s/%s", AppConstants.BASE_URL, app, citySlug,
                                 workLevelSlug);
@@ -159,8 +178,7 @@ public class ProgrammaticSeoController {
                 String parentPageUrl = String.format("/salary/%s/%s", app, citySlug);
 
                 // Freshness signal
-                String lastUpdated = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy")
-                                .format(java.time.LocalDate.now());
+                String lastUpdated = monthYear;
 
                 // Generate unique content sections
                 String workLevelMeaning = workLevel.getWorkLevelMeaning(appName, city.getCityName());
