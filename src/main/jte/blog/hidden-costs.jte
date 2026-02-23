@@ -1,8 +1,6 @@
 @import com.gigwager.model.SeoMeta
 @import com.gigwager.util.AppConstants
-
 @param String customTitle
-
 @param Boolean noIndex = false
 @template.layout.main(
     noIndex = noIndex,
@@ -33,9 +31,9 @@
                     </h1>
                     <div class="flex justify-center items-center gap-4 text-slate-400 text-sm">
                         <span>By Gabi</span>
-                        <span>•</span>
+                        <span>|</span>
                         <span>Jan 23, 2026</span>
-                        <span>•</span>
+                        <span>|</span>
                         <span>9 min read</span>
                     </div>
                 </div>
@@ -47,25 +45,25 @@
                     
                     <div class="prose prose-slate prose-lg max-w-none">
                         <p class="lead text-xl text-slate-600 font-medium mb-8">
-                            You drive 100 miles. You make $100. You put $20 in gas. You think you made $80 profit. <strong>You are wrong.</strong> You actually made about $60, and I can prove it with one word: **Depreciation.**
+                            You drive 100 miles. You make $100. You put $20 in gas. You think you made $80 profit. <strong>You are wrong.</strong> You actually made about $60, and I can prove it with one word: <strong>Depreciation.</strong>
                         </p>
 
-                        <h2>👻 The Invisible Expense</h2>
+                        <h2>?뫛 The Invisible Expense</h2>
                         <p>
-                            Most gig drivers treat their car like a free resource. It is not. It is a **depreciating asset**. Every mile you drive is a tiny slice of your car's resale value disappearing forever.
+                            Most gig drivers treat their car like a free resource. It is not. It is a <strong>depreciating asset</strong>. Every mile you drive is a tiny slice of your car's resale value disappearing forever.
                         </p>
                         <p>
                             Think about it this way:
                         </p>
                         <ul class="list-none pl-0">
-                            <li class="bg-slate-50 p-4 rounded-lg mb-2">🚗 A car with <strong>50,000 miles</strong> is worth $15,000.</li>
-                            <li class="bg-slate-50 p-4 rounded-lg">🚗 That same car with <strong>150,000 miles</strong> is worth $5,000.</li>
+                            <li class="bg-slate-50 p-4 rounded-lg mb-2">?슅 A car with <strong>50,000 miles</strong> is worth $15,000.</li>
+                            <li class="bg-slate-50 p-4 rounded-lg">?슅 That same car with <strong>150,000 miles</strong> is worth $5,000.</li>
                         </ul>
                         <p>
-                            That $10,000 difference didn't just vanish. **You sold it to Uber, one mile at a time.**
+                            That $10,000 difference didn't just vanish. <strong>You paid it out, mile by mile.</strong>
                         </p>
 
-                        <h2>📉 The "50k Mile Cliff"</h2>
+                        <h2>?뱣 The "50k Mile Cliff"</h2>
                         <p>
                             Cars don't lose value linearly. There are "cliffs" where the value drops significantly:
                         </p>
@@ -85,19 +83,19 @@
                             </p>
                         </div>
 
-                        <h2>🛡️ How to Fight Back</h2>
+                        <h2>?썳截?How to Fight Back</h2>
                         <p>
                             Is it impossible to make money? No. But you have to be smart:
                         </p>
                         <ol>
-                            <li><strong>🛠️ Drive the "Bottom of the Curve":</strong> Don't use a new car. Use a car that has already lost most of its value (e.g., a 10-year-old Toyota). If the car is only worth $4,000, it can't lose much more.</li>
-                            <li><strong>📅 Maintain religiously:</strong> A well-documented maintenance history can mitigate the loss of value when you eventually sell the car.</li>
-                            <li><strong>👀 Watch the Odometer:</strong> If you are near a major milestone (60k, 100k), consider trading the car in *before* you hit it.</li>
+                            <li><strong>?썱截?Drive the "Bottom of the Curve":</strong> Don't use a new car. Use a car that has already lost most of its value (e.g., a 10-year-old Toyota). If the car is only worth $4,000, it can't lose much more.</li>
+                            <li><strong>?뱟 Maintain religiously:</strong> A well-documented maintenance history can mitigate the loss of value when you eventually sell the car.</li>
+                            <li><strong>?? Watch the Odometer:</strong> If you are near a major milestone (60k, 100k), consider trading the car in *before* you hit it.</li>
                         </ol>
 
                         <h2>Conclusion</h2>
                         <p>
-                            Don't let the apps fool you with "Gross Revenue." Focus on your **Net Profit**. Your car is a tool, not a toy. Treat it like a business expense, because that's exactly what it is.
+                            Don't let the apps fool you with "Gross Revenue." Focus on your <strong>Net Profit</strong>. Your car is a tool, not a toy. Treat it like a business expense, because that's exactly what it is.
                         </p>
 
                         <div class="mt-12 text-center">

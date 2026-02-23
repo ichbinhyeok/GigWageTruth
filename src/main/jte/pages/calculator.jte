@@ -130,21 +130,28 @@
                                  <p class="text-emerald-700 mb-6">Learn professional strategies to protect your profit and double your hourly wage.</p>
                                  
                                  <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
-                                     <a href="/taxes" class="block bg-white p-4 rounded-xl border border-emerald-100 hover:border-emerald-300 hover:shadow-md transition">
-                                         <h4 class="font-bold text-slate-900 mb-1">🏦 Tax Guide</h4>
-                                         <p class="text-xs text-slate-500">Master the 1099 self-employment tax and deductions.</p>
+                                     <a href="/taxes" class="relative group block bg-white p-5 rounded-xl border-2 border-emerald-100 hover:border-emerald-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                                         <div class="absolute -right-2 -top-2 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide">Save $1,500+</div>
+                                         <h4 class="font-bold text-slate-900 mb-2 flex items-center gap-2"><span class="text-xl">🏦</span> Tax Guide</h4>
+                                         <p class="text-xs text-slate-600 mb-4 leading-relaxed">Don't let the IRS take 15.3% of your gross. Find out how to legally write off your mileage and avoid a surprise tax bill -> <strong>Download our free tracking setup</strong>.</p>
+                                         <div class="text-xs font-bold text-emerald-600 group-hover:text-emerald-700 flex items-center gap-1">Protect your profit <span class="group-hover:translate-x-1 transition-transform">→</span></div>
                                      </a>
-                                     <a href="/vehicle-cost" class="block bg-white p-4 rounded-xl border border-emerald-100 hover:border-emerald-300 hover:shadow-md transition">
-                                         <h4 class="font-bold text-slate-900 mb-1">🚗 Vehicle Costs</h4>
-                                         <p class="text-xs text-slate-500">Calculate the true cost of depreciation and maintenance.</p>
+                                     <a href="/vehicle-cost" class="relative group block bg-white p-5 rounded-xl border-2 border-emerald-100 hover:border-emerald-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                                         <h4 class="font-bold text-slate-900 mb-2 flex items-center gap-2"><span class="text-xl">🚗</span> Vehicle Costs</h4>
+                                         <p class="text-xs text-slate-600 mb-4 leading-relaxed">Your car is dying $0.725 every mile you drive. Discover if you are driving a "profit killer" vehicle and how to source a cheap hybrid instead.</p>
+                                         <div class="text-xs font-bold text-emerald-600 group-hover:text-emerald-700 flex items-center gap-1">Stop the bleeding <span class="group-hover:translate-x-1 transition-transform">→</span></div>
                                      </a>
-                                     <a href="/insurance" class="block bg-white p-4 rounded-xl border border-emerald-100 hover:border-emerald-300 hover:shadow-md transition">
-                                         <h4 class="font-bold text-slate-900 mb-1">🛡️ Insurance</h4>
-                                         <p class="text-xs text-slate-500">Why your personal policy won't cover Uber crashes.</p>
+                                     <a href="/insurance" class="relative group block bg-white p-5 rounded-xl border-2 border-emerald-100 hover:border-emerald-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                                         <div class="absolute -right-2 -top-2 bg-amber-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide">Critical Risk</div>
+                                         <h4 class="font-bold text-slate-900 mb-2 flex items-center gap-2"><span class="text-xl">🛡️</span> Insurance GAP</h4>
+                                         <p class="text-xs text-slate-600 mb-4 leading-relaxed">If you crash with a passenger, your Geico/StateFarm policy WILL deny the claim. See how to get a $15/mo rideshare endorsement to cover your ass.</p>
+                                         <div class="text-xs font-bold text-emerald-600 group-hover:text-emerald-700 flex items-center gap-1">Get covered now <span class="group-hover:translate-x-1 transition-transform">→</span></div>
                                      </a>
-                                     <a href="/blog/multi-apping-guide" class="block bg-emerald-600 text-white p-4 rounded-xl hover:bg-emerald-700 hover:shadow-md transition">
-                                         <h4 class="font-bold mb-1">📱 Multi-Apping</h4>
-                                         <p class="text-xs text-emerald-100">Our guide to doubling your hourly wage.</p>
+                                     <a href="/blog/multi-apping-guide" class="relative group block bg-gradient-to-br from-emerald-600 to-emerald-800 text-white p-5 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                                         <div class="absolute -right-2 -top-2 bg-yellow-400 text-slate-900 text-[10px] font-bold px-2 py-1 rounded-full shadow-sm uppercase tracking-wide">Pro Strategy</div>
+                                         <h4 class="font-bold text-white mb-2 flex items-center gap-2"><span class="text-xl">📱</span> Multi-Apping</h4>
+                                         <p class="text-xs text-emerald-50 mb-4 leading-relaxed">Only driving for Uber? You're leaving $5-10/hr on the table. Learn how top 5% drivers seamlessly juggle Uber, Lyft, and DoorDash without getting banned.</p>
+                                         <div class="text-xs font-bold text-yellow-300 group-hover:text-yellow-400 flex items-center gap-1">Double your wage <span class="group-hover:translate-x-1 transition-transform">→</span></div>
                                      </a>
                                  </div>
                             </div>
@@ -304,21 +311,28 @@
                                  <p class="text-red-700 mb-6">Learn professional strategies to protect your profit and double your hourly wage.</p>
                                  
                                  <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
-                                     <a href="/taxes" class="block bg-white p-4 rounded-xl border border-red-100 hover:border-red-300 hover:shadow-md transition">
-                                         <h4 class="font-bold text-slate-900 mb-1">🏦 Tax Guide</h4>
-                                         <p class="text-xs text-slate-500">Master the 1099 self-employment tax and deductions.</p>
+                                     <a href="/taxes" class="relative group block bg-white p-5 rounded-xl border-2 border-red-100 hover:border-red-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                                         <div class="absolute -right-2 -top-2 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide">Save $1,500+</div>
+                                         <h4 class="font-bold text-slate-900 mb-2 flex items-center gap-2"><span class="text-xl">🏦</span> Tax Guide</h4>
+                                         <p class="text-xs text-slate-600 mb-4 leading-relaxed">Don't let the IRS take 15.3% of your gross. Find out how to legally write off your mileage and avoid a surprise tax bill -> <strong>Download our free tracking setup</strong>.</p>
+                                         <div class="text-xs font-bold text-red-600 group-hover:text-red-700 flex items-center gap-1">Protect your profit <span class="group-hover:translate-x-1 transition-transform">→</span></div>
                                      </a>
-                                     <a href="/vehicle-cost" class="block bg-white p-4 rounded-xl border border-red-100 hover:border-red-300 hover:shadow-md transition">
-                                         <h4 class="font-bold text-slate-900 mb-1">🚗 Vehicle Costs</h4>
-                                         <p class="text-xs text-slate-500">Calculate the true cost of depreciation and maintenance.</p>
+                                     <a href="/vehicle-cost" class="relative group block bg-white p-5 rounded-xl border-2 border-red-100 hover:border-red-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                                         <h4 class="font-bold text-slate-900 mb-2 flex items-center gap-2"><span class="text-xl">🚗</span> Vehicle Costs</h4>
+                                         <p class="text-xs text-slate-600 mb-4 leading-relaxed">Your car is dying $0.725 every mile you drive. Discover if you are driving a "profit killer" vehicle and how to source a cheap hybrid instead.</p>
+                                         <div class="text-xs font-bold text-red-600 group-hover:text-red-700 flex items-center gap-1">Stop the bleeding <span class="group-hover:translate-x-1 transition-transform">→</span></div>
                                      </a>
-                                     <a href="/insurance" class="block bg-white p-4 rounded-xl border border-red-100 hover:border-red-300 hover:shadow-md transition">
-                                         <h4 class="font-bold text-slate-900 mb-1">🛡️ Insurance</h4>
-                                         <p class="text-xs text-slate-500">Why your personal policy won't cover delivery crashes.</p>
+                                     <a href="/insurance" class="relative group block bg-white p-5 rounded-xl border-2 border-red-100 hover:border-red-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                                         <div class="absolute -right-2 -top-2 bg-amber-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide">Critical Risk</div>
+                                         <h4 class="font-bold text-slate-900 mb-2 flex items-center gap-2"><span class="text-xl">🛡️</span> Insurance GAP</h4>
+                                         <p class="text-xs text-slate-600 mb-4 leading-relaxed">If you crash with food in the car, your Geico/StateFarm policy WILL deny the claim. See how to get a $15/mo rideshare endorsement to cover your ass.</p>
+                                         <div class="text-xs font-bold text-red-600 group-hover:text-red-700 flex items-center gap-1">Get covered now <span class="group-hover:translate-x-1 transition-transform">→</span></div>
                                      </a>
-                                     <a href="/blog/multi-apping-guide" class="block bg-red-600 text-white p-4 rounded-xl hover:bg-red-700 hover:shadow-md transition">
-                                         <h4 class="font-bold mb-1">📱 Multi-Apping</h4>
-                                         <p class="text-xs text-red-100">Our guide to doubling your hourly wage.</p>
+                                     <a href="/blog/multi-apping-guide" class="relative group block bg-gradient-to-br from-red-600 to-red-800 text-white p-5 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                                         <div class="absolute -right-2 -top-2 bg-yellow-400 text-slate-900 text-[10px] font-bold px-2 py-1 rounded-full shadow-sm uppercase tracking-wide">Pro Strategy</div>
+                                         <h4 class="font-bold text-white mb-2 flex items-center gap-2"><span class="text-xl">📱</span> Multi-Apping</h4>
+                                         <p class="text-xs text-red-50 mb-4 leading-relaxed">Only driving for DoorDash? You're leaving $5-10/hr on the table. Learn how top 5% drivers seamlessly juggle Uber and DoorDash without getting banned.</p>
+                                         <div class="text-xs font-bold text-yellow-300 group-hover:text-yellow-400 flex items-center gap-1">Double your wage <span class="group-hover:translate-x-1 transition-transform">→</span></div>
                                      </a>
                                  </div>
                             </div>
