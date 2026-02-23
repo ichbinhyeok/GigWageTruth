@@ -1,11 +1,9 @@
 @import com.gigwager.model.SeoMeta
 @import com.gigwager.util.AppConstants
-
 @param Double initialGross
 @param Double initialMiles  
 @param Double initialHours
 @param String customTitle
-
 @param Boolean noIndex = false
 @template.layout.main(
     noIndex = noIndex,

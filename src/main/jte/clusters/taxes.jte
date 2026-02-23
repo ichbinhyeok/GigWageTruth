@@ -1,8 +1,6 @@
 @import com.gigwager.util.AppConstants
-
 @param String customTitle
 @param Boolean noIndex = false
-
 @template.layout.main(
     noIndex = noIndex,
     seoMeta = new com.gigwager.model.SeoMeta(

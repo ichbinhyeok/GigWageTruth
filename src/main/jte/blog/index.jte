@@ -1,7 +1,5 @@
 @import com.gigwager.model.SeoMeta
-
 @param String customTitle
-
 @param Boolean noIndex = false
 @template.layout.main(
     noIndex = noIndex,

@@ -1,5 +1,4 @@
 @import com.gigwager.model.Verdict
-
 @param Verdict verdict
 
 <section class="bg-white border-2 border-${verdict.themeColor()}-100 rounded-3xl p-8 md:p-12 shadow-xl shadow-${verdict.themeColor()}-900/5 relative overflow-hidden" id="verdict-card-container">

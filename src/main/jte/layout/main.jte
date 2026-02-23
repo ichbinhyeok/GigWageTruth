@@ -1,7 +1,6 @@
 @import com.gigwager.model.SeoMeta
 @import gg.jte.Content
 @import com.gigwager.util.AppConstants
-
 @param Content content
 @param SeoMeta seoMeta
 @param gg.jte.Content headContent = null

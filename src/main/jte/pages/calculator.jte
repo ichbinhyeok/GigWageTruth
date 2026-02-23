@@ -1,7 +1,6 @@
 @import com.gigwager.model.SeoMeta
 @import com.gigwager.util.AppConstants
 @import com.gigwager.model.Verdict
-
 @param Double initialGross
 @param Double initialMiles  
 @param Double initialHours
@@ -9,7 +8,6 @@
 @param String app
 @param String customTitle
 @param Verdict verdict
-
 @param Boolean noIndex = false
 @template.layout.main(
     noIndex = noIndex,

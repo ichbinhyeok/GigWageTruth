@@ -1,6 +1,5 @@
 @import com.gigwager.util.AppConstants
 @import gg.jte.Content
-
 @param String appName
 @param String appSlug
 @param String themeColor

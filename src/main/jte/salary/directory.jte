@@ -1,6 +1,5 @@
 @import com.gigwager.model.SeoMeta
 @import com.gigwager.model.CityData
-
 @param Boolean noIndex = false
 @template.layout.main(
     noIndex = noIndex,

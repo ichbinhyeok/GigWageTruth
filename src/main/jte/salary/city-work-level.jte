@@ -3,7 +3,6 @@
 @import com.gigwager.model.CityScenario
 @import com.gigwager.model.WorkLevel
 @import com.gigwager.util.AppConstants
-
 @param SeoMeta seoMeta
 @param String app
 @param String appName
@@ -23,7 +22,6 @@
 @param String datePosted
 @param String schemaDescription
 @param java.util.List<com.gigwager.model.CityData> similarCities
-
 @param Boolean noIndex = false
 @template.layout.main(
     noIndex = noIndex,
