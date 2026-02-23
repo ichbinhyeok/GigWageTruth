@@ -2,7 +2,7 @@
 @param Boolean noIndex = false
 @template.layout.main(
     noIndex = noIndex,
-    seoMeta = new com.gigwager.model.SeoMeta(customTitle, "Find out if you have an insurance GAP as a rideshare or delivery driver. Avoid claim denials.", "https://gigverdict.com/insurance/rideshare-basics", "https://gigverdict.com/og-image.jpg"),
+    seoMeta = new com.gigwager.model.SeoMeta(customTitle, "Find out if you have an insurance GAP as a rideshare or delivery driver. Avoid claim denials.", com.gigwager.util.AppConstants.BASE_URL + "/insurance/rideshare-basics", com.gigwager.util.AppConstants.BASE_URL + "/og-image.jpg"),
     content = @`
         <div class="bg-slate-50 min-h-screen py-16 px-6">
             <div class="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center">
@@ -20,7 +20,7 @@
                 
                 <div class="bg-slate-50 p-6 rounded-xl border-2 border-slate-100 mb-8 mt-8">
                     <h2 class="text-xl font-bold text-slate-900 mb-2">Get the endorsement!</h2>
-                    <p class="text-slate-600 mb-4">A rideshare endorsement typically costs $10-$25/month. It is the only way to avoid bankruptcy if you cause an accident between requests.</p>
+                    <p class="text-slate-600 mb-4">A rideshare endorsement typically costs $10-$25/month. It is an important consideration for your financial safety if you cause an accident between requests. Coverage depends on insurer and state. Verify policy terms.</p>
                     <a href="/insurance" class="inline-block px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg transition-colors">See Complete Insurance Guide</a>
                 </div>
             </div>

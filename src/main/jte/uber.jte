@@ -10,8 +10,8 @@
     seoMeta = new SeoMeta(
         customTitle != null ? customTitle : "My Real Hourly Wage - The Shocking Truth",
         "Calculate Uber/Lyft rideshare profit after mileage deduction, depreciation, and taxes. Discover your true hourly wage.",
-        "https://gigverdict.com/uber",
-        "https://gigverdict.com/og-image.jpg"
+        com.gigwager.util.AppConstants.BASE_URL + "/uber",
+        com.gigwager.util.AppConstants.BASE_URL + "/og-image.jpg"
     ),
     headContent = @`
         <!-- Structured Data (JSON-LD) -->
@@ -22,7 +22,7 @@
             {
               "@type": "WebApplication",
               "name": "Real Uber Driver Pay Calculator",
-              "url": "https://gigverdict.com/uber",
+              "url": com.gigwager.util.AppConstants.BASE_URL + "/uber",
               "applicationCategory": "FinanceApplication",
               "operatingSystem": "Any",
               "description": "Calculate your true net profit as an Uber driver after gas, depreciation, and taxes.",

@@ -10,8 +10,8 @@
     seoMeta = new SeoMeta(
         customTitle != null ? customTitle : "DoorDash Truth - My Real Hourly Wage",
         "Calculate DoorDash delivery profit after gas, stop-and-go vehicle wear, and taxes. See your real food delivery earnings.",
-        "https://gigverdict.com/doordash",
-        "https://gigverdict.com/og-image.jpg"
+        com.gigwager.util.AppConstants.BASE_URL + "/doordash",
+        com.gigwager.util.AppConstants.BASE_URL + "/og-image.jpg"
     ),
     headContent = @`
         <!-- Structured Data (JSON-LD) -->
@@ -22,7 +22,7 @@
             {
               "@type": "WebApplication",
               "name": "Real DoorDash Pay Calculator",
-              "url": "https://gigverdict.com/doordash",
+              "url": com.gigwager.util.AppConstants.BASE_URL + "/doordash",
               "applicationCategory": "FinanceApplication",
               "operatingSystem": "Any",
               "description": "Calculate your true net profit as a DoorDash driver after gas, depreciation, and taxes.",

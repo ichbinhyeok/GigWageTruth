@@ -3,6 +3,7 @@ package com.gigwager.controller;
 import com.gigwager.util.AppConstants;
 import com.gigwager.model.CityData;
 import com.gigwager.model.WorkLevel;
+import com.gigwager.service.DataLayerService;
 import com.gigwager.service.PageIndexPolicyService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,9 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class SitemapController {
 
     private final PageIndexPolicyService pageIndexPolicyService;
+    private final DataLayerService dataLayerService;
 
-    public SitemapController(PageIndexPolicyService pageIndexPolicyService) {
+    public SitemapController(PageIndexPolicyService pageIndexPolicyService, DataLayerService dataLayerService) {
         this.pageIndexPolicyService = pageIndexPolicyService;
+        this.dataLayerService = dataLayerService;
     }
 
     @GetMapping(value = "/sitemap.xml", produces = MediaType.APPLICATION_XML_VALUE)
@@ -37,10 +40,20 @@ public class SitemapController {
         // Quality Gate: Programmatic SEO pages (City & Work-Level)
         // Add only those that pass the PageIndexPolicyService
         for (String app : new String[] { "uber", "doordash" }) {
+            // App Hubs
+            addUrl(xml, AppConstants.BASE_URL + "/salary/" + app, today, "weekly", "0.8");
+            addUrl(xml, AppConstants.BASE_URL + "/best-cities/" + app, today, "weekly", "0.8");
+
             for (CityData city : CityData.values()) {
                 if (pageIndexPolicyService.isCityReportIndexable(city)) {
                     addUrl(xml, AppConstants.BASE_URL + "/salary/" + app + "/" + city.getSlug(), today, "weekly",
                             "0.8");
+
+                    // Add Compare pages
+                    if (app.equals("uber") && dataLayerService.hasRichLocalData(city.getSlug())) {
+                        addUrl(xml, AppConstants.BASE_URL + "/compare/" + city.getSlug() + "/uber-vs-doordash", today,
+                                "monthly", "0.7");
+                    }
 
                     for (WorkLevel workLevel : WorkLevel.values()) {
                         if (pageIndexPolicyService.isWorkLevelReportIndexable(city, workLevel)) {

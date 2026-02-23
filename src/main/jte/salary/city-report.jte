@@ -59,13 +59,12 @@
                 </h1>
                 
                 <p class="text-xl text-slate-300 max-w-2xl mb-8">
-                    Stop guessing. See your <strong>true hourly wage</strong> after ${city.getCityName()}'s 
+                    Stop guessing. See your <strong>estimated net hourly wage</strong> after ${city.getCityName()}'s 
                     gas prices ($${String.format("%.2f", city.getGasPrice())}/gal), vehicle costs, and taxes.
                 </p>
 
                 <!-- AD SLOT 1: High Visibility (Top) -->
                 <div class="mb-8 p-4 bg-slate-800/50 rounded-xl border border-white/10 text-center min-h-[100px] flex items-center justify-center">
-                    <span class="text-xs text-slate-500 font-mono tracking-widest uppercase">Sponsored</span>
                     <!-- AdSense Code Placeholder for Top Slot -->
                     <!-- <ins class="adsbygoogle" style="display:block" ... ></ins> -->
                 </div>
@@ -151,7 +150,6 @@
 
             <!-- AD SLOT 2: In-Content (Middle) -->
             <div class="w-full bg-slate-50 rounded-xl border border-slate-200 text-center min-h-[150px] flex flex-col items-center justify-center overflow-hidden">
-                <span class="text-[10px] text-slate-300 font-mono tracking-widest uppercase mb-2">Advertisement</span>
                 <!-- Google AdSense Auto Ads Filler -->
             </div>
 
@@ -221,7 +219,7 @@
                         Actual results vary by vehicle efficiency, cherry-picking skill, and surge timing.
                     </p>
                     <p class="text-xs text-slate-600">
-                        Net Profit is estimated by deducting the <strong>2026 IRS Standard Mileage Rate ($0.725/mi)</strong> and an estimated <strong>15.3% Self-Employment Tax</strong> from the gross payout. These are national average estimates to help you understand your <em>True Cost of Ownership</em>. This is not financial advice.
+                        Net Profit is estimated by deducting the IRS Standard Mileage Rate and an estimated 15.3% Self-Employment Tax from the gross payout. For 2026, the IRS standard mileage rate is 72.5¢ per mile. We use this as an estimation proxy, not tax advice.
                     </p>
                 </div>
             </section>
@@ -327,7 +325,7 @@
                     <!-- Tax Risk Card -->
                     <div class="bg-white p-5 rounded-xl border-2 border-red-100 hover:border-red-500 transition-all">
                         <h4 class="font-bold text-slate-900 flex items-center gap-2 mb-2">🏦 Quarterly Tax Risk</h4>
-                        <p class="text-xs text-slate-600 mb-3">You may owe about <strong>$${String.format("%.0f", Math.max(0, (scenarios.get(1).getGrossWeekly() - (scenarios.get(1).getMiles() * 0.725)) * 0.153) * 13 )}</strong> this quarter in self-employment tax. Are you saving for this?</p>
+                        <p class="text-xs text-slate-600 mb-3">You may owe about <strong>$${String.format("%.0f", Math.max(0, (scenarios.get(1).getGrossWeekly() - (scenarios.get(1).getMiles() * AppConstants.IRS_MILEAGE_RATE)) * AppConstants.SELF_EMPLOYMENT_TAX_RATE) * 13 )}</strong> this quarter in self-employment tax. Are you saving for this?</p>
                         <a href="/taxes/quarterly-estimator" class="text-xs font-bold text-red-600 hover:text-red-700">Calculate quarterly estimate →</a>
                     </div>
                     <!-- Vehicle Cost Card -->
@@ -453,9 +451,20 @@
                 </div>
             </section>
 
+            <!-- Internal Linking PR8-4: Hub & Rankings Links -->
+            <section class="mt-8 mb-16 max-w-4xl mx-auto">
+                <div class="bg-indigo-50 border border-indigo-100 rounded-3xl p-8 text-center shadow-sm">
+                    <h3 class="text-xl font-bold text-indigo-900 mb-4">Want to see how ${city.getCityName()} compares?</h3>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="/salary/${app}" class="px-6 py-3 bg-white border border-indigo-200 hover:border-indigo-400 text-indigo-800 font-bold rounded-xl transition-colors shadow-sm text-sm">View Top ${appName} Cities Hub</a>
+                        <a href="/best-cities/${app}" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition-colors shadow-sm text-sm">See Best Cities Rankings</a>
+                    </div>
+                </div>
+            </section>
+
             <!-- CTA: Deep Calculator -->
             <section class="bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-2xl p-10 text-center shadow-xl">
-                <h3 class="text-2xl font-bold text-white mb-3">Calculate YOUR Exact Take-Home</h3>
+                <h3 class="text-2xl font-bold text-white mb-3">Calculate YOUR Personalized Estimate</h3>
                 <p class="text-emerald-100 mb-6 max-w-xl mx-auto">
                     These scenarios use averages. Want precision? Enter your exact miles, hours, and vehicle type.
                 </p>

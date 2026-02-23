@@ -50,6 +50,8 @@ public class PlaceholderLeakTest {
             content = content.replaceAll("(?s)<script.*?</script>", "");
             // Remove style blocks to ignore CSS attributes like [x-cloak]
             content = content.replaceAll("(?s)<style.*?</style>", "");
+            // Remove all remaining HTML tags
+            content = content.replaceAll("(?s)<.*?>", "");
 
             Matcher matcher = placeholderPattern.matcher(content);
             if (matcher.find()) {

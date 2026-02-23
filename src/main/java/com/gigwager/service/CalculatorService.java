@@ -13,7 +13,7 @@ public class CalculatorService {
     }
 
     public double calculateDepreciation(double miles) {
-        return miles * AppConstants.IRS_MILEAGE_RATE_2024;
+        return miles * AppConstants.IRS_MILEAGE_RATE;
     }
 
     public double calculateTax(double grossRevenue, double deductibleExpenses) {

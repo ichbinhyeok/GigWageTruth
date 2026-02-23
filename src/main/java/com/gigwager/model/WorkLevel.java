@@ -117,7 +117,7 @@ public enum WorkLevel {
                                                                 +
                                                                 "If your day job withholds taxes and this is supplemental income, you might owe a surprise tax bill in April unless you adjust your W-4 withholding or make quarterly payments. "
                                                                 +
-                                                                "On the bright side, you can deduct mileage using the IRS standard rate (72.5¢/mile in 2024), which often wipes out most taxable profit at this level."
+                                                                "On the bright side, you can deduct mileage. For 2026, the IRS standard mileage rate is 72.5¢ per mile. We use this as an estimation proxy, not tax advice. This often wipes out most taxable profit at this level."
                                                                 +
                                                                 "</p>" +
                                                                 "<p class=\"text-slate-700 leading-relaxed mb-4\">" +
@@ -196,7 +196,7 @@ public enum WorkLevel {
                                                 "<ul class=\"list-disc pl-5 space-y-2 text-slate-700\">" +
                                                 "<li><strong>Don't Panic:</strong> If you earn under $600/year, you won't get a 1099, but you still must report income.</li>"
                                                 +
-                                                "<li><strong>Mileage Tracking:</strong> Use a simple app like Stride or Everlance. Every mile driven for "
+                                                "<li><strong>Mileage Tracking:</strong> Use a simple app like Stride or Everlance. For 2026, the IRS standard mileage rate is 72.5¢ per mile. We use this as an estimation proxy, not tax advice. Every mile driven for "
                                                 + appName + " = 72.5¢ deduction.</li>" +
                                                 "<li><strong>No Quarterly Taxes Needed:</strong> At this level, the IRS won't penalize you for not making estimated payments. Just settle up in April.</li>"
                                                 +

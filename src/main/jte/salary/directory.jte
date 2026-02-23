@@ -6,8 +6,8 @@
     seoMeta = new SeoMeta(
         "Gig Driver Salary by City - Complete US Directory",
         "Compare real Uber and DoorDash earnings across major US cities. See how gas prices, traffic, and costs affect your hourly wage.",
-        "https://gigverdict.com/salary/directory",
-        "https://gigverdict.com/og-image.jpg"
+        com.gigwager.util.AppConstants.BASE_URL + "/salary/directory",
+        com.gigwager.util.AppConstants.BASE_URL + "/og-image.jpg"
     ),
     content = @`
         <div class="bg-slate-50 min-h-screen pb-24">

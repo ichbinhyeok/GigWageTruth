@@ -6,8 +6,8 @@
     seoMeta = new SeoMeta(
         customTitle,
         "Meet Gabi and the team behind GigWageTruth. We reveal the hidden costs of gig work.",
-        "https://gigverdict.com/about",
-        "https://gigverdict.com/og-image.jpg"
+        com.gigwager.util.AppConstants.BASE_URL + "/about",
+        com.gigwager.util.AppConstants.BASE_URL + "/og-image.jpg"
     ),
     content = @`
         <div class="max-w-3xl mx-auto px-6 py-12">

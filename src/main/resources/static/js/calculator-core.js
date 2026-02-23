@@ -261,7 +261,7 @@ window.createGigCalculator = function (initialData) {
 
         // Shared Logic for generating viral text
         get viralText() {
-            return `🚨 Shocking: My real hourly wage on ${this.selectedApp} is only $${this.netHourly.toFixed(2)}/hr (after gas & depreciation). \n\nCalculated with GigVerdict.com 💸 \n\n#GigEconomy #Drivers`;
+            return `🚨 Shocking: My real hourly wage on ${this.selectedApp} is only $${this.netHourly.toFixed(2)}/hr (after gas & depreciation). \n\nCalculated with True Gig Wage 💸 \n\n#GigEconomy #Drivers`;
         },
 
         shareResult() {
@@ -270,7 +270,7 @@ window.createGigCalculator = function (initialData) {
                 navigator.share({
                     title: 'My Real Gig Wage',
                     text: this.viralText,
-                    url: 'https://gigverdict.com'
+                    url: window.location.origin
                 }).catch((err) => {
                     console.log('Native share dismissed/failed', err);
                     // Fallback to modal if native share fails/is cancelled
@@ -284,7 +284,7 @@ window.createGigCalculator = function (initialData) {
 
         shareTo(platform) {
             const text = encodeURIComponent(this.viralText);
-            const url = encodeURIComponent("https://gigverdict.com");
+            const url = encodeURIComponent(window.location.origin);
             let shareUrl = "";
 
             switch (platform) {
@@ -299,7 +299,7 @@ window.createGigCalculator = function (initialData) {
                     break;
                 case 'copy':
                     if (navigator.clipboard) {
-                        navigator.clipboard.writeText(this.viralText + " https://gigverdict.com")
+                        navigator.clipboard.writeText(this.viralText + " " + window.location.origin)
                             .then(() => {
                                 alert("Copied to clipboard!"); // Simple feedback for now
                             });

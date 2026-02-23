@@ -8,6 +8,7 @@ import com.gigwager.model.CityLocalData;
 import com.gigwager.util.AppConstants;
 import com.gigwager.service.DataLayerService;
 import com.gigwager.service.PageIndexPolicyService;
+import com.gigwager.dto.CityRankingDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +30,121 @@ public class ProgrammaticSeoController {
                         PageIndexPolicyService pageIndexPolicyService) {
                 this.dataLayerService = dataLayerService;
                 this.pageIndexPolicyService = pageIndexPolicyService;
+        }
+
+        @GetMapping("/salary/{app}")
+        public String appHubPage(@PathVariable("app") String app, Model model) {
+                if (!app.equals("uber") && !app.equals("doordash")) {
+                        throw new com.gigwager.exception.ResourceNotFoundException("App not found");
+                }
+                String appName = app.equals("uber") ? "Uber" : "DoorDash";
+
+                List<CityRankingDto> topCities = Arrays.stream(CityData.values())
+                                .filter(pageIndexPolicyService::isCityReportIndexable)
+                                .map(city -> {
+                                        CityScenario scenario = calculateScenario("Full-time",
+                                                        city.getMarketTier().getFullTimeGross(), 400, 40, city, app);
+                                        return new CityRankingDto(city, scenario.getNetHourly(), "Full-time");
+                                })
+                                .sorted((c1, c2) -> Double.compare(c2.netHourly(), c1.netHourly()))
+                                .limit(10)
+                                .collect(Collectors.toList());
+
+                // Dynamic Date
+                java.time.LocalDate now = java.time.LocalDate.now();
+                String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
+                                .format(now);
+
+                String title = String.format("%s Pay Calculator & City Directory (%s)", appName, monthYear);
+                String description = String.format(
+                                "Learn how much %s drivers actually make after vehicle expenses and taxes. Find real net hourly wage estimates for top cities before you drive.",
+                                appName);
+                String canonicalUrl = String.format("%s/salary/%s", AppConstants.BASE_URL, app);
+
+                model.addAttribute("app", app);
+                model.addAttribute("appName", appName);
+                model.addAttribute("topCities", topCities);
+                model.addAttribute("lastUpdated", monthYear);
+                model.addAttribute("seoMeta",
+                                new SeoMeta(title, description, canonicalUrl, AppConstants.BASE_URL + "/og-image.jpg"));
+
+                return "salary/app-hub";
+        }
+
+        @GetMapping("/best-cities/{app}")
+        public String bestCitiesPage(@PathVariable("app") String app, Model model) {
+                if (!app.equals("uber") && !app.equals("doordash")) {
+                        throw new com.gigwager.exception.ResourceNotFoundException("App not found");
+                }
+                String appName = app.equals("uber") ? "Uber" : "DoorDash";
+
+                List<CityRankingDto> rankedCities = Arrays.stream(CityData.values())
+                                .filter(pageIndexPolicyService::isCityReportIndexable)
+                                .map(city -> {
+                                        CityScenario scenario = calculateScenario("Side-Hustle",
+                                                        city.getMarketTier().getSideHustleGross(), 250, 25, city, app);
+                                        return new CityRankingDto(city, scenario.getNetHourly(), "Side-Hustle");
+                                })
+                                .sorted((c1, c2) -> Double.compare(c2.netHourly(), c1.netHourly()))
+                                .collect(Collectors.toList());
+
+                java.time.LocalDate now = java.time.LocalDate.now();
+                String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
+                                .format(now);
+
+                String title = String.format("Best Cities for %s Drivers (%s Rankings)", appName, monthYear);
+                String description = String.format(
+                                "We ranked the best cities to drive for %s based on real net hourly take-home pay after deducting local gas prices and taxes.",
+                                appName);
+                String canonicalUrl = String.format("%s/best-cities/%s", AppConstants.BASE_URL, app);
+
+                model.addAttribute("app", app);
+                model.addAttribute("appName", appName);
+                model.addAttribute("rankedCities", rankedCities);
+                model.addAttribute("lastUpdated", monthYear);
+                model.addAttribute("seoMeta",
+                                new SeoMeta(title, description, canonicalUrl, AppConstants.BASE_URL + "/og-image.jpg"));
+
+                return "salary/best-cities";
+        }
+
+        @GetMapping("/compare/{citySlug}/uber-vs-doordash")
+        public String comparePage(@PathVariable("citySlug") String citySlug, Model model) {
+                CityData city = CityData.fromSlug(citySlug)
+                                .orElseThrow(() -> new com.gigwager.exception.ResourceNotFoundException(
+                                                "City not found"));
+
+                // PR8-3: Only generate for cities with rich local data AND passing policy
+                if (!dataLayerService.hasRichLocalData(citySlug)
+                                || !pageIndexPolicyService.isCityReportIndexable(city)) {
+                        throw new com.gigwager.exception.ResourceNotFoundException(
+                                        "Detailed comparison not available for this city yet");
+                }
+
+                CityScenario uberScenario = calculateScenario("Side-Hustle", city.getMarketTier().getSideHustleGross(),
+                                250, 25, city, "uber");
+                CityScenario doordashScenario = calculateScenario("Side-Hustle",
+                                city.getMarketTier().getSideHustleGross(), 250, 25, city, "doordash");
+
+                java.time.LocalDate now = java.time.LocalDate.now();
+                String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
+                                .format(now);
+
+                String title = String.format("Uber vs DoorDash in %s: Which Pays More? (%s)", city.getCityName(),
+                                monthYear);
+                String description = String.format(
+                                "Comparing Uber and DoorDash pay in %s. Discover which gig app offers a higher net hourly wage after adjusting for %s gas prices.",
+                                city.getCityName(), city.getCityName());
+                String canonicalUrl = String.format("%s/compare/%s/uber-vs-doordash", AppConstants.BASE_URL, citySlug);
+
+                model.addAttribute("city", city);
+                model.addAttribute("uberScenario", uberScenario);
+                model.addAttribute("doordashScenario", doordashScenario);
+                model.addAttribute("lastUpdated", monthYear);
+                model.addAttribute("seoMeta",
+                                new SeoMeta(title, description, canonicalUrl, AppConstants.BASE_URL + "/og-image.jpg"));
+
+                return "salary/compare";
         }
 
         @GetMapping("/salary/{app}/{citySlug}")
@@ -56,9 +172,9 @@ public class ProgrammaticSeoController {
                 // Dynamic Date (Freshness Signal) - Force US Locale
                 // Dynamic Date (Freshness Signal) - Force US Locale
                 java.time.LocalDate now = java.time.LocalDate.now();
-                String monthYear = java.time.format.DateTimeFormatter.ofPattern("yyyy", java.util.Locale.US)
+                String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
                                 .format(now);
-                String fullDate = java.time.format.DateTimeFormatter.ofPattern("yyyy", java.util.Locale.US)
+                String fullDate = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
                                 .format(now);
 
                 // Build unique SEO meta
@@ -75,7 +191,7 @@ public class ProgrammaticSeoController {
 
                 if (city.isHighTraffic()) {
                         description = String.format(
-                                        "Don't drive blind in %s. Traffic congestion thrives here. Estimate your TRUE liquid hourly wage after gas (%s/gal) and depreciation. See if you're actually making a profit.",
+                                        "Don't drive blind in %s. Traffic congestion thrives here. Estimate your liquid hourly wage after gas (%s/gal) and depreciation. See if you're actually making a profit.",
                                         city.getCityName(), gasPrice);
                 } else if (city.isCheapGas()) {
                         description = String.format(
@@ -168,7 +284,7 @@ public class ProgrammaticSeoController {
                 // Dynamic Date (Freshness Signal) - Force US Locale
                 // Dynamic Date (Freshness Signal) - Force US Locale
                 java.time.LocalDate now = java.time.LocalDate.now();
-                String monthYear = java.time.format.DateTimeFormatter.ofPattern("yyyy", java.util.Locale.US)
+                String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
                                 .format(now);
 
                 // Build unique SEO meta
@@ -308,7 +424,7 @@ public class ProgrammaticSeoController {
 
                 // Mode A (IRS proxy) - standard deduction reflects gas, maintenance, and
                 // depreciation
-                double mileageDeduction = milesAdjusted * AppConstants.IRS_MILEAGE_RATE_2024;
+                double mileageDeduction = milesAdjusted * AppConstants.IRS_MILEAGE_RATE;
                 double taxableProfit = grossAdjusted - mileageDeduction;
 
                 // Taxes cannot be negative

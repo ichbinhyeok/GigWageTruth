@@ -5,8 +5,8 @@
     var seoMeta = new SeoMeta(
         "Page Not Found - GigWageTruth",
         "The page you are looking for does not exist.",
-        "https://gigverdict.com/404",
-        "https://gigverdict.com/og-image.jpg"
+        com.gigwager.util.AppConstants.BASE_URL + "/404",
+        com.gigwager.util.AppConstants.BASE_URL + "/og-image.jpg"
     );
 }
 

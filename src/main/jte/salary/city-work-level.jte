@@ -138,7 +138,7 @@
                         Actual results vary by vehicle efficiency, cherry-picking skill, and surge timing.
                     </p>
                     <p class="text-xs text-slate-400">
-                        Net Profit is estimated by deducting the <strong>2026 IRS Standard Mileage Rate ($0.725/mi)</strong> and an estimated <strong>15.3% Self-Employment Tax</strong> from the gross payout. These are national average estimates to help you understand your <em>True Cost of Ownership</em>. This is not financial advice.
+                        Net Profit is estimated by deducting the IRS Standard Mileage Rate and an estimated 15.3% Self-Employment Tax from the gross payout. For 2026, the IRS standard mileage rate is 72.5¢ per mile. We use this as an estimation proxy, not tax advice.
                     </p>
                 </div>
             </div>
@@ -269,7 +269,7 @@
                     <!-- Tax Risk Card -->
                     <div class="bg-white p-5 rounded-xl border-2 border-red-100 hover:border-red-500 transition-all">
                         <h4 class="font-bold text-slate-900 flex items-center gap-2 mb-2">🏦 Quarterly Tax Risk</h4>
-                        <p class="text-xs text-slate-600 mb-3">You may owe about <strong>$${String.format("%.0f", Math.max(0, (scenario.getGrossWeekly() - (scenario.getMiles() * 0.725)) * 0.153) * 13 )}</strong> this quarter in self-employment tax. Are you saving for this?</p>
+                        <p class="text-xs text-slate-600 mb-3">You may owe about <strong>$${String.format("%.0f", Math.max(0, (scenario.getGrossWeekly() - (scenario.getMiles() * AppConstants.IRS_MILEAGE_RATE)) * AppConstants.SELF_EMPLOYMENT_TAX_RATE) * 13 )}</strong> this quarter in self-employment tax. Are you saving for this?</p>
                         <a href="/taxes/quarterly-estimator" class="text-xs font-bold text-red-600 hover:text-red-700">Calculate quarterly estimate →</a>
                     </div>
                     <!-- Vehicle Cost Card -->

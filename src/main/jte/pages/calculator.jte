@@ -18,8 +18,8 @@
         app.equals("uber") ? 
             "See exactly how much I make after gas, taxes, and depreciation. The number will surprise you." : 
             "See exactly how much you make on DoorDash after gas, vehicle destruction, and taxes. The truth is shocking.",
-        "https://gigverdict.com/" + app,
-        "https://gigverdict.com/og-image.jpg"
+        com.gigwager.util.AppConstants.BASE_URL + "/" + app,
+        com.gigwager.util.AppConstants.BASE_URL + "/og-image.jpg"
     ),
     content = @`
         <script src="/js/calculator-core.js?v=${AppConstants.CACHE_VERSION}"></script>

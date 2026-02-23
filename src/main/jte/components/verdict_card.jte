@@ -55,7 +55,7 @@
                 <div class="bg-white p-5 rounded-xl border-2 border-red-100 hover:border-red-500 transition-all relative">
                     <div class="absolute -right-2 -top-2 bg-amber-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide border-2 border-white">CRITICAL</div>
                     <h4 class="font-bold text-slate-900 flex items-center gap-2 mb-2">🛡️ Insurance GAP</h4>
-                    <p class="text-xs text-slate-600 mb-3">If you crash tomorrow, your personal insurance <strong>will likely deny the claim</strong>.</p>
+                    <p class="text-xs text-slate-600 mb-3">If you crash tomorrow, your personal insurance <strong>may deny the claim depending on your policy</strong>. Coverage depends on insurer and state. Verify policy terms.</p>
                     <a href="/insurance/rideshare-basics" class="text-xs font-bold text-red-600 hover:text-red-700">Learn how to fix this →</a>
                 </div>
             </div>

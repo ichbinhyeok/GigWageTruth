@@ -2,7 +2,7 @@
 @param Boolean noIndex = false
 @template.layout.main(
     noIndex = noIndex,
-    seoMeta = new com.gigwager.model.SeoMeta(customTitle, "Estimate your quarterly self-employment taxes easily to avoid IRS penalties. Our estimator makes gig tax prep a breeze.", "https://gigverdict.com/taxes/quarterly-estimator", "https://gigverdict.com/og-image.jpg"),
+    seoMeta = new com.gigwager.model.SeoMeta(customTitle, "Estimate your quarterly self-employment taxes easily to avoid IRS penalties. Our estimator makes gig tax prep a breeze.", com.gigwager.util.AppConstants.BASE_URL + "/taxes/quarterly-estimator", com.gigwager.util.AppConstants.BASE_URL + "/og-image.jpg"),
     content = @`
         <div class="bg-slate-50 min-h-screen py-16 px-6">
             <div class="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center">

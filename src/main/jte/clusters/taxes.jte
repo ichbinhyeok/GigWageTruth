@@ -38,10 +38,10 @@
                     <h2 class="text-2xl font-bold text-slate-900 mb-4">2. The Magic Eraser: The Standard Mileage Deduction</h2>
                     <div class="prose prose-slate max-w-none text-slate-600">
                         <p>If you made $10,000 driving for Uber, you <strong>do not</strong> pay 15.3% on $10,000. You only pay taxes on the profit <em>after</em> deducting your business expenses.</p>
-                        <p>For most drivers, the easiest and largest deduction is the <strong>IRS Standard Mileage Rate</strong>. For 2026, we project this to be around $0.725 per mile.</p>
+                        <p>For most drivers, the easiest and largest deduction is the <strong>IRS Standard Mileage Rate</strong>. For 2026, the IRS standard mileage rate is 72.5¢ per mile (<a href="https://www.irs.gov/tax-professionals/standard-mileage-rates" class="text-emerald-600 hover:text-emerald-700 underline" target="_blank" rel="noopener noreferrer">Official IRS Source</a>). We use this as an estimation proxy, not tax advice.</p>
                         <div class="bg-emerald-50 rounded-xl p-6 mt-6 border border-emerald-100">
                             <h4 class="font-bold text-emerald-900 mb-2">Example:</h4>
-                            <p class="text-emerald-800 text-sm">You drive 10,000 miles to earn that $10,000. Your deduction is 10,000 * $0.725 = $7,250. You only pay SE tax on the remaining <strong>$2,750</strong> profit.</p>
+                            <p class="text-emerald-800 text-sm">You drive 10,000 miles to earn that $10,000. Your deduction is 10,000 * 0.725 = $7,250. You only pay SE tax on the remaining <strong>$2,750</strong> profit.</p>
                         </div>
                         <p class="mt-4 text-sm text-red-600 font-bold">⚠️ Warning: If you claim the standard mileage rate, you cannot also deduct gas, repairs, or depreciation. The rate covers all of that.</p>
                     </div>
