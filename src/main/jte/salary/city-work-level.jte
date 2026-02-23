@@ -29,33 +29,48 @@
     noIndex = noIndex,
     seoMeta = seoMeta,
     content = @`
-        <!-- JobPosting Schema -->
+        <!-- Breadcrumb & FAQ Schema -->
         <script type="application/ld+json">
         {
-          "@context": "https://schema.org/",
-          "@type": "JobPosting",
-          "title": "${appName} Driver in ${city.getCityName()} (${workLevel.getDisplayName()})",
-          "description": "$unsafe{schemaDescription} Find out if driving for ${appName} in ${city.getCityName()} is worth it with GigWageTruth's real earnings data.",
-          "identifier": {
-            "@type": "PropertyValue",
-            "name": "GigWageTruth",
-            "value": "${city.getSlug()}-${app}-${workLevel.getSlug()}"
-          },
-          "datePosted": "${datePosted}",
-          "validThrough": "${validThrough}",
-          "employmentType": "${workLevel == WorkLevel.FULL_TIME ? "FULL_TIME" : "PART_TIME"}",
-          "hiringOrganization" : {
-            "@type" : "Organization",
-            "name" : "GigWageTruth",
-            "sameAs" : "${AppConstants.BASE_URL}",
-            "logo" : "${AppConstants.BASE_URL}/favicon.png"
-          },
-          "jobLocationType": "TELECOMMUTE",
-          "applicantLocationRequirements": {
-            "@type": "Country",
-            "name": "US"
-          },
-
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [{
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Salary Directory",
+                "item": "${AppConstants.BASE_URL}/salary/directory"
+              },{
+                "@type": "ListItem",
+                "position": 2,
+                "name": "${city.getCityName()} ${appName} Earnings",
+                "item": "${AppConstants.BASE_URL}${parentPageUrl}"
+              },{
+                "@type": "ListItem",
+                "position": 3,
+                "name": "${workLevel.getDisplayName()}"
+              }]
+            },
+            {
+              "@type": "FAQPage",
+              "mainEntity": [{
+                "@type": "Question",
+                "name": "How much does a ${workLevel.getDisplayName()} ${appName} driver make in ${city.getCityName()}?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "A ${workLevel.getDisplayName()} ${appName} driver in ${city.getCityName()} working ${workLevel.getHoursPerWeek()} hours per week can expect to take home approximately $${String.format("%.2f", scenario.getNetProfit())} per week after deducting estimated gas and self-employment taxes."
+                }
+              }, {
+                "@type": "Question",
+                "name": "Is ${appName} better than ${otherAppName} for ${workLevel.getDisplayName()} drivers in ${city.getCityName()}?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Local factors like ${city.getMarketTier()} market tier demand and ${String.format("$%.2f", city.getGasPrice())}/gal gas prices affect profitability. You can compare this to ${otherAppName} earnings for a more complete picture of the ${city.getCityName()} gig economy."
+                }
+              }]
+            }
+          ]
         }
         </script>
         
@@ -142,6 +157,17 @@
                             <div class="text-xl font-bold text-white">${scenario.getMiles()}</div>
                         </div>
                     </div>
+                </div>
+                
+                <div class="mt-8 bg-white/5 border border-white/10 rounded-xl p-4 text-slate-300">
+                    <h4 class="text-sm font-bold text-white mb-2">Calculation Assumptions</h4>
+                    <p class="text-xs mb-2">
+                        These are <strong>estimated scenarios</strong> based on typical ${city.getCityName()} conditions. 
+                        Actual results vary by vehicle efficiency, cherry-picking skill, and surge timing.
+                    </p>
+                    <p class="text-xs text-slate-400">
+                        Net Profit is estimated by deducting the <strong>2026 IRS Standard Mileage Rate ($0.725/mi)</strong> and an estimated <strong>15.3% Self-Employment Tax</strong> from the gross payout. These are national average estimates to help you understand your <em>True Cost of Ownership</em>. This is not financial advice.
+                    </p>
                 </div>
             </div>
         </div>
@@ -260,6 +286,31 @@
                         </a>
                     @endfor
                 </div>
+            </section>
+
+            <!-- AD SLOT 3: Revenue-Intent Clusters -->
+            <section class="bg-indigo-50 rounded-2xl p-8 border border-indigo-100 mb-8 mt-8">
+                 <h3 class="text-xl font-bold text-indigo-900 mb-2">Maximize your ${appName} Pay</h3>
+                 <p class="text-indigo-700 mb-6">Learn professional strategies to protect your profit and double your hourly wage.</p>
+                 
+                 <div class="grid md:grid-cols-2 gap-4 text-left">
+                     <a href="/taxes" class="block bg-white p-4 rounded-xl border border-indigo-100 hover:border-indigo-300 hover:shadow-md transition">
+                         <h4 class="font-bold text-slate-900 mb-1">🏦 Tax Guide</h4>
+                         <p class="text-xs text-slate-500">Master the 1099 self-employment tax and deductions.</p>
+                     </a>
+                     <a href="/vehicle-cost" class="block bg-white p-4 rounded-xl border border-indigo-100 hover:border-indigo-300 hover:shadow-md transition">
+                         <h4 class="font-bold text-slate-900 mb-1">🚗 Vehicle Costs</h4>
+                         <p class="text-xs text-slate-500">Calculate the true cost of depreciation and maintenance.</p>
+                     </a>
+                     <a href="/insurance" class="block bg-white p-4 rounded-xl border border-indigo-100 hover:border-indigo-300 hover:shadow-md transition">
+                         <h4 class="font-bold text-slate-900 mb-1">🛡️ Insurance</h4>
+                         <p class="text-xs text-slate-500">Why your personal policy won't cover ${appName} crashes.</p>
+                     </a>
+                     <a href="/blog/multi-apping-guide" class="block bg-indigo-600 text-white p-4 rounded-xl hover:bg-indigo-700 hover:shadow-md transition">
+                         <h4 class="font-bold mb-1">📱 Multi-Apping</h4>
+                         <p class="text-xs text-indigo-100">Our guide to doubling your hourly wage.</p>
+                     </a>
+                 </div>
             </section>
 
             <!-- Back to Overview -->

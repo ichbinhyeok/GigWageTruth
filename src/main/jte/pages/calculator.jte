@@ -127,21 +127,56 @@
 
                             <div class="bg-emerald-50 rounded-2xl p-8 text-center mt-12 mb-12">
                                  <h3 class="text-xl font-bold text-emerald-900 mb-2">Stop driving blind</h3>
-                                 <p class="text-emerald-700 mb-6">Learn professional strategies to double your hourly wage.</p>
-                                 <a href="/blog/multi-apping-guide" class="inline-block px-6 py-3 bg-emerald-600 text-white font-semibold rounded-xl hover:bg-emerald-700 transition shadow-lg shadow-emerald-600/20">Read Multi-Apping Guide</a>
+                                 <p class="text-emerald-700 mb-6">Learn professional strategies to protect your profit and double your hourly wage.</p>
+                                 
+                                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
+                                     <a href="/taxes" class="block bg-white p-4 rounded-xl border border-emerald-100 hover:border-emerald-300 hover:shadow-md transition">
+                                         <h4 class="font-bold text-slate-900 mb-1">🏦 Tax Guide</h4>
+                                         <p class="text-xs text-slate-500">Master the 1099 self-employment tax and deductions.</p>
+                                     </a>
+                                     <a href="/vehicle-cost" class="block bg-white p-4 rounded-xl border border-emerald-100 hover:border-emerald-300 hover:shadow-md transition">
+                                         <h4 class="font-bold text-slate-900 mb-1">🚗 Vehicle Costs</h4>
+                                         <p class="text-xs text-slate-500">Calculate the true cost of depreciation and maintenance.</p>
+                                     </a>
+                                     <a href="/insurance" class="block bg-white p-4 rounded-xl border border-emerald-100 hover:border-emerald-300 hover:shadow-md transition">
+                                         <h4 class="font-bold text-slate-900 mb-1">🛡️ Insurance</h4>
+                                         <p class="text-xs text-slate-500">Why your personal policy won't cover Uber crashes.</p>
+                                     </a>
+                                     <a href="/blog/multi-apping-guide" class="block bg-emerald-600 text-white p-4 rounded-xl hover:bg-emerald-700 hover:shadow-md transition">
+                                         <h4 class="font-bold mb-1">📱 Multi-Apping</h4>
+                                         <p class="text-xs text-emerald-100">Our guide to doubling your hourly wage.</p>
+                                     </a>
+                                 </div>
                             </div>
                         </article>
                         
                         <script type="application/ld+json">
                         {
                           "@context": "https://schema.org",
-                          "@type": "WebApplication",
-                          "name": "Real Uber Driver Pay Calculator",
-                          "url": "https://gigwagetruth.com/uber",
-                          "applicationCategory": "FinanceApplication",
-                          "operatingSystem": "Any",
-                          "description": "Calculate your true net profit as an Uber driver after gas, depreciation, and taxes.",
-                          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+                          "@graph": [
+                            {
+                              "@type": "WebApplication",
+                              "name": "Real Uber Driver Pay Calculator",
+                              "url": "${AppConstants.BASE_URL}/uber",
+                              "applicationCategory": "FinanceApplication",
+                              "operatingSystem": "Any",
+                              "description": "Calculate your true net profit as an Uber driver after gas, depreciation, and taxes.",
+                              "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+                            },
+                            {
+                              "@type": "BreadcrumbList",
+                              "itemListElement": [{
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Salary Directory",
+                                "item": "${AppConstants.BASE_URL}/salary/directory"
+                              },{
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Uber Calculator & Pay Truth"
+                              }]
+                            }
+                          ]
                         }
                         </script>
                         <script type="application/ld+json">
@@ -265,22 +300,57 @@
                             </section>
 
                             <div class="bg-red-50 rounded-2xl p-8 text-center mt-12 mb-12">
-                                 <h3 class="text-xl font-bold text-red-900 mb-2">Maximize your Dasher Pay?</h3>
-                                 <p class="text-red-700 mb-6">Read our guide on Multi-Apping strategies.</p>
-                                 <a href="/blog/multi-apping-guide" class="inline-block px-6 py-3 bg-red-600 text-white font-semibold rounded-xl hover:bg-red-700 transition shadow-lg shadow-red-600/20">Read Guide</a>
+                                 <h3 class="text-xl font-bold text-red-900 mb-2">Maximize your Dasher Pay</h3>
+                                 <p class="text-red-700 mb-6">Learn professional strategies to protect your profit and double your hourly wage.</p>
+                                 
+                                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
+                                     <a href="/taxes" class="block bg-white p-4 rounded-xl border border-red-100 hover:border-red-300 hover:shadow-md transition">
+                                         <h4 class="font-bold text-slate-900 mb-1">🏦 Tax Guide</h4>
+                                         <p class="text-xs text-slate-500">Master the 1099 self-employment tax and deductions.</p>
+                                     </a>
+                                     <a href="/vehicle-cost" class="block bg-white p-4 rounded-xl border border-red-100 hover:border-red-300 hover:shadow-md transition">
+                                         <h4 class="font-bold text-slate-900 mb-1">🚗 Vehicle Costs</h4>
+                                         <p class="text-xs text-slate-500">Calculate the true cost of depreciation and maintenance.</p>
+                                     </a>
+                                     <a href="/insurance" class="block bg-white p-4 rounded-xl border border-red-100 hover:border-red-300 hover:shadow-md transition">
+                                         <h4 class="font-bold text-slate-900 mb-1">🛡️ Insurance</h4>
+                                         <p class="text-xs text-slate-500">Why your personal policy won't cover delivery crashes.</p>
+                                     </a>
+                                     <a href="/blog/multi-apping-guide" class="block bg-red-600 text-white p-4 rounded-xl hover:bg-red-700 hover:shadow-md transition">
+                                         <h4 class="font-bold mb-1">📱 Multi-Apping</h4>
+                                         <p class="text-xs text-red-100">Our guide to doubling your hourly wage.</p>
+                                     </a>
+                                 </div>
                             </div>
                         </article>
 
                         <script type="application/ld+json">
                         {
                           "@context": "https://schema.org",
-                          "@type": "WebApplication",
-                          "name": "Real DoorDash Pay Calculator",
-                          "url": "https://gigwagetruth.com/doordash",
-                          "applicationCategory": "FinanceApplication",
-                          "operatingSystem": "Any",
-                          "description": "Calculate your true net profit as a DoorDash driver after gas, depreciation, and taxes.",
-                          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+                          "@graph": [
+                            {
+                              "@type": "WebApplication",
+                              "name": "Real DoorDash Pay Calculator",
+                              "url": "${AppConstants.BASE_URL}/doordash",
+                              "applicationCategory": "FinanceApplication",
+                              "operatingSystem": "Any",
+                              "description": "Calculate your true net profit as a DoorDash driver after gas, depreciation, and taxes.",
+                              "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+                            },
+                            {
+                              "@type": "BreadcrumbList",
+                              "itemListElement": [{
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Salary Directory",
+                                "item": "${AppConstants.BASE_URL}/salary/directory"
+                              },{
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "DoorDash Calculator & Pay Truth"
+                              }]
+                            }
+                          ]
                         }
                         </script>
                         <script type="application/ld+json">

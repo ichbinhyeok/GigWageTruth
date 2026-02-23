@@ -1,0 +1,28 @@
+﻿> Task :generateJte UP-TO-DATE
+> Task :compileJava UP-TO-DATE
+> Task :processResources
+> Task :classes
+> Task :compileTestJava
+> Task :precompileJte SKIPPED
+> Task :processTestResources NO-SOURCE
+> Task :testClasses
+.\gradlew : OpenJDK 64-Bit Server VM warning: 
+Sharing is only supported for boot loader clas
+ses because bootstrap classpath has been appen
+ded
+위치 줄:1 문자:1
++ .\gradlew test 2>&1 | Out-String | ForEach-O
+bject { $_ -replace "`r`n ...
++ ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ( 
+   OpenJDK 64-Bit ...s been appended:String)  
+   [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandEr 
+   ror
+ 
+> Task :test
+
+BUILD SUCCESSFUL in 7s
+5 actionable tasks: 3 executed, 2 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.2.1/userguide/configuration_cache_enabling.html
+

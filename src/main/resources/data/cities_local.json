@@ -1,0 +1,98 @@
+{
+    "austin": {
+        "nightlifeDistrict": "6th Street",
+        "shoppingDistrict": "The Domain",
+        "airport": "AUS",
+        "majorHighway": "I-35"
+    },
+    "houston": {
+        "nightlifeDistrict": "Midtown",
+        "shoppingDistrict": "The Galleria",
+        "airport": "IAH",
+        "majorHighway": "I-45"
+    },
+    "san-francisco": {
+        "nightlifeDistrict": "Mission District",
+        "shoppingDistrict": "Union Square",
+        "airport": "SFO",
+        "majorHighway": "US-101"
+    },
+    "new-york": {
+        "nightlifeDistrict": "Lower East Side",
+        "shoppingDistrict": "SoHo",
+        "airport": "JFK",
+        "majorHighway": "FDR Drive"
+    },
+    "los-angeles": {
+        "nightlifeDistrict": "West Hollywood",
+        "shoppingDistrict": "Rodeo Drive",
+        "airport": "LAX",
+        "majorHighway": "the 405"
+    },
+    "dallas": {
+        "nightlifeDistrict": "Deep Ellum",
+        "shoppingDistrict": "NorthPark Center",
+        "airport": "DFW",
+        "majorHighway": "US-75"
+    },
+    "phoenix": {
+        "nightlifeDistrict": "Old Town Scottsdale",
+        "shoppingDistrict": "Scottsdale Fashion Square",
+        "airport": "PHX",
+        "majorHighway": "I-10"
+    },
+    "chicago": {
+        "nightlifeDistrict": "River North",
+        "shoppingDistrict": "Magnificent Mile",
+        "airport": "ORD",
+        "majorHighway": "The Kennedy"
+    },
+    "miami": {
+        "nightlifeDistrict": "South Beach",
+        "shoppingDistrict": "Brickell",
+        "airport": "MIA",
+        "majorHighway": "I-95"
+    },
+    "seattle": {
+        "nightlifeDistrict": "Capitol Hill",
+        "shoppingDistrict": "Pike Place",
+        "airport": "SEA",
+        "majorHighway": "I-5"
+    },
+    "atlanta": {
+        "nightlifeDistrict": "Buckhead",
+        "shoppingDistrict": "Ponce City Market",
+        "airport": "ATL",
+        "majorHighway": "the Downtown Connector"
+    },
+    "boston": {
+        "nightlifeDistrict": "Faneuil Hall",
+        "shoppingDistrict": "Newbury Street",
+        "airport": "BOS",
+        "majorHighway": "I-93"
+    },
+    "denver": {
+        "nightlifeDistrict": "LoDo",
+        "shoppingDistrict": "Cherry Creek",
+        "airport": "DEN",
+        "majorHighway": "I-25"
+    },
+    "las-vegas": {
+        "nightlifeDistrict": "The Strip",
+        "shoppingDistrict": "Fremont Street",
+        "airport": "LAS",
+        "majorHighway": "I-15"
+    },
+    "philadelphia": {
+        "nightlifeDistrict": "Center City",
+        "shoppingDistrict": "Rittenhouse Square",
+        "airport": "PHL",
+        "majorHighway": "I-76"
+    },
+    "san-diego": {
+        "nightlifeDistrict": "Gaslamp Quarter",
+        "shoppingDistrict": "Fashion Valley",
+        "airport": "SAN",
+        "majorHighway": "I-5"
+    }
+}

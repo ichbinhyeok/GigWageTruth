@@ -13,7 +13,7 @@ public class VerdictService {
                 double expenses = miles * 0.725; // 2026 IRS Rate
                 double profit = gross - expenses;
                 double taxes = Math.max(0, profit * 0.153);
-                double netHourly = (profit - taxes) / hours;
+                double netHourly = hours > 0 ? (profit - taxes) / hours : 0.0;
 
                 return getVerdictForWage(netHourly, appName);
         }

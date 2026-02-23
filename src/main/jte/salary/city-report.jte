@@ -1,6 +1,7 @@
 @import com.gigwager.model.SeoMeta
 @import com.gigwager.model.CityData
 @import com.gigwager.model.CityScenario
+@import com.gigwager.util.AppConstants
 @import java.util.List
 
 @param SeoMeta seoMeta
@@ -20,10 +21,26 @@
     noIndex = noIndex,
     seoMeta = seoMeta,
     content = @`
-        <!-- Hero Section -->
+        <!-- Breadcrumb Navigation (Hub & Spoke Silo) -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [{
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Salary Directory",
+            "item": "${AppConstants.BASE_URL}/salary/directory"
+          },{
+            "@type": "ListItem",
+            "position": 2,
+            "name": "${city.getCityName()} ${appName} Earnings"
+          }]
+        }
+        </script>
         <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 pt-20 pb-24 px-6">
             <div class="max-w-4xl mx-auto">
-                <!-- Breadcrumb Navigation (Hub & Spoke Silo) -->
+                <!-- Visual Breadcrumb Navigation -->
                 <nav class="text-sm text-slate-400 mb-4 flex items-center gap-2">
                     <a href="/" class="hover:text-emerald-400 transition">Home</a>
                     <span class="text-slate-600">›</span>
@@ -199,10 +216,16 @@
                     </table>
                     </div>
                 </div>
-                <p class="text-xs text-slate-500 mt-4">
-                    <strong>Note:</strong> These are estimated scenarios based on typical ${city.getCityName()} conditions. 
-                    Actual results vary by vehicle efficiency, cherry-picking skill, and surge timing.
-                </p>
+                <div class="mt-6 bg-slate-50 border border-slate-200 rounded-xl p-4">
+                    <h4 class="text-sm font-bold text-slate-900 mb-2">Calculation Assumptions</h4>
+                    <p class="text-xs text-slate-600 mb-2">
+                        These are <strong>estimated scenarios</strong> based on typical ${city.getCityName()} conditions. 
+                        Actual results vary by vehicle efficiency, cherry-picking skill, and surge timing.
+                    </p>
+                    <p class="text-xs text-slate-600">
+                        Net Profit is estimated by deducting the <strong>2026 IRS Standard Mileage Rate ($0.725/mi)</strong> and an estimated <strong>15.3% Self-Employment Tax</strong> from the gross payout. These are national average estimates to help you understand your <em>True Cost of Ownership</em>. This is not financial advice.
+                    </p>
+                </div>
             </section>
 
             <!-- New Content: Best Times and Areas -->
@@ -297,9 +320,29 @@
             }
             </script>
 
-            <!-- AD SLOT 3: Bottom (Before CTA) -->
-            <div class="w-full bg-white rounded-xl border border-slate-200 text-center min-h-[150px] flex flex-col items-center justify-center overflow-hidden mb-8">
-                <span class="text-[10px] text-slate-300 font-mono tracking-widest uppercase mb-2">Sponsored Content</span>
+            <!-- AD SLOT 3: Revenue-Intent Clusters (Replaced Ad Slot) -->
+            <div class="bg-indigo-50 rounded-2xl p-8 border border-indigo-100 mb-8">
+                 <h3 class="text-xl font-bold text-indigo-900 mb-2">Maximize your ${appName} Pay</h3>
+                 <p class="text-indigo-700 mb-6">Learn professional strategies to protect your profit and double your hourly wage.</p>
+                 
+                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
+                     <a href="/taxes" class="block bg-white p-4 rounded-xl border border-indigo-100 hover:border-indigo-300 hover:shadow-md transition">
+                         <h4 class="font-bold text-slate-900 mb-1">🏦 Tax Guide</h4>
+                         <p class="text-xs text-slate-500">Master the 1099 self-employment tax and deductions.</p>
+                     </a>
+                     <a href="/vehicle-cost" class="block bg-white p-4 rounded-xl border border-indigo-100 hover:border-indigo-300 hover:shadow-md transition">
+                         <h4 class="font-bold text-slate-900 mb-1">🚗 Vehicle Costs</h4>
+                         <p class="text-xs text-slate-500">Calculate the true cost of depreciation and maintenance.</p>
+                     </a>
+                     <a href="/insurance" class="block bg-white p-4 rounded-xl border border-indigo-100 hover:border-indigo-300 hover:shadow-md transition">
+                         <h4 class="font-bold text-slate-900 mb-1">🛡️ Insurance</h4>
+                         <p class="text-xs text-slate-500">Why your personal policy won't cover ${appName} crashes.</p>
+                     </a>
+                     <a href="/blog/multi-apping-guide" class="block bg-indigo-600 text-white p-4 rounded-xl hover:bg-indigo-700 hover:shadow-md transition">
+                         <h4 class="font-bold mb-1">📱 Multi-Apping</h4>
+                         <p class="text-xs text-indigo-100">Our guide to doubling your hourly wage.</p>
+                     </a>
+                 </div>
             </div>
 
             <!-- Work-Level Deep-Dive Links (Internal Silo) -->

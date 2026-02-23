@@ -1,12 +1,21 @@
 package com.gigwager.controller;
 
 import com.gigwager.util.AppConstants;
+import com.gigwager.model.CityData;
+import com.gigwager.model.WorkLevel;
+import com.gigwager.service.PageIndexPolicyService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class SitemapController {
+
+    private final PageIndexPolicyService pageIndexPolicyService;
+
+    public SitemapController(PageIndexPolicyService pageIndexPolicyService) {
+        this.pageIndexPolicyService = pageIndexPolicyService;
+    }
 
     @GetMapping(value = "/sitemap.xml", produces = MediaType.APPLICATION_XML_VALUE)
     public String sitemap() {
@@ -25,10 +34,23 @@ public class SitemapController {
         // Salary directory (Hub page - highest priority)
         addUrl(xml, AppConstants.BASE_URL + "/salary/directory", today, "weekly", "0.9");
 
-        // Temporary: Programmatic SEO pages (City & Work-Level) are excluded
-        // from the sitemap here. They will be added back in PR5 ONLY IF they
-        // pass the new PageIndexPolicyService (Quality Gate) to prevent mass
-        // thin-content penalties.
+        // Quality Gate: Programmatic SEO pages (City & Work-Level)
+        // Add only those that pass the PageIndexPolicyService
+        for (String app : new String[] { "uber", "doordash" }) {
+            for (CityData city : CityData.values()) {
+                if (pageIndexPolicyService.isCityReportIndexable(city)) {
+                    addUrl(xml, AppConstants.BASE_URL + "/salary/" + app + "/" + city.getSlug(), today, "weekly",
+                            "0.8");
+
+                    for (WorkLevel workLevel : WorkLevel.values()) {
+                        if (pageIndexPolicyService.isWorkLevelReportIndexable(city, workLevel)) {
+                            addUrl(xml, AppConstants.BASE_URL + "/salary/" + app + "/" + city.getSlug() + "/"
+                                    + workLevel.getSlug(), today, "monthly", "0.7");
+                        }
+                    }
+                }
+            }
+        }
 
         // Blog
         addUrl(xml, AppConstants.BASE_URL + "/blog", today, "monthly", "0.8");

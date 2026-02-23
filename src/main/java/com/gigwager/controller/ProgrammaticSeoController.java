@@ -4,7 +4,10 @@ import com.gigwager.model.CityData;
 import com.gigwager.model.CityScenario;
 import com.gigwager.model.SeoMeta;
 import com.gigwager.model.WorkLevel;
+import com.gigwager.model.CityLocalData;
 import com.gigwager.util.AppConstants;
+import com.gigwager.service.DataLayerService;
+import com.gigwager.service.PageIndexPolicyService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,12 +15,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
 public class ProgrammaticSeoController {
+
+        private final DataLayerService dataLayerService;
+        private final PageIndexPolicyService pageIndexPolicyService;
+
+        public ProgrammaticSeoController(DataLayerService dataLayerService,
+                        PageIndexPolicyService pageIndexPolicyService) {
+                this.dataLayerService = dataLayerService;
+                this.pageIndexPolicyService = pageIndexPolicyService;
+        }
 
         @GetMapping("/salary/{app}/{citySlug}")
         public String citySalaryPage(@PathVariable("app") String app,
@@ -63,19 +75,19 @@ public class ProgrammaticSeoController {
 
                 if (city.isHighTraffic()) {
                         description = String.format(
-                                        "Don't drive blind in %s. Traffic congestion thrives here. Calculate your TRUE liquid hourly wage after gas (%s/gal) and depreciation. See if you're actually making money.",
+                                        "Don't drive blind in %s. Traffic congestion thrives here. Estimate your TRUE liquid hourly wage after gas (%s/gal) and depreciation. See if you're actually making a profit.",
                                         city.getCityName(), gasPrice);
                 } else if (city.isCheapGas()) {
                         description = String.format(
-                                        "Gas is cheap in %s (%s/gal), but are you actually profiting? Don't be fooled by gross numbers. Use our %s Net Pay Calculator to reveal your real take-home pay.",
+                                        "Gas is cheap in %s (%s/gal), but are you actually profiting? Don't be fooled by gross numbers. Use our %s Net Pay Calculator to estimate your real take-home pay.",
                                         city.getCityName(), gasPrice, appName);
                 } else if (city.isHighCost()) {
                         description = String.format(
-                                        "Is %s worth it in %s's high-cost market? Don't drive blind. We calculated the exact breakdown of Expenses vs. Profit for %s drivers. See the truth.",
+                                        "Is %s worth it in %s's high-cost market? Don't drive blind. We estimate the exact breakdown of Expenses vs. Profit for %s drivers. See the truth.",
                                         appName, city.getCityName(), appName);
                 } else {
                         description = String.format(
-                                        "Stop guessing. Calculate your true hourly wage as a %s driver in %s. We deduct gas (%s/gal), taxes, and wear & tear to show your REAL profit.",
+                                        "Stop guessing. Estimate your true hourly wage as a %s driver in %s. We deduct estimated gas (%s/gal), taxes, and wear & tear to show your REAL profit.",
                                         appName, city.getCityName(), gasPrice);
                 }
 
@@ -96,6 +108,10 @@ public class ProgrammaticSeoController {
                 model.addAttribute("otherAppName", otherAppName);
                 model.addAttribute("otherAppUrl", otherAppUrl);
 
+                if (!pageIndexPolicyService.isCityReportIndexable(city)) {
+                        model.addAttribute("noIndex", true);
+                }
+
                 // Pass raw description to template if needed, or rely on SeoMeta
                 model.addAttribute("seoMeta", new SeoMeta(title, description, canonicalUrl,
                                 AppConstants.BASE_URL + "/og-image.jpg"));
@@ -104,10 +120,14 @@ public class ProgrammaticSeoController {
                 List<CityData> similarCities = Arrays.stream(CityData.values())
                                 .filter(c -> c.getMarketTier() == city.getMarketTier()) // Same Economy Tier
                                 .filter(c -> !c.equals(city)) // Exclude current city
-                                .collect(Collectors.collectingAndThen(Collectors.toList(), collected -> {
-                                        Collections.shuffle(collected); // Randomize for variety
-                                        return collected.stream().limit(3).collect(Collectors.toList());
-                                }));
+                                .sorted((c1, c2) -> {
+                                        // Deterministic sorting based on hash of slugs to stabilize internal linking
+                                        String hash1 = c1.getSlug() + city.getSlug();
+                                        String hash2 = c2.getSlug() + city.getSlug();
+                                        return Integer.compare(hash1.hashCode(), hash2.hashCode());
+                                })
+                                .limit(3)
+                                .collect(Collectors.toList());
                 model.addAttribute("similarCities", similarCities);
 
                 return "salary/city-report";
@@ -178,11 +198,14 @@ public class ProgrammaticSeoController {
                 // Freshness signal
                 String lastUpdated = monthYear;
 
+                // Fetch CityLocalData to replace placeholder tokens
+                CityLocalData localData = dataLayerService.getLocalData(city.getSlug());
+
                 // Generate unique content sections
-                String workLevelMeaning = workLevel.getWorkLevelMeaning(appName, city.getCityName());
-                String taxStrategy = workLevel.getTaxStrategy(appName, city.getCityName());
-                String dayInTheLife = workLevel.getDayInTheLife(appName, city.getCityName(), city);
-                String bestPractices = workLevel.getBestPractices(appName, city.getCityName(), city);
+                String workLevelMeaning = workLevel.getWorkLevelMeaning(appName, city.getCityName(), localData);
+                String taxStrategy = workLevel.getTaxStrategy(appName, city.getCityName(), localData);
+                String dayInTheLife = workLevel.getDayInTheLife(appName, city.getCityName(), city, localData);
+                String bestPractices = workLevel.getBestPractices(appName, city.getCityName(), city, localData);
 
                 model.addAttribute("app", app);
                 model.addAttribute("appName", appName);
@@ -194,6 +217,10 @@ public class ProgrammaticSeoController {
                 model.addAttribute("otherAppName", otherAppName);
                 model.addAttribute("otherAppUrl", otherAppUrl);
                 model.addAttribute("parentPageUrl", parentPageUrl);
+
+                if (!pageIndexPolicyService.isWorkLevelReportIndexable(city, workLevel)) {
+                        model.addAttribute("noIndex", true);
+                }
 
                 // Unique content sections
                 model.addAttribute("workLevelMeaning", workLevelMeaning);
@@ -221,10 +248,14 @@ public class ProgrammaticSeoController {
                 List<CityData> similarCities = Arrays.stream(CityData.values())
                                 .filter(c -> c.getMarketTier() == city.getMarketTier()) // Same Economy Tier
                                 .filter(c -> !c.equals(city)) // Exclude current city
-                                .collect(Collectors.collectingAndThen(Collectors.toList(), collected -> {
-                                        Collections.shuffle(collected); // Randomize for variety
-                                        return collected.stream().limit(3).collect(Collectors.toList());
-                                }));
+                                .sorted((c1, c2) -> {
+                                        // Deterministic sorting based on hash of slugs to stabilize internal linking
+                                        String hash1 = c1.getSlug() + city.getSlug();
+                                        String hash2 = c2.getSlug() + city.getSlug();
+                                        return Integer.compare(hash1.hashCode(), hash2.hashCode());
+                                })
+                                .limit(3)
+                                .collect(Collectors.toList());
                 model.addAttribute("similarCities", similarCities);
 
                 return "salary/city-work-level";

@@ -13,6 +13,28 @@ public class PageController {
         return "methodology";
     }
 
+    // --- Phase 7: Core Revenue-Intent Clusters ---
+
+    @GetMapping("/taxes")
+    public String taxes(Model model) {
+        model.addAttribute("customTitle", "Gig Worker Tax Guide 2026: Don't Overpay the IRS");
+        return "clusters/taxes";
+    }
+
+    @GetMapping("/insurance")
+    public String insurance(Model model) {
+        model.addAttribute("customTitle", "Rideshare & Delivery Insurance Guide 2026");
+        return "clusters/insurance";
+    }
+
+    @GetMapping("/vehicle-cost")
+    public String vehicleCost(Model model) {
+        model.addAttribute("customTitle", "True Cost of Driving: Depreciation, Gas, & Maintenance");
+        return "clusters/vehicle-cost";
+    }
+
+    // --- End Phase 7 ---
+
     @GetMapping("/blog")
     public String blog(Model model) {
         model.addAttribute("customTitle", "Gig Driver Blog - Strategies & Truths");
