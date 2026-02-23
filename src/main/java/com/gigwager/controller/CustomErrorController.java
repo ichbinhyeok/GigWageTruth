@@ -11,17 +11,18 @@ import jakarta.servlet.http.HttpServletRequest;
 public class CustomErrorController implements ErrorController {
 
     @RequestMapping("/error")
-    public String handleError(HttpServletRequest request) {
+    public String handleError(HttpServletRequest request, org.springframework.ui.Model model) {
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 
         if (status != null) {
             Integer statusCode = Integer.valueOf(status.toString());
 
             if (statusCode == 404) {
-                // Redirect 404s to the Salary Directory instead of a dead end
-                // "Traffic Leakage Prevention"
-                return "redirect:/salary/directory";
+                // Return custom 404 JTE template, force noindex
+                model.addAttribute("noIndex", true);
+                return "error/404";
             } else if (statusCode == 500) {
+                model.addAttribute("noIndex", true);
                 return "error"; // You might want a generic error page, or just redirect home
             }
         }

@@ -24,7 +24,9 @@
 @param String schemaDescription
 @param java.util.List<com.gigwager.model.CityData> similarCities
 
+@param Boolean noIndex = false
 @template.layout.main(
+    noIndex = noIndex,
     seoMeta = seoMeta,
     content = @`
         <!-- JobPosting Schema -->

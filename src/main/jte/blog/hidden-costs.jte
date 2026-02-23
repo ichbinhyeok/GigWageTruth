@@ -3,7 +3,9 @@
 
 @param String customTitle
 
+@param Boolean noIndex = false
 @template.layout.main(
+    noIndex = noIndex,
     seoMeta = new SeoMeta(
         customTitle != null ? customTitle : "The Hidden Cost of Depreciation: Why Your $100 Day is Actually $60",
         "Depreciation is the silent killer of gig worker profits. Learn the math of why every mile you drive is a slice of your car's value disappearing.",

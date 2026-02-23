@@ -6,7 +6,9 @@
 @param Double initialHours
 @param String customTitle
 
+@param Boolean noIndex = false
 @template.layout.main(
+    noIndex = noIndex,
     seoMeta = new SeoMeta(
         customTitle != null ? customTitle : "My Real Hourly Wage - The Shocking Truth",
         "Calculate Uber/Lyft rideshare profit after mileage deduction, depreciation, and taxes. Discover your true hourly wage.",

@@ -1,5 +1,7 @@
 @import com.gigwager.util.AppConstants
+@param Boolean noIndex = false
 @template.layout.main(
+    noIndex = noIndex,
     seoMeta = new com.gigwager.model.SeoMeta(
         "GigWageTruth - The Only Real Net Profit Calculator for Gig Workers",
         "Stop driving blind. Calculate your true hourly wage for Uber, Lyft, and DoorDash after hidden costs.",

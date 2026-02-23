@@ -1,12 +1,14 @@
 @import com.gigwager.model.SeoMeta
 @import com.gigwager.model.CityData
 
+@param Boolean noIndex = false
 @template.layout.main(
+    noIndex = noIndex,
     seoMeta = new SeoMeta(
         "Gig Driver Salary by City - Complete US Directory",
         "Compare real Uber and DoorDash earnings across major US cities. See how gas prices, traffic, and costs affect your hourly wage.",
-        "https://www.gigwagetruth.com/salary/directory",
-        "https://www.gigwagetruth.com/og-image.jpg"
+        "https://gigverdict.com/salary/directory",
+        "https://gigverdict.com/og-image.jpg"
     ),
     content = @`
         <div class="bg-slate-50 min-h-screen pb-24">

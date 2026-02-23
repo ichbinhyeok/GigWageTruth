@@ -1,12 +1,14 @@
 @import com.gigwager.model.SeoMeta
 @param String customTitle
 
+@param Boolean noIndex = false
 @template.layout.main(
+    noIndex = noIndex,
     seoMeta = new SeoMeta(
         customTitle,
         "How we calculate your real gig wages. Methodology and formula explanation.",
-        "https://gigwagetruth.com/methodology",
-        "https://gigwagetruth.com/og-image.jpg"
+        "https://gigverdict.com/methodology",
+        "https://gigverdict.com/og-image.jpg"
     ),
     content = @`
         <div class="max-w-4xl mx-auto px-6 py-12">

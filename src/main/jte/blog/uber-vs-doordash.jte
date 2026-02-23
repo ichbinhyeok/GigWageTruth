@@ -3,7 +3,9 @@
 
 @param String customTitle
 
+@param Boolean noIndex = false
 @template.layout.main(
+    noIndex = noIndex,
     seoMeta = new SeoMeta(
         customTitle != null ? customTitle : "Uber vs DoorDash 2026: Which App Actually Pays More?",
         "Don't just look at the gross pay. We compare stress, vehicle wear, and hidden expenses to see which app is better for your personality.",

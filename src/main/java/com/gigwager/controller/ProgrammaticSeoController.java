@@ -30,11 +30,10 @@ public class ProgrammaticSeoController {
                 }
 
                 // Resolve city from slug
-                // FIX: Redirect to directory if city not found (Traffic Retention)
-                CityData city = CityData.fromSlug(citySlug).orElse(null);
-                if (city == null) {
-                        return "redirect:/salary/directory";
-                }
+                // FIX: Enforce Hard 404s for invalid cities
+                CityData city = CityData.fromSlug(citySlug)
+                                .orElseThrow(() -> new com.gigwager.exception.ResourceNotFoundException(
+                                                "City not found"));
 
                 // Generate 3 scenarios based on MarketTier
                 List<CityScenario> scenarios = generateScenarios(city, app);
@@ -130,18 +129,17 @@ public class ProgrammaticSeoController {
                 }
 
                 // Resolve city from slug
-                // FIX: Redirect to directory if city not found
-                CityData city = CityData.fromSlug(citySlug).orElse(null);
-                if (city == null) {
-                        return "redirect:/salary/directory";
-                }
+                // FIX: Enforce Hard 404s for invalid cities
+                CityData city = CityData.fromSlug(citySlug)
+                                .orElseThrow(() -> new com.gigwager.exception.ResourceNotFoundException(
+                                                "City not found"));
 
                 // Resolve work level from slug
                 WorkLevel workLevel;
                 try {
                         workLevel = WorkLevel.fromSlug(workLevelSlug);
                 } catch (IllegalArgumentException e) {
-                        return "redirect:/salary/" + app + "/" + citySlug;
+                        throw new com.gigwager.exception.ResourceNotFoundException("Work level not found");
                 }
 
                 // Generate scenario for this specific work level

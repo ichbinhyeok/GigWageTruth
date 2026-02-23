@@ -2,12 +2,14 @@
 
 @param String customTitle
 
+@param Boolean noIndex = false
 @template.layout.main(
+    noIndex = noIndex,
     seoMeta = new SeoMeta(
         customTitle != null ? customTitle : "Gig Driver Blog - The Truth About App Pay",
         "Honest guides, data-backed analysis, and strategies to increase your hourly wage on Uber, DoorDash, and Lyft.",
-        "https://gigwagetruth.com/blog",
-        "https://gigwagetruth.com/og-image.jpg"
+        "https://gigverdict.com/blog",
+        "https://gigverdict.com/og-image.jpg"
     ),
     content = @`
         <div class="bg-slate-50 min-h-screen pb-24">

@@ -6,7 +6,9 @@
 @param Double initialHours
 @param String customTitle
 
+@param Boolean noIndex = false
 @template.layout.main(
+    noIndex = noIndex,
     seoMeta = new SeoMeta(
         customTitle != null ? customTitle : "DoorDash Truth - My Real Hourly Wage",
         "Calculate DoorDash delivery profit after gas, stop-and-go vehicle wear, and taxes. See your real food delivery earnings.",

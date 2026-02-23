@@ -3,7 +3,9 @@
 
 @param String customTitle
 
+@param Boolean noIndex = false
 @template.layout.main(
+    noIndex = noIndex,
     seoMeta = new SeoMeta(
         customTitle != null ? customTitle : "Multi-Apping Masterclass 2026: Double Your Income Without Driving Faster",
         "The secret to a $30/hr gig career isn't working harder. It's working smarter. Learn the Clean Stacking strategy to maximize every mile.",

@@ -5,6 +5,7 @@
 @param Content content
 @param SeoMeta seoMeta
 @param gg.jte.Content headContent = null
+@param Boolean noIndex = false
 
 
 <!DOCTYPE html>
@@ -28,6 +29,9 @@
     <link rel="icon" type="image/png" href="/favicon.png">
     
     <title>${seoMeta.title()}</title>
+    @if(noIndex != null && noIndex)
+    <meta name="robots" content="noindex,follow">
+    @endif
     <meta name="description" content="${seoMeta.description()}">
     <link rel="canonical" href="${seoMeta.canonicalUrl()}">
     

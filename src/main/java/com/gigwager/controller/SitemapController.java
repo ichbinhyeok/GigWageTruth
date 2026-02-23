@@ -1,7 +1,5 @@
 package com.gigwager.controller;
 
-import com.gigwager.model.CityData;
-import com.gigwager.model.WorkLevel;
 import com.gigwager.util.AppConstants;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,30 +25,13 @@ public class SitemapController {
         // Salary directory (Hub page - highest priority)
         addUrl(xml, AppConstants.BASE_URL + "/salary/directory", today, "weekly", "0.9");
 
-        // Programmatic SEO: Main City pages (2 apps × 50 cities = 100 pages)
-        for (CityData city : CityData.values()) {
-            String uberUrl = AppConstants.BASE_URL + "/salary/uber/" + city.getSlug();
-            String doordashUrl = AppConstants.BASE_URL + "/salary/doordash/" + city.getSlug();
-
-            addUrl(xml, uberUrl, today, "monthly", "0.8");
-            addUrl(xml, doordashUrl, today, "monthly", "0.8");
-        }
-
-        // Programmatic SEO: Work-Level Deep-Dives (2 apps × 50 cities × 3 levels = 300
-        // pages)
-        for (CityData city : CityData.values()) {
-            for (WorkLevel level : WorkLevel.values()) {
-                String uberWorkUrl = AppConstants.BASE_URL + "/salary/uber/" + city.getSlug() + "/" + level.getSlug();
-                String doordashWorkUrl = AppConstants.BASE_URL + "/salary/doordash/" + city.getSlug() + "/"
-                        + level.getSlug();
-
-                addUrl(xml, uberWorkUrl, today, "monthly", "0.6");
-                addUrl(xml, doordashWorkUrl, today, "monthly", "0.6");
-            }
-        }
+        // Temporary: Programmatic SEO pages (City & Work-Level) are excluded
+        // from the sitemap here. They will be added back in PR5 ONLY IF they
+        // pass the new PageIndexPolicyService (Quality Gate) to prevent mass
+        // thin-content penalties.
 
         // Blog
-        addUrl(xml, AppConstants.BASE_URL + "/blog", today, "daily", "0.8");
+        addUrl(xml, AppConstants.BASE_URL + "/blog", today, "monthly", "0.8");
         addUrl(xml, AppConstants.BASE_URL + "/blog/multi-apping-guide", today, "monthly", "0.7");
         addUrl(xml, AppConstants.BASE_URL + "/blog/tax-guide", today, "monthly", "0.7");
         addUrl(xml, AppConstants.BASE_URL + "/blog/uber-vs-doordash", today, "monthly", "0.7");

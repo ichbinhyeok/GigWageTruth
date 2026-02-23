@@ -10,14 +10,16 @@
 @param String customTitle
 @param Verdict verdict
 
+@param Boolean noIndex = false
 @template.layout.main(
+    noIndex = noIndex,
     seoMeta = new SeoMeta(
         customTitle != null ? customTitle : (app.equals("uber") ? "My Real Hourly Wage - The Shocking Truth" : "DoorDash Truth - My Real Hourly Wage"),
         app.equals("uber") ? 
             "See exactly how much I make after gas, taxes, and depreciation. The number will surprise you." : 
             "See exactly how much you make on DoorDash after gas, vehicle destruction, and taxes. The truth is shocking.",
-        "https://gigwagetruth.com/" + app,
-        "https://gigwagetruth.com/og-image.jpg"
+        "https://gigverdict.com/" + app,
+        "https://gigverdict.com/og-image.jpg"
     ),
     content = @`
         <script src="/js/calculator-core.js?v=${AppConstants.CACHE_VERSION}"></script>
