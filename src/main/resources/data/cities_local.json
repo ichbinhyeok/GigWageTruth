@@ -96,207 +96,207 @@
         "majorHighway": "I-5"
     },
     "san-jose": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "Santana Row",
+        "shoppingDistrict": "Westfield Valley Fair",
+        "airport": "SJC",
+        "majorHighway": "US-101"
     },
     "san-antonio": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "River Walk",
+        "shoppingDistrict": "The Shops at La Cantera",
+        "airport": "SAT",
+        "majorHighway": "I-35"
     },
     "jacksonville": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "Jacksonville Beach",
+        "shoppingDistrict": "St. Johns Town Center",
+        "airport": "JAX",
+        "majorHighway": "I-95"
     },
     "fort-worth": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "Sundance Square",
+        "shoppingDistrict": "University Park Village",
+        "airport": "DFW",
+        "majorHighway": "I-35W"
     },
     "columbus": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "Short North",
+        "shoppingDistrict": "Easton Town Center",
+        "airport": "CMH",
+        "majorHighway": "I-70"
     },
     "indianapolis": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "Broad Ripple",
+        "shoppingDistrict": "Keystone at the Crossing",
+        "airport": "IND",
+        "majorHighway": "I-465"
     },
     "charlotte": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "South End",
+        "shoppingDistrict": "SouthPark",
+        "airport": "CLT",
+        "majorHighway": "I-85"
     },
     "washington-dc": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "Adams Morgan",
+        "shoppingDistrict": "Georgetown",
+        "airport": "DCA",
+        "majorHighway": "Capital Beltway"
     },
     "nashville": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "Broadway",
+        "shoppingDistrict": "Green Hills",
+        "airport": "BNA",
+        "majorHighway": "I-40"
     },
     "portland": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "Pearl District",
+        "shoppingDistrict": "Pioneer Place",
+        "airport": "PDX",
+        "majorHighway": "I-5"
     },
     "detroit": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "Greektown",
+        "shoppingDistrict": "Somerset Collection",
+        "airport": "DTW",
+        "majorHighway": "I-75"
     },
     "memphis": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "Beale Street",
+        "shoppingDistrict": "Wolfchase Galleria",
+        "airport": "MEM",
+        "majorHighway": "I-40"
     },
     "louisville": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "Bardstown Road",
+        "shoppingDistrict": "Mall St. Matthews",
+        "airport": "SDF",
+        "majorHighway": "I-64"
     },
     "baltimore": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "Fells Point",
+        "shoppingDistrict": "Inner Harbor",
+        "airport": "BWI",
+        "majorHighway": "I-95"
     },
     "milwaukee": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "Brady Street",
+        "shoppingDistrict": "Mayfair Mall",
+        "airport": "MKE",
+        "majorHighway": "I-94"
     },
     "albuquerque": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "Nob Hill",
+        "shoppingDistrict": "ABQ Uptown",
+        "airport": "ABQ",
+        "majorHighway": "I-40"
     },
     "tucson": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "4th Avenue",
+        "shoppingDistrict": "La Encantada",
+        "airport": "TUS",
+        "majorHighway": "I-10"
     },
     "fresno": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "Tower District",
+        "shoppingDistrict": "River Park",
+        "airport": "FAT",
+        "majorHighway": "Highway 99"
     },
     "sacramento": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "Midtown",
+        "shoppingDistrict": "DOCO",
+        "airport": "SMF",
+        "majorHighway": "I-5"
     },
     "kansas-city": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "Power & Light District",
+        "shoppingDistrict": "Country Club Plaza",
+        "airport": "MCI",
+        "majorHighway": "I-70"
     },
     "marietta": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "Marietta Square",
+        "shoppingDistrict": "The Avenue West Cobb",
+        "airport": "ATL",
+        "majorHighway": "I-75"
     },
     "omaha": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "Old Market",
+        "shoppingDistrict": "Village Pointe",
+        "airport": "OMA",
+        "majorHighway": "I-80"
     },
     "raleigh": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "Glenwood South",
+        "shoppingDistrict": "Crabtree Valley Mall",
+        "airport": "RDU",
+        "majorHighway": "I-40"
     },
     "virginia-beach": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "Oceanfront",
+        "shoppingDistrict": "Town Center",
+        "airport": "ORF",
+        "majorHighway": "I-264"
     },
     "minneapolis": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "North Loop",
+        "shoppingDistrict": "Mall of America",
+        "airport": "MSP",
+        "majorHighway": "I-35W"
     },
     "tulsa": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "Blue Dome District",
+        "shoppingDistrict": "Woodland Hills Mall",
+        "airport": "TUL",
+        "majorHighway": "US-169"
     },
     "arlington": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "Texas Live!",
+        "shoppingDistrict": "Arlington Highlands",
+        "airport": "DFW",
+        "majorHighway": "I-30"
     },
     "new-orleans": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "French Quarter",
+        "shoppingDistrict": "Canal Place",
+        "airport": "MSY",
+        "majorHighway": "I-10"
     },
     "wichita": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "Old Town",
+        "shoppingDistrict": "Bradley Fair",
+        "airport": "ICT",
+        "majorHighway": "US-400"
     },
     "cleveland": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "The Flats",
+        "shoppingDistrict": "Crocker Park",
+        "airport": "CLE",
+        "majorHighway": "I-90"
     },
     "bakersfield": {
         "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "shoppingDistrict": "Valley Plaza Mall",
+        "airport": "BFL",
+        "majorHighway": "Highway 99"
     },
     "honolulu": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "Waikiki",
+        "shoppingDistrict": "Ala Moana Center",
+        "airport": "HNL",
+        "majorHighway": "H-1"
     },
     "orlando": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "Downtown Orlando",
+        "shoppingDistrict": "The Florida Mall",
+        "airport": "MCO",
+        "majorHighway": "I-4"
     },
     "tampa": {
-        "nightlifeDistrict": "Downtown",
-        "shoppingDistrict": "Main Street",
-        "airport": "Regional Airport",
-        "majorHighway": "Local Highway"
+        "nightlifeDistrict": "Ybor City",
+        "shoppingDistrict": "International Plaza",
+        "airport": "TPA",
+        "majorHighway": "I-275"
     }
 }

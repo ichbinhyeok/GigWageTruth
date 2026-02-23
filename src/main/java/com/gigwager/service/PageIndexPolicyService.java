@@ -18,9 +18,13 @@ public class PageIndexPolicyService {
      * Quality Gate for City Base Reports (/salary/app/city)
      */
     public boolean isCityReportIndexable(CityData city) {
-        // Rule: Index only HIGH tier cities or those with rich data (> 500k population
-        // heuristic)
-        return city.getMarketTier() == MarketTier.HIGH || dataLayerService.hasLocalData(city.getSlug());
+        // Enforce strict quality gates for indexing:
+        // Do not index low tier cities, and demand rich programmatic data to avoid thin
+        // content
+        if (city.getMarketTier() == MarketTier.LOW) {
+            return false;
+        }
+        return dataLayerService.hasRichLocalData(city.getSlug());
     }
 
     /**

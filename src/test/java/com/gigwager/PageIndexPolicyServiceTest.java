@@ -28,6 +28,7 @@ public class PageIndexPolicyServiceTest {
     public void testHighTierCityIsIndexable() {
         // San Francisco is HIGH tier
         CityData sf = CityData.SAN_FRANCISCO;
+        when(dataLayerService.hasRichLocalData(anyString())).thenReturn(true);
         assertTrue(pageIndexPolicyService.isCityReportIndexable(sf));
     }
 
@@ -35,7 +36,7 @@ public class PageIndexPolicyServiceTest {
     public void testMedTierCityWithDataBlockIsIndexable() {
         // Austin is MED tier
         CityData austin = CityData.AUSTIN;
-        when(dataLayerService.hasLocalData("austin")).thenReturn(true);
+        when(dataLayerService.hasRichLocalData("austin")).thenReturn(true);
         assertTrue(pageIndexPolicyService.isCityReportIndexable(austin));
     }
 
@@ -43,7 +44,7 @@ public class PageIndexPolicyServiceTest {
     public void testMedTierCityWithoutDataBlockIsNotIndexable() {
         // A generic MED tier city with no specific local data layer
         CityData fresno = CityData.FRESNO;
-        when(dataLayerService.hasLocalData(anyString())).thenReturn(false);
+        when(dataLayerService.hasRichLocalData(anyString())).thenReturn(false);
         assertFalse(pageIndexPolicyService.isCityReportIndexable(fresno));
     }
 
@@ -51,6 +52,7 @@ public class PageIndexPolicyServiceTest {
     public void testWorkLevelIndexability() {
         // We only index SIDE_HUSTLE work levels for indexable cities
         CityData sf = CityData.SAN_FRANCISCO;
+        when(dataLayerService.hasRichLocalData("san-francisco")).thenReturn(true);
 
         assertTrue(pageIndexPolicyService.isWorkLevelReportIndexable(sf, WorkLevel.SIDE_HUSTLE));
         assertFalse(pageIndexPolicyService.isWorkLevelReportIndexable(sf, WorkLevel.PART_TIME));
@@ -58,7 +60,7 @@ public class PageIndexPolicyServiceTest {
 
         // Unindexable city shouldn't index its side hustle page either
         CityData fresno = CityData.FRESNO;
-        when(dataLayerService.hasLocalData(anyString())).thenReturn(false);
+        when(dataLayerService.hasRichLocalData(anyString())).thenReturn(false);
         assertFalse(pageIndexPolicyService.isWorkLevelReportIndexable(fresno, WorkLevel.SIDE_HUSTLE));
     }
 }

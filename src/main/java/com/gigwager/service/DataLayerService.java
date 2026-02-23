@@ -36,4 +36,17 @@ public class DataLayerService {
     public boolean hasLocalData(String citySlug) {
         return cityDataMap.containsKey(citySlug);
     }
+
+    public boolean hasRichLocalData(String citySlug) {
+        if (!cityDataMap.containsKey(citySlug)) {
+            return false;
+        }
+        CityLocalData data = cityDataMap.get(citySlug);
+        // Script generated defaults: "Downtown", "Main Street", "Regional Airport",
+        // "Local Highway"
+        if ("Downtown".equals(data.nightlifeDistrict()) && "Main Street".equals(data.shoppingDistrict())) {
+            return false; // It has data, but it's just the default low-quality script output
+        }
+        return true;
+    }
 }
