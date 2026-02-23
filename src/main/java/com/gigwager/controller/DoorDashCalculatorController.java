@@ -35,8 +35,19 @@ public class DoorDashCalculatorController {
         model.addAttribute("app", "doordash");
 
         // Calculate Verdict
-        var verdict = verdictService.calculateVerdict(gross, miles, hours, "DoorDash");
+        double grossVal = gross;
+        double milesVal = miles;
+        double hoursVal = hours;
+
+        var verdict = verdictService.calculateVerdict(grossVal, milesVal, hoursVal, "DoorDash");
+
+        double expenses = milesVal * 0.725;
+        double profit = grossVal - expenses;
+        double taxes = Math.max(0, profit * 0.153);
+
         model.addAttribute("verdict", verdict);
+        model.addAttribute("estimatedTaxes", taxes);
+        model.addAttribute("estimatedVehicleCost", expenses);
 
         // Dynamic SEO Title
         // Simple calculation for title context (approximate)

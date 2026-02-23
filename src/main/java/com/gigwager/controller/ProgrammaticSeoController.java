@@ -38,7 +38,7 @@ public class ProgrammaticSeoController {
 
                 // Validate app
                 if (!app.equals("uber") && !app.equals("doordash")) {
-                        return "redirect:/";
+                        throw new com.gigwager.exception.ResourceNotFoundException("App not found");
                 }
 
                 // Resolve city from slug
@@ -145,7 +145,7 @@ public class ProgrammaticSeoController {
 
                 // Validate app
                 if (!app.equals("uber") && !app.equals("doordash")) {
-                        return "redirect:/";
+                        throw new com.gigwager.exception.ResourceNotFoundException("App not found");
                 }
 
                 // Resolve city from slug
@@ -228,19 +228,6 @@ public class ProgrammaticSeoController {
                 model.addAttribute("dayInTheLife", dayInTheLife);
                 model.addAttribute("bestPractices", bestPractices);
 
-                // JobPosting Schema Automation
-                String validThrough = java.time.LocalDate.now().plusDays(180)
-                                .format(java.time.format.DateTimeFormatter.ISO_LOCAL_DATE);
-                String datePosted = java.time.LocalDate.now()
-                                .format(java.time.format.DateTimeFormatter.ISO_LOCAL_DATE);
-
-                // Escape HTML for JSON-LD description
-                String schemaDescription = workLevelMeaning.replace("\"", "\\\"").replace("\n", " ");
-
-                model.addAttribute("validThrough", validThrough);
-                model.addAttribute("datePosted", datePosted);
-                model.addAttribute("schemaDescription", schemaDescription);
-
                 model.addAttribute("seoMeta", new SeoMeta(title, description, canonicalUrl,
                                 AppConstants.BASE_URL + "/og-image.jpg"));
 
@@ -267,15 +254,15 @@ public class ProgrammaticSeoController {
 
                 // Scenario 1: Part-time (10 hrs/week)
                 scenarios.add(calculateScenario("Part-time (10 hrs/wk)", tier.getPartTimeGross(),
-                                100, 10, city.getGasPrice()));
+                                100, 10, city, app));
 
                 // Scenario 2: Side-Hustle (25 hrs/week)
                 scenarios.add(calculateScenario("Side-Hustle (25 hrs/wk)", tier.getSideHustleGross(),
-                                250, 25, city.getGasPrice()));
+                                250, 25, city, app));
 
                 // Scenario 3: Full-time (40 hrs/week)
                 scenarios.add(calculateScenario("Full-time (40 hrs/wk)", tier.getFullTimeGross(),
-                                400, 40, city.getGasPrice()));
+                                400, 40, city, app));
 
                 return scenarios;
         }
@@ -288,28 +275,50 @@ public class ProgrammaticSeoController {
                                         workLevel.getDisplayName() + " (" + workLevel.getHoursPerWeek() + " hrs/wk)",
                                         tier.getPartTimeGross(), workLevel.getMilesPerWeek(),
                                         workLevel.getHoursPerWeek(),
-                                        city.getGasPrice());
+                                        city, app);
                         case SIDE_HUSTLE -> calculateScenario(
                                         workLevel.getDisplayName() + " (" + workLevel.getHoursPerWeek() + " hrs/wk)",
                                         tier.getSideHustleGross(), workLevel.getMilesPerWeek(),
                                         workLevel.getHoursPerWeek(),
-                                        city.getGasPrice());
+                                        city, app);
                         case FULL_TIME -> calculateScenario(
                                         workLevel.getDisplayName() + " (" + workLevel.getHoursPerWeek() + " hrs/wk)",
                                         tier.getFullTimeGross(), workLevel.getMilesPerWeek(),
                                         workLevel.getHoursPerWeek(),
-                                        city.getGasPrice());
+                                        city, app);
                 };
         }
 
-        private CityScenario calculateScenario(String name, int gross, int miles, int hours, double gasPrice) {
-                // Use IRS standard rate for simplicity (server-side calculation)
-                double mileageDeduction = miles * AppConstants.IRS_MILEAGE_RATE_2024;
-                double taxableProfit = gross - mileageDeduction;
-                double taxes = taxableProfit * AppConstants.SELF_EMPLOYMENT_TAX_RATE;
-                double netProfit = taxableProfit - taxes;
-                double netHourly = netProfit / hours;
+        private CityScenario calculateScenario(String name, int baseGross, int baseMiles, int baseHours, CityData city,
+                        String app) {
+                // City-specific factor adjustments
+                double wageProxy = Math.max(1.0, city.getMinWage() / 7.25); // Baseline federal min wage
+                double appMultiplier = app.equals("uber") ? 1.0 : 0.95; // Small variance for app
 
-                return new CityScenario(name, gross, miles, hours, netProfit, netHourly);
+                // Adjust gross using local economy proxy
+                double grossAdjusted = baseGross * wageProxy * appMultiplier;
+
+                // Traffic Factor: < 1.0 means congested in CityData.
+                // Ergo, dividing by trafficFactor INCREASES hours (e.g. 10 / 0.65 = 15.3 hrs).
+                double adjustedHours = baseHours / city.getTrafficFactor();
+
+                // Keep miles slightly increased in congested areas due to detours, but mostly
+                // stable
+                double milesAdjusted = baseMiles * (1.0 + (1.0 - city.getTrafficFactor()) * 0.3);
+
+                // Mode A (IRS proxy) - standard deduction reflects gas, maintenance, and
+                // depreciation
+                double mileageDeduction = milesAdjusted * AppConstants.IRS_MILEAGE_RATE_2024;
+                double taxableProfit = grossAdjusted - mileageDeduction;
+
+                // Taxes cannot be negative
+                double taxes = Math.max(0, taxableProfit * AppConstants.SELF_EMPLOYMENT_TAX_RATE);
+
+                // Final net profit (Gross minus IRS Proxy minus Taxes)
+                double netProfit = grossAdjusted - mileageDeduction - taxes;
+                double netHourly = adjustedHours > 0 ? netProfit / adjustedHours : 0;
+
+                return new CityScenario(name, (int) grossAdjusted, (int) milesAdjusted, (int) adjustedHours, netProfit,
+                                netHourly);
         }
 }

@@ -29,8 +29,15 @@ public class VerdictController {
         // Calculate Verdict
         Verdict verdict = verdictService.calculateVerdict(gross, miles, hours, app);
 
+        // Calculate simple costs for CTA Triggers
+        double expenses = miles * 0.725; // 2026 IRS Rate
+        double profit = gross - expenses;
+        double taxes = Math.max(0, profit * 0.153);
+
         // Add to model for JTE rendering
         model.addAttribute("verdict", verdict);
+        model.addAttribute("estimatedTaxes", taxes);
+        model.addAttribute("estimatedVehicleCost", expenses);
 
         // Return the fragment template directly
         return "components/verdict_card";

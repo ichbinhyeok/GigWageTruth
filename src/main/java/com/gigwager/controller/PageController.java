@@ -33,6 +33,24 @@ public class PageController {
         return "clusters/vehicle-cost";
     }
 
+    @GetMapping("/taxes/quarterly-estimator")
+    public String quarterlyEstimator(Model model) {
+        model.addAttribute("customTitle", "Quarterly Tax Estimator - Avoid IRS Penalties");
+        return "clusters/quarterly-estimator";
+    }
+
+    @GetMapping("/insurance/rideshare-basics")
+    public String rideshareBasics(Model model) {
+        model.addAttribute("customTitle", "Rideshare Insurance Basics - Do You Need It?");
+        return "clusters/rideshare-basics";
+    }
+
+    @GetMapping("/vehicle-cost/cost-per-mile")
+    public String costPerMile(Model model) {
+        model.addAttribute("customTitle", "Calculate Your True Cost Per Mile ($/mi)");
+        return "clusters/cost-per-mile";
+    }
+
     // --- End Phase 7 ---
 
     @GetMapping("/blog")

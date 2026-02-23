@@ -18,9 +18,6 @@
 @param String taxStrategy
 @param String dayInTheLife
 @param String bestPractices
-@param String validThrough
-@param String datePosted
-@param String schemaDescription
 @param java.util.List<com.gigwager.model.CityData> similarCities
 @param Boolean noIndex = false
 @template.layout.main(
@@ -72,29 +69,6 @@
         }
         </script>
         
-        <!-- Aggressive FAQ Schema for SERP Real Estate -->
-        <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": [{
-            "@type": "Question",
-            "name": "How much does ${appName} really pay in ${city.getCityName()}?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "In 2026, the real net earnings for ${appName} drivers in ${city.getCityName()} are approximately $${String.format("%.2f", scenario.getNetHourly())}/hour after accounting for gas ($${String.format("%.2f", city.getGasPrice())}/gal), vehicle depreciation, and taxes. Gross earnings are typically higher, but expenses eat up about 30-40% of revenue."
-            }
-          }, {
-            "@type": "Question",
-            "name": "Is doing ${appName} in ${city.getCityName()} worth it?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "It depends on your vehicle. With local gas prices at $${String.format("%.2f", city.getGasPrice())}/gal, driving a gas-guzzler will significantly lower your hourly wage. ${workLevel.getDisplayName()} drivers in ${city.getCityName()} typically see the best results by ${city.isHighTraffic() ? "avoiding peak traffic hours" : "focusing on peak dining hours"}."
-            }
-          }]
-        }
-        </script>
-
         <!-- Hero Section -->
         <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 pt-20 pb-24 px-6">
             <div class="max-w-4xl mx-auto">
@@ -286,37 +260,33 @@
                 </div>
             </section>
 
-             <!-- AD SLOT 3: Revenue-Intent Clusters -->
-             <section class="bg-indigo-50 rounded-2xl p-8 border border-indigo-100 mb-8 mt-8">
-                  <h3 class="text-xl font-bold text-indigo-900 mb-2">Maximize your ${appName} Pay</h3>
-                  <p class="text-indigo-700 mb-6">Learn professional strategies to protect your profit and double your hourly wage.</p>
-                  
-                  <div class="grid md:grid-cols-2 gap-4 text-left">
-                      <a href="/taxes" class="relative group block bg-white p-5 rounded-xl border-2 border-indigo-100 hover:border-indigo-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-                          <div class="absolute -right-2 -top-2 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide">Save $1,500+</div>
-                          <h4 class="font-bold text-slate-900 mb-2 flex items-center gap-2"><span class="text-xl">🏦</span> Tax Guide</h4>
-                          <p class="text-xs text-slate-600 mb-4 leading-relaxed">Don't let the IRS take 15.3% of your gross. Find out how to legally write off your mileage and avoid a surprise tax bill -> <strong>Download our free tracking setup</strong>.</p>
-                          <div class="text-xs font-bold text-indigo-600 group-hover:text-indigo-700 flex items-center gap-1">Protect your profit <span class="group-hover:translate-x-1 transition-transform">→</span></div>
-                      </a>
-                      <a href="/vehicle-cost" class="relative group block bg-white p-5 rounded-xl border-2 border-indigo-100 hover:border-indigo-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-                          <h4 class="font-bold text-slate-900 mb-2 flex items-center gap-2"><span class="text-xl">🚗</span> Vehicle Costs</h4>
-                          <p class="text-xs text-slate-600 mb-4 leading-relaxed">Your car is dying $0.725 every mile you drive. Discover if you are driving a "profit killer" vehicle and how to source a cheap hybrid instead.</p>
-                          <div class="text-xs font-bold text-indigo-600 group-hover:text-indigo-700 flex items-center gap-1">Stop the bleeding <span class="group-hover:translate-x-1 transition-transform">→</span></div>
-                      </a>
-                      <a href="/insurance" class="relative group block bg-white p-5 rounded-xl border-2 border-indigo-100 hover:border-indigo-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-                          <div class="absolute -right-2 -top-2 bg-amber-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide">Critical Risk</div>
-                          <h4 class="font-bold text-slate-900 mb-2 flex items-center gap-2"><span class="text-xl">🛡️</span> Insurance GAP</h4>
-                          <p class="text-xs text-slate-600 mb-4 leading-relaxed">If you crash with a passenger/food, your personal policy WILL deny the claim. See how to get a $15/mo rideshare endorsement to cover your ass.</p>
-                          <div class="text-xs font-bold text-indigo-600 group-hover:text-indigo-700 flex items-center gap-1">Get covered now <span class="group-hover:translate-x-1 transition-transform">→</span></div>
-                      </a>
-                      <a href="/blog/multi-apping-guide" class="relative group block bg-gradient-to-br from-indigo-600 to-indigo-800 text-white p-5 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-                          <div class="absolute -right-2 -top-2 bg-yellow-400 text-slate-900 text-[10px] font-bold px-2 py-1 rounded-full shadow-sm uppercase tracking-wide">Pro Strategy</div>
-                          <h4 class="font-bold text-white mb-2 flex items-center gap-2"><span class="text-xl">📱</span> Multi-Apping</h4>
-                          <p class="text-xs text-indigo-50 mb-4 leading-relaxed">Leaving $5-10/hr on the table? Learn how top 5% drivers seamlessly juggle Uber, Lyft, and DoorDash without getting banned.</p>
-                          <div class="text-xs font-bold text-yellow-300 group-hover:text-yellow-400 flex items-center gap-1">Double your wage <span class="group-hover:translate-x-1 transition-transform">→</span></div>
-                      </a>
-                  </div>
-             </section>
+            <!-- Risk Trigger Cards (Loss Aversion) -->
+            <section class="bg-red-50/50 rounded-2xl p-8 border border-red-200 mb-8 mt-8">
+                <h3 class="text-xl font-bold text-slate-900 mb-2">⚠️ Risks You Should Check</h3>
+                <p class="text-slate-600 mb-6 text-sm">Based on the ${appName} estimates for ${city.getCityName()}.</p>
+                
+                <div class="grid md:grid-cols-3 gap-4">
+                    <!-- Tax Risk Card -->
+                    <div class="bg-white p-5 rounded-xl border-2 border-red-100 hover:border-red-500 transition-all">
+                        <h4 class="font-bold text-slate-900 flex items-center gap-2 mb-2">🏦 Quarterly Tax Risk</h4>
+                        <p class="text-xs text-slate-600 mb-3">You may owe about <strong>$${String.format("%.0f", Math.max(0, (scenario.getGrossWeekly() - (scenario.getMiles() * 0.725)) * 0.153) * 13 )}</strong> this quarter in self-employment tax. Are you saving for this?</p>
+                        <a href="/taxes/quarterly-estimator" class="text-xs font-bold text-red-600 hover:text-red-700">Calculate quarterly estimate →</a>
+                    </div>
+                    <!-- Vehicle Cost Card -->
+                    <div class="bg-white p-5 rounded-xl border-2 border-red-100 hover:border-red-500 transition-all">
+                        <h4 class="font-bold text-slate-900 flex items-center gap-2 mb-2">🚗 Vehicle Depreciation</h4>
+                        <p class="text-xs text-slate-600 mb-3">A ${workLevel.getDisplayName().toLowerCase()} schedule will put <strong>${scenario.getMiles() * 52} miles</strong> on your car this year. Do you know your true cost per mile?</p>
+                        <a href="/vehicle-cost/cost-per-mile" class="text-xs font-bold text-red-600 hover:text-red-700">See cost per mile calculator →</a>
+                    </div>
+                    <!-- Insurance GAP Card -->
+                    <div class="bg-white p-5 rounded-xl border-2 border-red-100 hover:border-red-500 transition-all relative">
+                        <div class="absolute -right-2 -top-2 bg-amber-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide border-2 border-white">CRITICAL</div>
+                        <h4 class="font-bold text-slate-900 flex items-center gap-2 mb-2">🛡️ Insurance GAP</h4>
+                        <p class="text-xs text-slate-600 mb-3">Driving in ${city.getCityName()}'s ${city.isHighTraffic() ? "dense traffic" : "sprawl"} without rideshare insurance? Your personal policy could drop you.</p>
+                        <a href="/insurance/rideshare-basics" class="text-xs font-bold text-red-600 hover:text-red-700">Check coverage risks →</a>
+                    </div>
+                </div>
+            </section>
 
             <!-- Back to Overview -->
             <section class="text-center">

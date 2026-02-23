@@ -94,5 +94,209 @@
         "shoppingDistrict": "Fashion Valley",
         "airport": "SAN",
         "majorHighway": "I-5"
+    },
+    "san-jose": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "san-antonio": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "jacksonville": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "fort-worth": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "columbus": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "indianapolis": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "charlotte": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "washington-dc": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "nashville": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "portland": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "detroit": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "memphis": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "louisville": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "baltimore": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "milwaukee": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "albuquerque": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "tucson": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "fresno": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "sacramento": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "kansas-city": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "marietta": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "omaha": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "raleigh": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "virginia-beach": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "minneapolis": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "tulsa": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "arlington": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "new-orleans": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "wichita": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "cleveland": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "bakersfield": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "honolulu": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "orlando": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
+    },
+    "tampa": {
+        "nightlifeDistrict": "Downtown",
+        "shoppingDistrict": "Main Street",
+        "airport": "Regional Airport",
+        "majorHighway": "Local Highway"
     }
 }

@@ -59,6 +59,11 @@ public class SitemapController {
         addUrl(xml, AppConstants.BASE_URL + "/blog/uber-vs-doordash", today, "monthly", "0.7");
         addUrl(xml, AppConstants.BASE_URL + "/blog/hidden-costs", today, "monthly", "0.7");
 
+        // Cluster Pillars
+        addUrl(xml, AppConstants.BASE_URL + "/taxes", today, "monthly", "0.8");
+        addUrl(xml, AppConstants.BASE_URL + "/insurance", today, "monthly", "0.8");
+        addUrl(xml, AppConstants.BASE_URL + "/vehicle-cost", today, "monthly", "0.8");
+
         // Static pages
         addUrl(xml, AppConstants.BASE_URL + "/about", today, "yearly", "0.5");
         addUrl(xml, AppConstants.BASE_URL + "/methodology", today, "yearly", "0.5");

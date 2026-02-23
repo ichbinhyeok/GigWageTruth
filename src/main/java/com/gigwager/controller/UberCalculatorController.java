@@ -41,7 +41,14 @@ public class UberCalculatorController {
 
         // Calculate Verdict
         var verdict = verdictService.calculateVerdict(gross, miles, hours, "Uber");
+
+        double expenses = miles * 0.725;
+        double profit = gross - expenses;
+        double taxes = Math.max(0, profit * 0.153);
+
         model.addAttribute("verdict", verdict);
+        model.addAttribute("estimatedTaxes", taxes);
+        model.addAttribute("estimatedVehicleCost", expenses);
 
         // Dynamic SEO Title
         // Simple calculation for title context (approximate)

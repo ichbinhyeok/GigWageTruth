@@ -8,6 +8,8 @@
 @param String app
 @param String customTitle
 @param Verdict verdict
+@param Double estimatedTaxes
+@param Double estimatedVehicleCost
 @param Boolean noIndex = false
 @template.layout.main(
     noIndex = noIndex,
@@ -46,7 +48,7 @@
                             
                             <div id="uber-verdict-container">
                             @if(verdict != null)
-@template.components.verdict_card(verdict = verdict)
+@template.components.verdict_card(verdict = verdict, estimatedTaxes = estimatedTaxes, estimatedVehicleCost = estimatedVehicleCost)
                             @else
                             <!-- Fallback/Default Content if no calculation runs (e.g. direct load without params) -->
                             <section>
@@ -228,7 +230,7 @@
                             
                             <div id="doordash-verdict-container">
                             @if(verdict != null)
-@template.components.verdict_card(verdict = verdict)
+@template.components.verdict_card(verdict = verdict, estimatedTaxes = estimatedTaxes, estimatedVehicleCost = estimatedVehicleCost)
                             @else
                             <section>
                                 <h2 class="text-2xl font-bold text-slate-900 mb-4">Why Dashers earned less than minimum wage in 2026</h2>
