@@ -206,7 +206,7 @@ public class ProgrammaticSeoController {
                                         appName, city.getCityName(), appName);
                 } else {
                         description = String.format(
-                                        "Stop guessing. Estimate your true hourly wage as a %s driver in %s. We deduct estimated gas (%s/gal), taxes, and wear & tear to show your REAL profit.",
+                                        "Stop guessing. Estimate your net hourly wage as a %s driver in %s. We deduct estimated gas (%s/gal), taxes, and wear & tear to show your REAL profit.",
                                         appName, city.getCityName(), gasPrice);
                 }
 

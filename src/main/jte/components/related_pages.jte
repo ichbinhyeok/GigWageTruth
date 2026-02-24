@@ -15,7 +15,7 @@
         </a>
         <a href="/insurance" class="bg-slate-50 hover:bg-emerald-50 p-5 rounded-xl border border-slate-200 hover:border-emerald-300 transition-colors group">
             <h4 class="font-bold text-slate-900 mb-1 group-hover:text-emerald-700">🛡️ Insurance GAP</h4>
-            <p class="text-xs text-slate-500">Protect yourself from bankruptcy.</p>
+            <p class="text-xs text-slate-500">Protect yourself from a financial surprise.</p>
         </a>
         <a href="/vehicle-cost/cost-per-mile" class="bg-slate-50 hover:bg-emerald-50 p-5 rounded-xl border border-slate-200 hover:border-emerald-300 transition-colors group">
             <h4 class="font-bold text-slate-900 mb-1 group-hover:text-emerald-700">🚗 Car Depreciation</h4>
