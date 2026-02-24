@@ -43,12 +43,15 @@ public class PlaceholderLeakTest {
 
             String content = result.getResponse().getContentAsString();
 
-            // Strip JSON-LD and script blocks safely
-            content = content.replaceAll("(?is)<script.*?</script>", " ");
+            // Strip JSON-LD specifically
+            content = content.replaceAll("(?is)<script[^>]*type=[\"']application/ld\\+json[\"'][^>]*>.*?</script>",
+                    " ");
+            // Strip script blocks safely
+            content = content.replaceAll("(?is)<script[^>]*>.*?</script>", " ");
             // Strip style blocks safely
-            content = content.replaceAll("(?is)<style.*?</style>", " ");
+            content = content.replaceAll("(?is)<style[^>]*>.*?</style>", " ");
             // Remove all remaining HTML tags
-            content = content.replaceAll("(?s)<.*?>", " ");
+            content = content.replaceAll("(?is)<.*?>", " ");
 
             Matcher matcher = placeholderPattern.matcher(content);
             while (matcher.find()) {
