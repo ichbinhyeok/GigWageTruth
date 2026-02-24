@@ -46,6 +46,7 @@ public class ProgrammaticSeoController {
                                                         city.getMarketTier().getFullTimeGross(), 400, 40, city, app);
                                         return new CityRankingDto(city, scenario.getNetHourly(), "Full-time");
                                 })
+                                .filter(dto -> dto.netHourly() >= 6.0 && dto.netHourly() <= 45.0) // Sanity Gate
                                 .sorted((c1, c2) -> Double.compare(c2.netHourly(), c1.netHourly()))
                                 .limit(10)
                                 .collect(Collectors.toList());
@@ -85,6 +86,7 @@ public class ProgrammaticSeoController {
                                                         city.getMarketTier().getSideHustleGross(), 250, 25, city, app);
                                         return new CityRankingDto(city, scenario.getNetHourly(), "Side-Hustle");
                                 })
+                                .filter(dto -> dto.netHourly() >= 6.0 && dto.netHourly() <= 45.0) // Sanity Gate
                                 .sorted((c1, c2) -> Double.compare(c2.netHourly(), c1.netHourly()))
                                 .collect(Collectors.toList());
 
@@ -225,7 +227,8 @@ public class ProgrammaticSeoController {
                 model.addAttribute("otherAppName", otherAppName);
                 model.addAttribute("otherAppUrl", otherAppUrl);
 
-                if (!pageIndexPolicyService.isCityReportIndexable(city)) {
+                if (!pageIndexPolicyService.isCityReportIndexable(city) || featuredScenario.getNetHourly() < 6.0
+                                || featuredScenario.getNetHourly() > 45.0) {
                         model.addAttribute("noIndex", true);
                 }
 
@@ -335,7 +338,8 @@ public class ProgrammaticSeoController {
                 model.addAttribute("otherAppUrl", otherAppUrl);
                 model.addAttribute("parentPageUrl", parentPageUrl);
 
-                if (!pageIndexPolicyService.isWorkLevelReportIndexable(city, workLevel)) {
+                if (!pageIndexPolicyService.isWorkLevelReportIndexable(city, workLevel) || scenario.getNetHourly() < 6.0
+                                || scenario.getNetHourly() > 45.0) {
                         model.addAttribute("noIndex", true);
                 }
 
@@ -409,7 +413,8 @@ public class ProgrammaticSeoController {
         private CityScenario calculateScenario(String name, int baseGross, int baseMiles, int baseHours, CityData city,
                         String app) {
                 // City-specific factor adjustments
-                double wageProxy = Math.max(1.0, city.getMinWage() / 7.25); // Baseline federal min wage
+                double rawWageProxy = city.getMinWage() / 7.25;
+                double wageProxy = Math.max(0.9, Math.min(1.2, rawWageProxy)); // Realism Clamp: 0.9 to 1.2
                 double appMultiplier = app.equals("uber") ? 1.0 : 0.95; // Small variance for app
 
                 // Adjust gross using local economy proxy

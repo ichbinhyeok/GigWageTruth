@@ -33,6 +33,8 @@ public class SitemapController {
 
         // Main pages
         addUrl(xml, AppConstants.BASE_URL + "/", today, "weekly", "1.0");
+        addUrl(xml, AppConstants.BASE_URL + "/uber", today, "weekly", "0.9");
+        addUrl(xml, AppConstants.BASE_URL + "/doordash", today, "weekly", "0.9");
 
         // Salary directory (Hub page - highest priority)
         addUrl(xml, AppConstants.BASE_URL + "/salary/directory", today, "weekly", "0.9");

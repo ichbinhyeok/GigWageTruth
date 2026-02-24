@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.gigwager.util.AppConstants;
 
 @Controller
 public class VerdictController {
@@ -30,9 +31,9 @@ public class VerdictController {
         Verdict verdict = verdictService.calculateVerdict(gross, miles, hours, app);
 
         // Calculate simple costs for CTA Triggers
-        double expenses = miles * 0.725; // 2026 IRS Rate
+        double expenses = miles * AppConstants.IRS_MILEAGE_RATE; // 2026 IRS Rate
         double profit = gross - expenses;
-        double taxes = Math.max(0, profit * 0.153);
+        double taxes = Math.max(0, profit * AppConstants.SELF_EMPLOYMENT_TAX_RATE);
 
         // Add to model for JTE rendering
         model.addAttribute("verdict", verdict);

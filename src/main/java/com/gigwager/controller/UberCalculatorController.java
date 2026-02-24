@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.gigwager.util.AppConstants;
 
 @Controller
 public class UberCalculatorController {
@@ -42,9 +43,9 @@ public class UberCalculatorController {
         // Calculate Verdict
         var verdict = verdictService.calculateVerdict(gross, miles, hours, "Uber");
 
-        double expenses = miles * 0.725;
+        double expenses = miles * AppConstants.IRS_MILEAGE_RATE;
         double profit = gross - expenses;
-        double taxes = Math.max(0, profit * 0.153);
+        double taxes = Math.max(0, profit * AppConstants.SELF_EMPLOYMENT_TAX_RATE);
 
         model.addAttribute("verdict", verdict);
         model.addAttribute("estimatedTaxes", taxes);

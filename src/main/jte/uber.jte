@@ -52,7 +52,7 @@
             "name": "What is the IRS Standard Mileage Rate for 2026?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "The 2026 IRS Standard Mileage Rate is projected to be 67 cents to 72.5 cents per mile. This rate covers gas, insurance, wear and tear, and depreciation. We use $0.725/mile in our Standard calculation to be safe."
+              "text": "For 2026, the IRS standard mileage rate is 72.5¢/mile ($0.725). This rate covers gas, insurance, wear and tear, and depreciation. We use this as an estimation proxy; not tax advice."
             }
           }, {
             "@type": "Question",
@@ -315,7 +315,7 @@
                              <div x-show="calculationMode === 'standard'" class="text-center py-4">
                                 <p class="text-3xl font-bold text-slate-900 mb-1">$0.725<span class="text-lg text-slate-400 font-medium">/mi</span></p>
                                 <p class="text-sm text-slate-500">2026 IRS Standard Deduction Rate</p>
-                                <p class="text-xs text-slate-400 mt-2 max-w-sm mx-auto">Includes gas, depreciation, insurance, and maintenance. Trusted by tax pros.</p>
+                                <p class="text-xs text-slate-400 mt-2 max-w-sm mx-auto">Includes gas, depreciation, insurance, and maintenance. Based on standard TCO methodologies.</p>
                             </div>
 
                             <div x-show="calculationMode === 'advanced'" class="space-y-6">
@@ -490,7 +490,7 @@
                                 </svg>
                             </button>
                             <div x-show="open" class="px-6 pb-4 text-slate-600">
-                                <p>The 2026 IRS Standard Mileage Rate is projected to be <strong>67 cents to 72.5 cents per mile</strong>. This rate covers gas, insurance, wear and tear, and depreciation. We use $0.725/mile in our Standard calculation to be safe.</p>
+                                <p>For 2026, the IRS standard mileage rate is <strong>72.5¢/mile ($0.725)</strong>. This rate covers gas, insurance, wear and tear, and depreciation. We use this as an estimation proxy; not tax advice.</p>
                             </div>
                         </div>
 

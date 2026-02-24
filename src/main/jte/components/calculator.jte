@@ -229,7 +229,7 @@
                          <div x-show="calculationMode === 'standard'" class="text-center py-4">
                             <p class="text-3xl font-bold text-slate-900 mb-1">$0.725<span class="text-lg text-slate-400 font-medium">/mi</span></p>
                             <p class="text-sm text-slate-500">2026 IRS Standard Deduction Rate</p>
-                            <p class="text-xs text-slate-400 mt-2 max-w-sm mx-auto">Includes gas, depreciation, insurance, and maintenance. Trusted by tax pros.</p>
+                            <p class="text-xs text-slate-400 mt-2 max-w-sm mx-auto">Includes gas, depreciation, insurance, and maintenance. Based on standard TCO methodologies.</p>
                         </div>
 
                         <div x-show="calculationMode === 'advanced'" class="space-y-6">

@@ -23,7 +23,7 @@
                         </div>
                         <div>
                             <h3 class="text-lg font-bold text-amber-900 mb-1">Your <span class="capitalize" x-text="appName"></span> Tax Warning</h3>
-                            <p class="text-amber-800 text-sm">Based on your weekly gross of <strong>$<span x-text="gross"></span></strong>, you could owe roughly <strong>$<span x-text="estimatedQuarterly"></span></strong> to the IRS every quarter. Scroll down to see how to avoid underpayment penalties.</p>
+                            <p class="text-amber-800 text-sm">Based on your weekly gross of <strong><span x-text="gross ? '$' + gross : '$500'">$500</span></strong>, you could owe roughly <strong><span x-text="estimatedQuarterly ? '$' + estimatedQuarterly : '$995'">$995</span></strong> to the IRS every quarter. Scroll down to see how to avoid underpayment penalties.</p>
                         </div>
                     </div>
                 </div>

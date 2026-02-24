@@ -71,7 +71,7 @@
                                             <svg class="w-5 h-5 text-slate-400 transition-transform" :class="{'rotate-180': open}" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                                         </button>
                                         <div x-show="open" class="px-6 pb-4 text-slate-600">
-                                            <p>The 2026 IRS Standard Mileage Rate is projected to be <strong>67 cents to 72.5 cents per mile</strong>. This rate covers gas, insurance, wear and tear, and depreciation. We use $0.725/mile in our Standard calculation to be safe.</p>
+                                            <p>For 2026, the IRS standard mileage rate is <strong>72.5¢/mile ($0.725)</strong>. This rate covers gas, insurance, wear and tear, and depreciation. We use this as an estimation proxy; not tax advice.</p>
                                         </div>
                                     </div>
                                     <div x-data="{ open: false }" class="border border-slate-200 rounded-xl bg-white overflow-hidden">
@@ -193,7 +193,7 @@
                           "mainEntity": [{
                             "@type": "Question",
                             "name": "What is the IRS Standard Mileage Rate for 2026?",
-                            "acceptedAnswer": { "@type": "Answer", "text": "The 2026 IRS Standard Mileage Rate is projected to be 67 cents to 72.5 cents per mile. This rate covers gas, insurance, wear and tear, and depreciation. We use $0.725/mile in our Standard calculation to be safe." }
+                            "acceptedAnswer": { "@type": "Answer", "text": "For 2026, the IRS standard mileage rate is 72.5¢/mile ($0.725). This rate covers gas, insurance, wear and tear, and depreciation. We use this as an estimation proxy; not tax advice." }
                           }, {
                             "@type": "Question",
                             "name": "Is Uber driving worth it in 2026?",

@@ -21,7 +21,7 @@
                         </div>
                         <div>
                             <h3 class="text-lg font-bold text-amber-900 mb-1">Warning: Based on your <span class="capitalize" x-text="fromApp"></span> stats</h3>
-                            <p class="text-amber-800">You are driving <strong x-text="miles"></strong> miles per week. At the standard deduction rate, you are putting <strong>$<span x-text="estimatedWeeklyCost"></span></strong> of wear and tear on your car every single week!</p>
+                            <p class="text-amber-800">You are driving <strong x-text="miles ? miles : '500'">500</strong> miles per week. At the standard deduction rate, you are putting <strong><span x-text="estimatedWeeklyCost ? '$' + estimatedWeeklyCost : '$362'">$362</span></strong> of wear and tear on your car every single week!</p>
                             <p class="text-sm text-amber-700 mt-2 font-semibold">Scroll down to see the real breakdown.</p>
                         </div>
                     </div>

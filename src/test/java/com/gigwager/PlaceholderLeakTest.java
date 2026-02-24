@@ -10,7 +10,6 @@ import org.springframework.test.web.servlet.MvcResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -35,7 +34,7 @@ public class PlaceholderLeakTest {
         // district]
         // But not JSON arrays or tags, so we look for [some words] that don't have HTML
         // tags inside
-        Pattern placeholderPattern = Pattern.compile("\\[[A-Za-z\\s-]+\\]");
+        Pattern placeholderPattern = Pattern.compile("\\[[^\\]]+\\]");
 
         for (String url : testUrls) {
             MvcResult result = mockMvc.perform(get(url))
@@ -44,18 +43,19 @@ public class PlaceholderLeakTest {
 
             String content = result.getResponse().getContentAsString();
 
-            // Remove the known JSON-LD blocks that use brackets legally
-            content = content.replaceAll("(?s)<script type=\"application/ld\\+json\">.*?</script>", "");
-            // Remove other standard JS brackets
-            content = content.replaceAll("(?s)<script.*?</script>", "");
-            // Remove style blocks to ignore CSS attributes like [x-cloak]
-            content = content.replaceAll("(?s)<style.*?</style>", "");
+            // Strip JSON-LD and script blocks safely
+            content = content.replaceAll("(?is)<script.*?</script>", " ");
+            // Strip style blocks safely
+            content = content.replaceAll("(?is)<style.*?</style>", " ");
             // Remove all remaining HTML tags
-            content = content.replaceAll("(?s)<.*?>", "");
+            content = content.replaceAll("(?s)<.*?>", " ");
 
             Matcher matcher = placeholderPattern.matcher(content);
-            if (matcher.find()) {
-                assertFalse(true, "Found a leaked placeholder token in " + url + ": " + matcher.group());
+            while (matcher.find()) {
+                String match = matcher.group();
+                if (!match.contains("x-cloak") && !match.contains("x-show") && !match.contains("x-text")) {
+                    org.junit.jupiter.api.Assertions.fail("Found a leaked placeholder token in " + url + ": " + match);
+                }
             }
         }
     }

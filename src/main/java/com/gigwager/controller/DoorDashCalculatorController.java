@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.gigwager.util.AppConstants;
 
 @Controller
 public class DoorDashCalculatorController {
@@ -41,9 +42,9 @@ public class DoorDashCalculatorController {
 
         var verdict = verdictService.calculateVerdict(grossVal, milesVal, hoursVal, "DoorDash");
 
-        double expenses = milesVal * 0.725;
+        double expenses = milesVal * AppConstants.IRS_MILEAGE_RATE;
         double profit = grossVal - expenses;
-        double taxes = Math.max(0, profit * 0.153);
+        double taxes = Math.max(0, profit * AppConstants.SELF_EMPLOYMENT_TAX_RATE);
 
         model.addAttribute("verdict", verdict);
         model.addAttribute("estimatedTaxes", taxes);

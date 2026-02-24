@@ -30,33 +30,43 @@
     <div class="mt-8 pt-8 border-t border-slate-100">
         <p class="text-lg font-bold text-${verdict.themeColor()}-700 italic mb-6">"${verdict.cta()}"</p>
         
+        <div class="flex flex-wrap gap-4 mb-4">
+            <button onclick="navigator.clipboard.writeText(document.getElementById('verdict-card-container').innerText); alert('Copied summary!')" class="px-4 py-2 bg-slate-100 text-slate-700 font-bold rounded-lg hover:bg-slate-200 text-sm transition">📋 Copy summary</button>
+            <button onclick="window.print()" class="px-4 py-2 bg-slate-100 text-slate-700 font-bold rounded-lg hover:bg-slate-200 text-sm transition">🖨️ Print/Save</button>
+        </div>
+        
         <!-- Personalized Risk Trigger Cards -->
         @if(estimatedTaxes != null && estimatedVehicleCost != null)
-        <div class="bg-red-50/50 rounded-2xl p-6 border border-red-200 mt-6">
-            <h3 class="text-xl font-bold text-slate-900 mb-2">⚠️ Your Personalized Risk Factors</h3>
-            <p class="text-slate-600 mb-6 text-sm">Based on the numbers you just entered.</p>
+        <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200 mt-6 action-cards-dedupe">
+            <h3 class="text-xl font-bold text-slate-900 mb-2">What to do next</h3>
+            <p class="text-slate-600 mb-6 text-sm">Take action on your real numbers.</p>
             
             <div class="grid md:grid-cols-3 gap-4">
                 <!-- Tax Risk Card -->
-                <div class="bg-white p-5 rounded-xl border-2 border-red-100 hover:border-red-500 transition-all">
-                    <h4 class="font-bold text-slate-900 flex items-center gap-2 mb-2">🏦 Self-Employment Tax</h4>
-                    <p class="text-xs text-slate-600 mb-3">You will likely owe <strong>$${String.format("%.0f", estimatedTaxes * 50)}</strong> this year. Are you making quarterly estimated payments?</p>
-                    <a :href="'/taxes/quarterly-estimator?app=' + selectedApp + '&gross=' + gross" class="text-xs font-bold text-red-600 hover:text-red-700">Calculate your tax risk →</a>
+                <div class="bg-white p-5 rounded-xl border border-slate-200 hover:border-slate-400 transition-all flex flex-col justify-between">
+                    <div>
+                        <h4 class="font-bold text-slate-900 flex items-center gap-2 mb-2">🏦 Taxes Estimate</h4>
+                        <p class="text-xs text-slate-600 mb-4">You may owe <strong>$${String.format("%.0f", estimatedTaxes * 50)}</strong>/yr in SE tax.</p>
+                    </div>
+                    <a :href="'/taxes/quarterly-estimator?app=' + selectedApp + '&gross=' + gross" class="block text-center py-2 bg-slate-900 text-white rounded-lg text-sm font-bold hover:bg-slate-800">Estimate Taxes</a>
                 </div>
                 
                 <!-- Vehicle Cost Card -->
-                <div class="bg-white p-5 rounded-xl border-2 border-red-100 hover:border-red-500 transition-all">
-                    <h4 class="font-bold text-slate-900 flex items-center gap-2 mb-2">🚗 Vehicle Depreciation</h4>
-                    <p class="text-xs text-slate-600 mb-3">Your car lost <strong>$${String.format("%.0f", estimatedVehicleCost)}</strong> in value/costs this week alone. Are you driving the right car?</p>
-                    <a :href="'/vehicle-cost/cost-per-mile?app=' + selectedApp + '&miles=' + miles" class="text-xs font-bold text-red-600 hover:text-red-700">See true cost per mile →</a>
+                <div class="bg-white p-5 rounded-xl border border-slate-200 hover:border-slate-400 transition-all flex flex-col justify-between">
+                    <div>
+                        <h4 class="font-bold text-slate-900 flex items-center gap-2 mb-2">🚗 Cost-per-mile</h4>
+                        <p class="text-xs text-slate-600 mb-4">You used <strong>$${String.format("%.0f", estimatedVehicleCost)}</strong> in car equity this week.</p>
+                    </div>
+                    <a :href="'/vehicle-cost/cost-per-mile?app=' + selectedApp + '&miles=' + miles" class="block text-center py-2 bg-slate-900 text-white rounded-lg text-sm font-bold hover:bg-slate-800">View Car Cost</a>
                 </div>
 
                 <!-- Insurance GAP Card -->
-                <div class="bg-white p-5 rounded-xl border-2 border-red-100 hover:border-red-500 transition-all relative">
-                    <div class="absolute -right-2 -top-2 bg-amber-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide border-2 border-white">CRITICAL</div>
-                    <h4 class="font-bold text-slate-900 flex items-center gap-2 mb-2">🛡️ Insurance GAP</h4>
-                    <p class="text-xs text-slate-600 mb-3">If you crash tomorrow, your personal insurance <strong>may deny the claim depending on your policy</strong>. Coverage depends on insurer and state. Verify policy terms.</p>
-                    <a :href="'/insurance/rideshare-basics?app=' + selectedApp" class="text-xs font-bold text-red-600 hover:text-red-700">Learn how to fix this →</a>
+                <div class="bg-white p-5 rounded-xl border border-slate-200 hover:border-slate-400 transition-all flex flex-col justify-between relative">
+                    <div>
+                        <h4 class="font-bold text-slate-900 flex items-center gap-2 mb-2">🛡️ Coverage Risk</h4>
+                        <p class="text-xs text-slate-600 mb-4">Insurer policies vary. You may have a coverage gap.</p>
+                    </div>
+                    <a :href="'/insurance/rideshare-basics?app=' + selectedApp" class="block text-center py-2 bg-slate-900 text-white rounded-lg text-sm font-bold hover:bg-slate-800">Check Coverage</a>
                 </div>
             </div>
         </div>

@@ -4,15 +4,16 @@ import com.gigwager.model.Verdict;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import com.gigwager.util.BrandConstants;
+import com.gigwager.util.AppConstants;
 
 @Service
 public class VerdictService {
 
         public Verdict calculateVerdict(double gross, double miles, double hours, String appName) {
                 // Core Calculation Logic (Matches Frontend JS)
-                double expenses = miles * 0.725; // 2026 IRS Rate
+                double expenses = miles * AppConstants.IRS_MILEAGE_RATE; // 2026 IRS Rate
                 double profit = gross - expenses;
-                double taxes = Math.max(0, profit * 0.153);
+                double taxes = Math.max(0, profit * AppConstants.SELF_EMPLOYMENT_TAX_RATE);
                 double netHourly = hours > 0 ? (profit - taxes) / hours : 0.0;
 
                 return getVerdictForWage(netHourly, appName);
@@ -25,7 +26,9 @@ public class VerdictService {
                                         "STOP DRIVING IMMEDIATELY. YOU ARE LOSING MONEY.",
                                         List.of(
                                                         "You are not making a wage. You are liquidating your vehicle's equity for quick cash. Every mile you drive destroys more value in your car than you earn in profit.",
-                                                        "After accounting for the IRS standard costs of $0.725/mile (gas, depreciation, maintenance), your net profit is effectively zero or negative. You are effectively paying "
+                                                        "After accounting for the IRS standard costs of $"
+                                                                        + AppConstants.IRS_MILEAGE_RATE
+                                                                        + "/mile (gas, depreciation, maintenance), your net profit is effectively zero or negative. You are effectively paying "
                                                                         + appName + " for the privilege of working.",
                                                         "This is not a job; it is a financial trap. The cash in your hand is just a loan from your future car repairs."),
                                         "Stop driving immediately and secure a W-2 income source.",

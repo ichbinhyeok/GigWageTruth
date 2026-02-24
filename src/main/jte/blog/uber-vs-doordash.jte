@@ -48,7 +48,7 @@
                             It's the classic gig worker deliema: Do you want to drive strangers around in your car, or do you want to deliver lukewarm tacos? One pays more per hour, but the other lets you listen to your own music in peace.
                         </p>
 
-                        <h2>?뮥 The Gross Income Reality</h2>
+                        <h2>📈 The Gross Income Reality</h2>
                         <p>
                             Historically, <strong>Uber (Rideshare) pays 20-30% more in gross revenue</strong> than DoorDash. Why? Because people are more expensive to move than packages. 
                         </p>
@@ -58,7 +58,7 @@
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-10 not-prose">
                             <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
-                                <h3 class="font-bold text-slate-900 mb-2">?슅 Uber Pros/Cons</h3>
+                                <h3 class="font-bold text-slate-900 mb-2">🚗 Uber Pros/Cons</h3>
                                 <ul class="text-sm space-y-2 text-slate-700">
                                     <li>??Higher hourly gross potential</li>
                                     <li>??Longer trips = less downtime</li>
@@ -68,7 +68,7 @@
                                 </ul>
                             </div>
                             <div class="bg-red-50 p-6 rounded-xl border border-red-100">
-                                <h3 class="font-bold text-red-900 mb-2">?뜑 DoorDash Pros/Cons</h3>
+                                <h3 class="font-bold text-red-900 mb-2">🍔 DoorDash Pros/Cons</h3>
                                 <ul class="text-sm space-y-2 text-red-800">
                                     <li>??No strangers in your car</li>
                                     <li>??Low vehicle standards (beaters welcome)</li>
@@ -79,7 +79,7 @@
                             </div>
                         </div>
 
-                        <h2>?뫀 The Hidden Cost of "People"</h2>
+                        <h2>👥 The Hidden Cost of "People"</h2>
                         <p>
                             When you drive for Uber, you aren't just a driver; you're a hospitality worker. 
                         </p>
@@ -87,7 +87,7 @@
                             If a passenger spills a drink, your shift is over. If they rate you 1-star because they didn't like your air freshener, your account is at risk. You also have to pay for higher-tier insurance (Rideshare Endorsement) which is often more expensive for passengers than for food delivery.
                         </p>
 
-                        <h2>?벀 The Hidden Cost of "Food"</h2>
+                        <h2>🥡 The Hidden Cost of "Food"</h2>
                         <p>
                             DoorDash kills your car in a different way: <strong>city miles.</strong> 
                         </p>
@@ -95,7 +95,7 @@
                             You turn your engine on and off 30 times a day. You're constantly idling in drive-thrus. You're parking illegally in red zones hoping you don't get a $60 ticket that wipes out your entire day's earnings.
                         </p>
 
-                        <h2>?쨺 Which One Should You Choose?</h2>
+                        <h2>🤔 Which One Should You Choose?</h2>
                         <p>
                             Take our advice: <strong>Don't choose. Do both.</strong>
                         </p>

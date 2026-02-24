@@ -80,9 +80,7 @@ public enum WorkLevel {
                                                 "<p class=\"text-slate-700 leading-relaxed mb-4\">" +
                                                                 "<strong>%s hours per week</strong> means you're treating %s as a <strong>hobby income</strong> source, not a business. "
                                                                 +
-                                                                "For tax purposes, this is actually advantageous: if your annual earnings stay below $600, the platform won't even send you a 1099-K. "
-                                                                +
-                                                                "However, you're still legally required to report all income to the IRS—most people don't realize this."
+                                                                "For tax purposes, keep in mind: reporting thresholds change. Regardless of forms received, income is taxable and must be reported. "
                                                                 +
                                                                 "</p>" +
                                                                 "<p class=\"text-slate-700 leading-relaxed mb-4\">" +
@@ -113,7 +111,7 @@ public enum WorkLevel {
                                                                 +
                                                                 "</p>" +
                                                                 "<p class=\"text-slate-700 leading-relaxed mb-4\">" +
-                                                                "<strong>Tax Complexity Increases:</strong> You'll definitely receive a 1099 form, and you need to start thinking about <strong>quarterly estimated tax payments</strong>. "
+                                                                "<strong>Tax Complexity Increases:</strong> You may receive a 1099 form, and you need to start thinking about <strong>quarterly estimated tax payments</strong>. "
                                                                 +
                                                                 "If your day job withholds taxes and this is supplemental income, you might owe a surprise tax bill in April unless you adjust your W-4 withholding or make quarterly payments. "
                                                                 +
