@@ -28,6 +28,22 @@
                     </p>
                 </div>
 
+                <!-- AEO Answer-First Block -->
+                <div class="bg-indigo-50 border-l-4 border-indigo-500 p-6 rounded-r-xl mb-12 shadow-sm">
+                    <h2 class="text-xl font-bold text-indigo-900 mb-2 flex items-center gap-2">
+                        <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        The TL;DR for ${city.getCityName()}
+                    </h2>
+                    <p class="text-indigo-800 font-medium">
+                        In ${city.getCityName()}, 
+                        @if(uberScenario.getNetHourly() > doordashScenario.getNetHourly())
+                            <strong>Uber tends to pay more per hour</strong> due to higher base fares and longer trip consistency, while DoorDash is better for short-distance drivers trying to avoid high depreciation.
+                        @else
+                            <strong>DoorDash tends to pay more per hour</strong>, as frequent short trips scale better against local traffic patterns compared to Uber's longer waits.
+                        @endif
+                    </p>
+                </div>
+
                 <div class="grid md:grid-cols-2 gap-8 mb-12">
                     <!-- Uber Card -->
                     <div class="bg-white rounded-3xl p-8 border-2 ${uberScenario.getNetHourly() >= doordashScenario.getNetHourly() ? "border-emerald-400 shadow-xl shadow-emerald-500/10" : "border-slate-200"} relative">
@@ -100,9 +116,35 @@
                     </div>
                 </div>
 
-                <div class="text-center">
+                <div class="text-center mb-16">
                     <a href="/salary/directory" class="text-slate-500 hover:text-slate-800 font-bold underline transition-colors">See all cities</a>
                 </div>
+
+                <!-- When to choose which app -->
+                <section class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm mb-16">
+                    <h2 class="text-2xl font-black text-slate-900 mb-6 text-center">When to Choose Which App</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="font-bold text-slate-800 mb-4 border-b pb-2 flex items-center gap-2">Choose Uber If:</h3>
+                            <ul class="space-y-3 text-sm text-slate-600">
+                                <li class="flex items-start gap-2"><span class="text-emerald-500">✓</span> You own an electric/hybrid vehicle (high MPG mitigates longer rides).</li>
+                                <li class="flex items-start gap-2"><span class="text-emerald-500">✓</span> You prefer driving passengers over finding apartment numbers and carrying food.</li>
+                                <li class="flex items-start gap-2"><span class="text-emerald-500">✓</span> You plan to drive early mornings or late-night weekends (bar rush).</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-800 mb-4 border-b pb-2 flex items-center gap-2">Choose DoorDash If:</h3>
+                            <ul class="space-y-3 text-sm text-slate-600">
+                                <li class="flex items-start gap-2"><span class="text-red-500">✓</span> Your car is older and you want to minimize highway mileage.</li>
+                                <li class="flex items-start gap-2"><span class="text-red-500">✓</span> You hate small talk and prefer listening to audiobooks uninterrupted.</li>
+                                <li class="flex items-start gap-2"><span class="text-red-500">✓</span> Your primary driving hours are 11 AM - 1 PM or 5 PM - 8 PM (meal times).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Internal Links Web -->
+                @template.components.related_pages(app = "uber")
             </div>
         </div>
     `

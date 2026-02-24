@@ -47,6 +47,7 @@ window.createGigCalculator = function (initialData) {
         isRoundTrip: false,
         showShareModal: false,
         shareBtnLabel: 'Share Result',
+        savedScenarios: [],
 
         verdictContainerId: initialData.verdictContainerId,
         debounceTimer: null,
@@ -70,6 +71,16 @@ window.createGigCalculator = function (initialData) {
             this.$watch('rawGross', () => this.debouncedFetchVerdict());
             this.$watch('rawMiles', () => this.debouncedFetchVerdict());
             this.$watch('rawHours', () => this.debouncedFetchVerdict());
+
+            // Phase 3-1: Local Storage Load
+            try {
+                const stored = localStorage.getItem('gigwager_saved_scenarios');
+                if (stored) {
+                    this.savedScenarios = JSON.parse(stored);
+                }
+            } catch (e) {
+                console.error("Failed to load local storage", e);
+            }
 
             console.log("GigWageTruth Calculator Loaded: v2 (Features Active)");
         },
@@ -299,7 +310,7 @@ window.createGigCalculator = function (initialData) {
                     break;
                 case 'copy':
                     if (navigator.clipboard) {
-                        navigator.clipboard.writeText(this.viralText + " " + window.location.origin)
+                        navigator.clipboard.writeText(this.viralText + " " + window.location.href)
                             .then(() => {
                                 alert("Copied to clipboard!"); // Simple feedback for now
                             });
@@ -315,6 +326,36 @@ window.createGigCalculator = function (initialData) {
         // Legacy compatibility (can be removed later if templates are updated)
         tweetResult() {
             this.shareTo('twitter');
+        },
+
+        // Phase 3-1: Save Scenario locally (Zero-DB)
+        saveScenario() {
+            if (this.gross <= 0 || this.hours <= 0) {
+                alert("Please enter hours and earnings first.");
+                return;
+            }
+            const stamp = new Date().toLocaleDateString();
+            const scenario = {
+                id: Date.now(),
+                date: stamp,
+                app: this.selectedApp,
+                gross: this.gross,
+                hours: this.hours,
+                netHourly: this.netHourly.toFixed(2),
+                urlParams: `?gross=${this.gross}&miles=${this.miles}&hours=${this.hours}&app=${this.selectedApp}`
+            };
+
+            this.savedScenarios.unshift(scenario);
+            if (this.savedScenarios.length > 5) {
+                this.savedScenarios.pop();
+            }
+            localStorage.setItem('gigwager_saved_scenarios', JSON.stringify(this.savedScenarios));
+            alert("Scenario saved! You can compare it later.");
+        },
+
+        clearScenarios() {
+            this.savedScenarios = [];
+            localStorage.removeItem('gigwager_saved_scenarios');
         }
     }
 };

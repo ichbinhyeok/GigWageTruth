@@ -65,6 +65,12 @@ public class SitemapController {
             }
         }
 
+        // Phase 2 Intent Hubs
+        addUrl(xml, AppConstants.BASE_URL + "/uber-after-expenses", today, "monthly", "0.9");
+        addUrl(xml, AppConstants.BASE_URL + "/doordash-after-expenses", today, "monthly", "0.9");
+        addUrl(xml, AppConstants.BASE_URL + "/net-hourly-calculator", today, "monthly", "0.9");
+        addUrl(xml, AppConstants.BASE_URL + "/multi-apping", today, "monthly", "0.8");
+
         // Blog
         addUrl(xml, AppConstants.BASE_URL + "/blog", today, "monthly", "0.8");
         addUrl(xml, AppConstants.BASE_URL + "/blog/multi-apping-guide", today, "monthly", "0.7");

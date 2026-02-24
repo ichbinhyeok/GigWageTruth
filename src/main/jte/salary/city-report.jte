@@ -474,6 +474,12 @@
                 </a>
             </section>
 
+            <!-- Personalized Next Step -->
+            @template.components.next_steps_by_worklevel(app = app, appName = appName, hoursPerWeek = featuredScenario.getHours())
+
+            <!-- Internal Linking Spider Web PR8-4 -->
+            @template.components.related_pages(app = app, appName = appName)
+
         </div>
     `
 )

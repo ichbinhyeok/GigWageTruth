@@ -4,13 +4,35 @@
     noIndex = noIndex,
     seoMeta = new com.gigwager.model.SeoMeta(customTitle, "Estimate how much your car costs to run per mile. Avoid the depreciation trap.", com.gigwager.util.AppConstants.BASE_URL + "/vehicle-cost/cost-per-mile", com.gigwager.util.AppConstants.BASE_URL + "/og-image.jpg"),
     content = @`
-        <div class="bg-slate-50 min-h-screen py-16 px-6">
-            <div class="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center">
-                <div class="inline-flex bg-blue-100 text-blue-600 p-4 rounded-full mb-6">
-                    <svg class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+        <div class="bg-slate-50 min-h-screen py-16 px-6" x-data="{
+            params: new URLSearchParams(window.location.search),
+            get fromApp() { return this.params.get('app') || 'gig apps'; },
+            get miles() { return parseInt(this.params.get('miles')) || 0; },
+            get estimatedWeeklyCost() { return (this.miles * 0.725).toFixed(0); },
+            get showPersonalizedBanner() { return this.miles > 0; }
+        }">
+            <div class="max-w-3xl mx-auto">
+                
+                <!-- Phase 3-2: Dynamic CTA Trigger Banner -->
+                <div x-show="showPersonalizedBanner" x-cloak class="mt-4 mb-8 bg-amber-50 border-2 border-amber-200 rounded-2xl p-6 shadow-sm">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-amber-100 p-2 rounded-full text-amber-600">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-amber-900 mb-1">Warning: Based on your <span class="capitalize" x-text="fromApp"></span> stats</h3>
+                            <p class="text-amber-800">You are driving <strong x-text="miles"></strong> miles per week. At the standard deduction rate, you are putting <strong>$<span x-text="estimatedWeeklyCost"></span></strong> of wear and tear on your car every single week!</p>
+                            <p class="text-sm text-amber-700 mt-2 font-semibold">Scroll down to see the real breakdown.</p>
+                        </div>
+                    </div>
                 </div>
-                <h1 class="text-4xl font-bold text-slate-900 mb-4">True Cost Per Mile</h1>
-                <p class="text-xl text-slate-600 mb-8">Stop treating your gas limit as your total cost.</p>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center">
+                    <div class="inline-flex bg-blue-100 text-blue-600 p-4 rounded-full mb-6">
+                        <svg class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+                    </div>
+                    <h1 class="text-4xl font-bold text-slate-900 mb-4">True Cost Per Mile</h1>
+                    <p class="text-xl text-slate-600 mb-8">Stop treating your gas limit as your total cost.</p>
                 
                 <div class="grid md:grid-cols-3 gap-6 mb-12">
                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 text-center">
@@ -35,6 +57,7 @@
                 </div>
                 
                 <a href="/vehicle-cost" class="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors shadow shadow-blue-500/30">View Vehicle Strategy Guide</a>
+                </div>
             </div>
         </div>
     `

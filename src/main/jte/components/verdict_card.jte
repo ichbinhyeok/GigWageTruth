@@ -41,14 +41,14 @@
                 <div class="bg-white p-5 rounded-xl border-2 border-red-100 hover:border-red-500 transition-all">
                     <h4 class="font-bold text-slate-900 flex items-center gap-2 mb-2">🏦 Self-Employment Tax</h4>
                     <p class="text-xs text-slate-600 mb-3">You will likely owe <strong>$${String.format("%.0f", estimatedTaxes * 50)}</strong> this year. Are you making quarterly estimated payments?</p>
-                    <a href="/taxes/quarterly-estimator" class="text-xs font-bold text-red-600 hover:text-red-700">Calculate your tax risk →</a>
+                    <a :href="'/taxes/quarterly-estimator?app=' + selectedApp + '&gross=' + gross" class="text-xs font-bold text-red-600 hover:text-red-700">Calculate your tax risk →</a>
                 </div>
                 
                 <!-- Vehicle Cost Card -->
                 <div class="bg-white p-5 rounded-xl border-2 border-red-100 hover:border-red-500 transition-all">
                     <h4 class="font-bold text-slate-900 flex items-center gap-2 mb-2">🚗 Vehicle Depreciation</h4>
                     <p class="text-xs text-slate-600 mb-3">Your car lost <strong>$${String.format("%.0f", estimatedVehicleCost)}</strong> in value/costs this week alone. Are you driving the right car?</p>
-                    <a href="/vehicle-cost/cost-per-mile" class="text-xs font-bold text-red-600 hover:text-red-700">See true cost per mile →</a>
+                    <a :href="'/vehicle-cost/cost-per-mile?app=' + selectedApp + '&miles=' + miles" class="text-xs font-bold text-red-600 hover:text-red-700">See true cost per mile →</a>
                 </div>
 
                 <!-- Insurance GAP Card -->
@@ -56,7 +56,7 @@
                     <div class="absolute -right-2 -top-2 bg-amber-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide border-2 border-white">CRITICAL</div>
                     <h4 class="font-bold text-slate-900 flex items-center gap-2 mb-2">🛡️ Insurance GAP</h4>
                     <p class="text-xs text-slate-600 mb-3">If you crash tomorrow, your personal insurance <strong>may deny the claim depending on your policy</strong>. Coverage depends on insurer and state. Verify policy terms.</p>
-                    <a href="/insurance/rideshare-basics" class="text-xs font-bold text-red-600 hover:text-red-700">Learn how to fix this →</a>
+                    <a :href="'/insurance/rideshare-basics?app=' + selectedApp" class="text-xs font-bold text-red-600 hover:text-red-700">Learn how to fix this →</a>
                 </div>
             </div>
         </div>

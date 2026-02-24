@@ -9,6 +9,7 @@
 @param String lastUpdated
 @param SeoMeta seoMeta
 @param Boolean noIndex = false
+@param com.gigwager.service.DataLayerService dataLayerService
 
 @template.layout.main(
     seoMeta = seoMeta,
@@ -26,7 +27,34 @@
                 </div>
 
                 <div class="bg-blue-50 p-6 rounded-xl border border-blue-200 text-left mb-8">
-                    <p class="text-blue-800 text-sm font-medium"><strong>Disclaimer:</strong> This ranking is based on automated algorithm estimates. It calculates net hourly pay using the IRS Standard Mileage Rate (${AppConstants.IRS_MILEAGE_RATE * 100}¢/mi) and a 15.3% Self-Employment Tax rate on projected gross earnings. Your actual results will vary depending on your specific vehicle, driving habits, and tax situation.</p>
+                    <h2 class="text-blue-900 font-bold mb-2">Method & Weights Disclosure</h2>
+                    <ul class="list-disc pl-5 text-blue-800 text-sm space-y-1">
+                        <li><strong>Ranking Criteria:</strong> Sorts strictly by estimated Net Hourly Pay for a "side-hustle" driver.</li>
+                        <li><strong>Input Weights:</strong> We apply a traffic multiplier and a market tier multiplier (demand baseline) to estimate gross hourly revenue.</li>
+                        <li><strong>Deductions:</strong> We deduct the precise local gas price (if applicable per vehicle setup) or the @template.components.irs_rate_snippet() standard deduction. We then deduct an assumed 15.3% SE tax. Actual results vary heavily based on your specific car MPG and driving habits.</li>
+                    </ul>
+                </div>
+
+                <!-- Top 5 Highlight Cards -->
+                <div class="mb-12">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Why the Top 5 Win in ${appName}</h2>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        @for(int i = 0; i < Math.min(rankedCities.size(), 5); i++)
+                            !{CityRankingDto ranking = rankedCities.get(i);}
+                            !{com.gigwager.model.CityLocalData local = dataLayerService.getLocalData(ranking.city().getSlug());}
+                            <div class="bg-white p-6 rounded-xl border border-emerald-100 shadow-sm relative overflow-hidden">
+                                <div class="absolute top-0 left-0 w-1 h-full bg-emerald-500"></div>
+                                <h3 class="font-bold text-slate-900 text-lg flex items-center gap-2">
+                                    <span class="bg-emerald-100 text-emerald-800 font-black text-xs px-2 py-1 rounded-full">#${i + 1}</span>
+                                    ${ranking.city().getCityName()}
+                                </h3>
+                                <p class="text-xs text-slate-500 mt-1 mb-3">Est. Net Hourly: <strong class="text-emerald-600">$${String.format("%.2f", ranking.netHourly())}</strong></p>
+                                <p class="text-sm text-slate-600 italic">
+                                    "High surge density near ${local != null && local.nightlifeDistrict() != null ? local.nightlifeDistrict() : "downtown"} and consistent order volume around ${local != null && local.shoppingDistrict() != null ? local.shoppingDistrict() : "commercial areas"} keeps active time highly optimized."
+                                </p>
+                            </div>
+                        @endfor
+                    </div>
                 </div>
 
                 <div class="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm">

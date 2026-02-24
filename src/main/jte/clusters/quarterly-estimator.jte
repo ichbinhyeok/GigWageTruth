@@ -4,8 +4,30 @@
     noIndex = noIndex,
     seoMeta = new com.gigwager.model.SeoMeta(customTitle, "Estimate your quarterly self-employment taxes easily to avoid IRS penalties. Our estimator makes gig tax prep a breeze.", com.gigwager.util.AppConstants.BASE_URL + "/taxes/quarterly-estimator", com.gigwager.util.AppConstants.BASE_URL + "/og-image.jpg"),
     content = @`
-        <div class="bg-slate-50 min-h-screen py-16 px-6">
-            <div class="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center">
+        <div class="bg-slate-50 min-h-screen py-16 px-6" x-data="{
+            params: new URLSearchParams(window.location.search),
+            get appName() { return this.params.get('app'); },
+            get gross() { return parseInt(this.params.get('gross')) || 0; },
+            get estimatedQuarterly() { return (this.gross * 13 * 0.153).toFixed(0); },
+            get showPersonalizedBanner() { return this.gross > 0 && this.appName != null; }
+        }">
+            <div class="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-2 bg-red-500"></div>
+                
+                <!-- Phase 3-2: Dynamic CTA Trigger Banner -->
+                <div x-show="showPersonalizedBanner" x-cloak class="mt-4 mb-8 bg-amber-50 border border-amber-200 rounded-2xl p-6 shadow-sm text-left relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-2 h-full bg-amber-400"></div>
+                    <div class="flex items-start gap-4">
+                        <div class="bg-amber-100 p-2 rounded-full text-amber-600 shrink-0 mt-1">
+                            <span class="text-xl">⚠️</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-amber-900 mb-1">Your <span class="capitalize" x-text="appName"></span> Tax Warning</h3>
+                            <p class="text-amber-800 text-sm">Based on your weekly gross of <strong>$<span x-text="gross"></span></strong>, you could owe roughly <strong>$<span x-text="estimatedQuarterly"></span></strong> to the IRS every quarter. Scroll down to see how to avoid underpayment penalties.</p>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="inline-flex bg-red-100 text-red-600 p-4 rounded-full mb-6">
                     <svg class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 </div>

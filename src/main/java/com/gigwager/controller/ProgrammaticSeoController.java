@@ -104,6 +104,7 @@ public class ProgrammaticSeoController {
                 model.addAttribute("lastUpdated", monthYear);
                 model.addAttribute("seoMeta",
                                 new SeoMeta(title, description, canonicalUrl, AppConstants.BASE_URL + "/og-image.jpg"));
+                model.addAttribute("dataLayerService", dataLayerService);
 
                 return "salary/best-cities";
         }

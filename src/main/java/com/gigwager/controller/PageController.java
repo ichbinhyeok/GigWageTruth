@@ -13,6 +13,32 @@ public class PageController {
         return "methodology";
     }
 
+    // --- Phase 2: Intent Hub Landing Pages ---
+    @GetMapping("/uber-after-expenses")
+    public String uberAfterExpenses(Model model) {
+        model.addAttribute("customTitle", "Uber After Expenses 2026: The Real Hourly Wage");
+        return "hubs/uber-after-expenses";
+    }
+
+    @GetMapping("/doordash-after-expenses")
+    public String doordashAfterExpenses(Model model) {
+        model.addAttribute("customTitle", "DoorDash After Expenses 2026: Real Net Profit");
+        return "hubs/doordash-after-expenses";
+    }
+
+    @GetMapping("/net-hourly-calculator")
+    public String netHourlyCalculator(Model model) {
+        model.addAttribute("customTitle", "Gig Worker Net Hourly Calculator 2026");
+        return "hubs/net-hourly-calculator";
+    }
+
+    @GetMapping("/multi-apping")
+    public String multiApping(Model model) {
+        model.addAttribute("customTitle", "Mastering Multi-Apping: Uber & DoorDash Strategy");
+        return "hubs/multi-apping";
+    }
+    // --- End Phase 2 ---
+
     // --- Phase 7: Core Revenue-Intent Clusters ---
 
     @GetMapping("/taxes")
