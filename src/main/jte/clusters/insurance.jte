@@ -15,7 +15,7 @@
             <div class="text-center mb-16">
                 <span class="text-blue-600 font-bold tracking-widest uppercase text-sm">Revenue Pillar</span>
                 <h1 class="text-4xl lg:text-5xl font-black text-slate-900 mt-4 mb-6 tracking-tight">The Rideshare Insurance Trap</h1>
-                <p class="text-xl text-slate-600 max-w-2xl mx-auto">One crash while delivering could bankrupt you. Find out why your personal auto policy won't cover you while driving for Gig apps.</p>
+                <p class="text-xl text-slate-600 max-w-2xl mx-auto">One crash while delivering could be a severe financial risk. Find out why your personal auto policy may not cover you while driving for Gig apps.</p>
             </div>
 
             <!-- Content Grid -->

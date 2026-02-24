@@ -95,7 +95,7 @@
 
                         <h2>Conclusion</h2>
                         <p>
-                            Don't let the apps fool you with "Gross Revenue." Focus on your <strong>Net Profit</strong>. Your car is a tool, not a toy. Treat it like a business expense, because that's exactly what it is.
+                            Don't let the apps fool you with "Gross Revenue." Focus on your <strong>Net Profit</strong>. Your car is a tool, not a toy. Treat it like a business expense.
                         </p>
 
                         <div class="mt-12 text-center">

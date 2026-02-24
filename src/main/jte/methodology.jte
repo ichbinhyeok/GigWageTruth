@@ -11,7 +11,8 @@
     ),
     content = @`
         <div class="max-w-4xl mx-auto px-6 py-12">
-            <h1 class="text-4xl font-bold text-slate-900 mb-8">Methodology: The Math Behind the Truth</h1>
+            <h1 class="text-4xl font-bold text-slate-900 mb-2">Methodology: The Math Behind the Truth</h1>
+            <p class="text-sm text-slate-500 mb-8 italic">Last updated: February 2026. <a href="https://www.irs.gov/tax-professionals/standard-mileage-rates" class="text-emerald-600 hover:underline" target="_blank" rel="noopener noreferrer">Data Source: Official IRS Mileage Rates</a></p>
             
             <div class="space-y-8">
                 <!-- 1. Gross Revenue -->

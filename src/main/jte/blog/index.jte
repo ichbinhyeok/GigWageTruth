@@ -80,7 +80,7 @@
                                 Gig Worker Tax Guide 2026: Don't Overpay the IRS
                             </h2>
                             <p class="text-slate-600 text-sm mb-4 line-clamp-3">
-                                The 2026 IRS mileage rate is 72.5 cents. Learn exactly how to deduct your car, phone, and hot bags to pay zero taxes legally.
+                                @template.components.irs_rate_snippet() Learn how to estimate deductions for your car, phone, and hot bags to lower your tax burden.
                             </p>
                             <div class="mt-auto flex items-center gap-2 text-xs text-slate-400 font-medium">
                                 <span>8 min read</span>

@@ -466,7 +466,7 @@
             <section class="bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-2xl p-10 text-center shadow-xl">
                 <h3 class="text-2xl font-bold text-white mb-3">Calculate YOUR Personalized Estimate</h3>
                 <p class="text-emerald-100 mb-6 max-w-xl mx-auto">
-                    These scenarios use averages. Want precision? Enter your exact miles, hours, and vehicle type.
+                    These scenarios use averages. Want a personalized estimate? Enter your typical miles, hours, and vehicle type.
                 </p>
                 <a href="/${app}?gross=${featuredScenario.getGrossWeekly()}&miles=${featuredScenario.getMiles()}&hours=${featuredScenario.getHours()}&gasPrice=${city.getGasPrice()}" 
                    class="inline-block px-8 py-4 bg-white text-emerald-700 font-bold text-lg rounded-xl hover:bg-emerald-50 transition shadow-lg">

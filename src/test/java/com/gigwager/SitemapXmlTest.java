@@ -17,6 +17,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import org.w3c.dom.NodeList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 @SpringBootTest
 @AutoConfigureMockMvc
 public class SitemapXmlTest {
@@ -42,7 +46,20 @@ public class SitemapXmlTest {
 
             // Assert root element is urlset
             assertNotNull(doc.getDocumentElement(), "Root element should not be null");
-            assert (doc.getDocumentElement().getNodeName().equals("urlset"));
+            assertEquals("urlset",
+                    doc.getDocumentElement().getLocalName() != null ? doc.getDocumentElement().getLocalName()
+                            : doc.getDocumentElement().getNodeName());
+
+            NodeList urls = doc.getElementsByTagName("url");
+            assertTrue(urls.getLength() >= 10, "Sitemap should have at least 10 URLs");
+
+            // Check if required clusters are present
+            assertTrue(xmlContent.contains("/taxes"), "Sitemap should contain /taxes");
+            assertTrue(xmlContent.contains("/insurance"), "Sitemap should contain /insurance");
+            assertTrue(xmlContent.contains("/vehicle-cost"), "Sitemap should contain /vehicle-cost");
+            assertTrue(xmlContent.contains("/taxes/quarterly-estimator"),
+                    "Sitemap should contain /taxes/quarterly-estimator");
+
         }, "Sitemap output could not be parsed as valid XML");
     }
 }

@@ -2,7 +2,7 @@
 @param Boolean noIndex = false
 @template.layout.main(
     noIndex = noIndex,
-    seoMeta = new com.gigwager.model.SeoMeta(customTitle, "See exactly how much your car costs to run per mile. Avoid the depreciation trap.", com.gigwager.util.AppConstants.BASE_URL + "/vehicle-cost/cost-per-mile", com.gigwager.util.AppConstants.BASE_URL + "/og-image.jpg"),
+    seoMeta = new com.gigwager.model.SeoMeta(customTitle, "Estimate how much your car costs to run per mile. Avoid the depreciation trap.", com.gigwager.util.AppConstants.BASE_URL + "/vehicle-cost/cost-per-mile", com.gigwager.util.AppConstants.BASE_URL + "/og-image.jpg"),
     content = @`
         <div class="bg-slate-50 min-h-screen py-16 px-6">
             <div class="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center">

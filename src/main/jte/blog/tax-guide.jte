@@ -6,7 +6,7 @@
     noIndex = noIndex,
     seoMeta = new SeoMeta(
         customTitle != null ? customTitle : "Gig Worker Tax Guide 2026: Don't Overpay the IRS",
-        "The 2026 IRS mileage rate is 72.5 cents. Learn exactly how to deduct your car, phone, and hot bags to pay zero taxes legally.",
+        "The 2026 IRS mileage rate is 72.5 cents. Learn how to estimate deductions for your car, phone, and hot bags to lower your tax burden.",
         AppConstants.BASE_URL + "/blog/tax-guide",
         AppConstants.BASE_URL + "/og-image-tax.jpg"
     ),

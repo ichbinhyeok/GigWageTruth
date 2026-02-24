@@ -16,8 +16,8 @@
     seoMeta = new SeoMeta(
         customTitle != null ? customTitle : (app.equals("uber") ? "My Real Hourly Wage - The Shocking Truth" : "DoorDash Truth - My Real Hourly Wage"),
         app.equals("uber") ? 
-            "See exactly how much I make after gas, taxes, and depreciation. The number will surprise you." : 
-            "See exactly how much you make on DoorDash after gas, vehicle destruction, and taxes. The truth is shocking.",
+            "See an estimate of how much I make after gas, taxes, and depreciation. The number will surprise you." : 
+            "See an estimate of how much you make on DoorDash after gas, vehicle destruction, and taxes. The truth is shocking.",
         com.gigwager.util.AppConstants.BASE_URL + "/" + app,
         com.gigwager.util.AppConstants.BASE_URL + "/og-image.jpg"
     ),
@@ -144,7 +144,7 @@
                                      <a href="/insurance" class="relative group block bg-white p-5 rounded-xl border-2 border-emerald-100 hover:border-emerald-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
                                          <div class="absolute -right-2 -top-2 bg-amber-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide">Critical Risk</div>
                                          <h4 class="font-bold text-slate-900 mb-2 flex items-center gap-2"><span class="text-xl">🛡️</span> Insurance GAP</h4>
-                                         <p class="text-xs text-slate-600 mb-4 leading-relaxed">If you crash with a passenger, your Geico/StateFarm policy WILL deny the claim. See how to get a $15/mo rideshare endorsement to cover your ass.</p>
+                                         <p class="text-xs text-slate-600 mb-4 leading-relaxed">If you crash with a passenger, your personal auto policy may deny the claim. See how to get a rideshare endorsement to protect yourself.</p>
                                          <div class="text-xs font-bold text-emerald-600 group-hover:text-emerald-700 flex items-center gap-1">Get covered now <span class="group-hover:translate-x-1 transition-transform">→</span></div>
                                      </a>
                                      <a href="/blog/multi-apping-guide" class="relative group block bg-gradient-to-br from-emerald-600 to-emerald-800 text-white p-5 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
@@ -325,7 +325,7 @@
                                      <a href="/insurance" class="relative group block bg-white p-5 rounded-xl border-2 border-red-100 hover:border-red-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
                                          <div class="absolute -right-2 -top-2 bg-amber-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide">Critical Risk</div>
                                          <h4 class="font-bold text-slate-900 mb-2 flex items-center gap-2"><span class="text-xl">🛡️</span> Insurance GAP</h4>
-                                         <p class="text-xs text-slate-600 mb-4 leading-relaxed">If you crash with food in the car, your Geico/StateFarm policy WILL deny the claim. See how to get a $15/mo rideshare endorsement to cover your ass.</p>
+                                         <p class="text-xs text-slate-600 mb-4 leading-relaxed">If you crash with food in the car, your personal auto policy may deny the claim. See how to get a rideshare endorsement to protect yourself.</p>
                                          <div class="text-xs font-bold text-red-600 group-hover:text-red-700 flex items-center gap-1">Get covered now <span class="group-hover:translate-x-1 transition-transform">→</span></div>
                                      </a>
                                      <a href="/blog/multi-apping-guide" class="relative group block bg-gradient-to-br from-red-600 to-red-800 text-white p-5 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">

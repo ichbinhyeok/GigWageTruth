@@ -194,7 +194,7 @@ public enum WorkLevel {
                                 return "<h3 class=\"text-xl font-bold text-slate-900 mb-3\">💰 Tax Strategy: Keep It Simple</h3>"
                                                 +
                                                 "<ul class=\"list-disc pl-5 space-y-2 text-slate-700\">" +
-                                                "<li><strong>Don't Panic:</strong> If you earn under $600/year, you won't get a 1099, but you still must report income.</li>"
+                                                "<li><strong>Don't Panic:</strong> Reporting thresholds change. Regardless of forms received, income is taxable and must be reported. Check current IRS 1099-K guidance.</li>"
                                                 +
                                                 "<li><strong>Mileage Tracking:</strong> Use a simple app like Stride or Everlance. For 2026, the IRS standard mileage rate is 72.5¢ per mile. We use this as an estimation proxy, not tax advice. Every mile driven for "
                                                 + appName + " = 72.5¢ deduction.</li>" +

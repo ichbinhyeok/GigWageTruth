@@ -74,8 +74,11 @@ public class SitemapController {
 
         // Cluster Pillars
         addUrl(xml, AppConstants.BASE_URL + "/taxes", today, "monthly", "0.8");
+        addUrl(xml, AppConstants.BASE_URL + "/taxes/quarterly-estimator", today, "monthly", "0.7");
         addUrl(xml, AppConstants.BASE_URL + "/insurance", today, "monthly", "0.8");
+        addUrl(xml, AppConstants.BASE_URL + "/insurance/rideshare-basics", today, "monthly", "0.7");
         addUrl(xml, AppConstants.BASE_URL + "/vehicle-cost", today, "monthly", "0.8");
+        addUrl(xml, AppConstants.BASE_URL + "/vehicle-cost/cost-per-mile", today, "monthly", "0.7");
 
         // Static pages
         addUrl(xml, AppConstants.BASE_URL + "/about", today, "yearly", "0.5");
