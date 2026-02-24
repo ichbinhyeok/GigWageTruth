@@ -194,20 +194,20 @@ public class ProgrammaticSeoController {
 
                 if (city.isHighTraffic()) {
                         description = String.format(
-                                        "Don't drive blind in %s. Traffic congestion thrives here. Estimate your liquid hourly wage after gas (%s/gal) and depreciation. See if you're actually making a profit.",
+                                        "Don't drive blind in %s. Traffic congestion eats your profit. Estimate your net hourly wage using the IRS mileage rate ($0.725/mi) plus taxes. Local gas: %s/gal.",
                                         city.getCityName(), gasPrice);
                 } else if (city.isCheapGas()) {
                         description = String.format(
-                                        "Gas is cheap in %s (%s/gal), but are you actually profiting? Don't be fooled by gross numbers. Use our %s Net Pay Calculator to estimate your real take-home pay.",
+                                        "Gas is cheap in %s (%s/gal), but are you actually profiting after all costs? Use our %s Net Pay Calculator (IRS mileage proxy + SE tax) to see your real take-home.",
                                         city.getCityName(), gasPrice, appName);
                 } else if (city.isHighCost()) {
                         description = String.format(
-                                        "Is %s worth it in %s's high-cost market? Don't drive blind. We estimate the exact breakdown of Expenses vs. Profit for %s drivers. See the truth.",
-                                        appName, city.getCityName(), appName);
+                                        "Is %s worth it in %s's high-cost market? We estimate net profit using the IRS standard mileage rate and SE tax to show the real breakdown. See the numbers.",
+                                        appName, city.getCityName());
                 } else {
                         description = String.format(
-                                        "Stop guessing. Estimate your net hourly wage as a %s driver in %s. We deduct estimated gas (%s/gal), taxes, and wear & tear to show your REAL profit.",
-                                        appName, city.getCityName(), gasPrice);
+                                        "Stop guessing. Estimate your net hourly wage as a %s driver in %s. We use the IRS mileage rate ($0.725/mi) and 15.3%% SE tax to show your REAL profit.",
+                                        appName, city.getCityName());
                 }
 
                 String canonicalUrl = String.format("%s/salary/%s/%s", AppConstants.BASE_URL, app, citySlug);

@@ -1,0 +1,179 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GJVLR0KTTS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GJVLR0KTTS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3533137832089555"
+     crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+    <title>Calculate Your True Cost Per Mile ($/mi)</title>
+    
+    <meta name="description" content="Estimate how much your car costs to run per mile. Avoid the depreciation trap.">
+    <link rel="canonical" href="https://gigverdict.com/vehicle-cost/cost-per-mile">
+    
+    <meta property="og:title" content="Calculate Your True Cost Per Mile ($/mi)">
+    <meta property="og:description" content="Estimate how much your car costs to run per mile. Avoid the depreciation trap.">
+    <meta property="og:image" content="https://gigverdict.com/og-image.jpg">
+    <meta property="og:type" content="website">
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+    
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: '#10B981', 
+                        primary: '#0F172A', 
+                        secondary: '#64748B', 
+                        surface: '#FFFFFF',
+                        background: '#F8FAFC', 
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
+    
+</head>
+<body class="flex flex-col min-h-screen bg-slate-50 text-slate-900 antialiased font-sans">
+
+    
+    <header class="w-full bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="w-full px-8 h-16 flex justify-between items-center">
+            
+            <a href="/" class="flex items-center space-x-2 group">
+                <span class="text-xl font-bold tracking-tight text-slate-900 group-hover:text-emerald-600 transition-colors">
+                    GigWageTruth
+                </span>
+            </a>
+
+            
+            <nav class="flex space-x-6 text-sm font-medium text-slate-600">
+                <a href="/salary/directory" class="hover:text-emerald-600 transition hidden sm:inline-block">Directory</a>
+                <a href="/" class="hover:text-emerald-600 transition">Calculator</a>
+                <a href="/blog" class="hover:text-emerald-600 transition">Blog</a>
+            </nav>
+        </div>
+    </header>
+
+    
+    <main class="flex-grow w-full">
+        
+        <div class="bg-slate-50 min-h-screen py-16 px-6" x-data="{
+            params: new URLSearchParams(window.location.search),
+            get fromApp() { return this.params.get('app') || 'gig apps'; },
+            get miles() { return parseInt(this.params.get('miles')) || 0; },
+            get estimatedWeeklyCost() { return (this.miles * 0.725).toFixed(0); },
+            get showPersonalizedBanner() { return this.miles > 0; }
+        }">
+            <div class="max-w-3xl mx-auto">
+                
+                
+                <div x-show="showPersonalizedBanner" x-cloak class="mt-4 mb-8 bg-amber-50 border-2 border-amber-200 rounded-2xl p-6 shadow-sm">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-amber-100 p-2 rounded-full text-amber-600">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-amber-900 mb-1">Warning: Based on your <span class="capitalize" x-text="fromApp"></span> stats</h3>
+                            <p class="text-amber-800">You are driving <strong x-text="miles ? miles : '500'">500</strong> miles per week. At the standard deduction rate, you are putting <strong><span x-text="estimatedWeeklyCost ? '$' + estimatedWeeklyCost : '$362'">$362</span></strong> of wear and tear on your car every single week!</p>
+                            <p class="text-sm text-amber-700 mt-2 font-semibold">Scroll down to see the real breakdown.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center">
+                    <div class="inline-flex bg-blue-100 text-blue-600 p-4 rounded-full mb-6">
+                        <svg class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+                    </div>
+                    <h1 class="text-4xl font-bold text-slate-900 mb-4">True Cost Per Mile</h1>
+                    <p class="text-xl text-slate-600 mb-8">Stop treating your gas limit as your total cost.</p>
+                
+                <div class="grid md:grid-cols-3 gap-6 mb-12">
+                   <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 text-center">
+                       <h3 class="font-bold text-slate-800">Depreciation</h3>
+                       <p class="text-3xl text-slate-900 font-extrabold my-2">$0.18</p>
+                       <p class="text-xs text-slate-500">Invisible loss per mile</p>
+                   </div>
+                   <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 text-center">
+                       <h3 class="font-bold text-slate-800">Maintenance</h3>
+                       <p class="text-3xl text-slate-900 font-extrabold my-2">$0.09</p>
+                       <p class="text-xs text-slate-500">Tires, brakes, oil</p>
+                   </div>
+                   <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 text-center">
+                       <h3 class="font-bold text-slate-800">Gas & Oil</h3>
+                       <p class="text-3xl text-slate-900 font-extrabold my-2">$0.15</p>
+                       <p class="text-xs text-slate-500">Direct wallet hit</p>
+                   </div>
+                </div>
+
+                <div class="bg-blue-50 p-6 rounded-xl border border-blue-200 text-left mb-8">
+                    <p class="text-blue-800 font-medium mb-4">For most sedans, you are losing <strong>around 45 cents to 70 cents</strong> per mile driven. For 2026, the IRS standard mileage rate is 72.5¢ per mile. We use this as an estimation proxy, not tax advice. It is actually highly accurate to the real cost if you use a depreciating asset.</p>
+                </div>
+                
+                <a href="/vehicle-cost" class="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors shadow shadow-blue-500/30">View Vehicle Strategy Guide</a>
+                </div>
+            </div>
+        </div>
+    
+    </main>
+
+    
+    <footer class="bg-white border-t border-slate-200 py-12 mt-12">
+        <div class="max-w-5xl mx-auto px-4 text-center">
+            <p class="text-slate-900 font-semibold mb-2">GigWageTruth</p>
+            <div class="flex flex-col md:flex-row flex-wrap justify-center items-center gap-x-6 gap-y-3 mb-6 text-sm text-slate-500">
+                <a href="/salary/directory" class="hover:text-emerald-600 transition">Salary by City</a>
+                <a href="/blog" class="hover:text-emerald-600 transition border-b-2 border-emerald-500/20 md:border-0">Blog</a>
+                <a href="/about" class="hover:text-emerald-600 transition">About</a>
+                <a href="/methodology" class="hover:text-emerald-600 transition">Methodology</a>
+                <a href="/privacy" class="hover:text-emerald-600 transition">Privacy</a>
+                <a href="/terms" class="hover:text-emerald-600 transition">Terms</a>
+                <a href="/contact" class="hover:text-emerald-600 transition">Contact</a>
+            </div>
+            <p class="text-slate-500 text-sm mb-4">
+                Revealing the true cost of the gig economy.
+            </p>
+            <p class="text-xs text-slate-400">
+                &copy; 2026 GigWageTruth. All rights reserved. <br>
+                Calculations based on 2026 IRS Standard Mileage Rate ($0.725/mile). Not financial advice.
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
+
+

@@ -145,9 +145,9 @@ public enum WorkLevel {
                                                                 +
                                                                 "</p>" +
                                                                 "<p class=\"text-slate-700 leading-relaxed mb-4\">" +
-                                                                "<strong>Health Insurance Reality:</strong> You'll need to purchase coverage through the ACA Marketplace (Healthcare.gov). "
+                                                                "<strong>Health Insurance Reality:</strong> You'll likely need to purchase coverage through the ACA Marketplace (Healthcare.gov). "
                                                                 +
-                                                                "In %s, expect to pay $300-600/month for a mid-tier plan if you're under 40 and healthy. If you're married with kids, this jumps to $800-1,200/month. "
+                                                                "In %s, premiums can range from roughly $300-600/month for a mid-tier plan depending on age and household size (check Healthcare.gov for current rates). "
                                                                 +
                                                                 "<em>This is not included in the hourly wage estimates above.</em> Factor this into your 'real take-home' calculations."
                                                                 +
@@ -155,9 +155,9 @@ public enum WorkLevel {
                                                                 "<p class=\"text-slate-700 leading-relaxed mb-4\">" +
                                                                 "<strong>Retirement Planning:</strong> As a 1099 contractor, there's no employer 401(k) match. However, you can open a <strong>Solo 401(k)</strong> "
                                                                 +
-                                                                "or SEP IRA and contribute up to $66,000/year (2024 limit). The catch? You need to be disciplined enough to set money aside quarterly. "
+                                                                "or SEP IRA with generous contribution limits (check IRS.gov for current year limits). The catch? You need to be disciplined enough to set money aside regularly. "
                                                                 +
-                                                                "Most full-time gig drivers don't do this and end up with zero retirement savings after 5 years."
+                                                                "Many full-time gig drivers skip this and may end up with minimal retirement savings."
                                                                 +
                                                                 "</p>" +
                                                                 "<p class=\"text-slate-700 leading-relaxed mb-4\">" +
@@ -196,11 +196,12 @@ public enum WorkLevel {
                                                 +
                                                 "<li><strong>Mileage Tracking:</strong> Use a simple app like Stride or Everlance. For 2026, the IRS standard mileage rate is 72.5¢ per mile. We use this as an estimation proxy, not tax advice. Every mile driven for "
                                                 + appName + " = 72.5¢ deduction.</li>" +
-                                                "<li><strong>No Quarterly Taxes Needed:</strong> At this level, the IRS won't penalize you for not making estimated payments. Just settle up in April.</li>"
+                                                "<li><strong>Quarterly Taxes May Not Apply:</strong> At lower income levels, the IRS penalty for skipping estimated payments is often minimal. However, check your total tax liability to be sure.</li>"
                                                 +
                                                 "<li><strong>Student Loan Borrowers:</strong> Gig income can affect your Income-Driven Repayment (IDR) plan. Report it honestly to avoid recertification issues.</li>"
                                                 +
-                                                "</ul>";
+                                                "</ul>" +
+                                                "<p class=\"text-xs text-slate-400 mt-3 italic\">Tax information is for educational purposes only — not tax advice. Consult a qualified CPA. Last reviewed: 2026-02.</p>";
 
                         case SIDE_HUSTLE:
                                 return "<h3 class=\"text-xl font-bold text-slate-900 mb-3\">💰 Tax Strategy: Get Organized</h3>"
@@ -215,19 +216,20 @@ public enum WorkLevel {
                                                 +
                                                 "<li><strong>Deduction Goldmine:</strong> Phone bill (business use %), car washes, toll fees, parking, even that air freshener—if it's for "
                                                 + appName + ", it's deductible.</li>" +
-                                                "<li><strong>Audit Risk:</strong> Low. The IRS flags Schedule C filers with losses or luxury car write-offs, not side-hustlers making $25K/year.</li>"
+                                                "<li><strong>Audit Risk:</strong> Generally low for typical side-hustle earners, but always keep clean records and honest deductions.</li>"
                                                 +
-                                                "</ul>";
+                                                "</ul>" +
+                                                "<p class=\"text-xs text-slate-400 mt-3 italic\">Tax information is for educational purposes only — not tax advice. Consult a qualified CPA. Last reviewed: 2026-02.</p>";
 
                         case FULL_TIME:
                                 return "<h3 class=\"text-xl font-bold text-slate-900 mb-3\">💰 Tax Strategy: Treat This Like a Business</h3>"
                                                 +
                                                 "<ul class=\"list-disc pl-5 space-y-2 text-slate-700\">" +
-                                                "<li><strong>Mandatory Quarterly Payments:</strong> You'll owe $3,000-5,000 quarterly in taxes (federal + state). Set aside 25-30% of every check in a separate savings account.</li>"
+                                                "<li><strong>Quarterly Estimated Taxes:</strong> Depending on your earnings, you may owe several thousand dollars per quarter in taxes (federal + state). A common guideline: set aside 25-30% of net profit in a separate savings account to avoid surprises.</li>"
                                                 +
-                                                "<li><strong>Retirement Tax Hack:</strong> Open a Solo 401(k). Contribute up to $23,000 as 'employee' + 25% of net profit as 'employer.' "
+                                                "<li><strong>Retirement Tax Strategy:</strong> Consider a Solo 401(k) or SEP IRA. You can contribute as both 'employee' and 'employer' (check IRS.gov for current limits). "
                                                 +
-                                                "This reduces your taxable income massively—e.g., $50K gross → $15K contribution → taxed on $35K.</li>"
+                                                "This can significantly reduce taxable income. Consult a CPA for the optimal setup based on your earnings.</li>"
                                                 +
                                                 "<li><strong>Health Insurance Deduction:</strong> You can deduct 100% of Marketplace premiums as an 'above-the-line' deduction (not itemized). "
                                                 +
@@ -236,11 +238,12 @@ public enum WorkLevel {
                                                 +
                                                 "instead of the standard mileage rate. Run both calculations—sometimes actual saves you $2,000-3,000 more.</li>"
                                                 +
-                                                "<li><strong>S-Corp Election:</strong> If you're netting $60K+/year, talk to a CPA about electing S-Corp status. You can split income into 'wages' and 'distributions' to legally reduce SE tax.</li>"
+                                                "<li><strong>S-Corp Election:</strong> If you're netting significant income, talk to a CPA about electing S-Corp status. This can allow you to split income into 'wages' and 'distributions' to potentially reduce SE tax. The optimal threshold varies by state.</li>"
                                                 +
-                                                "<li><strong>Audit Risk:</strong> Moderate. Full-time gig drivers are more likely to be audited if they claim 100% business use of a personal vehicle or report consecutive years of losses.</li>"
+                                                "<li><strong>Audit Risk:</strong> Moderate. Full-time gig drivers may face higher scrutiny if they claim 100% business use of a personal vehicle or report consecutive years of losses.</li>"
                                                 +
-                                                "</ul>";
+                                                "</ul>" +
+                                                "<p class=\"text-xs text-slate-400 mt-3 italic\">Tax information is for educational purposes only — not tax advice. Consult a qualified CPA. Last reviewed: 2026-02.</p>";
 
                         default:
                                 return "";
@@ -389,7 +392,7 @@ public enum WorkLevel {
                 switch (this) {
                         case PART_TIME:
                                 practices.append(
-                                                "<li><strong>Cherry-Pick Ruthlessly:</strong> At 10 hours/week, you can afford to decline low-tip orders. Maintain a 70%+ acceptance rate to avoid deactivation, but don't waste time on $3 deliveries.</li>");
+                                                "<li><strong>Cherry-Pick Strategically:</strong> At 10 hours/week, you can afford to decline low-value orders. Be aware that acceptance rate thresholds vary by platform and region — check your app's current driver requirements.</li>");
                                 practices.append(
                                                 "<li><strong>Know Your 'Strike Zone':</strong> Identify the 2-3 neighborhoods in ")
                                                 .append(cityName)
@@ -414,7 +417,7 @@ public enum WorkLevel {
                                 practices.append(
                                                 "<li><strong>Invest in Comfort:</strong> At 25 hrs/week, you need better equipment. Buy a good phone mount, seat cushion, and insulated delivery bag. These aren't luxuries—they're tools.</li>");
                                 practices.append(
-                                                "<li><strong>Track EVERYTHING:</strong> Use apps like Hurdlr or Stride to auto-track mileage. You'll drive 13,000 miles/year—that's a $9,425 tax deduction you CAN'T afford to lose.</li>");
+                                                "<li><strong>Track EVERYTHING:</strong> Use apps like Hurdlr or Stride to auto-track mileage. At ~13,000 miles/year, your mileage deduction could be substantial (multiply miles × current IRS rate). Don't leave this money on the table.</li>");
                                 if (city.getGasPrice() > 4.0) {
                                         practices.append("<li><strong>Gas Strategy in High-Cost ").append(cityName)
                                                         .append(

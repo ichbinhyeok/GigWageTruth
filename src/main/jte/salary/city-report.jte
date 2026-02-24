@@ -59,8 +59,8 @@
                 </h1>
                 
                 <p class="text-xl text-slate-300 max-w-2xl mb-8">
-                    Stop guessing. See your <strong>estimated net hourly wage</strong> after ${city.getCityName()}'s 
-                    gas prices ($${String.format("%.2f", city.getGasPrice())}/gal), vehicle costs, and taxes.
+                    Stop guessing. See your <strong>estimated net hourly wage</strong> after mileage costs
+                    (IRS rate: $0.725/mi), vehicle depreciation, and taxes. Local gas: $${String.format("%.2f", city.getGasPrice())}/gal.
                 </p>
 
                 <!-- AD SLOT 1: High Visibility (Top) -->
@@ -86,6 +86,70 @@
                 </div>
             </div>
         </div>
+
+        <!-- AEO: TL;DR Summary Table (AI-Crawlable Semantic Data) -->
+        <section class="max-w-4xl mx-auto px-6 -mt-8 relative z-10 mb-8">
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden">
+                <div class="bg-slate-900 px-6 py-3 flex items-center justify-between">
+                    <h2 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                        <span>📊</span> ${appName} in ${city.getCityName()} — Quick Summary (${lastUpdated})
+                    </h2>
+                    <span class="text-xs text-slate-400">Updated ${lastUpdated}</span>
+                </div>
+                <div class="overflow-x-auto">
+                <table class="w-full text-sm" aria-label="${appName} earnings summary for ${city.getCityName()} in 2026">
+                    <caption class="sr-only">Estimated ${appName} driver earnings in ${city.getCityName()} for 2026, showing gross pay, net profit, and real hourly wage by work level.</caption>
+                    <thead>
+                        <tr class="bg-slate-50 border-b border-slate-200">
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-bold text-slate-500 uppercase">Metric</th>
+                            @for(var scenario : scenarios)
+                                <th scope="col" class="px-4 py-3 text-right text-xs font-bold text-slate-500 uppercase">${scenario.getName()}</th>
+                            @endfor
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        <tr>
+                            <td class="px-4 py-2.5 font-medium text-slate-700">Gross Weekly Pay</td>
+                            @for(var scenario : scenarios)
+                                <td class="px-4 py-2.5 text-right font-bold text-slate-900">$${scenario.getGrossWeekly()}</td>
+                            @endfor
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2.5 font-medium text-slate-700">Est. Weekly Miles</td>
+                            @for(var scenario : scenarios)
+                                <td class="px-4 py-2.5 text-right text-slate-600">${scenario.getMiles()} mi</td>
+                            @endfor
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2.5 font-medium text-slate-700">Hours / Week</td>
+                            @for(var scenario : scenarios)
+                                <td class="px-4 py-2.5 text-right text-slate-600">${scenario.getHours()} hrs</td>
+                            @endfor
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2.5 font-medium text-slate-700">Est. Net Profit / Week</td>
+                            @for(var scenario : scenarios)
+                                <td class="px-4 py-2.5 text-right font-bold text-emerald-600">$${String.format("%.2f", scenario.getNetProfit())}</td>
+                            @endfor
+                        </tr>
+                        <tr class="bg-emerald-50/50">
+                            <td class="px-4 py-3 font-bold text-slate-900">⭐ Real Hourly Wage</td>
+                            @for(var scenario : scenarios)
+                                <td class="px-4 py-3 text-right text-lg font-black text-slate-900">$${String.format("%.2f", scenario.getNetHourly())}/hr</td>
+                            @endfor
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr class="bg-slate-50 border-t border-slate-200">
+                            <td colspan="${scenarios.size() + 1}" class="px-4 py-2.5 text-xs text-slate-500">
+                                Assumes: Gas at $${String.format("%.2f", city.getGasPrice())}/gal · IRS Mileage Rate $0.725/mi · 15.3% SE Tax · ${city.getCityName()}, ${city.getState()} market conditions. Estimates only, not financial advice.
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+                </div>
+            </div>
+        </section>
 
         <!-- Main Content -->
         <div class="max-w-4xl mx-auto px-6 py-16 space-y-16">
@@ -286,31 +350,59 @@
                 </ul>
             </section>
 
-            <!-- FAQ Schema JSON-LD -->
+            <!-- FAQ Schema JSON-LD (AEO: 7 Long-tail Questions for AI Search) -->
             <script type="application/ld+json">
             {
               "@context": "https://schema.org",
               "@type": "FAQPage",
               "mainEntity": [{
                 "@type": "Question",
+                "name": "How much does a ${appName} driver make in ${city.getCityName()} after expenses in 2026?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Based on our estimates for ${city.getCityName()}, a side-hustle ${appName} driver (25 hrs/week) earns approximately $${String.format("%.2f", featuredScenario.getNetHourly())} per hour after deducting gas ($${String.format("%.2f", city.getGasPrice())}/gal), vehicle depreciation (IRS rate: $0.725/mile), and 15.3% self-employment tax. This translates to roughly $${String.format("%.0f", featuredScenario.getNetProfit())} in net weekly profit."
+                }
+              }, {
+                "@type": "Question",
+                "name": "Is ${appName} worth it in ${city.getCityName()} in 2026?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "It depends on your work level and vehicle. At a side-hustle pace in ${city.getCityName()}, the estimated net hourly wage is $${String.format("%.2f", featuredScenario.getNetHourly())}/hr. ${featuredScenario.getNetHourly() >= 15.0 ? "This is above the federal minimum wage, making it potentially viable as supplemental income." : "This is close to or below minimum wage in many states, meaning a traditional W-2 job may offer better compensation plus benefits."} Vehicle choice matters: a Toyota Prius (57 MPG) will yield significantly higher net pay than a Ford Explorer (23 MPG)."
+                }
+              }, {
+                "@type": "Question",
                 "name": "How are these ${appName} earnings calculated?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "We calculate 'real' net profit by starting with estimated gross income levels for ${city.getMarketTier()} markets, then subtracting fuel costs ($${String.format("%.2f", city.getGasPrice())}/gal), vehicle depreciation (using the IRS standard rate of 72.5 cents/mile), and estimated self-employment taxes (15.3%). This reveals your true take-home pay."
+                  "text": "We estimate net profit by starting with gross income levels typical for ${city.getMarketTier()} markets, then subtracting fuel costs ($${String.format("%.2f", city.getGasPrice())}/gal local average), vehicle depreciation (using the 2026 IRS standard mileage rate of $0.725/mile), and estimated self-employment taxes (15.3%). The result is your estimated take-home pay per hour."
                 }
               }, {
                 "@type": "Question",
-                "name": "Why do earnings in ${city.getCityName()} differ from other cities?",
+                "name": "What is the best car for ${appName} driving in ${city.getCityName()}?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Earnings vary due to local factors. ${city.getCityName()} has specific gas prices ($${String.format("%.2f", city.getGasPrice())}/gal), traffic conditions, and market demand tiers (${city.getMarketTier()}). High-cost cities often have higher gross pay but also higher expenses, while lower-cost cities might offer better effective margins."
+                  "text": "${city.isHighTraffic() ? "In " + city.getCityName() + "'s stop-and-go traffic, a hybrid like the Toyota Prius (57 MPG) or Corolla Hybrid (52 MPG) is ideal because city driving actually improves hybrid efficiency. Gas-only SUVs can drop to 15-18 MPG in congestion, destroying your margins." : "For " + city.getCityName() + "'s driving conditions, a Toyota Prius (57 MPG) or Camry Hybrid (51 MPG) offers the best cost-per-mile. If you need SUV capacity for XL rides, the RAV4 Hybrid (39 MPG) is the most efficient option."}"
                 }
               }, {
                 "@type": "Question",
-                "name": "Do these numbers include taxes?",
+                "name": "How much should a ${appName} driver in ${city.getCityName()} save for taxes?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Yes. Our models deduct the standardized IRS mileage deduction from your gross income to find taxable profit, then apply a 15.3% self-employment tax estimate. This is crucial because gig drivers are independent contractors (1099), not employees."
+                  "text": "As an independent contractor (1099), you owe approximately 15.3% self-employment tax on net profit, plus federal and state income tax. For a side-hustle driver in ${city.getCityName()} grossing $${featuredScenario.getGrossWeekly()}/week, the estimated quarterly SE tax alone is about $${String.format("%.0f", Math.max(0, (featuredScenario.getGrossWeekly() - (featuredScenario.getMiles() * 0.725)) * 0.153) * 13)}. A safe rule: set aside 25-30% of your net profit for taxes and pay quarterly to avoid IRS penalties."
+                }
+              }, {
+                "@type": "Question",
+                "name": "Why do ${appName} earnings in ${city.getCityName()} differ from other cities?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Earnings vary due to local factors. ${city.getCityName()} has gas at $${String.format("%.2f", city.getGasPrice())}/gal, ${city.isHighTraffic() ? "heavy traffic congestion that increases hours per delivery" : "moderate traffic conditions"}, and is classified as a ${city.getMarketTier()} market. High-cost cities often have higher gross pay but also higher expenses, while lower-cost cities might offer better effective margins after expenses."
+                }
+              }, {
+                "@type": "Question",
+                "name": "Is it better to drive for Uber or DoorDash in ${city.getCityName()}?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Both platforms operate in ${city.getCityName()}'s ${city.getMarketTier()} market with similar expenses. ${city.isHighTraffic() ? "In high-traffic areas like " + city.getCityName() + ", DoorDash deliveries may involve more parking challenges but shorter distances, while Uber rides can get stuck in congestion with passengers." : "In " + city.getCityName() + ", Uber tends to have higher per-trip gross pay for rideshare while DoorDash offers more flexibility for food delivery."} Many top earners 'multi-app' — running both platforms simultaneously to minimize downtime. Use our comparison tool to see the specific numbers."
                 }
               }]
             }

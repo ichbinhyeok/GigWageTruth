@@ -1,0 +1,269 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GJVLR0KTTS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GJVLR0KTTS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3533137832089555"
+     crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+    <title>GigWageTruth - The Only Real Net Profit Calculator for Gig Workers</title>
+    
+    <meta name="description" content="Stop driving blind. Calculate your net hourly wage for Uber, Lyft, and DoorDash after hidden costs.">
+    <link rel="canonical" href="https://gigverdict.com">
+    
+    <meta property="og:title" content="GigWageTruth - The Only Real Net Profit Calculator for Gig Workers">
+    <meta property="og:description" content="Stop driving blind. Calculate your net hourly wage for Uber, Lyft, and DoorDash after hidden costs.">
+    <meta property="og:image" content="https://gigverdict.com/og-image.jpg">
+    <meta property="og:type" content="website">
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+    
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: '#10B981', 
+                        primary: '#0F172A', 
+                        secondary: '#64748B', 
+                        surface: '#FFFFFF',
+                        background: '#F8FAFC', 
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
+    
+</head>
+<body class="flex flex-col min-h-screen bg-slate-50 text-slate-900 antialiased font-sans">
+
+    
+    <header class="w-full bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="w-full px-8 h-16 flex justify-between items-center">
+            
+            <a href="/" class="flex items-center space-x-2 group">
+                <span class="text-xl font-bold tracking-tight text-slate-900 group-hover:text-emerald-600 transition-colors">
+                    GigWageTruth
+                </span>
+            </a>
+
+            
+            <nav class="flex space-x-6 text-sm font-medium text-slate-600">
+                <a href="/salary/directory" class="hover:text-emerald-600 transition hidden sm:inline-block">Directory</a>
+                <a href="/" class="hover:text-emerald-600 transition">Calculator</a>
+                <a href="/blog" class="hover:text-emerald-600 transition">Blog</a>
+            </nav>
+        </div>
+    </header>
+
+    
+    <main class="flex-grow w-full">
+        
+        <div class="lg:h-[calc(100vh-4rem)] flex flex-col lg:flex-row overflow-hidden">
+            
+            
+            
+            <div class="order-1 lg:order-1 lg:w-1/2 bg-slate-50 border-r border-slate-200 p-8 lg:p-20 flex flex-col justify-end relative">
+                
+                 <div class="absolute top-0 left-0 w-full h-full overflow-hidden flex items-center justify-center opacity-80 pointer-events-none">
+                     <canvas
+                         id="cobe"
+                         style="width: 100%; height: 100%; max-width: 600px; max-height: 600px;"
+                         width="1000"
+                         height="1000"
+                     ></canvas>
+                </div>
+                
+                <script type="module">
+                    import { initGlobe } from '/js/globe-component.js';
+                    const canvas = document.getElementById('cobe');
+                    initGlobe(canvas);
+                </script>
+
+                <div class="relative z-10 space-y-6">
+                    <h1 class="text-6xl lg:text-8xl font-black tracking-tighter text-slate-900 leading-[0.9]">
+                        DON'T<br>
+                        DRIVE<br>
+                        <span class="text-emerald-600">BLIND.</span>
+                    </h1>
+                    <p class="text-xl lg:text-2xl font-medium text-slate-500 max-w-md leading-relaxed">
+                        You see revenue. We see the truth.<br>
+                        Find your <span class="text-emerald-600 font-bold">Real Hourly Wage</span> in seconds.
+                    </p>
+                    
+                    <div class="pt-8 flex items-center space-x-6 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+                         <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">Powered by</span>
+                         <span class="font-bold text-slate-600">2026 IRS Data</span>
+                         <span class="font-bold text-slate-600">BLS.gov</span>
+                    </div>
+                </div>
+            </div>
+
+            
+            
+            <div class="order-2 lg:order-2 lg:w-1/2 bg-white p-6 lg:p-20 flex items-center justify-center overflow-y-auto">
+                <div class="w-full max-w-lg space-y-8">
+                    
+                    
+                    <div x-data="{ app: 'rideshare', actionUrl: '/uber' }" class="bg-white rounded-3xl border-2 border-slate-100 shadow-2xl shadow-slate-200/50 p-6 md:p-10 relative">
+                        
+                        
+                        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow-lg flex items-center gap-1 whitespace-nowrap">
+                            <span>🔒</span> 100% Anonymous & No Sign-up
+                        </div>
+
+                        
+                        <div class="grid grid-cols-2 gap-2 mb-8 p-1 bg-slate-100 rounded-xl">
+                            <button @click="app = 'rideshare'; actionUrl = '/uber'" 
+                                    :class="app === 'rideshare' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'"
+                                    class="py-2.5 text-sm font-bold rounded-lg transition-all flex items-center justify-center gap-2">
+                                <span>🚗</span> Uber / Lyft
+                            </button>
+                            <button @click="app = 'delivery'; actionUrl = '/doordash'" 
+                                    :class="app === 'delivery' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'"
+                                    class="py-2.5 text-sm font-bold rounded-lg transition-all flex items-center justify-center gap-2">
+                                <span>🍔</span> DoorDash
+                            </button>
+                        </div>
+
+                        <form :action="actionUrl" method="GET" class="space-y-6">
+                            
+                            
+                            <div class="space-y-2">
+                                <label class="text-xs font-bold text-slate-900 uppercase tracking-wide">Total Weekly Earnings (Payout)</label>
+                                <p class="text-xs text-slate-500">Week, month, or any period</p>
+                                <div class="relative group">
+                                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-lg font-medium group-focus-within:text-emerald-600 transition-colors">$</span>
+                                    <input type="number" inputmode="decimal" name="gross" required placeholder="1000" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-4 pl-10 pr-4 text-xl font-bold text-slate-900 outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all placeholder:text-slate-300">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                
+                                <div class="space-y-2">
+                                    <div class="flex justify-between items-baseline">
+                                        <label class="text-xs font-bold text-slate-900 uppercase tracking-wide">Miles Driven</label>
+                                    </div>
+                                    <div class="relative group">
+                                        <input type="number" inputmode="decimal" name="miles" required placeholder="800" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-4 px-4 text-xl font-bold text-slate-900 outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all placeholder:text-slate-300">
+                                        <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-medium">mi</span>
+                                    </div>
+                                </div>
+
+                                
+                                <div class="space-y-2">
+                                    <div class="flex justify-between items-baseline">
+                                        <label class="text-xs font-bold text-slate-900 uppercase tracking-wide">Total Online Time</label>
+                                        <span class="text-[10px] text-red-500 font-bold">NO Active Time</span>
+                                    </div>
+                                    <div class="relative group">
+                                        <input type="number" inputmode="decimal" name="hours" required placeholder="40" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-4 px-4 text-xl font-bold text-slate-900 outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all placeholder:text-slate-300">
+                                        <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-medium">hr</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                            <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-3">
+                                <p class="text-xs text-emerald-800">
+                                    <span class="font-bold">💡 Where to find:</span> 
+                                    <span x-text="app === 'rideshare' ? 'Uber/Lyft app → Earnings tab' : 'Earnings tab → Dash Time (Not Active Time)'"></span>
+                                </p>
+                            </div>
+
+                            <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xl py-5 rounded-xl shadow-lg shadow-emerald-200 transform transition active:scale-[0.98] hover:-translate-y-1">
+                                Calculate My Truth &rarr;
+                            </button>
+                        </form>
+                        
+                        <div class="pt-4 text-center">
+                            <p class="text-[10px] text-slate-400 font-medium">
+                                ⚡ Calculated instantly. No email required. No BS.
+                            </p>
+                        </div>
+
+                    </div>
+                    
+                    
+                    <div class="lg:hidden text-center text-slate-300 text-xs font-medium uppercase tracking-widest">
+                        &darr; Why check? &darr;
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        
+        
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [{
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home"
+          }]
+        }
+        </script>
+    
+    </main>
+
+    
+    <footer class="bg-white border-t border-slate-200 py-12 mt-12">
+        <div class="max-w-5xl mx-auto px-4 text-center">
+            <p class="text-slate-900 font-semibold mb-2">GigWageTruth</p>
+            <div class="flex flex-col md:flex-row flex-wrap justify-center items-center gap-x-6 gap-y-3 mb-6 text-sm text-slate-500">
+                <a href="/salary/directory" class="hover:text-emerald-600 transition">Salary by City</a>
+                <a href="/blog" class="hover:text-emerald-600 transition border-b-2 border-emerald-500/20 md:border-0">Blog</a>
+                <a href="/about" class="hover:text-emerald-600 transition">About</a>
+                <a href="/methodology" class="hover:text-emerald-600 transition">Methodology</a>
+                <a href="/privacy" class="hover:text-emerald-600 transition">Privacy</a>
+                <a href="/terms" class="hover:text-emerald-600 transition">Terms</a>
+                <a href="/contact" class="hover:text-emerald-600 transition">Contact</a>
+            </div>
+            <p class="text-slate-500 text-sm mb-4">
+                Revealing the true cost of the gig economy.
+            </p>
+            <p class="text-xs text-slate-400">
+                &copy; 2026 GigWageTruth. All rights reserved. <br>
+                Calculations based on 2026 IRS Standard Mileage Rate ($0.725/mile). Not financial advice.
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
+
+

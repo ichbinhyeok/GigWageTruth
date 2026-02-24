@@ -152,6 +152,105 @@
         "icon": "🚐"
     },
     {
+        "id": "camry",
+        "name": "Toyota Camry (Gas)",
+        "type": "sedan",
+        "mpg": 32,
+        "maintenanceCostPerMile": 0.1104,
+        "avgGasPrice": 3.50,
+        "depreciationCostPerMile": 0.10,
+        "description": "Popular full-size sedan - 32 MPG",
+        "icon": "🚙"
+    },
+    {
+        "id": "altima",
+        "name": "Nissan Altima",
+        "type": "sedan",
+        "mpg": 31,
+        "maintenanceCostPerMile": 0.1104,
+        "avgGasPrice": 3.50,
+        "depreciationCostPerMile": 0.10,
+        "description": "Budget-friendly midsize - 31 MPG",
+        "icon": "🚙"
+    },
+    {
+        "id": "malibu",
+        "name": "Chevy Malibu",
+        "type": "sedan",
+        "mpg": 30,
+        "maintenanceCostPerMile": 0.1104,
+        "avgGasPrice": 3.50,
+        "depreciationCostPerMile": 0.11,
+        "description": "Common fleet car - 30 MPG",
+        "icon": "🚙"
+    },
+    {
+        "id": "accord",
+        "name": "Honda Accord (Gas)",
+        "type": "sedan",
+        "mpg": 33,
+        "maintenanceCostPerMile": 0.1104,
+        "avgGasPrice": 3.50,
+        "depreciationCostPerMile": 0.10,
+        "description": "Reliable midsize - 33 MPG",
+        "icon": "🚙"
+    },
+    {
+        "id": "highlander",
+        "name": "Toyota Highlander (Gas SUV)",
+        "type": "suv",
+        "mpg": 24,
+        "maintenanceCostPerMile": 0.14,
+        "avgGasPrice": 3.50,
+        "depreciationCostPerMile": 0.13,
+        "description": "Large SUV, XL rides - 24 MPG",
+        "icon": "🚐"
+    },
+    {
+        "id": "rav4-gas",
+        "name": "Toyota RAV4 (Gas SUV)",
+        "type": "suv",
+        "mpg": 30,
+        "maintenanceCostPerMile": 0.12,
+        "avgGasPrice": 3.50,
+        "depreciationCostPerMile": 0.11,
+        "description": "Compact SUV - 30 MPG",
+        "icon": "🚐"
+    },
+    {
+        "id": "cx-5",
+        "name": "Mazda CX-5 (SUV)",
+        "type": "suv",
+        "mpg": 28,
+        "maintenanceCostPerMile": 0.12,
+        "avgGasPrice": 3.50,
+        "depreciationCostPerMile": 0.12,
+        "description": "Sporty crossover - 28 MPG",
+        "icon": "🚐"
+    },
+    {
+        "id": "explorer",
+        "name": "Ford Explorer (SUV)",
+        "type": "suv",
+        "mpg": 23,
+        "maintenanceCostPerMile": 0.15,
+        "avgGasPrice": 3.50,
+        "depreciationCostPerMile": 0.14,
+        "description": "Full-size SUV, XL rides - 23 MPG",
+        "icon": "🚐"
+    },
+    {
+        "id": "sienna-hybrid",
+        "name": "Toyota Sienna Hybrid (Minivan)",
+        "type": "hybrid",
+        "mpg": 36,
+        "maintenanceCostPerMile": 0.12,
+        "avgGasPrice": 3.50,
+        "depreciationCostPerMile": 0.11,
+        "description": "XL rides, great MPG - 36 MPG",
+        "icon": "🚐"
+    },
+    {
         "id": "ebike",
         "name": "E-Bike / Bicycle",
         "type": "bike",
