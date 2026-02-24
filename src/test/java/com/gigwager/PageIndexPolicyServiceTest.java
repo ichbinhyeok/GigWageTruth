@@ -55,8 +55,8 @@ public class PageIndexPolicyServiceTest {
         when(dataLayerService.hasRichLocalData("san-francisco")).thenReturn(true);
 
         assertTrue(pageIndexPolicyService.isWorkLevelReportIndexable(sf, WorkLevel.SIDE_HUSTLE));
-        assertFalse(pageIndexPolicyService.isWorkLevelReportIndexable(sf, WorkLevel.PART_TIME));
-        assertFalse(pageIndexPolicyService.isWorkLevelReportIndexable(sf, WorkLevel.FULL_TIME));
+        assertTrue(pageIndexPolicyService.isWorkLevelReportIndexable(sf, WorkLevel.PART_TIME));
+        assertTrue(pageIndexPolicyService.isWorkLevelReportIndexable(sf, WorkLevel.FULL_TIME));
 
         // Unindexable city shouldn't index its side hustle page either
         CityData fresno = CityData.FRESNO;

@@ -46,6 +46,18 @@
                          <span class="font-bold text-slate-600">2026 IRS Data</span>
                          <span class="font-bold text-slate-600">BLS.gov</span>
                     </div>
+
+                    <div class="hidden lg:block pt-8 mt-8 border-t border-slate-200/50">
+                        <h2 class="text-lg font-bold text-slate-900 mb-2">What is GigWageTruth?</h2>
+                        <p class="text-sm text-slate-600 mb-4 max-w-lg leading-relaxed">
+                            GigWageTruth aggregates 2026 IRS data, BLS statistics, and real-world surveys to calculate your *true* hourly earnings. We factor in 15.3% SE tax, $0.725/mi depreciation, and local market costs.
+                        </p>
+                        <ul class="text-xs font-semibold text-slate-500 space-y-2">
+                            <li class="flex items-center gap-2"><span class="text-emerald-500 flex-shrink-0">✓</span> Enter your market & work level</li>
+                            <li class="flex items-center gap-2"><span class="text-emerald-500 flex-shrink-0">✓</span> Our engine calculates taxes & vehicle wear</li>
+                            <li class="flex items-center gap-2"><span class="text-emerald-500 flex-shrink-0">✓</span> Instantly see your actual net hourly take-home wage</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 

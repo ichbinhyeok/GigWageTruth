@@ -60,7 +60,10 @@
                 <section class="bg-slate-900 rounded-3xl p-8 lg:p-12 text-center shadow-xl">
                     <h2 class="text-3xl font-bold text-white mb-4">Need help tracking your miles?</h2>
                     <p class="text-slate-300 mb-8 max-w-xl mx-auto">Stop guessing and risking an audit. Use a premium mileage tracker to automatically log every drive.</p>
-                    <a href="#" class="inline-block bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-bold px-8 py-4 rounded-xl transition duration-200">Get the best mileage tracker apps &rarr;</a>
+                    <form action="https://formspree.io/f/mqkenryp" method="POST" class="flex flex-col sm:flex-row gap-2 max-w-xl" onsubmit="gtag('event','cta_click',{'event_category':'lead','event_label':'tax_tracker_app'});">
+                        <input type="email" name="email" placeholder="Enter your email..." required class="flex-1 px-6 py-4 rounded-xl border-2 border-slate-200 focus:outline-none focus:border-emerald-500 text-slate-900 font-medium">
+                        <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-8 py-4 rounded-xl transition duration-200 whitespace-nowrap">Get Tracker List &rarr;</button>
+                    </form>
                 </section>
             </div>
         </div>

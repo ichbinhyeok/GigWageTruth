@@ -31,6 +31,7 @@
                     
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         @for(var city : CityData.values())
+                            @if(!city.getMarketTier().name().equals("LOW"))
                             <div class="group">
                                 <div class="bg-slate-50 border border-slate-200 rounded-xl p-6 hover:shadow-lg hover:border-emerald-500 transition-all">
                                     <div class="flex items-start justify-between mb-3">
@@ -72,6 +73,28 @@
                                     </div>
                                 </div>
                             </div>
+                            @else
+                            <!-- Low Data City -->
+                            <div class="group opacity-50 grayscale hover:grayscale-0 transition-all">
+                                <div class="bg-slate-50 border border-slate-200 rounded-xl p-6">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div>
+                                            <h3 class="text-xl font-bold text-slate-900">
+                                                ${city.getCityName()}, ${city.getState()}
+                                            </h3>
+                                            <div class="flex items-center gap-2 mt-1">
+                                                <span class="text-xs px-2 py-1 rounded-md font-semibold bg-slate-200 text-slate-600">
+                                                    Low-Data Market
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <p class="text-xs text-slate-500">Full verified earnings data coming soon.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
                         @endfor
                     </div>
                 </div>

@@ -55,7 +55,10 @@
                 <section class="bg-slate-900 rounded-3xl p-8 lg:p-12 text-center shadow-xl">
                     <h2 class="text-3xl font-bold text-white mb-4">Get Covered Before It's Too Late</h2>
                     <p class="text-slate-300 mb-8 max-w-xl mx-auto">Not all insurers offer rideshare coverage in every state. Compare quotes from providers who specialize in protecting gig workers.</p>
-                    <a href="#" class="inline-block bg-blue-500 hover:bg-blue-400 text-white font-bold px-8 py-4 rounded-xl transition duration-200">Compare Rideshare Insurance Quotes &rarr;</a>
+                    <form action="https://formspree.io/f/mqkenryp" method="POST" class="flex flex-col sm:flex-row gap-2 max-w-xl" onsubmit="gtag('event','cta_click',{'event_category':'lead','event_label':'insurance_quote'});">
+                        <input type="email" name="email" placeholder="Enter your email..." required class="flex-1 px-6 py-4 rounded-xl border-2 border-slate-200 focus:outline-none focus:border-blue-500 text-slate-900 font-medium">
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-8 py-4 rounded-xl transition duration-200 whitespace-nowrap">Get Free Quote &rarr;</button>
+                    </form>
                 </section>
             </div>
         </div>

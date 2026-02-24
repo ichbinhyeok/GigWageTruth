@@ -48,7 +48,7 @@
                         <h4 class="font-bold text-slate-900 flex items-center gap-2 mb-2">🏦 Taxes Estimate</h4>
                         <p class="text-xs text-slate-600 mb-4">You may owe <strong>$${String.format("%.0f", estimatedTaxes * 50)}</strong>/yr in SE tax.</p>
                     </div>
-                    <a :href="'/taxes/quarterly-estimator?app=' + selectedApp + '&gross=' + gross" class="block text-center py-2 bg-slate-900 text-white rounded-lg text-sm font-bold hover:bg-slate-800">Estimate Taxes</a>
+                    <a :href="'/taxes/quarterly-estimator?app=' + selectedApp + '&gross=' + gross" onclick="gtag('event', 'cta_click', { 'event_category': 'funnel', 'event_label': 'estimate_taxes' })" class="block text-center py-2 bg-slate-900 text-white rounded-lg text-sm font-bold hover:bg-slate-800">Estimate Taxes</a>
                 </div>
                 
                 <!-- Vehicle Cost Card -->
@@ -57,7 +57,7 @@
                         <h4 class="font-bold text-slate-900 flex items-center gap-2 mb-2">🚗 Cost-per-mile</h4>
                         <p class="text-xs text-slate-600 mb-4">You used <strong>$${String.format("%.0f", estimatedVehicleCost)}</strong> in car equity this week.</p>
                     </div>
-                    <a :href="'/vehicle-cost/cost-per-mile?app=' + selectedApp + '&miles=' + miles" class="block text-center py-2 bg-slate-900 text-white rounded-lg text-sm font-bold hover:bg-slate-800">View Car Cost</a>
+                    <a :href="'/vehicle-cost/cost-per-mile?app=' + selectedApp + '&miles=' + miles" onclick="gtag('event', 'cta_click', { 'event_category': 'funnel', 'event_label': 'view_car_cost' })" class="block text-center py-2 bg-slate-900 text-white rounded-lg text-sm font-bold hover:bg-slate-800">View Car Cost</a>
                 </div>
 
                 <!-- Insurance GAP Card -->
@@ -66,7 +66,7 @@
                         <h4 class="font-bold text-slate-900 flex items-center gap-2 mb-2">🛡️ Coverage Risk</h4>
                         <p class="text-xs text-slate-600 mb-4">Insurer policies vary. You may have a coverage gap.</p>
                     </div>
-                    <a :href="'/insurance/rideshare-basics?app=' + selectedApp" class="block text-center py-2 bg-slate-900 text-white rounded-lg text-sm font-bold hover:bg-slate-800">Check Coverage</a>
+                    <a :href="'/insurance/rideshare-basics?app=' + selectedApp" onclick="gtag('event', 'cta_click', { 'event_category': 'funnel', 'event_label': 'check_coverage' })" class="block text-center py-2 bg-slate-900 text-white rounded-lg text-sm font-bold hover:bg-slate-800">Check Coverage</a>
                 </div>
             </div>
         </div>

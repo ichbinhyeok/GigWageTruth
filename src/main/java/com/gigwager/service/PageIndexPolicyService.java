@@ -35,6 +35,9 @@ public class PageIndexPolicyService {
         if (!isCityReportIndexable(city)) {
             return false;
         }
+        if (city.getMarketTier() == MarketTier.HIGH) {
+            return true;
+        }
         return workLevel == WorkLevel.SIDE_HUSTLE;
     }
 }

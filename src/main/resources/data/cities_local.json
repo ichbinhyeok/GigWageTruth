@@ -1,302 +1,302 @@
 {
     "austin": {
-        "nightlifeDistrict": "6th Street",
+        "nightlifeDistrict": "6th Street & Rainey Street",
         "shoppingDistrict": "The Domain",
-        "airport": "AUS",
-        "majorHighway": "I-35"
+        "airport": "Austin-Bergstrom International Airport (AUS)",
+        "majorHighway": "I-35 & MoPac"
     },
     "houston": {
-        "nightlifeDistrict": "Midtown",
+        "nightlifeDistrict": "Midtown & Washington Ave",
         "shoppingDistrict": "The Galleria",
-        "airport": "IAH",
-        "majorHighway": "I-45"
+        "airport": "George Bush Intercontinental (IAH)",
+        "majorHighway": "I-45 & I-10"
     },
     "san-francisco": {
-        "nightlifeDistrict": "Mission District",
+        "nightlifeDistrict": "Mission District & Marina",
         "shoppingDistrict": "Union Square",
-        "airport": "SFO",
-        "majorHighway": "US-101"
+        "airport": "San Francisco International (SFO)",
+        "majorHighway": "US-101 & I-280"
     },
     "new-york": {
-        "nightlifeDistrict": "Lower East Side",
-        "shoppingDistrict": "SoHo",
-        "airport": "JFK",
-        "majorHighway": "FDR Drive"
+        "nightlifeDistrict": "Lower East Side & Williamsburg",
+        "shoppingDistrict": "SoHo & 5th Ave",
+        "airport": "JFK & LaGuardia",
+        "majorHighway": "FDR Drive & BQE"
     },
     "los-angeles": {
-        "nightlifeDistrict": "West Hollywood",
-        "shoppingDistrict": "Rodeo Drive",
-        "airport": "LAX",
-        "majorHighway": "the 405"
+        "nightlifeDistrict": "West Hollywood & Downtown LA",
+        "shoppingDistrict": "Rodeo Drive & The Grove",
+        "airport": "Los Angeles International (LAX)",
+        "majorHighway": "The 405 & I-10"
     },
     "dallas": {
-        "nightlifeDistrict": "Deep Ellum",
+        "nightlifeDistrict": "Deep Ellum & Uptown",
         "shoppingDistrict": "NorthPark Center",
-        "airport": "DFW",
-        "majorHighway": "US-75"
+        "airport": "Dallas/Fort Worth International (DFW)",
+        "majorHighway": "US-75 & I-35E"
     },
     "phoenix": {
         "nightlifeDistrict": "Old Town Scottsdale",
         "shoppingDistrict": "Scottsdale Fashion Square",
-        "airport": "PHX",
-        "majorHighway": "I-10"
+        "airport": "Phoenix Sky Harbor (PHX)",
+        "majorHighway": "I-10 & Loop 202"
     },
     "chicago": {
-        "nightlifeDistrict": "River North",
+        "nightlifeDistrict": "River North & West Loop",
         "shoppingDistrict": "Magnificent Mile",
-        "airport": "ORD",
-        "majorHighway": "The Kennedy"
+        "airport": "O'Hare International (ORD)",
+        "majorHighway": "The Kennedy (I-90) & Dan Ryan"
     },
     "miami": {
-        "nightlifeDistrict": "South Beach",
-        "shoppingDistrict": "Brickell",
-        "airport": "MIA",
-        "majorHighway": "I-95"
+        "nightlifeDistrict": "South Beach & Wynwood",
+        "shoppingDistrict": "Brickell City Centre",
+        "airport": "Miami International (MIA)",
+        "majorHighway": "I-95 & Palmetto Expressway"
     },
     "seattle": {
-        "nightlifeDistrict": "Capitol Hill",
-        "shoppingDistrict": "Pike Place",
-        "airport": "SEA",
-        "majorHighway": "I-5"
+        "nightlifeDistrict": "Capitol Hill & Belltown",
+        "shoppingDistrict": "Pike Place Market",
+        "airport": "Seattle-Tacoma International (SEA)",
+        "majorHighway": "I-5 & I-405"
     },
     "atlanta": {
-        "nightlifeDistrict": "Buckhead",
+        "nightlifeDistrict": "Buckhead & Midtown",
         "shoppingDistrict": "Ponce City Market",
-        "airport": "ATL",
-        "majorHighway": "the Downtown Connector"
+        "airport": "Hartsfield-Jackson (ATL)",
+        "majorHighway": "The Downtown Connector (I-75/85)"
     },
     "boston": {
-        "nightlifeDistrict": "Faneuil Hall",
+        "nightlifeDistrict": "Faneuil Hall & Seaport",
         "shoppingDistrict": "Newbury Street",
-        "airport": "BOS",
-        "majorHighway": "I-93"
+        "airport": "Boston Logan International (BOS)",
+        "majorHighway": "I-93 & The Mass Pike"
     },
     "denver": {
-        "nightlifeDistrict": "LoDo",
-        "shoppingDistrict": "Cherry Creek",
-        "airport": "DEN",
-        "majorHighway": "I-25"
+        "nightlifeDistrict": "LoDo & RiNo",
+        "shoppingDistrict": "Cherry Creek North",
+        "airport": "Denver International (DEN)",
+        "majorHighway": "I-25 & I-70"
     },
     "las-vegas": {
-        "nightlifeDistrict": "The Strip",
-        "shoppingDistrict": "Fremont Street",
-        "airport": "LAS",
-        "majorHighway": "I-15"
+        "nightlifeDistrict": "The Strip & Fremont Street",
+        "shoppingDistrict": "Fashion Show Mall",
+        "airport": "Harry Reid International (LAS)",
+        "majorHighway": "I-15 & 215 Beltway"
     },
     "philadelphia": {
-        "nightlifeDistrict": "Center City",
+        "nightlifeDistrict": "Center City & Fishtown",
         "shoppingDistrict": "Rittenhouse Square",
-        "airport": "PHL",
-        "majorHighway": "I-76"
+        "airport": "Philadelphia International (PHL)",
+        "majorHighway": "I-76 (Schuylkill) & I-95"
     },
     "san-diego": {
-        "nightlifeDistrict": "Gaslamp Quarter",
+        "nightlifeDistrict": "Gaslamp Quarter & PB",
         "shoppingDistrict": "Fashion Valley",
-        "airport": "SAN",
-        "majorHighway": "I-5"
+        "airport": "San Diego International (SAN)",
+        "majorHighway": "I-5 & I-8"
     },
     "san-jose": {
-        "nightlifeDistrict": "Santana Row",
+        "nightlifeDistrict": "Santana Row & Downtown",
         "shoppingDistrict": "Westfield Valley Fair",
-        "airport": "SJC",
-        "majorHighway": "US-101"
+        "airport": "San Jose Mineta International (SJC)",
+        "majorHighway": "US-101 & I-880"
     },
     "san-antonio": {
-        "nightlifeDistrict": "River Walk",
+        "nightlifeDistrict": "River Walk & Pearl District",
         "shoppingDistrict": "The Shops at La Cantera",
-        "airport": "SAT",
-        "majorHighway": "I-35"
+        "airport": "San Antonio International (SAT)",
+        "majorHighway": "I-35 & Loop 1604"
     },
     "jacksonville": {
-        "nightlifeDistrict": "Jacksonville Beach",
+        "nightlifeDistrict": "Jacksonville Beach & Riverside",
         "shoppingDistrict": "St. Johns Town Center",
-        "airport": "JAX",
-        "majorHighway": "I-95"
+        "airport": "Jacksonville International (JAX)",
+        "majorHighway": "I-95 & I-295"
     },
     "fort-worth": {
-        "nightlifeDistrict": "Sundance Square",
+        "nightlifeDistrict": "Sundance Square & West 7th",
         "shoppingDistrict": "University Park Village",
-        "airport": "DFW",
-        "majorHighway": "I-35W"
+        "airport": "DFW International",
+        "majorHighway": "I-35W & I-30"
     },
     "columbus": {
-        "nightlifeDistrict": "Short North",
+        "nightlifeDistrict": "Short North Arts District",
         "shoppingDistrict": "Easton Town Center",
-        "airport": "CMH",
-        "majorHighway": "I-70"
+        "airport": "John Glenn Columbus International (CMH)",
+        "majorHighway": "I-70 & I-270"
     },
     "indianapolis": {
-        "nightlifeDistrict": "Broad Ripple",
-        "shoppingDistrict": "Keystone at the Crossing",
-        "airport": "IND",
-        "majorHighway": "I-465"
+        "nightlifeDistrict": "Broad Ripple & Mass Ave",
+        "shoppingDistrict": "The Fashion Mall at Keystone",
+        "airport": "Indianapolis International (IND)",
+        "majorHighway": "I-465 & I-70"
     },
     "charlotte": {
-        "nightlifeDistrict": "South End",
-        "shoppingDistrict": "SouthPark",
-        "airport": "CLT",
-        "majorHighway": "I-85"
+        "nightlifeDistrict": "South End & NoDa",
+        "shoppingDistrict": "SouthPark Mall",
+        "airport": "Charlotte Douglas International (CLT)",
+        "majorHighway": "I-85 & I-77"
     },
     "washington-dc": {
-        "nightlifeDistrict": "Adams Morgan",
+        "nightlifeDistrict": "Adams Morgan & 14th St",
         "shoppingDistrict": "Georgetown",
-        "airport": "DCA",
-        "majorHighway": "Capital Beltway"
+        "airport": "Reagan National (DCA) & Dulles (IAD)",
+        "majorHighway": "Capital Beltway (I-495)"
     },
     "nashville": {
-        "nightlifeDistrict": "Broadway",
-        "shoppingDistrict": "Green Hills",
-        "airport": "BNA",
-        "majorHighway": "I-40"
+        "nightlifeDistrict": "Lower Broadway (Honky Tonk Highway)",
+        "shoppingDistrict": "Green Hills & The Gulch",
+        "airport": "Nashville International (BNA)",
+        "majorHighway": "I-40 & I-65"
     },
     "portland": {
-        "nightlifeDistrict": "Pearl District",
-        "shoppingDistrict": "Pioneer Place",
-        "airport": "PDX",
-        "majorHighway": "I-5"
+        "nightlifeDistrict": "Pearl District & Eastside",
+        "shoppingDistrict": "Washington Square Mall",
+        "airport": "Portland International (PDX)",
+        "majorHighway": "I-5 & I-84"
     },
     "detroit": {
-        "nightlifeDistrict": "Greektown",
-        "shoppingDistrict": "Somerset Collection",
-        "airport": "DTW",
-        "majorHighway": "I-75"
+        "nightlifeDistrict": "Greektown & Downtown",
+        "shoppingDistrict": "Somerset Collection (Troy)",
+        "airport": "Detroit Metropolitan (DTW)",
+        "majorHighway": "I-75 & I-94"
     },
     "memphis": {
-        "nightlifeDistrict": "Beale Street",
+        "nightlifeDistrict": "Beale Street & Midtown",
         "shoppingDistrict": "Wolfchase Galleria",
-        "airport": "MEM",
-        "majorHighway": "I-40"
+        "airport": "Memphis International (MEM)",
+        "majorHighway": "I-40 & I-240"
     },
     "louisville": {
-        "nightlifeDistrict": "Bardstown Road",
+        "nightlifeDistrict": "Bardstown Road & NuLu",
         "shoppingDistrict": "Mall St. Matthews",
-        "airport": "SDF",
-        "majorHighway": "I-64"
+        "airport": "Louisville Muhammad Ali International (SDF)",
+        "majorHighway": "I-64 & I-65"
     },
     "baltimore": {
-        "nightlifeDistrict": "Fells Point",
+        "nightlifeDistrict": "Fells Point & Federal Hill",
         "shoppingDistrict": "Inner Harbor",
-        "airport": "BWI",
-        "majorHighway": "I-95"
+        "airport": "BWI Marshall",
+        "majorHighway": "I-95 & I-695"
     },
     "milwaukee": {
-        "nightlifeDistrict": "Brady Street",
+        "nightlifeDistrict": "Brady Street & Third Ward",
         "shoppingDistrict": "Mayfair Mall",
-        "airport": "MKE",
-        "majorHighway": "I-94"
+        "airport": "Milwaukee Mitchell International (MKE)",
+        "majorHighway": "I-94 & I-43"
     },
     "albuquerque": {
-        "nightlifeDistrict": "Nob Hill",
+        "nightlifeDistrict": "Nob Hill & Downtown",
         "shoppingDistrict": "ABQ Uptown",
-        "airport": "ABQ",
-        "majorHighway": "I-40"
+        "airport": "Albuquerque International Sunport (ABQ)",
+        "majorHighway": "I-40 & I-25"
     },
     "tucson": {
-        "nightlifeDistrict": "4th Avenue",
+        "nightlifeDistrict": "4th Avenue & Downtown",
         "shoppingDistrict": "La Encantada",
-        "airport": "TUS",
+        "airport": "Tucson International (TUS)",
         "majorHighway": "I-10"
     },
     "fresno": {
         "nightlifeDistrict": "Tower District",
-        "shoppingDistrict": "River Park",
-        "airport": "FAT",
-        "majorHighway": "Highway 99"
+        "shoppingDistrict": "River Park Shopping Center",
+        "airport": "Fresno Yosemite International (FAT)",
+        "majorHighway": "Highway 99 & CA-41"
     },
     "sacramento": {
-        "nightlifeDistrict": "Midtown",
-        "shoppingDistrict": "DOCO",
-        "airport": "SMF",
-        "majorHighway": "I-5"
+        "nightlifeDistrict": "Midtown & Downtown",
+        "shoppingDistrict": "DOCO & Arden Fair",
+        "airport": "Sacramento International (SMF)",
+        "majorHighway": "I-5 & I-80"
     },
     "kansas-city": {
-        "nightlifeDistrict": "Power & Light District",
+        "nightlifeDistrict": "Power & Light District & Westport",
         "shoppingDistrict": "Country Club Plaza",
-        "airport": "MCI",
-        "majorHighway": "I-70"
+        "airport": "Kansas City International (MCI)",
+        "majorHighway": "I-70 & I-435"
     },
     "marietta": {
-        "nightlifeDistrict": "Marietta Square",
+        "nightlifeDistrict": "Marietta Square & Battery Atlanta",
         "shoppingDistrict": "The Avenue West Cobb",
-        "airport": "ATL",
-        "majorHighway": "I-75"
+        "airport": "Hartsfield-Jackson (ATL)",
+        "majorHighway": "I-75 & I-285"
     },
     "omaha": {
-        "nightlifeDistrict": "Old Market",
+        "nightlifeDistrict": "Old Market & Blackstone",
         "shoppingDistrict": "Village Pointe",
-        "airport": "OMA",
-        "majorHighway": "I-80"
+        "airport": "Eppley Airfield (OMA)",
+        "majorHighway": "I-80 & I-680"
     },
     "raleigh": {
-        "nightlifeDistrict": "Glenwood South",
+        "nightlifeDistrict": "Glenwood South & Fayetteville St",
         "shoppingDistrict": "Crabtree Valley Mall",
-        "airport": "RDU",
-        "majorHighway": "I-40"
+        "airport": "Raleigh-Durham International (RDU)",
+        "majorHighway": "I-40 & I-440"
     },
     "virginia-beach": {
-        "nightlifeDistrict": "Oceanfront",
-        "shoppingDistrict": "Town Center",
-        "airport": "ORF",
+        "nightlifeDistrict": "Oceanfront & Town Center",
+        "shoppingDistrict": "Lynnhaven Mall",
+        "airport": "Norfolk International (ORF)",
         "majorHighway": "I-264"
     },
     "minneapolis": {
-        "nightlifeDistrict": "North Loop",
+        "nightlifeDistrict": "North Loop & Uptown",
         "shoppingDistrict": "Mall of America",
-        "airport": "MSP",
-        "majorHighway": "I-35W"
+        "airport": "Minneapolis-St. Paul International (MSP)",
+        "majorHighway": "I-35W & I-94"
     },
     "tulsa": {
-        "nightlifeDistrict": "Blue Dome District",
+        "nightlifeDistrict": "Blue Dome District & Brady Arts",
         "shoppingDistrict": "Woodland Hills Mall",
-        "airport": "TUL",
-        "majorHighway": "US-169"
+        "airport": "Tulsa International (TUL)",
+        "majorHighway": "US-169 & I-44"
     },
     "arlington": {
-        "nightlifeDistrict": "Texas Live!",
-        "shoppingDistrict": "Arlington Highlands",
-        "airport": "DFW",
-        "majorHighway": "I-30"
+        "nightlifeDistrict": "Texas Live! & Entertainment District",
+        "shoppingDistrict": "Arlington Highlands & Parks Mall",
+        "airport": "DFW International",
+        "majorHighway": "I-30 & I-20"
     },
     "new-orleans": {
-        "nightlifeDistrict": "French Quarter",
-        "shoppingDistrict": "Canal Place",
-        "airport": "MSY",
-        "majorHighway": "I-10"
+        "nightlifeDistrict": "Frenchmen Street & Bourbon Street",
+        "shoppingDistrict": "Canal Place & Magazine St",
+        "airport": "Louis Armstrong New Orleans (MSY)",
+        "majorHighway": "I-10 & US-90"
     },
     "wichita": {
         "nightlifeDistrict": "Old Town",
         "shoppingDistrict": "Bradley Fair",
-        "airport": "ICT",
-        "majorHighway": "US-400"
+        "airport": "Wichita Dwight D. Eisenhower National (ICT)",
+        "majorHighway": "US-400 & I-135"
     },
     "cleveland": {
-        "nightlifeDistrict": "The Flats",
-        "shoppingDistrict": "Crocker Park",
-        "airport": "CLE",
-        "majorHighway": "I-90"
+        "nightlifeDistrict": "The Flats & Ohio City",
+        "shoppingDistrict": "Crocker Park & Pinecrest",
+        "airport": "Cleveland Hopkins International (CLE)",
+        "majorHighway": "I-90 & I-71"
     },
     "bakersfield": {
-        "nightlifeDistrict": "Downtown",
+        "nightlifeDistrict": "Downtown Bakersfield",
         "shoppingDistrict": "Valley Plaza Mall",
-        "airport": "BFL",
-        "majorHighway": "Highway 99"
+        "airport": "Meadows Field (BFL)",
+        "majorHighway": "Highway 99 & CA-58"
     },
     "honolulu": {
-        "nightlifeDistrict": "Waikiki",
+        "nightlifeDistrict": "Waikiki & Chinatown",
         "shoppingDistrict": "Ala Moana Center",
-        "airport": "HNL",
-        "majorHighway": "H-1"
+        "airport": "Daniel K. Inouye International (HNL)",
+        "majorHighway": "H-1 Freeway"
     },
     "orlando": {
-        "nightlifeDistrict": "Downtown Orlando",
-        "shoppingDistrict": "The Florida Mall",
-        "airport": "MCO",
-        "majorHighway": "I-4"
+        "nightlifeDistrict": "Downtown Orlando & I-Drive",
+        "shoppingDistrict": "The Florida Mall & Mall at Millenia",
+        "airport": "Orlando International (MCO)",
+        "majorHighway": "I-4 & SR-408"
     },
     "tampa": {
-        "nightlifeDistrict": "Ybor City",
-        "shoppingDistrict": "International Plaza",
-        "airport": "TPA",
-        "majorHighway": "I-275"
+        "nightlifeDistrict": "Ybor City & SoHo",
+        "shoppingDistrict": "International Plaza and Bay Street",
+        "airport": "Tampa International (TPA)",
+        "majorHighway": "I-275 & I-4"
     }
 }
