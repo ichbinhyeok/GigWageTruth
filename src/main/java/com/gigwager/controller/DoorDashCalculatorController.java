@@ -22,24 +22,20 @@ public class DoorDashCalculatorController {
             @RequestParam(name = "hours", required = false) Double hours,
             @RequestParam(name = "gasPrice", required = false) Double gasPrice,
             Model model) {
-
-        // Strict 2-Page Flow: If no params, go back to Gateway (Index)
-        if (gross == null || miles == null || hours == null) {
-            return "redirect:/";
-        }
+        boolean hasInputs = gross != null && miles != null && hours != null;
+        double grossVal = gross != null ? gross : 900.0;
+        double milesVal = miles != null ? miles : 700.0;
+        double hoursVal = hours != null ? hours : 35.0;
+        double gasPriceVal = gasPrice != null ? gasPrice : 3.50;
 
         // Pass params to view for Alpine JS initialization
-        model.addAttribute("initialGross", gross);
-        model.addAttribute("initialMiles", miles);
-        model.addAttribute("initialHours", hours);
-        model.addAttribute("initialGasPrice", gasPrice);
+        model.addAttribute("initialGross", grossVal);
+        model.addAttribute("initialMiles", milesVal);
+        model.addAttribute("initialHours", hoursVal);
+        model.addAttribute("initialGasPrice", gasPriceVal);
         model.addAttribute("app", "doordash");
 
         // Calculate Verdict
-        double grossVal = gross;
-        double milesVal = miles;
-        double hoursVal = hours;
-
         var verdict = verdictService.calculateVerdict(grossVal, milesVal, hoursVal, "DoorDash");
 
         double expenses = milesVal * AppConstants.IRS_MILEAGE_RATE;
@@ -50,10 +46,12 @@ public class DoorDashCalculatorController {
         model.addAttribute("estimatedTaxes", taxes);
         model.addAttribute("estimatedVehicleCost", expenses);
 
-        // Dynamic SEO Title
-        // Simple calculation for title context (approximate)
-        model.addAttribute("customTitle",
-                "DoorDash Truth: I made $" + gross.intValue() + "... but the real wage is shocking.");
+        if (hasInputs) {
+            model.addAttribute("customTitle",
+                    "DoorDash Truth: I made $" + Math.round(grossVal) + "... but the real wage is shocking.");
+        } else {
+            model.addAttribute("customTitle", "DoorDash Driver Pay Calculator 2026: Real Net Hourly After Expenses");
+        }
 
         return "pages/calculator";
     }

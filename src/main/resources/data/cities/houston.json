@@ -1,0 +1,128 @@
+﻿{
+  "citySlug": "houston",
+  "cityName": "Houston",
+  "state": "TX",
+  "coreData": {
+    "gasPrice": 2.85,
+    "trafficFactor": 0.9
+  },
+  "seo": {
+    "heroHook": "Houston rewards drivers who treat the city like multiple markets, not one map, because Energy Corridor, Medical Center, and airport flow behave differently by hour.",
+    "pageStructureType": "TYPE_B",
+    "contentType": "editorial_composite",
+    "methodologyVersion": "city-rich-v2.1",
+    "lastVerifiedAt": "2026-02-21",
+    "sources": [
+      {
+        "title": "Houston TranStar Traffic Data",
+        "url": "https://traffic.houstontranstar.org/",
+        "publisher": "Houston TranStar",
+        "checkedAt": "2026-02-16"
+      },
+      {
+        "title": "AAA Texas Gas Price Trends",
+        "url": "https://gasprices.aaa.com/?state=TX",
+        "publisher": "AAA",
+        "checkedAt": "2026-02-16"
+      },
+      {
+        "title": "IRS Standard Mileage Rates",
+        "url": "https://www.irs.gov/tax-professionals/standard-mileage-rates",
+        "publisher": "IRS",
+        "checkedAt": "2026-02-16"
+      }
+    ]
+  },
+  "workLevels": {
+    "part-time": {
+      "realisticNetHourlyRange": {
+        "min": 14.9,
+        "max": 21.1
+      },
+      "localStrategyText": "Part-time Houston drivers usually win by avoiding long cross-city hops and sticking to one micro-market per shift, especially around Medical Center and West University dinner windows.",
+      "workLevelMeaningHtml": "<h3>Part-time in Houston depends on zone choice</h3><p>With ten hours, long-distance pickups erase margin quickly because Houston scale is massive. A zone-first plan around dense demand corridors typically outperforms random request acceptance.</p><p>Think in controlled four-hour sessions rather than all-day availability.</p>",
+      "taxStrategyHtml": "<h3>Simple tax routine for small volume</h3><p>Track mileage from the first trip and keep payout summaries in one folder. Houston part-time operators can stay compliant with a lightweight weekly workflow and avoid year-end reconstruction stress.</p><p>The value is consistency and clarity, not complexity.</p>",
+      "dayInTheLifeHtml": "<h3>Low-friction part-time sequence</h3><p>A practical pattern is two weekday dinner blocks plus one weekend lunch window. Begin near the same hub each shift and stop when pickup distance drifts beyond your target radius.</p><p>This protects net hourly and limits fuel waste from cross-market repositioning.</p>",
+      "bestPracticesHtml": "<h3>Part-time execution habits</h3><p>Predefine your go zones and no-go corridors before the app goes live. Keep a quick post-shift note on wait times and idle miles so you can tune start points weekly.</p><p>The strongest part-time operators keep their playbook stable for long enough to learn from it.</p>",
+      "painPoints": [
+        "Long repositioning miles between neighborhoods",
+        "Unexpected freeway slowdowns near major interchanges",
+        "Low-value requests during midday lull"
+      ],
+      "personaQuotes": [
+        {
+          "personaType": "RIDESHARE_VETERAN",
+          "displayName": "J. Patel, 5-year rideshare driver",
+          "quote": "In Houston I never chase a ping across the loop for part-time shifts. Staying in one zone kept my hourly from collapsing.",
+          "attributionType": "USER_SUBMITTED"
+        },
+        {
+          "personaType": "NEW_DRIVER_COACH",
+          "displayName": "Onboarding mentor, Gulf region",
+          "quote": "New drivers who map one market per shift adapt faster and avoid the expensive trial-and-error phase.",
+          "attributionType": "EDITORIAL_COMPOSITE"
+        }
+      ]
+    },
+    "side-hustle": {
+      "realisticNetHourlyRange": {
+        "min": 16.3,
+        "max": 23.4
+      },
+      "localStrategyText": "Houston side-hustle schedules perform best when weekday dinner runs are paired with weekend airport or event windows, while strict deadhead limits protect net outcomes.",
+      "workLevelMeaningHtml": "<h3>Side-hustle in Houston is manageable with structure</h3><p>At twenty-five hours, earnings become more stable if schedule blocks are consistent and geographically tight. The market is large enough to generate demand, but only disciplined routing keeps miles aligned with pay.</p><p>This level rewards repeatable routines over one-off surge chasing.</p>",
+      "taxStrategyHtml": "<h3>Reserve strategy for side-hustle volume</h3><p>Set automatic transfers to a tax reserve account after each payout and review estimated liability monthly. Drivers at this level usually improve outcomes by making bookkeeping boring and routine.</p><p>Avoid end-of-year catch-up cycles that create cash flow stress.</p>",
+      "dayInTheLifeHtml": "<h3>Weekly rhythm that holds up</h3><p>Use three weekday dinner windows and one longer Saturday block, with fixed start zones near high restaurant density. Keep an hourly floor rule and log off if request quality stays below target.</p><p>This prevents emotional overdriving and preserves vehicle economics.</p>",
+      "bestPracticesHtml": "<h3>Side-hustle control loop</h3><p>Track gross per online hour, miles per payout dollar, and cancel friction by zone. If one metric slips for two consecutive weeks, adjust either location or schedule, not both simultaneously.</p><p>Measured iteration outperforms random changes in Houston sprawl conditions.</p>",
+      "painPoints": [
+        "Demand fragmentation across large metro areas",
+        "Traffic uncertainty near major freeway connectors",
+        "Fatigue from stacking gig hours after day job"
+      ],
+      "personaQuotes": [
+        {
+          "personaType": "DELIVERY_VETERAN",
+          "displayName": "L. Brooks, multi-app courier",
+          "quote": "My side-hustle improved once I fixed a weekly schedule and quit crossing town for weak offers that looked busy but paid poorly.",
+          "attributionType": "USER_SUBMITTED"
+        },
+        {
+          "personaType": "TAX_PROFESSIONAL",
+          "displayName": "Houston small-business CPA",
+          "quote": "Consistent weekly logs change everything. Side-hustle clients with clean records almost never face avoidable filing penalties.",
+          "attributionType": "EDITORIAL_COMPOSITE"
+        }
+      ]
+    },
+    "full-time": {
+      "realisticNetHourlyRange": {
+        "min": 15.5,
+        "max": 22.2
+      },
+      "localStrategyText": "Full-time Houston drivers need strict corridor strategy because airport queues, business district demand, and suburban deadhead miles each require different operating rules.",
+      "workLevelMeaningHtml": "<h3>Full-time requires operational discipline</h3><p>At forty hours, Houston can provide workable gross volume, but uncontrolled mileage quickly reduces net performance. Full-time operators need route rules, maintenance cadence, and downtime planning as standard practice.</p><p>The difference between sustainable and unsustainable weeks is usually process, not effort.</p>",
+      "taxStrategyHtml": "<h3>Business-style tax and cash controls</h3><p>Use separate operating and reserve accounts, run monthly projections, and reconcile deductible categories weekly. Full-time cash flow is too volatile to manage with ad hoc notes.</p><p>Professional review each quarter is a practical safeguard when mileage and earnings are both high.</p>",
+      "dayInTheLifeHtml": "<h3>Two-peak full-time pattern</h3><p>Morning commute and evening demand windows are usually the highest leverage periods. Midday should prioritize selective, short-mile opportunities or planned maintenance tasks.</p><p>This structure controls fatigue while improving consistency versus all-day random acceptance.</p>",
+      "bestPracticesHtml": "<h3>Sustainability protocol</h3><p>Set limits for weekly miles, mandatory recovery breaks, and maintenance reserve funding. If any limit is breached, reduce low-yield sessions before adding more hours.</p><p>Full-time performance in Houston improves when the plan is built for longevity first and expansion second.</p>",
+      "painPoints": [
+        "Mileage creep from broad service area",
+        "Coverage and liability complexity at higher utilization",
+        "Burnout risk from extended driving blocks"
+      ],
+      "personaQuotes": [
+        {
+          "personaType": "FLEET_MANAGER",
+          "displayName": "Metro operations manager",
+          "quote": "Drivers who run Houston like one giant zone usually burn margin. Corridor-based planning is what keeps full-time economics intact.",
+          "attributionType": "EDITORIAL_COMPOSITE"
+        },
+        {
+          "personaType": "INSURANCE_ADVISOR",
+          "displayName": "Commercial auto specialist",
+          "quote": "High-mileage gig work can outgrow personal policy assumptions fast. Annual coverage review is a baseline, not a nice-to-have.",
+          "attributionType": "EDITORIAL_COMPOSITE"
+        }
+      ]
+    }
+  }
+}

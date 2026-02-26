@@ -24,7 +24,7 @@
                         Uber vs DoorDash in ${city.getCityName()}
                     </h1>
                     <p class="text-xl text-slate-600 max-w-2xl mx-auto">
-                        Which app actually pays more per hour in ${city.getCityName()}? We compared net hourly pay after local gas prices and self-employment taxes.
+                        Which app actually pays more per hour in ${city.getCityName()}? We compared net hourly estimates after IRS mileage proxy and self-employment tax assumptions.
                     </p>
                 </div>
 

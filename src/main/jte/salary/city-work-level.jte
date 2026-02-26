@@ -2,6 +2,9 @@
 @import com.gigwager.model.CityData
 @import com.gigwager.model.CityScenario
 @import com.gigwager.model.WorkLevel
+@import com.gigwager.model.content.PersonaQuote
+@import com.gigwager.model.content.SourceCitation
+@import java.util.List
 @import com.gigwager.util.AppConstants
 @param SeoMeta seoMeta
 @param String app
@@ -18,13 +21,20 @@
 @param String taxStrategy
 @param String dayInTheLife
 @param String bestPractices
-@param java.util.List<com.gigwager.model.CityData> similarCities
+@param String pageStructureType = "TYPE_A"
+@param String heroHook = null
+@param List personaQuotes = null
+@param List sourceCitations = null
+@param String methodologyVersion = "legacy-v1"
+@param String contentType = "legacy_template"
+@param Double richNetMin = null
+@param Double richNetMax = null
+@param List similarCities
 @param Boolean noIndex = false
 @template.layout.main(
     noIndex = noIndex,
     seoMeta = seoMeta,
     content = @`
-        <!-- Breadcrumb & FAQ Schema -->
         <script type="application/ld+json">
         {
           "@context": "https://schema.org",
@@ -54,32 +64,30 @@
                 "name": "How much does a ${workLevel.getDisplayName()} ${appName} driver make in ${city.getCityName()}?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "A ${workLevel.getDisplayName()} ${appName} driver in ${city.getCityName()} working ${workLevel.getHoursPerWeek()} hours per week can expect to take home approximately $${String.format("%.2f", scenario.getNetProfit())} per week after deducting estimated gas and self-employment taxes."
+                  "text": "A ${workLevel.getDisplayName()} ${appName} driver in ${city.getCityName()} working ${workLevel.getHoursPerWeek()} hours per week can expect to take home approximately $${String.format("%.2f", scenario.getNetProfit())} per week after deducting estimated mileage and self-employment taxes."
                 }
               }, {
                 "@type": "Question",
                 "name": "Is ${appName} better than ${otherAppName} for ${workLevel.getDisplayName()} drivers in ${city.getCityName()}?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Local factors like ${city.getMarketTier()} market tier demand and ${String.format("$%.2f", city.getGasPrice())}/gal gas prices affect profitability. You can compare this to ${otherAppName} earnings for a more complete picture of the ${city.getCityName()} gig economy."
+                  "text": "Local factors like ${city.getMarketTier()} demand and ${String.format("$%.2f", city.getGasPrice())} per gallon gas prices affect profitability. Compare this page with ${otherAppName} data to see which app fits your market timing."
                 }
               }]
             }
           ]
         }
         </script>
-        
-        <!-- Hero Section -->
+
         <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 pt-20 pb-24 px-6">
             <div class="max-w-4xl mx-auto">
-                <!-- Breadcrumb Navigation -->
                 <nav class="text-sm text-slate-400 mb-4 flex items-center gap-2 flex-wrap">
                     <a href="/" class="hover:text-emerald-400 transition">Home</a>
-                    <span class="text-slate-600">›</span>
+                    <span class="text-slate-600">&gt;</span>
                     <a href="/salary/directory" class="hover:text-emerald-400 transition">Salary Directory</a>
-                    <span class="text-slate-600">›</span>
+                    <span class="text-slate-600">&gt;</span>
                     <a href="${parentPageUrl}" class="hover:text-emerald-400 transition">${city.getCityName()} ${appName}</a>
-                    <span class="text-slate-600">›</span>
+                    <span class="text-slate-600">&gt;</span>
                     <span class="text-white">${workLevel.getDisplayName()} Deep Dive</span>
                 </nav>
 
@@ -92,19 +100,19 @@
                     </div>
                     <span class="text-slate-400 text-xs font-medium uppercase tracking-wider">Last Updated: ${lastUpdated}</span>
                 </div>
-                
+
                 <h1 class="text-4xl md:text-6xl font-black text-white mb-4 leading-tight">
                     ${workLevel.getDisplayName()} ${appName} Earnings in ${city.getCityName()}
                 </h1>
-                
-                <p class="text-xl text-slate-300 max-w-2xl mb-8">
-                    ${workLevel.getTagline()}
-                </p>
+                @if(heroHook != null && !heroHook.isBlank())
+                    <p class="text-xl text-slate-300 max-w-3xl mb-8">${heroHook}</p>
+                @else
+                    <p class="text-xl text-slate-300 max-w-2xl mb-8">${workLevel.getTagline()}</p>
+                @endif
 
-                <!-- Featured Scenario Card -->
                 <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
                     <div class="flex items-baseline gap-3 mb-2">
-                        <span class="text-sm font-bold text-slate-400 uppercase tracking-wider">Your Real Take-Home</span>
+                        <span class="text-sm font-bold text-slate-400 uppercase tracking-wider">Estimated Weekly Take-Home</span>
                         <span class="text-xs px-3 py-1 bg-slate-700 text-slate-300 rounded-md">${scenario.getHours()} hrs/week, ${scenario.getMiles()} mi</span>
                     </div>
                     <div class="flex items-baseline gap-2 mb-4">
@@ -130,86 +138,182 @@
                         </div>
                     </div>
                 </div>
-                
+
+                @if(richNetMin != null && richNetMax != null)
+                    <div class="mt-6 bg-emerald-500/10 border border-emerald-400/30 rounded-xl p-4">
+                        <p class="text-emerald-200 text-sm">
+                            Editorial observed range: <strong>$${String.format("%.2f", richNetMin)}-$${String.format("%.2f", richNetMax)}/hr</strong>
+                        </p>
+                    </div>
+                @endif
+
                 <div class="mt-8 bg-white/5 border border-white/10 rounded-xl p-4 text-slate-300">
                     <h4 class="text-sm font-bold text-white mb-2">Calculation Assumptions</h4>
                     <p class="text-xs mb-2">
-                        These are <strong>estimated scenarios</strong> based on typical ${city.getCityName()} conditions. 
-                        Actual results vary by vehicle efficiency, cherry-picking skill, and surge timing.
+                        These are estimated scenarios based on typical ${city.getCityName()} conditions. Actual results vary by vehicle efficiency, trip mix, acceptance behavior, and market timing.
                     </p>
                     <p class="text-xs text-slate-400">
-                        Net Profit is estimated by deducting the IRS Standard Mileage Rate and an estimated 15.3% Self-Employment Tax from the gross payout. For 2026, the IRS standard mileage rate is 72.5¢ per mile. We use this as an estimation proxy, not tax advice.
+                        Net profit is estimated by applying the IRS standard mileage rate and 15.3% self-employment tax to modeled weekly gross income. For 2026, the IRS standard mileage rate is 72.5 cents per mile. This is educational content, not tax advice.
                     </p>
                 </div>
             </div>
         </div>
 
-        <!-- Main Content -->
         <div class="max-w-4xl mx-auto px-6 py-16 space-y-12">
 
-            <!-- What This Work Level Means (UNIQUE CONTENT #1) -->
-            <section class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200">
-                <h2 class="text-3xl font-bold text-slate-900 mb-6 flex items-center gap-3">
-                    <span class="text-3xl">${workLevel.getEmoji()}</span>
-                    What ${workLevel.getDisplayName()} Really Means in ${city.getCityName()}
-                </h2>
-                <div class="prose prose-slate max-w-none">
-                    $unsafe{workLevelMeaning}
-                </div>
-            </section>
+            @if("TYPE_B".equals(pageStructureType))
+                <section class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200">
+                    <div class="prose prose-slate max-w-none">$unsafe{dayInTheLife}</div>
+                </section>
 
-            <!-- Tax Strategy Section (UNIQUE CONTENT #2) -->
-            <section class="bg-slate-50 rounded-2xl p-8 border border-slate-200">
-                <div class="prose prose-slate max-w-none">
-                    $unsafe{taxStrategy}
-                </div>
-            </section>
+                <section class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                        <span class="text-3xl">${workLevel.getEmoji()}</span>
+                        What ${workLevel.getDisplayName()} Means in ${city.getCityName()}
+                    </h2>
+                    <div class="prose prose-slate max-w-none">$unsafe{workLevelMeaning}</div>
+                </section>
 
-            <!-- Day in the Life (UNIQUE CONTENT #3) -->
-            <section class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200">
-                <div class="prose prose-slate max-w-none">
-                    $unsafe{dayInTheLife}
-                </div>
-            </section>
+                @if(personaQuotes != null && !personaQuotes.isEmpty())
+                    <section class="bg-slate-900 rounded-2xl p-8 border border-slate-700 text-white">
+                        <h3 class="text-2xl font-bold mb-4">Persona Validation Snapshot</h3>
+                        <p class="text-slate-300 text-sm mb-6">These voices are labeled by persona type so users can evaluate perspective and bias.</p>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            @for(var quoteObj : personaQuotes)
+                                <article class="bg-white/5 border border-white/10 rounded-xl p-5">
+                                    <p class="text-xs uppercase tracking-wider text-emerald-300 mb-2">${((PersonaQuote) quoteObj).personaType().name().replace('_', ' ')}</p>
+                                    <blockquote class="text-slate-100 leading-relaxed">"${((PersonaQuote) quoteObj).quote()}"</blockquote>
+                                    <p class="text-xs text-slate-400 mt-3">${((PersonaQuote) quoteObj).displayName()} | ${((PersonaQuote) quoteObj).attributionType().name().replace('_', ' ')}</p>
+                                </article>
+                            @endfor
+                        </div>
+                    </section>
+                @endif
 
-            <!-- Best Practices (UNIQUE CONTENT #4) -->
-            <section class="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl p-8 border-2 border-emerald-200">
-                <div class="prose prose-slate max-w-none">
-                    $unsafe{bestPractices}
-                </div>
-            </section>
+                <section class="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl p-8 border-2 border-emerald-200">
+                    <div class="prose prose-slate max-w-none">$unsafe{bestPractices}</div>
+                </section>
 
-            <!-- Cross-Links to Other Work Levels (Internal Silo) -->
+                <section class="bg-slate-50 rounded-2xl p-8 border border-slate-200">
+                    <div class="prose prose-slate max-w-none">$unsafe{taxStrategy}</div>
+                </section>
+
+            @else
+                @if("TYPE_C".equals(pageStructureType))
+                <section class="bg-slate-50 rounded-2xl p-8 border border-slate-200">
+                    <div class="prose prose-slate max-w-none">$unsafe{taxStrategy}</div>
+                </section>
+
+                <section class="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl p-8 border-2 border-emerald-200">
+                    <div class="prose prose-slate max-w-none">$unsafe{bestPractices}</div>
+                </section>
+
+                @if(personaQuotes != null && !personaQuotes.isEmpty())
+                    <section class="bg-slate-900 rounded-2xl p-8 border border-slate-700 text-white">
+                        <h3 class="text-2xl font-bold mb-4">Persona Validation Snapshot</h3>
+                        <p class="text-slate-300 text-sm mb-6">These voices are labeled by persona type so users can evaluate perspective and bias.</p>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            @for(var quoteObj : personaQuotes)
+                                <article class="bg-white/5 border border-white/10 rounded-xl p-5">
+                                    <p class="text-xs uppercase tracking-wider text-emerald-300 mb-2">${((PersonaQuote) quoteObj).personaType().name().replace('_', ' ')}</p>
+                                    <blockquote class="text-slate-100 leading-relaxed">"${((PersonaQuote) quoteObj).quote()}"</blockquote>
+                                    <p class="text-xs text-slate-400 mt-3">${((PersonaQuote) quoteObj).displayName()} | ${((PersonaQuote) quoteObj).attributionType().name().replace('_', ' ')}</p>
+                                </article>
+                            @endfor
+                        </div>
+                    </section>
+                @endif
+
+                <section class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                        <span class="text-3xl">${workLevel.getEmoji()}</span>
+                        What ${workLevel.getDisplayName()} Means in ${city.getCityName()}
+                    </h2>
+                    <div class="prose prose-slate max-w-none">$unsafe{workLevelMeaning}</div>
+                </section>
+
+                <section class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200">
+                    <div class="prose prose-slate max-w-none">$unsafe{dayInTheLife}</div>
+                </section>
+
+                @else
+                <section class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                        <span class="text-3xl">${workLevel.getEmoji()}</span>
+                        What ${workLevel.getDisplayName()} Means in ${city.getCityName()}
+                    </h2>
+                    <div class="prose prose-slate max-w-none">$unsafe{workLevelMeaning}</div>
+                </section>
+
+                <section class="bg-slate-50 rounded-2xl p-8 border border-slate-200">
+                    <div class="prose prose-slate max-w-none">$unsafe{taxStrategy}</div>
+                </section>
+
+                <section class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200">
+                    <div class="prose prose-slate max-w-none">$unsafe{dayInTheLife}</div>
+                </section>
+
+                @if(personaQuotes != null && !personaQuotes.isEmpty())
+                    <section class="bg-slate-900 rounded-2xl p-8 border border-slate-700 text-white">
+                        <h3 class="text-2xl font-bold mb-4">Persona Validation Snapshot</h3>
+                        <p class="text-slate-300 text-sm mb-6">These voices are labeled by persona type so users can evaluate perspective and bias.</p>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            @for(var quoteObj : personaQuotes)
+                                <article class="bg-white/5 border border-white/10 rounded-xl p-5">
+                                    <p class="text-xs uppercase tracking-wider text-emerald-300 mb-2">${((PersonaQuote) quoteObj).personaType().name().replace('_', ' ')}</p>
+                                    <blockquote class="text-slate-100 leading-relaxed">"${((PersonaQuote) quoteObj).quote()}"</blockquote>
+                                    <p class="text-xs text-slate-400 mt-3">${((PersonaQuote) quoteObj).displayName()} | ${((PersonaQuote) quoteObj).attributionType().name().replace('_', ' ')}</p>
+                                </article>
+                            @endfor
+                        </div>
+                    </section>
+                @endif
+
+                <section class="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl p-8 border-2 border-emerald-200">
+                    <div class="prose prose-slate max-w-none">$unsafe{bestPractices}</div>
+                </section>
+                @endif
+            @endif
+
+            @if(sourceCitations != null && !sourceCitations.isEmpty())
+                <section class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Sources and Methodology</h3>
+                    <p class="text-sm text-slate-600 mb-2">Methodology version: <strong>${methodologyVersion}</strong></p>
+                    <p class="text-sm text-slate-600 mb-5">Content classification: <strong>${contentType}</strong></p>
+                    <ul class="space-y-3">
+                        @for(var sourceObj : sourceCitations)
+                            <li class="text-sm text-slate-700">
+                                <a class="text-emerald-700 hover:text-emerald-800 font-semibold" href="${((SourceCitation) sourceObj).url()}" target="_blank" rel="noopener nofollow">${((SourceCitation) sourceObj).title()}</a>
+                                <span class="text-slate-500"> | ${((SourceCitation) sourceObj).publisher()} | Checked ${((SourceCitation) sourceObj).checkedAt()}</span>
+                            </li>
+                        @endfor
+                    </ul>
+                </section>
+            @endif
+
             <section class="bg-slate-100 rounded-2xl p-8 border border-slate-300">
-                <h3 class="text-xl font-bold text-slate-900 mb-4">
-                    📊 Explore Other Work Levels in ${city.getCityName()}
-                </h3>
-                <p class="text-slate-700 mb-6">
-                    Not sure ${workLevel.getDisplayName()} is right for you? Compare with other work levels:
-                </p>
+                <h3 class="text-xl font-bold text-slate-900 mb-4">Explore Other Work Levels in ${city.getCityName()}</h3>
+                <p class="text-slate-700 mb-6">Compare the same market across different weekly hour commitments.</p>
                 <div class="grid md:grid-cols-3 gap-4">
                     @if(workLevel != WorkLevel.PART_TIME)
-                        <a href="/salary/${app}/${city.getSlug()}/part-time" 
+                        <a href="/salary/${app}/${city.getSlug()}/part-time"
                            class="block p-4 bg-white border-2 border-emerald-200 rounded-lg hover:shadow-md hover:border-emerald-400 transition">
-                            <div class="text-2xl mb-2">⏰</div>
                             <div class="font-bold text-slate-900">Part-Time Guide</div>
                             <p class="text-xs text-slate-600 mt-1">10 hrs/week</p>
                         </a>
                     @endif
 
                     @if(workLevel != WorkLevel.SIDE_HUSTLE)
-                        <a href="/salary/${app}/${city.getSlug()}/side-hustle" 
+                        <a href="/salary/${app}/${city.getSlug()}/side-hustle"
                            class="block p-4 bg-white border-2 border-amber-200 rounded-lg hover:shadow-md hover:border-amber-400 transition">
-                            <div class="text-2xl mb-2">💼</div>
                             <div class="font-bold text-slate-900">Side-Hustle Guide</div>
                             <p class="text-xs text-slate-600 mt-1">25 hrs/week</p>
                         </a>
                     @endif
 
                     @if(workLevel != WorkLevel.FULL_TIME)
-                        <a href="/salary/${app}/${city.getSlug()}/full-time" 
+                        <a href="/salary/${app}/${city.getSlug()}/full-time"
                            class="block p-4 bg-white border-2 border-blue-200 rounded-lg hover:shadow-md hover:border-blue-400 transition">
-                            <div class="text-2xl mb-2">🚗</div>
                             <div class="font-bold text-slate-900">Full-Time Guide</div>
                             <p class="text-xs text-slate-600 mt-1">40 hrs/week</p>
                         </a>
@@ -217,85 +321,74 @@
                 </div>
             </section>
 
-            <!-- Cross-App Comparison CTA -->
             <section class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 text-white shadow-xl">
-                <div class="flex items-start gap-4">
-                    <div class="text-4xl">🔄</div>
-                    <div class="flex-1">
-                        <h3 class="text-2xl font-bold mb-3">
-                            Compare: ${workLevel.getDisplayName()} ${otherAppName} in ${city.getCityName()}
-                        </h3>
-                        <p class="text-slate-300 mb-4">
-                            You're viewing ${appName} ${workLevel.getDisplayName().toLowerCase()} data. 
-                            See how ${otherAppName} compares at the same work level in ${city.getCityName()}.
-                        </p>
-                        <a href="${otherAppUrl}" 
-                           class="inline-block px-6 py-3 bg-white text-slate-900 font-bold rounded-lg hover:bg-slate-100 transition shadow-lg">
-                            View ${otherAppName} ${workLevel.getDisplayName()} Report →
-                        </a>
-                    </div>
-                </div>
+                <h3 class="text-2xl font-bold mb-3">Compare With ${otherAppName} at the Same Work Level</h3>
+                <p class="text-slate-300 mb-4">
+                    You are viewing ${appName} ${workLevel.getDisplayName().toLowerCase()} estimates. Open the equivalent ${otherAppName} page for a direct app-to-app comparison in ${city.getCityName()}.
+                </p>
+                <a href="${otherAppUrl}"
+                   class="inline-block px-6 py-3 bg-white text-slate-900 font-bold rounded-lg hover:bg-slate-100 transition shadow-lg">
+                    View ${otherAppName} ${workLevel.getDisplayName()} Report
+                </a>
             </section>
 
-            <!-- Internal Linking Silo: Similar Cities -->
             <section class="mt-8 pt-8 border-t border-slate-200">
                 <h4 class="text-sm font-bold text-slate-500 uppercase tracking-wider mb-6">
-                    Other High-Demand ${city.getMarketTier()} Markets
+                    Other ${city.getMarketTier()} Tier Markets
                 </h4>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    @for(com.gigwager.model.CityData simCity : similarCities)
-                        <a href="/salary/${app}/${simCity.getSlug()}/${workLevel.getSlug()}" 
+                    @for(var simCityObj : similarCities)
+                        <a href="/salary/${app}/${((CityData) simCityObj).getSlug()}/${workLevel.getSlug()}"
                            class="flex items-center gap-3 p-4 bg-white rounded-xl border border-slate-200 hover:border-emerald-400 hover:shadow-md transition group">
-                            <span class="text-2xl">📍</span>
                             <div class="flex flex-col">
-                                <span class="text-sm font-bold text-slate-900 group-hover:text-emerald-700">
-                                    ${simCity.getCityName()}
-                                </span>
-                                <span class="text-xs text-slate-500">
-                                    ${appName} ${workLevel.getDisplayName()}
-                                </span>
+                                <span class="text-sm font-bold text-slate-900 group-hover:text-emerald-700">${((CityData) simCityObj).getCityName()}</span>
+                                <span class="text-xs text-slate-500">${appName} ${workLevel.getDisplayName()}</span>
                             </div>
                         </a>
                     @endfor
                 </div>
             </section>
 
-            <!-- Risk Trigger Cards (Loss Aversion) -->
             <section class="bg-red-50/50 rounded-2xl p-8 border border-red-200 mb-8 mt-8">
-                <h3 class="text-xl font-bold text-slate-900 mb-2">⚠️ Risks You Should Check</h3>
-                <p class="text-slate-600 mb-6 text-sm">Based on the ${appName} estimates for ${city.getCityName()}.</p>
-                
+                <h3 class="text-xl font-bold text-slate-900 mb-2">Risk Checks Before Scaling Hours</h3>
+                <p class="text-slate-600 mb-6 text-sm">Based on modeled ${appName} weekly assumptions for ${city.getCityName()}.</p>
+
                 <div class="grid md:grid-cols-3 gap-4">
-                    <!-- Tax Risk Card -->
                     <div class="bg-white p-5 rounded-xl border-2 border-red-100 hover:border-red-500 transition-all">
-                        <h4 class="font-bold text-slate-900 flex items-center gap-2 mb-2">🏦 Quarterly Tax Risk</h4>
-                        <p class="text-xs text-slate-600 mb-3">You may owe about <strong>$${String.format("%.0f", Math.max(0, (scenario.getGrossWeekly() - (scenario.getMiles() * AppConstants.IRS_MILEAGE_RATE)) * AppConstants.SELF_EMPLOYMENT_TAX_RATE) * 13 )}</strong> this quarter in self-employment tax. Are you saving for this?</p>
-                        <a href="/taxes/quarterly-estimator" class="text-xs font-bold text-red-600 hover:text-red-700">Calculate quarterly estimate →</a>
+                        <h4 class="font-bold text-slate-900 mb-2">Quarterly Tax Risk</h4>
+                        <p class="text-xs text-slate-600 mb-3">
+                            Estimated quarterly self-employment tax exposure: <strong>$${String.format("%.0f", Math.max(0, (scenario.getGrossWeekly() - (scenario.getMiles() * AppConstants.IRS_MILEAGE_RATE)) * AppConstants.SELF_EMPLOYMENT_TAX_RATE) * 13 )}</strong>.
+                        </p>
+                        <a href="/taxes/quarterly-estimator" class="text-xs font-bold text-red-600 hover:text-red-700">Open quarterly estimator</a>
                     </div>
-                    <!-- Vehicle Cost Card -->
+
                     <div class="bg-white p-5 rounded-xl border-2 border-red-100 hover:border-red-500 transition-all">
-                        <h4 class="font-bold text-slate-900 flex items-center gap-2 mb-2">🚗 Vehicle Depreciation</h4>
-                        <p class="text-xs text-slate-600 mb-3">A ${workLevel.getDisplayName().toLowerCase()} schedule will put <strong>${scenario.getMiles() * 52} miles</strong> on your car this year. Do you know your true cost per mile?</p>
-                        <a href="/vehicle-cost/cost-per-mile" class="text-xs font-bold text-red-600 hover:text-red-700">See cost per mile calculator →</a>
+                        <h4 class="font-bold text-slate-900 mb-2">Vehicle Depreciation</h4>
+                        <p class="text-xs text-slate-600 mb-3">
+                            This schedule can add roughly <strong>${scenario.getMiles() * 52} miles</strong> per year to your vehicle.
+                        </p>
+                        <a href="/vehicle-cost/cost-per-mile" class="text-xs font-bold text-red-600 hover:text-red-700">Open cost-per-mile calculator</a>
                     </div>
-                    <!-- Insurance GAP Card -->
+
                     <div class="bg-white p-5 rounded-xl border-2 border-red-100 hover:border-red-500 transition-all relative">
-                        <div class="absolute -right-2 -top-2 bg-amber-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide border-2 border-white">CRITICAL</div>
-                        <h4 class="font-bold text-slate-900 flex items-center gap-2 mb-2">🛡️ Insurance GAP</h4>
-                        <p class="text-xs text-slate-600 mb-3">Driving in ${city.getCityName()}'s ${city.isHighTraffic() ? "dense traffic" : "sprawl"} without rideshare insurance? Your personal policy could drop you.</p>
-                        <a href="/insurance/rideshare-basics" class="text-xs font-bold text-red-600 hover:text-red-700">Check coverage risks →</a>
+                        <div class="absolute -right-2 -top-2 bg-amber-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide border-2 border-white">Critical</div>
+                        <h4 class="font-bold text-slate-900 mb-2">Insurance Gap</h4>
+                        <p class="text-xs text-slate-600 mb-3">
+                            Market traffic intensity in ${city.getCityName()} can increase collision frequency. Confirm rideshare endorsement details before increasing weekly miles.
+                        </p>
+                        <a href="/insurance/rideshare-basics" class="text-xs font-bold text-red-600 hover:text-red-700">Review coverage basics</a>
                     </div>
                 </div>
             </section>
 
-            <!-- Back to Overview -->
             <section class="text-center">
-                <a href="${parentPageUrl}" 
+                <a href="${parentPageUrl}"
                    class="inline-block px-8 py-4 bg-slate-200 text-slate-900 font-bold text-lg rounded-xl hover:bg-slate-300 transition">
-                    ← Back to ${city.getCityName()} ${appName} Overview
+                    Back to ${city.getCityName()} ${appName} Overview
                 </a>
             </section>
 
         </div>
     `
 )
+

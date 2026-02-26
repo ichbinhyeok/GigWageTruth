@@ -56,7 +56,7 @@
                 <h2 class="text-2xl font-bold text-slate-900 mt-12 mb-4">Contact</h2>
                 <p>
                     Have questions? Found a bug? Just want to share your story?<br>
-                    Email me directly at <a href="mailto:spainhyeok@gmail.com" class="text-emerald-600 hover:underline">spainhyeok@gmail.com</a>.
+                    Email me directly at <a href="mailto:painhyeok@gmail.com" class="text-emerald-600 hover:underline">painhyeok@gmail.com</a>.
                 </p>
             </div>
         </div>

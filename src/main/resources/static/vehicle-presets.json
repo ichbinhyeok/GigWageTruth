@@ -5,7 +5,7 @@
         "type": "standard",
         "costPerMile": 0.725,
         "description": "Official IRS 2026 rate - includes all vehicle costs",
-        "icon": "📋"
+        "icon": "ICON"
     },
     {
         "id": "prius",
@@ -16,7 +16,7 @@
         "depreciationCostPerMile": 0.08,
         "avgGasPrice": 3.50,
         "description": "Industry standard - 57 MPG, ultra reliable",
-        "icon": "🔥"
+        "icon": "ICON"
     },
     {
         "id": "camry-hybrid",
@@ -27,7 +27,7 @@
         "avgGasPrice": 3.50,
         "depreciationCostPerMile": 0.09,
         "description": "Premium comfort - 51 MPG",
-        "icon": "🚗"
+        "icon": "ICON"
     },
     {
         "id": "accord-hybrid",
@@ -38,7 +38,7 @@
         "avgGasPrice": 3.50,
         "depreciationCostPerMile": 0.09,
         "description": "Smooth ride - 48 MPG",
-        "icon": "🚗"
+        "icon": "ICON"
     },
     {
         "id": "corolla-hybrid",
@@ -49,7 +49,7 @@
         "avgGasPrice": 3.50,
         "depreciationCostPerMile": 0.08,
         "description": "Compact efficient - 52 MPG",
-        "icon": "🚗"
+        "icon": "ICON"
     },
     {
         "id": "sonata-hybrid",
@@ -60,7 +60,7 @@
         "avgGasPrice": 3.50,
         "depreciationCostPerMile": 0.09,
         "description": "Stylish value - 47 MPG",
-        "icon": "🚗"
+        "icon": "ICON"
     },
     {
         "id": "civic",
@@ -71,7 +71,7 @@
         "avgGasPrice": 3.50,
         "depreciationCostPerMile": 0.09,
         "description": "Popular budget choice - 35 MPG",
-        "icon": "🚙"
+        "icon": "ICON"
     },
     {
         "id": "corolla",
@@ -82,7 +82,7 @@
         "avgGasPrice": 3.50,
         "depreciationCostPerMile": 0.09,
         "description": "Legendary reliability - 34 MPG",
-        "icon": "🚙"
+        "icon": "ICON"
     },
     {
         "id": "elantra",
@@ -93,7 +93,7 @@
         "depreciationCostPerMile": 0.10,
         "avgGasPrice": 3.50,
         "description": "Affordable reliable - 33 MPG",
-        "icon": "🚙"
+        "icon": "ICON"
     },
     {
         "id": "model-3",
@@ -105,7 +105,7 @@
         "depreciationCostPerMile": 0.12,
         "kwhPer100Miles": 24,
         "description": "Zero gas cost - 130 MPGe",
-        "icon": "⚡"
+        "icon": "ICON"
     },
     {
         "id": "bolt-ev",
@@ -116,7 +116,7 @@
         "avgElectricityCost": 0.15,
         "kwhPer100Miles": 28,
         "description": "Affordable EV - 120 MPGe",
-        "icon": "⚡"
+        "icon": "ICON"
     },
     {
         "id": "nissan-leaf",
@@ -127,7 +127,7 @@
         "avgElectricityCost": 0.15,
         "kwhPer100Miles": 30,
         "description": "Popular budget EV - 111 MPGe",
-        "icon": "⚡"
+        "icon": "ICON"
     },
     {
         "id": "rav4-hybrid",
@@ -138,7 +138,7 @@
         "avgGasPrice": 3.50,
         "depreciationCostPerMile": 0.10,
         "description": "SUV space - 39 MPG",
-        "icon": "🚐"
+        "icon": "ICON"
     },
     {
         "id": "cr-v-hybrid",
@@ -149,7 +149,7 @@
         "depreciationCostPerMile": 0.09,
         "avgGasPrice": 3.50,
         "description": "Versatile SUV - 43 MPG",
-        "icon": "🚐"
+        "icon": "ICON"
     },
     {
         "id": "camry",
@@ -160,7 +160,7 @@
         "avgGasPrice": 3.50,
         "depreciationCostPerMile": 0.10,
         "description": "Popular full-size sedan - 32 MPG",
-        "icon": "🚙"
+        "icon": "ICON"
     },
     {
         "id": "altima",
@@ -171,7 +171,7 @@
         "avgGasPrice": 3.50,
         "depreciationCostPerMile": 0.10,
         "description": "Budget-friendly midsize - 31 MPG",
-        "icon": "🚙"
+        "icon": "ICON"
     },
     {
         "id": "malibu",
@@ -182,7 +182,7 @@
         "avgGasPrice": 3.50,
         "depreciationCostPerMile": 0.11,
         "description": "Common fleet car - 30 MPG",
-        "icon": "🚙"
+        "icon": "ICON"
     },
     {
         "id": "accord",
@@ -193,7 +193,7 @@
         "avgGasPrice": 3.50,
         "depreciationCostPerMile": 0.10,
         "description": "Reliable midsize - 33 MPG",
-        "icon": "🚙"
+        "icon": "ICON"
     },
     {
         "id": "highlander",
@@ -204,7 +204,7 @@
         "avgGasPrice": 3.50,
         "depreciationCostPerMile": 0.13,
         "description": "Large SUV, XL rides - 24 MPG",
-        "icon": "🚐"
+        "icon": "ICON"
     },
     {
         "id": "rav4-gas",
@@ -215,7 +215,7 @@
         "avgGasPrice": 3.50,
         "depreciationCostPerMile": 0.11,
         "description": "Compact SUV - 30 MPG",
-        "icon": "🚐"
+        "icon": "ICON"
     },
     {
         "id": "cx-5",
@@ -226,7 +226,7 @@
         "avgGasPrice": 3.50,
         "depreciationCostPerMile": 0.12,
         "description": "Sporty crossover - 28 MPG",
-        "icon": "🚐"
+        "icon": "ICON"
     },
     {
         "id": "explorer",
@@ -237,7 +237,7 @@
         "avgGasPrice": 3.50,
         "depreciationCostPerMile": 0.14,
         "description": "Full-size SUV, XL rides - 23 MPG",
-        "icon": "🚐"
+        "icon": "ICON"
     },
     {
         "id": "sienna-hybrid",
@@ -248,7 +248,7 @@
         "avgGasPrice": 3.50,
         "depreciationCostPerMile": 0.11,
         "description": "XL rides, great MPG - 36 MPG",
-        "icon": "🚐"
+        "icon": "ICON"
     },
     {
         "id": "ebike",
@@ -258,7 +258,7 @@
         "maintenanceCostPerMile": 0.03,
         "avgGasPrice": 0,
         "description": "Low cost, delivery only",
-        "icon": "🚲"
+        "icon": "ICON"
     },
     {
         "id": "walker",
@@ -268,7 +268,7 @@
         "maintenanceCostPerMile": 0.01,
         "avgGasPrice": 0,
         "description": "Zero vehicle cost",
-        "icon": "👟"
+        "icon": "ICON"
     },
     {
         "id": "custom",
@@ -278,6 +278,6 @@
         "maintenanceCostPerMile": 0.12,
         "avgGasPrice": 3.50,
         "description": "Enter your own values",
-        "icon": "🔧"
+        "icon": "ICON"
     }
 ]

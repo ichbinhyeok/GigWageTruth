@@ -1,0 +1,140 @@
+{
+    "citySlug":  "miami",
+    "cityName":  "Miami",
+    "state":  "FL",
+    "coreData":  {
+                     "gasPrice":  3.4,
+                     "trafficFactor":  0.8
+                 },
+    "seo":  {
+                "heroHook":  "Miami has year-round demand, but true net depends on controlling repositioning between Brickell, Wynwood, and beach corridors where congestion and parking delays spike unpredictably.",
+                "pageStructureType":  "TYPE_B",
+                "contentType":  "user_submitted",
+                "methodologyVersion":  "city-rich-v2.2",
+                "lastVerifiedAt":  "2026-02-26",
+                "sources":  [
+                                {
+                                    "title":  "Miami-Dade Traffic Engineering Program",
+                                    "url":  "https://www.miamidade.gov/global/transportation/public-works/traffic-engineering.page",
+                                    "publisher":  "Miami-Dade County",
+                                    "checkedAt":  "2026-02-26"
+                                },
+                                {
+                                    "title":  "MIA 2025 Passenger and Cargo Growth Release",
+                                    "url":  "https://news.miami-airport.com/mia-soars-to-sixth-straight-record-year-in-cargo-growth/",
+                                    "publisher":  "Miami International Airport",
+                                    "checkedAt":  "2026-02-26"
+                                },
+                                {
+                                    "title":  "MIA Passenger Service Development Facts",
+                                    "url":  "https://miami-airport.com/home-passenger.asp",
+                                    "publisher":  "Miami International Airport",
+                                    "checkedAt":  "2026-02-26"
+                                },
+                                {
+                                    "title":  "EIA Gasoline and Diesel Fuel Update",
+                                    "url":  "https://www.eia.gov/petroleum/gasdiesel/",
+                                    "publisher":  "U.S. Energy Information Administration",
+                                    "checkedAt":  "2026-02-26"
+                                },
+                                {
+                                    "title":  "IRS Standard Mileage Rates",
+                                    "url":  "https://www.irs.gov/tax-professionals/standard-mileage-rates",
+                                    "publisher":  "Internal Revenue Service",
+                                    "checkedAt":  "2026-02-26"
+                                }
+                            ]
+            },
+    "workLevels":  {
+                       "part-time":  {
+                                         "realisticNetHourlyRange":  {
+                                                                         "min":  15.7,
+                                                                         "max":  24.2
+                                                                     },
+                                         "localStrategyText":  "Part-time shifts in Miami hold up when drivers stay in Brickell, Wynwood, and Miami Beach and avoid cross-market jumps through I-95, the Dolphin Expressway, and MacArthur Causeway, because short windows lose margin fastest when deadhead miles spike.",
+                                         "workLevelMeaningHtml":  "\u003ch3\u003ePart-time in Miami is precision over volume\u003c/h3\u003e\u003cp\u003eAt ten hours, Miami does not reward random online time. Profitability hinges on entering only high-probability windows and keeping repositioning distance contained.\u003c/p\u003e\u003cp\u003eDrivers who lock one core zone and one fallback zone usually keep stronger net outcomes than drivers who chase demand across I-95, the Dolphin Expressway, and MacArthur Causeway.\u003c/p\u003e",
+                                         "taxStrategyHtml":  "\u003ch3\u003ePart-time tax routine\u003c/h3\u003e\u003cp\u003eKeep bookkeeping simple and weekly: mileage logs, payout exports, and reserve transfers. This is enough to stay clean and avoid end-of-year reconstruction risk.\u003c/p\u003e\u003cp\u003eIn Miami, part-time volatility is mostly an operations issue, so clean records let you decide quickly whether your current zone and timing strategy is actually working.\u003c/p\u003e",
+                                         "dayInTheLifeHtml":  "\u003ch3\u003eFour-hour shift pattern\u003c/h3\u003e\u003cp\u003eA practical block is one weekday evening plus one weekend window around Brickell, Wynwood, and Miami Beach. Start near dense pickup corridors and stop when pickup ETA exceeds your threshold.\u003c/p\u003e\u003cp\u003eThis approach protects net hourly in Miami by reducing idle circulation on I-95, the Dolphin Expressway, and MacArthur Causeway and containing unbilled travel time.\u003c/p\u003e",
+                                         "bestPracticesHtml":  "\u003ch3\u003ePart-time operating checklist\u003c/h3\u003e\u003cp\u003eSet a fixed hourly floor, a max pickup distance, and a hard stop time before you go online. Review these metrics weekly and only change one variable at a time.\u003c/p\u003e\u003cp\u003eWhen tourism cycles, cruise windows, and nightlife turnover changes local conditions in Miami, controlled experimentation beats extending hours without a clear plan.\u003c/p\u003e",
+                                         "painPoints":  [
+                                                            "Deadhead risk across I-95, the Dolphin Expressway, and MacArthur Causeway",
+                                                            "Curb and parking delay around Brickell, Wynwood, and Miami Beach",
+                                                            "Demand drop outside targeted windows"
+                                                        ],
+                                         "personaQuotes":  [
+                                                               {
+                                                                   "personaType":  "RIDESHARE_VETERAN",
+                                                                   "displayName":  "Miami rideshare veteran",
+                                                                   "quote":  "My part-time performance in Miami improved only after I stopped crossing the map and started running strict windows around Brickell, Wynwood, and Miami Beach.",
+                                                                   "attributionType":  "USER_SUBMITTED"
+                                                               },
+                                                               {
+                                                                   "personaType":  "MARKET_ANALYST",
+                                                                   "displayName":  "Editorial demand analyst",
+                                                                   "quote":  "Short-session economics in Miami are dominated by unpaid repositioning time, so route discipline matters more than raw request volume.",
+                                                                   "attributionType":  "EDITORIAL_COMPOSITE"
+                                                               }
+                                                           ]
+                                     },
+                       "side-hustle":  {
+                                           "realisticNetHourlyRange":  {
+                                                                           "min":  17.8,
+                                                                           "max":  26.6
+                                                                       },
+                                           "localStrategyText":  "Side-hustle operators in Miami generally outperform when they stack repeatable dinner and weekend blocks in Brickell, Wynwood, and Miami Beach while capping cross-city repositioning through I-95, the Dolphin Expressway, and MacArthur Causeway.",
+                                           "workLevelMeaningHtml":  "\u003ch3\u003eSide-hustle in Miami needs repeatable structure\u003c/h3\u003e\u003cp\u003eAt twenty-five hours, consistent schedule design matters more than occasional surge spikes. A stable operating loop across Brickell, Wynwood, and Miami Beach usually beats reactive citywide roaming.\u003c/p\u003e\u003cp\u003eThis level can produce durable supplemental income in Miami, but only if miles-per-dollar and wait-time discipline are treated as non-negotiable controls.\u003c/p\u003e",
+                                           "taxStrategyHtml":  "\u003ch3\u003eSide-hustle tax controls\u003c/h3\u003e\u003cp\u003eAutomate reserve transfers after each payout and reconcile mileage weekly. That workflow is the most reliable way to avoid avoidable tax shock.\u003c/p\u003e\u003cp\u003eBecause Miami cost conditions can move quickly, monthly estimate checks help keep cash flow stable while you scale hours.\u003c/p\u003e",
+                                           "dayInTheLifeHtml":  "\u003ch3\u003eTypical side-hustle week\u003c/h3\u003e\u003cp\u003eThree weekday dinner blocks plus one longer weekend block around Brickell, Wynwood, and Miami Beach is a common pattern. Keep one backup zone ready when congestion rises on I-95, the Dolphin Expressway, and MacArthur Causeway.\u003c/p\u003e\u003cp\u003eIf request quality drops below target for two consecutive hours in Miami, disciplined logoff often outperforms low-yield grinding.\u003c/p\u003e",
+                                           "bestPracticesHtml":  "\u003ch3\u003eSide-hustle improvement loop\u003c/h3\u003e\u003cp\u003eTrack gross per online hour, miles per payout dollar, and cancellation friction each week. Change only one variable so your own data remains interpretable.\u003c/p\u003e\u003cp\u003eIn Miami, this measurement loop is usually the fastest way to turn inconsistent weeks into predictable side-income.\u003c/p\u003e",
+                                           "painPoints":  [
+                                                              "Fatigue from combining W2 schedule with Miami gig windows",
+                                                              "Cross-zone drift through I-95, the Dolphin Expressway, and MacArthur Causeway",
+                                                              "Inconsistent order quality outside Brickell, Wynwood, and Miami Beach"
+                                                          ],
+                                           "personaQuotes":  [
+                                                                 {
+                                                                     "personaType":  "DELIVERY_VETERAN",
+                                                                     "displayName":  "Miami multi-app courier",
+                                                                     "quote":  "My side-hustle net increased once I fixed a recurring zone plan in Brickell, Wynwood, and Miami Beach and stopped reacting to every map signal.",
+                                                                     "attributionType":  "USER_SUBMITTED"
+                                                                 },
+                                                                 {
+                                                                     "personaType":  "TAX_PROFESSIONAL",
+                                                                     "displayName":  "Independent tax advisor",
+                                                                     "quote":  "Drivers with weekly logs and automatic reserves rarely face avoidable filing surprises, even when monthly earnings fluctuate.",
+                                                                     "attributionType":  "EDITORIAL_COMPOSITE"
+                                                                 }
+                                                             ]
+                                       },
+                       "full-time":  {
+                                         "realisticNetHourlyRange":  {
+                                                                         "min":  16.9,
+                                                                         "max":  24.9
+                                                                     },
+                                         "localStrategyText":  "Full-time in Miami is viable only with strict zone governance, planned recovery windows, and continuous cost controls because I-95, the Dolphin Expressway, and MacArthur Causeway can magnify every weak operational decision.",
+                                         "workLevelMeaningHtml":  "\u003ch3\u003eFull-time in Miami is an operations business\u003c/h3\u003e\u003cp\u003eAt forty hours, the challenge is not only demand access. It is sustaining margin while controlling wear, downtime, and cognitive load in high-friction corridors.\u003c/p\u003e\u003cp\u003eThe most durable full-time operators near MIA run predefined daypart plans and avoid uncontrolled roaming outside their proven segments.\u003c/p\u003e",
+                                         "taxStrategyHtml":  "\u003ch3\u003eFull-time finance cadence\u003c/h3\u003e\u003cp\u003eUse separate operating and reserve accounts, reconcile weekly, and project obligations monthly. Full-time volatility cannot be managed with ad hoc records.\u003c/p\u003e\u003cp\u003eIn Miami, frequent review of mileage, maintenance, and tax posture is what prevents high gross weeks from turning into weak retained earnings.\u003c/p\u003e",
+                                         "dayInTheLifeHtml":  "\u003ch3\u003eTwo-peak full-time model\u003c/h3\u003e\u003cp\u003eAnchor work around morning and evening demand clusters in Brickell, Wynwood, and Miami Beach, then assign midday to lower-mile tasks or planned downtime rather than random searching.\u003c/p\u003e\u003cp\u003eThis structure reduces burnout and controls long-run costs when tourism cycles, cruise windows, and nightlife turnover and congestion patterns shift during the week.\u003c/p\u003e",
+                                         "bestPracticesHtml":  "\u003ch3\u003eDurability protocol\u003c/h3\u003e\u003cp\u003eSet hard limits for weekly miles, consecutive drive time, and maintenance reserve levels. If one limit is breached, reduce low-yield blocks before adding new hours.\u003c/p\u003e\u003cp\u003eIn Miami, full-time earnings are determined by risk control and repeatability, not by occasional spike sessions.\u003c/p\u003e",
+                                         "painPoints":  [
+                                                            "Mileage escalation under sustained I-95, the Dolphin Expressway, and MacArthur Causeway congestion",
+                                                            "Coverage and liability risk at full utilization",
+                                                            "Burnout pressure from continuous high-friction navigation"
+                                                        ],
+                                         "personaQuotes":  [
+                                                               {
+                                                                   "personaType":  "FLEET_MANAGER",
+                                                                   "displayName":  "Urban fleet operations lead",
+                                                                   "quote":  "When drivers in Miami run all zones without limits, utilization looks high but retained net performance degrades quickly.",
+                                                                   "attributionType":  "EDITORIAL_COMPOSITE"
+                                                               },
+                                                               {
+                                                                   "personaType":  "INSURANCE_ADVISOR",
+                                                                   "displayName":  "Commercial coverage specialist",
+                                                                   "quote":  "At full-time mileage near MIA corridors, policy fit should be reviewed regularly because exposure patterns change faster than most drivers expect.",
+                                                                   "attributionType":  "VERIFIED_INTERVIEW"
+                                                               }
+                                                           ]
+                                     }
+                   }
+}

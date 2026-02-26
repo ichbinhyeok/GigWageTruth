@@ -22,7 +22,7 @@
                         Best Cities to Drive for ${appName}
                     </h1>
                     <p class="text-xl text-slate-600 max-w-2xl mx-auto">
-                        Ranked dynamically by estimated net hourly take-home pay, after deducting local gas prices and taxes.
+                        Ranked dynamically by estimated net hourly take-home pay using market-tier and traffic-adjusted scenarios.
                     </p>
                 </div>
 
@@ -31,7 +31,7 @@
                     <ul class="list-disc pl-5 text-blue-800 text-sm space-y-1">
                         <li><strong>Ranking Criteria:</strong> Sorts strictly by estimated Net Hourly Pay for a "side-hustle" driver.</li>
                         <li><strong>Input Weights:</strong> We apply a traffic multiplier and a market tier multiplier (demand baseline) to estimate gross hourly revenue.</li>
-                        <li><strong>Deductions:</strong> We deduct the precise local gas price (if applicable per vehicle setup) or the @template.components.irs_rate_snippet() standard deduction. We then deduct an assumed 15.3% SE tax. Actual results vary heavily based on your specific car MPG and driving habits.</li>
+                        <li><strong>Deductions:</strong> We apply the @template.components.irs_rate_snippet() mileage proxy plus an assumed 15.3% SE tax. Local gas prices are shown as market context, not a direct variable in this ranking formula.</li>
                     </ul>
                 </div>
 

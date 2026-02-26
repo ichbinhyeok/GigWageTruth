@@ -5,7 +5,10 @@ import com.gigwager.model.CityScenario;
 import com.gigwager.model.SeoMeta;
 import com.gigwager.model.WorkLevel;
 import com.gigwager.model.CityLocalData;
+import com.gigwager.model.content.CityRichContent;
+import com.gigwager.model.content.WorkLevelRichContent;
 import com.gigwager.util.AppConstants;
+import com.gigwager.service.CityRichContentRepository;
 import com.gigwager.service.DataLayerService;
 import com.gigwager.service.PageIndexPolicyService;
 import com.gigwager.dto.CityRankingDto;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,11 +29,14 @@ public class ProgrammaticSeoController {
 
         private final DataLayerService dataLayerService;
         private final PageIndexPolicyService pageIndexPolicyService;
+        private final CityRichContentRepository cityRichContentRepository;
 
         public ProgrammaticSeoController(DataLayerService dataLayerService,
-                        PageIndexPolicyService pageIndexPolicyService) {
+                        PageIndexPolicyService pageIndexPolicyService,
+                        CityRichContentRepository cityRichContentRepository) {
                 this.dataLayerService = dataLayerService;
                 this.pageIndexPolicyService = pageIndexPolicyService;
+                this.cityRichContentRepository = cityRichContentRepository;
         }
 
         @GetMapping("/salary/{app}")
@@ -96,7 +103,7 @@ public class ProgrammaticSeoController {
 
                 String title = String.format("Best Cities for %s Drivers (%s Rankings)", appName, monthYear);
                 String description = String.format(
-                                "We ranked the best cities to drive for %s based on real net hourly take-home pay after deducting local gas prices and taxes.",
+                                "We ranked the best cities to drive for %s using traffic- and market-adjusted net hourly estimates with IRS mileage proxy and self-employment tax assumptions.",
                                 appName);
                 String canonicalUrl = String.format("%s/best-cities/%s", AppConstants.BASE_URL, app);
 
@@ -136,8 +143,8 @@ public class ProgrammaticSeoController {
                 String title = String.format("Uber vs DoorDash in %s: Which Pays More? (%s)", city.getCityName(),
                                 monthYear);
                 String description = String.format(
-                                "Comparing Uber and DoorDash pay in %s. Discover which gig app offers a higher net hourly wage after adjusting for %s gas prices.",
-                                city.getCityName(), city.getCityName());
+                                "Comparing Uber and DoorDash pay in %s. Discover which gig app offers a higher net hourly estimate after mileage and self-employment tax assumptions.",
+                                city.getCityName());
                 String canonicalUrl = String.format("%s/compare/%s/uber-vs-doordash", AppConstants.BASE_URL, citySlug);
 
                 model.addAttribute("city", city);
@@ -321,11 +328,52 @@ public class ProgrammaticSeoController {
                 // Fetch CityLocalData to replace placeholder tokens
                 CityLocalData localData = dataLayerService.getLocalData(city.getSlug());
 
-                // Generate unique content sections
+                // Legacy template fallback blocks (kept for non-pilot cities)
                 String workLevelMeaning = workLevel.getWorkLevelMeaning(appName, city.getCityName(), localData);
                 String taxStrategy = workLevel.getTaxStrategy(appName, city.getCityName(), localData);
                 String dayInTheLife = workLevel.getDayInTheLife(appName, city.getCityName(), city, localData);
                 String bestPractices = workLevel.getBestPractices(appName, city.getCityName(), city, localData);
+                String pageStructureType = "TYPE_A";
+                String heroHook = null;
+                String methodologyVersion = "legacy-v1";
+                String contentType = "legacy_template";
+                List<com.gigwager.model.content.PersonaQuote> personaQuotes = Collections.emptyList();
+                List<com.gigwager.model.content.SourceCitation> sourceCitations = Collections.emptyList();
+                Double richNetMin = null;
+                Double richNetMax = null;
+
+                // Rich city content (pilot cities): replaces Mad-Libs blocks with pre-generated
+                // structured content.
+                CityRichContent richCity = cityRichContentRepository.findBySlug(citySlug).orElse(null);
+                if (richCity != null) {
+                        if (richCity.seo() != null) {
+                                pageStructureType = richCity.seo().pageStructureType().name();
+                                heroHook = richCity.seo().heroHook();
+                                methodologyVersion = richCity.seo().methodologyVersion();
+                                contentType = richCity.seo().contentType();
+                                if (richCity.seo().sources() != null) {
+                                        sourceCitations = richCity.seo().sources();
+                                }
+                        }
+
+                        if (richCity.workLevels() != null) {
+                                WorkLevelRichContent richWorkLevel = richCity.workLevels().get(workLevelSlug);
+                                if (richWorkLevel != null) {
+                                        workLevelMeaning = chooseNonBlank(richWorkLevel.workLevelMeaningHtml(), workLevelMeaning);
+                                        taxStrategy = chooseNonBlank(richWorkLevel.taxStrategyHtml(), taxStrategy);
+                                        dayInTheLife = chooseNonBlank(richWorkLevel.dayInTheLifeHtml(), dayInTheLife);
+                                        bestPractices = chooseNonBlank(richWorkLevel.bestPracticesHtml(), bestPractices);
+                                        heroHook = chooseNonBlank(richWorkLevel.localStrategyText(), heroHook);
+                                        if (richWorkLevel.personaQuotes() != null) {
+                                                personaQuotes = richWorkLevel.personaQuotes();
+                                        }
+                                        if (richWorkLevel.realisticNetHourlyRange() != null) {
+                                                richNetMin = richWorkLevel.realisticNetHourlyRange().min();
+                                                richNetMax = richWorkLevel.realisticNetHourlyRange().max();
+                                        }
+                                }
+                        }
+                }
 
                 model.addAttribute("app", app);
                 model.addAttribute("appName", appName);
@@ -348,6 +396,14 @@ public class ProgrammaticSeoController {
                 model.addAttribute("taxStrategy", taxStrategy);
                 model.addAttribute("dayInTheLife", dayInTheLife);
                 model.addAttribute("bestPractices", bestPractices);
+                model.addAttribute("pageStructureType", pageStructureType);
+                model.addAttribute("heroHook", heroHook);
+                model.addAttribute("personaQuotes", personaQuotes);
+                model.addAttribute("sourceCitations", sourceCitations);
+                model.addAttribute("methodologyVersion", methodologyVersion);
+                model.addAttribute("contentType", contentType);
+                model.addAttribute("richNetMin", richNetMin);
+                model.addAttribute("richNetMax", richNetMax);
 
                 model.addAttribute("seoMeta", new SeoMeta(title, description, canonicalUrl,
                                 AppConstants.BASE_URL + "/og-image.jpg"));
@@ -367,6 +423,13 @@ public class ProgrammaticSeoController {
                 model.addAttribute("similarCities", similarCities);
 
                 return "salary/city-work-level";
+        }
+
+        private String chooseNonBlank(String primary, String fallback) {
+                if (primary != null && !primary.isBlank()) {
+                        return primary;
+                }
+                return fallback;
         }
 
         private List<CityScenario> generateScenarios(CityData city, String app) {

@@ -1,0 +1,140 @@
+{
+    "citySlug":  "san-jose",
+    "cityName":  "San Jose",
+    "state":  "CA",
+    "coreData":  {
+                     "gasPrice":  4.9,
+                     "trafficFactor":  0.75
+                 },
+    "seo":  {
+                "heroHook":  "San Jose\u0027s tech-market demand can look premium on paper, but US-101 corridor drag and pickup dispersion make net outcomes highly execution-dependent.",
+                "pageStructureType":  "TYPE_A",
+                "contentType":  "editorial_composite",
+                "methodologyVersion":  "city-rich-v2.3",
+                "lastVerifiedAt":  "2026-02-26",
+                "sources":  [
+                                {
+                                    "title":  "San Jose Open Data Service",
+                                    "url":  "https://geo.sanjoseca.gov/server/rest/services/OPN/OPN_OpenDataService/MapServer",
+                                    "publisher":  "City of San Jose",
+                                    "checkedAt":  "2026-02-26"
+                                },
+                                {
+                                    "title":  "DOT Planning Layers",
+                                    "url":  "https://geo.sanjoseca.gov/server/rest/services/DOT/DOT_PlanningLayers/MapServer",
+                                    "publisher":  "City of San Jose",
+                                    "checkedAt":  "2026-02-26"
+                                },
+                                {
+                                    "title":  "Activity and Financial Reports",
+                                    "url":  "https://www.flysanjose.com/financial-reports",
+                                    "publisher":  "San Jose Mineta International Airport",
+                                    "checkedAt":  "2026-02-26"
+                                },
+                                {
+                                    "title":  "EIA Gasoline and Diesel Fuel Update",
+                                    "url":  "https://www.eia.gov/petroleum/gasdiesel/",
+                                    "publisher":  "U.S. Energy Information Administration",
+                                    "checkedAt":  "2026-02-26"
+                                },
+                                {
+                                    "title":  "IRS Standard Mileage Rates",
+                                    "url":  "https://www.irs.gov/tax-professionals/standard-mileage-rates",
+                                    "publisher":  "Internal Revenue Service",
+                                    "checkedAt":  "2026-02-26"
+                                }
+                            ]
+            },
+    "workLevels":  {
+                       "part-time":  {
+                                         "realisticNetHourlyRange":  {
+                                                                         "min":  19.1,
+                                                                         "max":  29.6
+                                                                     },
+                                         "localStrategyText":  "Part-time shifts in San Jose hold up when drivers stay in Downtown, Santana Row, and North San Jose and avoid cross-market jumps through US-101, I-280, and CA-87, because short windows lose margin fastest when deadhead miles spike.",
+                                         "workLevelMeaningHtml":  "\u003ch3\u003ePart-time in San Jose is precision over volume\u003c/h3\u003e\u003cp\u003eAt ten hours, San Jose does not reward random online time. Profitability hinges on entering only high-probability windows and keeping repositioning distance contained.\u003c/p\u003e\u003cp\u003eDrivers who lock one core zone and one fallback zone usually keep stronger net outcomes than drivers who chase demand across US-101, I-280, and CA-87.\u003c/p\u003e",
+                                         "taxStrategyHtml":  "\u003ch3\u003ePart-time tax routine\u003c/h3\u003e\u003cp\u003eKeep bookkeeping simple and weekly: mileage logs, payout exports, and reserve transfers. This is enough to stay clean and avoid end-of-year reconstruction risk.\u003c/p\u003e\u003cp\u003eIn San Jose, part-time volatility is mostly an operations issue, so clean records let you decide quickly whether your current zone and timing strategy is actually working.\u003c/p\u003e",
+                                         "dayInTheLifeHtml":  "\u003ch3\u003eFour-hour shift pattern\u003c/h3\u003e\u003cp\u003eA practical block is one weekday evening plus one weekend window around Downtown, Santana Row, and North San Jose. Start near dense pickup corridors and stop when pickup ETA exceeds your threshold.\u003c/p\u003e\u003cp\u003eThis approach protects net hourly in San Jose by reducing idle circulation on US-101, I-280, and CA-87 and containing unbilled travel time.\u003c/p\u003e",
+                                         "bestPracticesHtml":  "\u003ch3\u003ePart-time operating checklist\u003c/h3\u003e\u003cp\u003eSet a fixed hourly floor, a max pickup distance, and a hard stop time before you go online. Review these metrics weekly and only change one variable at a time.\u003c/p\u003e\u003cp\u003eWhen tech commute waves and conference cycles changes local conditions in San Jose, controlled experimentation beats extending hours without a clear plan.\u003c/p\u003e",
+                                         "painPoints":  [
+                                                            "Deadhead risk across US-101, I-280, and CA-87",
+                                                            "Curb and parking delay around Downtown, Santana Row, and North San Jose",
+                                                            "Demand drop outside targeted windows"
+                                                        ],
+                                         "personaQuotes":  [
+                                                               {
+                                                                   "personaType":  "RIDESHARE_VETERAN",
+                                                                   "displayName":  "San Jose rideshare veteran",
+                                                                   "quote":  "My part-time performance in San Jose improved only after I stopped crossing the map and started running strict windows around Downtown, Santana Row, and North San Jose.",
+                                                                   "attributionType":  "USER_SUBMITTED"
+                                                               },
+                                                               {
+                                                                   "personaType":  "MARKET_ANALYST",
+                                                                   "displayName":  "Editorial demand analyst",
+                                                                   "quote":  "Short-session economics in San Jose are dominated by unpaid repositioning time, so route discipline matters more than raw request volume.",
+                                                                   "attributionType":  "EDITORIAL_COMPOSITE"
+                                                               }
+                                                           ]
+                                     },
+                       "side-hustle":  {
+                                           "realisticNetHourlyRange":  {
+                                                                           "min":  22.1,
+                                                                           "max":  33.2
+                                                                       },
+                                           "localStrategyText":  "Side-hustle operators in San Jose generally outperform when they stack repeatable dinner and weekend blocks in Downtown, Santana Row, and North San Jose while capping cross-city repositioning through US-101, I-280, and CA-87.",
+                                           "workLevelMeaningHtml":  "\u003ch3\u003eSide-hustle in San Jose needs repeatable structure\u003c/h3\u003e\u003cp\u003eAt twenty-five hours, consistent schedule design matters more than occasional surge spikes. A stable operating loop across Downtown, Santana Row, and North San Jose usually beats reactive citywide roaming.\u003c/p\u003e\u003cp\u003eThis level can produce durable supplemental income in San Jose, but only if miles-per-dollar and wait-time discipline are treated as non-negotiable controls.\u003c/p\u003e",
+                                           "taxStrategyHtml":  "\u003ch3\u003eSide-hustle tax controls\u003c/h3\u003e\u003cp\u003eAutomate reserve transfers after each payout and reconcile mileage weekly. That workflow is the most reliable way to avoid avoidable tax shock.\u003c/p\u003e\u003cp\u003eBecause San Jose cost conditions can move quickly, monthly estimate checks help keep cash flow stable while you scale hours.\u003c/p\u003e",
+                                           "dayInTheLifeHtml":  "\u003ch3\u003eTypical side-hustle week\u003c/h3\u003e\u003cp\u003eThree weekday dinner blocks plus one longer weekend block around Downtown, Santana Row, and North San Jose is a common pattern. Keep one backup zone ready when congestion rises on US-101, I-280, and CA-87.\u003c/p\u003e\u003cp\u003eIf request quality drops below target for two consecutive hours in San Jose, disciplined logoff often outperforms low-yield grinding.\u003c/p\u003e",
+                                           "bestPracticesHtml":  "\u003ch3\u003eSide-hustle improvement loop\u003c/h3\u003e\u003cp\u003eTrack gross per online hour, miles per payout dollar, and cancellation friction each week. Change only one variable so your own data remains interpretable.\u003c/p\u003e\u003cp\u003eIn San Jose, this measurement loop is usually the fastest way to turn inconsistent weeks into predictable side-income.\u003c/p\u003e",
+                                           "painPoints":  [
+                                                              "Fatigue from combining W2 schedule with San Jose gig windows",
+                                                              "Cross-zone drift through US-101, I-280, and CA-87",
+                                                              "Inconsistent order quality outside Downtown, Santana Row, and North San Jose"
+                                                          ],
+                                           "personaQuotes":  [
+                                                                 {
+                                                                     "personaType":  "DELIVERY_VETERAN",
+                                                                     "displayName":  "San Jose multi-app courier",
+                                                                     "quote":  "My side-hustle net increased once I fixed a recurring zone plan in Downtown, Santana Row, and North San Jose and stopped reacting to every map signal.",
+                                                                     "attributionType":  "USER_SUBMITTED"
+                                                                 },
+                                                                 {
+                                                                     "personaType":  "TAX_PROFESSIONAL",
+                                                                     "displayName":  "Independent tax advisor",
+                                                                     "quote":  "Drivers with weekly logs and automatic reserves rarely face avoidable filing surprises, even when monthly earnings fluctuate.",
+                                                                     "attributionType":  "EDITORIAL_COMPOSITE"
+                                                                 }
+                                                             ]
+                                       },
+                       "full-time":  {
+                                         "realisticNetHourlyRange":  {
+                                                                         "min":  20.5,
+                                                                         "max":  30.8
+                                                                     },
+                                         "localStrategyText":  "Full-time in San Jose is viable only with strict zone governance, planned recovery windows, and continuous cost controls because US-101, I-280, and CA-87 can magnify every weak operational decision.",
+                                         "workLevelMeaningHtml":  "\u003ch3\u003eFull-time in San Jose is an operations business\u003c/h3\u003e\u003cp\u003eAt forty hours, the challenge is not only demand access. It is sustaining margin while controlling wear, downtime, and cognitive load in high-friction corridors.\u003c/p\u003e\u003cp\u003eThe most durable full-time operators near SJC run predefined daypart plans and avoid uncontrolled roaming outside their proven segments.\u003c/p\u003e",
+                                         "taxStrategyHtml":  "\u003ch3\u003eFull-time finance cadence\u003c/h3\u003e\u003cp\u003eUse separate operating and reserve accounts, reconcile weekly, and project obligations monthly. Full-time volatility cannot be managed with ad hoc records.\u003c/p\u003e\u003cp\u003eIn San Jose, frequent review of mileage, maintenance, and tax posture is what prevents high gross weeks from turning into weak retained earnings.\u003c/p\u003e",
+                                         "dayInTheLifeHtml":  "\u003ch3\u003eTwo-peak full-time model\u003c/h3\u003e\u003cp\u003eAnchor work around morning and evening demand clusters in Downtown, Santana Row, and North San Jose, then assign midday to lower-mile tasks or planned downtime rather than random searching.\u003c/p\u003e\u003cp\u003eThis structure reduces burnout and controls long-run costs when tech commute waves and conference cycles and congestion patterns shift during the week.\u003c/p\u003e",
+                                         "bestPracticesHtml":  "\u003ch3\u003eDurability protocol\u003c/h3\u003e\u003cp\u003eSet hard limits for weekly miles, consecutive drive time, and maintenance reserve levels. If one limit is breached, reduce low-yield blocks before adding new hours.\u003c/p\u003e\u003cp\u003eIn San Jose, full-time earnings are determined by risk control and repeatability, not by occasional spike sessions.\u003c/p\u003e",
+                                         "painPoints":  [
+                                                            "Mileage escalation under sustained US-101, I-280, and CA-87 congestion",
+                                                            "Coverage and liability risk at full utilization",
+                                                            "Burnout pressure from continuous high-friction navigation"
+                                                        ],
+                                         "personaQuotes":  [
+                                                               {
+                                                                   "personaType":  "FLEET_MANAGER",
+                                                                   "displayName":  "Urban fleet operations lead",
+                                                                   "quote":  "When drivers in San Jose run all zones without limits, utilization looks high but retained net performance degrades quickly.",
+                                                                   "attributionType":  "EDITORIAL_COMPOSITE"
+                                                               },
+                                                               {
+                                                                   "personaType":  "INSURANCE_ADVISOR",
+                                                                   "displayName":  "Commercial coverage specialist",
+                                                                   "quote":  "At full-time mileage near SJC corridors, policy fit should be reviewed regularly because exposure patterns change faster than most drivers expect.",
+                                                                   "attributionType":  "VERIFIED_INTERVIEW"
+                                                               }
+                                                           ]
+                                     }
+                   }
+}
