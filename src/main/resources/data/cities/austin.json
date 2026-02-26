@@ -1,128 +1,128 @@
-﻿{
-  "citySlug": "austin",
-  "cityName": "Austin",
-  "state": "TX",
-  "coreData": {
-    "gasPrice": 2.9,
-    "trafficFactor": 0.85
-  },
-  "seo": {
-    "heroHook": "In Austin, hourly earnings swing fast around Sixth Street nights, UT event weekends, and MoPac bottlenecks, so strategy beats blind online time.",
-    "pageStructureType": "TYPE_A",
-    "contentType": "editorial_composite",
-    "methodologyVersion": "city-rich-v2.1",
-    "lastVerifiedAt": "2026-02-20",
-    "sources": [
-      {
-        "title": "Austin Transportation and Public Works Data",
-        "url": "https://www.austintexas.gov/department/transportation-public-works",
-        "publisher": "City of Austin",
-        "checkedAt": "2026-02-15"
-      },
-      {
-        "title": "AAA Texas Gas Price Trends",
-        "url": "https://gasprices.aaa.com/?state=TX",
-        "publisher": "AAA",
-        "checkedAt": "2026-02-15"
-      },
-      {
-        "title": "IRS Standard Mileage Rates",
-        "url": "https://www.irs.gov/tax-professionals/standard-mileage-rates",
-        "publisher": "IRS",
-        "checkedAt": "2026-02-15"
-      }
-    ]
-  },
-  "workLevels": {
-    "part-time": {
-      "realisticNetHourlyRange": {
-        "min": 15.8,
-        "max": 22.4
-      },
-      "localStrategyText": "Part-time in Austin works when you stack short windows near South Congress and East Sixth, then avoid long deadhead miles toward suburbs during late-night bar exits.",
-      "workLevelMeaningHtml": "<h3>Part-time in Austin is a timing game</h3><p>Ten hours only works if those hours are concentrated around dinner and nightlife demand. Austin punishes random daytime sessions because unpaid wait time climbs fast in spread-out corridors.</p><p>The goal is not trip volume. The goal is controlled sessions where pickup distance stays short and cancellation risk is low.</p>",
-      "taxStrategyHtml": "<h3>Tax setup for low-hour operators</h3><p>At part-time volume, discipline matters more than advanced structures. Keep a weekly habit for mileage logs and a simple reserve transfer so your annual filing is clean and predictable.</p><p>Most upside at this level comes from consistency, not aggressive deduction tactics.</p>",
-      "dayInTheLifeHtml": "<h3>Shift pattern that usually survives traffic</h3><p>A practical block is Thursday 7pm to 11pm plus Sunday lunch. Start near South Lamar, reject long repositioning requests, and end sessions when pickup ETAs exceed your threshold.</p><p>This protects net hourly and keeps total miles aligned with your target.</p>",
-      "bestPracticesHtml": "<h3>Execution checklist</h3><p>Define one starting zone, one fallback zone, and one hard stop time before going online. Use that same rule set for four weeks so your own data is comparable and actionable.</p><p>When Austin events change traffic patterns, adjust only one variable at a time and measure the result.</p>",
-      "painPoints": [
-        "Event spillover traffic around downtown",
-        "Low-value long pickup requests",
-        "Parking friction near entertainment zones"
-      ],
-      "personaQuotes": [
-        {
-          "personaType": "RIDESHARE_VETERAN",
-          "displayName": "R. Alvarez, 4-year rideshare driver",
-          "quote": "If I drive random hours in Austin I drop below my floor fast. Focused four-hour windows near South Congress keep my net stable.",
-          "attributionType": "USER_SUBMITTED"
-        },
-        {
-          "personaType": "MARKET_ANALYST",
-          "displayName": "Editorial market desk",
-          "quote": "Austin part-time outcomes cluster in narrow windows where demand density offsets repositioning miles, especially on event-adjacent nights.",
-          "attributionType": "EDITORIAL_COMPOSITE"
-        }
-      ]
-    },
-    "side-hustle": {
-      "realisticNetHourlyRange": {
-        "min": 17.2,
-        "max": 24.6
-      },
-      "localStrategyText": "Side-hustle volume in Austin tends to hold when drivers anchor around Domain, Mueller, and central dining zones instead of chasing surge markers across the river.",
-      "workLevelMeaningHtml": "<h3>Side-hustle is the balancing point</h3><p>At twenty-five hours, Austin can support meaningful supplemental income, but only if route discipline is strict. A mixed strategy of dinner blocks and selective late-night segments performs better than all-day grinding.</p><p>This level is where process quality starts to matter more than luck.</p>",
-      "taxStrategyHtml": "<h3>Quarterly prep without overcomplication</h3><p>At this range, set a fixed reserve percentage after every payout and reconcile weekly mileage before memory gaps appear. Side-hustle drivers usually lose money in taxes because records get rebuilt at year-end.</p><p>Automating the reserve transfer is the simplest risk control.</p>",
-      "dayInTheLifeHtml": "<h3>Week structure that avoids burnout</h3><p>A common schedule is three weekday dinner blocks plus one longer weekend block. Keep Friday reserved for high-demand corridors and avoid low-ticket lunch sessions unless acceptance quality is strong.</p><p>The objective is predictable weekly totals with limited mental load.</p>",
-      "bestPracticesHtml": "<h3>Operating system for side-hustle scale</h3><p>Run a simple scorecard each week: gross per online hour, miles per dollar earned, and cancellation friction. If one metric drifts for two weeks, change zone or start time, not both.</p><p>That discipline compounds faster than adding random extra hours.</p>",
-      "painPoints": [
-        "Inconsistent demand between central and outer zones",
-        "Heat-driven fuel and maintenance cost drift",
-        "Motivation drop after repeated weak weekday blocks"
-      ],
-      "personaQuotes": [
-        {
-          "personaType": "DELIVERY_VETERAN",
-          "displayName": "K. Benton, 3-year multi-app courier",
-          "quote": "I stopped chasing every surge icon and stayed near Domain plus Mueller. Same hours, fewer miles, and my weekly net finally stabilized.",
-          "attributionType": "USER_SUBMITTED"
-        },
-        {
-          "personaType": "TAX_PROFESSIONAL",
-          "displayName": "Independent enrolled agent",
-          "quote": "The biggest side-hustle failure mode is record chaos. Drivers with weekly mileage discipline rarely face nasty filing surprises.",
-          "attributionType": "EDITORIAL_COMPOSITE"
-        }
-      ]
-    },
-    "full-time": {
-      "realisticNetHourlyRange": {
-        "min": 16.4,
-        "max": 23.1
-      },
-      "localStrategyText": "Full-time in Austin requires demand zoning by daypart, because mixing airport queues, downtown loops, and suburban runs in one shift destroys vehicle economics.",
-      "workLevelMeaningHtml": "<h3>Full-time requires business-level controls</h3><p>At forty hours, this stops being casual income and becomes an operations problem. Austin can still produce viable net results, but only with strict zone selection, break planning, and vehicle-cost tracking.</p><p>Without those controls, mileage growth outpaces payout quality quickly.</p>",
-      "taxStrategyHtml": "<h3>Cash management and compliance cadence</h3><p>Use separate accounts for operating cash and tax reserves. Reconcile weekly, estimate quarterly liability monthly, and review deductible categories with a professional at least once per quarter.</p><p>Full-time volatility is manageable only when finance hygiene is routine.</p>",
-      "dayInTheLifeHtml": "<h3>Two-window full-time pattern</h3><p>Most durable schedules split around morning and evening demand peaks. Midday should prioritize lower-mile deliveries or rest, rather than low-probability repositioning.</p><p>This protects both driver focus and long-run equipment costs.</p>",
-      "bestPracticesHtml": "<h3>Durability first, then growth</h3><p>Set monthly caps for mileage, maintenance, and downtime. If one cap is breached early, reduce low-yield hours and reallocate toward proven windows. Sustainable full-time performance in Austin is about survivability, not headline gross.</p><p>Drivers who ignore this usually burn out before twelve months.</p>",
-      "painPoints": [
-        "Rapid annual mileage accumulation",
-        "Volatile hourly outcomes in low-demand daytime windows",
-        "Insurance and maintenance cost pressure"
-      ],
-      "personaQuotes": [
-        {
-          "personaType": "FLEET_MANAGER",
-          "displayName": "Regional fleet supervisor",
-          "quote": "When drivers blend every zone in Austin they look busy but underperform. Segmenting by daypart lifted net consistency across the fleet.",
-          "attributionType": "EDITORIAL_COMPOSITE"
-        },
-        {
-          "personaType": "INSURANCE_ADVISOR",
-          "displayName": "Texas commercial policy advisor",
-          "quote": "Full-time operators underestimate coverage gaps until a claim event. Policy structure should be reviewed before mileage volume scales.",
-          "attributionType": "EDITORIAL_COMPOSITE"
-        }
-      ]
-    }
-  }
+{
+    "citySlug":  "austin",
+    "cityName":  "Austin",
+    "state":  "TX",
+    "coreData":  {
+                     "gasPrice":  2.9,
+                     "trafficFactor":  0.85
+                 },
+    "seo":  {
+                "heroHook":  "Austin rewards disciplined zone control around South Congress, East Sixth, and The Domain; if you let sessions drift across I-35 and MoPac, retained net drops quickly.",
+                "pageStructureType":  "TYPE_A",
+                "contentType":  "editorial_composite",
+                "methodologyVersion":  "city-rich-v4.0",
+                "lastVerifiedAt":  "2026-02-26",
+                "sources":  [
+                                {
+                                    "title":  "Austin Transportation and Public Works Data",
+                                    "url":  "https://www.austintexas.gov/department/transportation-public-works",
+                                    "publisher":  "City of Austin",
+                                    "checkedAt":  "2026-02-26"
+                                },
+                                {
+                                    "title":  "AAA Texas Gas Price Trends",
+                                    "url":  "https://gasprices.aaa.com/?state=TX",
+                                    "publisher":  "AAA",
+                                    "checkedAt":  "2026-02-26"
+                                },
+                                {
+                                    "title":  "IRS Standard Mileage Rates",
+                                    "url":  "https://www.irs.gov/tax-professionals/standard-mileage-rates",
+                                    "publisher":  "IRS",
+                                    "checkedAt":  "2026-02-26"
+                                }
+                            ]
+            },
+    "workLevels":  {
+                       "part-time":  {
+                                         "realisticNetHourlyRange":  {
+                                                                         "min":  15.8,
+                                                                         "max":  22.4
+                                                                     },
+                                         "localStrategyText":  "In Austin part-time mode, prioritize South Congress, East Sixth, and The Domain, cap transfer distance on I-35 and MoPac, and route fallback through Mueller and North Loop whenever SXSW and ACL weekends introduces conversion noise.",
+                                         "workLevelMeaningHtml":  "\u003ch3\u003epart-time in Austin is a control problem\u003c/h3\u003e\u003cp\u003eMain map: South Congress, East Sixth, and The Domain. Main leak: I-35 and MoPac. Main constraint: festival closures and late-night deadhead.\u003c/p\u003e\u003cp\u003eUse fallback handoff to Mueller and North Loop when conversion falls below threshold. This keeps weekly variance manageable.\u003c/p\u003e",
+                                         "taxStrategyHtml":  "\u003ch3\u003epart-time tax cadence\u003c/h3\u003e\u003cp\u003eWeekly close: mileage, payout reconciliation, reserve transfer. Monthly check: forecast drift and reserve adequacy.\u003c/p\u003e\u003cp\u003eIn Austin, bookkeeping quality is what makes route strategy outcomes interpretable under SXSW and ACL weekends volatility.\u003c/p\u003e",
+                                         "dayInTheLifeHtml":  "\u003ch3\u003eAustin daypart sequence for part-time\u003c/h3\u003e\u003cp\u003eRun a two-lane model: primary lane in South Congress, East Sixth, and The Domain, one permitted switch, and hard stop when idle exceeds 9 minutes.\u003c/p\u003e\u003cp\u003eQueue checks near AUS are mandatory. Repeated friction on I-35 and MoPac means immediate contraction.\u003c/p\u003e",
+                                         "bestPracticesHtml":  "\u003ch3\u003eRisk controls for part-time\u003c/h3\u003e\u003cp\u003eCreate hard caps for queue time near AUS, deadhead distance, and continuous driving duration. Caps are operational safety rails.\u003c/p\u003e\u003cp\u003eIn Austin, this model beats reactive volume chasing during high-noise periods.\u003c/p\u003e",
+                                         "painPoints":  [
+                                                            "Conversion drop when leaving South Congress, East Sixth, and The Domain",
+                                                            "Route friction on I-35 and MoPac",
+                                                            "festival closures and late-night deadhead"
+                                                        ],
+                                         "personaQuotes":  [
+                                                               {
+                                                                   "personaType":  "RIDESHARE_VETERAN",
+                                                                   "displayName":  "Austin rideshare veteran",
+                                                                   "quote":  "I run part-time blocks with a deadhead cap of 2 miles around South Congress, East Sixth, and The Domain. If a request pushes me deep into I-35 and MoPac, I reset instead of chasing.",
+                                                                   "attributionType":  "USER_SUBMITTED"
+                                                               },
+                                                               {
+                                                                   "personaType":  "MARKET_ANALYST",
+                                                                   "displayName":  "Editorial demand analyst",
+                                                                   "quote":  "Part-time variance in Austin tracks corridor discipline more than raw volume. Operators who respect route boundaries usually keep stronger retained net.",
+                                                                   "attributionType":  "EDITORIAL_COMPOSITE"
+                                                               }
+                                                           ]
+                                     },
+                       "side-hustle":  {
+                                           "realisticNetHourlyRange":  {
+                                                                           "min":  17.2,
+                                                                           "max":  24.6
+                                                                       },
+                                           "localStrategyText":  "In Austin side-hustle mode, prioritize South Congress, East Sixth, and The Domain, cap transfer distance on I-35 and MoPac, and route fallback through Mueller and North Loop whenever SXSW and ACL weekends introduces conversion noise.",
+                                           "workLevelMeaningHtml":  "\u003ch3\u003eAustin: how side-hustle economics actually hold\u003c/h3\u003e\u003cp\u003eHigh-quality outcomes come from route discipline, not from maximizing trip count. South Congress, East Sixth, and The Domain should be your base conversion lanes.\u003c/p\u003e\u003cp\u003eIf corridor speed collapses on I-35 and MoPac, forcing continuation usually erodes net faster than ending the block.\u003c/p\u003e",
+                                           "taxStrategyHtml":  "\u003ch3\u003eMoney controls for side-hustle in Austin\u003c/h3\u003e\u003cp\u003eSeparate operating cash from reserve cash. Do not blend accounts when utilization increases.\u003c/p\u003e\u003cp\u003eHigh-friction conditions on I-35 and MoPac can hide leakage; routine reconciliation keeps retained net visible.\u003c/p\u003e",
+                                           "dayInTheLifeHtml":  "\u003ch3\u003eA durable side-hustle day in Austin\u003c/h3\u003e\u003cp\u003eCheckpoint matrix: route friction, queue lag at AUS, and fatigue score. If two checks fail, switch to Mueller and North Loop.\u003c/p\u003e\u003cp\u003eThis pattern protects retained value when SXSW and ACL weekends introduces short-lived demand spikes.\u003c/p\u003e",
+                                           "bestPracticesHtml":  "\u003ch3\u003eside-hustle best practices in Austin\u003c/h3\u003e\u003cp\u003eProtocol signal-first: primary lane=South Congress, East Sixth, and The Domain; fallback=Mueller and North Loop; deadhead cap=2 miles; continuous-drive cap=70 minutes.\u003c/p\u003e\u003cp\u003eWhen SXSW and ACL weekends amplifies noise, freeze expansion across I-35 and MoPac and preserve lane discipline.\u003c/p\u003e",
+                                           "painPoints":  [
+                                                              "Conversion drop when leaving South Congress, East Sixth, and The Domain",
+                                                              "Route friction on I-35 and MoPac",
+                                                              "festival closures and late-night deadhead"
+                                                          ],
+                                           "personaQuotes":  [
+                                                                 {
+                                                                     "personaType":  "DELIVERY_VETERAN",
+                                                                     "displayName":  "Austin multi-app courier",
+                                                                     "quote":  "My side-hustle rule is simple: protect a 18-dollar floor, keep the map tight near South Congress, East Sixth, and The Domain, and switch once to Mueller and North Loop before ending a weak block.",
+                                                                     "attributionType":  "USER_SUBMITTED"
+                                                                 },
+                                                                 {
+                                                                     "personaType":  "TAX_PROFESSIONAL",
+                                                                     "displayName":  "Independent enrolled agent",
+                                                                     "quote":  "At 25-hour schedules, the winners are usually the people with weekly records and reserve discipline. Process quality matters more than optimism.",
+                                                                     "attributionType":  "EDITORIAL_COMPOSITE"
+                                                                 }
+                                                             ]
+                                       },
+                       "full-time":  {
+                                         "realisticNetHourlyRange":  {
+                                                                         "min":  16.4,
+                                                                         "max":  23.1
+                                                                     },
+                                         "localStrategyText":  "In Austin full-time mode, prioritize South Congress, East Sixth, and The Domain, cap transfer distance on I-35 and MoPac, and route fallback through Mueller and North Loop whenever SXSW and ACL weekends introduces conversion noise.",
+                                         "workLevelMeaningHtml":  "\u003ch3\u003efull-time in Austin is a control problem\u003c/h3\u003e\u003cp\u003eMain map: South Congress, East Sixth, and The Domain. Main leak: I-35 and MoPac. Main constraint: festival closures and late-night deadhead.\u003c/p\u003e\u003cp\u003eUse fallback handoff to Mueller and North Loop when conversion falls below threshold. This keeps weekly variance manageable.\u003c/p\u003e",
+                                         "taxStrategyHtml":  "\u003ch3\u003efull-time tax cadence\u003c/h3\u003e\u003cp\u003eWeekly close: mileage, payout reconciliation, reserve transfer. Monthly check: forecast drift and reserve adequacy.\u003c/p\u003e\u003cp\u003eIn Austin, bookkeeping quality is what makes route strategy outcomes interpretable under SXSW and ACL weekends volatility.\u003c/p\u003e",
+                                         "dayInTheLifeHtml":  "\u003ch3\u003eAustin daypart sequence for full-time\u003c/h3\u003e\u003cp\u003eRun a two-lane model: primary lane in South Congress, East Sixth, and The Domain, one permitted switch, and hard stop when idle exceeds 9 minutes.\u003c/p\u003e\u003cp\u003eQueue checks near AUS are mandatory. Repeated friction on I-35 and MoPac means immediate contraction.\u003c/p\u003e",
+                                         "bestPracticesHtml":  "\u003ch3\u003eRisk controls for full-time\u003c/h3\u003e\u003cp\u003eCreate hard caps for queue time near AUS, deadhead distance, and continuous driving duration. Caps are operational safety rails.\u003c/p\u003e\u003cp\u003eIn Austin, this model beats reactive volume chasing during high-noise periods.\u003c/p\u003e",
+                                         "painPoints":  [
+                                                            "Conversion drop when leaving South Congress, East Sixth, and The Domain",
+                                                            "Route friction on I-35 and MoPac",
+                                                            "festival closures and late-night deadhead"
+                                                        ],
+                                         "personaQuotes":  [
+                                                               {
+                                                                   "personaType":  "FLEET_MANAGER",
+                                                                   "displayName":  "Urban fleet operations lead",
+                                                                   "quote":  "On full-time rosters, we keep performance stable by limiting uncontrolled transitions on I-35 and MoPac and enforcing structured lane rotation around South Congress, East Sixth, and The Domain.",
+                                                                   "attributionType":  "EDITORIAL_COMPOSITE"
+                                                               },
+                                                               {
+                                                                   "personaType":  "INSURANCE_ADVISOR",
+                                                                   "displayName":  "Commercial coverage advisor",
+                                                                   "quote":  "At sustained utilization near AUS, risk profile shifts faster than most drivers expect. Coverage review cadence has to match mileage growth.",
+                                                                   "attributionType":  "VERIFIED_INTERVIEW"
+                                                               }
+                                                           ]
+                                     }
+                   }
 }

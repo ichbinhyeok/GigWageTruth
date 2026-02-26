@@ -7,10 +7,10 @@
                      "trafficFactor":  0.8
                  },
     "seo":  {
-                "heroHook":  "Las Vegas demand is deep, but event spikes and Strip congestion punish random roaming, so profitable weeks depend on strict zone and timing discipline.",
+                "heroHook":  "If your strategy in Las Vegas is just more online time, performance degrades. Corridor rules, fallback logic, and event timing are required.",
                 "pageStructureType":  "TYPE_A",
                 "contentType":  "editorial_composite",
-                "methodologyVersion":  "city-rich-v2.3",
+                "methodologyVersion":  "city-rich-v4.0",
                 "lastVerifiedAt":  "2026-02-26",
                 "sources":  [
                                 {
@@ -51,27 +51,27 @@
                                                                          "min":  17.4,
                                                                          "max":  27.3
                                                                      },
-                                         "localStrategyText":  "Part-time shifts in Las Vegas hold up when drivers stay in The Strip, Downtown, and Summerlin edge and avoid cross-market jumps through I-15, US-95, and Tropicana Avenue corridors, because short windows lose margin fastest when deadhead miles spike.",
-                                         "workLevelMeaningHtml":  "\u003ch3\u003ePart-time in Las Vegas is precision over volume\u003c/h3\u003e\u003cp\u003eAt ten hours, Las Vegas does not reward random online time. Profitability hinges on entering only high-probability windows and keeping repositioning distance contained.\u003c/p\u003e\u003cp\u003eDrivers who lock one core zone and one fallback zone usually keep stronger net outcomes than drivers who chase demand across I-15, US-95, and Tropicana Avenue corridors.\u003c/p\u003e",
-                                         "taxStrategyHtml":  "\u003ch3\u003ePart-time tax routine\u003c/h3\u003e\u003cp\u003eKeep bookkeeping simple and weekly: mileage logs, payout exports, and reserve transfers. This is enough to stay clean and avoid end-of-year reconstruction risk.\u003c/p\u003e\u003cp\u003eIn Las Vegas, part-time volatility is mostly an operations issue, so clean records let you decide quickly whether your current zone and timing strategy is actually working.\u003c/p\u003e",
-                                         "dayInTheLifeHtml":  "\u003ch3\u003eFour-hour shift pattern\u003c/h3\u003e\u003cp\u003eA practical block is one weekday evening plus one weekend window around The Strip, Downtown, and Summerlin edge. Start near dense pickup corridors and stop when pickup ETA exceeds your threshold.\u003c/p\u003e\u003cp\u003eThis approach protects net hourly in Las Vegas by reducing idle circulation on I-15, US-95, and Tropicana Avenue corridors and containing unbilled travel time.\u003c/p\u003e",
-                                         "bestPracticesHtml":  "\u003ch3\u003ePart-time operating checklist\u003c/h3\u003e\u003cp\u003eSet a fixed hourly floor, a max pickup distance, and a hard stop time before you go online. Review these metrics weekly and only change one variable at a time.\u003c/p\u003e\u003cp\u003eWhen event calendars and weekend flight banks changes local conditions in Las Vegas, controlled experimentation beats extending hours without a clear plan.\u003c/p\u003e",
+                                         "localStrategyText":  "In Las Vegas part-time mode, prioritize The Strip, Arts District, and Summerlin edge, cap transfer distance on I-15, US-95, and Tropicana corridors, and route fallback through Henderson and Downtown cluster whenever fight nights, conventions, and tourism peaks introduces conversion noise.",
+                                         "workLevelMeaningHtml":  "\u003ch3\u003ePractical view: part-time in Las Vegas\u003c/h3\u003e\u003cp\u003eThis level works when you can keep decisions rule-based under volatility. Calendar noise from fight nights, conventions, and tourism peaks should change radius, not discipline.\u003c/p\u003e\u003cp\u003eThe system goal is retained value per hour with controlled mileage, not raw completion volume.\u003c/p\u003e",
+                                         "taxStrategyHtml":  "\u003ch3\u003eLas Vegas compliance posture\u003c/h3\u003e\u003cp\u003eThis level does not require complex structures first. It requires complete logs, stable category labels, and predictable reserve behavior.\u003c/p\u003e\u003cp\u003eWhen event congestion bursts and strip pickup delay rises, disciplined records reduce both tax surprises and bad tactical decisions.\u003c/p\u003e",
+                                         "dayInTheLifeHtml":  "\u003ch3\u003epart-time shift clock in Las Vegas\u003c/h3\u003e\u003cp\u003eStart 07:00, pulse 17:30, stop 23:00; pickup cap 4 miles and idle cap 17 minutes.\u003c/p\u003e\u003cp\u003eOperate inside The Strip, Arts District, and Summerlin edge, and if fight nights, conventions, and tourism peaks distorts flow across I-15, US-95, and Tropicana corridors, route reset through Henderson and Downtown cluster.\u003c/p\u003e",
+                                         "bestPracticesHtml":  "\u003ch3\u003eLas Vegas optimization guardrails\u003c/h3\u003e\u003cp\u003eDo not promote one outlier shift into policy. Require repeated evidence in the same corridor pair: The Strip, Arts District, and Summerlin edge and Henderson and Downtown cluster.\u003c/p\u003e\u003cp\u003eIf deadhead exceeds 6 miles twice on I-15, US-95, and Tropicana corridors, disable that lane for the day.\u003c/p\u003e",
                                          "painPoints":  [
-                                                            "Deadhead risk across I-15, US-95, and Tropicana Avenue corridors",
-                                                            "Curb and parking delay around The Strip, Downtown, and Summerlin edge",
-                                                            "Demand drop outside targeted windows"
+                                                            "Conversion drop when leaving The Strip, Arts District, and Summerlin edge",
+                                                            "Route friction on I-15, US-95, and Tropicana corridors",
+                                                            "event congestion bursts and strip pickup delay"
                                                         ],
                                          "personaQuotes":  [
                                                                {
                                                                    "personaType":  "RIDESHARE_VETERAN",
                                                                    "displayName":  "Las Vegas rideshare veteran",
-                                                                   "quote":  "My part-time performance in Las Vegas improved only after I stopped crossing the map and started running strict windows around The Strip, Downtown, and Summerlin edge.",
+                                                                   "quote":  "I run part-time blocks with a deadhead cap of 4 miles around The Strip, Arts District, and Summerlin edge. If a request pushes me deep into I-15, US-95, and Tropicana corridors, I reset instead of chasing.",
                                                                    "attributionType":  "USER_SUBMITTED"
                                                                },
                                                                {
                                                                    "personaType":  "MARKET_ANALYST",
                                                                    "displayName":  "Editorial demand analyst",
-                                                                   "quote":  "Short-session economics in Las Vegas are dominated by unpaid repositioning time, so route discipline matters more than raw request volume.",
+                                                                   "quote":  "Part-time variance in Las Vegas tracks corridor discipline more than raw volume. Operators who respect route boundaries usually keep stronger retained net.",
                                                                    "attributionType":  "EDITORIAL_COMPOSITE"
                                                                }
                                                            ]
@@ -81,27 +81,27 @@
                                                                            "min":  20.2,
                                                                            "max":  30.8
                                                                        },
-                                           "localStrategyText":  "Side-hustle operators in Las Vegas generally outperform when they stack repeatable dinner and weekend blocks in The Strip, Downtown, and Summerlin edge while capping cross-city repositioning through I-15, US-95, and Tropicana Avenue corridors.",
-                                           "workLevelMeaningHtml":  "\u003ch3\u003eSide-hustle in Las Vegas needs repeatable structure\u003c/h3\u003e\u003cp\u003eAt twenty-five hours, consistent schedule design matters more than occasional surge spikes. A stable operating loop across The Strip, Downtown, and Summerlin edge usually beats reactive citywide roaming.\u003c/p\u003e\u003cp\u003eThis level can produce durable supplemental income in Las Vegas, but only if miles-per-dollar and wait-time discipline are treated as non-negotiable controls.\u003c/p\u003e",
-                                           "taxStrategyHtml":  "\u003ch3\u003eSide-hustle tax controls\u003c/h3\u003e\u003cp\u003eAutomate reserve transfers after each payout and reconcile mileage weekly. That workflow is the most reliable way to avoid avoidable tax shock.\u003c/p\u003e\u003cp\u003eBecause Las Vegas cost conditions can move quickly, monthly estimate checks help keep cash flow stable while you scale hours.\u003c/p\u003e",
-                                           "dayInTheLifeHtml":  "\u003ch3\u003eTypical side-hustle week\u003c/h3\u003e\u003cp\u003eThree weekday dinner blocks plus one longer weekend block around The Strip, Downtown, and Summerlin edge is a common pattern. Keep one backup zone ready when congestion rises on I-15, US-95, and Tropicana Avenue corridors.\u003c/p\u003e\u003cp\u003eIf request quality drops below target for two consecutive hours in Las Vegas, disciplined logoff often outperforms low-yield grinding.\u003c/p\u003e",
-                                           "bestPracticesHtml":  "\u003ch3\u003eSide-hustle improvement loop\u003c/h3\u003e\u003cp\u003eTrack gross per online hour, miles per payout dollar, and cancellation friction each week. Change only one variable so your own data remains interpretable.\u003c/p\u003e\u003cp\u003eIn Las Vegas, this measurement loop is usually the fastest way to turn inconsistent weeks into predictable side-income.\u003c/p\u003e",
+                                           "localStrategyText":  "In Las Vegas side-hustle mode, prioritize The Strip, Arts District, and Summerlin edge, cap transfer distance on I-15, US-95, and Tropicana corridors, and route fallback through Henderson and Downtown cluster whenever fight nights, conventions, and tourism peaks introduces conversion noise.",
+                                           "workLevelMeaningHtml":  "\u003ch3\u003eside-hustle schedule logic for Las Vegas\u003c/h3\u003e\u003cp\u003eTreat each block as finite: define entry lane, stop trigger, and no-go corridor before you start.\u003c/p\u003e\u003cp\u003eIn Las Vegas, this protects against fight nights, conventions, and tourism peaks turbulence and prevents random expansion under pressure.\u003c/p\u003e",
+                                           "taxStrategyHtml":  "\u003ch3\u003eside-hustle financial governance\u003c/h3\u003e\u003cp\u003eUse one weekly reconciliation day and one monthly forecast review to avoid reactive decision-making.\u003c/p\u003e\u003cp\u003eStrong accounting rhythm helps you compare The Strip, Arts District, and Summerlin edge versus Henderson and Downtown cluster based on real net outcomes.\u003c/p\u003e",
+                                           "dayInTheLifeHtml":  "\u003ch3\u003eside-hustle operational rhythm\u003c/h3\u003e\u003cp\u003eBlock A conversion, Block B quality filter, Block C controlled close. Transition count maximum: two.\u003c/p\u003e\u003cp\u003eFor Las Vegas, enforce deadhead ceiling of 4 miles and pause expansion when event congestion bursts and strip pickup delay appears.\u003c/p\u003e",
+                                           "bestPracticesHtml":  "\u003ch3\u003eside-hustle playbook notes\u003c/h3\u003e\u003cp\u003eProtect prime windows, keep transitions explicit, and define no-go corridors before launch. Route sprawl is the main hidden cost.\u003c/p\u003e\u003cp\u003eIf quality fails under conversion-led mode, contract to Henderson and Downtown cluster and restart with fresh thresholds.\u003c/p\u003e",
                                            "painPoints":  [
-                                                              "Fatigue from combining W2 schedule with Las Vegas gig windows",
-                                                              "Cross-zone drift through I-15, US-95, and Tropicana Avenue corridors",
-                                                              "Inconsistent order quality outside The Strip, Downtown, and Summerlin edge"
+                                                              "Conversion drop when leaving The Strip, Arts District, and Summerlin edge",
+                                                              "Route friction on I-15, US-95, and Tropicana corridors",
+                                                              "event congestion bursts and strip pickup delay"
                                                           ],
                                            "personaQuotes":  [
                                                                  {
                                                                      "personaType":  "DELIVERY_VETERAN",
                                                                      "displayName":  "Las Vegas multi-app courier",
-                                                                     "quote":  "My side-hustle net increased once I fixed a recurring zone plan in The Strip, Downtown, and Summerlin edge and stopped reacting to every map signal.",
+                                                                     "quote":  "My side-hustle rule is simple: protect a 20-dollar floor, keep the map tight near The Strip, Arts District, and Summerlin edge, and switch once to Henderson and Downtown cluster before ending a weak block.",
                                                                      "attributionType":  "USER_SUBMITTED"
                                                                  },
                                                                  {
                                                                      "personaType":  "TAX_PROFESSIONAL",
-                                                                     "displayName":  "Independent tax advisor",
-                                                                     "quote":  "Drivers with weekly logs and automatic reserves rarely face avoidable filing surprises, even when monthly earnings fluctuate.",
+                                                                     "displayName":  "Independent enrolled agent",
+                                                                     "quote":  "At 25-hour schedules, the winners are usually the people with weekly records and reserve discipline. Process quality matters more than optimism.",
                                                                      "attributionType":  "EDITORIAL_COMPOSITE"
                                                                  }
                                                              ]
@@ -111,27 +111,27 @@
                                                                          "min":  18.7,
                                                                          "max":  28.9
                                                                      },
-                                         "localStrategyText":  "Full-time in Las Vegas is viable only with strict zone governance, planned recovery windows, and continuous cost controls because I-15, US-95, and Tropicana Avenue corridors can magnify every weak operational decision.",
-                                         "workLevelMeaningHtml":  "\u003ch3\u003eFull-time in Las Vegas is an operations business\u003c/h3\u003e\u003cp\u003eAt forty hours, the challenge is not only demand access. It is sustaining margin while controlling wear, downtime, and cognitive load in high-friction corridors.\u003c/p\u003e\u003cp\u003eThe most durable full-time operators near LAS run predefined daypart plans and avoid uncontrolled roaming outside their proven segments.\u003c/p\u003e",
-                                         "taxStrategyHtml":  "\u003ch3\u003eFull-time finance cadence\u003c/h3\u003e\u003cp\u003eUse separate operating and reserve accounts, reconcile weekly, and project obligations monthly. Full-time volatility cannot be managed with ad hoc records.\u003c/p\u003e\u003cp\u003eIn Las Vegas, frequent review of mileage, maintenance, and tax posture is what prevents high gross weeks from turning into weak retained earnings.\u003c/p\u003e",
-                                         "dayInTheLifeHtml":  "\u003ch3\u003eTwo-peak full-time model\u003c/h3\u003e\u003cp\u003eAnchor work around morning and evening demand clusters in The Strip, Downtown, and Summerlin edge, then assign midday to lower-mile tasks or planned downtime rather than random searching.\u003c/p\u003e\u003cp\u003eThis structure reduces burnout and controls long-run costs when event calendars and weekend flight banks and congestion patterns shift during the week.\u003c/p\u003e",
-                                         "bestPracticesHtml":  "\u003ch3\u003eDurability protocol\u003c/h3\u003e\u003cp\u003eSet hard limits for weekly miles, consecutive drive time, and maintenance reserve levels. If one limit is breached, reduce low-yield blocks before adding new hours.\u003c/p\u003e\u003cp\u003eIn Las Vegas, full-time earnings are determined by risk control and repeatability, not by occasional spike sessions.\u003c/p\u003e",
+                                         "localStrategyText":  "In Las Vegas full-time mode, prioritize The Strip, Arts District, and Summerlin edge, cap transfer distance on I-15, US-95, and Tropicana corridors, and route fallback through Henderson and Downtown cluster whenever fight nights, conventions, and tourism peaks introduces conversion noise.",
+                                         "workLevelMeaningHtml":  "\u003ch3\u003ePractical view: full-time in Las Vegas\u003c/h3\u003e\u003cp\u003eThis level works when you can keep decisions rule-based under volatility. Calendar noise from fight nights, conventions, and tourism peaks should change radius, not discipline.\u003c/p\u003e\u003cp\u003eThe system goal is retained value per hour with controlled mileage, not raw completion volume.\u003c/p\u003e",
+                                         "taxStrategyHtml":  "\u003ch3\u003eLas Vegas compliance posture\u003c/h3\u003e\u003cp\u003eThis level does not require complex structures first. It requires complete logs, stable category labels, and predictable reserve behavior.\u003c/p\u003e\u003cp\u003eWhen event congestion bursts and strip pickup delay rises, disciplined records reduce both tax surprises and bad tactical decisions.\u003c/p\u003e",
+                                         "dayInTheLifeHtml":  "\u003ch3\u003efull-time shift clock in Las Vegas\u003c/h3\u003e\u003cp\u003eStart 07:00, pulse 17:30, stop 23:00; pickup cap 4 miles and idle cap 17 minutes.\u003c/p\u003e\u003cp\u003eOperate inside The Strip, Arts District, and Summerlin edge, and if fight nights, conventions, and tourism peaks distorts flow across I-15, US-95, and Tropicana corridors, route reset through Henderson and Downtown cluster.\u003c/p\u003e",
+                                         "bestPracticesHtml":  "\u003ch3\u003eLas Vegas optimization guardrails\u003c/h3\u003e\u003cp\u003eDo not promote one outlier shift into policy. Require repeated evidence in the same corridor pair: The Strip, Arts District, and Summerlin edge and Henderson and Downtown cluster.\u003c/p\u003e\u003cp\u003eIf deadhead exceeds 6 miles twice on I-15, US-95, and Tropicana corridors, disable that lane for the day.\u003c/p\u003e",
                                          "painPoints":  [
-                                                            "Mileage escalation under sustained I-15, US-95, and Tropicana Avenue corridors congestion",
-                                                            "Coverage and liability risk at full utilization",
-                                                            "Burnout pressure from continuous high-friction navigation"
+                                                            "Conversion drop when leaving The Strip, Arts District, and Summerlin edge",
+                                                            "Route friction on I-15, US-95, and Tropicana corridors",
+                                                            "event congestion bursts and strip pickup delay"
                                                         ],
                                          "personaQuotes":  [
                                                                {
                                                                    "personaType":  "FLEET_MANAGER",
                                                                    "displayName":  "Urban fleet operations lead",
-                                                                   "quote":  "When drivers in Las Vegas run all zones without limits, utilization looks high but retained net performance degrades quickly.",
+                                                                   "quote":  "On full-time rosters, we keep performance stable by limiting uncontrolled transitions on I-15, US-95, and Tropicana corridors and enforcing structured lane rotation around The Strip, Arts District, and Summerlin edge.",
                                                                    "attributionType":  "EDITORIAL_COMPOSITE"
                                                                },
                                                                {
                                                                    "personaType":  "INSURANCE_ADVISOR",
-                                                                   "displayName":  "Commercial coverage specialist",
-                                                                   "quote":  "At full-time mileage near LAS corridors, policy fit should be reviewed regularly because exposure patterns change faster than most drivers expect.",
+                                                                   "displayName":  "Commercial coverage advisor",
+                                                                   "quote":  "At sustained utilization near LAS, risk profile shifts faster than most drivers expect. Coverage review cadence has to match mileage growth.",
                                                                    "attributionType":  "VERIFIED_INTERVIEW"
                                                                }
                                                            ]

@@ -23,8 +23,14 @@ public class CityRichContentDuplicationGuardTest {
 
     private static final Path CITY_DIR = Path.of("src/main/resources/data/cities");
     private static final int NGRAM_SIZE = 3;
-    // Guardrail for "differentiator content" similarity, not full template blocks.
-    private static final double MAX_PAIRWISE_SIMILARITY = 0.60;
+    // Guardrail for cross-city differentiator content.
+    private static final double MAX_DIFFERENTIATOR_SIMILARITY = 0.52;
+    // Field-level caps to prevent template skeleton drift.
+    private static final Map<String, Double> FIELD_SIMILARITY_CAPS = Map.of(
+            "workLevelMeaningHtml", 0.67,
+            "dayInTheLifeHtml", 0.55,
+            "taxStrategyHtml", 0.68,
+            "bestPracticesHtml", 0.78);
     private static final Pattern TAGS = Pattern.compile("<[^>]+>");
     private static final Pattern NON_ALNUM = Pattern.compile("[^a-z0-9\\s]");
     private static final Pattern MULTI_SPACE = Pattern.compile("\\s+");
@@ -56,14 +62,14 @@ public class CityRichContentDuplicationGuardTest {
         }
 
         List<SimilarityRow> offenders = rows.stream()
-                .filter(r -> r.score() > MAX_PAIRWISE_SIMILARITY)
+                .filter(r -> r.score() > MAX_DIFFERENTIATOR_SIMILARITY)
                 .sorted(Comparator.comparingDouble(SimilarityRow::score).reversed())
                 .toList();
 
         if (!offenders.isEmpty()) {
             StringBuilder sb = new StringBuilder();
             sb.append("Near-duplicate city differentiator content detected.\n")
-                    .append("Threshold: ").append(MAX_PAIRWISE_SIMILARITY).append("\n")
+                    .append("Threshold: ").append(MAX_DIFFERENTIATOR_SIMILARITY).append("\n")
                     .append("Top offenders:\n");
             offenders.stream().limit(10).forEach(r -> sb
                     .append(" - ")
@@ -71,6 +77,60 @@ public class CityRichContentDuplicationGuardTest {
                     .append(" = ").append(String.format(Locale.US, "%.4f", r.score()))
                     .append("\n"));
             assertTrue(false, sb.toString());
+        }
+    }
+
+    @Test
+    public void narrativeFieldsShouldNotCollapseIntoTemplateSkeletons() throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        List<Path> files = Files.list(CITY_DIR)
+                .filter(p -> p.toString().endsWith(".json"))
+                .toList();
+
+        for (String workLevel : List.of("part-time", "side-hustle", "full-time")) {
+            for (Map.Entry<String, Double> cap : FIELD_SIMILARITY_CAPS.entrySet()) {
+                String field = cap.getKey();
+                double threshold = cap.getValue();
+
+                Map<String, Set<String>> gramsByCity = new HashMap<>();
+                for (Path file : files) {
+                    JsonNode root = mapper.readTree(file.toFile());
+                    String slug = root.path("citySlug").asText();
+                    String text = root.path("workLevels").path(workLevel).path(field).asText("");
+                    gramsByCity.put(slug, toNgrams(normalize(text), NGRAM_SIZE));
+                }
+
+                List<String> slugs = gramsByCity.keySet().stream().sorted().toList();
+                List<SimilarityRow> offenders = new ArrayList<>();
+                for (int i = 0; i < slugs.size(); i++) {
+                    for (int j = i + 1; j < slugs.size(); j++) {
+                        String left = slugs.get(i);
+                        String right = slugs.get(j);
+                        double score = jaccard(gramsByCity.get(left), gramsByCity.get(right));
+                        if (score > threshold) {
+                            offenders.add(new SimilarityRow(left, right, score));
+                        }
+                    }
+                }
+
+                if (!offenders.isEmpty()) {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("Narrative field similarity exceeded cap.\n")
+                            .append("workLevel=").append(workLevel).append("\n")
+                            .append("field=").append(field).append("\n")
+                            .append("threshold=").append(threshold).append("\n")
+                            .append("Top offenders:\n");
+                    offenders.stream()
+                            .sorted(Comparator.comparingDouble(SimilarityRow::score).reversed())
+                            .limit(10)
+                            .forEach(r -> sb
+                                    .append(" - ")
+                                    .append(r.left()).append(" vs ").append(r.right())
+                                    .append(" = ").append(String.format(Locale.US, "%.4f", r.score()))
+                                    .append("\n"));
+                    assertTrue(false, sb.toString());
+                }
+            }
         }
     }
 

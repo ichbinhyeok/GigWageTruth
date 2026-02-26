@@ -7,10 +7,10 @@
                      "trafficFactor":  0.7
                  },
     "seo":  {
-                "heroHook":  "Atlanta has massive trip volume, but Connector congestion and airport queue swings force operators to treat zone selection and timing as a hard rule, not a preference.",
+                "heroHook":  "Atlanta rewards disciplined zone control around Buckhead, Midtown, and Old Fourth Ward; if you let sessions drift across I-75/85 Connector, I-285, and GA-400, retained net drops quickly.",
                 "pageStructureType":  "TYPE_A",
                 "contentType":  "editorial_composite",
-                "methodologyVersion":  "city-rich-v2.2",
+                "methodologyVersion":  "city-rich-v4.0",
                 "lastVerifiedAt":  "2026-02-26",
                 "sources":  [
                                 {
@@ -51,27 +51,27 @@
                                                                          "min":  15.3,
                                                                          "max":  23.8
                                                                      },
-                                         "localStrategyText":  "Part-time shifts in Atlanta hold up when drivers stay in Buckhead, Midtown, and Old Fourth Ward and avoid cross-market jumps through the I-75 and I-85 Connector, I-285, and GA-400, because short windows lose margin fastest when deadhead miles spike.",
-                                         "workLevelMeaningHtml":  "\u003ch3\u003ePart-time in Atlanta is precision over volume\u003c/h3\u003e\u003cp\u003eAt ten hours, Atlanta does not reward random online time. Profitability hinges on entering only high-probability windows and keeping repositioning distance contained.\u003c/p\u003e\u003cp\u003eDrivers who lock one core zone and one fallback zone usually keep stronger net outcomes than drivers who chase demand across the I-75 and I-85 Connector, I-285, and GA-400.\u003c/p\u003e",
-                                         "taxStrategyHtml":  "\u003ch3\u003ePart-time tax routine\u003c/h3\u003e\u003cp\u003eKeep bookkeeping simple and weekly: mileage logs, payout exports, and reserve transfers. This is enough to stay clean and avoid end-of-year reconstruction risk.\u003c/p\u003e\u003cp\u003eIn Atlanta, part-time volatility is mostly an operations issue, so clean records let you decide quickly whether your current zone and timing strategy is actually working.\u003c/p\u003e",
-                                         "dayInTheLifeHtml":  "\u003ch3\u003eFour-hour shift pattern\u003c/h3\u003e\u003cp\u003eA practical block is one weekday evening plus one weekend window around Buckhead, Midtown, and Old Fourth Ward. Start near dense pickup corridors and stop when pickup ETA exceeds your threshold.\u003c/p\u003e\u003cp\u003eThis approach protects net hourly in Atlanta by reducing idle circulation on the I-75 and I-85 Connector, I-285, and GA-400 and containing unbilled travel time.\u003c/p\u003e",
-                                         "bestPracticesHtml":  "\u003ch3\u003ePart-time operating checklist\u003c/h3\u003e\u003cp\u003eSet a fixed hourly floor, a max pickup distance, and a hard stop time before you go online. Review these metrics weekly and only change one variable at a time.\u003c/p\u003e\u003cp\u003eWhen airport throughput and convention-driven peaks changes local conditions in Atlanta, controlled experimentation beats extending hours without a clear plan.\u003c/p\u003e",
+                                         "localStrategyText":  "In Atlanta part-time mode, prioritize Buckhead, Midtown, and Old Fourth Ward, cap transfer distance on I-75/85 Connector, I-285, and GA-400, and route fallback through Sandy Springs and Decatur whenever conference weeks and game days introduces conversion noise.",
+                                         "workLevelMeaningHtml":  "\u003ch3\u003epart-time in Atlanta is a control problem\u003c/h3\u003e\u003cp\u003eMain map: Buckhead, Midtown, and Old Fourth Ward. Main leak: I-75/85 Connector, I-285, and GA-400. Main constraint: connector lockups and airport queue swings.\u003c/p\u003e\u003cp\u003eUse fallback handoff to Sandy Springs and Decatur when conversion falls below threshold. This keeps weekly variance manageable.\u003c/p\u003e",
+                                         "taxStrategyHtml":  "\u003ch3\u003eAtlanta compliance posture\u003c/h3\u003e\u003cp\u003eThis level does not require complex structures first. It requires complete logs, stable category labels, and predictable reserve behavior.\u003c/p\u003e\u003cp\u003eWhen connector lockups and airport queue swings rises, disciplined records reduce both tax surprises and bad tactical decisions.\u003c/p\u003e",
+                                         "dayInTheLifeHtml":  "\u003ch3\u003eAtlanta daypart sequence for part-time\u003c/h3\u003e\u003cp\u003eRun a two-lane model: primary lane in Buckhead, Midtown, and Old Fourth Ward, one permitted switch, and hard stop when idle exceeds 9 minutes.\u003c/p\u003e\u003cp\u003eQueue checks near ATL are mandatory. Repeated friction on I-75/85 Connector, I-285, and GA-400 means immediate contraction.\u003c/p\u003e",
+                                         "bestPracticesHtml":  "\u003ch3\u003eRisk controls for part-time\u003c/h3\u003e\u003cp\u003eCreate hard caps for queue time near ATL, deadhead distance, and continuous driving duration. Caps are operational safety rails.\u003c/p\u003e\u003cp\u003eIn Atlanta, this model beats reactive volume chasing during high-noise periods.\u003c/p\u003e",
                                          "painPoints":  [
-                                                            "Deadhead risk across the I-75 and I-85 Connector, I-285, and GA-400",
-                                                            "Curb and parking delay around Buckhead, Midtown, and Old Fourth Ward",
-                                                            "Demand drop outside targeted windows"
+                                                            "Conversion drop when leaving Buckhead, Midtown, and Old Fourth Ward",
+                                                            "Route friction on I-75/85 Connector, I-285, and GA-400",
+                                                            "connector lockups and airport queue swings"
                                                         ],
                                          "personaQuotes":  [
                                                                {
                                                                    "personaType":  "RIDESHARE_VETERAN",
                                                                    "displayName":  "Atlanta rideshare veteran",
-                                                                   "quote":  "My part-time performance in Atlanta improved only after I stopped crossing the map and started running strict windows around Buckhead, Midtown, and Old Fourth Ward.",
+                                                                   "quote":  "I run part-time blocks with a deadhead cap of 4 miles around Buckhead, Midtown, and Old Fourth Ward. If a request pushes me deep into I-75/85 Connector, I-285, and GA-400, I reset instead of chasing.",
                                                                    "attributionType":  "USER_SUBMITTED"
                                                                },
                                                                {
                                                                    "personaType":  "MARKET_ANALYST",
                                                                    "displayName":  "Editorial demand analyst",
-                                                                   "quote":  "Short-session economics in Atlanta are dominated by unpaid repositioning time, so route discipline matters more than raw request volume.",
+                                                                   "quote":  "Part-time variance in Atlanta tracks corridor discipline more than raw volume. Operators who respect route boundaries usually keep stronger retained net.",
                                                                    "attributionType":  "EDITORIAL_COMPOSITE"
                                                                }
                                                            ]
@@ -81,27 +81,27 @@
                                                                            "min":  17.7,
                                                                            "max":  26.1
                                                                        },
-                                           "localStrategyText":  "Side-hustle operators in Atlanta generally outperform when they stack repeatable dinner and weekend blocks in Buckhead, Midtown, and Old Fourth Ward while capping cross-city repositioning through the I-75 and I-85 Connector, I-285, and GA-400.",
-                                           "workLevelMeaningHtml":  "\u003ch3\u003eSide-hustle in Atlanta needs repeatable structure\u003c/h3\u003e\u003cp\u003eAt twenty-five hours, consistent schedule design matters more than occasional surge spikes. A stable operating loop across Buckhead, Midtown, and Old Fourth Ward usually beats reactive citywide roaming.\u003c/p\u003e\u003cp\u003eThis level can produce durable supplemental income in Atlanta, but only if miles-per-dollar and wait-time discipline are treated as non-negotiable controls.\u003c/p\u003e",
-                                           "taxStrategyHtml":  "\u003ch3\u003eSide-hustle tax controls\u003c/h3\u003e\u003cp\u003eAutomate reserve transfers after each payout and reconcile mileage weekly. That workflow is the most reliable way to avoid avoidable tax shock.\u003c/p\u003e\u003cp\u003eBecause Atlanta cost conditions can move quickly, monthly estimate checks help keep cash flow stable while you scale hours.\u003c/p\u003e",
-                                           "dayInTheLifeHtml":  "\u003ch3\u003eTypical side-hustle week\u003c/h3\u003e\u003cp\u003eThree weekday dinner blocks plus one longer weekend block around Buckhead, Midtown, and Old Fourth Ward is a common pattern. Keep one backup zone ready when congestion rises on the I-75 and I-85 Connector, I-285, and GA-400.\u003c/p\u003e\u003cp\u003eIf request quality drops below target for two consecutive hours in Atlanta, disciplined logoff often outperforms low-yield grinding.\u003c/p\u003e",
-                                           "bestPracticesHtml":  "\u003ch3\u003eSide-hustle improvement loop\u003c/h3\u003e\u003cp\u003eTrack gross per online hour, miles per payout dollar, and cancellation friction each week. Change only one variable so your own data remains interpretable.\u003c/p\u003e\u003cp\u003eIn Atlanta, this measurement loop is usually the fastest way to turn inconsistent weeks into predictable side-income.\u003c/p\u003e",
+                                           "localStrategyText":  "In Atlanta side-hustle mode, prioritize Buckhead, Midtown, and Old Fourth Ward, cap transfer distance on I-75/85 Connector, I-285, and GA-400, and route fallback through Sandy Springs and Decatur whenever conference weeks and game days introduces conversion noise.",
+                                           "workLevelMeaningHtml":  "\u003ch3\u003eAtlanta: how side-hustle economics actually hold\u003c/h3\u003e\u003cp\u003eHigh-quality outcomes come from route discipline, not from maximizing trip count. Buckhead, Midtown, and Old Fourth Ward should be your base conversion lanes.\u003c/p\u003e\u003cp\u003eIf corridor speed collapses on I-75/85 Connector, I-285, and GA-400, forcing continuation usually erodes net faster than ending the block.\u003c/p\u003e",
+                                           "taxStrategyHtml":  "\u003ch3\u003eside-hustle financial governance\u003c/h3\u003e\u003cp\u003eUse one weekly reconciliation day and one monthly forecast review to avoid reactive decision-making.\u003c/p\u003e\u003cp\u003eStrong accounting rhythm helps you compare Buckhead, Midtown, and Old Fourth Ward versus Sandy Springs and Decatur based on real net outcomes.\u003c/p\u003e",
+                                           "dayInTheLifeHtml":  "\u003ch3\u003eA durable side-hustle day in Atlanta\u003c/h3\u003e\u003cp\u003eCheckpoint matrix: route friction, queue lag at ATL, and fatigue score. If two checks fail, switch to Sandy Springs and Decatur.\u003c/p\u003e\u003cp\u003eThis pattern protects retained value when conference weeks and game days introduces short-lived demand spikes.\u003c/p\u003e",
+                                           "bestPracticesHtml":  "\u003ch3\u003eside-hustle best practices in Atlanta\u003c/h3\u003e\u003cp\u003eProtocol signal-first: primary lane=Buckhead, Midtown, and Old Fourth Ward; fallback=Sandy Springs and Decatur; deadhead cap=2 miles; continuous-drive cap=100 minutes.\u003c/p\u003e\u003cp\u003eWhen conference weeks and game days amplifies noise, freeze expansion across I-75/85 Connector, I-285, and GA-400 and preserve lane discipline.\u003c/p\u003e",
                                            "painPoints":  [
-                                                              "Fatigue from combining W2 schedule with Atlanta gig windows",
-                                                              "Cross-zone drift through the I-75 and I-85 Connector, I-285, and GA-400",
-                                                              "Inconsistent order quality outside Buckhead, Midtown, and Old Fourth Ward"
+                                                              "Conversion drop when leaving Buckhead, Midtown, and Old Fourth Ward",
+                                                              "Route friction on I-75/85 Connector, I-285, and GA-400",
+                                                              "connector lockups and airport queue swings"
                                                           ],
                                            "personaQuotes":  [
                                                                  {
                                                                      "personaType":  "DELIVERY_VETERAN",
                                                                      "displayName":  "Atlanta multi-app courier",
-                                                                     "quote":  "My side-hustle net increased once I fixed a recurring zone plan in Buckhead, Midtown, and Old Fourth Ward and stopped reacting to every map signal.",
+                                                                     "quote":  "My side-hustle rule is simple: protect a 22-dollar floor, keep the map tight near Buckhead, Midtown, and Old Fourth Ward, and switch once to Sandy Springs and Decatur before ending a weak block.",
                                                                      "attributionType":  "USER_SUBMITTED"
                                                                  },
                                                                  {
                                                                      "personaType":  "TAX_PROFESSIONAL",
-                                                                     "displayName":  "Independent tax advisor",
-                                                                     "quote":  "Drivers with weekly logs and automatic reserves rarely face avoidable filing surprises, even when monthly earnings fluctuate.",
+                                                                     "displayName":  "Independent enrolled agent",
+                                                                     "quote":  "At 25-hour schedules, the winners are usually the people with weekly records and reserve discipline. Process quality matters more than optimism.",
                                                                      "attributionType":  "EDITORIAL_COMPOSITE"
                                                                  }
                                                              ]
@@ -111,27 +111,27 @@
                                                                          "min":  16.2,
                                                                          "max":  24.4
                                                                      },
-                                         "localStrategyText":  "Full-time in Atlanta is viable only with strict zone governance, planned recovery windows, and continuous cost controls because the I-75 and I-85 Connector, I-285, and GA-400 can magnify every weak operational decision.",
-                                         "workLevelMeaningHtml":  "\u003ch3\u003eFull-time in Atlanta is an operations business\u003c/h3\u003e\u003cp\u003eAt forty hours, the challenge is not only demand access. It is sustaining margin while controlling wear, downtime, and cognitive load in high-friction corridors.\u003c/p\u003e\u003cp\u003eThe most durable full-time operators near ATL run predefined daypart plans and avoid uncontrolled roaming outside their proven segments.\u003c/p\u003e",
-                                         "taxStrategyHtml":  "\u003ch3\u003eFull-time finance cadence\u003c/h3\u003e\u003cp\u003eUse separate operating and reserve accounts, reconcile weekly, and project obligations monthly. Full-time volatility cannot be managed with ad hoc records.\u003c/p\u003e\u003cp\u003eIn Atlanta, frequent review of mileage, maintenance, and tax posture is what prevents high gross weeks from turning into weak retained earnings.\u003c/p\u003e",
-                                         "dayInTheLifeHtml":  "\u003ch3\u003eTwo-peak full-time model\u003c/h3\u003e\u003cp\u003eAnchor work around morning and evening demand clusters in Buckhead, Midtown, and Old Fourth Ward, then assign midday to lower-mile tasks or planned downtime rather than random searching.\u003c/p\u003e\u003cp\u003eThis structure reduces burnout and controls long-run costs when airport throughput and convention-driven peaks and congestion patterns shift during the week.\u003c/p\u003e",
-                                         "bestPracticesHtml":  "\u003ch3\u003eDurability protocol\u003c/h3\u003e\u003cp\u003eSet hard limits for weekly miles, consecutive drive time, and maintenance reserve levels. If one limit is breached, reduce low-yield blocks before adding new hours.\u003c/p\u003e\u003cp\u003eIn Atlanta, full-time earnings are determined by risk control and repeatability, not by occasional spike sessions.\u003c/p\u003e",
+                                         "localStrategyText":  "In Atlanta full-time mode, prioritize Buckhead, Midtown, and Old Fourth Ward, cap transfer distance on I-75/85 Connector, I-285, and GA-400, and route fallback through Sandy Springs and Decatur whenever conference weeks and game days introduces conversion noise.",
+                                         "workLevelMeaningHtml":  "\u003ch3\u003efull-time in Atlanta is a control problem\u003c/h3\u003e\u003cp\u003eMain map: Buckhead, Midtown, and Old Fourth Ward. Main leak: I-75/85 Connector, I-285, and GA-400. Main constraint: connector lockups and airport queue swings.\u003c/p\u003e\u003cp\u003eUse fallback handoff to Sandy Springs and Decatur when conversion falls below threshold. This keeps weekly variance manageable.\u003c/p\u003e",
+                                         "taxStrategyHtml":  "\u003ch3\u003eAtlanta compliance posture\u003c/h3\u003e\u003cp\u003eThis level does not require complex structures first. It requires complete logs, stable category labels, and predictable reserve behavior.\u003c/p\u003e\u003cp\u003eWhen connector lockups and airport queue swings rises, disciplined records reduce both tax surprises and bad tactical decisions.\u003c/p\u003e",
+                                         "dayInTheLifeHtml":  "\u003ch3\u003eAtlanta daypart sequence for full-time\u003c/h3\u003e\u003cp\u003eRun a two-lane model: primary lane in Buckhead, Midtown, and Old Fourth Ward, one permitted switch, and hard stop when idle exceeds 9 minutes.\u003c/p\u003e\u003cp\u003eQueue checks near ATL are mandatory. Repeated friction on I-75/85 Connector, I-285, and GA-400 means immediate contraction.\u003c/p\u003e",
+                                         "bestPracticesHtml":  "\u003ch3\u003eRisk controls for full-time\u003c/h3\u003e\u003cp\u003eCreate hard caps for queue time near ATL, deadhead distance, and continuous driving duration. Caps are operational safety rails.\u003c/p\u003e\u003cp\u003eIn Atlanta, this model beats reactive volume chasing during high-noise periods.\u003c/p\u003e",
                                          "painPoints":  [
-                                                            "Mileage escalation under sustained the I-75 and I-85 Connector, I-285, and GA-400 congestion",
-                                                            "Coverage and liability risk at full utilization",
-                                                            "Burnout pressure from continuous high-friction navigation"
+                                                            "Conversion drop when leaving Buckhead, Midtown, and Old Fourth Ward",
+                                                            "Route friction on I-75/85 Connector, I-285, and GA-400",
+                                                            "connector lockups and airport queue swings"
                                                         ],
                                          "personaQuotes":  [
                                                                {
                                                                    "personaType":  "FLEET_MANAGER",
                                                                    "displayName":  "Urban fleet operations lead",
-                                                                   "quote":  "When drivers in Atlanta run all zones without limits, utilization looks high but retained net performance degrades quickly.",
+                                                                   "quote":  "On full-time rosters, we keep performance stable by limiting uncontrolled transitions on I-75/85 Connector, I-285, and GA-400 and enforcing structured lane rotation around Buckhead, Midtown, and Old Fourth Ward.",
                                                                    "attributionType":  "EDITORIAL_COMPOSITE"
                                                                },
                                                                {
                                                                    "personaType":  "INSURANCE_ADVISOR",
-                                                                   "displayName":  "Commercial coverage specialist",
-                                                                   "quote":  "At full-time mileage near ATL corridors, policy fit should be reviewed regularly because exposure patterns change faster than most drivers expect.",
+                                                                   "displayName":  "Commercial coverage advisor",
+                                                                   "quote":  "At sustained utilization near ATL, risk profile shifts faster than most drivers expect. Coverage review cadence has to match mileage growth.",
                                                                    "attributionType":  "VERIFIED_INTERVIEW"
                                                                }
                                                            ]

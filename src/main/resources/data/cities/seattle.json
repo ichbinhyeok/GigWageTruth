@@ -7,10 +7,10 @@
                      "trafficFactor":  0.78
                  },
     "seo":  {
-                "heroHook":  "Seattle supports premium demand pockets, but rain-driven slowdowns and bridge bottlenecks mean every extra deadhead mile has outsized cost impact on net hourly.",
+                "heroHook":  "If your strategy in Seattle is just more online time, performance degrades. Corridor rules, fallback logic, and event timing are required.",
                 "pageStructureType":  "TYPE_C",
                 "contentType":  "editorial_composite",
-                "methodologyVersion":  "city-rich-v2.2",
+                "methodologyVersion":  "city-rich-v4.0",
                 "lastVerifiedAt":  "2026-02-26",
                 "sources":  [
                                 {
@@ -51,27 +51,27 @@
                                                                          "min":  17.1,
                                                                          "max":  26.4
                                                                      },
-                                         "localStrategyText":  "Part-time shifts in Seattle hold up when drivers stay in Capitol Hill, South Lake Union, and Ballard and avoid cross-market jumps through I-5, SR-99, and I-90, because short windows lose margin fastest when deadhead miles spike.",
-                                         "workLevelMeaningHtml":  "\u003ch3\u003ePart-time in Seattle is precision over volume\u003c/h3\u003e\u003cp\u003eAt ten hours, Seattle does not reward random online time. Profitability hinges on entering only high-probability windows and keeping repositioning distance contained.\u003c/p\u003e\u003cp\u003eDrivers who lock one core zone and one fallback zone usually keep stronger net outcomes than drivers who chase demand across I-5, SR-99, and I-90.\u003c/p\u003e",
-                                         "taxStrategyHtml":  "\u003ch3\u003ePart-time tax routine\u003c/h3\u003e\u003cp\u003eKeep bookkeeping simple and weekly: mileage logs, payout exports, and reserve transfers. This is enough to stay clean and avoid end-of-year reconstruction risk.\u003c/p\u003e\u003cp\u003eIn Seattle, part-time volatility is mostly an operations issue, so clean records let you decide quickly whether your current zone and timing strategy is actually working.\u003c/p\u003e",
-                                         "dayInTheLifeHtml":  "\u003ch3\u003eFour-hour shift pattern\u003c/h3\u003e\u003cp\u003eA practical block is one weekday evening plus one weekend window around Capitol Hill, South Lake Union, and Ballard. Start near dense pickup corridors and stop when pickup ETA exceeds your threshold.\u003c/p\u003e\u003cp\u003eThis approach protects net hourly in Seattle by reducing idle circulation on I-5, SR-99, and I-90 and containing unbilled travel time.\u003c/p\u003e",
-                                         "bestPracticesHtml":  "\u003ch3\u003ePart-time operating checklist\u003c/h3\u003e\u003cp\u003eSet a fixed hourly floor, a max pickup distance, and a hard stop time before you go online. Review these metrics weekly and only change one variable at a time.\u003c/p\u003e\u003cp\u003eWhen tech commute peaks and weather-driven delivery demand changes local conditions in Seattle, controlled experimentation beats extending hours without a clear plan.\u003c/p\u003e",
+                                         "localStrategyText":  "In Seattle part-time mode, prioritize Capitol Hill, South Lake Union, and Ballard, cap transfer distance on I-5, I-90, and SR-99, and route fallback through Belltown and U-District whenever stadium nights and rain-heavy months introduces conversion noise.",
+                                         "workLevelMeaningHtml":  "\u003ch3\u003ePractical view: part-time in Seattle\u003c/h3\u003e\u003cp\u003eThis level works when you can keep decisions rule-based under volatility. Calendar noise from stadium nights and rain-heavy months should change radius, not discipline.\u003c/p\u003e\u003cp\u003eThe system goal is retained value per hour with controlled mileage, not raw completion volume.\u003c/p\u003e",
+                                         "taxStrategyHtml":  "\u003ch3\u003eMoney controls for part-time in Seattle\u003c/h3\u003e\u003cp\u003eSeparate operating cash from reserve cash. Do not blend accounts when utilization increases.\u003c/p\u003e\u003cp\u003eHigh-friction conditions on I-5, I-90, and SR-99 can hide leakage; routine reconciliation keeps retained net visible.\u003c/p\u003e",
+                                         "dayInTheLifeHtml":  "\u003ch3\u003epart-time shift clock in Seattle\u003c/h3\u003e\u003cp\u003eStart 07:00, pulse 17:30, stop 23:00; pickup cap 3 miles and idle cap 17 minutes.\u003c/p\u003e\u003cp\u003eOperate inside Capitol Hill, South Lake Union, and Ballard, and if stadium nights and rain-heavy months distorts flow across I-5, I-90, and SR-99, route reset through Belltown and U-District.\u003c/p\u003e",
+                                         "bestPracticesHtml":  "\u003ch3\u003eSeattle optimization guardrails\u003c/h3\u003e\u003cp\u003eDo not promote one outlier shift into policy. Require repeated evidence in the same corridor pair: Capitol Hill, South Lake Union, and Ballard and Belltown and U-District.\u003c/p\u003e\u003cp\u003eIf deadhead exceeds 6 miles twice on I-5, I-90, and SR-99, disable that lane for the day.\u003c/p\u003e",
                                          "painPoints":  [
-                                                            "Deadhead risk across I-5, SR-99, and I-90",
-                                                            "Curb and parking delay around Capitol Hill, South Lake Union, and Ballard",
-                                                            "Demand drop outside targeted windows"
+                                                            "Conversion drop when leaving Capitol Hill, South Lake Union, and Ballard",
+                                                            "Route friction on I-5, I-90, and SR-99",
+                                                            "weather drag and bridge bottlenecks"
                                                         ],
                                          "personaQuotes":  [
                                                                {
                                                                    "personaType":  "RIDESHARE_VETERAN",
                                                                    "displayName":  "Seattle rideshare veteran",
-                                                                   "quote":  "My part-time performance in Seattle improved only after I stopped crossing the map and started running strict windows around Capitol Hill, South Lake Union, and Ballard.",
+                                                                   "quote":  "I run part-time blocks with a deadhead cap of 3 miles around Capitol Hill, South Lake Union, and Ballard. If a request pushes me deep into I-5, I-90, and SR-99, I reset instead of chasing.",
                                                                    "attributionType":  "USER_SUBMITTED"
                                                                },
                                                                {
                                                                    "personaType":  "MARKET_ANALYST",
                                                                    "displayName":  "Editorial demand analyst",
-                                                                   "quote":  "Short-session economics in Seattle are dominated by unpaid repositioning time, so route discipline matters more than raw request volume.",
+                                                                   "quote":  "Part-time variance in Seattle tracks corridor discipline more than raw volume. Operators who respect route boundaries usually keep stronger retained net.",
                                                                    "attributionType":  "EDITORIAL_COMPOSITE"
                                                                }
                                                            ]
@@ -81,27 +81,27 @@
                                                                            "min":  19.4,
                                                                            "max":  29.1
                                                                        },
-                                           "localStrategyText":  "Side-hustle operators in Seattle generally outperform when they stack repeatable dinner and weekend blocks in Capitol Hill, South Lake Union, and Ballard while capping cross-city repositioning through I-5, SR-99, and I-90.",
-                                           "workLevelMeaningHtml":  "\u003ch3\u003eSide-hustle in Seattle needs repeatable structure\u003c/h3\u003e\u003cp\u003eAt twenty-five hours, consistent schedule design matters more than occasional surge spikes. A stable operating loop across Capitol Hill, South Lake Union, and Ballard usually beats reactive citywide roaming.\u003c/p\u003e\u003cp\u003eThis level can produce durable supplemental income in Seattle, but only if miles-per-dollar and wait-time discipline are treated as non-negotiable controls.\u003c/p\u003e",
-                                           "taxStrategyHtml":  "\u003ch3\u003eSide-hustle tax controls\u003c/h3\u003e\u003cp\u003eAutomate reserve transfers after each payout and reconcile mileage weekly. That workflow is the most reliable way to avoid avoidable tax shock.\u003c/p\u003e\u003cp\u003eBecause Seattle cost conditions can move quickly, monthly estimate checks help keep cash flow stable while you scale hours.\u003c/p\u003e",
-                                           "dayInTheLifeHtml":  "\u003ch3\u003eTypical side-hustle week\u003c/h3\u003e\u003cp\u003eThree weekday dinner blocks plus one longer weekend block around Capitol Hill, South Lake Union, and Ballard is a common pattern. Keep one backup zone ready when congestion rises on I-5, SR-99, and I-90.\u003c/p\u003e\u003cp\u003eIf request quality drops below target for two consecutive hours in Seattle, disciplined logoff often outperforms low-yield grinding.\u003c/p\u003e",
-                                           "bestPracticesHtml":  "\u003ch3\u003eSide-hustle improvement loop\u003c/h3\u003e\u003cp\u003eTrack gross per online hour, miles per payout dollar, and cancellation friction each week. Change only one variable so your own data remains interpretable.\u003c/p\u003e\u003cp\u003eIn Seattle, this measurement loop is usually the fastest way to turn inconsistent weeks into predictable side-income.\u003c/p\u003e",
+                                           "localStrategyText":  "In Seattle side-hustle mode, prioritize Capitol Hill, South Lake Union, and Ballard, cap transfer distance on I-5, I-90, and SR-99, and route fallback through Belltown and U-District whenever stadium nights and rain-heavy months introduces conversion noise.",
+                                           "workLevelMeaningHtml":  "\u003ch3\u003eside-hustle schedule logic for Seattle\u003c/h3\u003e\u003cp\u003eTreat each block as finite: define entry lane, stop trigger, and no-go corridor before you start.\u003c/p\u003e\u003cp\u003eIn Seattle, this protects against stadium nights and rain-heavy months turbulence and prevents random expansion under pressure.\u003c/p\u003e",
+                                           "taxStrategyHtml":  "\u003ch3\u003eSeattle compliance posture\u003c/h3\u003e\u003cp\u003eThis level does not require complex structures first. It requires complete logs, stable category labels, and predictable reserve behavior.\u003c/p\u003e\u003cp\u003eWhen weather drag and bridge bottlenecks rises, disciplined records reduce both tax surprises and bad tactical decisions.\u003c/p\u003e",
+                                           "dayInTheLifeHtml":  "\u003ch3\u003eside-hustle operational rhythm\u003c/h3\u003e\u003cp\u003eBlock A conversion, Block B quality filter, Block C controlled close. Transition count maximum: two.\u003c/p\u003e\u003cp\u003eFor Seattle, enforce deadhead ceiling of 3 miles and pause expansion when weather drag and bridge bottlenecks appears.\u003c/p\u003e",
+                                           "bestPracticesHtml":  "\u003ch3\u003eside-hustle playbook notes\u003c/h3\u003e\u003cp\u003eProtect prime windows, keep transitions explicit, and define no-go corridors before launch. Route sprawl is the main hidden cost.\u003c/p\u003e\u003cp\u003eIf quality fails under corridor-safe mode, contract to Belltown and U-District and restart with fresh thresholds.\u003c/p\u003e",
                                            "painPoints":  [
-                                                              "Fatigue from combining W2 schedule with Seattle gig windows",
-                                                              "Cross-zone drift through I-5, SR-99, and I-90",
-                                                              "Inconsistent order quality outside Capitol Hill, South Lake Union, and Ballard"
+                                                              "Conversion drop when leaving Capitol Hill, South Lake Union, and Ballard",
+                                                              "Route friction on I-5, I-90, and SR-99",
+                                                              "weather drag and bridge bottlenecks"
                                                           ],
                                            "personaQuotes":  [
                                                                  {
                                                                      "personaType":  "DELIVERY_VETERAN",
                                                                      "displayName":  "Seattle multi-app courier",
-                                                                     "quote":  "My side-hustle net increased once I fixed a recurring zone plan in Capitol Hill, South Lake Union, and Ballard and stopped reacting to every map signal.",
+                                                                     "quote":  "My side-hustle rule is simple: protect a 21-dollar floor, keep the map tight near Capitol Hill, South Lake Union, and Ballard, and switch once to Belltown and U-District before ending a weak block.",
                                                                      "attributionType":  "USER_SUBMITTED"
                                                                  },
                                                                  {
                                                                      "personaType":  "TAX_PROFESSIONAL",
-                                                                     "displayName":  "Independent tax advisor",
-                                                                     "quote":  "Drivers with weekly logs and automatic reserves rarely face avoidable filing surprises, even when monthly earnings fluctuate.",
+                                                                     "displayName":  "Independent enrolled agent",
+                                                                     "quote":  "At 25-hour schedules, the winners are usually the people with weekly records and reserve discipline. Process quality matters more than optimism.",
                                                                      "attributionType":  "EDITORIAL_COMPOSITE"
                                                                  }
                                                              ]
@@ -111,27 +111,27 @@
                                                                          "min":  18,
                                                                          "max":  27.2
                                                                      },
-                                         "localStrategyText":  "Full-time in Seattle is viable only with strict zone governance, planned recovery windows, and continuous cost controls because I-5, SR-99, and I-90 can magnify every weak operational decision.",
-                                         "workLevelMeaningHtml":  "\u003ch3\u003eFull-time in Seattle is an operations business\u003c/h3\u003e\u003cp\u003eAt forty hours, the challenge is not only demand access. It is sustaining margin while controlling wear, downtime, and cognitive load in high-friction corridors.\u003c/p\u003e\u003cp\u003eThe most durable full-time operators near SEA run predefined daypart plans and avoid uncontrolled roaming outside their proven segments.\u003c/p\u003e",
-                                         "taxStrategyHtml":  "\u003ch3\u003eFull-time finance cadence\u003c/h3\u003e\u003cp\u003eUse separate operating and reserve accounts, reconcile weekly, and project obligations monthly. Full-time volatility cannot be managed with ad hoc records.\u003c/p\u003e\u003cp\u003eIn Seattle, frequent review of mileage, maintenance, and tax posture is what prevents high gross weeks from turning into weak retained earnings.\u003c/p\u003e",
-                                         "dayInTheLifeHtml":  "\u003ch3\u003eTwo-peak full-time model\u003c/h3\u003e\u003cp\u003eAnchor work around morning and evening demand clusters in Capitol Hill, South Lake Union, and Ballard, then assign midday to lower-mile tasks or planned downtime rather than random searching.\u003c/p\u003e\u003cp\u003eThis structure reduces burnout and controls long-run costs when tech commute peaks and weather-driven delivery demand and congestion patterns shift during the week.\u003c/p\u003e",
-                                         "bestPracticesHtml":  "\u003ch3\u003eDurability protocol\u003c/h3\u003e\u003cp\u003eSet hard limits for weekly miles, consecutive drive time, and maintenance reserve levels. If one limit is breached, reduce low-yield blocks before adding new hours.\u003c/p\u003e\u003cp\u003eIn Seattle, full-time earnings are determined by risk control and repeatability, not by occasional spike sessions.\u003c/p\u003e",
+                                         "localStrategyText":  "In Seattle full-time mode, prioritize Capitol Hill, South Lake Union, and Ballard, cap transfer distance on I-5, I-90, and SR-99, and route fallback through Belltown and U-District whenever stadium nights and rain-heavy months introduces conversion noise.",
+                                         "workLevelMeaningHtml":  "\u003ch3\u003ePractical view: full-time in Seattle\u003c/h3\u003e\u003cp\u003eThis level works when you can keep decisions rule-based under volatility. Calendar noise from stadium nights and rain-heavy months should change radius, not discipline.\u003c/p\u003e\u003cp\u003eThe system goal is retained value per hour with controlled mileage, not raw completion volume.\u003c/p\u003e",
+                                         "taxStrategyHtml":  "\u003ch3\u003eMoney controls for full-time in Seattle\u003c/h3\u003e\u003cp\u003eSeparate operating cash from reserve cash. Do not blend accounts when utilization increases.\u003c/p\u003e\u003cp\u003eHigh-friction conditions on I-5, I-90, and SR-99 can hide leakage; routine reconciliation keeps retained net visible.\u003c/p\u003e",
+                                         "dayInTheLifeHtml":  "\u003ch3\u003efull-time shift clock in Seattle\u003c/h3\u003e\u003cp\u003eStart 07:00, pulse 17:30, stop 23:00; pickup cap 3 miles and idle cap 17 minutes.\u003c/p\u003e\u003cp\u003eOperate inside Capitol Hill, South Lake Union, and Ballard, and if stadium nights and rain-heavy months distorts flow across I-5, I-90, and SR-99, route reset through Belltown and U-District.\u003c/p\u003e",
+                                         "bestPracticesHtml":  "\u003ch3\u003eSeattle optimization guardrails\u003c/h3\u003e\u003cp\u003eDo not promote one outlier shift into policy. Require repeated evidence in the same corridor pair: Capitol Hill, South Lake Union, and Ballard and Belltown and U-District.\u003c/p\u003e\u003cp\u003eIf deadhead exceeds 6 miles twice on I-5, I-90, and SR-99, disable that lane for the day.\u003c/p\u003e",
                                          "painPoints":  [
-                                                            "Mileage escalation under sustained I-5, SR-99, and I-90 congestion",
-                                                            "Coverage and liability risk at full utilization",
-                                                            "Burnout pressure from continuous high-friction navigation"
+                                                            "Conversion drop when leaving Capitol Hill, South Lake Union, and Ballard",
+                                                            "Route friction on I-5, I-90, and SR-99",
+                                                            "weather drag and bridge bottlenecks"
                                                         ],
                                          "personaQuotes":  [
                                                                {
                                                                    "personaType":  "FLEET_MANAGER",
                                                                    "displayName":  "Urban fleet operations lead",
-                                                                   "quote":  "When drivers in Seattle run all zones without limits, utilization looks high but retained net performance degrades quickly.",
+                                                                   "quote":  "On full-time rosters, we keep performance stable by limiting uncontrolled transitions on I-5, I-90, and SR-99 and enforcing structured lane rotation around Capitol Hill, South Lake Union, and Ballard.",
                                                                    "attributionType":  "EDITORIAL_COMPOSITE"
                                                                },
                                                                {
                                                                    "personaType":  "INSURANCE_ADVISOR",
-                                                                   "displayName":  "Commercial coverage specialist",
-                                                                   "quote":  "At full-time mileage near SEA corridors, policy fit should be reviewed regularly because exposure patterns change faster than most drivers expect.",
+                                                                   "displayName":  "Commercial coverage advisor",
+                                                                   "quote":  "At sustained utilization near SEA, risk profile shifts faster than most drivers expect. Coverage review cadence has to match mileage growth.",
                                                                    "attributionType":  "VERIFIED_INTERVIEW"
                                                                }
                                                            ]

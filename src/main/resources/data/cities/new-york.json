@@ -7,10 +7,10 @@
                      "trafficFactor":  0.6
                  },
     "seo":  {
-                "heroHook":  "New York can look unbeatable on gross payout, but net hourly collapses quickly unless you control deadhead miles around Manhattan choke points and airport queue risk.",
+                "heroHook":  "The gap between average and strong operators in New York is not effort. It is whether they can contain bridge choke points and queue variance with hard map boundaries.",
                 "pageStructureType":  "TYPE_B",
                 "contentType":  "verified_interview",
-                "methodologyVersion":  "city-rich-v2.2",
+                "methodologyVersion":  "city-rich-v4.0",
                 "lastVerifiedAt":  "2026-02-26",
                 "sources":  [
                                 {
@@ -51,27 +51,27 @@
                                                                          "min":  18.8,
                                                                          "max":  30.9
                                                                      },
-                                         "localStrategyText":  "Part-time shifts in New York hold up when drivers stay in Long Island City, Williamsburg, and the Lower East Side and avoid cross-market jumps through FDR Drive, the BQE, and the Cross Bronx Expressway, because short windows lose margin fastest when deadhead miles spike.",
-                                         "workLevelMeaningHtml":  "\u003ch3\u003ePart-time in New York is precision over volume\u003c/h3\u003e\u003cp\u003eAt ten hours, New York does not reward random online time. Profitability hinges on entering only high-probability windows and keeping repositioning distance contained.\u003c/p\u003e\u003cp\u003eDrivers who lock one core zone and one fallback zone usually keep stronger net outcomes than drivers who chase demand across FDR Drive, the BQE, and the Cross Bronx Expressway.\u003c/p\u003e",
-                                         "taxStrategyHtml":  "\u003ch3\u003ePart-time tax routine\u003c/h3\u003e\u003cp\u003eKeep bookkeeping simple and weekly: mileage logs, payout exports, and reserve transfers. This is enough to stay clean and avoid end-of-year reconstruction risk.\u003c/p\u003e\u003cp\u003eIn New York, part-time volatility is mostly an operations issue, so clean records let you decide quickly whether your current zone and timing strategy is actually working.\u003c/p\u003e",
-                                         "dayInTheLifeHtml":  "\u003ch3\u003eFour-hour shift pattern\u003c/h3\u003e\u003cp\u003eA practical block is one weekday evening plus one weekend window around Long Island City, Williamsburg, and the Lower East Side. Start near dense pickup corridors and stop when pickup ETA exceeds your threshold.\u003c/p\u003e\u003cp\u003eThis approach protects net hourly in New York by reducing idle circulation on FDR Drive, the BQE, and the Cross Bronx Expressway and containing unbilled travel time.\u003c/p\u003e",
-                                         "bestPracticesHtml":  "\u003ch3\u003ePart-time operating checklist\u003c/h3\u003e\u003cp\u003eSet a fixed hourly floor, a max pickup distance, and a hard stop time before you go online. Review these metrics weekly and only change one variable at a time.\u003c/p\u003e\u003cp\u003eWhen late-night hospitality peaks and airport waves changes local conditions in New York, controlled experimentation beats extending hours without a clear plan.\u003c/p\u003e",
+                                         "localStrategyText":  "In New York part-time mode, prioritize Long Island City, Williamsburg, and the Lower East Side, cap transfer distance on FDR Drive, the BQE, and the Cross Bronx, and route fallback through Downtown Brooklyn and Harlem edge whenever holiday tourism and nightlife waves introduces conversion noise.",
+                                         "workLevelMeaningHtml":  "\u003ch3\u003epart-time operating frame in New York\u003c/h3\u003e\u003cp\u003eAnchor around Long Island City, Williamsburg, and the Lower East Side, then re-evaluate only at scheduled checkpoints. Avoid ad hoc map-wide jumps.\u003c/p\u003e\u003cp\u003eFailure pattern to avoid: bridge choke points and queue variance. Recovery pattern to use: compact around Downtown Brooklyn and Harlem edge.\u003c/p\u003e",
+                                         "taxStrategyHtml":  "\u003ch3\u003epart-time financial governance\u003c/h3\u003e\u003cp\u003eUse one weekly reconciliation day and one monthly forecast review to avoid reactive decision-making.\u003c/p\u003e\u003cp\u003eStrong accounting rhythm helps you compare Long Island City, Williamsburg, and the Lower East Side versus Downtown Brooklyn and Harlem edge based on real net outcomes.\u003c/p\u003e",
+                                         "dayInTheLifeHtml":  "\u003ch3\u003eNew York part-time block design\u003c/h3\u003e\u003cp\u003eFinite blocks only: objective, lane, and stop condition. Keep map radius tight around Long Island City, Williamsburg, and the Lower East Side for high-conversion windows.\u003c/p\u003e\u003cp\u003eIf quality breaks twice on FDR Drive, the BQE, and the Cross Bronx, terminate the block instead of forcing recovery miles.\u003c/p\u003e",
+                                         "bestPracticesHtml":  "\u003ch3\u003eExecution rules that matter\u003c/h3\u003e\u003cp\u003eMaintain a three-metric board: retained value per hour, miles per payout dollar, and idle-ratio. Change one parameter at a time.\u003c/p\u003e\u003cp\u003eFor New York, lane-disciplined mode prevents tactical drift under bridge choke points and queue variance.\u003c/p\u003e",
                                          "painPoints":  [
-                                                            "Deadhead risk across FDR Drive, the BQE, and the Cross Bronx Expressway",
-                                                            "Curb and parking delay around Long Island City, Williamsburg, and the Lower East Side",
-                                                            "Demand drop outside targeted windows"
+                                                            "Conversion drop when leaving Long Island City, Williamsburg, and the Lower East Side",
+                                                            "Route friction on FDR Drive, the BQE, and the Cross Bronx",
+                                                            "bridge choke points and queue variance"
                                                         ],
                                          "personaQuotes":  [
                                                                {
                                                                    "personaType":  "RIDESHARE_VETERAN",
                                                                    "displayName":  "New York rideshare veteran",
-                                                                   "quote":  "My part-time performance in New York improved only after I stopped crossing the map and started running strict windows around Long Island City, Williamsburg, and the Lower East Side.",
+                                                                   "quote":  "I run part-time blocks with a deadhead cap of 5 miles around Long Island City, Williamsburg, and the Lower East Side. If a request pushes me deep into FDR Drive, the BQE, and the Cross Bronx, I reset instead of chasing.",
                                                                    "attributionType":  "USER_SUBMITTED"
                                                                },
                                                                {
                                                                    "personaType":  "MARKET_ANALYST",
                                                                    "displayName":  "Editorial demand analyst",
-                                                                   "quote":  "Short-session economics in New York are dominated by unpaid repositioning time, so route discipline matters more than raw request volume.",
+                                                                   "quote":  "Part-time variance in New York tracks corridor discipline more than raw volume. Operators who respect route boundaries usually keep stronger retained net.",
                                                                    "attributionType":  "EDITORIAL_COMPOSITE"
                                                                }
                                                            ]
@@ -81,27 +81,27 @@
                                                                            "min":  22.4,
                                                                            "max":  34.8
                                                                        },
-                                           "localStrategyText":  "Side-hustle operators in New York generally outperform when they stack repeatable dinner and weekend blocks in Long Island City, Williamsburg, and the Lower East Side while capping cross-city repositioning through FDR Drive, the BQE, and the Cross Bronx Expressway.",
-                                           "workLevelMeaningHtml":  "\u003ch3\u003eSide-hustle in New York needs repeatable structure\u003c/h3\u003e\u003cp\u003eAt twenty-five hours, consistent schedule design matters more than occasional surge spikes. A stable operating loop across Long Island City, Williamsburg, and the Lower East Side usually beats reactive citywide roaming.\u003c/p\u003e\u003cp\u003eThis level can produce durable supplemental income in New York, but only if miles-per-dollar and wait-time discipline are treated as non-negotiable controls.\u003c/p\u003e",
-                                           "taxStrategyHtml":  "\u003ch3\u003eSide-hustle tax controls\u003c/h3\u003e\u003cp\u003eAutomate reserve transfers after each payout and reconcile mileage weekly. That workflow is the most reliable way to avoid avoidable tax shock.\u003c/p\u003e\u003cp\u003eBecause New York cost conditions can move quickly, monthly estimate checks help keep cash flow stable while you scale hours.\u003c/p\u003e",
-                                           "dayInTheLifeHtml":  "\u003ch3\u003eTypical side-hustle week\u003c/h3\u003e\u003cp\u003eThree weekday dinner blocks plus one longer weekend block around Long Island City, Williamsburg, and the Lower East Side is a common pattern. Keep one backup zone ready when congestion rises on FDR Drive, the BQE, and the Cross Bronx Expressway.\u003c/p\u003e\u003cp\u003eIf request quality drops below target for two consecutive hours in New York, disciplined logoff often outperforms low-yield grinding.\u003c/p\u003e",
-                                           "bestPracticesHtml":  "\u003ch3\u003eSide-hustle improvement loop\u003c/h3\u003e\u003cp\u003eTrack gross per online hour, miles per payout dollar, and cancellation friction each week. Change only one variable so your own data remains interpretable.\u003c/p\u003e\u003cp\u003eIn New York, this measurement loop is usually the fastest way to turn inconsistent weeks into predictable side-income.\u003c/p\u003e",
+                                           "localStrategyText":  "In New York side-hustle mode, prioritize Long Island City, Williamsburg, and the Lower East Side, cap transfer distance on FDR Drive, the BQE, and the Cross Bronx, and route fallback through Downtown Brooklyn and Harlem edge whenever holiday tourism and nightlife waves introduces conversion noise.",
+                                           "workLevelMeaningHtml":  "\u003ch3\u003eside-hustle in New York is a control problem\u003c/h3\u003e\u003cp\u003eMain map: Long Island City, Williamsburg, and the Lower East Side. Main leak: FDR Drive, the BQE, and the Cross Bronx. Main constraint: bridge choke points and queue variance.\u003c/p\u003e\u003cp\u003eUse fallback handoff to Downtown Brooklyn and Harlem edge when conversion falls below threshold. This keeps weekly variance manageable.\u003c/p\u003e",
+                                           "taxStrategyHtml":  "\u003ch3\u003eside-hustle tax cadence\u003c/h3\u003e\u003cp\u003eWeekly close: mileage, payout reconciliation, reserve transfer. Monthly check: forecast drift and reserve adequacy.\u003c/p\u003e\u003cp\u003eIn New York, bookkeeping quality is what makes route strategy outcomes interpretable under holiday tourism and nightlife waves volatility.\u003c/p\u003e",
+                                           "dayInTheLifeHtml":  "\u003ch3\u003eNew York daypart sequence for side-hustle\u003c/h3\u003e\u003cp\u003eRun a two-lane model: primary lane in Long Island City, Williamsburg, and the Lower East Side, one permitted switch, and hard stop when idle exceeds 15 minutes.\u003c/p\u003e\u003cp\u003eQueue checks near JFK and LaGuardia are mandatory. Repeated friction on FDR Drive, the BQE, and the Cross Bronx means immediate contraction.\u003c/p\u003e",
+                                           "bestPracticesHtml":  "\u003ch3\u003eRisk controls for side-hustle\u003c/h3\u003e\u003cp\u003eCreate hard caps for queue time near JFK and LaGuardia, deadhead distance, and continuous driving duration. Caps are operational safety rails.\u003c/p\u003e\u003cp\u003eIn New York, this model beats reactive volume chasing during high-noise periods.\u003c/p\u003e",
                                            "painPoints":  [
-                                                              "Fatigue from combining W2 schedule with New York gig windows",
-                                                              "Cross-zone drift through FDR Drive, the BQE, and the Cross Bronx Expressway",
-                                                              "Inconsistent order quality outside Long Island City, Williamsburg, and the Lower East Side"
+                                                              "Conversion drop when leaving Long Island City, Williamsburg, and the Lower East Side",
+                                                              "Route friction on FDR Drive, the BQE, and the Cross Bronx",
+                                                              "bridge choke points and queue variance"
                                                           ],
                                            "personaQuotes":  [
                                                                  {
                                                                      "personaType":  "DELIVERY_VETERAN",
                                                                      "displayName":  "New York multi-app courier",
-                                                                     "quote":  "My side-hustle net increased once I fixed a recurring zone plan in Long Island City, Williamsburg, and the Lower East Side and stopped reacting to every map signal.",
+                                                                     "quote":  "My side-hustle rule is simple: protect a 21-dollar floor, keep the map tight near Long Island City, Williamsburg, and the Lower East Side, and switch once to Downtown Brooklyn and Harlem edge before ending a weak block.",
                                                                      "attributionType":  "USER_SUBMITTED"
                                                                  },
                                                                  {
                                                                      "personaType":  "TAX_PROFESSIONAL",
-                                                                     "displayName":  "Independent tax advisor",
-                                                                     "quote":  "Drivers with weekly logs and automatic reserves rarely face avoidable filing surprises, even when monthly earnings fluctuate.",
+                                                                     "displayName":  "Independent enrolled agent",
+                                                                     "quote":  "At 25-hour schedules, the winners are usually the people with weekly records and reserve discipline. Process quality matters more than optimism.",
                                                                      "attributionType":  "EDITORIAL_COMPOSITE"
                                                                  }
                                                              ]
@@ -111,27 +111,27 @@
                                                                          "min":  20.6,
                                                                          "max":  31.5
                                                                      },
-                                         "localStrategyText":  "Full-time in New York is viable only with strict zone governance, planned recovery windows, and continuous cost controls because FDR Drive, the BQE, and the Cross Bronx Expressway can magnify every weak operational decision.",
-                                         "workLevelMeaningHtml":  "\u003ch3\u003eFull-time in New York is an operations business\u003c/h3\u003e\u003cp\u003eAt forty hours, the challenge is not only demand access. It is sustaining margin while controlling wear, downtime, and cognitive load in high-friction corridors.\u003c/p\u003e\u003cp\u003eThe most durable full-time operators near JFK and LaGuardia run predefined daypart plans and avoid uncontrolled roaming outside their proven segments.\u003c/p\u003e",
-                                         "taxStrategyHtml":  "\u003ch3\u003eFull-time finance cadence\u003c/h3\u003e\u003cp\u003eUse separate operating and reserve accounts, reconcile weekly, and project obligations monthly. Full-time volatility cannot be managed with ad hoc records.\u003c/p\u003e\u003cp\u003eIn New York, frequent review of mileage, maintenance, and tax posture is what prevents high gross weeks from turning into weak retained earnings.\u003c/p\u003e",
-                                         "dayInTheLifeHtml":  "\u003ch3\u003eTwo-peak full-time model\u003c/h3\u003e\u003cp\u003eAnchor work around morning and evening demand clusters in Long Island City, Williamsburg, and the Lower East Side, then assign midday to lower-mile tasks or planned downtime rather than random searching.\u003c/p\u003e\u003cp\u003eThis structure reduces burnout and controls long-run costs when late-night hospitality peaks and airport waves and congestion patterns shift during the week.\u003c/p\u003e",
-                                         "bestPracticesHtml":  "\u003ch3\u003eDurability protocol\u003c/h3\u003e\u003cp\u003eSet hard limits for weekly miles, consecutive drive time, and maintenance reserve levels. If one limit is breached, reduce low-yield blocks before adding new hours.\u003c/p\u003e\u003cp\u003eIn New York, full-time earnings are determined by risk control and repeatability, not by occasional spike sessions.\u003c/p\u003e",
+                                         "localStrategyText":  "In New York full-time mode, prioritize Long Island City, Williamsburg, and the Lower East Side, cap transfer distance on FDR Drive, the BQE, and the Cross Bronx, and route fallback through Downtown Brooklyn and Harlem edge whenever holiday tourism and nightlife waves introduces conversion noise.",
+                                         "workLevelMeaningHtml":  "\u003ch3\u003efull-time operating frame in New York\u003c/h3\u003e\u003cp\u003eAnchor around Long Island City, Williamsburg, and the Lower East Side, then re-evaluate only at scheduled checkpoints. Avoid ad hoc map-wide jumps.\u003c/p\u003e\u003cp\u003eFailure pattern to avoid: bridge choke points and queue variance. Recovery pattern to use: compact around Downtown Brooklyn and Harlem edge.\u003c/p\u003e",
+                                         "taxStrategyHtml":  "\u003ch3\u003efull-time financial governance\u003c/h3\u003e\u003cp\u003eUse one weekly reconciliation day and one monthly forecast review to avoid reactive decision-making.\u003c/p\u003e\u003cp\u003eStrong accounting rhythm helps you compare Long Island City, Williamsburg, and the Lower East Side versus Downtown Brooklyn and Harlem edge based on real net outcomes.\u003c/p\u003e",
+                                         "dayInTheLifeHtml":  "\u003ch3\u003eNew York full-time block design\u003c/h3\u003e\u003cp\u003eFinite blocks only: objective, lane, and stop condition. Keep map radius tight around Long Island City, Williamsburg, and the Lower East Side for high-conversion windows.\u003c/p\u003e\u003cp\u003eIf quality breaks twice on FDR Drive, the BQE, and the Cross Bronx, terminate the block instead of forcing recovery miles.\u003c/p\u003e",
+                                         "bestPracticesHtml":  "\u003ch3\u003eExecution rules that matter\u003c/h3\u003e\u003cp\u003eMaintain a three-metric board: retained value per hour, miles per payout dollar, and idle-ratio. Change one parameter at a time.\u003c/p\u003e\u003cp\u003eFor New York, lane-disciplined mode prevents tactical drift under bridge choke points and queue variance.\u003c/p\u003e",
                                          "painPoints":  [
-                                                            "Mileage escalation under sustained FDR Drive, the BQE, and the Cross Bronx Expressway congestion",
-                                                            "Coverage and liability risk at full utilization",
-                                                            "Burnout pressure from continuous high-friction navigation"
+                                                            "Conversion drop when leaving Long Island City, Williamsburg, and the Lower East Side",
+                                                            "Route friction on FDR Drive, the BQE, and the Cross Bronx",
+                                                            "bridge choke points and queue variance"
                                                         ],
                                          "personaQuotes":  [
                                                                {
                                                                    "personaType":  "FLEET_MANAGER",
                                                                    "displayName":  "Urban fleet operations lead",
-                                                                   "quote":  "When drivers in New York run all zones without limits, utilization looks high but retained net performance degrades quickly.",
+                                                                   "quote":  "On full-time rosters, we keep performance stable by limiting uncontrolled transitions on FDR Drive, the BQE, and the Cross Bronx and enforcing structured lane rotation around Long Island City, Williamsburg, and the Lower East Side.",
                                                                    "attributionType":  "EDITORIAL_COMPOSITE"
                                                                },
                                                                {
                                                                    "personaType":  "INSURANCE_ADVISOR",
-                                                                   "displayName":  "Commercial coverage specialist",
-                                                                   "quote":  "At full-time mileage near JFK and LaGuardia corridors, policy fit should be reviewed regularly because exposure patterns change faster than most drivers expect.",
+                                                                   "displayName":  "Commercial coverage advisor",
+                                                                   "quote":  "At sustained utilization near JFK and LaGuardia, risk profile shifts faster than most drivers expect. Coverage review cadence has to match mileage growth.",
                                                                    "attributionType":  "VERIFIED_INTERVIEW"
                                                                }
                                                            ]

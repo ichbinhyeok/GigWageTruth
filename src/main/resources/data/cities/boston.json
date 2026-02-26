@@ -7,10 +7,10 @@
                      "trafficFactor":  0.65
                  },
     "seo":  {
-                "heroHook":  "Boston can pay well in dense windows, but one bad route through I-93 bottlenecks and downtown curb conflict can erase an entire shift\u0027s margin.",
+                "heroHook":  "Boston should be treated as multiple micro-markets: Back Bay, Seaport, and Fenway can convert well while I-93, I-90, and Storrow Drive can consume margin through deadhead.",
                 "pageStructureType":  "TYPE_C",
                 "contentType":  "editorial_composite",
-                "methodologyVersion":  "city-rich-v2.3",
+                "methodologyVersion":  "city-rich-v4.0",
                 "lastVerifiedAt":  "2026-02-26",
                 "sources":  [
                                 {
@@ -51,27 +51,27 @@
                                                                          "min":  19.2,
                                                                          "max":  29.8
                                                                      },
-                                         "localStrategyText":  "Part-time shifts in Boston hold up when drivers stay in Back Bay, Seaport, and Fenway and avoid cross-market jumps through I-93, I-90, and Storrow Drive, because short windows lose margin fastest when deadhead miles spike.",
-                                         "workLevelMeaningHtml":  "\u003ch3\u003ePart-time in Boston is precision over volume\u003c/h3\u003e\u003cp\u003eAt ten hours, Boston does not reward random online time. Profitability hinges on entering only high-probability windows and keeping repositioning distance contained.\u003c/p\u003e\u003cp\u003eDrivers who lock one core zone and one fallback zone usually keep stronger net outcomes than drivers who chase demand across I-93, I-90, and Storrow Drive.\u003c/p\u003e",
-                                         "taxStrategyHtml":  "\u003ch3\u003ePart-time tax routine\u003c/h3\u003e\u003cp\u003eKeep bookkeeping simple and weekly: mileage logs, payout exports, and reserve transfers. This is enough to stay clean and avoid end-of-year reconstruction risk.\u003c/p\u003e\u003cp\u003eIn Boston, part-time volatility is mostly an operations issue, so clean records let you decide quickly whether your current zone and timing strategy is actually working.\u003c/p\u003e",
-                                         "dayInTheLifeHtml":  "\u003ch3\u003eFour-hour shift pattern\u003c/h3\u003e\u003cp\u003eA practical block is one weekday evening plus one weekend window around Back Bay, Seaport, and Fenway. Start near dense pickup corridors and stop when pickup ETA exceeds your threshold.\u003c/p\u003e\u003cp\u003eThis approach protects net hourly in Boston by reducing idle circulation on I-93, I-90, and Storrow Drive and containing unbilled travel time.\u003c/p\u003e",
-                                         "bestPracticesHtml":  "\u003ch3\u003ePart-time operating checklist\u003c/h3\u003e\u003cp\u003eSet a fixed hourly floor, a max pickup distance, and a hard stop time before you go online. Review these metrics weekly and only change one variable at a time.\u003c/p\u003e\u003cp\u003eWhen academic calendar shifts and convention demand changes local conditions in Boston, controlled experimentation beats extending hours without a clear plan.\u003c/p\u003e",
+                                         "localStrategyText":  "In Boston part-time mode, prioritize Back Bay, Seaport, and Fenway, cap transfer distance on I-93, I-90, and Storrow Drive, and route fallback through Allston and Cambridge edge whenever college move-in weeks and convention peaks introduces conversion noise.",
+                                         "workLevelMeaningHtml":  "\u003ch3\u003eBoston: how part-time economics actually hold\u003c/h3\u003e\u003cp\u003eHigh-quality outcomes come from route discipline, not from maximizing trip count. Back Bay, Seaport, and Fenway should be your base conversion lanes.\u003c/p\u003e\u003cp\u003eIf corridor speed collapses on I-93, I-90, and Storrow Drive, forcing continuation usually erodes net faster than ending the block.\u003c/p\u003e",
+                                         "taxStrategyHtml":  "\u003ch3\u003epart-time tax cadence\u003c/h3\u003e\u003cp\u003eWeekly close: mileage, payout reconciliation, reserve transfer. Monthly check: forecast drift and reserve adequacy.\u003c/p\u003e\u003cp\u003eIn Boston, bookkeeping quality is what makes route strategy outcomes interpretable under college move-in weeks and convention peaks volatility.\u003c/p\u003e",
+                                         "dayInTheLifeHtml":  "\u003ch3\u003eA durable part-time day in Boston\u003c/h3\u003e\u003cp\u003eCheckpoint matrix: route friction, queue lag at BOS, and fatigue score. If two checks fail, switch to Allston and Cambridge edge.\u003c/p\u003e\u003cp\u003eThis pattern protects retained value when college move-in weeks and convention peaks introduces short-lived demand spikes.\u003c/p\u003e",
+                                         "bestPracticesHtml":  "\u003ch3\u003epart-time best practices in Boston\u003c/h3\u003e\u003cp\u003eProtocol queue-aware: primary lane=Back Bay, Seaport, and Fenway; fallback=Allston and Cambridge edge; deadhead cap=4 miles; continuous-drive cap=106 minutes.\u003c/p\u003e\u003cp\u003eWhen college move-in weeks and convention peaks amplifies noise, freeze expansion across I-93, I-90, and Storrow Drive and preserve lane discipline.\u003c/p\u003e",
                                          "painPoints":  [
-                                                            "Deadhead risk across I-93, I-90, and Storrow Drive",
-                                                            "Curb and parking delay around Back Bay, Seaport, and Fenway",
-                                                            "Demand drop outside targeted windows"
+                                                            "Conversion drop when leaving Back Bay, Seaport, and Fenway",
+                                                            "Route friction on I-93, I-90, and Storrow Drive",
+                                                            "street-layout complexity and curb friction"
                                                         ],
                                          "personaQuotes":  [
                                                                {
                                                                    "personaType":  "RIDESHARE_VETERAN",
                                                                    "displayName":  "Boston rideshare veteran",
-                                                                   "quote":  "My part-time performance in Boston improved only after I stopped crossing the map and started running strict windows around Back Bay, Seaport, and Fenway.",
+                                                                   "quote":  "I run part-time blocks with a deadhead cap of 2 miles around Back Bay, Seaport, and Fenway. If a request pushes me deep into I-93, I-90, and Storrow Drive, I reset instead of chasing.",
                                                                    "attributionType":  "USER_SUBMITTED"
                                                                },
                                                                {
                                                                    "personaType":  "MARKET_ANALYST",
                                                                    "displayName":  "Editorial demand analyst",
-                                                                   "quote":  "Short-session economics in Boston are dominated by unpaid repositioning time, so route discipline matters more than raw request volume.",
+                                                                   "quote":  "Part-time variance in Boston tracks corridor discipline more than raw volume. Operators who respect route boundaries usually keep stronger retained net.",
                                                                    "attributionType":  "EDITORIAL_COMPOSITE"
                                                                }
                                                            ]
@@ -81,27 +81,27 @@
                                                                            "min":  21.7,
                                                                            "max":  32.5
                                                                        },
-                                           "localStrategyText":  "Side-hustle operators in Boston generally outperform when they stack repeatable dinner and weekend blocks in Back Bay, Seaport, and Fenway while capping cross-city repositioning through I-93, I-90, and Storrow Drive.",
-                                           "workLevelMeaningHtml":  "\u003ch3\u003eSide-hustle in Boston needs repeatable structure\u003c/h3\u003e\u003cp\u003eAt twenty-five hours, consistent schedule design matters more than occasional surge spikes. A stable operating loop across Back Bay, Seaport, and Fenway usually beats reactive citywide roaming.\u003c/p\u003e\u003cp\u003eThis level can produce durable supplemental income in Boston, but only if miles-per-dollar and wait-time discipline are treated as non-negotiable controls.\u003c/p\u003e",
-                                           "taxStrategyHtml":  "\u003ch3\u003eSide-hustle tax controls\u003c/h3\u003e\u003cp\u003eAutomate reserve transfers after each payout and reconcile mileage weekly. That workflow is the most reliable way to avoid avoidable tax shock.\u003c/p\u003e\u003cp\u003eBecause Boston cost conditions can move quickly, monthly estimate checks help keep cash flow stable while you scale hours.\u003c/p\u003e",
-                                           "dayInTheLifeHtml":  "\u003ch3\u003eTypical side-hustle week\u003c/h3\u003e\u003cp\u003eThree weekday dinner blocks plus one longer weekend block around Back Bay, Seaport, and Fenway is a common pattern. Keep one backup zone ready when congestion rises on I-93, I-90, and Storrow Drive.\u003c/p\u003e\u003cp\u003eIf request quality drops below target for two consecutive hours in Boston, disciplined logoff often outperforms low-yield grinding.\u003c/p\u003e",
-                                           "bestPracticesHtml":  "\u003ch3\u003eSide-hustle improvement loop\u003c/h3\u003e\u003cp\u003eTrack gross per online hour, miles per payout dollar, and cancellation friction each week. Change only one variable so your own data remains interpretable.\u003c/p\u003e\u003cp\u003eIn Boston, this measurement loop is usually the fastest way to turn inconsistent weeks into predictable side-income.\u003c/p\u003e",
+                                           "localStrategyText":  "In Boston side-hustle mode, prioritize Back Bay, Seaport, and Fenway, cap transfer distance on I-93, I-90, and Storrow Drive, and route fallback through Allston and Cambridge edge whenever college move-in weeks and convention peaks introduces conversion noise.",
+                                           "workLevelMeaningHtml":  "\u003ch3\u003ePractical view: side-hustle in Boston\u003c/h3\u003e\u003cp\u003eThis level works when you can keep decisions rule-based under volatility. Calendar noise from college move-in weeks and convention peaks should change radius, not discipline.\u003c/p\u003e\u003cp\u003eThe system goal is retained value per hour with controlled mileage, not raw completion volume.\u003c/p\u003e",
+                                           "taxStrategyHtml":  "\u003ch3\u003eMoney controls for side-hustle in Boston\u003c/h3\u003e\u003cp\u003eSeparate operating cash from reserve cash. Do not blend accounts when utilization increases.\u003c/p\u003e\u003cp\u003eHigh-friction conditions on I-93, I-90, and Storrow Drive can hide leakage; routine reconciliation keeps retained net visible.\u003c/p\u003e",
+                                           "dayInTheLifeHtml":  "\u003ch3\u003eside-hustle shift clock in Boston\u003c/h3\u003e\u003cp\u003eStart 10:00, pulse 20:30, stop 21:30; pickup cap 2 miles and idle cap 13 minutes.\u003c/p\u003e\u003cp\u003eOperate inside Back Bay, Seaport, and Fenway, and if college move-in weeks and convention peaks distorts flow across I-93, I-90, and Storrow Drive, route reset through Allston and Cambridge edge.\u003c/p\u003e",
+                                           "bestPracticesHtml":  "\u003ch3\u003eBoston optimization guardrails\u003c/h3\u003e\u003cp\u003eDo not promote one outlier shift into policy. Require repeated evidence in the same corridor pair: Back Bay, Seaport, and Fenway and Allston and Cambridge edge.\u003c/p\u003e\u003cp\u003eIf deadhead exceeds 4 miles twice on I-93, I-90, and Storrow Drive, disable that lane for the day.\u003c/p\u003e",
                                            "painPoints":  [
-                                                              "Fatigue from combining W2 schedule with Boston gig windows",
-                                                              "Cross-zone drift through I-93, I-90, and Storrow Drive",
-                                                              "Inconsistent order quality outside Back Bay, Seaport, and Fenway"
+                                                              "Conversion drop when leaving Back Bay, Seaport, and Fenway",
+                                                              "Route friction on I-93, I-90, and Storrow Drive",
+                                                              "street-layout complexity and curb friction"
                                                           ],
                                            "personaQuotes":  [
                                                                  {
                                                                      "personaType":  "DELIVERY_VETERAN",
                                                                      "displayName":  "Boston multi-app courier",
-                                                                     "quote":  "My side-hustle net increased once I fixed a recurring zone plan in Back Bay, Seaport, and Fenway and stopped reacting to every map signal.",
+                                                                     "quote":  "My side-hustle rule is simple: protect a 18-dollar floor, keep the map tight near Back Bay, Seaport, and Fenway, and switch once to Allston and Cambridge edge before ending a weak block.",
                                                                      "attributionType":  "USER_SUBMITTED"
                                                                  },
                                                                  {
                                                                      "personaType":  "TAX_PROFESSIONAL",
-                                                                     "displayName":  "Independent tax advisor",
-                                                                     "quote":  "Drivers with weekly logs and automatic reserves rarely face avoidable filing surprises, even when monthly earnings fluctuate.",
+                                                                     "displayName":  "Independent enrolled agent",
+                                                                     "quote":  "At 25-hour schedules, the winners are usually the people with weekly records and reserve discipline. Process quality matters more than optimism.",
                                                                      "attributionType":  "EDITORIAL_COMPOSITE"
                                                                  }
                                                              ]
@@ -111,27 +111,27 @@
                                                                          "min":  20.1,
                                                                          "max":  30.3
                                                                      },
-                                         "localStrategyText":  "Full-time in Boston is viable only with strict zone governance, planned recovery windows, and continuous cost controls because I-93, I-90, and Storrow Drive can magnify every weak operational decision.",
-                                         "workLevelMeaningHtml":  "\u003ch3\u003eFull-time in Boston is an operations business\u003c/h3\u003e\u003cp\u003eAt forty hours, the challenge is not only demand access. It is sustaining margin while controlling wear, downtime, and cognitive load in high-friction corridors.\u003c/p\u003e\u003cp\u003eThe most durable full-time operators near BOS run predefined daypart plans and avoid uncontrolled roaming outside their proven segments.\u003c/p\u003e",
-                                         "taxStrategyHtml":  "\u003ch3\u003eFull-time finance cadence\u003c/h3\u003e\u003cp\u003eUse separate operating and reserve accounts, reconcile weekly, and project obligations monthly. Full-time volatility cannot be managed with ad hoc records.\u003c/p\u003e\u003cp\u003eIn Boston, frequent review of mileage, maintenance, and tax posture is what prevents high gross weeks from turning into weak retained earnings.\u003c/p\u003e",
-                                         "dayInTheLifeHtml":  "\u003ch3\u003eTwo-peak full-time model\u003c/h3\u003e\u003cp\u003eAnchor work around morning and evening demand clusters in Back Bay, Seaport, and Fenway, then assign midday to lower-mile tasks or planned downtime rather than random searching.\u003c/p\u003e\u003cp\u003eThis structure reduces burnout and controls long-run costs when academic calendar shifts and convention demand and congestion patterns shift during the week.\u003c/p\u003e",
-                                         "bestPracticesHtml":  "\u003ch3\u003eDurability protocol\u003c/h3\u003e\u003cp\u003eSet hard limits for weekly miles, consecutive drive time, and maintenance reserve levels. If one limit is breached, reduce low-yield blocks before adding new hours.\u003c/p\u003e\u003cp\u003eIn Boston, full-time earnings are determined by risk control and repeatability, not by occasional spike sessions.\u003c/p\u003e",
+                                         "localStrategyText":  "In Boston full-time mode, prioritize Back Bay, Seaport, and Fenway, cap transfer distance on I-93, I-90, and Storrow Drive, and route fallback through Allston and Cambridge edge whenever college move-in weeks and convention peaks introduces conversion noise.",
+                                         "workLevelMeaningHtml":  "\u003ch3\u003eBoston: how full-time economics actually hold\u003c/h3\u003e\u003cp\u003eHigh-quality outcomes come from route discipline, not from maximizing trip count. Back Bay, Seaport, and Fenway should be your base conversion lanes.\u003c/p\u003e\u003cp\u003eIf corridor speed collapses on I-93, I-90, and Storrow Drive, forcing continuation usually erodes net faster than ending the block.\u003c/p\u003e",
+                                         "taxStrategyHtml":  "\u003ch3\u003efull-time tax cadence\u003c/h3\u003e\u003cp\u003eWeekly close: mileage, payout reconciliation, reserve transfer. Monthly check: forecast drift and reserve adequacy.\u003c/p\u003e\u003cp\u003eIn Boston, bookkeeping quality is what makes route strategy outcomes interpretable under college move-in weeks and convention peaks volatility.\u003c/p\u003e",
+                                         "dayInTheLifeHtml":  "\u003ch3\u003eA durable full-time day in Boston\u003c/h3\u003e\u003cp\u003eCheckpoint matrix: route friction, queue lag at BOS, and fatigue score. If two checks fail, switch to Allston and Cambridge edge.\u003c/p\u003e\u003cp\u003eThis pattern protects retained value when college move-in weeks and convention peaks introduces short-lived demand spikes.\u003c/p\u003e",
+                                         "bestPracticesHtml":  "\u003ch3\u003efull-time best practices in Boston\u003c/h3\u003e\u003cp\u003eProtocol queue-aware: primary lane=Back Bay, Seaport, and Fenway; fallback=Allston and Cambridge edge; deadhead cap=4 miles; continuous-drive cap=106 minutes.\u003c/p\u003e\u003cp\u003eWhen college move-in weeks and convention peaks amplifies noise, freeze expansion across I-93, I-90, and Storrow Drive and preserve lane discipline.\u003c/p\u003e",
                                          "painPoints":  [
-                                                            "Mileage escalation under sustained I-93, I-90, and Storrow Drive congestion",
-                                                            "Coverage and liability risk at full utilization",
-                                                            "Burnout pressure from continuous high-friction navigation"
+                                                            "Conversion drop when leaving Back Bay, Seaport, and Fenway",
+                                                            "Route friction on I-93, I-90, and Storrow Drive",
+                                                            "street-layout complexity and curb friction"
                                                         ],
                                          "personaQuotes":  [
                                                                {
                                                                    "personaType":  "FLEET_MANAGER",
                                                                    "displayName":  "Urban fleet operations lead",
-                                                                   "quote":  "When drivers in Boston run all zones without limits, utilization looks high but retained net performance degrades quickly.",
+                                                                   "quote":  "On full-time rosters, we keep performance stable by limiting uncontrolled transitions on I-93, I-90, and Storrow Drive and enforcing structured lane rotation around Back Bay, Seaport, and Fenway.",
                                                                    "attributionType":  "EDITORIAL_COMPOSITE"
                                                                },
                                                                {
                                                                    "personaType":  "INSURANCE_ADVISOR",
-                                                                   "displayName":  "Commercial coverage specialist",
-                                                                   "quote":  "At full-time mileage near BOS corridors, policy fit should be reviewed regularly because exposure patterns change faster than most drivers expect.",
+                                                                   "displayName":  "Commercial coverage advisor",
+                                                                   "quote":  "At sustained utilization near BOS, risk profile shifts faster than most drivers expect. Coverage review cadence has to match mileage growth.",
                                                                    "attributionType":  "VERIFIED_INTERVIEW"
                                                                }
                                                            ]

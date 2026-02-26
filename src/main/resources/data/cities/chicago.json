@@ -7,10 +7,10 @@
                      "trafficFactor":  0.75
                  },
     "seo":  {
-                "heroHook":  "Chicago can deliver strong payout clusters, but Lower Wacker confusion, winter weather risk, and Loop parking friction make disciplined route selection mandatory.",
+                "heroHook":  "Chicago should be treated as multiple micro-markets: River North, West Loop, and Wicker Park can convert well while I-90, I-94, and Lower Wacker can consume margin through deadhead.",
                 "pageStructureType":  "TYPE_A",
                 "contentType":  "editorial_composite",
-                "methodologyVersion":  "city-rich-v2.2",
+                "methodologyVersion":  "city-rich-v4.0",
                 "lastVerifiedAt":  "2026-02-26",
                 "sources":  [
                                 {
@@ -51,27 +51,27 @@
                                                                          "min":  16.2,
                                                                          "max":  25.1
                                                                      },
-                                         "localStrategyText":  "Part-time shifts in Chicago hold up when drivers stay in River North, Wicker Park, and the West Loop and avoid cross-market jumps through I-90 and I-94, the Dan Ryan, and Lower Wacker corridors, because short windows lose margin fastest when deadhead miles spike.",
-                                         "workLevelMeaningHtml":  "\u003ch3\u003ePart-time in Chicago is precision over volume\u003c/h3\u003e\u003cp\u003eAt ten hours, Chicago does not reward random online time. Profitability hinges on entering only high-probability windows and keeping repositioning distance contained.\u003c/p\u003e\u003cp\u003eDrivers who lock one core zone and one fallback zone usually keep stronger net outcomes than drivers who chase demand across I-90 and I-94, the Dan Ryan, and Lower Wacker corridors.\u003c/p\u003e",
-                                         "taxStrategyHtml":  "\u003ch3\u003ePart-time tax routine\u003c/h3\u003e\u003cp\u003eKeep bookkeeping simple and weekly: mileage logs, payout exports, and reserve transfers. This is enough to stay clean and avoid end-of-year reconstruction risk.\u003c/p\u003e\u003cp\u003eIn Chicago, part-time volatility is mostly an operations issue, so clean records let you decide quickly whether your current zone and timing strategy is actually working.\u003c/p\u003e",
-                                         "dayInTheLifeHtml":  "\u003ch3\u003eFour-hour shift pattern\u003c/h3\u003e\u003cp\u003eA practical block is one weekday evening plus one weekend window around River North, Wicker Park, and the West Loop. Start near dense pickup corridors and stop when pickup ETA exceeds your threshold.\u003c/p\u003e\u003cp\u003eThis approach protects net hourly in Chicago by reducing idle circulation on I-90 and I-94, the Dan Ryan, and Lower Wacker corridors and containing unbilled travel time.\u003c/p\u003e",
-                                         "bestPracticesHtml":  "\u003ch3\u003ePart-time operating checklist\u003c/h3\u003e\u003cp\u003eSet a fixed hourly floor, a max pickup distance, and a hard stop time before you go online. Review these metrics weekly and only change one variable at a time.\u003c/p\u003e\u003cp\u003eWhen commuter reversals and weekend nightlife density changes local conditions in Chicago, controlled experimentation beats extending hours without a clear plan.\u003c/p\u003e",
+                                         "localStrategyText":  "In Chicago part-time mode, prioritize River North, West Loop, and Wicker Park, cap transfer distance on I-90, I-94, and Lower Wacker, and route fallback through Lincoln Park and South Loop whenever summer festivals and sports weekends introduces conversion noise.",
+                                         "workLevelMeaningHtml":  "\u003ch3\u003eChicago: how part-time economics actually hold\u003c/h3\u003e\u003cp\u003eHigh-quality outcomes come from route discipline, not from maximizing trip count. River North, West Loop, and Wicker Park should be your base conversion lanes.\u003c/p\u003e\u003cp\u003eIf corridor speed collapses on I-90, I-94, and Lower Wacker, forcing continuation usually erodes net faster than ending the block.\u003c/p\u003e",
+                                         "taxStrategyHtml":  "\u003ch3\u003epart-time financial governance\u003c/h3\u003e\u003cp\u003eUse one weekly reconciliation day and one monthly forecast review to avoid reactive decision-making.\u003c/p\u003e\u003cp\u003eStrong accounting rhythm helps you compare River North, West Loop, and Wicker Park versus Lincoln Park and South Loop based on real net outcomes.\u003c/p\u003e",
+                                         "dayInTheLifeHtml":  "\u003ch3\u003eA durable part-time day in Chicago\u003c/h3\u003e\u003cp\u003eCheckpoint matrix: route friction, queue lag at ORD and MDW, and fatigue score. If two checks fail, switch to Lincoln Park and South Loop.\u003c/p\u003e\u003cp\u003eThis pattern protects retained value when summer festivals and sports weekends introduces short-lived demand spikes.\u003c/p\u003e",
+                                         "bestPracticesHtml":  "\u003ch3\u003epart-time best practices in Chicago\u003c/h3\u003e\u003cp\u003eProtocol heat-adjusted: primary lane=River North, West Loop, and Wicker Park; fallback=Lincoln Park and South Loop; deadhead cap=4 miles; continuous-drive cap=91 minutes.\u003c/p\u003e\u003cp\u003eWhen summer festivals and sports weekends amplifies noise, freeze expansion across I-90, I-94, and Lower Wacker and preserve lane discipline.\u003c/p\u003e",
                                          "painPoints":  [
-                                                            "Deadhead risk across I-90 and I-94, the Dan Ryan, and Lower Wacker corridors",
-                                                            "Curb and parking delay around River North, Wicker Park, and the West Loop",
-                                                            "Demand drop outside targeted windows"
+                                                            "Conversion drop when leaving River North, West Loop, and Wicker Park",
+                                                            "Route friction on I-90, I-94, and Lower Wacker",
+                                                            "winter slowdowns and Loop parking pressure"
                                                         ],
                                          "personaQuotes":  [
                                                                {
                                                                    "personaType":  "RIDESHARE_VETERAN",
                                                                    "displayName":  "Chicago rideshare veteran",
-                                                                   "quote":  "My part-time performance in Chicago improved only after I stopped crossing the map and started running strict windows around River North, Wicker Park, and the West Loop.",
+                                                                   "quote":  "I run part-time blocks with a deadhead cap of 5 miles around River North, West Loop, and Wicker Park. If a request pushes me deep into I-90, I-94, and Lower Wacker, I reset instead of chasing.",
                                                                    "attributionType":  "USER_SUBMITTED"
                                                                },
                                                                {
                                                                    "personaType":  "MARKET_ANALYST",
                                                                    "displayName":  "Editorial demand analyst",
-                                                                   "quote":  "Short-session economics in Chicago are dominated by unpaid repositioning time, so route discipline matters more than raw request volume.",
+                                                                   "quote":  "Part-time variance in Chicago tracks corridor discipline more than raw volume. Operators who respect route boundaries usually keep stronger retained net.",
                                                                    "attributionType":  "EDITORIAL_COMPOSITE"
                                                                }
                                                            ]
@@ -81,27 +81,27 @@
                                                                            "min":  18.7,
                                                                            "max":  27.9
                                                                        },
-                                           "localStrategyText":  "Side-hustle operators in Chicago generally outperform when they stack repeatable dinner and weekend blocks in River North, Wicker Park, and the West Loop while capping cross-city repositioning through I-90 and I-94, the Dan Ryan, and Lower Wacker corridors.",
-                                           "workLevelMeaningHtml":  "\u003ch3\u003eSide-hustle in Chicago needs repeatable structure\u003c/h3\u003e\u003cp\u003eAt twenty-five hours, consistent schedule design matters more than occasional surge spikes. A stable operating loop across River North, Wicker Park, and the West Loop usually beats reactive citywide roaming.\u003c/p\u003e\u003cp\u003eThis level can produce durable supplemental income in Chicago, but only if miles-per-dollar and wait-time discipline are treated as non-negotiable controls.\u003c/p\u003e",
-                                           "taxStrategyHtml":  "\u003ch3\u003eSide-hustle tax controls\u003c/h3\u003e\u003cp\u003eAutomate reserve transfers after each payout and reconcile mileage weekly. That workflow is the most reliable way to avoid avoidable tax shock.\u003c/p\u003e\u003cp\u003eBecause Chicago cost conditions can move quickly, monthly estimate checks help keep cash flow stable while you scale hours.\u003c/p\u003e",
-                                           "dayInTheLifeHtml":  "\u003ch3\u003eTypical side-hustle week\u003c/h3\u003e\u003cp\u003eThree weekday dinner blocks plus one longer weekend block around River North, Wicker Park, and the West Loop is a common pattern. Keep one backup zone ready when congestion rises on I-90 and I-94, the Dan Ryan, and Lower Wacker corridors.\u003c/p\u003e\u003cp\u003eIf request quality drops below target for two consecutive hours in Chicago, disciplined logoff often outperforms low-yield grinding.\u003c/p\u003e",
-                                           "bestPracticesHtml":  "\u003ch3\u003eSide-hustle improvement loop\u003c/h3\u003e\u003cp\u003eTrack gross per online hour, miles per payout dollar, and cancellation friction each week. Change only one variable so your own data remains interpretable.\u003c/p\u003e\u003cp\u003eIn Chicago, this measurement loop is usually the fastest way to turn inconsistent weeks into predictable side-income.\u003c/p\u003e",
+                                           "localStrategyText":  "In Chicago side-hustle mode, prioritize River North, West Loop, and Wicker Park, cap transfer distance on I-90, I-94, and Lower Wacker, and route fallback through Lincoln Park and South Loop whenever summer festivals and sports weekends introduces conversion noise.",
+                                           "workLevelMeaningHtml":  "\u003ch3\u003ePractical view: side-hustle in Chicago\u003c/h3\u003e\u003cp\u003eThis level works when you can keep decisions rule-based under volatility. Calendar noise from summer festivals and sports weekends should change radius, not discipline.\u003c/p\u003e\u003cp\u003eThe system goal is retained value per hour with controlled mileage, not raw completion volume.\u003c/p\u003e",
+                                           "taxStrategyHtml":  "\u003ch3\u003eside-hustle tax cadence\u003c/h3\u003e\u003cp\u003eWeekly close: mileage, payout reconciliation, reserve transfer. Monthly check: forecast drift and reserve adequacy.\u003c/p\u003e\u003cp\u003eIn Chicago, bookkeeping quality is what makes route strategy outcomes interpretable under summer festivals and sports weekends volatility.\u003c/p\u003e",
+                                           "dayInTheLifeHtml":  "\u003ch3\u003eside-hustle shift clock in Chicago\u003c/h3\u003e\u003cp\u003eStart 10:00, pulse 20:30, stop 21:30; pickup cap 5 miles and idle cap 13 minutes.\u003c/p\u003e\u003cp\u003eOperate inside River North, West Loop, and Wicker Park, and if summer festivals and sports weekends distorts flow across I-90, I-94, and Lower Wacker, route reset through Lincoln Park and South Loop.\u003c/p\u003e",
+                                           "bestPracticesHtml":  "\u003ch3\u003eChicago optimization guardrails\u003c/h3\u003e\u003cp\u003eDo not promote one outlier shift into policy. Require repeated evidence in the same corridor pair: River North, West Loop, and Wicker Park and Lincoln Park and South Loop.\u003c/p\u003e\u003cp\u003eIf deadhead exceeds 4 miles twice on I-90, I-94, and Lower Wacker, disable that lane for the day.\u003c/p\u003e",
                                            "painPoints":  [
-                                                              "Fatigue from combining W2 schedule with Chicago gig windows",
-                                                              "Cross-zone drift through I-90 and I-94, the Dan Ryan, and Lower Wacker corridors",
-                                                              "Inconsistent order quality outside River North, Wicker Park, and the West Loop"
+                                                              "Conversion drop when leaving River North, West Loop, and Wicker Park",
+                                                              "Route friction on I-90, I-94, and Lower Wacker",
+                                                              "winter slowdowns and Loop parking pressure"
                                                           ],
                                            "personaQuotes":  [
                                                                  {
                                                                      "personaType":  "DELIVERY_VETERAN",
                                                                      "displayName":  "Chicago multi-app courier",
-                                                                     "quote":  "My side-hustle net increased once I fixed a recurring zone plan in River North, Wicker Park, and the West Loop and stopped reacting to every map signal.",
+                                                                     "quote":  "My side-hustle rule is simple: protect a 19-dollar floor, keep the map tight near River North, West Loop, and Wicker Park, and switch once to Lincoln Park and South Loop before ending a weak block.",
                                                                      "attributionType":  "USER_SUBMITTED"
                                                                  },
                                                                  {
                                                                      "personaType":  "TAX_PROFESSIONAL",
-                                                                     "displayName":  "Independent tax advisor",
-                                                                     "quote":  "Drivers with weekly logs and automatic reserves rarely face avoidable filing surprises, even when monthly earnings fluctuate.",
+                                                                     "displayName":  "Independent enrolled agent",
+                                                                     "quote":  "At 25-hour schedules, the winners are usually the people with weekly records and reserve discipline. Process quality matters more than optimism.",
                                                                      "attributionType":  "EDITORIAL_COMPOSITE"
                                                                  }
                                                              ]
@@ -111,27 +111,27 @@
                                                                          "min":  17.1,
                                                                          "max":  25.8
                                                                      },
-                                         "localStrategyText":  "Full-time in Chicago is viable only with strict zone governance, planned recovery windows, and continuous cost controls because I-90 and I-94, the Dan Ryan, and Lower Wacker corridors can magnify every weak operational decision.",
-                                         "workLevelMeaningHtml":  "\u003ch3\u003eFull-time in Chicago is an operations business\u003c/h3\u003e\u003cp\u003eAt forty hours, the challenge is not only demand access. It is sustaining margin while controlling wear, downtime, and cognitive load in high-friction corridors.\u003c/p\u003e\u003cp\u003eThe most durable full-time operators near O\u0027Hare run predefined daypart plans and avoid uncontrolled roaming outside their proven segments.\u003c/p\u003e",
-                                         "taxStrategyHtml":  "\u003ch3\u003eFull-time finance cadence\u003c/h3\u003e\u003cp\u003eUse separate operating and reserve accounts, reconcile weekly, and project obligations monthly. Full-time volatility cannot be managed with ad hoc records.\u003c/p\u003e\u003cp\u003eIn Chicago, frequent review of mileage, maintenance, and tax posture is what prevents high gross weeks from turning into weak retained earnings.\u003c/p\u003e",
-                                         "dayInTheLifeHtml":  "\u003ch3\u003eTwo-peak full-time model\u003c/h3\u003e\u003cp\u003eAnchor work around morning and evening demand clusters in River North, Wicker Park, and the West Loop, then assign midday to lower-mile tasks or planned downtime rather than random searching.\u003c/p\u003e\u003cp\u003eThis structure reduces burnout and controls long-run costs when commuter reversals and weekend nightlife density and congestion patterns shift during the week.\u003c/p\u003e",
-                                         "bestPracticesHtml":  "\u003ch3\u003eDurability protocol\u003c/h3\u003e\u003cp\u003eSet hard limits for weekly miles, consecutive drive time, and maintenance reserve levels. If one limit is breached, reduce low-yield blocks before adding new hours.\u003c/p\u003e\u003cp\u003eIn Chicago, full-time earnings are determined by risk control and repeatability, not by occasional spike sessions.\u003c/p\u003e",
+                                         "localStrategyText":  "In Chicago full-time mode, prioritize River North, West Loop, and Wicker Park, cap transfer distance on I-90, I-94, and Lower Wacker, and route fallback through Lincoln Park and South Loop whenever summer festivals and sports weekends introduces conversion noise.",
+                                         "workLevelMeaningHtml":  "\u003ch3\u003eChicago: how full-time economics actually hold\u003c/h3\u003e\u003cp\u003eHigh-quality outcomes come from route discipline, not from maximizing trip count. River North, West Loop, and Wicker Park should be your base conversion lanes.\u003c/p\u003e\u003cp\u003eIf corridor speed collapses on I-90, I-94, and Lower Wacker, forcing continuation usually erodes net faster than ending the block.\u003c/p\u003e",
+                                         "taxStrategyHtml":  "\u003ch3\u003efull-time financial governance\u003c/h3\u003e\u003cp\u003eUse one weekly reconciliation day and one monthly forecast review to avoid reactive decision-making.\u003c/p\u003e\u003cp\u003eStrong accounting rhythm helps you compare River North, West Loop, and Wicker Park versus Lincoln Park and South Loop based on real net outcomes.\u003c/p\u003e",
+                                         "dayInTheLifeHtml":  "\u003ch3\u003eA durable full-time day in Chicago\u003c/h3\u003e\u003cp\u003eCheckpoint matrix: route friction, queue lag at ORD and MDW, and fatigue score. If two checks fail, switch to Lincoln Park and South Loop.\u003c/p\u003e\u003cp\u003eThis pattern protects retained value when summer festivals and sports weekends introduces short-lived demand spikes.\u003c/p\u003e",
+                                         "bestPracticesHtml":  "\u003ch3\u003efull-time best practices in Chicago\u003c/h3\u003e\u003cp\u003eProtocol heat-adjusted: primary lane=River North, West Loop, and Wicker Park; fallback=Lincoln Park and South Loop; deadhead cap=4 miles; continuous-drive cap=91 minutes.\u003c/p\u003e\u003cp\u003eWhen summer festivals and sports weekends amplifies noise, freeze expansion across I-90, I-94, and Lower Wacker and preserve lane discipline.\u003c/p\u003e",
                                          "painPoints":  [
-                                                            "Mileage escalation under sustained I-90 and I-94, the Dan Ryan, and Lower Wacker corridors congestion",
-                                                            "Coverage and liability risk at full utilization",
-                                                            "Burnout pressure from continuous high-friction navigation"
+                                                            "Conversion drop when leaving River North, West Loop, and Wicker Park",
+                                                            "Route friction on I-90, I-94, and Lower Wacker",
+                                                            "winter slowdowns and Loop parking pressure"
                                                         ],
                                          "personaQuotes":  [
                                                                {
                                                                    "personaType":  "FLEET_MANAGER",
                                                                    "displayName":  "Urban fleet operations lead",
-                                                                   "quote":  "When drivers in Chicago run all zones without limits, utilization looks high but retained net performance degrades quickly.",
+                                                                   "quote":  "On full-time rosters, we keep performance stable by limiting uncontrolled transitions on I-90, I-94, and Lower Wacker and enforcing structured lane rotation around River North, West Loop, and Wicker Park.",
                                                                    "attributionType":  "EDITORIAL_COMPOSITE"
                                                                },
                                                                {
                                                                    "personaType":  "INSURANCE_ADVISOR",
-                                                                   "displayName":  "Commercial coverage specialist",
-                                                                   "quote":  "At full-time mileage near O\u0027Hare corridors, policy fit should be reviewed regularly because exposure patterns change faster than most drivers expect.",
+                                                                   "displayName":  "Commercial coverage advisor",
+                                                                   "quote":  "At sustained utilization near ORD and MDW, risk profile shifts faster than most drivers expect. Coverage review cadence has to match mileage growth.",
                                                                    "attributionType":  "VERIFIED_INTERVIEW"
                                                                }
                                                            ]

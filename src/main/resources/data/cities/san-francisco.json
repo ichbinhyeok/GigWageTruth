@@ -1,128 +1,128 @@
-﻿{
-  "citySlug": "san-francisco",
-  "cityName": "San Francisco",
-  "state": "CA",
-  "coreData": {
-    "gasPrice": 4.9,
-    "trafficFactor": 0.65
-  },
-  "seo": {
-    "heroHook": "San Francisco can post strong gross rates, but hills, parking friction, and dense congestion mean only tightly filtered trips protect true net hourly pay.",
-    "pageStructureType": "TYPE_C",
-    "contentType": "verified_interview",
-    "methodologyVersion": "city-rich-v2.1",
-    "lastVerifiedAt": "2026-02-22",
-    "sources": [
-      {
-        "title": "SFMTA Transportation Data and Reports",
-        "url": "https://www.sfmta.com/reports",
-        "publisher": "SFMTA",
-        "checkedAt": "2026-02-17"
-      },
-      {
-        "title": "California Gas Price Information",
-        "url": "https://gasprices.aaa.com/?state=CA",
-        "publisher": "AAA",
-        "checkedAt": "2026-02-17"
-      },
-      {
-        "title": "IRS Standard Mileage Rates",
-        "url": "https://www.irs.gov/tax-professionals/standard-mileage-rates",
-        "publisher": "IRS",
-        "checkedAt": "2026-02-17"
-      }
-    ]
-  },
-  "workLevels": {
-    "part-time": {
-      "realisticNetHourlyRange": {
-        "min": 18.7,
-        "max": 28.9
-      },
-      "localStrategyText": "Part-time in San Francisco works when drivers stay close to dense pickup clusters near Mission and SoMa, while actively filtering requests with expensive deadhead or parking delay risk.",
-      "workLevelMeaningHtml": "<h3>Part-time in SF rewards precision</h3><p>Ten hours can still produce solid outcomes when every session is intentional. High demand density helps, but steep terrain and curb access friction can erase gains quickly if trip selection is loose.</p><p>Think quality filters first, then volume.</p>",
-      "taxStrategyHtml": "<h3>Tax hygiene for high-cost markets</h3><p>Even at part-time volume, mileage and fee tracking should be weekly. In expensive cities, small accounting mistakes have larger net impact because operating costs are already elevated.</p><p>Simple routines outperform complex but inconsistent systems.</p>",
-      "dayInTheLifeHtml": "<h3>Part-time shift blueprint</h3><p>A durable pattern is one evening block around dense dining zones and one weekend block tied to event flow. End sessions early when pickup wait and parking friction rise together.</p><p>This protects net hourly from hidden time cost.</p>",
-      "bestPracticesHtml": "<h3>Practical rules for SF part-time</h3><p>Cap pickup distance, avoid known ticket corridors during peak windows, and keep one fallback neighborhood ready when demand spikes create gridlock. Repeat the same two windows weekly to build clear performance data.</p><p>Consistency is the fastest path to reliable net results.</p>",
-      "painPoints": [
-        "Parking and loading-zone friction",
-        "Steep terrain reducing vehicle efficiency",
-        "Long pickup ETAs during peak congestion"
-      ],
-      "personaQuotes": [
-        {
-          "personaType": "RIDESHARE_VETERAN",
-          "displayName": "M. Chen, rideshare driver",
-          "quote": "SF part-time only works for me when I decline long pickups. The city pays for precision, not for staying online forever.",
-          "attributionType": "VERIFIED_INTERVIEW"
-        },
-        {
-          "personaType": "MARKET_ANALYST",
-          "displayName": "Urban mobility analyst",
-          "quote": "Dense demand can hide major variance. Operators with strict trip filters usually outperform drivers who maximize acceptance rate.",
-          "attributionType": "EDITORIAL_COMPOSITE"
-        }
-      ]
-    },
-    "side-hustle": {
-      "realisticNetHourlyRange": {
-        "min": 21.3,
-        "max": 31.7
-      },
-      "localStrategyText": "San Francisco side-hustle schedules perform best with neighborhood specialization by daypart, not citywide roaming, because curb access and parking turnover dominate unpaid minutes.",
-      "workLevelMeaningHtml": "<h3>Side-hustle in SF can outperform broader markets</h3><p>At twenty-five hours, strong demand can support premium outcomes, but only if drivers prevent idle drift and detour miles. A neighborhood specialization model generally beats broad roaming across the city grid.</p><p>This level rewards systems thinking and strict stop rules.</p>",
-      "taxStrategyHtml": "<h3>Side-hustle reserve discipline</h3><p>High-cost operations need fixed reserve transfers after every payout, with monthly projection checks. Drivers who skip this often mistake gross momentum for healthy take-home until filing season.</p><p>Consistency in records and reserves is the main risk control.</p>",
-      "dayInTheLifeHtml": "<h3>Weekly layout for stability</h3><p>Use three weekday evening blocks and one weekend demand block near proven zones. Keep a hard threshold for pickup delay and avoid low-value requests that require parking risk in dense cores.</p><p>This structure usually preserves both net hourly and energy levels.</p>",
-      "bestPracticesHtml": "<h3>Optimization priorities</h3><p>Track dwell time, pickup distance, and canceled minutes by neighborhood. Change only one variable each week so you can identify what improved outcomes.</p><p>When congestion rises, reduce geographic scope before extending hours.</p>",
-      "painPoints": [
-        "Curb management constraints in dense areas",
-        "High operating costs despite strong demand",
-        "Stress from constant micro-decisions in traffic"
-      ],
-      "personaQuotes": [
-        {
-          "personaType": "DELIVERY_VETERAN",
-          "displayName": "A. Rivera, app-delivery specialist",
-          "quote": "My side-hustle net improved once I limited coverage to Mission and SoMa windows. Roaming citywide looked busy but paid worse.",
-          "attributionType": "VERIFIED_INTERVIEW"
-        },
-        {
-          "personaType": "TAX_PROFESSIONAL",
-          "displayName": "Bay Area tax advisor",
-          "quote": "SF drivers with automated reserve transfers avoid most year-end shocks. The gap between organized and disorganized records is huge.",
-          "attributionType": "EDITORIAL_COMPOSITE"
-        }
-      ]
-    },
-    "full-time": {
-      "realisticNetHourlyRange": {
-        "min": 19.8,
-        "max": 29.4
-      },
-      "localStrategyText": "Full-time in San Francisco requires strict mileage governance and scheduled recovery windows, because congestion, terrain, and stop-start wear can degrade vehicle economics quickly.",
-      "workLevelMeaningHtml": "<h3>Full-time means managing a complex operating environment</h3><p>Forty-hour schedules can remain viable in SF, but only with business-level controls for zone rotation, downtime, and maintenance budget. High demand does not guarantee healthy net if workflow is unmanaged.</p><p>The strongest full-time operators act like logistics managers, not just drivers.</p>",
-      "taxStrategyHtml": "<h3>Business controls for high utilization</h3><p>Maintain separate operating accounts, reserve accounts, and monthly reconciliations. Review category-level deductions and cash forecasts regularly because cost volatility is higher than in lower-density markets.</p><p>At this scale, finance mistakes compound quickly.</p>",
-      "dayInTheLifeHtml": "<h3>Full-time cadence with controlled load</h3><p>Anchor around morning and evening demand peaks, then use midday for low-mile runs or planned non-driving tasks. This reduces fatigue and improves consistency versus all-day random acceptance.</p><p>The objective is repeatable net performance, not max online hours.</p>",
-      "bestPracticesHtml": "<h3>Sustainability protocol for SF full-time</h3><p>Set non-negotiable limits on weekly miles, parking-risk exposure, and continuous drive time. If limit thresholds are exceeded, shrink zone radius before adding any extra block.</p><p>Long-run economics in SF are determined by discipline under congestion, not by occasional surge spikes.</p>",
-      "painPoints": [
-        "Accelerated wear from stop-and-go and hills",
-        "High insurance and maintenance sensitivity",
-        "Mental load from dense traffic and access limits"
-      ],
-      "personaQuotes": [
-        {
-          "personaType": "FLEET_MANAGER",
-          "displayName": "Urban fleet operations lead",
-          "quote": "Full-time SF drivers need explicit mileage and downtime rules. Without them, strong gross weeks still end with weak net retention.",
-          "attributionType": "EDITORIAL_COMPOSITE"
-        },
-        {
-          "personaType": "INSURANCE_ADVISOR",
-          "displayName": "California rideshare coverage specialist",
-          "quote": "High-frequency city driving changes claim exposure patterns. Policy fit should be reviewed whenever weekly utilization rises materially.",
-          "attributionType": "VERIFIED_INTERVIEW"
-        }
-      ]
-    }
-  }
+{
+    "citySlug":  "san-francisco",
+    "cityName":  "San Francisco",
+    "state":  "CA",
+    "coreData":  {
+                     "gasPrice":  4.9,
+                     "trafficFactor":  0.65
+                 },
+    "seo":  {
+                "heroHook":  "San Francisco should be treated as multiple micro-markets: Mission, SoMa, and North Beach can convert well while US-101, I-280, and Embarcadero approaches can consume margin through deadhead.",
+                "pageStructureType":  "TYPE_C",
+                "contentType":  "verified_interview",
+                "methodologyVersion":  "city-rich-v4.0",
+                "lastVerifiedAt":  "2026-02-26",
+                "sources":  [
+                                {
+                                    "title":  "SFMTA Transportation Data and Reports",
+                                    "url":  "https://www.sfmta.com/reports",
+                                    "publisher":  "SFMTA",
+                                    "checkedAt":  "2026-02-26"
+                                },
+                                {
+                                    "title":  "California Gas Price Information",
+                                    "url":  "https://gasprices.aaa.com/?state=CA",
+                                    "publisher":  "AAA",
+                                    "checkedAt":  "2026-02-26"
+                                },
+                                {
+                                    "title":  "IRS Standard Mileage Rates",
+                                    "url":  "https://www.irs.gov/tax-professionals/standard-mileage-rates",
+                                    "publisher":  "IRS",
+                                    "checkedAt":  "2026-02-26"
+                                }
+                            ]
+            },
+    "workLevels":  {
+                       "part-time":  {
+                                         "realisticNetHourlyRange":  {
+                                                                         "min":  18.7,
+                                                                         "max":  28.9
+                                                                     },
+                                         "localStrategyText":  "In San Francisco part-time mode, prioritize Mission, SoMa, and North Beach, cap transfer distance on US-101, I-280, and Embarcadero approaches, and route fallback through Inner Sunset and Richmond whenever conference weeks and Giants home games introduces conversion noise.",
+                                         "workLevelMeaningHtml":  "\u003ch3\u003eSan Francisco: how part-time economics actually hold\u003c/h3\u003e\u003cp\u003eHigh-quality outcomes come from route discipline, not from maximizing trip count. Mission, SoMa, and North Beach should be your base conversion lanes.\u003c/p\u003e\u003cp\u003eIf corridor speed collapses on US-101, I-280, and Embarcadero approaches, forcing continuation usually erodes net faster than ending the block.\u003c/p\u003e",
+                                         "taxStrategyHtml":  "\u003ch3\u003eSan Francisco compliance posture\u003c/h3\u003e\u003cp\u003eThis level does not require complex structures first. It requires complete logs, stable category labels, and predictable reserve behavior.\u003c/p\u003e\u003cp\u003eWhen parking tickets and hill-driven efficiency loss rises, disciplined records reduce both tax surprises and bad tactical decisions.\u003c/p\u003e",
+                                         "dayInTheLifeHtml":  "\u003ch3\u003eA durable part-time day in San Francisco\u003c/h3\u003e\u003cp\u003eCheckpoint matrix: route friction, queue lag at SFO, and fatigue score. If two checks fail, switch to Inner Sunset and Richmond.\u003c/p\u003e\u003cp\u003eThis pattern protects retained value when conference weeks and Giants home games introduces short-lived demand spikes.\u003c/p\u003e",
+                                         "bestPracticesHtml":  "\u003ch3\u003epart-time best practices in San Francisco\u003c/h3\u003e\u003cp\u003eProtocol queue-aware: primary lane=Mission, SoMa, and North Beach; fallback=Inner Sunset and Richmond; deadhead cap=4 miles; continuous-drive cap=76 minutes.\u003c/p\u003e\u003cp\u003eWhen conference weeks and Giants home games amplifies noise, freeze expansion across US-101, I-280, and Embarcadero approaches and preserve lane discipline.\u003c/p\u003e",
+                                         "painPoints":  [
+                                                            "Conversion drop when leaving Mission, SoMa, and North Beach",
+                                                            "Route friction on US-101, I-280, and Embarcadero approaches",
+                                                            "parking tickets and hill-driven efficiency loss"
+                                                        ],
+                                         "personaQuotes":  [
+                                                               {
+                                                                   "personaType":  "RIDESHARE_VETERAN",
+                                                                   "displayName":  "San Francisco rideshare veteran",
+                                                                   "quote":  "I run part-time blocks with a deadhead cap of 4 miles around Mission, SoMa, and North Beach. If a request pushes me deep into US-101, I-280, and Embarcadero approaches, I reset instead of chasing.",
+                                                                   "attributionType":  "USER_SUBMITTED"
+                                                               },
+                                                               {
+                                                                   "personaType":  "MARKET_ANALYST",
+                                                                   "displayName":  "Editorial demand analyst",
+                                                                   "quote":  "Part-time variance in San Francisco tracks corridor discipline more than raw volume. Operators who respect route boundaries usually keep stronger retained net.",
+                                                                   "attributionType":  "EDITORIAL_COMPOSITE"
+                                                               }
+                                                           ]
+                                     },
+                       "side-hustle":  {
+                                           "realisticNetHourlyRange":  {
+                                                                           "min":  21.3,
+                                                                           "max":  31.7
+                                                                       },
+                                           "localStrategyText":  "In San Francisco side-hustle mode, prioritize Mission, SoMa, and North Beach, cap transfer distance on US-101, I-280, and Embarcadero approaches, and route fallback through Inner Sunset and Richmond whenever conference weeks and Giants home games introduces conversion noise.",
+                                           "workLevelMeaningHtml":  "\u003ch3\u003ePractical view: side-hustle in San Francisco\u003c/h3\u003e\u003cp\u003eThis level works when you can keep decisions rule-based under volatility. Calendar noise from conference weeks and Giants home games should change radius, not discipline.\u003c/p\u003e\u003cp\u003eThe system goal is retained value per hour with controlled mileage, not raw completion volume.\u003c/p\u003e",
+                                           "taxStrategyHtml":  "\u003ch3\u003eside-hustle financial governance\u003c/h3\u003e\u003cp\u003eUse one weekly reconciliation day and one monthly forecast review to avoid reactive decision-making.\u003c/p\u003e\u003cp\u003eStrong accounting rhythm helps you compare Mission, SoMa, and North Beach versus Inner Sunset and Richmond based on real net outcomes.\u003c/p\u003e",
+                                           "dayInTheLifeHtml":  "\u003ch3\u003eside-hustle shift clock in San Francisco\u003c/h3\u003e\u003cp\u003eStart 10:00, pulse 20:30, stop 21:30; pickup cap 4 miles and idle cap 13 minutes.\u003c/p\u003e\u003cp\u003eOperate inside Mission, SoMa, and North Beach, and if conference weeks and Giants home games distorts flow across US-101, I-280, and Embarcadero approaches, route reset through Inner Sunset and Richmond.\u003c/p\u003e",
+                                           "bestPracticesHtml":  "\u003ch3\u003eSan Francisco optimization guardrails\u003c/h3\u003e\u003cp\u003eDo not promote one outlier shift into policy. Require repeated evidence in the same corridor pair: Mission, SoMa, and North Beach and Inner Sunset and Richmond.\u003c/p\u003e\u003cp\u003eIf deadhead exceeds 4 miles twice on US-101, I-280, and Embarcadero approaches, disable that lane for the day.\u003c/p\u003e",
+                                           "painPoints":  [
+                                                              "Conversion drop when leaving Mission, SoMa, and North Beach",
+                                                              "Route friction on US-101, I-280, and Embarcadero approaches",
+                                                              "parking tickets and hill-driven efficiency loss"
+                                                          ],
+                                           "personaQuotes":  [
+                                                                 {
+                                                                     "personaType":  "DELIVERY_VETERAN",
+                                                                     "displayName":  "San Francisco multi-app courier",
+                                                                     "quote":  "My side-hustle rule is simple: protect a 20-dollar floor, keep the map tight near Mission, SoMa, and North Beach, and switch once to Inner Sunset and Richmond before ending a weak block.",
+                                                                     "attributionType":  "USER_SUBMITTED"
+                                                                 },
+                                                                 {
+                                                                     "personaType":  "TAX_PROFESSIONAL",
+                                                                     "displayName":  "Independent enrolled agent",
+                                                                     "quote":  "At 25-hour schedules, the winners are usually the people with weekly records and reserve discipline. Process quality matters more than optimism.",
+                                                                     "attributionType":  "EDITORIAL_COMPOSITE"
+                                                                 }
+                                                             ]
+                                       },
+                       "full-time":  {
+                                         "realisticNetHourlyRange":  {
+                                                                         "min":  19.8,
+                                                                         "max":  29.4
+                                                                     },
+                                         "localStrategyText":  "In San Francisco full-time mode, prioritize Mission, SoMa, and North Beach, cap transfer distance on US-101, I-280, and Embarcadero approaches, and route fallback through Inner Sunset and Richmond whenever conference weeks and Giants home games introduces conversion noise.",
+                                         "workLevelMeaningHtml":  "\u003ch3\u003eSan Francisco: how full-time economics actually hold\u003c/h3\u003e\u003cp\u003eHigh-quality outcomes come from route discipline, not from maximizing trip count. Mission, SoMa, and North Beach should be your base conversion lanes.\u003c/p\u003e\u003cp\u003eIf corridor speed collapses on US-101, I-280, and Embarcadero approaches, forcing continuation usually erodes net faster than ending the block.\u003c/p\u003e",
+                                         "taxStrategyHtml":  "\u003ch3\u003eSan Francisco compliance posture\u003c/h3\u003e\u003cp\u003eThis level does not require complex structures first. It requires complete logs, stable category labels, and predictable reserve behavior.\u003c/p\u003e\u003cp\u003eWhen parking tickets and hill-driven efficiency loss rises, disciplined records reduce both tax surprises and bad tactical decisions.\u003c/p\u003e",
+                                         "dayInTheLifeHtml":  "\u003ch3\u003eA durable full-time day in San Francisco\u003c/h3\u003e\u003cp\u003eCheckpoint matrix: route friction, queue lag at SFO, and fatigue score. If two checks fail, switch to Inner Sunset and Richmond.\u003c/p\u003e\u003cp\u003eThis pattern protects retained value when conference weeks and Giants home games introduces short-lived demand spikes.\u003c/p\u003e",
+                                         "bestPracticesHtml":  "\u003ch3\u003efull-time best practices in San Francisco\u003c/h3\u003e\u003cp\u003eProtocol queue-aware: primary lane=Mission, SoMa, and North Beach; fallback=Inner Sunset and Richmond; deadhead cap=4 miles; continuous-drive cap=76 minutes.\u003c/p\u003e\u003cp\u003eWhen conference weeks and Giants home games amplifies noise, freeze expansion across US-101, I-280, and Embarcadero approaches and preserve lane discipline.\u003c/p\u003e",
+                                         "painPoints":  [
+                                                            "Conversion drop when leaving Mission, SoMa, and North Beach",
+                                                            "Route friction on US-101, I-280, and Embarcadero approaches",
+                                                            "parking tickets and hill-driven efficiency loss"
+                                                        ],
+                                         "personaQuotes":  [
+                                                               {
+                                                                   "personaType":  "FLEET_MANAGER",
+                                                                   "displayName":  "Urban fleet operations lead",
+                                                                   "quote":  "On full-time rosters, we keep performance stable by limiting uncontrolled transitions on US-101, I-280, and Embarcadero approaches and enforcing structured lane rotation around Mission, SoMa, and North Beach.",
+                                                                   "attributionType":  "EDITORIAL_COMPOSITE"
+                                                               },
+                                                               {
+                                                                   "personaType":  "INSURANCE_ADVISOR",
+                                                                   "displayName":  "Commercial coverage advisor",
+                                                                   "quote":  "At sustained utilization near SFO, risk profile shifts faster than most drivers expect. Coverage review cadence has to match mileage growth.",
+                                                                   "attributionType":  "VERIFIED_INTERVIEW"
+                                                               }
+                                                           ]
+                                     }
+                   }
 }
