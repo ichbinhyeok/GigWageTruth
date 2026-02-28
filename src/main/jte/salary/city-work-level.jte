@@ -27,6 +27,7 @@
 @param List sourceCitations = null
 @param String methodologyVersion = "legacy-v1"
 @param String contentType = "legacy_template"
+@param String lastVerifiedAt = null
 @param Double richNetMin = null
 @param Double richNetMax = null
 @param List similarCities
@@ -156,6 +157,19 @@
                         Net profit is estimated by applying the IRS standard mileage rate and 15.3% self-employment tax to modeled weekly gross income. For 2026, the IRS standard mileage rate is 72.5 cents per mile. This is educational content, not tax advice.
                     </p>
                 </div>
+
+                @if(sourceCitations != null && !sourceCitations.isEmpty())
+                    <div class="mt-6 bg-emerald-500/10 border border-emerald-400/30 rounded-xl p-4 text-emerald-100">
+                        <p class="text-xs uppercase tracking-wider font-bold mb-1">Source-backed page</p>
+                        <p class="text-sm">
+                            ${sourceCitations.size()} editorial sources linked below
+                            @if(lastVerifiedAt != null && !lastVerifiedAt.isBlank())
+                                | Last verified: <strong>${lastVerifiedAt}</strong>
+                            @endif
+                            | Method: <strong>${methodologyVersion}</strong>
+                        </p>
+                    </div>
+                @endif
             </div>
         </div>
 
@@ -290,6 +304,20 @@
                     </ul>
                 </section>
             @endif
+
+            <section class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200">
+                <h3 class="text-xl font-bold text-slate-900 mb-4">Frequently Asked Questions</h3>
+                <div class="space-y-4">
+                    <details class="group border border-slate-200 rounded-xl p-4">
+                        <summary class="font-semibold text-slate-900 cursor-pointer">How much does a ${workLevel.getDisplayName()} ${appName} driver make in ${city.getCityName()}?</summary>
+                        <p class="text-slate-600 mt-3">A ${workLevel.getDisplayName()} ${appName} driver in ${city.getCityName()} working ${workLevel.getHoursPerWeek()} hours per week can expect to take home approximately $${String.format("%.2f", scenario.getNetProfit())} per week after deducting estimated mileage and self-employment taxes.</p>
+                    </details>
+                    <details class="group border border-slate-200 rounded-xl p-4">
+                        <summary class="font-semibold text-slate-900 cursor-pointer">Is ${appName} better than ${otherAppName} for ${workLevel.getDisplayName()} drivers in ${city.getCityName()}?</summary>
+                        <p class="text-slate-600 mt-3">Local factors like ${city.getMarketTier()} demand and ${String.format("$%.2f", city.getGasPrice())} per gallon gas prices affect profitability. Compare this page with ${otherAppName} data to see which app fits your market timing.</p>
+                    </details>
+                </div>
+            </section>
 
             <section class="bg-slate-100 rounded-2xl p-8 border border-slate-300">
                 <h3 class="text-xl font-bold text-slate-900 mb-4">Explore Other Work Levels in ${city.getCityName()}</h3>

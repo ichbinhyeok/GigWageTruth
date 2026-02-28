@@ -25,9 +25,33 @@
                 </div>
                 
                 <script type="module">
-                    import { initGlobe } from '/js/globe-component.js';
                     const canvas = document.getElementById('cobe');
-                    initGlobe(canvas);
+                    const bootGlobe = async () => {
+                        if (!canvas || canvas.dataset.globeReady === '1') {
+                            return;
+                        }
+                        canvas.dataset.globeReady = '1';
+                        const globeModule = await import('/js/globe-component.js');
+                        globeModule.initGlobe(canvas);
+                    };
+
+                    if ('IntersectionObserver' in window && canvas) {
+                        const observer = new IntersectionObserver((entries) => {
+                            const visible = entries.some((entry) => entry.isIntersecting);
+                            if (!visible) {
+                                return;
+                            }
+                            observer.disconnect();
+                            if ('requestIdleCallback' in window) {
+                                requestIdleCallback(() => { void bootGlobe(); }, { timeout: 2500 });
+                            } else {
+                                setTimeout(() => { void bootGlobe(); }, 600);
+                            }
+                        }, { threshold: 0.2 });
+                        observer.observe(canvas);
+                    } else {
+                        setTimeout(() => { void bootGlobe(); }, 800);
+                    }
                 </script>
 
                 <div class="relative z-10 space-y-6">
@@ -44,13 +68,13 @@
                     <div class="pt-8 flex items-center space-x-6 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
                          <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">Powered by</span>
                          <span class="font-bold text-slate-600">2026 IRS Data</span>
-                         <span class="font-bold text-slate-600">BLS.gov</span>
+                         <span class="font-bold text-slate-600">Transparent Methodology</span>
                     </div>
 
                     <div class="hidden lg:block pt-8 mt-8 border-t border-slate-200/50">
                         <h2 class="text-lg font-bold text-slate-900 mb-2">What is GigWageTruth?</h2>
                         <p class="text-sm text-slate-600 mb-4 max-w-lg leading-relaxed">
-                            GigWageTruth aggregates 2026 IRS data, BLS statistics, and real-world surveys to calculate your *true* hourly earnings. We factor in 15.3% SE tax, $0.725/mi depreciation, and local market costs.
+                            GigWageTruth models your true hourly earnings using the 2026 IRS mileage rate, a 15.3% self-employment tax assumption, and city-level market factors. See the Methodology page for formula details.
                         </p>
                         <ul class="text-xs font-semibold text-slate-500 space-y-2">
                             <li class="flex items-center gap-2"><span class="text-emerald-500 flex-shrink-0">✓</span> Enter your market & work level</li>
@@ -159,11 +183,15 @@
         <script type="application/ld+json">
         {
           "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          "itemListElement": [{
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home"
+          "@graph": [{
+            "@type": "WebSite",
+            "name": "GigWageTruth",
+            "url": "${AppConstants.BASE_URL}"
+          }, {
+            "@type": "Organization",
+            "name": "GigWageTruth",
+            "url": "${AppConstants.BASE_URL}",
+            "logo": "${AppConstants.BASE_URL}/favicon.png"
           }]
         }
         </script>

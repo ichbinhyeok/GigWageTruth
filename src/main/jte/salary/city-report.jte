@@ -14,6 +14,7 @@
 @param String otherAppName
 @param String otherAppUrl
 @param java.util.List<com.gigwager.model.CityData> similarCities
+@param String safeMarketDescription = ""
 @param Boolean noIndex = false
 @template.layout.main(
     noIndex = noIndex,
@@ -161,7 +162,7 @@
                     What Makes ${city.getCityName()} Different?
                 </h2>
                 <p class="text-slate-700 leading-relaxed mb-4">
-                    $unsafe{city.getMarketDescription()}
+                    $unsafe{safeMarketDescription}
                 </p>
                 
                 <!-- Narrative Branching: Cost Context -->
@@ -348,6 +349,40 @@
                         If you don't save this, tax season will be a shock.
                     </li>
                 </ul>
+            </section>
+
+            <section class="bg-white rounded-2xl p-8 border border-slate-200">
+                <h2 class="text-2xl font-bold text-slate-900 mb-6">Frequently Asked Questions</h2>
+                <div class="space-y-4">
+                    <details class="group border border-slate-200 rounded-xl p-4">
+                        <summary class="font-semibold text-slate-900 cursor-pointer">How much does a ${appName} driver make in ${city.getCityName()} after expenses in 2026?</summary>
+                        <p class="text-slate-600 mt-3">Based on our estimates for ${city.getCityName()}, a side-hustle ${appName} driver (25 hrs/week) earns approximately $${String.format("%.2f", featuredScenario.getNetHourly())} per hour after deducting gas ($${String.format("%.2f", city.getGasPrice())}/gal), vehicle depreciation (IRS rate: $0.725/mile), and 15.3% self-employment tax. This translates to roughly $${String.format("%.0f", featuredScenario.getNetProfit())} in net weekly profit.</p>
+                    </details>
+                    <details class="group border border-slate-200 rounded-xl p-4">
+                        <summary class="font-semibold text-slate-900 cursor-pointer">Is ${appName} worth it in ${city.getCityName()} in 2026?</summary>
+                        <p class="text-slate-600 mt-3">It depends on your work level and vehicle. At a side-hustle pace in ${city.getCityName()}, the estimated net hourly wage is $${String.format("%.2f", featuredScenario.getNetHourly())}/hr. ${featuredScenario.getNetHourly() >= 15.0 ? "This is above the federal minimum wage, making it potentially viable as supplemental income." : "This is close to or below minimum wage in many states, meaning a traditional W-2 job may offer better compensation plus benefits."} Vehicle choice matters: a Toyota Prius (57 MPG) will yield significantly higher net pay than a Ford Explorer (23 MPG).</p>
+                    </details>
+                    <details class="group border border-slate-200 rounded-xl p-4">
+                        <summary class="font-semibold text-slate-900 cursor-pointer">How are these ${appName} earnings calculated?</summary>
+                        <p class="text-slate-600 mt-3">We estimate net profit by starting with gross income levels typical for ${city.getMarketTier()} markets, then subtracting fuel costs ($${String.format("%.2f", city.getGasPrice())}/gal local average), vehicle depreciation (using the 2026 IRS standard mileage rate of $0.725/mile), and estimated self-employment taxes (15.3%). The result is your estimated take-home pay per hour.</p>
+                    </details>
+                    <details class="group border border-slate-200 rounded-xl p-4">
+                        <summary class="font-semibold text-slate-900 cursor-pointer">What is the best car for ${appName} driving in ${city.getCityName()}?</summary>
+                        <p class="text-slate-600 mt-3">${city.isHighTraffic() ? "In " + city.getCityName() + "'s stop-and-go traffic, a hybrid like the Toyota Prius (57 MPG) or Corolla Hybrid (52 MPG) is ideal because city driving actually improves hybrid efficiency. Gas-only SUVs can drop to 15-18 MPG in congestion, destroying your margins." : "For " + city.getCityName() + "'s driving conditions, a Toyota Prius (57 MPG) or Camry Hybrid (51 MPG) offers the best cost-per-mile. If you need SUV capacity for XL rides, the RAV4 Hybrid (39 MPG) is the most efficient option."}</p>
+                    </details>
+                    <details class="group border border-slate-200 rounded-xl p-4">
+                        <summary class="font-semibold text-slate-900 cursor-pointer">How much should a ${appName} driver in ${city.getCityName()} save for taxes?</summary>
+                        <p class="text-slate-600 mt-3">As an independent contractor (1099), you owe approximately 15.3% self-employment tax on net profit, plus federal and state income tax. For a side-hustle driver in ${city.getCityName()} grossing $${featuredScenario.getGrossWeekly()}/week, the estimated quarterly SE tax alone is about $${String.format("%.0f", Math.max(0, (featuredScenario.getGrossWeekly() - (featuredScenario.getMiles() * 0.725)) * 0.153) * 13)}. A safe rule: set aside 25-30% of your net profit for taxes and pay quarterly to avoid IRS penalties.</p>
+                    </details>
+                    <details class="group border border-slate-200 rounded-xl p-4">
+                        <summary class="font-semibold text-slate-900 cursor-pointer">Why do ${appName} earnings in ${city.getCityName()} differ from other cities?</summary>
+                        <p class="text-slate-600 mt-3">Earnings vary due to local factors. ${city.getCityName()} has gas at $${String.format("%.2f", city.getGasPrice())}/gal, ${city.isHighTraffic() ? "heavy traffic congestion that increases hours per delivery" : "moderate traffic conditions"}, and is classified as a ${city.getMarketTier()} market. High-cost cities often have higher gross pay but also higher expenses, while lower-cost cities might offer better effective margins after expenses.</p>
+                    </details>
+                    <details class="group border border-slate-200 rounded-xl p-4">
+                        <summary class="font-semibold text-slate-900 cursor-pointer">Is it better to drive for Uber or DoorDash in ${city.getCityName()}?</summary>
+                        <p class="text-slate-600 mt-3">Both platforms operate in ${city.getCityName()}'s ${city.getMarketTier()} market with similar expenses. ${city.isHighTraffic() ? "In high-traffic areas like " + city.getCityName() + ", DoorDash deliveries may involve more parking challenges but shorter distances, while Uber rides can get stuck in congestion with passengers." : "In " + city.getCityName() + ", Uber tends to have higher per-trip gross pay for rideshare while DoorDash offers more flexibility for food delivery."} Many top earners 'multi-app' — running both platforms simultaneously to minimize downtime. Use our comparison tool to see the specific numbers.</p>
+                    </details>
+                </div>
             </section>
 
             <!-- FAQ Schema JSON-LD (AEO: 7 Long-tail Questions for AI Search) -->

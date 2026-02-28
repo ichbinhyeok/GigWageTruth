@@ -60,21 +60,21 @@
                             <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
                                 <h3 class="font-bold text-slate-900 mb-2">🚗 Uber Pros/Cons</h3>
                                 <ul class="text-sm space-y-2 text-slate-700">
-                                    <li>??Higher hourly gross potential</li>
-                                    <li>??Longer trips = less downtime</li>
-                                    <li>??Passengers can be rude/messy</li>
-                                    <li>??High vehicle requirements (4-door, new-ish)</li>
-                                    <li>??Constant need to keep car pristine</li>
+                                    <li>✅ Higher hourly gross potential</li>
+                                    <li>✅ Longer trips = less downtime</li>
+                                    <li>❌ Passengers can be rude/messy</li>
+                                    <li>❌ High vehicle requirements (4-door, new-ish)</li>
+                                    <li>❌ Constant need to keep car pristine</li>
                                 </ul>
                             </div>
                             <div class="bg-red-50 p-6 rounded-xl border border-red-100">
                                 <h3 class="font-bold text-red-900 mb-2">🍔 DoorDash Pros/Cons</h3>
                                 <ul class="text-sm space-y-2 text-red-800">
-                                    <li>??No strangers in your car</li>
-                                    <li>??Low vehicle standards (beaters welcome)</li>
-                                    <li>??Dress however you want</li>
-                                    <li>??Constant parking/traffic headaches</li>
-                                    <li>??High engine wear (frequent stop/start)</li>
+                                    <li>✅ No strangers in your car</li>
+                                    <li>✅ Low vehicle standards (beaters welcome)</li>
+                                    <li>✅ Dress however you want</li>
+                                    <li>❌ Constant parking/traffic headaches</li>
+                                    <li>❌ High engine wear (frequent stop/start)</li>
                                 </ul>
                             </div>
                         </div>

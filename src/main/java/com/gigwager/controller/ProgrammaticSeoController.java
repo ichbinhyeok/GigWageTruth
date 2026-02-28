@@ -10,6 +10,7 @@ import com.gigwager.model.content.WorkLevelRichContent;
 import com.gigwager.util.AppConstants;
 import com.gigwager.service.CityRichContentRepository;
 import com.gigwager.service.DataLayerService;
+import com.gigwager.service.HtmlSanitizerService;
 import com.gigwager.service.PageIndexPolicyService;
 import com.gigwager.dto.CityRankingDto;
 import org.springframework.stereotype.Controller;
@@ -30,13 +31,16 @@ public class ProgrammaticSeoController {
         private final DataLayerService dataLayerService;
         private final PageIndexPolicyService pageIndexPolicyService;
         private final CityRichContentRepository cityRichContentRepository;
+        private final HtmlSanitizerService htmlSanitizerService;
 
         public ProgrammaticSeoController(DataLayerService dataLayerService,
                         PageIndexPolicyService pageIndexPolicyService,
-                        CityRichContentRepository cityRichContentRepository) {
+                        CityRichContentRepository cityRichContentRepository,
+                        HtmlSanitizerService htmlSanitizerService) {
                 this.dataLayerService = dataLayerService;
                 this.pageIndexPolicyService = pageIndexPolicyService;
                 this.cityRichContentRepository = cityRichContentRepository;
+                this.htmlSanitizerService = htmlSanitizerService;
         }
 
         @GetMapping("/salary/{app}")
@@ -190,9 +194,7 @@ public class ProgrammaticSeoController {
                 // Build unique SEO meta
                 String appName = app.equals("uber") ? "Uber" : "DoorDash";
 
-                // CTR Strategy: Utility Gap + Curiosity Gap (No specific numbers in Title)
-                // "Uber in Austin: Net Pay Calculator (Jan 2026) - Is It Worth It?"
-                String title = String.format("%s in %s: Net Pay Calculator (%s) - Is It Worth It?",
+                String title = String.format("%s Pay in %s (%s): Net After Expenses",
                                 appName, city.getCityName(), monthYear);
 
                 // Meta Description: Fear/Loss Marketing + Utility Focus
@@ -218,6 +220,7 @@ public class ProgrammaticSeoController {
                 }
 
                 String canonicalUrl = String.format("%s/salary/%s/%s", AppConstants.BASE_URL, app, citySlug);
+                String appHubCanonicalUrl = String.format("%s/salary/%s", AppConstants.BASE_URL, app);
 
                 // Cross-App Silo: Generate link to the other app
                 String otherApp = app.equals("uber") ? "doordash" : "uber";
@@ -233,10 +236,14 @@ public class ProgrammaticSeoController {
                 model.addAttribute("otherApp", otherApp);
                 model.addAttribute("otherAppName", otherAppName);
                 model.addAttribute("otherAppUrl", otherAppUrl);
+                model.addAttribute("safeMarketDescription", htmlSanitizerService.sanitize(city.getMarketDescription()));
 
-                if (!pageIndexPolicyService.isCityReportIndexable(city) || featuredScenario.getNetHourly() < 6.0
-                                || featuredScenario.getNetHourly() > 45.0) {
+                boolean cityIndexable = pageIndexPolicyService.isCityReportIndexable(city)
+                                && featuredScenario.getNetHourly() >= 6.0
+                                && featuredScenario.getNetHourly() <= 45.0;
+                if (!cityIndexable) {
                         model.addAttribute("noIndex", true);
+                        canonicalUrl = appHubCanonicalUrl;
                 }
 
                 // Pass raw description to template if needed, or rely on SeoMeta
@@ -301,9 +308,7 @@ public class ProgrammaticSeoController {
                 // Build unique SEO meta
                 String appName = app.equals("uber") ? "Uber" : "DoorDash";
 
-                // CTR Strategy: Utility Gap + Curiosity Gap
-                // "Uber Part-Time in Austin: Net Pay Calculator (Jan 2026) - Is It Worth It?"
-                String title = String.format("%s %s in %s: Net Pay Calculator (%s) - Is It Worth It?",
+                String title = String.format("%s %s Pay in %s (%s)",
                                 appName, workLevel.getDisplayName(), city.getCityName(), monthYear);
 
                 // Meta Description: Utility Focused
@@ -321,6 +326,7 @@ public class ProgrammaticSeoController {
 
                 // Parent page (main city report) for breadcrumb
                 String parentPageUrl = String.format("/salary/%s/%s", app, citySlug);
+                String parentCanonicalUrl = String.format("%s%s", AppConstants.BASE_URL, parentPageUrl);
 
                 // Freshness signal
                 String lastUpdated = monthYear;
@@ -337,6 +343,7 @@ public class ProgrammaticSeoController {
                 String heroHook = null;
                 String methodologyVersion = "legacy-v1";
                 String contentType = "legacy_template";
+                String lastVerifiedAt = null;
                 List<com.gigwager.model.content.PersonaQuote> personaQuotes = Collections.emptyList();
                 List<com.gigwager.model.content.SourceCitation> sourceCitations = Collections.emptyList();
                 Double richNetMin = null;
@@ -351,6 +358,7 @@ public class ProgrammaticSeoController {
                                 heroHook = richCity.seo().heroHook();
                                 methodologyVersion = richCity.seo().methodologyVersion();
                                 contentType = richCity.seo().contentType();
+                                lastVerifiedAt = richCity.seo().lastVerifiedAt();
                                 if (richCity.seo().sources() != null) {
                                         sourceCitations = richCity.seo().sources();
                                 }
@@ -386,22 +394,26 @@ public class ProgrammaticSeoController {
                 model.addAttribute("otherAppUrl", otherAppUrl);
                 model.addAttribute("parentPageUrl", parentPageUrl);
 
-                if (!pageIndexPolicyService.isWorkLevelReportIndexable(city, workLevel) || scenario.getNetHourly() < 6.0
-                                || scenario.getNetHourly() > 45.0) {
+                boolean workLevelIndexable = pageIndexPolicyService.isWorkLevelReportIndexable(city, workLevel)
+                                && scenario.getNetHourly() >= 6.0
+                                && scenario.getNetHourly() <= 45.0;
+                if (!workLevelIndexable) {
                         model.addAttribute("noIndex", true);
+                        canonicalUrl = parentCanonicalUrl;
                 }
 
                 // Unique content sections
-                model.addAttribute("workLevelMeaning", workLevelMeaning);
-                model.addAttribute("taxStrategy", taxStrategy);
-                model.addAttribute("dayInTheLife", dayInTheLife);
-                model.addAttribute("bestPractices", bestPractices);
+                model.addAttribute("workLevelMeaning", htmlSanitizerService.sanitize(workLevelMeaning));
+                model.addAttribute("taxStrategy", htmlSanitizerService.sanitize(taxStrategy));
+                model.addAttribute("dayInTheLife", htmlSanitizerService.sanitize(dayInTheLife));
+                model.addAttribute("bestPractices", htmlSanitizerService.sanitize(bestPractices));
                 model.addAttribute("pageStructureType", pageStructureType);
                 model.addAttribute("heroHook", heroHook);
                 model.addAttribute("personaQuotes", personaQuotes);
                 model.addAttribute("sourceCitations", sourceCitations);
                 model.addAttribute("methodologyVersion", methodologyVersion);
                 model.addAttribute("contentType", contentType);
+                model.addAttribute("lastVerifiedAt", lastVerifiedAt);
                 model.addAttribute("richNetMin", richNetMin);
                 model.addAttribute("richNetMax", richNetMax);
 
@@ -476,8 +488,7 @@ public class ProgrammaticSeoController {
         private CityScenario calculateScenario(String name, int baseGross, int baseMiles, int baseHours, CityData city,
                         String app) {
                 // City-specific factor adjustments
-                double rawWageProxy = city.getMinWage() / 7.25;
-                double wageProxy = Math.max(0.9, Math.min(1.2, rawWageProxy)); // Realism Clamp: 0.9 to 1.2
+                double wageProxy = calculateWageProxy(city);
                 double appMultiplier = app.equals("uber") ? 1.0 : 0.95; // Small variance for app
 
                 // Adjust gross using local economy proxy
@@ -505,5 +516,15 @@ public class ProgrammaticSeoController {
 
                 return new CityScenario(name, (int) grossAdjusted, (int) milesAdjusted, (int) adjustedHours, netProfit,
                                 netHourly);
+        }
+
+        /**
+         * Keep city-level spread without letting high-wage markets explode the model.
+         * sqrt() preserves differentiation better than hard clamping.
+         */
+        private double calculateWageProxy(CityData city) {
+                double rawWageProxy = city.getMinWage() / 7.25;
+                double dampenedProxy = Math.sqrt(rawWageProxy);
+                return Math.max(0.85, Math.min(1.85, dampenedProxy));
         }
 }

@@ -26,10 +26,8 @@ public class SitemapController {
         xml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
         xml.append("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n");
 
-        // Freshness Signal: Set lastmod to the 1st day of the current month
-        // This creates a "Monthly Report" trust signal rather than a "Daily Spam"
-        // signal
-        String today = java.time.YearMonth.now().atDay(1).toString();
+        // Keep lastmod tied to actual content/data refresh, not calendar rollover.
+        String today = AppConstants.SITEMAP_LASTMOD_DATE;
 
         // Main pages
         addUrl(xml, AppConstants.BASE_URL + "/", today, "weekly", "1.0");

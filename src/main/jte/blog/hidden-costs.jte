@@ -48,7 +48,7 @@
                             You drive 100 miles. You make $100. You put $20 in gas. You think you made $80 profit. <strong>You are wrong.</strong> You actually made about $60, and I can prove it with one word: <strong>Depreciation.</strong>
                         </p>
 
-                        <h2>?뫛 The Invisible Expense</h2>
+                        <h2>🧾 The Invisible Expense</h2>
                         <p>
                             Most gig drivers treat their car like a free resource. It is not. It is a <strong>depreciating asset</strong>. Every mile you drive is a tiny slice of your car's resale value disappearing forever.
                         </p>
@@ -56,14 +56,14 @@
                             Think about it this way:
                         </p>
                         <ul class="list-none pl-0">
-                            <li class="bg-slate-50 p-4 rounded-lg mb-2">?슅 A car with <strong>50,000 miles</strong> is worth $15,000.</li>
-                            <li class="bg-slate-50 p-4 rounded-lg">?슅 That same car with <strong>150,000 miles</strong> is worth $5,000.</li>
+                            <li class="bg-slate-50 p-4 rounded-lg mb-2">🚗 A car with <strong>50,000 miles</strong> is worth $15,000.</li>
+                            <li class="bg-slate-50 p-4 rounded-lg">🚗 That same car with <strong>150,000 miles</strong> is worth $5,000.</li>
                         </ul>
                         <p>
                             That $10,000 difference didn't just vanish. <strong>You paid it out, mile by mile.</strong>
                         </p>
 
-                        <h2>?뱣 The "50k Mile Cliff"</h2>
+                        <h2>📉 The "50k Mile Cliff"</h2>
                         <p>
                             Cars don't lose value linearly. There are "cliffs" where the value drops significantly:
                         </p>
@@ -83,14 +83,14 @@
                             </p>
                         </div>
 
-                        <h2>?썳截?How to Fight Back</h2>
+                        <h2>🛠️ How to Fight Back</h2>
                         <p>
                             Is it impossible to make money? No. But you have to be smart:
                         </p>
                         <ol>
-                            <li><strong>?썱截?Drive the "Bottom of the Curve":</strong> Don't use a new car. Use a car that has already lost most of its value (e.g., a 10-year-old Toyota). If the car is only worth $4,000, it can't lose much more.</li>
-                            <li><strong>?뱟 Maintain religiously:</strong> A well-documented maintenance history can mitigate the loss of value when you eventually sell the car.</li>
-                            <li><strong>?? Watch the Odometer:</strong> If you are near a major milestone (60k, 100k), consider trading the car in *before* you hit it.</li>
+                            <li><strong>🚙 Drive the "Bottom of the Curve":</strong> Don't use a new car. Use a car that has already lost most of its value (e.g., a 10-year-old Toyota). If the car is only worth $4,000, it can't lose much more.</li>
+                            <li><strong>🧰 Maintain religiously:</strong> A well-documented maintenance history can mitigate the loss of value when you eventually sell the car.</li>
+                            <li><strong>👀 Watch the Odometer:</strong> If you are near a major milestone (60k, 100k), consider trading the car in *before* you hit it.</li>
                         </ol>
 
                         <h2>Conclusion</h2>

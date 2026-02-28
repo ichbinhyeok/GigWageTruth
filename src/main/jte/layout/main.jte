@@ -10,21 +10,53 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GJVLR0KTTS"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+      (function () {
+        let thirdPartyBooted = false;
+        function loadScript(src, attrs, onload) {
+          const script = document.createElement('script');
+          script.src = src;
+          script.async = true;
+          if (attrs) {
+            Object.keys(attrs).forEach((key) => script.setAttribute(key, attrs[key]));
+          }
+          if (onload) {
+            script.onload = onload;
+          }
+          document.head.appendChild(script);
+        }
 
-      gtag('config', 'G-GJVLR0KTTS');
+        function bootThirdParty() {
+          if (thirdPartyBooted) return;
+          thirdPartyBooted = true;
+
+          loadScript('https://www.googletagmanager.com/gtag/js?id=G-GJVLR0KTTS', null, function () {
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function () { window.dataLayer.push(arguments); };
+            window.gtag('js', new Date());
+            window.gtag('config', 'G-GJVLR0KTTS');
+          });
+
+          loadScript(
+            'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3533137832089555',
+            { crossorigin: 'anonymous' }
+          );
+        }
+
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(bootThirdParty, { timeout: 4500 });
+        } else {
+          setTimeout(bootThirdParty, 3000);
+        }
+
+        window.addEventListener('pointerdown', bootThirdParty, { once: true, passive: true });
+        window.addEventListener('scroll', bootThirdParty, { once: true, passive: true });
+        window.addEventListener('keydown', bootThirdParty, { once: true });
+      })();
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3533137832089555"
-     crossorigin="anonymous"></script>
+
     <link rel="icon" type="image/png" href="/favicon.png">
     
     <title>${seoMeta.title()}</title>
@@ -32,12 +64,21 @@
     <meta name="robots" content="noindex,follow">
     @endif
     <meta name="description" content="${seoMeta.description()}">
+    @if(seoMeta.canonicalUrl() != null && !seoMeta.canonicalUrl().isBlank())
     <link rel="canonical" href="${seoMeta.canonicalUrl()}">
+    @endif
     
     <meta property="og:title" content="${seoMeta.title()}">
     <meta property="og:description" content="${seoMeta.description()}">
     <meta property="og:image" content="${seoMeta.ogImage()}">
+    @if(seoMeta.canonicalUrl() != null && !seoMeta.canonicalUrl().isBlank())
+    <meta property="og:url" content="${seoMeta.canonicalUrl()}">
+    @endif
     <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="${seoMeta.title()}">
+    <meta name="twitter:description" content="${seoMeta.description()}">
+    <meta name="twitter:image" content="${seoMeta.ogImage()}">
 
     <!-- Fonts: Inter for Professional FinTech Look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
