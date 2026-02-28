@@ -132,6 +132,40 @@ public class PlaywrightBetaE2ETest {
     }
 
     @Test
+    public void mobileCityComparisonTableShouldAllowHorizontalScroll() {
+        try (BrowserContext context = browser.newContext(new Browser.NewContextOptions()
+                .setViewportSize(390, 844)
+                .setDeviceScaleFactor(3)
+                .setUserAgent(
+                        "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1")
+                .setIsMobile(true)
+                .setHasTouch(true));
+                Page page = context.newPage()) {
+            page.navigate(baseUrl + "/salary/uber/houston");
+            page.waitForLoadState();
+
+            double scrollWidth = ((Number) page.evaluate(
+                    "() => { const el = document.querySelector('[data-testid=\"cross-app-table-scroll\"]'); return el ? el.scrollWidth : 0; }"))
+                    .doubleValue();
+            double clientWidth = ((Number) page.evaluate(
+                    "() => { const el = document.querySelector('[data-testid=\"cross-app-table-scroll\"]'); return el ? el.clientWidth : 0; }"))
+                    .doubleValue();
+
+            double before = ((Number) page.evaluate(
+                    "() => { const el = document.querySelector('[data-testid=\"cross-app-table-scroll\"]'); return el ? el.scrollLeft : 0; }"))
+                    .doubleValue();
+            double after = ((Number) page.evaluate(
+                    "() => { const el = document.querySelector('[data-testid=\"cross-app-table-scroll\"]'); if (!el) return 0; el.scrollLeft = 180; return el.scrollLeft; }"))
+                    .doubleValue();
+
+            assertTrue(scrollWidth > clientWidth,
+                    "Comparison table wrapper should overflow horizontally on mobile");
+            assertTrue(after > before,
+                    "Comparison table wrapper should allow horizontal scrolling");
+        }
+    }
+
+    @Test
     public void nonIndexablePagesShouldExposeNoindexAndParentCanonical() {
         try (BrowserContext context = browser.newContext();
                 Page page = context.newPage()) {

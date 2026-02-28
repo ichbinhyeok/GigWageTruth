@@ -22,7 +22,7 @@
             {
               "@type": "WebApplication",
               "name": "Real DoorDash Pay Calculator",
-              "url": com.gigwager.util.AppConstants.BASE_URL + "/doordash",
+              "url": "${AppConstants.BASE_URL}/doordash",
               "applicationCategory": "FinanceApplication",
               "operatingSystem": "Any",
               "description": "Calculate your true net profit as a DoorDash driver after gas, depreciation, and taxes.",

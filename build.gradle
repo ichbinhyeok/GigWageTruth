@@ -79,3 +79,55 @@ tasks.named('bootRun') {
     systemProperty 'gg.jte.developmentMode', 'true'
     systemProperty 'gg.jte.usePrecompiledTemplates', 'false'
 }
+
+def sitemapTrackedPaths = [
+        'src/main/jte',
+        'src/main/resources/data',
+        'src/main/java/com/gigwager/controller',
+        'src/main/java/com/gigwager/service',
+        'src/main/java/com/gigwager/model/content'
+]
+
+tasks.register('generateSitemapLastmod') {
+    group = 'build setup'
+    description = 'Generates sitemap-lastmod.txt from the latest git commit touching SEO/content sources.'
+    outputs.file("$buildDir/generated-resources/sitemap-lastmod.txt")
+
+    doLast {
+        def lastmod = java.time.LocalDate.now().toString()
+        def out = new ByteArrayOutputStream()
+        def err = new ByteArrayOutputStream()
+
+        try {
+            exec {
+                commandLine(['git', 'log', '-1', '--format=%cs', '--'] + sitemapTrackedPaths)
+                standardOutput = out
+                errorOutput = err
+                ignoreExitValue = true
+            }
+
+            def gitDate = out.toString().trim()
+            if (gitDate ==~ /\d{4}-\d{2}-\d{2}/) {
+                lastmod = gitDate
+            }
+        } catch (Exception ignored) {
+            // Fall back to current date when git metadata is unavailable in the runtime.
+        }
+
+        def outputFile = file("$buildDir/generated-resources/sitemap-lastmod.txt")
+        outputFile.parentFile.mkdirs()
+        outputFile.text = lastmod + System.lineSeparator()
+    }
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDir("$buildDir/generated-resources")
+        }
+    }
+}
+
+tasks.named('processResources') {
+    dependsOn tasks.named('generateSitemapLastmod')
+}

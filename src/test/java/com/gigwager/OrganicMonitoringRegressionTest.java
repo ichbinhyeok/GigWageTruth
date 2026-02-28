@@ -125,6 +125,19 @@ public class OrganicMonitoringRegressionTest {
                 AppConstants.BASE_URL + "/salary/uber/jacksonville");
     }
 
+    @Test
+    public void userSubmittedWorkLevelPageShouldExposeEditorialReviewLabel() throws Exception {
+        MvcResult result = mockMvc.perform(get("/salary/uber/miami/side-hustle"))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String html = result.getResponse().getContentAsString();
+        assertTrue(html.contains("Editorial review:"),
+                "Work-level page should expose editorial review status");
+        assertTrue(html.contains("Editorial review pending (user-submitted source)"),
+                "User-submitted content should be labeled as pending editorial review");
+    }
+
     private void assertCanonicalAndNoIndex(String path, String expectedCanonical) throws Exception {
         MvcResult result = mockMvc.perform(get(path))
                 .andExpect(status().isOk())

@@ -1,5 +1,11 @@
 package com.gigwager.util;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+
 /**
  * AppConstants
  * 
@@ -22,9 +28,48 @@ public class AppConstants {
     public static final String BASE_URL = "https://gigverdict.com";
     public static final String DEFAULT_DESCRIPTION = "Discover your TRUE hourly wage as a gig worker. Don't let gross revenue fool you.";
     public static final int CURRENT_YEAR = java.time.LocalDate.now().getYear();
-    // Update this date only when material page content/data is actually refreshed.
-    public static final String SITEMAP_LASTMOD_DATE = "2026-02-28";
+    // Auto-generated from the latest content-affecting git commit at build time.
+    // Override with env var SITEMAP_LASTMOD_DATE when needed (YYYY-MM-DD).
+    public static final String SITEMAP_LASTMOD_DATE = resolveSitemapLastmodDate();
 
     // Asset Versioning (Updates on every restart to bust cache)
     public static final String CACHE_VERSION = String.valueOf(System.currentTimeMillis());
+
+    private static String resolveSitemapLastmodDate() {
+        String envOverride = System.getenv("SITEMAP_LASTMOD_DATE");
+        if (isIsoDate(envOverride)) {
+            return envOverride;
+        }
+
+        try (InputStream input = AppConstants.class.getClassLoader().getResourceAsStream("sitemap-lastmod.txt")) {
+            if (input != null) {
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))) {
+                    String line = reader.readLine();
+                    if (isIsoDate(line)) {
+                        return line.trim();
+                    }
+                }
+            }
+        } catch (Exception ignored) {
+            // Fall through to stable runtime fallback below.
+        }
+
+        return LocalDate.now().toString();
+    }
+
+    private static boolean isIsoDate(String value) {
+        if (value == null) {
+            return false;
+        }
+        String trimmed = value.trim();
+        if (!trimmed.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            return false;
+        }
+        try {
+            LocalDate.parse(trimmed);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

@@ -27,6 +27,8 @@
 @param List sourceCitations = null
 @param String methodologyVersion = "legacy-v1"
 @param String contentType = "legacy_template"
+@param Boolean requiresEditorialReview = false
+@param String editorialReviewLabel = "Editorial review status unavailable"
 @param String lastVerifiedAt = null
 @param Double richNetMin = null
 @param Double richNetMax = null
@@ -168,6 +170,11 @@
                             @endif
                             | Method: <strong>${methodologyVersion}</strong>
                         </p>
+                        @if(requiresEditorialReview)
+                            <p class="text-xs mt-2 text-amber-200">Editorial review: <strong>${editorialReviewLabel}</strong></p>
+                        @else
+                            <p class="text-xs mt-2 text-emerald-200">Editorial review: <strong>${editorialReviewLabel}</strong></p>
+                        @endif
                     </div>
                 @endif
             </div>
@@ -293,7 +300,12 @@
                 <section class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200">
                     <h3 class="text-xl font-bold text-slate-900 mb-3">Sources and Methodology</h3>
                     <p class="text-sm text-slate-600 mb-2">Methodology version: <strong>${methodologyVersion}</strong></p>
-                    <p class="text-sm text-slate-600 mb-5">Content classification: <strong>${contentType}</strong></p>
+                    <p class="text-sm text-slate-600 mb-2">Content classification: <strong>${contentType}</strong></p>
+                    @if(requiresEditorialReview)
+                        <p class="text-sm text-amber-700 mb-5">Editorial review: <strong>${editorialReviewLabel}</strong></p>
+                    @else
+                        <p class="text-sm text-emerald-700 mb-5">Editorial review: <strong>${editorialReviewLabel}</strong></p>
+                    @endif
                     <ul class="space-y-3">
                         @for(var sourceObj : sourceCitations)
                             <li class="text-sm text-slate-700">

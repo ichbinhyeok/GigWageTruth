@@ -22,7 +22,7 @@
             {
               "@type": "WebApplication",
               "name": "Real Uber Driver Pay Calculator",
-              "url": com.gigwager.util.AppConstants.BASE_URL + "/uber",
+              "url": "${AppConstants.BASE_URL}/uber",
               "applicationCategory": "FinanceApplication",
               "operatingSystem": "Any",
               "description": "Calculate your true net profit as an Uber driver after gas, depreciation, and taxes.",

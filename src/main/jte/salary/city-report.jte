@@ -512,8 +512,9 @@
                     <span class="px-3 py-1 bg-slate-900 text-white text-xs font-bold rounded-full uppercase tracking-wider">Analysis</span>
                 </div>
                 
-                <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200">
-                    <table class="w-full">
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200">
+                    <div class="overflow-x-auto" data-testid="cross-app-table-scroll">
+                    <table class="w-full min-w-[38rem]">
                         <thead class="bg-slate-50 border-b border-slate-200">
                             <tr>
                                 <th class="px-4 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Feature</th>
@@ -549,6 +550,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    </div>
                 </div>
                 <div class="mt-6 text-center">
                      <p class="text-slate-600 mb-4 text-sm">

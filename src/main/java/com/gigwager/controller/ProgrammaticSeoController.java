@@ -413,6 +413,8 @@ public class ProgrammaticSeoController {
                 model.addAttribute("sourceCitations", sourceCitations);
                 model.addAttribute("methodologyVersion", methodologyVersion);
                 model.addAttribute("contentType", contentType);
+                model.addAttribute("requiresEditorialReview", requiresEditorialReview(contentType));
+                model.addAttribute("editorialReviewLabel", editorialReviewLabel(contentType));
                 model.addAttribute("lastVerifiedAt", lastVerifiedAt);
                 model.addAttribute("richNetMin", richNetMin);
                 model.addAttribute("richNetMax", richNetMax);
@@ -442,6 +444,27 @@ public class ProgrammaticSeoController {
                         return primary;
                 }
                 return fallback;
+        }
+
+        private boolean requiresEditorialReview(String contentType) {
+                if (contentType == null) {
+                        return true;
+                }
+                return "user_submitted".equalsIgnoreCase(contentType.trim());
+        }
+
+        private String editorialReviewLabel(String contentType) {
+                if (contentType == null || contentType.isBlank()) {
+                        return "Editorial review status unavailable";
+                }
+
+                String normalized = contentType.trim().toLowerCase(java.util.Locale.US);
+                return switch (normalized) {
+                        case "user_submitted" -> "Editorial review pending (user-submitted source)";
+                        case "verified_interview" -> "Editorially reviewed (verified interview source)";
+                        case "editorial_composite" -> "Editorially reviewed (composite source synthesis)";
+                        default -> "Editorial review status: " + normalized;
+                };
         }
 
         private List<CityScenario> generateScenarios(CityData city, String app) {
