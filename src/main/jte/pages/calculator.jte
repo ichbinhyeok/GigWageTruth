@@ -100,7 +100,17 @@
                                     <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     Methodology: How We Calculate Real Pay
                                 </h3>
-                                <div class="prose prose-sm text-slate-600 max-w-none">
+                                <div class="md:hidden mb-4">
+                                    <details class="group border border-slate-200 rounded-xl p-4 bg-slate-50">
+                                        <summary class="cursor-pointer font-semibold text-slate-800">Quick assumptions (tap for full method)</summary>
+                                        <ul class="mt-3 text-sm text-slate-600 list-disc pl-5 space-y-1">
+                                            <li>IRS mileage proxy: $0.725/mi (2026)</li>
+                                            <li>SE tax estimate: 15.3%</li>
+                                            <li>Real wage uses total online time</li>
+                                        </ul>
+                                    </details>
+                                </div>
+                                <div class="prose prose-sm text-slate-600 max-w-none hidden md:block">
                                     <p>Most earning calculators are misleading because they only subtract gas. GigWageTruth uses a comprehensive <strong>Total Cost of Ownership (TCO)</strong> model.</p>
                                     <table class="w-full mt-4 text-left border-collapse">
                                         <tbody class="align-top">
@@ -128,8 +138,13 @@
                             <div class="bg-emerald-50 rounded-2xl p-8 text-center mt-12 mb-12">
                                  <h3 class="text-xl font-bold text-emerald-900 mb-2">Stop driving blind</h3>
                                  <p class="text-emerald-700 mb-6">Learn professional strategies to protect your profit and double your hourly wage.</p>
+                                 <div class="md:hidden space-y-3 text-left">
+                                     <a href="/taxes" class="block bg-white p-4 rounded-xl border border-emerald-200 font-semibold text-slate-900">1) Set your quarterly tax plan →</a>
+                                     <a href="/vehicle-cost/cost-per-mile" class="block bg-white p-4 rounded-xl border border-emerald-200 font-semibold text-slate-900">2) Check cost-per-mile risk →</a>
+                                     <a href="/insurance/rideshare-basics" class="block bg-white p-4 rounded-xl border border-emerald-200 font-semibold text-slate-900">3) Verify coverage gap →</a>
+                                 </div>
                                  
-                                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
+                                 <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
                                      <a href="/taxes" class="relative group block bg-white p-5 rounded-xl border-2 border-emerald-100 hover:border-emerald-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
                                          <div class="absolute -right-2 -top-2 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide">Save $1,500+</div>
                                          <h4 class="font-bold text-slate-900 mb-2 flex items-center gap-2"><span class="text-xl">🏦</span> Tax Guide</h4>
@@ -281,7 +296,17 @@
                                     <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     Methodology: How We Calculate Real Pay
                                 </h3>
-                                <div class="prose prose-sm text-slate-600 max-w-none">
+                                <div class="md:hidden mb-4">
+                                    <details class="group border border-slate-200 rounded-xl p-4 bg-slate-50">
+                                        <summary class="cursor-pointer font-semibold text-slate-800">Quick assumptions (tap for full method)</summary>
+                                        <ul class="mt-3 text-sm text-slate-600 list-disc pl-5 space-y-1">
+                                            <li>IRS mileage proxy: $0.725/mi (2026)</li>
+                                            <li>SE tax estimate: 15.3%</li>
+                                            <li>Real wage uses total online time</li>
+                                        </ul>
+                                    </details>
+                                </div>
+                                <div class="prose prose-sm text-slate-600 max-w-none hidden md:block">
                                     <p>DoorDash "Active Time" is a vanity metric. GigWageTruth calculates your <strong>Real Hourly Wage</strong> by accounting for the full picture.</p>
                                     <table class="w-full mt-4 text-left border-collapse">
                                         <tbody class="align-top">
@@ -309,8 +334,13 @@
                             <div class="bg-red-50 rounded-2xl p-8 text-center mt-12 mb-12">
                                  <h3 class="text-xl font-bold text-red-900 mb-2">Maximize your Dasher Pay</h3>
                                  <p class="text-red-700 mb-6">Learn professional strategies to protect your profit and double your hourly wage.</p>
+                                 <div class="md:hidden space-y-3 text-left">
+                                     <a href="/taxes" class="block bg-white p-4 rounded-xl border border-red-200 font-semibold text-slate-900">1) Set your quarterly tax plan →</a>
+                                     <a href="/vehicle-cost/cost-per-mile" class="block bg-white p-4 rounded-xl border border-red-200 font-semibold text-slate-900">2) Check cost-per-mile risk →</a>
+                                     <a href="/insurance/rideshare-basics" class="block bg-white p-4 rounded-xl border border-red-200 font-semibold text-slate-900">3) Verify coverage gap →</a>
+                                 </div>
                                  
-                                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
+                                 <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
                                      <a href="/taxes" class="relative group block bg-white p-5 rounded-xl border-2 border-red-100 hover:border-red-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
                                          <div class="absolute -right-2 -top-2 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide">Save $1,500+</div>
                                          <h4 class="font-bold text-slate-900 mb-2 flex items-center gap-2"><span class="text-xl">🏦</span> Tax Guide</h4>

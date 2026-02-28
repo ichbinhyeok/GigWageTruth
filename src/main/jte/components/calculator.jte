@@ -406,6 +406,48 @@
                                    x-text="shockMessage.text">
                                 </p>
                             </div>
+
+                            <div class="mt-4 bg-white rounded-lg p-4 border border-slate-200">
+                                <h4 class="text-xs font-black uppercase tracking-widest text-slate-700 mb-3">Recommended Next Step</h4>
+                                <template x-if="netHourly < 12">
+                                    <a :href="'/vehicle-cost/cost-per-mile?app=' + selectedApp + '&miles=' + miles"
+                                       class="block w-full text-center px-3 py-2.5 rounded-lg bg-red-600 text-white text-sm font-bold hover:bg-red-700 transition">
+                                        1) Fix cost per mile first
+                                    </a>
+                                </template>
+                                <template x-if="netHourly >= 12 && netHourly < 18">
+                                    <a :href="'/taxes/quarterly-estimator?app=' + selectedApp + '&gross=' + gross"
+                                       class="block w-full text-center px-3 py-2.5 rounded-lg bg-amber-600 text-white text-sm font-bold hover:bg-amber-700 transition">
+                                        1) Lock your tax buffer now
+                                    </a>
+                                </template>
+                                <template x-if="netHourly >= 18">
+                                    <a :href="'/blog/multi-apping-guide?app=' + selectedApp"
+                                       class="block w-full text-center px-3 py-2.5 rounded-lg bg-emerald-600 text-white text-sm font-bold hover:bg-emerald-700 transition">
+                                        1) Scale with multi-app strategy
+                                    </a>
+                                </template>
+                                <div class="grid grid-cols-2 gap-2 mt-2">
+                                    <a :href="'/taxes/quarterly-estimator?app=' + selectedApp + '&gross=' + gross"
+                                       class="text-center px-3 py-2 rounded-lg border border-slate-300 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition">
+                                        Tax plan
+                                    </a>
+                                    <a :href="'/insurance/rideshare-basics?app=' + selectedApp"
+                                       class="text-center px-3 py-2 rounded-lg border border-slate-300 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition">
+                                        Coverage check
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 bg-slate-50 rounded-lg p-4 border border-slate-200">
+                                <h4 class="text-xs font-black uppercase tracking-widest text-slate-700 mb-2">Standard Assumptions</h4>
+                                <ul class="text-xs text-slate-600 space-y-1">
+                                    <li>IRS mileage proxy: <strong>$0.725/mi</strong> (2026).</li>
+                                    <li>Self-employment tax estimate: <strong>15.3%</strong>.</li>
+                                    <li>Hourly base uses <strong>total online time</strong> (not active time).</li>
+                                </ul>
+                                <p class="text-[10px] text-slate-400 mt-2">Educational estimate only, not tax or legal advice.</p>
+                            </div>
                         </div>
 
                     </div>

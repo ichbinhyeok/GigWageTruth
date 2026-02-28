@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -29,16 +30,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class PlaywrightBetaE2ETest {
 
-    private static final String BASE_URL = System.getProperty("e2e.baseUrl", "http://localhost:8081");
+    @LocalServerPort
+    private int localPort;
+
+    private String baseUrl;
     private Playwright playwright;
     private Browser browser;
 
     @BeforeAll
     public void setUp() {
+        String overrideBaseUrl = System.getProperty("e2e.baseUrl");
+        baseUrl = overrideBaseUrl != null && !overrideBaseUrl.isBlank()
+                ? overrideBaseUrl
+                : "http://localhost:" + localPort;
         playwright = Playwright.create();
         browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(true));
     }
@@ -57,7 +65,7 @@ public class PlaywrightBetaE2ETest {
     public void rideshareUserCanSubmitFromHomeAndReachUberCalculator() {
         try (BrowserContext context = browser.newContext();
                 Page page = context.newPage()) {
-            page.navigate(BASE_URL + "/");
+            page.navigate(baseUrl + "/");
             page.locator("input[name='gross']").fill("1200");
             page.locator("input[name='miles']").fill("780");
             page.locator("input[name='hours']").fill("38");
@@ -75,7 +83,7 @@ public class PlaywrightBetaE2ETest {
     public void deliveryUserCanSwitchTabAndReachDoorDashCalculator() {
         try (BrowserContext context = browser.newContext();
                 Page page = context.newPage()) {
-            page.navigate(BASE_URL + "/");
+            page.navigate(baseUrl + "/");
             page.locator("button:has-text('DoorDash')").click();
             page.locator("input[name='gross']").fill("900");
             page.locator("input[name='miles']").fill("620");
@@ -91,7 +99,7 @@ public class PlaywrightBetaE2ETest {
     public void calculatorShouldReactToInputChanges() {
         try (BrowserContext context = browser.newContext();
                 Page page = context.newPage()) {
-            page.navigate(BASE_URL + "/uber?gross=1100&miles=700&hours=35");
+            page.navigate(baseUrl + "/uber?gross=1100&miles=700&hours=35");
             page.waitForLoadState();
 
             String before = page.locator("span[x-text='netHourly.toFixed(2)']").first().innerText().trim();
@@ -107,13 +115,13 @@ public class PlaywrightBetaE2ETest {
     public void cityAndWorkLevelPagesShouldShowTrustAndFaqSignals() {
         try (BrowserContext context = browser.newContext();
                 Page page = context.newPage()) {
-            page.navigate(BASE_URL + "/salary/uber/san-francisco");
+            page.navigate(baseUrl + "/salary/uber/san-francisco");
             assertTrue(page.locator("h1").first().innerText().contains("San Francisco"),
                     "City report must show city-specific heading");
             assertTrue(page.getByText("Frequently Asked Questions").first().isVisible(),
                     "City report should include visible FAQ");
 
-            page.navigate(BASE_URL + "/salary/uber/new-york/full-time");
+            page.navigate(baseUrl + "/salary/uber/new-york/full-time");
             assertTrue(page.getByText("Source-backed page").first().isVisible(),
                     "Work-level page should expose source-backed trust signal near top");
             assertTrue(page.getByText("Sources and Methodology").first().isVisible(),
@@ -127,7 +135,7 @@ public class PlaywrightBetaE2ETest {
     public void nonIndexablePagesShouldExposeNoindexAndParentCanonical() {
         try (BrowserContext context = browser.newContext();
                 Page page = context.newPage()) {
-            page.navigate(BASE_URL + "/salary/uber/jacksonville/part-time");
+            page.navigate(baseUrl + "/salary/uber/jacksonville/part-time");
             String robots = page.locator("meta[name='robots']").first().getAttribute("content");
             String canonical = page.locator("link[rel='canonical']").first().getAttribute("href");
 
@@ -145,7 +153,7 @@ public class PlaywrightBetaE2ETest {
                 .setIsMobile(true)
                 .setHasTouch(true));
                 Page page = context.newPage()) {
-            page.navigate(BASE_URL + "/");
+            page.navigate(baseUrl + "/");
             page.locator("input[name='gross']").fill("1000");
             page.locator("input[name='miles']").fill("700");
             page.locator("input[name='hours']").fill("40");
@@ -156,10 +164,57 @@ public class PlaywrightBetaE2ETest {
     }
 
     @Test
+    public void calculatorShouldShowActionCtasAndFixedAssumptions() {
+        try (BrowserContext context = browser.newContext();
+                Page page = context.newPage()) {
+            page.navigate(baseUrl + "/uber?gross=1050&miles=740&hours=40");
+            assertTrue(page.getByText("Recommended Next Step").first().isVisible(),
+                    "Result area should expose recommended next action");
+            assertTrue(page.getByText("Standard Assumptions").first().isVisible(),
+                    "Result area should expose fixed assumptions");
+            assertTrue(page.getByText("IRS mileage proxy: $0.725/mi (2026).").first().isVisible(),
+                    "Assumption block should include IRS mileage baseline");
+            assertTrue(page.getByText("Self-employment tax estimate: 15.3%.").first().isVisible(),
+                    "Assumption block should include SE tax baseline");
+        }
+    }
+
+    @Test
+    public void recommendationShouldAdaptForLowNetScenario() {
+        try (BrowserContext context = browser.newContext();
+                Page page = context.newPage()) {
+            page.navigate(baseUrl + "/uber?gross=500&miles=1200&hours=45");
+            assertTrue(page.getByText("Fix cost per mile first").first().isVisible(),
+                    "Low-net scenario should prioritize cost-per-mile action");
+            String href = page.locator("a:has-text('Fix cost per mile first')").first().getAttribute("href");
+            assertTrue(href != null && href.contains("/vehicle-cost/cost-per-mile"),
+                    "Low-net recommendation should route to cost-per-mile tool");
+        }
+    }
+
+    @Test
+    public void mobileShouldUseCompactSummaryForLongSections() {
+        try (BrowserContext context = browser.newContext(new Browser.NewContextOptions()
+                .setViewportSize(390, 844)
+                .setDeviceScaleFactor(3)
+                .setUserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1")
+                .setIsMobile(true)
+                .setHasTouch(true));
+                Page page = context.newPage()) {
+            page.navigate(baseUrl + "/uber?gross=1000&miles=700&hours=40");
+            page.getByText("Quick assumptions (tap for full method)").first().scrollIntoViewIfNeeded();
+            assertTrue(page.getByText("Quick assumptions (tap for full method)").first().isVisible(),
+                    "Mobile should show collapsible assumptions summary");
+            assertTrue(page.getByText("1) Set your quarterly tax plan →").first().isVisible(),
+                    "Mobile should show compact next-action links");
+        }
+    }
+
+    @Test
     public void clusterIntentLinksShouldBeReachableFromWorkLevelPage() {
         try (BrowserContext context = browser.newContext();
                 Page page = context.newPage()) {
-            page.navigate(BASE_URL + "/salary/uber/san-francisco/full-time");
+            page.navigate(baseUrl + "/salary/uber/san-francisco/full-time");
 
             assertTrue(page.locator("a[href='/taxes/quarterly-estimator']").count() > 0,
                     "Work-level page should link to quarterly tax estimator");
@@ -187,7 +242,7 @@ public class PlaywrightBetaE2ETest {
         try (BrowserContext context = browser.newContext();
                 Page page = context.newPage()) {
             for (String path : blogPaths) {
-                page.navigate(BASE_URL + path);
+                page.navigate(baseUrl + path);
                 String bodyText = page.locator("body").innerText();
                 assertTrue(!bodyText.contains("�"), path + " should not include replacement character");
                 assertTrue(!bodyText.contains("?뫛"), path + " should not include mojibake token");
@@ -199,7 +254,7 @@ public class PlaywrightBetaE2ETest {
     @Test
     public void ecosystemCrawlShouldGenerateBetaReportForTopLandingPages() throws Exception {
         HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder(URI.create(BASE_URL + "/sitemap.xml")).GET().build();
+        HttpRequest request = HttpRequest.newBuilder(URI.create(baseUrl + "/sitemap.xml")).GET().build();
         HttpResponse<String> sitemapResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
         List<String> urls = extractLocUrls(sitemapResponse.body());
         List<String> top20 = urls.stream().limit(20).toList();
@@ -284,12 +339,12 @@ public class PlaywrightBetaE2ETest {
                         "})();");
     }
 
-    private static List<String> extractLocUrls(String xml) {
+    private List<String> extractLocUrls(String xml) {
         Pattern pattern = Pattern.compile("<loc>(.*?)</loc>");
         Matcher matcher = pattern.matcher(xml);
         List<String> urls = new ArrayList<>();
         while (matcher.find()) {
-            urls.add(matcher.group(1).trim().replace("https://gigverdict.com", BASE_URL));
+            urls.add(matcher.group(1).trim().replace("https://gigverdict.com", baseUrl));
         }
         return urls;
     }
