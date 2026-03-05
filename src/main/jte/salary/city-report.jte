@@ -16,6 +16,7 @@
 @param java.util.List<com.gigwager.model.CityData> similarCities
 @param String safeMarketDescription = ""
 @param Boolean noIndex = false
+@param String cityFaqJsonLd = "{}"
 @template.layout.main(
     noIndex = noIndex,
     seoMeta = seoMeta,
@@ -42,9 +43,9 @@
                 <!-- Visual Breadcrumb Navigation -->
                 <nav class="text-sm text-slate-400 mb-4 flex items-center gap-2">
                     <a href="/" class="hover:text-emerald-400 transition">Home</a>
-                    <span class="text-slate-600">›</span>
+                    <span class="text-slate-600">&gt;</span>
                     <a href="/salary/directory" class="hover:text-emerald-400 transition">Salary Directory</a>
-                    <span class="text-slate-600">›</span>
+                    <span class="text-slate-600">&gt;</span>
                     <span class="text-white">${city.getCityName()} ${appName} Earnings</span>
                 </nav>
                 <div class="flex items-center gap-4 mb-6">
@@ -93,7 +94,7 @@
             <div class="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden">
                 <div class="bg-slate-900 px-6 py-3 flex items-center justify-between">
                     <h2 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
-                        <span>📊</span> ${appName} in ${city.getCityName()} — Quick Summary (${lastUpdated})
+                        <span>TL;DR</span> ${appName} in ${city.getCityName()} - Quick Summary (${lastUpdated})
                     </h2>
                     <span class="text-xs text-slate-400">Updated ${lastUpdated}</span>
                 </div>
@@ -134,7 +135,7 @@
                             @endfor
                         </tr>
                         <tr class="bg-emerald-50/50">
-                            <td class="px-4 py-3 font-bold text-slate-900">⭐ Real Hourly Wage</td>
+                            <td class="px-4 py-3 font-bold text-slate-900">Real Hourly Wage</td>
                             @for(var scenario : scenarios)
                                 <td class="px-4 py-3 text-right text-lg font-black text-slate-900">$${String.format("%.2f", scenario.getNetHourly())}/hr</td>
                             @endfor
@@ -143,7 +144,7 @@
                     <tfoot>
                         <tr class="bg-slate-50 border-t border-slate-200">
                             <td colspan="${scenarios.size() + 1}" class="px-4 py-2.5 text-xs text-slate-500">
-                                Assumes: Gas at $${String.format("%.2f", city.getGasPrice())}/gal · IRS Mileage Rate $0.725/mi · 15.3% SE Tax · ${city.getCityName()}, ${city.getState()} market conditions. Estimates only, not financial advice.
+                                Assumes: Gas at $${String.format("%.2f", city.getGasPrice())}/gal | IRS Mileage Rate $0.725/mi | 15.3% SE Tax | ${city.getCityName()}, ${city.getState()} market conditions. Estimates only, not financial advice.
                             </td>
                         </tr>
                     </tfoot>
@@ -158,7 +159,7 @@
             <!-- City-Specific Market Context (Handwritten, Non-Calculated) -->
             <section class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200">
                 <h2 class="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-                    <span class="text-2xl">📍</span>
+                    <span class="text-2xl">Local</span>
                     What Makes ${city.getCityName()} Different?
                 </h2>
                 <p class="text-slate-700 leading-relaxed mb-4">
@@ -169,7 +170,7 @@
                 @if(city.isCheapGas())
                     <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 mt-4">
                         <p class="text-emerald-900 text-sm">
-                            <strong>💰 Gas Price Advantage:</strong> Lucky for you, ${city.getCityName()} gas prices 
+                            <strong>Gas Price Advantage:</strong> Lucky for you, ${city.getCityName()} gas prices 
                             ($${String.format("%.2f", city.getGasPrice())}/gal) are about 20% below the national average. 
                             This significantly improves your profit margin compared to coastal cities.
                         </p>
@@ -179,7 +180,7 @@
                 @if(city.isHighTraffic())
                     <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 mt-4">
                         <p class="text-amber-900 text-sm">
-                            <strong>⚠️ Traffic Warning:</strong> Stop-and-go traffic in ${city.getCityName()} kills MPG 
+                            <strong>Traffic Warning:</strong> Stop-and-go traffic in ${city.getCityName()} kills MPG 
                             and increases wear on brakes. Factor in 15-20% higher vehicle costs than highway-focused markets.
                         </p>
                     </div>
@@ -188,7 +189,7 @@
                 @if(city.isHighCost())
                     <div class="bg-red-50 border border-red-200 rounded-xl p-4 mt-4">
                         <p class="text-red-900 text-sm">
-                            <strong>💸 High Cost Market:</strong> ${city.getCityName()} has one of the highest costs of living 
+                            <strong>High Cost Market:</strong> ${city.getCityName()} has one of the highest costs of living 
                             in the US. While minimum wage is $${String.format("%.2f", city.getMinWage())}/hr, housing and parking 
                             expenses can eat your earnings quickly.
                         </p>
@@ -201,7 +202,7 @@
                 <div class="absolute -right-4 -top-4 text-8xl text-red-500/10 font-black group-hover:scale-110 transition-transform">TRUTH</div>
                 <div class="relative z-10">
                     <h3 class="text-xl font-bold text-red-900 mb-3 flex items-center gap-2">
-                        <span>📉</span> The Hidden Cost of Driving in ${city.getCityName()}
+                        <span>Truth</span> The Hidden Cost of Driving in ${city.getCityName()}
                     </h3>
                     <p class="text-red-800 mb-6">
                         Your car is losing value every mile you drive. Most drivers in ${city.getCityName()} ignore depreciation until it's too late.
@@ -284,7 +285,7 @@
                         Actual results vary by vehicle efficiency, cherry-picking skill, and surge timing.
                     </p>
                     <p class="text-xs text-slate-600">
-                        Net Profit is estimated by deducting the IRS Standard Mileage Rate and an estimated 15.3% Self-Employment Tax from the gross payout. For 2026, the IRS standard mileage rate is 72.5¢ per mile. We use this as an estimation proxy, not tax advice.
+                        Net Profit is estimated by deducting the IRS Standard Mileage Rate and an estimated 15.3% Self-Employment Tax from the gross payout. For 2026, the IRS standard mileage rate is 72.5 cents per mile. We use this as an estimation proxy, not tax advice.
                     </p>
                 </div>
             </section>
@@ -314,7 +315,7 @@
                     @else
                         <p>
                             <strong>Follow the Demand:</strong> Focus on high-density commercial/restaurant districts during lunch (11 AM - 1 PM)
-                            and dinner (5 PM - 8 PM) rushes. In ${city.getCityName()}, consistency is key—stick to areas with
+                            and dinner (5 PM - 8 PM) rushes. In ${city.getCityName()}, consistency is key - stick to areas with
                             proven order volume rather than chasing "hot spots" that disappear quickly.
                         </p>
                     @endif
@@ -380,93 +381,40 @@
                     </details>
                     <details class="group border border-slate-200 rounded-xl p-4">
                         <summary class="font-semibold text-slate-900 cursor-pointer">Is it better to drive for Uber or DoorDash in ${city.getCityName()}?</summary>
-                        <p class="text-slate-600 mt-3">Both platforms operate in ${city.getCityName()}'s ${city.getMarketTier()} market with similar expenses. ${city.isHighTraffic() ? "In high-traffic areas like " + city.getCityName() + ", DoorDash deliveries may involve more parking challenges but shorter distances, while Uber rides can get stuck in congestion with passengers." : "In " + city.getCityName() + ", Uber tends to have higher per-trip gross pay for rideshare while DoorDash offers more flexibility for food delivery."} Many top earners 'multi-app' — running both platforms simultaneously to minimize downtime. Use our comparison tool to see the specific numbers.</p>
+                        <p class="text-slate-600 mt-3">Both platforms operate in ${city.getCityName()}'s ${city.getMarketTier()} market with similar expenses. ${city.isHighTraffic() ? "In high-traffic areas like " + city.getCityName() + ", DoorDash deliveries may involve more parking challenges but shorter distances, while Uber rides can get stuck in congestion with passengers." : "In " + city.getCityName() + ", Uber tends to have higher per-trip gross pay for rideshare while DoorDash offers more flexibility for food delivery."} Many top earners 'multi-app' - running both platforms simultaneously to minimize downtime. Use our comparison tool to see the specific numbers.</p>
                     </details>
                 </div>
             </section>
 
             <!-- FAQ Schema JSON-LD (AEO: 7 Long-tail Questions for AI Search) -->
             <script type="application/ld+json">
-            {
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              "mainEntity": [{
-                "@type": "Question",
-                "name": "How much does a ${appName} driver make in ${city.getCityName()} after expenses in 2026?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Based on our estimates for ${city.getCityName()}, a side-hustle ${appName} driver (25 hrs/week) earns approximately $${String.format("%.2f", featuredScenario.getNetHourly())} per hour after deducting gas ($${String.format("%.2f", city.getGasPrice())}/gal), vehicle depreciation (IRS rate: $0.725/mile), and 15.3% self-employment tax. This translates to roughly $${String.format("%.0f", featuredScenario.getNetProfit())} in net weekly profit."
-                }
-              }, {
-                "@type": "Question",
-                "name": "Is ${appName} worth it in ${city.getCityName()} in 2026?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "It depends on your work level and vehicle. At a side-hustle pace in ${city.getCityName()}, the estimated net hourly wage is $${String.format("%.2f", featuredScenario.getNetHourly())}/hr. ${featuredScenario.getNetHourly() >= 15.0 ? "This is above the federal minimum wage, making it potentially viable as supplemental income." : "This is close to or below minimum wage in many states, meaning a traditional W-2 job may offer better compensation plus benefits."} Vehicle choice matters: a Toyota Prius (57 MPG) will yield significantly higher net pay than a Ford Explorer (23 MPG)."
-                }
-              }, {
-                "@type": "Question",
-                "name": "How are these ${appName} earnings calculated?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "We estimate net profit by starting with gross income levels typical for ${city.getMarketTier()} markets, then subtracting fuel costs ($${String.format("%.2f", city.getGasPrice())}/gal local average), vehicle depreciation (using the 2026 IRS standard mileage rate of $0.725/mile), and estimated self-employment taxes (15.3%). The result is your estimated take-home pay per hour."
-                }
-              }, {
-                "@type": "Question",
-                "name": "What is the best car for ${appName} driving in ${city.getCityName()}?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "${city.isHighTraffic() ? "In " + city.getCityName() + "'s stop-and-go traffic, a hybrid like the Toyota Prius (57 MPG) or Corolla Hybrid (52 MPG) is ideal because city driving actually improves hybrid efficiency. Gas-only SUVs can drop to 15-18 MPG in congestion, destroying your margins." : "For " + city.getCityName() + "'s driving conditions, a Toyota Prius (57 MPG) or Camry Hybrid (51 MPG) offers the best cost-per-mile. If you need SUV capacity for XL rides, the RAV4 Hybrid (39 MPG) is the most efficient option."}"
-                }
-              }, {
-                "@type": "Question",
-                "name": "How much should a ${appName} driver in ${city.getCityName()} save for taxes?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "As an independent contractor (1099), you owe approximately 15.3% self-employment tax on net profit, plus federal and state income tax. For a side-hustle driver in ${city.getCityName()} grossing $${featuredScenario.getGrossWeekly()}/week, the estimated quarterly SE tax alone is about $${String.format("%.0f", Math.max(0, (featuredScenario.getGrossWeekly() - (featuredScenario.getMiles() * 0.725)) * 0.153) * 13)}. A safe rule: set aside 25-30% of your net profit for taxes and pay quarterly to avoid IRS penalties."
-                }
-              }, {
-                "@type": "Question",
-                "name": "Why do ${appName} earnings in ${city.getCityName()} differ from other cities?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Earnings vary due to local factors. ${city.getCityName()} has gas at $${String.format("%.2f", city.getGasPrice())}/gal, ${city.isHighTraffic() ? "heavy traffic congestion that increases hours per delivery" : "moderate traffic conditions"}, and is classified as a ${city.getMarketTier()} market. High-cost cities often have higher gross pay but also higher expenses, while lower-cost cities might offer better effective margins after expenses."
-                }
-              }, {
-                "@type": "Question",
-                "name": "Is it better to drive for Uber or DoorDash in ${city.getCityName()}?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Both platforms operate in ${city.getCityName()}'s ${city.getMarketTier()} market with similar expenses. ${city.isHighTraffic() ? "In high-traffic areas like " + city.getCityName() + ", DoorDash deliveries may involve more parking challenges but shorter distances, while Uber rides can get stuck in congestion with passengers." : "In " + city.getCityName() + ", Uber tends to have higher per-trip gross pay for rideshare while DoorDash offers more flexibility for food delivery."} Many top earners 'multi-app' — running both platforms simultaneously to minimize downtime. Use our comparison tool to see the specific numbers."
-                }
-              }]
-            }
+            $unsafe{cityFaqJsonLd}
             </script>
 
              <!-- Risk Trigger Cards (Loss Aversion) -->
             <section class="bg-red-50/50 rounded-2xl p-8 border border-red-200 mb-8 mt-8">
-                <h3 class="text-xl font-bold text-slate-900 mb-2">⚠️ Risks You Should Check</h3>
+                <h3 class="text-xl font-bold text-slate-900 mb-2">Risks You Should Check</h3>
                 <p class="text-slate-600 mb-6 text-sm">Based on the ${appName} estimates for ${city.getCityName()}.</p>
                 
                 <div class="grid md:grid-cols-3 gap-4">
                     <!-- Tax Risk Card -->
                     <div class="bg-white p-5 rounded-xl border-2 border-red-100 hover:border-red-500 transition-all">
-                        <h4 class="font-bold text-slate-900 flex items-center gap-2 mb-2">🏦 Quarterly Tax Risk</h4>
+                        <h4 class="font-bold text-slate-900 flex items-center gap-2 mb-2">Quarterly Tax Risk</h4>
                         <p class="text-xs text-slate-600 mb-3">You may owe about <strong>$${String.format("%.0f", Math.max(0, (scenarios.get(1).getGrossWeekly() - (scenarios.get(1).getMiles() * AppConstants.IRS_MILEAGE_RATE)) * AppConstants.SELF_EMPLOYMENT_TAX_RATE) * 13 )}</strong> this quarter in self-employment tax. Are you saving for this?</p>
-                        <a href="/taxes/quarterly-estimator" class="text-xs font-bold text-red-600 hover:text-red-700">Calculate quarterly estimate →</a>
+                        <a href="/taxes/quarterly-estimator" class="text-xs font-bold text-red-600 hover:text-red-700">Calculate quarterly estimate</a>
                     </div>
                     <!-- Vehicle Cost Card -->
                     <div class="bg-white p-5 rounded-xl border-2 border-red-100 hover:border-red-500 transition-all">
-                        <h4 class="font-bold text-slate-900 flex items-center gap-2 mb-2">🚗 Vehicle Depreciation</h4>
+                        <h4 class="font-bold text-slate-900 flex items-center gap-2 mb-2">Vehicle Depreciation</h4>
                         <p class="text-xs text-slate-600 mb-3">A side-hustle schedule will put <strong>${scenarios.get(1).getMiles() * 52} miles</strong> on your car this year. Do you know your true cost per mile?</p>
-                        <a href="/vehicle-cost/cost-per-mile" class="text-xs font-bold text-red-600 hover:text-red-700">See cost per mile calculator →</a>
+                        <a href="/vehicle-cost/cost-per-mile" class="text-xs font-bold text-red-600 hover:text-red-700">See cost per mile calculator</a>
                     </div>
                     <!-- Insurance GAP Card -->
                     <div class="bg-white p-5 rounded-xl border-2 border-red-100 hover:border-red-500 transition-all relative">
                         <div class="absolute -right-2 -top-2 bg-amber-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide border-2 border-white">CRITICAL</div>
-                        <h4 class="font-bold text-slate-900 flex items-center gap-2 mb-2">🛡️ Insurance GAP</h4>
+                        <h4 class="font-bold text-slate-900 flex items-center gap-2 mb-2">Insurance Gap</h4>
                         <p class="text-xs text-slate-600 mb-3">Driving in ${city.getCityName()}'s ${city.isHighTraffic() ? "dense traffic" : "sprawl"} without rideshare insurance? Your personal policy could drop you.</p>
-                        <a href="/insurance/rideshare-basics" class="text-xs font-bold text-red-600 hover:text-red-700">Check coverage risks →</a>
+                        <a href="/insurance/rideshare-basics" class="text-xs font-bold text-red-600 hover:text-red-700">Check coverage risks</a>
                     </div>
                 </div>
             </section>
@@ -474,7 +422,7 @@
             <!-- Work-Level Deep-Dive Links (Internal Silo) -->
             <section class="bg-white rounded-2xl p-8 border border-slate-200 mb-8">
                 <h3 class="text-2xl font-bold text-slate-900 mb-3">
-                    📊 Want a Deep-Dive for Your Work Level?
+                    Want a Deep-Dive for Your Work Level?
                 </h3>
                 <p class="text-slate-600 mb-6">
                     The table above shows all three scenarios. Choose yours below for tax strategy, time optimization, and work-level specific insights.
@@ -482,21 +430,21 @@
                 <div class="grid md:grid-cols-3 gap-4">
                     <a href="/salary/${app}/${city.getSlug()}/part-time" 
                        class="block p-6 bg-emerald-50 border-2 border-emerald-200 rounded-xl hover:shadow-lg hover:border-emerald-400 transition group">
-                        <div class="text-4xl mb-3">⏰</div>
+                        <div class="text-4xl mb-3">PT</div>
                         <div class="font-bold text-lg text-slate-900 group-hover:text-emerald-700 transition">Part-Time ${appName} in ${city.getCityName()}</div>
                         <p class="text-sm text-slate-600 mt-2">10 hrs/week strategy, tax tips, best hours to drive</p>
                     </a>
 
                     <a href="/salary/${app}/${city.getSlug()}/side-hustle" 
                        class="block p-6 bg-amber-50 border-2 border-amber-200 rounded-xl hover:shadow-lg hover:border-amber-400 transition group">
-                        <div class="text-4xl mb-3">💼</div>
+                        <div class="text-4xl mb-3">SH</div>
                         <div class="font-bold text-lg text-slate-900 group-hover:text-amber-700 transition">Side-Hustle ${appName} in ${city.getCityName()}</div>
                         <p class="text-sm text-slate-600 mt-2">25 hrs/week balance, quarterly taxes, vehicle strategy</p>
                     </a>
 
                     <a href="/salary/${app}/${city.getSlug()}/full-time" 
                        class="block p-6 bg-blue-50 border-2 border-blue-200 rounded-xl hover:shadow-lg hover:border-blue-400 transition group">
-                        <div class="text-4xl mb-3">🚗</div>
+                        <div class="text-4xl mb-3">FT</div>
                         <div class="font-bold text-lg text-slate-900 group-hover:text-blue-700 transition">Full-Time ${appName} in ${city.getCityName()}</div>
                         <p class="text-sm text-slate-600 mt-2">40 hrs/week reality, health insurance, retirement planning</p>
                     </a>
@@ -507,7 +455,7 @@
             <section class="bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl p-8 border-2 border-slate-300 shadow-sm mb-8">
                 <div class="flex items-center justify-between mb-6">
                     <h3 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
-                        <span class="text-3xl">🥊</span> ${appName} vs ${otherAppName} in ${city.getCityName()}
+                        <span class="text-3xl">VS</span> ${appName} vs ${otherAppName} in ${city.getCityName()}
                     </h3>
                     <span class="px-3 py-1 bg-slate-900 text-white text-xs font-bold rounded-full uppercase tracking-wider">Analysis</span>
                 </div>
@@ -572,7 +520,7 @@
                     @for(com.gigwager.model.CityData simCity : similarCities)
                         <a href="/salary/${app}/${simCity.getSlug()}" 
                            class="block p-3 bg-white rounded-lg border border-slate-100 hover:border-emerald-300 hover:shadow-sm transition text-center">
-                            <div class="text-xl mb-1">📍</div>
+                            <div class="text-xl mb-1">City</div>
                             <div class="text-xs font-bold text-slate-700">${simCity.getCityName()}</div>
                             <div class="text-[10px] text-slate-400">View Earnings</div>
                         </a>

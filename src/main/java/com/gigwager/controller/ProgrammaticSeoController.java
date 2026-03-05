@@ -13,6 +13,8 @@ import com.gigwager.service.DataLayerService;
 import com.gigwager.service.HtmlSanitizerService;
 import com.gigwager.service.PageIndexPolicyService;
 import com.gigwager.dto.CityRankingDto;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,12 +24,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
 public class ProgrammaticSeoController {
 
+        private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
         private final DataLayerService dataLayerService;
         private final PageIndexPolicyService pageIndexPolicyService;
         private final CityRichContentRepository cityRichContentRepository;
@@ -67,10 +72,10 @@ public class ProgrammaticSeoController {
                 String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
                                 .format(now);
 
-                String title = String.format("%s Pay Calculator & City Directory (%s)", appName, monthYear);
+                String title = String.format("%s Driver Pay by City (%s): Net After Expenses", appName, monthYear);
                 String description = String.format(
-                                "Learn how much %s drivers actually make after vehicle expenses and taxes. Find real net hourly wage estimates for top cities before you drive.",
-                                appName);
+                                "Compare %s pay across U.S. cities with net hourly estimates after mileage, fuel, and self-employment tax assumptions. Updated %s.",
+                                appName, monthYear);
                 String canonicalUrl = String.format("%s/salary/%s", AppConstants.BASE_URL, app);
 
                 model.addAttribute("app", app);
@@ -105,10 +110,10 @@ public class ProgrammaticSeoController {
                 String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
                                 .format(now);
 
-                String title = String.format("Best Cities for %s Drivers (%s Rankings)", appName, monthYear);
+                String title = String.format("Best Cities for %s Drivers (%s): Net Hourly Ranking", appName, monthYear);
                 String description = String.format(
-                                "We ranked the best cities to drive for %s using traffic- and market-adjusted net hourly estimates with IRS mileage proxy and self-employment tax assumptions.",
-                                appName);
+                                "See where %s pays best after expenses with net hourly rankings built from mileage, fuel, and self-employment tax assumptions. Updated %s.",
+                                appName, monthYear);
                 String canonicalUrl = String.format("%s/best-cities/%s", AppConstants.BASE_URL, app);
 
                 model.addAttribute("app", app);
@@ -118,6 +123,7 @@ public class ProgrammaticSeoController {
                 model.addAttribute("seoMeta",
                                 new SeoMeta(title, description, canonicalUrl, AppConstants.BASE_URL + "/og-image.jpg"));
                 model.addAttribute("dataLayerService", dataLayerService);
+                model.addAttribute("itemListJsonLd", buildBestCitiesItemListJsonLd(appName, app, rankedCities));
 
                 return "salary/best-cities";
         }
@@ -144,10 +150,10 @@ public class ProgrammaticSeoController {
                 String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
                                 .format(now);
 
-                String title = String.format("Uber vs DoorDash in %s: Which Pays More? (%s)", city.getCityName(),
+                String title = String.format("Uber vs DoorDash Pay in %s (%s): Who Nets More?", city.getCityName(),
                                 monthYear);
                 String description = String.format(
-                                "Comparing Uber and DoorDash pay in %s. Discover which gig app offers a higher net hourly estimate after mileage and self-employment tax assumptions.",
+                                "Compare Uber and DoorDash in %s with side-hustle net hourly estimates after mileage, fuel, and self-employment tax assumptions.",
                                 city.getCityName());
                 String canonicalUrl = String.format("%s/compare/%s/uber-vs-doordash", AppConstants.BASE_URL, citySlug);
 
@@ -183,41 +189,19 @@ public class ProgrammaticSeoController {
                 // Select "Featured" scenario (side-hustle level)
                 CityScenario featuredScenario = scenarios.get(1);
 
-                // Dynamic Date (Freshness Signal) - Force US Locale
-                // Dynamic Date (Freshness Signal) - Force US Locale
                 java.time.LocalDate now = java.time.LocalDate.now();
                 String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
-                                .format(now);
-                String fullDate = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
                                 .format(now);
 
                 // Build unique SEO meta
                 String appName = app.equals("uber") ? "Uber" : "DoorDash";
 
-                String title = String.format("%s Pay in %s (%s): Net After Expenses",
-                                appName, city.getCityName(), monthYear);
-
-                // Meta Description: Fear/Loss Marketing + Utility Focus
-                String description;
                 String gasPrice = String.format("$%.2f", city.getGasPrice());
-
-                if (city.isHighTraffic()) {
-                        description = String.format(
-                                        "Don't drive blind in %s. Traffic congestion eats your profit. Estimate your net hourly wage using the IRS mileage rate ($0.725/mi) plus taxes. Local gas: %s/gal.",
-                                        city.getCityName(), gasPrice);
-                } else if (city.isCheapGas()) {
-                        description = String.format(
-                                        "Gas is cheap in %s (%s/gal), but are you actually profiting after all costs? Use our %s Net Pay Calculator (IRS mileage proxy + SE tax) to see your real take-home.",
-                                        city.getCityName(), gasPrice, appName);
-                } else if (city.isHighCost()) {
-                        description = String.format(
-                                        "Is %s worth it in %s's high-cost market? We estimate net profit using the IRS standard mileage rate and SE tax to show the real breakdown. See the numbers.",
-                                        appName, city.getCityName());
-                } else {
-                        description = String.format(
-                                        "Stop guessing. Estimate your net hourly wage as a %s driver in %s. We use the IRS mileage rate ($0.725/mi) and 15.3%% SE tax to show your REAL profit.",
-                                        appName, city.getCityName());
-                }
+                String title = String.format("%s Pay in %s (%s): $%.2f/hr Net Estimate",
+                                appName, city.getCityName(), monthYear, featuredScenario.getNetHourly());
+                String description = String.format(
+                                "Estimate real %s earnings in %s. Side-hustle baseline is about $%.2f/hr net after mileage, fuel (%s/gal), and self-employment tax assumptions. Updated %s.",
+                                appName, city.getCityName(), featuredScenario.getNetHourly(), gasPrice, monthYear);
 
                 String canonicalUrl = String.format("%s/salary/%s/%s", AppConstants.BASE_URL, app, citySlug);
                 String appHubCanonicalUrl = String.format("%s/salary/%s", AppConstants.BASE_URL, app);
@@ -237,6 +221,7 @@ public class ProgrammaticSeoController {
                 model.addAttribute("otherAppName", otherAppName);
                 model.addAttribute("otherAppUrl", otherAppUrl);
                 model.addAttribute("safeMarketDescription", htmlSanitizerService.sanitize(city.getMarketDescription()));
+                model.addAttribute("cityFaqJsonLd", buildCityFaqJsonLd(appName, city, featuredScenario));
 
                 boolean cityIndexable = pageIndexPolicyService.isCityReportIndexable(city)
                                 && featuredScenario.getNetHourly() >= 6.0
@@ -299,29 +284,27 @@ public class ProgrammaticSeoController {
                 // Generate scenario for this specific work level
                 CityScenario scenario = generateScenarioByWorkLevel(city, app, workLevel);
 
-                // Dynamic Date (Freshness Signal) - Force US Locale
-                // Dynamic Date (Freshness Signal) - Force US Locale
                 java.time.LocalDate now = java.time.LocalDate.now();
                 String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
                                 .format(now);
 
                 // Build unique SEO meta
                 String appName = app.equals("uber") ? "Uber" : "DoorDash";
+                String otherApp = app.equals("uber") ? "doordash" : "uber";
+                String otherAppName = app.equals("uber") ? "DoorDash" : "Uber";
 
-                String title = String.format("%s %s Pay in %s (%s)",
-                                appName, workLevel.getDisplayName(), city.getCityName(), monthYear);
-
-                // Meta Description: Utility Focused
+                String title = String.format("%s %s Pay in %s (%s): $%.2f/hr Net",
+                                appName, workLevel.getDisplayName(), city.getCityName(), monthYear,
+                                scenario.getNetHourly());
                 String description = String.format(
-                                "Using the %s strategy (%s hrs/wk) in %s? Use our calculator to see your real net profit after self-employment tax and gas. Don't rely on gross numbers.",
-                                workLevel.getDisplayName(), workLevel.getHoursPerWeek(), city.getCityName());
+                                "See %s %s earnings in %s (%d hrs/week): about $%.2f/hr net after mileage, fuel, and self-employment tax assumptions. Compare with %s.",
+                                appName, workLevel.getDisplayName(), city.getCityName(), workLevel.getHoursPerWeek(),
+                                scenario.getNetHourly(), otherAppName);
 
                 String canonicalUrl = String.format("%s/salary/%s/%s/%s", AppConstants.BASE_URL, app, citySlug,
                                 workLevelSlug);
 
                 // Cross-App Silo
-                String otherApp = app.equals("uber") ? "doordash" : "uber";
-                String otherAppName = app.equals("uber") ? "DoorDash" : "Uber";
                 String otherAppUrl = String.format("/salary/%s/%s/%s", otherApp, citySlug, workLevelSlug);
 
                 // Parent page (main city report) for breadcrumb
@@ -421,6 +404,13 @@ public class ProgrammaticSeoController {
 
                 model.addAttribute("seoMeta", new SeoMeta(title, description, canonicalUrl,
                                 AppConstants.BASE_URL + "/og-image.jpg"));
+                model.addAttribute("workLevelJsonLd", buildWorkLevelJsonLd(
+                                city,
+                                appName,
+                                workLevel,
+                                scenario,
+                                otherAppName,
+                                parentPageUrl));
 
                 // Internal Linking Silo: 3 random cities with same MarketTier
                 List<CityData> similarCities = Arrays.stream(CityData.values())
@@ -451,6 +441,230 @@ public class ProgrammaticSeoController {
                         return true;
                 }
                 return "user_submitted".equalsIgnoreCase(contentType.trim());
+        }
+
+        private String buildBestCitiesItemListJsonLd(String appName, String app, List<CityRankingDto> rankedCities) {
+                List<Map<String, Object>> itemListElements = new ArrayList<>();
+                int limit = Math.min(rankedCities.size(), 20);
+                for (int i = 0; i < limit; i++) {
+                        CityRankingDto ranking = rankedCities.get(i);
+                        Map<String, Object> item = new LinkedHashMap<>();
+                        item.put("@type", "ListItem");
+                        item.put("position", i + 1);
+                        item.put("name", ranking.city().getCityName());
+                        item.put("url", String.format("%s/salary/%s/%s",
+                                        AppConstants.BASE_URL,
+                                        app,
+                                        ranking.city().getSlug()));
+                        itemListElements.add(item);
+                }
+
+                Map<String, Object> itemList = new LinkedHashMap<>();
+                itemList.put("@context", "https://schema.org");
+                itemList.put("@type", "ItemList");
+                itemList.put("name", String.format("Best Cities for %s Drivers", appName));
+                itemList.put("description",
+                                String.format("Rankings of US cities based on %s net hourly pay after expenses.",
+                                                appName));
+                itemList.put("itemListElement", itemListElements);
+                return toJsonLd(itemList);
+        }
+
+        private String buildCityFaqJsonLd(String appName, CityData city, CityScenario featuredScenario) {
+                String q1 = String.format("How much does a %s driver make in %s after expenses in 2026?",
+                                appName,
+                                city.getCityName());
+                String a1 = String.format(
+                                "Based on our estimates for %s, a side-hustle %s driver (25 hrs/week) earns approximately $%.2f per hour after deducting gas ($%.2f/gal), vehicle depreciation (IRS rate: $0.725/mile), and 15.3%% self-employment tax. This translates to roughly $%.0f in net weekly profit.",
+                                city.getCityName(),
+                                appName,
+                                featuredScenario.getNetHourly(),
+                                city.getGasPrice(),
+                                featuredScenario.getNetProfit());
+
+                String q2 = String.format("Is %s worth it in %s in 2026?",
+                                appName,
+                                city.getCityName());
+                String viability = featuredScenario.getNetHourly() >= 15.0
+                                ? "This is above the federal minimum wage, making it potentially viable as supplemental income."
+                                : "This is close to or below minimum wage in many states, meaning a traditional W-2 job may offer better compensation plus benefits.";
+                String a2 = String.format(
+                                "It depends on your work level and vehicle. At a side-hustle pace in %s, the estimated net hourly wage is $%.2f/hr. %s Vehicle choice matters: a Toyota Prius (57 MPG) often yields higher net pay than a Ford Explorer (23 MPG).",
+                                city.getCityName(),
+                                featuredScenario.getNetHourly(),
+                                viability);
+
+                String q3 = String.format("How are these %s earnings calculated?", appName);
+                String a3 = String.format(
+                                "We estimate net profit by starting with gross income levels typical for %s markets, then subtracting fuel costs ($%.2f/gal local average), vehicle depreciation (using the 2026 IRS standard mileage rate of $0.725/mile), and estimated self-employment taxes (15.3%%). The result is your estimated take-home pay per hour.",
+                                city.getMarketTier(),
+                                city.getGasPrice());
+
+                String q4 = String.format("What is the best car for %s driving in %s?", appName, city.getCityName());
+                String a4 = city.isHighTraffic()
+                                ? String.format(
+                                                "In %s traffic, a hybrid such as the Toyota Prius (57 MPG) or Corolla Hybrid (52 MPG) is ideal because city driving improves hybrid efficiency. Gas-only SUVs can drop to 15-18 MPG in congestion and reduce margins.",
+                                                city.getCityName())
+                                : String.format(
+                                                "For %s driving conditions, a Toyota Prius (57 MPG) or Camry Hybrid (51 MPG) offers strong cost-per-mile performance. If SUV capacity is required for XL rides, the RAV4 Hybrid (39 MPG) is typically the most efficient option.",
+                                                city.getCityName());
+
+                String q5 = String.format("How much should a %s driver in %s save for taxes?",
+                                appName,
+                                city.getCityName());
+                double quarterlyTax = Math.max(0,
+                                (featuredScenario.getGrossWeekly() - (featuredScenario.getMiles() * 0.725)) * 0.153)
+                                * 13;
+                String a5 = String.format(
+                                "As an independent contractor (1099), you owe approximately 15.3%% self-employment tax on net profit, plus federal and state income tax. For a side-hustle driver in %s grossing $%d/week, estimated quarterly self-employment tax is about $%.0f. A common rule is to set aside 25-30%% of net profit for taxes and pay quarterly.",
+                                city.getCityName(),
+                                featuredScenario.getGrossWeekly(),
+                                quarterlyTax);
+
+                String q6 = String.format("Why do %s earnings in %s differ from other cities?",
+                                appName,
+                                city.getCityName());
+                String trafficDescriptor = city.isHighTraffic()
+                                ? "heavy traffic congestion that increases hours per delivery"
+                                : "moderate traffic conditions";
+                String a6 = String.format(
+                                "Earnings vary due to local factors. %s has gas at $%.2f/gal, %s, and is classified as a %s market. High-cost cities can have higher gross pay and higher expenses, while lower-cost cities may provide better effective margins.",
+                                city.getCityName(),
+                                city.getGasPrice(),
+                                trafficDescriptor,
+                                city.getMarketTier());
+
+                String q7 = String.format("Is it better to drive for Uber or DoorDash in %s?",
+                                city.getCityName());
+                String channelComparison = city.isHighTraffic()
+                                ? String.format(
+                                                "In high-traffic areas like %s, DoorDash deliveries can involve more parking challenges but shorter distances, while Uber rides can get delayed in congestion with passengers.",
+                                                city.getCityName())
+                                : String.format(
+                                                "In %s, Uber can have higher per-trip gross pay for rideshare while DoorDash can offer more flexible food-delivery windows.",
+                                                city.getCityName());
+                String a7 = String.format(
+                                "Both platforms operate in the %s %s market with similar expense pressure. %s Many top earners multi-app by running both platforms to minimize downtime. Use the comparison tool to evaluate the current market tradeoff.",
+                                city.getCityName(),
+                                city.getMarketTier(),
+                                channelComparison);
+
+                List<Map<String, Object>> mainEntity = List.of(
+                                buildFaqQuestion(q1, a1),
+                                buildFaqQuestion(q2, a2),
+                                buildFaqQuestion(q3, a3),
+                                buildFaqQuestion(q4, a4),
+                                buildFaqQuestion(q5, a5),
+                                buildFaqQuestion(q6, a6),
+                                buildFaqQuestion(q7, a7));
+
+                Map<String, Object> faqPage = new LinkedHashMap<>();
+                faqPage.put("@context", "https://schema.org");
+                faqPage.put("@type", "FAQPage");
+                faqPage.put("mainEntity", mainEntity);
+                return toJsonLd(faqPage);
+        }
+
+        private String buildWorkLevelJsonLd(
+                        CityData city,
+                        String appName,
+                        WorkLevel workLevel,
+                        CityScenario scenario,
+                        String otherAppName,
+                        String parentPageUrl) {
+                List<Map<String, Object>> breadcrumbItems = new ArrayList<>();
+                Map<String, Object> crumb1 = new LinkedHashMap<>();
+                crumb1.put("@type", "ListItem");
+                crumb1.put("position", 1);
+                crumb1.put("name", "Salary Directory");
+                crumb1.put("item", AppConstants.BASE_URL + "/salary/directory");
+                breadcrumbItems.add(crumb1);
+
+                Map<String, Object> crumb2 = new LinkedHashMap<>();
+                crumb2.put("@type", "ListItem");
+                crumb2.put("position", 2);
+                crumb2.put("name", String.format("%s %s Earnings", city.getCityName(), appName));
+                crumb2.put("item", AppConstants.BASE_URL + parentPageUrl);
+                breadcrumbItems.add(crumb2);
+
+                Map<String, Object> crumb3 = new LinkedHashMap<>();
+                crumb3.put("@type", "ListItem");
+                crumb3.put("position", 3);
+                crumb3.put("name", workLevel.getDisplayName());
+                breadcrumbItems.add(crumb3);
+
+                Map<String, Object> breadcrumb = new LinkedHashMap<>();
+                breadcrumb.put("@type", "BreadcrumbList");
+                breadcrumb.put("itemListElement", breadcrumbItems);
+
+                List<Map<String, Object>> mainEntity = new ArrayList<>();
+                Map<String, Object> q1 = new LinkedHashMap<>();
+                q1.put("@type", "Question");
+                q1.put("name",
+                                String.format("How much does a %s %s driver make in %s?",
+                                                workLevel.getDisplayName(),
+                                                appName,
+                                                city.getCityName()));
+                Map<String, Object> q1Answer = new LinkedHashMap<>();
+                q1Answer.put("@type", "Answer");
+                q1Answer.put("text",
+                                String.format(
+                                                "A %s %s driver in %s working %d hours per week can expect to take home approximately $%.2f per week after deducting estimated mileage and self-employment taxes.",
+                                                workLevel.getDisplayName(),
+                                                appName,
+                                                city.getCityName(),
+                                                workLevel.getHoursPerWeek(),
+                                                scenario.getNetProfit()));
+                q1.put("acceptedAnswer", q1Answer);
+                mainEntity.add(q1);
+
+                Map<String, Object> q2 = new LinkedHashMap<>();
+                q2.put("@type", "Question");
+                q2.put("name",
+                                String.format("Is %s better than %s for %s drivers in %s?",
+                                                appName,
+                                                otherAppName,
+                                                workLevel.getDisplayName(),
+                                                city.getCityName()));
+                Map<String, Object> q2Answer = new LinkedHashMap<>();
+                q2Answer.put("@type", "Answer");
+                q2Answer.put("text",
+                                String.format(
+                                                "Local factors like %s demand and $%.2f per gallon gas prices affect profitability. Compare this page with %s data to see which app fits your market timing.",
+                                                city.getMarketTier(),
+                                                city.getGasPrice(),
+                                                otherAppName));
+                q2.put("acceptedAnswer", q2Answer);
+                mainEntity.add(q2);
+
+                Map<String, Object> faqPage = new LinkedHashMap<>();
+                faqPage.put("@type", "FAQPage");
+                faqPage.put("mainEntity", mainEntity);
+
+                Map<String, Object> graph = new LinkedHashMap<>();
+                graph.put("@context", "https://schema.org");
+                graph.put("@graph", List.of(breadcrumb, faqPage));
+                return toJsonLd(graph);
+        }
+
+        private Map<String, Object> buildFaqQuestion(String question, String answerText) {
+                Map<String, Object> answer = new LinkedHashMap<>();
+                answer.put("@type", "Answer");
+                answer.put("text", answerText);
+
+                Map<String, Object> questionMap = new LinkedHashMap<>();
+                questionMap.put("@type", "Question");
+                questionMap.put("name", question);
+                questionMap.put("acceptedAnswer", answer);
+                return questionMap;
+        }
+
+        private String toJsonLd(Object value) {
+                try {
+                        return OBJECT_MAPPER.writeValueAsString(value);
+                } catch (JsonProcessingException e) {
+                        throw new IllegalStateException("Failed to serialize JSON-LD payload", e);
+                }
         }
 
         private String editorialReviewLabel(String contentType) {

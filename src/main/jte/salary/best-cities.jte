@@ -10,6 +10,7 @@
 @param SeoMeta seoMeta
 @param Boolean noIndex = false
 @param com.gigwager.service.DataLayerService dataLayerService
+@param String itemListJsonLd = "{}"
 
 @template.layout.main(
     seoMeta = seoMeta,
@@ -91,22 +92,7 @@
 
         <!-- PR8-5: ItemList Structured Data for Rankings -->
         <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "ItemList",
-          "name": "Best Cities for ${appName} Drivers",
-          "description": "Rankings of US cities based on ${appName} net hourly pay after expenses.",
-          "itemListElement": [
-            @for(int i = 0; i < Math.min(rankedCities.size(), 20); i++)
-            {
-              "@type": "ListItem",
-              "position": ${i + 1},
-              "name": "${rankedCities.get(i).city().getCityName()}",
-              "url": "${AppConstants.BASE_URL}/salary/${app}/${rankedCities.get(i).city().getSlug()}"
-            }${i < Math.min(rankedCities.size(), 20) - 1 ? "," : ""}
-            @endfor
-          ]
-        }
+        $unsafe{itemListJsonLd}
         </script>
     `
 )

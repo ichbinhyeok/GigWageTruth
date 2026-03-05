@@ -34,52 +34,13 @@
 @param Double richNetMax = null
 @param List similarCities
 @param Boolean noIndex = false
+@param String workLevelJsonLd = "{}"
 @template.layout.main(
     noIndex = noIndex,
     seoMeta = seoMeta,
     content = @`
         <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@graph": [
-            {
-              "@type": "BreadcrumbList",
-              "itemListElement": [{
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Salary Directory",
-                "item": "${AppConstants.BASE_URL}/salary/directory"
-              },{
-                "@type": "ListItem",
-                "position": 2,
-                "name": "${city.getCityName()} ${appName} Earnings",
-                "item": "${AppConstants.BASE_URL}${parentPageUrl}"
-              },{
-                "@type": "ListItem",
-                "position": 3,
-                "name": "${workLevel.getDisplayName()}"
-              }]
-            },
-            {
-              "@type": "FAQPage",
-              "mainEntity": [{
-                "@type": "Question",
-                "name": "How much does a ${workLevel.getDisplayName()} ${appName} driver make in ${city.getCityName()}?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "A ${workLevel.getDisplayName()} ${appName} driver in ${city.getCityName()} working ${workLevel.getHoursPerWeek()} hours per week can expect to take home approximately $${String.format("%.2f", scenario.getNetProfit())} per week after deducting estimated mileage and self-employment taxes."
-                }
-              }, {
-                "@type": "Question",
-                "name": "Is ${appName} better than ${otherAppName} for ${workLevel.getDisplayName()} drivers in ${city.getCityName()}?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Local factors like ${city.getMarketTier()} demand and ${String.format("$%.2f", city.getGasPrice())} per gallon gas prices affect profitability. Compare this page with ${otherAppName} data to see which app fits your market timing."
-                }
-              }]
-            }
-          ]
-        }
+        $unsafe{workLevelJsonLd}
         </script>
 
         <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 pt-20 pb-24 px-6">

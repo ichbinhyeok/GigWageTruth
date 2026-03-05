@@ -1,6 +1,7 @@
 package com.gigwager;
 
 import com.gigwager.util.AppConstants;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -136,6 +137,45 @@ public class OrganicMonitoringRegressionTest {
                 "Work-level page should expose editorial review status");
         assertTrue(html.contains("Editorial review pending (user-submitted source)"),
                 "User-submitted content should be labeled as pending editorial review");
+    }
+
+    @Test
+    public void keyPagesShouldRenderValidJsonLdScripts() throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Pattern jsonLdPattern = Pattern.compile(
+                "<script\\s+type=\"application/ld\\+json\">\\s*(.*?)\\s*</script>",
+                Pattern.DOTALL);
+
+        List<String> paths = List.of(
+                "/best-cities/doordash",
+                "/salary/doordash/denver",
+                "/salary/doordash/denver/side-hustle");
+        List<String> failures = new ArrayList<>();
+
+        for (String path : paths) {
+            MvcResult result = mockMvc.perform(get(path))
+                    .andExpect(status().isOk())
+                    .andReturn();
+
+            String html = result.getResponse().getContentAsString();
+            Matcher matcher = jsonLdPattern.matcher(html);
+            int scriptCount = 0;
+            while (matcher.find()) {
+                scriptCount++;
+                String jsonLd = matcher.group(1).trim();
+                try {
+                    objectMapper.readTree(jsonLd);
+                } catch (Exception e) {
+                    failures.add(path + " script#" + scriptCount + " invalid JSON-LD: " + e.getMessage());
+                }
+            }
+
+            if (scriptCount == 0) {
+                failures.add(path + " missing JSON-LD script");
+            }
+        }
+
+        assertTrue(failures.isEmpty(), "JSON-LD validation failures:\n - " + String.join("\n - ", failures));
     }
 
     private void assertCanonicalAndNoIndex(String path, String expectedCanonical) throws Exception {
