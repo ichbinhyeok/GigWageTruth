@@ -1,115 +1,141 @@
 # SEO Tracker
 
-Last updated: 2026-03-05
-Owner: GigWageTruth
-Primary source: Google Search Console (GA4 pending access)
+Last updated: 2026-03-11  
+Owner: GigWageTruth  
+Primary source: Google Search Console (GA4 property access still pending)
 
 ## Current Verdict
-- Index/technical quality: improving
-- Visibility (impressions/rank): improving fast
-- Click conversion (CTR/clicks): weak and needs focused work
-- Overall: good execution for this phase, but still early and unproven on traffic quality
+- Indexing and canonical health: mostly good
+- Visibility (impressions/rank): accelerating
+- Click conversion (CTR/clicks): improving, but still weak for current ranking levels
+- Primary bottleneck: query intent mismatch on list/ranking pages, not raw ranking
 
-## Segment Snapshot (2026-02-06 to 2026-03-05)
-- `/best-cities/*`: 0 clicks / 382 impressions / avg pos 4.73
-- `/compare/*`: 1 click / 387 impressions / avg pos 6.01
-- `/salary/uber/*`: 1 click / 2,585 impressions / avg pos 7.44
-- `/salary/doordash/*`: 0 clicks / 4,938 impressions / avg pos 5.87
-- `/best-cities/doordash`: 0 clicks / 257 impressions / avg pos 4.84
+## Current Snapshot
+- Current period: 2026-02-12 to 2026-03-10
+- Previous period: 2026-01-15 to 2026-02-11
+- Clicks: 2 -> 12 (+500%)
+- Impressions: 3,342 -> 14,049 (+320.4%)
+- CTR: 0.060% -> 0.085% (+42.7%)
+- Avg position: 10.25 -> 6.16 (improved)
 
-Interpretation:
-- Ranking is not the primary bottleneck anymore.
-- Snippet-message fit and query intent fit are the main bottlenecks.
+## Market Split Note
+- US only (last 28 days): 11 clicks / 7,985 impressions / 0.138% CTR / avg pos 6.48
+- Sitewide CTR is lower than US-only CTR because non-US impressions are diluting the aggregate number.
 
-## Baseline Snapshot
-- Current period: 2026-02-06 to 2026-03-05
-- Previous period: 2026-01-09 to 2026-02-05
-- Clicks: 3 -> 3 (flat)
-- Impressions: 3,060 -> 7,084 (+131.5%)
-- CTR: 0.098% -> 0.042% (-56.8%)
-- Avg position: 10.25 -> 6.30 (improved)
+## Top Page Watchlist (last 28 days by impressions)
+- `/best-cities/doordash`: 1 click / 384 impressions / 0.26% CTR / avg pos 5.86
+- `/`: 1 click / 230 impressions / 0.43% CTR / avg pos 2.92
+- `/best-cities/uber`: 0 clicks / 206 impressions / 0.00% CTR / avg pos 4.65
+- `/about`: 0 clicks / 153 impressions / 0.00% CTR / avg pos 2.91
+- `/salary/doordash/minneapolis`: 1 click / 110 impressions / 0.91% CTR / avg pos 5.82
 
-## What Was Fixed (2026-03-05)
-- Fixed JSON-LD escape issues causing Search Console inspection errors (`Bad escape sequence`).
-- Moved key JSON-LD generation to backend Jackson serialization for safer escaping.
-- Cleaned corrupted strings/tag artifacts in `city-report.jte`.
-- Added/expanded regression tests to validate JSON-LD syntax on key SEO pages.
+## Key Observations (2026-03-11)
+- Ranking is no longer the primary bottleneck. Average position moved from 10.25 to 6.16 while clicks also rose, but CTR is still far below what pages in positions 3-8 should usually earn.
+- `/best-cities/doordash` is attracting the wrong kind of impression. Search Console low-CTR data showed the query `doordash availability and performance by city 2026` at avg pos 1.78 with 23 impressions and 0 clicks. This confirms list-page intent leakage.
+- `/best-cities/uber` is likely leaking the same type of coverage/support-city intent even before clicks materialize. The page had 206 impressions, 0 clicks, and avg position 4.65. Treat this as the first page to watch for intent migration after a dedicated coverage page ships.
+- Sampled URL inspections for `/`, `/best-cities/doordash`, `/best-cities/uber`, `/salary/doordash/minneapolis`, and `/salary/uber/columbus/side-hustle` all returned `Submitted and indexed`. Indexing is not the blocker.
+- Search Console URL Inspection still reports `Bad escape sequence in string` on sampled rich-result pages, but current live HTML JSON-LD parsed cleanly when fetched directly. Treat this as a recrawl/inspection follow-up item until Google refreshes the rendered version.
+- Search appearance data is still effectively empty. Do not assume rich-result eligibility is helping click-through yet.
+- Cannibalization check returned no meaningful conflicts in the current 28-day window.
+- Sitemap API output showed `submitted 260 / indexed 0`, but sampled URL inspections contradicted that. Treat the sitemap indexed count as noisy until rechecked.
+
+## Changes Prepared In Code On 2026-03-11
+- Repositioned `/best-cities/{app}` metadata from generic `best cities` phrasing to `highest-paying cities` / `net earnings ranking`.
+- Added an explicit intent note on `/best-cities/{app}` clarifying that the page is an earnings ranking, not an official coverage list.
+- Tightened the above-the-fold copy on `/best-cities/{app}` to match the earnings-ranking promise.
+- Added a new intent-split landing page at `/uber/where-you-can-drive` for coverage/support-city searches.
+- Built the new Uber page around a clear two-step promise:
+  - official Uber city directory for current availability
+  - GigVerdict city reports for pay-after-expenses analysis
+- Added internal links from `/salary/uber` and `/best-cities/uber` into the new coverage-intent page so search and navigation can separate `coverage` from `earnings ranking`.
+- Added tracked CTA labels on the key Uber intent-split pages:
+  - `/salary/uber`
+  - `/uber/where-you-can-drive`
+- Added an above-the-fold action block on city report pages that links directly to:
+  - the app-specific calculator with prefilled gross / miles / hours / gas price
+  - the quarterly tax estimator
+  - the highest-paying cities ranking
+- Added sitemap coverage and regression-test coverage for `/uber/where-you-can-drive`.
+- Added regression coverage to ensure city report hero actions and coverage-page CTA tracking stay rendered.
+- Cleaned visible text corruption on:
+  - homepage (`index.jte`)
+  - about page (`about.jte`)
+  - app hub page (`salary/app-hub.jte`)
+  - verdict card component (`components/verdict_card.jte`)
 
 ## Validation Result
-- `generateJte`: pass
+- `EncodingCorruptionGuardTest`: pass
 - `OrganicMonitoringRegressionTest`: pass
-- `SitemapXmlTest`: pass
+- Note: one non-clean incremental build produced a transient Gradle/JTE compile-state issue; `clean test` resolved it and the final verification passed.
 
-## Open Constraints
-- GA4 property access is not connected yet, so behavior/conversion analysis is partial.
-- Post-deploy recrawl lag means ranking/CTR impact is not measurable immediately.
+## What We Are Testing Now
+- Hypothesis 1: narrowing `/best-cities/{app}` to explicit earnings intent will reduce low-quality impressions and improve CTR.
+- Hypothesis 2: removing visible text corruption will improve trust and reduce click waste / bounce on brand-adjacent and entry pages.
+- Hypothesis 3: once Google recrawls the updated pages, structured-data inspection errors should clear if the current JSON-LD serialization is truly fixed.
+- Hypothesis 4: a dedicated Uber coverage-intent page will absorb support-city / availability queries that previously leaked into `/best-cities/uber`, improving query-to-page fit.
+- Hypothesis 5: if query-to-page fit improves but clicks still do not turn into product behavior, the new tracked hero CTAs will show whether the landing experience is failing to move users into calculators and tax tools.
 
-## How To Judge If We Are Doing Well
-- Rule 1: technical blockers must stay at 0 critical issues.
-- Rule 2: impressions and average position should trend up week-over-week.
-- Rule 3: CTR on pages ranking in positions 3-8 must rise over time.
-- Rule 4: clicks must eventually follow impressions; if not, query intent/page match is off.
+## 14-Day Success Criteria
+- Site CTR >= 0.10%
+- At least 3 top-impression pages with non-zero clicks
+- `/best-cities/doordash` CTR meaningfully above 0.26%
+- `/best-cities/uber` CTR meaningfully above 0.00%
+- `/uber/where-you-can-drive` begins receiving impressions for coverage-style Uber queries
+- Once GA4 access is connected, new `cta_click` labels should begin appearing for:
+  - `open_official_uber_directory`
+  - `open_uber_pay_reports`
+  - `open_prefilled_calculator`
+  - `estimate_quarterly_taxes`
+- No sampled URL inspection result showing fresh `Bad escape sequence` after recrawl
+- No visible text corruption on key landing pages
 
-## CTR Benchmark Reference (Industry Heuristic)
-- Position 1-3: often 10-30% CTR
-- Position 4-6: often 4-10% CTR
-- Position 7-10: often 1-4% CTR
-- Our current site-level CTR (~0.04%) is far below these ranges, so snippet intent match remains the primary gap.
+## Immediate Follow-Up Actions
+- Deploy current code changes.
+- Re-run URL Inspection after deployment for:
+  - `https://gigverdict.com/best-cities/doordash`
+  - `https://gigverdict.com/best-cities/uber`
+  - `https://gigverdict.com/uber/where-you-can-drive`
+  - `https://gigverdict.com/salary/doordash/minneapolis`
+  - `https://gigverdict.com/salary/uber/columbus/side-hustle`
+  - `https://gigverdict.com/`
+- Compare 7-day and 28-day CTR deltas after recrawl.
+- Compare query migration between:
+  - `/best-cities/uber`
+  - `/uber/where-you-can-drive`
+- Watch for Uber query patterns such as `uber cities`, `where can i drive for uber`, `uber available cities`, and `uber driver cities` to see whether the new page is matching the right intent.
+- Connect GA4 property access so landing-page engagement and CTA events can be tied back to SEO traffic quality.
+- Once GA4 access is available, verify the new event labels fire on live pages:
+  - `open_official_uber_directory`
+  - `open_uber_pay_reports`
+  - `open_prefilled_calculator`
+  - `estimate_quarterly_taxes`
 
-## 30-Day Targets
-- Technical critical issues: 0
-- Keep average position <= 7.0
-- Raise site CTR from ~0.04% to >=0.10%
-- Raise clicks from 3 per 28 days to >=8 per 28 days
-- At least 3 landing pages with non-zero clicks in top impression group
+## Follow-Up Entry Template
+Copy this block for each new review cycle.
 
-## Expert Backlog (Priority)
-- P0: Keep JSON-LD valid on all key templates (`best-cities`, `city-report`, `city-work-level`) and keep regression test green.
-- P0: Rewrite title/meta templates for top-impression pages to match high-intent phrasing users actually click.
-- P0: Tighten SERP snippet promise: include explicit value proposition (`after expenses`, `real hourly`, `updated`).
-- P1: Re-balance indexing scope for low-yield pages if they keep generating impressions with persistent 0 clicks.
-- P1: Improve on-page first screen for top entry pages to match title promise immediately.
-- P1: Strengthen internal links from high-impression pages into calculator entry paths with intent-anchored anchor text.
-- P2: After GA4 access, validate landing-page behavior (engagement, CTA clicks, calculator start rate) to separate SEO vs product friction.
-
-## Title/Meta Rewrite Focus (First Batch)
-- `https://gigverdict.com/best-cities/doordash`
-- `https://gigverdict.com/best-cities/uber`
-- `https://gigverdict.com/salary/doordash/*` template
-- `https://gigverdict.com/salary/uber/*` template
-- `https://gigverdict.com/compare/*` template
-
-Definition of done for first batch:
-- Updated templates deployed
-- Re-index requested for top URLs
-- 7-day and 28-day CTR deltas recorded in this file
-
-## Shipped On 2026-03-05 (CTR Batch 1)
-- Rewrote title/meta templates for:
-- `/salary/{app}`
-- `/best-cities/{app}`
-- `/compare/{city}/uber-vs-doordash`
-- `/salary/{app}/{city}`
-- `/salary/{app}/{city}/{workLevel}`
-- Added explicit snippet value props: `net after expenses`, per-city/per-work-level context, freshness signal (`Updated {month year}`), and estimated `$/hr` on city/work-level pages.
-
-## Weekly Scorecard (fill every 7 days)
-- Week ending:
-- Clicks:
-- Impressions:
-- CTR:
-- Avg position:
+### Review Entry
+- Review date:
+- Current period:
+- Comparison period:
+- Site clicks / impressions / CTR / avg position:
+- US-only clicks / impressions / CTR / avg position:
 - Top 5 pages by impressions:
 - Top 5 pages by clicks:
-- Striking distance keywords (pos 8-15):
-- Critical issues:
-- Changes shipped this week:
-- Next week focus:
+- High-impression zero-click pages:
+- Low-CTR queries worth action:
+- Query migration between related pages:
+- SEO CTA event notes:
+- URL inspection notes:
+- Structured-data status:
+- Cannibalization notes:
+- Changes shipped since last review:
+- Changes still pending deploy:
+- Recrawl requested for:
+- Hypothesis for next cycle:
+- Decision / next action:
 
-## Immediate Next Actions
-- Deploy current fixes.
-- Re-check URL Inspection on `https://gigverdict.com/best-cities/doordash`.
-- Re-check URL Inspection on `https://gigverdict.com/salary/doordash/denver/side-hustle`.
-- Re-check URL Inspection on `https://gigverdict.com/salary/doordash/denver`.
-- After 3-7 days, compare period again and update this file.
-- Connect GA4 property access as final step.
+## Operating Rules
+- Do not judge CTR off sitewide averages alone. Always compare sitewide and US-only views.
+- For list pages, record both page-level CTR and the top leaking query intents.
+- Do not mark structured-data work as complete until URL Inspection reflects the new rendered version.
+- If a page keeps generating impressions with near-zero clicks for two consecutive reviews, either retarget its intent or reduce its indexing priority.

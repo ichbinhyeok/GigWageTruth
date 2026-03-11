@@ -42,6 +42,9 @@ public class SitemapController {
         for (String app : new String[] { "uber", "doordash" }) {
             // App Hubs
             addUrl(xml, AppConstants.BASE_URL + "/salary/" + app, today, "weekly", "0.8");
+            if (app.equals("uber")) {
+                addUrl(xml, AppConstants.BASE_URL + "/uber/where-you-can-drive", today, "weekly", "0.8");
+            }
             addUrl(xml, AppConstants.BASE_URL + "/best-cities/" + app, today, "weekly", "0.8");
 
             for (CityData city : CityData.values()) {

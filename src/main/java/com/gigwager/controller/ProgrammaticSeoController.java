@@ -88,6 +88,39 @@ public class ProgrammaticSeoController {
                 return "salary/app-hub";
         }
 
+        @GetMapping("/uber/where-you-can-drive")
+        public String uberCoveragePage(Model model) {
+                String app = "uber";
+                String appName = "Uber";
+
+                List<CityData> coveredCities = Arrays.stream(CityData.values())
+                                .filter(pageIndexPolicyService::isCityReportIndexable)
+                                .sorted((left, right) -> left.getCityName().compareTo(right.getCityName()))
+                                .collect(Collectors.toList());
+
+                java.time.LocalDate now = java.time.LocalDate.now();
+                String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
+                                .format(now);
+
+                String title = String.format("Where You Can Drive for Uber in the US (%s)", monthYear);
+                String description = String.format(
+                                "Use Uber's official driver city directory to confirm coverage, then compare net pay across %d GigVerdict city reports. Updated %s.",
+                                coveredCities.size(),
+                                monthYear);
+                String canonicalUrl = String.format("%s/uber/where-you-can-drive", AppConstants.BASE_URL);
+
+                model.addAttribute("app", app);
+                model.addAttribute("appName", appName);
+                model.addAttribute("lastUpdated", monthYear);
+                model.addAttribute("coveredCityCount", coveredCities.size());
+                model.addAttribute("coverageByRegion", buildCoverageByRegion(coveredCities));
+                model.addAttribute("coverageFaqJsonLd", buildCoverageFaqJsonLd(appName, coveredCities.size()));
+                model.addAttribute("seoMeta",
+                                new SeoMeta(title, description, canonicalUrl, AppConstants.BASE_URL + "/og-image.jpg"));
+
+                return "salary/app-coverage";
+        }
+
         @GetMapping("/best-cities/{app}")
         public String bestCitiesPage(@PathVariable("app") String app, Model model) {
                 if (!app.equals("uber") && !app.equals("doordash")) {
@@ -110,9 +143,10 @@ public class ProgrammaticSeoController {
                 String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
                                 .format(now);
 
-                String title = String.format("Best Cities for %s Drivers (%s): Net Hourly Ranking", appName, monthYear);
+                String title = String.format("Highest-Paying Cities for %s Drivers (%s): Net Earnings Ranking",
+                                appName, monthYear);
                 String description = String.format(
-                                "See where %s pays best after expenses with net hourly rankings built from mileage, fuel, and self-employment tax assumptions. Updated %s.",
+                                "See which cities produce the highest estimated %s net pay after mileage, fuel, and self-employment tax assumptions. Earnings ranking only, not an official coverage list. Updated %s.",
                                 appName, monthYear);
                 String canonicalUrl = String.format("%s/best-cities/%s", AppConstants.BASE_URL, app);
 
@@ -220,6 +254,9 @@ public class ProgrammaticSeoController {
                 model.addAttribute("otherApp", otherApp);
                 model.addAttribute("otherAppName", otherAppName);
                 model.addAttribute("otherAppUrl", otherAppUrl);
+                model.addAttribute("calculatorUrl", buildCalculatorUrl(app, featuredScenario, city));
+                model.addAttribute("taxEstimatorUrl", buildTaxEstimatorUrl(app, featuredScenario));
+                model.addAttribute("bestCitiesUrl", String.format("/best-cities/%s", app));
                 model.addAttribute("safeMarketDescription", htmlSanitizerService.sanitize(city.getMarketDescription()));
                 model.addAttribute("cityFaqJsonLd", buildCityFaqJsonLd(appName, city, featuredScenario));
 
@@ -436,6 +473,30 @@ public class ProgrammaticSeoController {
                 return fallback;
         }
 
+        private Map<String, List<CityData>> buildCoverageByRegion(List<CityData> coveredCities) {
+                Map<String, List<CityData>> coverageByRegion = new LinkedHashMap<>();
+                coverageByRegion.put("West", filterCitiesByRegion(coveredCities, "West"));
+                coverageByRegion.put("South", filterCitiesByRegion(coveredCities, "South"));
+                coverageByRegion.put("Midwest", filterCitiesByRegion(coveredCities, "Midwest"));
+                coverageByRegion.put("Northeast", filterCitiesByRegion(coveredCities, "Northeast"));
+                return coverageByRegion;
+        }
+
+        private List<CityData> filterCitiesByRegion(List<CityData> coveredCities, String region) {
+                return coveredCities.stream()
+                                .filter(city -> region.equals(regionForState(city.getState())))
+                                .collect(Collectors.toList());
+        }
+
+        private String regionForState(String state) {
+                return switch (state) {
+                        case "CA", "WA", "OR", "NV", "AZ", "CO", "NM", "HI" -> "West";
+                        case "TX", "FL", "GA", "NC", "TN", "KY", "LA", "VA", "DC", "MD", "OK" -> "South";
+                        case "IL", "OH", "IN", "MI", "WI", "MN", "MO", "KS", "NE" -> "Midwest";
+                        default -> "Northeast";
+                };
+        }
+
         private boolean requiresEditorialReview(String contentType) {
                 if (contentType == null) {
                         return true;
@@ -563,6 +624,52 @@ public class ProgrammaticSeoController {
                 faqPage.put("@type", "FAQPage");
                 faqPage.put("mainEntity", mainEntity);
                 return toJsonLd(faqPage);
+        }
+
+        private String buildCoverageFaqJsonLd(String appName, int coveredCityCount) {
+                String q1 = String.format("Is this an official %s coverage list?", appName);
+                String a1 = String.format(
+                                "No. This page is a navigation guide. Use Uber's official driver city directory to confirm current %s availability because onboarding and product coverage can change by city and metro area.",
+                                appName);
+
+                String q2 = String.format("How many %s city pay reports does GigVerdict cover right now?", appName);
+                String a2 = String.format(
+                                "GigVerdict currently links %d covered city pay reports for %s. Each report focuses on net hourly earnings after mileage, fuel, and self-employment tax assumptions.",
+                                coveredCityCount,
+                                appName);
+
+                String q3 = String.format("What should I do after I confirm my %s city is active?", appName);
+                String a3 = String.format(
+                                "Open the matching GigVerdict city report to compare estimated take-home pay, then review the best-cities ranking if you are deciding between markets or planning a move for %s work.",
+                                appName);
+
+                List<Map<String, Object>> mainEntity = List.of(
+                                buildFaqQuestion(q1, a1),
+                                buildFaqQuestion(q2, a2),
+                                buildFaqQuestion(q3, a3));
+
+                Map<String, Object> faqPage = new LinkedHashMap<>();
+                faqPage.put("@context", "https://schema.org");
+                faqPage.put("@type", "FAQPage");
+                faqPage.put("mainEntity", mainEntity);
+                return toJsonLd(faqPage);
+        }
+
+        private String buildCalculatorUrl(String app, CityScenario scenario, CityData city) {
+                return String.format(java.util.Locale.US,
+                                "/%s?gross=%d&miles=%d&hours=%d&gasPrice=%.2f",
+                                app,
+                                scenario.getGrossWeekly(),
+                                scenario.getMiles(),
+                                scenario.getHours(),
+                                city.getGasPrice());
+        }
+
+        private String buildTaxEstimatorUrl(String app, CityScenario scenario) {
+                return String.format(java.util.Locale.US,
+                                "/taxes/quarterly-estimator?app=%s&gross=%d",
+                                app,
+                                scenario.getGrossWeekly());
         }
 
         private String buildWorkLevelJsonLd(

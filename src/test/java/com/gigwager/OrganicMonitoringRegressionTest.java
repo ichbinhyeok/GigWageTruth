@@ -140,6 +140,23 @@ public class OrganicMonitoringRegressionTest {
     }
 
     @Test
+    public void uberCoverageIntentPageShouldBridgeOfficialDirectoryAndCityReports() throws Exception {
+        MvcResult result = mockMvc.perform(get("/uber/where-you-can-drive"))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String html = result.getResponse().getContentAsString();
+        assertTrue(html.contains("Where You Can Drive for Uber in the US"),
+                "Coverage guide should expose a clear intent-matched H1");
+        assertTrue(html.contains("https://www.uber.com/us/en/e/drive/cities/"),
+                "Coverage guide should point to Uber's official city directory");
+        assertTrue(html.contains("/salary/uber"),
+                "Coverage guide should connect users back to Uber pay reports");
+        assertTrue(html.contains("open_official_uber_directory"),
+                "Coverage guide should track official-directory CTA clicks");
+    }
+
+    @Test
     public void keyPagesShouldRenderValidJsonLdScripts() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         Pattern jsonLdPattern = Pattern.compile(
@@ -147,6 +164,7 @@ public class OrganicMonitoringRegressionTest {
                 Pattern.DOTALL);
 
         List<String> paths = List.of(
+                "/uber/where-you-can-drive",
                 "/best-cities/doordash",
                 "/salary/doordash/denver",
                 "/salary/doordash/denver/side-hustle");
@@ -176,6 +194,23 @@ public class OrganicMonitoringRegressionTest {
         }
 
         assertTrue(failures.isEmpty(), "JSON-LD validation failures:\n - " + String.join("\n - ", failures));
+    }
+
+    @Test
+    public void cityReportShouldExposeTrackedHeroActions() throws Exception {
+        MvcResult result = mockMvc.perform(get("/salary/uber/miami"))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String html = result.getResponse().getContentAsString();
+        assertTrue(html.contains("Run this scenario in the calculator"),
+                "City report hero should expose a prefilled calculator CTA");
+        assertTrue(html.contains("/uber?gross="),
+                "City report should link to the app calculator with prefilled query params");
+        assertTrue(html.contains("estimate_quarterly_taxes"),
+                "City report hero should expose a tracked tax estimator CTA");
+        assertTrue(html.contains("compare_best_cities"),
+                "City report hero should expose a tracked best-cities CTA");
     }
 
     private void assertCanonicalAndNoIndex(String path, String expectedCanonical) throws Exception {

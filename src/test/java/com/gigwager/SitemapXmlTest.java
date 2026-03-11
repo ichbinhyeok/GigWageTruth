@@ -58,6 +58,8 @@ public class SitemapXmlTest {
                 assertTrue(xmlContent.contains("/salary/directory"), "Sitemap should contain /salary/directory");
                 assertTrue(xmlContent.contains("/uber"), "Sitemap should contain /uber");
                 assertTrue(xmlContent.contains("/doordash"), "Sitemap should contain /doordash");
+                assertTrue(xmlContent.contains("/uber/where-you-can-drive"),
+                                "Sitemap should contain the Uber coverage guide");
 
                 assertTrue(xmlContent.contains("/taxes"), "Sitemap should contain /taxes");
                 assertTrue(xmlContent.contains("/insurance"), "Sitemap should contain /insurance");

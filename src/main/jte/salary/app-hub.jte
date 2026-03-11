@@ -20,11 +20,21 @@
                         ${appName} Hub
                     </span>
                     <h1 class="text-4xl lg:text-5xl font-black text-slate-900 mb-6 tracking-tight">
-                        Real ${appName} Pay Calculator & City Guide
+                        Real ${appName} Pay by City
                     </h1>
                     <p class="text-xl text-slate-600 max-w-2xl mx-auto">
-                        Stop guessing your take-home pay. See real net hourly estimates for ${appName} drivers after gas and taxes in major cities. Last updated: ${lastUpdated}.
+                        Compare estimated ${appName} net pay by city and open the full report for the market you care about. Last updated: ${lastUpdated}.
                     </p>
+                    <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
+                        <a href="/best-cities/${app}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_app_hub', 'event_label': 'compare_highest_paying_cities' })" class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold transition-colors">
+                            Compare highest-paying cities
+                        </a>
+                        @if (app.equals("uber"))
+                            <a href="/uber/where-you-can-drive" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_app_hub', 'event_label': 'check_official_coverage_guide' })" class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-white border border-slate-200 hover:border-sky-200 hover:bg-sky-50 text-slate-900 font-bold transition-colors">
+                                Check official coverage guide
+                            </a>
+                        @endif
+                    </div>
                 </div>
 
                 <div class="bg-white rounded-3xl p-8 lg:p-12 border border-slate-200 shadow-sm mb-12">
@@ -34,10 +44,10 @@
                         <h3 class="text-xl font-bold mt-6 mb-2">How our calculation works:</h3>
                         <ul class="list-disc pl-5 mt-2 space-y-2">
                             <li><strong>Gross Pay:</strong> Estimated based on local market economy tiers and minimum wage baselines.</li>
-                            <li><strong>Vehicle Expenses:</strong> We deduct the IRS Standard Mileage Rate (72.5¢ per mile for 2026), which acts as a proxy for gas, maintenance, and vehicle depreciation.</li>
+                            <li><strong>Vehicle Expenses:</strong> We deduct the 2026 IRS Standard Mileage Rate ($0.725 per mile), which acts as a proxy for gas, maintenance, and vehicle depreciation.</li>
                             <li><strong>Self-Employment Tax:</strong> We deduct an estimated 15.3% tax on your net profit (Medicare & Social Security).</li>
                         </ul>
-                        <p class="mt-4 italic text-sm text-slate-500">Note: These are personalized estimates to help you understand your True Cost of Ownership. This is not financial or tax advice.</p>
+                        <p class="mt-4 italic text-sm text-slate-500">Note: These are personalized estimates to help you understand your true cost of driving. This is not financial or tax advice.</p>
                     </div>
                 </div>
 
@@ -71,7 +81,7 @@
                         </table>
                     </div>
                 </div>
-                
+
                 <div class="text-center mt-12">
                     <h3 class="text-2xl font-bold text-slate-900 mb-6">Explore the Directory</h3>
                     <a href="/salary/directory" class="inline-block px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-lg shadow-emerald-600/20 transition-all">View All Cities Directory</a>

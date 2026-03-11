@@ -20,10 +20,10 @@
             <div class="max-w-4xl mx-auto">
                 <div class="text-center mb-12">
                     <h1 class="text-4xl lg:text-5xl font-black text-slate-900 mb-6 tracking-tight">
-                        Best Cities to Drive for ${appName}
+                        Highest-Paying Cities for ${appName} Drivers
                     </h1>
                     <p class="text-xl text-slate-600 max-w-2xl mx-auto">
-                        Ranked dynamically by estimated net hourly take-home pay using market-tier and traffic-adjusted scenarios.
+                        Earnings ranking based on estimated net hourly take-home pay after mileage, fuel, and self-employment tax assumptions.
                     </p>
                 </div>
 
@@ -33,12 +33,16 @@
                         <li><strong>Ranking Criteria:</strong> Sorts strictly by estimated Net Hourly Pay for a "side-hustle" driver.</li>
                         <li><strong>Input Weights:</strong> We apply a traffic multiplier and a market tier multiplier (demand baseline) to estimate gross hourly revenue.</li>
                         <li><strong>Deductions:</strong> We apply the @template.components.irs_rate_snippet() mileage proxy plus an assumed 15.3% SE tax. Local gas prices are shown as market context, not a direct variable in this ranking formula.</li>
+                        <li><strong>Intent note:</strong> This page ranks estimated earnings by city. It is not an official ${appName} coverage or supported-cities list.</li>
+                        @if (app.equals("uber"))
+                            <li><strong>Need coverage instead?</strong> Use the <a href="/uber/where-you-can-drive" class="font-bold underline hover:text-blue-900">Uber coverage guide</a> to check the official city directory first.</li>
+                        @endif
                     </ul>
                 </div>
 
                 <!-- Top 5 Highlight Cards -->
                 <div class="mb-12">
-                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Why the Top 5 Win in ${appName}</h2>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Why These Cities Rank Highest for ${appName}</h2>
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         @for(int i = 0; i < Math.min(rankedCities.size(), 5); i++)
                             !{CityRankingDto ranking = rankedCities.get(i);}
