@@ -150,6 +150,24 @@
                             </button>
                         </form>
 
+                        <div class="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-3">Research First</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+                                <a href="/salary/uber" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
+                                    Uber pay by city
+                                </a>
+                                <a href="/uber/where-you-can-drive" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
+                                    Where you can drive for Uber
+                                </a>
+                                <a href="/salary/doordash" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
+                                    DoorDash pay by city
+                                </a>
+                                <a href="/blog/multi-apping-guide" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
+                                    Clean stacking guide
+                                </a>
+                            </div>
+                        </div>
+
                         <div class="pt-4 text-center">
                             <p class="text-[10px] text-slate-400 font-medium">
                                 Calculated instantly. No email required. No BS.

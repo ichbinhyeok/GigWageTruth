@@ -13,6 +13,8 @@
     <script>
       (function () {
         let thirdPartyBooted = false;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
         function loadScript(src, attrs, onload) {
           const script = document.createElement('script');
           script.src = src;
@@ -31,8 +33,6 @@
           thirdPartyBooted = true;
 
           loadScript('https://www.googletagmanager.com/gtag/js?id=G-GJVLR0KTTS', null, function () {
-            window.dataLayer = window.dataLayer || [];
-            window.gtag = function () { window.dataLayer.push(arguments); };
             window.gtag('js', new Date());
             window.gtag('config', 'G-GJVLR0KTTS');
           });
@@ -83,7 +83,12 @@
     <!-- Fonts: Inter for Professional FinTech Look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    </noscript>
     
     <!-- Alpine.js -->
     <!-- Alpine Plugins -->
@@ -99,7 +104,7 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
                     },
                     colors: {
                         brand: '#10B981', // Emerald 500

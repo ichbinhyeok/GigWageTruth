@@ -1,6 +1,6 @@
 # SEO Tracker
 
-Last updated: 2026-03-11  
+Last updated: 2026-03-20  
 Owner: GigWageTruth  
 Primary source: Google Search Console (GA4 property access still pending)
 
@@ -91,6 +91,13 @@ Primary source: Google Search Console (GA4 property access still pending)
 
 ## Immediate Follow-Up Actions
 - Deploy current code changes.
+- Submit sitemap after deploy:
+  - `https://gigverdict.com/sitemap.xml`
+- Request manual indexing after deploy for:
+  - `https://gigverdict.com/best-cities/doordash`
+  - `https://gigverdict.com/best-cities/uber`
+  - `https://gigverdict.com/salary/uber`
+  - `https://gigverdict.com/uber/where-you-can-drive`
 - Re-run URL Inspection after deployment for:
   - `https://gigverdict.com/best-cities/doordash`
   - `https://gigverdict.com/best-cities/uber`
@@ -109,6 +116,109 @@ Primary source: Google Search Console (GA4 property access still pending)
   - `open_uber_pay_reports`
   - `open_prefilled_calculator`
   - `estimate_quarterly_taxes`
+
+## Early-April Recheck Checklist
+- Recheck window:
+  - First pass: 2026-04-03
+  - Second pass: 2026-04-10
+- Indexing checks:
+  - Confirm `/salary/uber` is no longer `Discovered - currently not indexed`
+  - Confirm `/uber/where-you-can-drive` is no longer `URL is unknown to Google`
+  - Confirm `/about` shows `noindex,follow` in live HTML and is absent from the live sitemap
+- Query-fit checks:
+  - Compare whether coverage-style Uber queries start shifting from `/best-cities/uber` to `/uber/where-you-can-drive`
+  - Check whether `/best-cities/doordash` loses `availability` / `supported cities` style impressions
+- CTR checks:
+  - Re-measure sitewide CTR and US-only CTR
+  - Re-measure `/best-cities/doordash`, `/best-cities/uber`, `/blog/multi-apping-guide`, and top `/compare/*` pages
+  - Flag any page still above 150 impressions with 0 clicks
+- Snippet checks:
+  - Pull live SERPs for `/salary/uber`, `/best-cities/uber`, and one or two `/compare/*` pages to confirm the rewritten titles are actually being used
+  - Re-open Search Console inspection for `/best-cities/doordash` and `/best-cities/uber` to see whether `Bad escape sequence in string` has cleared after recrawl
+- Decision gate:
+  - If `/salary/uber` and `/uber/where-you-can-drive` still are not properly indexed by 2026-04-10, treat discovery/indexing as the main blocker
+  - If indexing is fixed but CTR is still near current levels, shift the next sprint toward authority/E-E-A-T strengthening and selective page pruning rather than more template expansion
+
+## Review Log
+
+### Review Entry
+- Review date: 2026-03-20
+- Current period: 2026-02-21 to 2026-03-19
+- Comparison period: 2026-01-24 to 2026-02-20
+- Site clicks / impressions / CTR / avg position: 19 / 24,671 / 0.077% / 6.53
+- US-only clicks / impressions / CTR / avg position: 18 / 13,988 / 0.129% / 6.75
+- Top 5 pages by impressions:
+  - `/best-cities/doordash`: 1 click / 936 impressions / 0.11% CTR / avg pos 6.27
+  - `/blog/multi-apping-guide`: 0 clicks / 518 impressions / 0.00% CTR / avg pos 8.36
+  - `/best-cities/uber`: 0 clicks / 381 impressions / 0.00% CTR / avg pos 5.32
+  - `/compare/denver/uber-vs-doordash`: 0 clicks / 273 impressions / 0.00% CTR / avg pos 3.22
+  - `/salary/uber/orlando`: 1 click / 268 impressions / 0.37% CTR / avg pos 8.86
+- Top 5 pages by clicks:
+  - `/salary/uber/new-orleans/side-hustle`: 2 clicks / 7 impressions / 28.57% CTR / avg pos 6.14
+  - `/best-cities/doordash`: 1 click / 936 impressions / 0.11% CTR / avg pos 6.27
+  - `/`: 1 click / 251 impressions / 0.40% CTR / avg pos 3.67
+  - `/salary/doordash/san-jose`: 1 click / 234 impressions / 0.43% CTR / avg pos 7.73
+  - `/salary/uber/austin`: 1 click / 223 impressions / 0.45% CTR / avg pos 8.37
+- High-impression zero-click pages:
+  - `/blog/multi-apping-guide`: 518 impressions / 0 clicks / avg pos 8.36
+  - `/best-cities/uber`: 381 impressions / 0 clicks / avg pos 5.32
+  - `/compare/denver/uber-vs-doordash`: 273 impressions / 0 clicks / avg pos 3.22
+  - `/about`: 156 impressions / 0 clicks / avg pos 2.91
+  - `/compare/dallas/uber-vs-doordash`: 93 impressions / 0 clicks / avg pos 4.23
+- Low-CTR queries worth action:
+  - `doordash availability and performance by city 2026` -> `/best-cities/doordash`: 27 impressions / avg pos 1.85 / 0 clicks
+  - `doordash official coverage areas or cities list 2026` -> `/best-cities/doordash`: 1 impression / avg pos 2.00 / 0 clicks
+  - `doordash supported cities list 2026` -> `/best-cities/doordash`: 3 impressions / avg pos 6.33 / 0 clicks
+  - `highest paying cities for uber drivers 2026` -> `/best-cities/uber`: 3 impressions / avg pos 3.00 / 0 clicks
+- Query migration between related pages:
+  - No visible migration yet from `/best-cities/uber` into `/uber/where-you-can-drive`.
+  - `/uber/where-you-can-drive` returned zero query rows in the current period.
+- SEO CTA event notes:
+  - GA4 property access is still pending, so live CTA event quality cannot be verified from analytics yet.
+- URL inspection notes:
+  - `/` is `Submitted and indexed` and was crawled on 2026-03-11.
+  - `/best-cities/doordash` is `Submitted and indexed`, but the last crawl in inspection is still 2026-02-27.
+  - `/best-cities/uber` is `Submitted and indexed`, but the last crawl in inspection is still 2026-02-25.
+  - `/salary/doordash` is `Submitted and indexed` with last crawl 2026-02-25.
+  - `/salary/uber` is `Discovered - currently not indexed`.
+  - `/uber/where-you-can-drive` is live with HTTP 200 and present in `sitemap.xml`, but inspection still says `URL is unknown to Google`.
+- Structured-data status:
+  - `/best-cities/doordash` and `/best-cities/uber` still show `Unparsable structured data` with `Bad escape sequence in string` in Search Console inspection.
+  - Because the indexed crawls on both pages predate the 2026-03-11 deploy, this still looks like a recrawl/refresh issue rather than proof that the live HTML is broken.
+- Cannibalization notes:
+  - No meaningful cannibalization was detected in the current 28-day window.
+- Changes shipped since last review:
+  - Live sitemap and page metadata confirm the 2026-03-11 release is deployed, including `/uber/where-you-can-drive` and the rewritten `/best-cities/{app}` titles/descriptions.
+- Changes still pending deploy:
+  - Rewrote `/blog/multi-apping-guide` to remove visible text corruption and align the page around `clean stacking` / deactivation-safe intent.
+  - Tightened `/compare/{city}/uber-vs-doordash` titles, descriptions, and hero copy so the winning app and hourly gap are visible before the click.
+  - Added stronger homepage links into `/salary/uber`, `/salary/doordash`, `/uber/where-you-can-drive`, and the clean-stacking guide to improve crawl paths from an already indexed page.
+  - Rebuilt `/salary/{app}` so the hub is now side-hustle aligned, richer in explanatory content, and ships `BreadcrumbList` + `ItemList` + `FAQPage` JSON-LD instead of a thin top-10 table.
+  - Marked `/about` as `noindex,follow` and removed it from `sitemap.xml` so a zero-click trust page stops consuming impression budget.
+  - Fixed the shared related-pages component so anchors and destinations now match, and added the missing `/best-cities/{app}` link path.
+  - Updated the blog index card for `/blog/multi-apping-guide` so the listing matches the rewritten clean-stacking article and no longer shows broken separator text.
+  - Reduced layout blocking a bit by making the Inter stylesheet non-blocking and by stubbing `gtag()` before lazy analytics boot so early clicks do not throw client-side errors.
+- Local verification after patch:
+  - `.\gradlew test --console=plain`: pass
+  - `OrganicMonitoringRegressionTest`: pass
+  - `build/reports/organic-monitoring-report.json`: `failures = 0`
+  - Remaining warning after the latest local pass: `/salary/uber` meta description is still slightly long at 186 characters
+- Recrawl requested for:
+  - `https://gigverdict.com/best-cities/doordash`
+  - `https://gigverdict.com/best-cities/uber`
+  - `https://gigverdict.com/salary/uber`
+  - `https://gigverdict.com/uber/where-you-can-drive`
+- Hypothesis for next cycle:
+  - CTR is still being suppressed by a mix of intent leakage on list/comparison pages and stale Google crawls on the pages that were updated on 2026-03-11.
+  - `/salary/uber` not being indexed is likely reducing discovery for the new Uber coverage page.
+  - `/blog/multi-apping-guide` is still accumulating zero-click impressions while the live template contains visible text corruption, so trust damage may still be affecting click behavior on that article.
+- Decision / next action:
+  - Deploy the pending patch set first.
+  - Submit `https://gigverdict.com/sitemap.xml` in Search Console right after deploy.
+  - Request fresh indexing for the four URLs above inside Search Console immediately after deploy.
+  - Verify that `/about` returns `noindex,follow` in live HTML and is absent from the live sitemap.
+  - If `/uber/where-you-can-drive` is still unknown at the next review, add one stronger internal link from the homepage or the main Uber hub block and consider linking it from another indexed page with recent crawl activity.
+  - If `/compare/*` pages keep sitting in positions 3-5 with zero clicks, rewrite titles/heroes to surface a concrete city-specific winner or net-pay delta instead of the generic `Who Nets More?` framing.
 
 ## Follow-Up Entry Template
 Copy this block for each new review cycle.

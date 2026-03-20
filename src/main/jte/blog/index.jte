@@ -40,7 +40,7 @@
                             </p>
                             <div class="mt-auto flex items-center gap-2 text-xs text-slate-400 font-medium">
                                 <span>9 min read</span>
-                                <span>•</span>
+                                <span>|</span>
                                 <span>Jan 23, 2026</span>
                             </div>
                         </div>
@@ -55,14 +55,14 @@
                         </div>
                         <div class="p-6 flex-1 flex flex-col">
                             <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-emerald-600 transition-colors">
-                                Multi-Apping Masterclass 2026: Double Your Income
+                                Multi-Apping Guide 2026: Clean Stacking Without Getting Deactivated
                             </h2>
                             <p class="text-slate-600 text-sm mb-4 line-clamp-3">
-                                The secret to a $30/hr gig career isn't working harder. It's working smarter. Learn the Clean Stacking strategy to maximize every mile.
+                                Learn the clean stacking system for Uber, DoorDash, Lyft, and Instacart. Cut dead time, avoid platform violations, and raise net hourly pay without juggling two active jobs.
                             </p>
                             <div class="mt-auto flex items-center gap-2 text-xs text-slate-400 font-medium">
                                 <span>10 min read</span>
-                                <span>•</span>
+                                <span>|</span>
                                 <span>Jan 21, 2026</span>
                             </div>
                         </div>
@@ -84,7 +84,7 @@
                             </p>
                             <div class="mt-auto flex items-center gap-2 text-xs text-slate-400 font-medium">
                                 <span>8 min read</span>
-                                <span>•</span>
+                                <span>|</span>
                                 <span>Jan 15, 2026</span>
                             </div>
                         </div>
@@ -106,7 +106,7 @@
                             </p>
                             <div class="mt-auto flex items-center gap-2 text-xs text-slate-400 font-medium">
                                 <span>7 min read</span>
-                                <span>•</span>
+                                <span>|</span>
                                 <span>Jan 18, 2026</span>
                             </div>
                         </div>

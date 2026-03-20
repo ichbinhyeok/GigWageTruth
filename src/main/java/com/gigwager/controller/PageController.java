@@ -87,7 +87,7 @@ public class PageController {
 
     @GetMapping("/blog/multi-apping-guide")
     public String multiAppingGuide(Model model) {
-        model.addAttribute("customTitle", "Multi-Apping Guide 2026: Double Your Hourly Wage");
+        model.addAttribute("customTitle", "Multi-Apping Guide 2026: Clean Stacking Without Getting Deactivated");
         return "blog/multi-apping-guide";
     }
 
@@ -112,6 +112,7 @@ public class PageController {
     @GetMapping("/about")
     public String about(Model model) {
         model.addAttribute("customTitle", "About Us - The GigWageTruth Story");
+        model.addAttribute("noIndex", true);
         return "about";
     }
 

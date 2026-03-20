@@ -90,7 +90,6 @@ public class SitemapController {
         addUrl(xml, AppConstants.BASE_URL + "/vehicle-cost/cost-per-mile", today, "monthly", "0.7");
 
         // Static pages
-        addUrl(xml, AppConstants.BASE_URL + "/about", today, "yearly", "0.5");
         addUrl(xml, AppConstants.BASE_URL + "/methodology", today, "yearly", "0.5");
 
         xml.append("</urlset>");

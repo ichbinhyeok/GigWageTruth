@@ -5,7 +5,15 @@
 @param String app
 @param String appName
 @param List<CityRankingDto> topCities
+@param CityRankingDto topCity
+@param Long indexedCityCount
 @param String lastUpdated
+@param String bestCitiesUrl = ""
+@param String calculatorUrl = ""
+@param String coverageUrl = ""
+@param String directoryUrl = ""
+@param String topCityReportUrl = ""
+@param String appHubSchemaJsonLd = "{}"
 @param SeoMeta seoMeta
 @param Boolean noIndex = false
 
@@ -15,6 +23,10 @@
     content = @`
         <div class="bg-slate-50 min-h-screen py-16 px-6">
             <div class="max-w-4xl mx-auto">
+                <script type="application/ld+json">
+                $unsafe{appHubSchemaJsonLd}
+                </script>
+
                 <div class="text-center mb-12">
                     <span class="inline-block px-4 py-1 rounded-full bg-emerald-100 text-emerald-800 font-bold text-sm tracking-wider mb-4 uppercase">
                         ${appName} Hub
@@ -23,38 +35,82 @@
                         Real ${appName} Pay by City
                     </h1>
                     <p class="text-xl text-slate-600 max-w-2xl mx-auto">
-                        Compare estimated ${appName} net pay by city and open the full report for the market you care about. Last updated: ${lastUpdated}.
+                        Compare estimated ${appName} net pay by city with a side-hustle-first ranking, then open the city report for part-time, side-hustle, and full-time scenarios. Last updated: ${lastUpdated}.
                     </p>
                     <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
-                        <a href="/best-cities/${app}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_app_hub', 'event_label': 'compare_highest_paying_cities' })" class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold transition-colors">
-                            Compare highest-paying cities
+                        <a href="${bestCitiesUrl}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_app_hub', 'event_label': 'compare_highest_paying_cities' })" class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold transition-colors">
+                            Browse the ranking
                         </a>
-                        @if (app.equals("uber"))
-                            <a href="/uber/where-you-can-drive" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_app_hub', 'event_label': 'check_official_coverage_guide' })" class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-white border border-slate-200 hover:border-sky-200 hover:bg-sky-50 text-slate-900 font-bold transition-colors">
+                        <a href="${topCityReportUrl}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_app_hub', 'event_label': 'open_top_city_report' })" class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-white border border-slate-200 hover:border-emerald-200 hover:bg-emerald-50 text-slate-900 font-bold transition-colors">
+                            Open ${topCity.city().getCityName()}
+                        </a>
+                        @if (coverageUrl != null && !coverageUrl.isBlank())
+                            <a href="${coverageUrl}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_app_hub', 'event_label': 'check_official_coverage_guide' })" class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-white border border-slate-200 hover:border-sky-200 hover:bg-sky-50 text-slate-900 font-bold transition-colors">
                                 Check official coverage guide
                             </a>
                         @endif
                     </div>
                 </div>
 
+                <div class="grid md:grid-cols-3 gap-4 mb-12">
+                    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+                        <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Top side-hustle market</p>
+                        <h2 class="text-2xl font-black text-slate-900">${topCity.city().getCityName()}</h2>
+                        <p class="text-emerald-600 font-bold text-lg mt-1">$${String.format("%.2f", topCity.netHourly())}/hr net</p>
+                        <p class="text-sm text-slate-500 mt-3">Current ranking leader after mileage proxy and self-employment tax assumptions.</p>
+                    </div>
+                    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+                        <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Reports live</p>
+                        <h2 class="text-2xl font-black text-slate-900">${indexedCityCount}</h2>
+                        <p class="text-sm text-slate-500 mt-3">Indexable city reports with detailed pay scenarios and internal links into the calculator and tax tools.</p>
+                    </div>
+                    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+                        <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Included in every city page</p>
+                        <h2 class="text-2xl font-black text-slate-900">PT, SH, FT</h2>
+                        <p class="text-sm text-slate-500 mt-3">Each city report includes part-time, side-hustle, and full-time scenarios instead of one flat payout number.</p>
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-4 mb-12">
+                    <a href="${topCityReportUrl}" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
+                        <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Start here</p>
+                        <h2 class="text-xl font-bold text-slate-900 mb-2">Open a city report</h2>
+                        <p class="text-sm text-slate-600">Use the city page when you want concrete weekly gross, miles, hours, taxes, and calculator links for one market.</p>
+                    </a>
+                    <a href="${bestCitiesUrl}" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
+                        <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">For ranking intent</p>
+                        <h2 class="text-xl font-bold text-slate-900 mb-2">See the full best-cities list</h2>
+                        <p class="text-sm text-slate-600">Use the ranking page when your question is purely which city pays the most for ${appName} right now.</p>
+                    </a>
+                    <a href="${calculatorUrl}" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
+                        <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">For your own numbers</p>
+                        <h2 class="text-xl font-bold text-slate-900 mb-2">Run the calculator</h2>
+                        <p class="text-sm text-slate-600">Adjust gross, miles, hours, and vehicle assumptions if your routine is stronger or weaker than the model baseline.</p>
+                    </a>
+                </div>
+
                 <div class="bg-white rounded-3xl p-8 lg:p-12 border border-slate-200 shadow-sm mb-12">
-                    <h2 class="text-2xl font-bold text-slate-900 mb-4">What is "Net Hourly After Expenses"?</h2>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4">What "Net Hourly After Expenses" means here</h2>
                     <div class="prose prose-slate max-w-none text-slate-600">
-                        <p>Most ${appName} drivers look at their gross earnings and think they're doing well, but that number is a dangerous illusion. <strong>Net hourly pay</strong> is what you actually keep after deducting your true business costs.</p>
-                        <h3 class="text-xl font-bold mt-6 mb-2">How our calculation works:</h3>
+                        <p>Gross payout does not tell you whether a market is actually worth working. <strong>Net hourly pay</strong> is the take-home estimate after mileage-based operating costs and self-employment tax assumptions.</p>
+                        <p>This hub is intentionally sorted by the <strong>side-hustle</strong> scenario because that matches the most common "pay by city" query intent. If you open a city report, you will also see part-time and full-time scenarios so you can judge whether the market still works at a different pace.</p>
+                        <h3 class="text-xl font-bold mt-6 mb-2">How the model works:</h3>
                         <ul class="list-disc pl-5 mt-2 space-y-2">
-                            <li><strong>Gross Pay:</strong> Estimated based on local market economy tiers and minimum wage baselines.</li>
-                            <li><strong>Vehicle Expenses:</strong> We deduct the 2026 IRS Standard Mileage Rate ($0.725 per mile), which acts as a proxy for gas, maintenance, and vehicle depreciation.</li>
-                            <li><strong>Self-Employment Tax:</strong> We deduct an estimated 15.3% tax on your net profit (Medicare & Social Security).</li>
+                            <li><strong>Gross pay:</strong> Estimated from local market tiers, traffic friction, and wage proxies.</li>
+                            <li><strong>Operating cost proxy:</strong> We deduct the 2026 IRS standard mileage rate of $0.725 per mile as a stand-in for gas, maintenance, and depreciation.</li>
+                            <li><strong>Tax drag:</strong> We deduct an estimated 15.3% self-employment tax from taxable profit.</li>
                         </ul>
-                        <p class="mt-4 italic text-sm text-slate-500">Note: These are personalized estimates to help you understand your true cost of driving. This is not financial or tax advice.</p>
+                        <p class="mt-4 italic text-sm text-slate-500">These are planning estimates built for decision-making, not tax filing or guarantees of platform earnings.</p>
                     </div>
                 </div>
 
                 <div class="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm mb-8">
                     <div class="bg-slate-900 p-6 flex justify-between items-center">
-                        <h2 class="text-xl font-bold text-white">Top 10 Cities for ${appName}</h2>
-                        <a href="/best-cities/${app}" class="text-emerald-400 hover:text-emerald-300 font-bold text-sm">See Full Ranking &rarr;</a>
+                        <div>
+                            <h2 class="text-xl font-bold text-white">Top 10 cities for ${appName} side-hustle pay</h2>
+                            <p class="text-sm text-slate-300 mt-1">Use this as a quick shortlist, then open the city report for the deeper scenario table.</p>
+                        </div>
+                        <a href="${bestCitiesUrl}" class="text-emerald-400 hover:text-emerald-300 font-bold text-sm">See Full Ranking &rarr;</a>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse">
@@ -82,9 +138,46 @@
                     </div>
                 </div>
 
-                <div class="text-center mt-12">
-                    <h3 class="text-2xl font-bold text-slate-900 mb-6">Explore the Directory</h3>
-                    <a href="/salary/directory" class="inline-block px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-lg shadow-emerald-600/20 transition-all">View All Cities Directory</a>
+                <div class="bg-white rounded-3xl p-8 lg:p-10 border border-slate-200 shadow-sm mt-12">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-6">Choose the next page by intent</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <a href="${directoryUrl}" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
+                            <p class="font-bold text-slate-900">Full city directory</p>
+                            <p class="text-sm text-slate-600 mt-1">Browse every indexed market, not just the current leaders.</p>
+                        </a>
+                        <a href="${bestCitiesUrl}" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
+                            <p class="font-bold text-slate-900">Best-cities ranking</p>
+                            <p class="text-sm text-slate-600 mt-1">Stay in ranking mode if you are comparing markets for a move or a trip.</p>
+                        </a>
+                        <a href="${calculatorUrl}" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
+                            <p class="font-bold text-slate-900">Calculator</p>
+                            <p class="text-sm text-slate-600 mt-1">Plug in your own mileage and hours when the baseline feels too optimistic or too conservative.</p>
+                        </a>
+                        @if (coverageUrl != null && !coverageUrl.isBlank())
+                            <a href="${coverageUrl}" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
+                                <p class="font-bold text-slate-900">Official coverage guide</p>
+                                <p class="text-sm text-slate-600 mt-1">Confirm that Uber is active in the metro before you optimize around pay.</p>
+                            </a>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl p-8 lg:p-10 border border-slate-200 shadow-sm mt-12">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-6">Frequently Asked Questions</h3>
+                    <div class="space-y-4">
+                        <details class="group border border-slate-200 rounded-2xl p-4">
+                            <summary class="font-semibold text-slate-900 cursor-pointer">How much does ${appName} pay by city right now?</summary>
+                            <p class="text-slate-600 mt-3">In the current side-hustle model, ${topCity.city().getCityName()} leads this hub at about $${String.format("%.2f", topCity.netHourly())}/hr net. That is a directional estimate after mileage proxy and self-employment tax assumptions, not a guarantee of live app payouts.</p>
+                        </details>
+                        <details class="group border border-slate-200 rounded-2xl p-4">
+                            <summary class="font-semibold text-slate-900 cursor-pointer">Why is the table sorted by side-hustle instead of full-time?</summary>
+                            <p class="text-slate-600 mt-3">Most "pay by city" searches are really asking which market looks strongest at a typical weekly pace. Side-hustle is the cleanest baseline for that comparison. Each city report still includes part-time and full-time scenarios if your routine is heavier.</p>
+                        </details>
+                        <details class="group border border-slate-200 rounded-2xl p-4">
+                            <summary class="font-semibold text-slate-900 cursor-pointer">What should I click after this page?</summary>
+                            <p class="text-slate-600 mt-3">Open a city report when you care about one market, the best-cities page when you only want rankings, and the calculator when your mileage or hours differ from the default model. This hub currently links ${indexedCityCount} indexable city reports.</p>
+                        </details>
+                    </div>
                 </div>
             </div>
         </div>

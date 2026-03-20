@@ -58,30 +58,49 @@ public class ProgrammaticSeoController {
                 List<CityRankingDto> topCities = Arrays.stream(CityData.values())
                                 .filter(pageIndexPolicyService::isCityReportIndexable)
                                 .map(city -> {
-                                        CityScenario scenario = calculateScenario("Full-time",
-                                                        city.getMarketTier().getFullTimeGross(), 400, 40, city, app);
-                                        return new CityRankingDto(city, scenario.getNetHourly(), "Full-time");
+                                        CityScenario scenario = calculateScenario("Side-Hustle",
+                                                        city.getMarketTier().getSideHustleGross(), 250, 25, city, app);
+                                        return new CityRankingDto(city, scenario.getNetHourly(), "Side-Hustle");
                                 })
                                 .filter(dto -> dto.netHourly() >= 6.0 && dto.netHourly() <= 45.0) // Sanity Gate
                                 .sorted((c1, c2) -> Double.compare(c2.netHourly(), c1.netHourly()))
                                 .limit(10)
                                 .collect(Collectors.toList());
 
+                if (topCities.isEmpty()) {
+                        throw new com.gigwager.exception.ResourceNotFoundException("App pay data not available");
+                }
+
+                CityRankingDto topCity = topCities.get(0);
+                long indexedCityCount = Arrays.stream(CityData.values())
+                                .filter(pageIndexPolicyService::isCityReportIndexable)
+                                .count();
+
                 // Dynamic Date
                 java.time.LocalDate now = java.time.LocalDate.now();
                 String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
                                 .format(now);
 
-                String title = String.format("%s Driver Pay by City (%s): Net After Expenses", appName, monthYear);
+                String title = String.format("%s Pay by City (%s): Net Hourly After Expenses", appName, monthYear);
                 String description = String.format(
-                                "Compare %s pay across U.S. cities with net hourly estimates after mileage, fuel, and self-employment tax assumptions. Updated %s.",
-                                appName, monthYear);
+                                "Compare %s pay across %d city reports. Side-hustle estimates include mileage and self-employment tax assumptions. Each report also adds part-time and full-time views. Updated %s.",
+                                appName, indexedCityCount, monthYear);
                 String canonicalUrl = String.format("%s/salary/%s", AppConstants.BASE_URL, app);
 
                 model.addAttribute("app", app);
                 model.addAttribute("appName", appName);
                 model.addAttribute("topCities", topCities);
+                model.addAttribute("topCity", topCity);
+                model.addAttribute("indexedCityCount", indexedCityCount);
                 model.addAttribute("lastUpdated", monthYear);
+                model.addAttribute("bestCitiesUrl", String.format("/best-cities/%s", app));
+                model.addAttribute("calculatorUrl", "/" + app);
+                model.addAttribute("coverageUrl", app.equals("uber") ? "/uber/where-you-can-drive" : "");
+                model.addAttribute("directoryUrl", "/salary/directory");
+                model.addAttribute("topCityReportUrl",
+                                String.format("/salary/%s/%s", app, topCity.city().getSlug()));
+                model.addAttribute("appHubSchemaJsonLd",
+                                buildAppHubSchemaGraph(appName, app, topCities, indexedCityCount));
                 model.addAttribute("seoMeta",
                                 new SeoMeta(title, description, canonicalUrl, AppConstants.BASE_URL + "/og-image.jpg"));
 
@@ -143,10 +162,10 @@ public class ProgrammaticSeoController {
                 String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
                                 .format(now);
 
-                String title = String.format("Highest-Paying Cities for %s Drivers (%s): Net Earnings Ranking",
+                String title = String.format("Best Cities for %s Drivers (%s): Net Pay Ranking",
                                 appName, monthYear);
                 String description = String.format(
-                                "See which cities produce the highest estimated %s net pay after mileage, fuel, and self-employment tax assumptions. Earnings ranking only, not an official coverage list. Updated %s.",
+                                "See which cities rank highest for estimated %s net pay after mileage and self-employment tax assumptions. Ranking page only, not an official coverage list. Updated %s.",
                                 appName, monthYear);
                 String canonicalUrl = String.format("%s/best-cities/%s", AppConstants.BASE_URL, app);
 
@@ -184,16 +203,48 @@ public class ProgrammaticSeoController {
                 String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
                                 .format(now);
 
-                String title = String.format("Uber vs DoorDash Pay in %s (%s): Who Nets More?", city.getCityName(),
-                                monthYear);
-                String description = String.format(
-                                "Compare Uber and DoorDash in %s with side-hustle net hourly estimates after mileage, fuel, and self-employment tax assumptions.",
-                                city.getCityName());
+                double netHourlyGap = Math.abs(uberScenario.getNetHourly() - doordashScenario.getNetHourly());
+                boolean nearlyTied = netHourlyGap < 0.25;
+                boolean uberWins = uberScenario.getNetHourly() >= doordashScenario.getNetHourly();
+                String winningAppName = uberWins ? "Uber" : "DoorDash";
+                String losingAppName = uberWins ? "DoorDash" : "Uber";
+                double winningNetHourly = uberWins ? uberScenario.getNetHourly() : doordashScenario.getNetHourly();
+
+                String title;
+                String description;
+                if (nearlyTied) {
+                        title = String.format("Uber vs DoorDash Pay in %s (%s): Nearly Tied", city.getCityName(),
+                                        monthYear);
+                        description = String.format(
+                                        "Compare Uber and DoorDash in %s. Side-hustle estimates put both apps near $%.2f/hr net after mileage and tax assumptions. Updated %s.",
+                                        city.getCityName(),
+                                        winningNetHourly,
+                                        monthYear);
+                } else {
+                        title = String.format("Uber vs DoorDash Pay in %s (%s): %s by $%.2f/hr",
+                                        city.getCityName(),
+                                        monthYear,
+                                        winningAppName,
+                                        netHourlyGap);
+                        description = String.format(
+                                        "Compare Uber and DoorDash in %s. Side-hustle estimates put %s at $%.2f/hr net, about $%.2f/hr ahead of %s after mileage and tax assumptions. Updated %s.",
+                                        city.getCityName(),
+                                        winningAppName,
+                                        winningNetHourly,
+                                        netHourlyGap,
+                                        losingAppName,
+                                        monthYear);
+                }
                 String canonicalUrl = String.format("%s/compare/%s/uber-vs-doordash", AppConstants.BASE_URL, citySlug);
 
                 model.addAttribute("city", city);
                 model.addAttribute("uberScenario", uberScenario);
                 model.addAttribute("doordashScenario", doordashScenario);
+                model.addAttribute("winningAppName", winningAppName);
+                model.addAttribute("losingAppName", losingAppName);
+                model.addAttribute("winningNetHourly", winningNetHourly);
+                model.addAttribute("netHourlyGap", netHourlyGap);
+                model.addAttribute("nearlyTied", nearlyTied);
                 model.addAttribute("lastUpdated", monthYear);
                 model.addAttribute("seoMeta",
                                 new SeoMeta(title, description, canonicalUrl, AppConstants.BASE_URL + "/og-image.jpg"));
@@ -531,6 +582,71 @@ public class ProgrammaticSeoController {
                 return toJsonLd(itemList);
         }
 
+        private String buildAppHubSchemaGraph(String appName, String app, List<CityRankingDto> topCities,
+                        long indexedCityCount) {
+                List<Map<String, Object>> breadcrumbItems = new ArrayList<>();
+                breadcrumbItems.add(buildBreadcrumbItem(1, "Home", AppConstants.BASE_URL + "/"));
+                breadcrumbItems.add(buildBreadcrumbItem(2, "Salary Directory", AppConstants.BASE_URL + "/salary/directory"));
+                breadcrumbItems.add(buildBreadcrumbItem(3,
+                                String.format("%s Pay by City", appName),
+                                String.format("%s/salary/%s", AppConstants.BASE_URL, app)));
+
+                Map<String, Object> breadcrumb = new LinkedHashMap<>();
+                breadcrumb.put("@type", "BreadcrumbList");
+                breadcrumb.put("itemListElement", breadcrumbItems);
+
+                List<Map<String, Object>> itemListElements = new ArrayList<>();
+                int limit = Math.min(topCities.size(), 10);
+                for (int i = 0; i < limit; i++) {
+                        CityRankingDto ranking = topCities.get(i);
+                        Map<String, Object> item = new LinkedHashMap<>();
+                        item.put("@type", "ListItem");
+                        item.put("position", i + 1);
+                        item.put("name", ranking.city().getCityName());
+                        item.put("url", String.format("%s/salary/%s/%s",
+                                        AppConstants.BASE_URL,
+                                        app,
+                                        ranking.city().getSlug()));
+                        itemListElements.add(item);
+                }
+
+                Map<String, Object> itemList = new LinkedHashMap<>();
+                itemList.put("@type", "ItemList");
+                itemList.put("name", String.format("%s pay by city reports", appName));
+                itemList.put("itemListOrder", "https://schema.org/ItemListOrderDescending");
+                itemList.put("numberOfItems", itemListElements.size());
+                itemList.put("itemListElement", itemListElements);
+
+                CityRankingDto topCity = topCities.get(0);
+                String q1 = String.format("How much does %s pay by city in 2026?", appName);
+                String a1 = String.format(
+                                "GigVerdict currently tracks %d %s city reports. In the current side-hustle ranking, %s leads at about $%.2f per hour net after mileage and self-employment tax assumptions. Open any city report to compare part-time, side-hustle, and full-time scenarios.",
+                                indexedCityCount,
+                                appName,
+                                topCity.city().getCityName(),
+                                topCity.netHourly());
+
+                String q2 = String.format("Is this an official %s coverage list?", appName);
+                String a2 = app.equals("uber")
+                                ? "No. This hub compares estimated pay by city. Use the separate Uber coverage guide and Uber's official city directory to confirm that a market is active before assuming coverage."
+                                : "No. This hub compares estimated pay by city and is not an official coverage directory. Check DoorDash's own onboarding flow or local app availability to confirm that a market is active.";
+
+                String q3 = String.format("What does each %s city report include?", appName);
+                String a3 = "Each city report includes part-time, side-hustle, and full-time earnings scenarios, mileage-based cost assumptions, quarterly tax context, and links to the calculator so you can adjust the numbers for your own routine.";
+
+                Map<String, Object> faqPage = new LinkedHashMap<>();
+                faqPage.put("@type", "FAQPage");
+                faqPage.put("mainEntity", List.of(
+                                buildFaqQuestion(q1, a1),
+                                buildFaqQuestion(q2, a2),
+                                buildFaqQuestion(q3, a3)));
+
+                Map<String, Object> graph = new LinkedHashMap<>();
+                graph.put("@context", "https://schema.org");
+                graph.put("@graph", List.of(breadcrumb, itemList, faqPage));
+                return toJsonLd(graph);
+        }
+
         private String buildCityFaqJsonLd(String appName, CityData city, CityScenario featuredScenario) {
                 String q1 = String.format("How much does a %s driver make in %s after expenses in 2026?",
                                 appName,
@@ -764,6 +880,15 @@ public class ProgrammaticSeoController {
                 questionMap.put("name", question);
                 questionMap.put("acceptedAnswer", answer);
                 return questionMap;
+        }
+
+        private Map<String, Object> buildBreadcrumbItem(int position, String name, String itemUrl) {
+                Map<String, Object> breadcrumbItem = new LinkedHashMap<>();
+                breadcrumbItem.put("@type", "ListItem");
+                breadcrumbItem.put("position", position);
+                breadcrumbItem.put("name", name);
+                breadcrumbItem.put("item", itemUrl);
+                return breadcrumbItem;
         }
 
         private String toJsonLd(Object value) {
