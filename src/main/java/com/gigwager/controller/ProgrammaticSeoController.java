@@ -166,7 +166,7 @@ public class ProgrammaticSeoController {
                 String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
                                 .format(now);
 
-                String title = String.format("Highest-Paying Cities for %s Drivers (%s): Net Earnings Ranking",
+                String title = String.format("Top Cities for %s Drivers (%s): Net Earnings",
                                 appName, monthYear);
                 String description = String.format(
                                 "See the highest-paying cities for estimated %s net earnings after mileage and tax assumptions. Ranking page only, not a coverage list. Updated %s.",
