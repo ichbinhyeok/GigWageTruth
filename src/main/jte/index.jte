@@ -167,11 +167,17 @@
                                 </a>
                             </div>
                             <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+                                <a href="/uber-after-expenses" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
+                                    Uber after expenses
+                                </a>
+                                <a href="/doordash-after-expenses" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
+                                    DoorDash after expenses
+                                </a>
                                 <a href="/uber/where-you-can-drive" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
                                     Uber city coverage guide
                                 </a>
-                                <a href="/salary/directory" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
-                                    Earnings by city directory
+                                <a href="/multi-apping" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
+                                    Multi-app strategy hub
                                 </a>
                             </div>
                         </div>

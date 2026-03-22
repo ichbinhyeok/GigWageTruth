@@ -34,7 +34,9 @@
             <div class="flex flex-wrap gap-3 justify-center mb-16">
                 <a href="#how-its-calculated" class="px-5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full font-medium text-sm transition-colors">How it's Calculated</a>
                 <a href="#faqs" class="px-5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full font-medium text-sm transition-colors">Top 10 FAQs</a>
-                <a href="/salary/uber" class="px-5 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 rounded-full font-bold text-sm transition-colors border border-emerald-200">See Top Cities Ranking</a>
+                <a href="/uber" class="px-5 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 rounded-full font-bold text-sm transition-colors border border-emerald-200">Run Uber calculator</a>
+                <a href="/taxes/quarterly-estimator" class="px-5 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 rounded-full font-bold text-sm transition-colors border border-emerald-200">Estimate quarterly taxes</a>
+                <a href="/salary/uber" class="px-5 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 rounded-full font-bold text-sm transition-colors border border-emerald-200">Open Uber city hub</a>
             </div>
 
             <!-- How It's Calculated -->

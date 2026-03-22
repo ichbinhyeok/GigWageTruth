@@ -51,6 +51,21 @@
                 <a href="/doordash" class="inline-block px-8 py-4 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition-colors shadow-lg shadow-slate-900/20">DoorDash Calculator</a>
             </div>
 
+            <div class="grid sm:grid-cols-3 gap-4 mb-16">
+                <a href="/taxes/quarterly-estimator" class="rounded-2xl border border-slate-200 bg-white p-5 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
+                    <h3 class="font-bold text-slate-900 mb-2">Quarterly Tax Estimator</h3>
+                    <p class="text-sm text-slate-600">Check how much of your weekly profit needs to be set aside for taxes.</p>
+                </a>
+                <a href="/vehicle-cost/cost-per-mile" class="rounded-2xl border border-slate-200 bg-white p-5 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
+                    <h3 class="font-bold text-slate-900 mb-2">Cost Per Mile Tool</h3>
+                    <p class="text-sm text-slate-600">Test whether your vehicle is strong enough for gig work at your mileage level.</p>
+                </a>
+                <a href="/multi-apping" class="rounded-2xl border border-slate-200 bg-white p-5 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
+                    <h3 class="font-bold text-slate-900 mb-2">Multi-App Strategy</h3>
+                    <p class="text-sm text-slate-600">Learn how drivers turn weak idle time into stronger hourly pay.</p>
+                </a>
+            </div>
+
             <!-- Internal Linking Spider Web -->
             @template.components.related_pages(app = "uber")
 

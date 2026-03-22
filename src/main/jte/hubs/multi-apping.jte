@@ -35,7 +35,9 @@
             <div class="flex flex-wrap gap-3 justify-center mb-16">
                 <a href="#how-to" class="px-5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full font-medium text-sm transition-colors">How To Multi-App</a>
                 <a href="#faqs" class="px-5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full font-medium text-sm transition-colors">Top 10 FAQs</a>
-                <a href="/salary/directory" class="px-5 py-2 bg-amber-50 hover:bg-amber-100 text-amber-800 rounded-full font-bold text-sm transition-colors border border-amber-200">See Your City's Data</a>
+                <a href="/uber" class="px-5 py-2 bg-amber-50 hover:bg-amber-100 text-amber-800 rounded-full font-bold text-sm transition-colors border border-amber-200">Run Uber calculator</a>
+                <a href="/doordash" class="px-5 py-2 bg-amber-50 hover:bg-amber-100 text-amber-800 rounded-full font-bold text-sm transition-colors border border-amber-200">Run DoorDash calculator</a>
+                <a href="/blog/uber-vs-doordash" class="px-5 py-2 bg-amber-50 hover:bg-amber-100 text-amber-800 rounded-full font-bold text-sm transition-colors border border-amber-200">Read app comparison</a>
             </div>
 
             <!-- The Strategy -->

@@ -34,7 +34,9 @@
             <div class="flex flex-wrap gap-3 justify-center mb-16">
                 <a href="#how-its-calculated" class="px-5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full font-medium text-sm transition-colors">How it's Calculated</a>
                 <a href="#faqs" class="px-5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full font-medium text-sm transition-colors">Top 10 FAQs</a>
-                <a href="/salary/doordash" class="px-5 py-2 bg-red-50 hover:bg-red-100 text-red-800 rounded-full font-bold text-sm transition-colors border border-red-200">See Top Dash Cities Ranking</a>
+                <a href="/doordash" class="px-5 py-2 bg-red-50 hover:bg-red-100 text-red-800 rounded-full font-bold text-sm transition-colors border border-red-200">Run DoorDash calculator</a>
+                <a href="/taxes/quarterly-estimator" class="px-5 py-2 bg-red-50 hover:bg-red-100 text-red-800 rounded-full font-bold text-sm transition-colors border border-red-200">Estimate quarterly taxes</a>
+                <a href="/salary/doordash" class="px-5 py-2 bg-red-50 hover:bg-red-100 text-red-800 rounded-full font-bold text-sm transition-colors border border-red-200">Open DoorDash city hub</a>
             </div>
 
             <!-- How It's Calculated -->
