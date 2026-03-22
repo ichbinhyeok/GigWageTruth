@@ -66,7 +66,7 @@
                 </div>
 
                 <h1 class="text-4xl md:text-6xl font-black text-white mb-4 leading-tight">
-                    ${workLevel.getDisplayName()} ${appName} Earnings in ${city.getCityName()}
+                    ${workLevel.getDisplayName()} ${appName} Earnings in ${city.getCityName()} After Expenses
                 </h1>
                 @if(heroHook != null && !heroHook.isBlank())
                     <p class="text-xl text-slate-300 max-w-3xl mb-8">${heroHook}</p>

@@ -5,8 +5,8 @@
 @template.layout.main(
     noIndex = noIndex,
     seoMeta = new SeoMeta(
-        customTitle != null ? customTitle : "Multi-Apping Guide 2026: Clean Stacking Without Getting Deactivated",
-        "Learn the clean stacking system for Uber, DoorDash, Lyft, and Instacart. Reduce dead time, avoid contract violations, and raise net hourly pay without driving faster.",
+        customTitle != null ? customTitle : "How to Multi-App Uber and DoorDash Without Getting Deactivated (2026)",
+        "Learn clean stacking for Uber and DoorDash so you can reduce dead time, avoid contract violations, and raise net hourly pay without juggling two active jobs at once.",
         AppConstants.BASE_URL + "/blog/multi-apping-guide",
         AppConstants.BASE_URL + "/og-image-multiapping.jpg"
     ),
@@ -25,7 +25,7 @@
                         ADVANCED STRATEGY
                     </div>
                     <h1 class="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
-                        The Multi-Apping Guide:<br>Clean Stacking Without Getting Deactivated
+                        How to Multi-App Uber and DoorDash<br>Without Getting Deactivated
                     </h1>
                     <div class="flex justify-center items-center gap-4 text-slate-400 text-sm">
                         <span>By Gabi</span>
@@ -42,7 +42,7 @@
 
                     <div class="prose prose-slate prose-lg max-w-none">
                         <p class="lead text-xl text-slate-600 font-medium mb-8">
-                            If you only run one app, you accept too much dead time. Clean multi-apping lets you source the next good order faster without juggling two active jobs at once.
+                            If you only run one app, you accept too much dead time. Clean multi-apping lets you source the next good Uber trip or DoorDash order faster without juggling two active jobs at once.
                         </p>
 
                         <h2>What Multi-Apping Actually Means</h2>

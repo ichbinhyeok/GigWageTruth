@@ -23,7 +23,10 @@
                         Highest-Paying Cities for ${appName} Drivers
                     </h1>
                     <p class="text-xl text-slate-600 max-w-2xl mx-auto">
-                        Earnings ranking based on estimated net hourly take-home pay after mileage, fuel, and self-employment tax assumptions.
+                        Net earnings ranking based on estimated take-home pay after mileage, fuel, and self-employment tax assumptions.
+                    </p>
+                    <p class="text-sm text-slate-500 max-w-2xl mx-auto mt-3">
+                        Use this page for ranking intent only. It is not an official coverage or supported-cities directory.
                     </p>
                 </div>
 

@@ -81,10 +81,14 @@ public class ProgrammaticSeoController {
                 String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
                                 .format(now);
 
-                String title = String.format("%s Pay by City (%s): Net Hourly After Expenses", appName, monthYear);
+                String title = String.format("%s Earnings by City After Expenses (%s): PT, SH, FT Reports", appName,
+                                monthYear);
                 String description = String.format(
-                                "Compare %s pay across %d city reports. Side-hustle estimates include mileage and self-employment tax assumptions. Each report also adds part-time and full-time views. Updated %s.",
-                                appName, indexedCityCount, monthYear);
+                                "Compare %s earnings across %d city reports. This hub connects city pages, rankings, the calculator%s. Updated %s.",
+                                appName,
+                                indexedCityCount,
+                                app.equals("uber") ? ", and the coverage guide" : "",
+                                monthYear);
                 String canonicalUrl = String.format("%s/salary/%s", AppConstants.BASE_URL, app);
 
                 model.addAttribute("app", app);
@@ -162,10 +166,10 @@ public class ProgrammaticSeoController {
                 String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
                                 .format(now);
 
-                String title = String.format("Best Cities for %s Drivers (%s): Net Pay Ranking",
+                String title = String.format("Highest-Paying Cities for %s Drivers (%s): Net Earnings Ranking",
                                 appName, monthYear);
                 String description = String.format(
-                                "See which cities rank highest for estimated %s net pay after mileage and self-employment tax assumptions. Ranking page only, not an official coverage list. Updated %s.",
+                                "See the highest-paying cities for estimated %s net earnings after mileage and tax assumptions. Ranking page only, not a coverage list. Updated %s.",
                                 appName, monthYear);
                 String canonicalUrl = String.format("%s/best-cities/%s", AppConstants.BASE_URL, app);
 
@@ -213,7 +217,8 @@ public class ProgrammaticSeoController {
                 String title;
                 String description;
                 if (nearlyTied) {
-                        title = String.format("Uber vs DoorDash Pay in %s (%s): Nearly Tied", city.getCityName(),
+                        title = String.format("Uber vs DoorDash in %s (%s): Nearly Tied",
+                                        city.getCityName(),
                                         monthYear);
                         description = String.format(
                                         "Compare Uber and DoorDash in %s. Side-hustle estimates put both apps near $%.2f/hr net after mileage and tax assumptions. Updated %s.",
@@ -221,7 +226,7 @@ public class ProgrammaticSeoController {
                                         winningNetHourly,
                                         monthYear);
                 } else {
-                        title = String.format("Uber vs DoorDash Pay in %s (%s): %s by $%.2f/hr",
+                        title = String.format("Uber vs DoorDash in %s (%s): %s by $%.2f/hr Net",
                                         city.getCityName(),
                                         monthYear,
                                         winningAppName,
@@ -281,12 +286,11 @@ public class ProgrammaticSeoController {
                 // Build unique SEO meta
                 String appName = app.equals("uber") ? "Uber" : "DoorDash";
 
-                String gasPrice = String.format("$%.2f", city.getGasPrice());
-                String title = String.format("%s Pay in %s (%s): $%.2f/hr Net Estimate",
+                String title = String.format("%s Earnings in %s (%s): $%.2f/hr Net",
                                 appName, city.getCityName(), monthYear, featuredScenario.getNetHourly());
                 String description = String.format(
-                                "Estimate real %s earnings in %s. Side-hustle baseline is about $%.2f/hr net after mileage, fuel (%s/gal), and self-employment tax assumptions. Updated %s.",
-                                appName, city.getCityName(), featuredScenario.getNetHourly(), gasPrice, monthYear);
+                                "Compare part-time, side-hustle, and full-time %s earnings in %s. Side-hustle baseline is about $%.2f/hr net after mileage and tax assumptions. Updated %s.",
+                                appName, city.getCityName(), featuredScenario.getNetHourly(), monthYear);
 
                 String canonicalUrl = String.format("%s/salary/%s/%s", AppConstants.BASE_URL, app, citySlug);
                 String appHubCanonicalUrl = String.format("%s/salary/%s", AppConstants.BASE_URL, app);
@@ -381,11 +385,11 @@ public class ProgrammaticSeoController {
                 String otherApp = app.equals("uber") ? "doordash" : "uber";
                 String otherAppName = app.equals("uber") ? "DoorDash" : "Uber";
 
-                String title = String.format("%s %s Pay in %s (%s): $%.2f/hr Net",
+                String title = String.format("%s %s Earnings in %s (%s): $%.2f/hr Net",
                                 appName, workLevel.getDisplayName(), city.getCityName(), monthYear,
                                 scenario.getNetHourly());
                 String description = String.format(
-                                "See %s %s earnings in %s (%d hrs/week): about $%.2f/hr net after mileage, fuel, and self-employment tax assumptions. Compare with %s.",
+                                "See %s %s earnings in %s (%d hrs/week). About $%.2f/hr net after mileage and tax assumptions, with local strategy and calculator links. Compare with %s.",
                                 appName, workLevel.getDisplayName(), city.getCityName(), workLevel.getHoursPerWeek(),
                                 scenario.getNetHourly(), otherAppName);
 
@@ -574,9 +578,9 @@ public class ProgrammaticSeoController {
                 Map<String, Object> itemList = new LinkedHashMap<>();
                 itemList.put("@context", "https://schema.org");
                 itemList.put("@type", "ItemList");
-                itemList.put("name", String.format("Best Cities for %s Drivers", appName));
+                itemList.put("name", String.format("Highest-Paying Cities for %s Drivers", appName));
                 itemList.put("description",
-                                String.format("Rankings of US cities based on %s net hourly pay after expenses.",
+                                String.format("Rankings of US cities based on %s net hourly earnings after expenses.",
                                                 appName));
                 itemList.put("itemListElement", itemListElements);
                 return toJsonLd(itemList);
@@ -588,7 +592,7 @@ public class ProgrammaticSeoController {
                 breadcrumbItems.add(buildBreadcrumbItem(1, "Home", AppConstants.BASE_URL + "/"));
                 breadcrumbItems.add(buildBreadcrumbItem(2, "Salary Directory", AppConstants.BASE_URL + "/salary/directory"));
                 breadcrumbItems.add(buildBreadcrumbItem(3,
-                                String.format("%s Pay by City", appName),
+                                String.format("%s Earnings by City", appName),
                                 String.format("%s/salary/%s", AppConstants.BASE_URL, app)));
 
                 Map<String, Object> breadcrumb = new LinkedHashMap<>();
@@ -612,13 +616,13 @@ public class ProgrammaticSeoController {
 
                 Map<String, Object> itemList = new LinkedHashMap<>();
                 itemList.put("@type", "ItemList");
-                itemList.put("name", String.format("%s pay by city reports", appName));
+                itemList.put("name", String.format("%s earnings by city reports", appName));
                 itemList.put("itemListOrder", "https://schema.org/ItemListOrderDescending");
                 itemList.put("numberOfItems", itemListElements.size());
                 itemList.put("itemListElement", itemListElements);
 
                 CityRankingDto topCity = topCities.get(0);
-                String q1 = String.format("How much does %s pay by city in 2026?", appName);
+                String q1 = String.format("How do %s earnings by city look in 2026?", appName);
                 String a1 = String.format(
                                 "GigVerdict currently tracks %d %s city reports. In the current side-hustle ranking, %s leads at about $%.2f per hour net after mileage and self-employment tax assumptions. Open any city report to compare part-time, side-hustle, and full-time scenarios.",
                                 indexedCityCount,

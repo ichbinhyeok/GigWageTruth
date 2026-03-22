@@ -59,8 +59,8 @@
                 </div>
                 
                 <h1 class="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
-                    Real ${appName} Earnings in ${city.getCityName()}
-                    <span class="block text-emerald-400 mt-2">(2026 Truth)</span>
+                    ${appName} Earnings in ${city.getCityName()} After Expenses
+                    <span class="block text-emerald-400 mt-2">Part-Time, Side-Hustle, and Full-Time Views</span>
                 </h1>
                 
                 <p class="text-xl text-slate-300 max-w-2xl mb-8">

@@ -32,10 +32,16 @@
                         ${appName} Hub
                     </span>
                     <h1 class="text-4xl lg:text-5xl font-black text-slate-900 mb-6 tracking-tight">
-                        Real ${appName} Pay by City
+                        Real ${appName} Earnings by City After Expenses
                     </h1>
                     <p class="text-xl text-slate-600 max-w-2xl mx-auto">
-                        Compare estimated ${appName} net pay by city with a side-hustle-first ranking, then open the city report for part-time, side-hustle, and full-time scenarios. Last updated: ${lastUpdated}.
+                        Use this hub when you want one place to move between city reports, the ranking page, the calculator, and
+                        @if (coverageUrl != null && !coverageUrl.isBlank())
+                            the coverage guide.
+                        @else
+                            the main directory.
+                        @endif
+                        Every city report shows part-time, side-hustle, and full-time scenarios. Last updated: ${lastUpdated}.
                     </p>
                     <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
                         <a href="${bestCitiesUrl}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_app_hub', 'event_label': 'compare_highest_paying_cities' })" class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold transition-colors">
@@ -50,6 +56,21 @@
                             </a>
                         @endif
                     </div>
+                </div>
+
+                <div class="bg-sky-50 border border-sky-200 rounded-2xl p-6 mb-12">
+                    <h2 class="text-lg font-bold text-sky-950 mb-2">Use this page by intent</h2>
+                    <p class="text-sm text-sky-900 leading-relaxed">
+                        This hub is for comparing ${appName} earnings structures across cities. It is not the ranking page,
+                        and
+                        @if (coverageUrl != null && !coverageUrl.isBlank())
+                            it is not an official coverage list.
+                        @else
+                            it is not an official coverage directory.
+                        @endif
+                        Open a city report when you care about one market, the ranking page when you only want the leaders,
+                        and the calculator when your own miles or hours differ from the baseline.
+                    </p>
                 </div>
 
                 <div class="grid md:grid-cols-3 gap-4 mb-12">
@@ -87,6 +108,13 @@
                         <h2 class="text-xl font-bold text-slate-900 mb-2">Run the calculator</h2>
                         <p class="text-sm text-slate-600">Adjust gross, miles, hours, and vehicle assumptions if your routine is stronger or weaker than the model baseline.</p>
                     </a>
+                    @if (coverageUrl != null && !coverageUrl.isBlank())
+                        <a href="${coverageUrl}" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">For coverage intent</p>
+                            <h2 class="text-xl font-bold text-slate-900 mb-2">Check the coverage guide</h2>
+                            <p class="text-sm text-slate-600">Use the official city directory flow before assuming a market is active, then come back here for earnings analysis.</p>
+                        </a>
+                    @endif
                 </div>
 
                 <div class="bg-white rounded-3xl p-8 lg:p-12 border border-slate-200 shadow-sm mb-12">
@@ -166,7 +194,7 @@
                     <h3 class="text-2xl font-bold text-slate-900 mb-6">Frequently Asked Questions</h3>
                     <div class="space-y-4">
                         <details class="group border border-slate-200 rounded-2xl p-4">
-                            <summary class="font-semibold text-slate-900 cursor-pointer">How much does ${appName} pay by city right now?</summary>
+                            <summary class="font-semibold text-slate-900 cursor-pointer">How do ${appName} earnings compare by city right now?</summary>
                             <p class="text-slate-600 mt-3">In the current side-hustle model, ${topCity.city().getCityName()} leads this hub at about $${String.format("%.2f", topCity.netHourly())}/hr net. That is a directional estimate after mileage proxy and self-employment tax assumptions, not a guarantee of live app payouts.</p>
                         </details>
                         <details class="group border border-slate-200 rounded-2xl p-4">

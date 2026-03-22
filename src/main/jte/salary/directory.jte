@@ -4,8 +4,8 @@
 @template.layout.main(
     noIndex = noIndex,
     seoMeta = new SeoMeta(
-        "Gig Driver Salary by City - Complete US Directory",
-        "Compare real Uber and DoorDash earnings across major US cities. See how gas prices, traffic, and costs affect your hourly wage.",
+        "Uber and DoorDash Earnings by City (2026): US Directory",
+        "Browse Uber and DoorDash earnings by city after mileage, traffic, and tax assumptions. Jump from the full directory into app hubs, rankings, and city reports.",
         com.gigwager.util.AppConstants.BASE_URL + "/salary/directory",
         com.gigwager.util.AppConstants.BASE_URL + "/og-image.jpg"
     ),
@@ -15,11 +15,11 @@
             <!-- Hero -->
             <div class="bg-slate-900 py-20 text-center px-6">
                 <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
-                    Gig Driver Salary <span class="text-emerald-400">by City</span>
+                    Uber and DoorDash <span class="text-emerald-400">Earnings by City</span>
                 </h1>
                 <p class="text-lg text-slate-400 max-w-2xl mx-auto">
-                    See real earnings after expenses for Uber and DoorDash drivers in major US cities.
-                    Every city has unique gas prices, traffic patterns, and market conditions.
+                    Browse the full city directory when you want a market list first, then jump into the app hub, ranking page,
+                    or city report for deeper after-expenses analysis.
                 </p>
             </div>
 
@@ -64,11 +64,11 @@
                                     <div class="grid grid-cols-2 gap-2">
                                         <a href="/salary/uber/${city.getSlug()}" 
                                            class="text-center px-3 py-2 bg-slate-900 text-white text-sm font-semibold rounded-lg hover:bg-slate-800 transition">
-                                            🚗 Uber
+                                            Uber
                                         </a>
                                         <a href="/salary/doordash/${city.getSlug()}" 
                                            class="text-center px-3 py-2 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition">
-                                            🍔 DoorDash
+                                            DoorDash
                                         </a>
                                     </div>
                                 </div>

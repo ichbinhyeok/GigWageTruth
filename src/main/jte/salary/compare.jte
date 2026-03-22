@@ -26,7 +26,7 @@
                         ${city.getCityName()} Comparison
                     </span>
                     <h1 class="text-4xl lg:text-5xl font-black text-slate-900 mb-6 tracking-tight">
-                        Uber vs DoorDash in ${city.getCityName()}
+                        Uber vs DoorDash Earnings in ${city.getCityName()} After Expenses
                     </h1>
                     <p class="text-xl text-slate-600 max-w-2xl mx-auto">
                         @if (nearlyTied)
@@ -34,6 +34,13 @@
                         @else
                             Current side-hustle estimates show <strong>${winningAppName}</strong> ahead by <strong>$${String.format("%.2f", netHourlyGap)}/hr net</strong> in ${city.getCityName()} after IRS mileage proxy and self-employment tax assumptions.
                         @endif
+                    </p>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-2xl p-5 mb-8">
+                    <p class="text-sm text-slate-600">
+                        Use this page when your question is <strong>which app pays more in ${city.getCityName()}</strong>.
+                        Open the app-specific city reports below when you want the deeper part-time, side-hustle, and full-time breakdowns.
                     </p>
                 </div>
 
