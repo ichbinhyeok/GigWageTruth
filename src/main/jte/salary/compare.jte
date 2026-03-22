@@ -44,6 +44,21 @@
                     </p>
                 </div>
 
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-10">
+                    <a href="/uber?gross=${uberScenario.getGrossWeekly()}&miles=${uberScenario.getMiles()}&hours=${uberScenario.getHours()}&gasPrice=${city.getGasPrice()}" class="rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-bold px-5 py-4 transition-colors">
+                        Run Uber calculator
+                    </a>
+                    <a href="/doordash?gross=${doordashScenario.getGrossWeekly()}&miles=${doordashScenario.getMiles()}&hours=${doordashScenario.getHours()}&gasPrice=${city.getGasPrice()}" class="rounded-2xl bg-red-600 hover:bg-red-700 text-white font-bold px-5 py-4 transition-colors">
+                        Run DoorDash calculator
+                    </a>
+                    <a href="/salary/uber/${city.getSlug()}" class="rounded-2xl bg-white border border-slate-200 hover:border-slate-300 text-slate-900 font-bold px-5 py-4 transition-colors">
+                        Uber city report
+                    </a>
+                    <a href="/salary/doordash/${city.getSlug()}" class="rounded-2xl bg-white border border-slate-200 hover:border-slate-300 text-slate-900 font-bold px-5 py-4 transition-colors">
+                        DoorDash city report
+                    </a>
+                </div>
+
                 <div class="bg-indigo-50 border-l-4 border-indigo-500 p-6 rounded-r-xl mb-12 shadow-sm">
                     <h2 class="text-xl font-bold text-indigo-900 mb-2 flex items-center gap-2">
                         <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>

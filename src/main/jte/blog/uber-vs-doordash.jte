@@ -105,10 +105,10 @@
 
                         <div class="bg-slate-900 p-8 rounded-2xl text-white my-12 text-center">
                             <h4 class="text-2xl font-bold mb-4">Are you actually making a profit?</h4>
-                                <p class="text-slate-400 mb-6">Our calculator knows the difference between Uber's insurance costs and DoorDash's gas consumption.</p>
+                                <p class="text-slate-400 mb-6">Run the calculators with your own mileage and hours before you trust any generic city average.</p>
                                 <div class="flex flex-col sm:flex-row justify-center gap-4">
-                                    <a href="/salary/uber/austin" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-bold transition">Uber Profit Calc</a>
-                                    <a href="/salary/doordash/austin" class="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-lg font-bold transition">DoorDash Profit Calc</a>
+                                    <a href="/uber" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-bold transition">Uber calculator</a>
+                                    <a href="/doordash" class="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-lg font-bold transition">DoorDash calculator</a>
                                 </div>
                         </div>
 

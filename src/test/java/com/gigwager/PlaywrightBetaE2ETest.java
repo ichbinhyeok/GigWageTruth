@@ -3,6 +3,7 @@ package com.gigwager;
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.BrowserType;
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 import org.junit.jupiter.api.AfterAll;
@@ -84,7 +85,8 @@ public class PlaywrightBetaE2ETest {
         try (BrowserContext context = browser.newContext();
                 Page page = context.newPage()) {
             page.navigate(baseUrl + "/");
-            page.locator("button:has-text('DoorDash')").click();
+            page.locator("button:has-text('DoorDash')").evaluate("el => el.click()");
+            page.waitForTimeout(150);
             page.locator("input[name='gross']").fill("900");
             page.locator("input[name='miles']").fill("620");
             page.locator("input[name='hours']").fill("32");

@@ -11,7 +11,7 @@
     content = @`
         <div class="lg:h-[calc(100vh-4rem)] flex flex-col lg:flex-row overflow-hidden">
 
-            <div class="order-1 lg:order-1 lg:w-1/2 bg-slate-50 border-r border-slate-200 p-8 lg:p-20 flex flex-col justify-end relative">
+            <div class="order-2 lg:order-1 lg:w-1/2 bg-slate-50 border-r border-slate-200 p-8 lg:p-20 flex flex-col justify-end relative">
                 <div class="absolute top-0 left-0 w-full h-full overflow-hidden flex items-center justify-center opacity-80 pointer-events-none">
                      <canvas
                          id="cobe"
@@ -82,7 +82,7 @@
                 </div>
             </div>
 
-            <div class="order-2 lg:order-2 lg:w-1/2 bg-white p-6 lg:p-20 flex items-center justify-center overflow-y-auto">
+            <div class="order-1 lg:order-2 lg:w-1/2 bg-white p-6 lg:p-20 flex items-center justify-center overflow-y-auto">
                 <div class="w-full max-w-lg space-y-8">
 
                     <div x-data="{ app: 'rideshare', actionUrl: '/uber' }" class="bg-white rounded-3xl border-2 border-slate-100 shadow-2xl shadow-slate-200/50 p-6 md:p-10 relative">
@@ -94,12 +94,12 @@
                         <div class="grid grid-cols-2 gap-2 mb-8 p-1 bg-slate-100 rounded-xl">
                             <button @click="app = 'rideshare'; actionUrl = '/uber'"
                                     :class="app === 'rideshare' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'"
-                                    class="py-2.5 text-sm font-bold rounded-lg transition-all flex items-center justify-center gap-2">
+                                    class="scroll-mt-24 py-2.5 text-sm font-bold rounded-lg transition-all flex items-center justify-center gap-2">
                                 <span>Ride</span> Uber / Lyft
                             </button>
                             <button @click="app = 'delivery'; actionUrl = '/doordash'"
                                     :class="app === 'delivery' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'"
-                                    class="py-2.5 text-sm font-bold rounded-lg transition-all flex items-center justify-center gap-2">
+                                    class="scroll-mt-24 py-2.5 text-sm font-bold rounded-lg transition-all flex items-center justify-center gap-2">
                                 <span>Delivery</span> DoorDash
                             </button>
                         </div>
@@ -151,19 +151,27 @@
                         </form>
 
                         <div class="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                            <p class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-3">Research First</p>
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-3">Start With A Decision</p>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
-                                <a href="/salary/uber" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
-                                    Uber pay by city
+                                <a href="/net-hourly-calculator" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
+                                    Net hourly calculator
                                 </a>
-                                <a href="/uber/where-you-can-drive" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
-                                    Where you can drive for Uber
+                                <a href="/taxes/quarterly-estimator" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
+                                    Quarterly tax estimator
                                 </a>
-                                <a href="/salary/doordash" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
-                                    DoorDash pay by city
+                                <a href="/vehicle-cost/cost-per-mile" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
+                                    Cost per mile calculator
                                 </a>
                                 <a href="/blog/multi-apping-guide" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
-                                    Clean stacking guide
+                                    Multi-app without deactivation
+                                </a>
+                            </div>
+                            <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+                                <a href="/uber/where-you-can-drive" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
+                                    Uber city coverage guide
+                                </a>
+                                <a href="/salary/directory" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
+                                    Earnings by city directory
                                 </a>
                             </div>
                         </div>

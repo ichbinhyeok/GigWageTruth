@@ -89,13 +89,32 @@ Primary source: Google Search Console (GA4 property access still pending)
   - `Uber`
   - `DoorDash`
 - Repositioned `/blog/multi-apping-guide` around the more literal query intent `How to multi-app Uber and DoorDash without getting deactivated`.
+- Rebalanced the homepage, shared toolkit links, top navigation, and blog CTA paths so the site now pushes users toward:
+  - calculators
+  - quarterly tax estimator
+  - cost-per-mile tool
+  - coverage guide
+  - decision-first blog content
+- Reduced the prominence of `salary-city` and directory-first paths in the first-click experience so the pivot can test whether stronger decision intent improves clicks and downstream tool usage.
+- Rewrote blog index card headlines and CTA copy to match more literal user questions instead of abstract editorial phrasing.
+- Reframed the highest-priority `salary-city` titles and descriptions around the more direct question `Is {app} worth it in {city}?` so high-impression city pages carry a stronger click hook.
+- Added compare-path links in the highest-value templates so users and crawlers can move from:
+  - app hub -> compare page
+  - city page -> compare page
+  - directory -> compare page
+- Reworked `/salary/uber` hub copy so it is more distinct from the ranking page and directory, with a clearer role for:
+  - city reports
+  - compare pages
+  - calculator
+  - coverage guide
+- Adjusted the mobile home-page order so the calculator appears before the long brand narrative, reducing friction for calculator-first usage and stabilizing the E2E flow that mirrors that path.
 
 ## Validation Result
 - `EncodingCorruptionGuardTest`: pass
 - `OrganicMonitoringRegressionTest`: pass
 - `.\gradlew.bat test --no-daemon`: pass
 - `build/reports/organic-monitoring-report.json`: `failures = 0`
-- Remaining warning after the latest local pass: `/best-cities/uber` title may still truncate at `71` characters
+- `build/reports/organic-monitoring-report.json`: `warnings = 0`
 
 ## What We Are Testing Now
 - Hypothesis 1: narrowing `/best-cities/{app}` to explicit earnings intent will reduce low-quality impressions and improve CTR.

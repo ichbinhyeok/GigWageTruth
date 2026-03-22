@@ -20,6 +20,7 @@
 @param String calculatorUrl = ""
 @param String taxEstimatorUrl = ""
 @param String bestCitiesUrl = ""
+@param String compareUrl = ""
 @template.layout.main(
     noIndex = noIndex,
     seoMeta = seoMeta,
@@ -59,22 +60,28 @@
                 </div>
                 
                 <h1 class="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
-                    ${appName} Earnings in ${city.getCityName()} After Expenses
+                    Is ${appName} Worth It in ${city.getCityName()}?
+                    <span class="block text-white">${appName} Earnings After Expenses</span>
                     <span class="block text-emerald-400 mt-2">Part-Time, Side-Hustle, and Full-Time Views</span>
                 </h1>
                 
                 <p class="text-xl text-slate-300 max-w-2xl mb-8">
-                    Stop guessing. See your <strong>estimated net hourly wage</strong> after mileage costs
+                    Stop guessing. See whether ${appName} is actually worth it in ${city.getCityName()} after mileage costs
                     (IRS rate: $0.725/mi), vehicle depreciation, and taxes. Local gas: $${String.format("%.2f", city.getGasPrice())}/gal.
                 </p>
 
-                <div class="grid sm:grid-cols-3 gap-3 mb-8">
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
                     <a href="${calculatorUrl}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_city_report', 'event_label': 'open_prefilled_calculator' })" class="rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-5 py-4 transition-colors shadow-lg shadow-emerald-500/20">
                         Run this scenario in the calculator
                     </a>
                     <a href="${taxEstimatorUrl}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_city_report', 'event_label': 'estimate_quarterly_taxes' })" class="rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-bold px-5 py-4 transition-colors">
                         Estimate quarterly taxes
                     </a>
+                    @if (compareUrl != null && !compareUrl.isBlank())
+                        <a href="${compareUrl}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_city_report', 'event_label': 'open_compare_page' })" class="rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-bold px-5 py-4 transition-colors">
+                            Compare Uber vs DoorDash here
+                        </a>
+                    @endif
                     <a href="${bestCitiesUrl}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_city_report', 'event_label': 'compare_best_cities' })" class="rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-bold px-5 py-4 transition-colors">
                         Compare highest-paying cities
                     </a>
@@ -519,10 +526,18 @@
                      <p class="text-slate-600 mb-4 text-sm">
                         Curious if ${otherAppName} pays better in ${city.getCityName()}?
                     </p>
-                    <a href="${otherAppUrl}" 
-                       class="inline-block px-6 py-3 bg-white border border-slate-300 text-slate-900 font-bold rounded-lg hover:bg-slate-50 transition shadow-sm">
-                        Compare with ${otherAppName} in ${city.getCityName()} now &rarr;
-                    </a>
+                    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                        @if (compareUrl != null && !compareUrl.isBlank())
+                            <a href="${compareUrl}" 
+                               class="inline-block px-6 py-3 bg-slate-900 text-white font-bold rounded-lg hover:bg-slate-800 transition shadow-sm">
+                                Open full Uber vs DoorDash compare &rarr;
+                            </a>
+                        @endif
+                        <a href="${otherAppUrl}" 
+                           class="inline-block px-6 py-3 bg-white border border-slate-300 text-slate-900 font-bold rounded-lg hover:bg-slate-50 transition shadow-sm">
+                            View ${otherAppName} city details &rarr;
+                        </a>
+                    </div>
                 </div>
             </section>
 

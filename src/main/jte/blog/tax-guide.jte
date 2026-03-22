@@ -128,11 +128,16 @@
                     <!-- CTA -->
                     <div class="mt-16 pt-8 border-t border-slate-200">
                         <div class="bg-indigo-900 rounded-xl p-8 text-center text-white">
-                            <h3 class="text-2xl font-bold mb-4">Calculate Your True Net Wage</h3>
-                            <p class="text-indigo-200 mb-6">See how taxes and depreciation hit your specific city.</p>
-                            <a href="/salary/directory" class="inline-block px-8 py-4 bg-white text-indigo-900 font-bold rounded-lg hover:bg-indigo-50 transition transform hover:-translate-y-1 shadow-lg">
-                                Find My City
-                            </a>
+                            <h3 class="text-2xl font-bold mb-4">Estimate The Tax Hit Before It Hurts</h3>
+                            <p class="text-indigo-200 mb-6">Use the quarterly estimator and the main calculator before you dig into city-by-city research.</p>
+                            <div class="flex flex-wrap justify-center gap-3">
+                                <a href="/taxes/quarterly-estimator" class="inline-block px-8 py-4 bg-white text-indigo-900 font-bold rounded-lg hover:bg-indigo-50 transition transform hover:-translate-y-1 shadow-lg">
+                                    Open tax estimator
+                                </a>
+                                <a href="/net-hourly-calculator" class="inline-block px-8 py-4 bg-indigo-700 text-white font-bold rounded-lg hover:bg-indigo-600 transition transform hover:-translate-y-1 shadow-lg">
+                                    Open net hourly tool
+                                </a>
+                            </div>
                         </div>
                     </div>
 

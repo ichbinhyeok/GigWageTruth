@@ -4,8 +4,8 @@
 @template.layout.main(
     noIndex = noIndex,
     seoMeta = new SeoMeta(
-        customTitle != null ? customTitle : "Gig Driver Blog - The Truth About App Pay",
-        "Honest guides, data-backed analysis, and strategies to increase your hourly wage on Uber, DoorDash, and Lyft.",
+        customTitle != null ? customTitle : "Gig Driver Guides - Taxes, Multi-Apping, and Real Pay",
+        "Decision-first guides for gig workers: quarterly taxes, multi-apping, hidden costs, and after-expenses earnings.",
         com.gigwager.util.AppConstants.BASE_URL + "/blog",
         com.gigwager.util.AppConstants.BASE_URL + "/og-image.jpg"
     ),
@@ -14,9 +14,9 @@
             
             <!-- Hero -->
             <div class="bg-slate-900 py-20 text-center px-6">
-                <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">Gig Driver <span class="text-emerald-400">Truth</span> Blog</h1>
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">Gig Driver <span class="text-emerald-400">Decision Guides</span></h1>
                 <p class="text-lg text-slate-400 max-w-2xl mx-auto">
-                    No fluff. No corporate PR. Just the raw data and strategies you need to actually make money in 2026.
+                    Start with the question you are trying to answer: taxes, hidden car costs, app comparison, or multi-apping without getting deactivated.
                 </p>
             </div>
 
@@ -33,10 +33,10 @@
                         </div>
                         <div class="p-6 flex-1 flex flex-col">
                             <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-emerald-600 transition-colors">
-                                The Silent Killer: Why Your "$100 Day" is Actually Only $60
+                                Hidden Costs of Uber and DoorDash: Why "$100 Gross" Can Mean "$60 Net"
                             </h2>
                             <p class="text-slate-600 text-sm mb-4 line-clamp-3">
-                                Depreciation is the silent killer of gig worker profits. Learn the math of why every mile you drive is a slice of your car's value disappearing.
+                                Depreciation, return miles, and maintenance turn decent-looking gross pay into weak net pay. This guide shows where the money disappears.
                             </p>
                             <div class="mt-auto flex items-center gap-2 text-xs text-slate-400 font-medium">
                                 <span>9 min read</span>
@@ -55,10 +55,10 @@
                         </div>
                         <div class="p-6 flex-1 flex flex-col">
                             <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-emerald-600 transition-colors">
-                                Multi-Apping Guide 2026: Clean Stacking Without Getting Deactivated
+                                How to Multi-App Uber and DoorDash Without Getting Deactivated
                             </h2>
                             <p class="text-slate-600 text-sm mb-4 line-clamp-3">
-                                Learn the clean stacking system for Uber, DoorDash, Lyft, and Instacart. Cut dead time, avoid platform violations, and raise net hourly pay without juggling two active jobs.
+                                Learn the clean stacking system for Uber and DoorDash. Cut dead time, avoid platform violations, and raise net hourly pay without juggling two active jobs.
                             </p>
                             <div class="mt-auto flex items-center gap-2 text-xs text-slate-400 font-medium">
                                 <span>10 min read</span>
@@ -77,10 +77,10 @@
                         </div>
                         <div class="p-6 flex-1 flex flex-col">
                             <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
-                                Gig Worker Tax Guide 2026: Don't Overpay the IRS
+                                Gig Worker Tax Guide 2026: Quarterly Taxes, Mileage, and Write-Offs
                             </h2>
                             <p class="text-slate-600 text-sm mb-4 line-clamp-3">
-                                @template.components.irs_rate_snippet() Learn how to estimate deductions for your car, phone, and hot bags to lower your tax burden.
+                                Learn how quarterly taxes, mileage tracking, and common deductions actually work for 1099 gig workers.
                             </p>
                             <div class="mt-auto flex items-center gap-2 text-xs text-slate-400 font-medium">
                                 <span>8 min read</span>
@@ -99,10 +99,10 @@
                         </div>
                         <div class="p-6 flex-1 flex flex-col">
                             <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-red-600 transition-colors">
-                                Uber vs. DoorDash 2026: Which App Actually Pays More?
+                                Uber vs DoorDash: Which App Pays More After Expenses?
                             </h2>
                             <p class="text-slate-600 text-sm mb-4 line-clamp-3">
-                                Don't just look at the gross pay. We compare stress, vehicle wear, and hidden expenses to see which app is better for your personality.
+                                Compare the two apps after mileage, taxes, wait time, and car wear so you can choose the better fit for your market and routine.
                             </p>
                             <div class="mt-auto flex items-center gap-2 text-xs text-slate-400 font-medium">
                                 <span>7 min read</span>

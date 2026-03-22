@@ -119,11 +119,12 @@
                         </p>
 
                         <div class="bg-orange-50 p-8 rounded-2xl border border-orange-200 mt-12">
-                            <h4 class="text-xl font-bold text-orange-900 mb-2">Want to see where clean stacking helps most?</h4>
-                            <p class="text-orange-800 mb-6">Compare Uber and DoorDash net pay by city before you decide which apps deserve a slot on your screen.</p>
+                            <h4 class="text-xl font-bold text-orange-900 mb-2">Want to test whether multi-apping is worth it?</h4>
+                            <p class="text-orange-800 mb-6">Run your own numbers first, then compare the apps with city-level context only if you still need it.</p>
                             <div class="flex flex-wrap gap-3">
-                                <a href="/salary/uber" class="inline-block bg-orange-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-orange-700 transition">See Uber pay by city</a>
-                                <a href="/salary/doordash" class="inline-block bg-white text-orange-700 px-6 py-3 rounded-lg font-bold border border-orange-300 hover:bg-orange-100 transition">See DoorDash pay by city</a>
+                                <a href="/uber" class="inline-block bg-orange-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-orange-700 transition">Open Uber calculator</a>
+                                <a href="/doordash" class="inline-block bg-white text-orange-700 px-6 py-3 rounded-lg font-bold border border-orange-300 hover:bg-orange-100 transition">Open DoorDash calculator</a>
+                                <a href="/blog/uber-vs-doordash" class="inline-block bg-white text-orange-700 px-6 py-3 rounded-lg font-bold border border-orange-300 hover:bg-orange-100 transition">Read app comparison</a>
                             </div>
                         </div>
 

@@ -13,6 +13,8 @@
 @param String coverageUrl = ""
 @param String directoryUrl = ""
 @param String topCityReportUrl = ""
+@param String comparisonUrl = ""
+@param String comparisonCityName = ""
 @param String appHubSchemaJsonLd = "{}"
 @param SeoMeta seoMeta
 @param Boolean noIndex = false
@@ -32,10 +34,11 @@
                         ${appName} Hub
                     </span>
                     <h1 class="text-4xl lg:text-5xl font-black text-slate-900 mb-6 tracking-tight">
-                        Real ${appName} Earnings by City After Expenses
+                        Is ${appName} Worth It?
+                        <span class="block text-slate-900">Real Earnings by City After Expenses</span>
                     </h1>
                     <p class="text-xl text-slate-600 max-w-2xl mx-auto">
-                        Use this hub when you want one place to move between city reports, the ranking page, the calculator, and
+                        Use this hub when you want one place to move between city reports, compare pages, the ranking page, the calculator, and
                         @if (coverageUrl != null && !coverageUrl.isBlank())
                             the coverage guide.
                         @else
@@ -50,6 +53,11 @@
                         <a href="${topCityReportUrl}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_app_hub', 'event_label': 'open_top_city_report' })" class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-white border border-slate-200 hover:border-emerald-200 hover:bg-emerald-50 text-slate-900 font-bold transition-colors">
                             Open ${topCity.city().getCityName()}
                         </a>
+                        @if (comparisonUrl != null && !comparisonUrl.isBlank())
+                            <a href="${comparisonUrl}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_app_hub', 'event_label': 'open_city_compare_page' })" class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-white border border-slate-200 hover:border-indigo-200 hover:bg-indigo-50 text-slate-900 font-bold transition-colors">
+                                Compare in ${comparisonCityName}
+                            </a>
+                        @endif
                         @if (coverageUrl != null && !coverageUrl.isBlank())
                             <a href="${coverageUrl}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_app_hub', 'event_label': 'check_official_coverage_guide' })" class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-white border border-slate-200 hover:border-sky-200 hover:bg-sky-50 text-slate-900 font-bold transition-colors">
                                 Check official coverage guide
@@ -60,7 +68,7 @@
 
                 <div class="bg-sky-50 border border-sky-200 rounded-2xl p-6 mb-12">
                     <h2 class="text-lg font-bold text-sky-950 mb-2">Use this page by intent</h2>
-                    <p class="text-sm text-sky-900 leading-relaxed">
+                        <p class="text-sm text-sky-900 leading-relaxed">
                         This hub is for comparing ${appName} earnings structures across cities. It is not the ranking page,
                         and
                         @if (coverageUrl != null && !coverageUrl.isBlank())
@@ -68,8 +76,8 @@
                         @else
                             it is not an official coverage directory.
                         @endif
-                        Open a city report when you care about one market, the ranking page when you only want the leaders,
-                        and the calculator when your own miles or hours differ from the baseline.
+                        Open a city report when you care about one market, the compare page when you are choosing between apps,
+                        the ranking page when you only want the leaders, and the calculator when your own miles or hours differ from the baseline.
                     </p>
                 </div>
 
@@ -92,12 +100,19 @@
                     </div>
                 </div>
 
-                <div class="grid lg:grid-cols-3 gap-4 mb-12">
+                <div class="grid lg:grid-cols-2 gap-4 mb-12">
                     <a href="${topCityReportUrl}" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
                         <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Start here</p>
                         <h2 class="text-xl font-bold text-slate-900 mb-2">Open a city report</h2>
                         <p class="text-sm text-slate-600">Use the city page when you want concrete weekly gross, miles, hours, taxes, and calculator links for one market.</p>
                     </a>
+                    @if (comparisonUrl != null && !comparisonUrl.isBlank())
+                        <a href="${comparisonUrl}" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">For app choice</p>
+                            <h2 class="text-xl font-bold text-slate-900 mb-2">Compare Uber vs DoorDash in ${comparisonCityName}</h2>
+                            <p class="text-sm text-slate-600">Use the compare page when your real question is which app pays more after expenses in one market.</p>
+                        </a>
+                    @endif
                     <a href="${bestCitiesUrl}" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
                         <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">For ranking intent</p>
                         <h2 class="text-xl font-bold text-slate-900 mb-2">See the full best-cities list</h2>
@@ -173,6 +188,12 @@
                             <p class="font-bold text-slate-900">Full city directory</p>
                             <p class="text-sm text-slate-600 mt-1">Browse every indexed market, not just the current leaders.</p>
                         </a>
+                        @if (comparisonUrl != null && !comparisonUrl.isBlank())
+                            <a href="${comparisonUrl}" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
+                                <p class="font-bold text-slate-900">Compare apps in ${comparisonCityName}</p>
+                                <p class="text-sm text-slate-600 mt-1">Check the side-by-side winner before you go deeper into single-app city pages.</p>
+                            </a>
+                        @endif
                         <a href="${bestCitiesUrl}" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
                             <p class="font-bold text-slate-900">Best-cities ranking</p>
                             <p class="text-sm text-slate-600 mt-1">Stay in ranking mode if you are comparing markets for a move or a trip.</p>

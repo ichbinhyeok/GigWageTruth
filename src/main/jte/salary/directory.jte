@@ -1,11 +1,12 @@
 @import com.gigwager.model.SeoMeta
 @import com.gigwager.model.CityData
+@param java.util.Set<String> comparableCitySlugs
 @param Boolean noIndex = false
 @template.layout.main(
     noIndex = noIndex,
     seoMeta = new SeoMeta(
-        "Uber and DoorDash Earnings by City (2026): US Directory",
-        "Browse Uber and DoorDash earnings by city after mileage, traffic, and tax assumptions. Jump from the full directory into app hubs, rankings, and city reports.",
+        "Which City Pays Best for Uber or DoorDash? US Directory",
+        "Browse Uber and DoorDash earnings by city, then jump into compare pages, app hubs, rankings, and city reports after expenses.",
         com.gigwager.util.AppConstants.BASE_URL + "/salary/directory",
         com.gigwager.util.AppConstants.BASE_URL + "/og-image.jpg"
     ),
@@ -15,11 +16,11 @@
             <!-- Hero -->
             <div class="bg-slate-900 py-20 text-center px-6">
                 <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
-                    Uber and DoorDash <span class="text-emerald-400">Earnings by City</span>
+                    Which City Pays Best for <span class="text-emerald-400">Uber or DoorDash?</span>
                 </h1>
                 <p class="text-lg text-slate-400 max-w-2xl mx-auto">
-                    Browse the full city directory when you want a market list first, then jump into the app hub, ranking page,
-                    or city report for deeper after-expenses analysis.
+                    Browse the full city directory when you want a market list first, then jump into compare pages, app hubs,
+                    rankings, or city reports for deeper after-expenses analysis.
                 </p>
             </div>
 
@@ -71,6 +72,12 @@
                                             DoorDash
                                         </a>
                                     </div>
+                                    @if(comparableCitySlugs.contains(city.getSlug()))
+                                        <a href="/compare/${city.getSlug()}/uber-vs-doordash"
+                                           class="mt-2 block text-center px-3 py-2 bg-white border border-slate-300 text-slate-900 text-sm font-semibold rounded-lg hover:bg-slate-100 transition">
+                                            Compare Uber vs DoorDash
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
                             @else

@@ -136,9 +136,10 @@
 
             <!-- Simple Menu -->
             <nav class="flex space-x-6 text-sm font-medium text-slate-600">
-                <a href="/salary/directory" class="hover:text-emerald-600 transition hidden sm:inline-block">Directory</a>
                 <a href="/" class="hover:text-emerald-600 transition">Calculator</a>
-                <a href="/blog" class="hover:text-emerald-600 transition">Blog</a>
+                <a href="/net-hourly-calculator" class="hover:text-emerald-600 transition hidden sm:inline-block">Tools</a>
+                <a href="/blog" class="hover:text-emerald-600 transition">Guides</a>
+                <a href="/salary/directory" class="hover:text-emerald-600 transition hidden sm:inline-block">Cities</a>
             </nav>
         </div>
     </header>
@@ -153,7 +154,10 @@
         <div class="max-w-5xl mx-auto px-4 text-center">
             <p class="text-slate-900 font-semibold mb-2">GigWageTruth</p>
             <div class="flex flex-col md:flex-row flex-wrap justify-center items-center gap-x-6 gap-y-3 mb-6 text-sm text-slate-500">
-                <a href="/salary/directory" class="hover:text-emerald-600 transition">Salary by City</a>
+                <a href="/net-hourly-calculator" class="hover:text-emerald-600 transition">Net Hourly Tool</a>
+                <a href="/taxes/quarterly-estimator" class="hover:text-emerald-600 transition">Quarterly Taxes</a>
+                <a href="/vehicle-cost/cost-per-mile" class="hover:text-emerald-600 transition">Cost Per Mile</a>
+                <a href="/salary/directory" class="hover:text-emerald-600 transition">Earnings by City</a>
                 <a href="/blog" class="hover:text-emerald-600 transition border-b-2 border-emerald-500/20 md:border-0">Blog</a>
                 <a href="/about" class="hover:text-emerald-600 transition">About</a>
                 <a href="/methodology" class="hover:text-emerald-600 transition">Methodology</a>
