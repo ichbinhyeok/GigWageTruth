@@ -1,23 +1,33 @@
 @import com.gigwager.model.SeoMeta
 @import com.gigwager.util.AppConstants
+@import com.gigwager.model.GigCalculationResult
 @import com.gigwager.model.Verdict
 @param Double initialGross
 @param Double initialMiles  
 @param Double initialHours
+@param Double initialTips = 0.0
+@param Double initialBonuses = 0.0
+@param Double initialActiveTime = 0.0
 @param Double initialGasPrice
+@param Double initialTaxRate = 15.3
+@param Boolean initialRoundTrip = false
+@param String initialCalculationMode = "standard"
+@param String initialSelectedVehicleId = null
+@param Double initialCustomMpg = 25.0
+@param Double initialCustomMaintenance = 0.12
+@param Double initialCustomDepreciation = 0.15
 @param String app
 @param String customTitle
 @param Verdict verdict
-@param Double estimatedTaxes
-@param Double estimatedVehicleCost
+@param GigCalculationResult calculationResult
 @param Boolean noIndex = false
 @template.layout.main(
     noIndex = noIndex,
     seoMeta = new SeoMeta(
-        customTitle != null ? customTitle : (app.equals("uber") ? "My Real Hourly Wage - The Shocking Truth" : "DoorDash Truth - My Real Hourly Wage"),
+        customTitle != null ? customTitle : (app.equals("uber") ? "Uber Weekly Take-Home Calculator 2026" : "DoorDash Weekly Take-Home Calculator 2026"),
         app.equals("uber") ? 
-            "See an estimate of how much I make after gas, taxes, and depreciation. The number will surprise you." : 
-            "See an estimate of how much you make on DoorDash after gas, vehicle destruction, and taxes. The truth is shocking.",
+            "Estimate what you actually keep from Uber after mileage and self-employment tax, then decide what to fix next." : 
+            "Estimate what you actually keep from DoorDash after mileage and self-employment tax, then decide what to fix next.",
         com.gigwager.util.AppConstants.BASE_URL + "/" + app,
         com.gigwager.util.AppConstants.BASE_URL + "/og-image.jpg"
     ),
@@ -37,8 +47,18 @@
                     initialGross = initialGross,
                     initialMiles = initialMiles,
                     initialHours = initialHours,
+                    initialTips = initialTips,
+                    initialBonuses = initialBonuses,
+                    initialActiveTime = initialActiveTime,
                     initialGasPrice = initialGasPrice,
+                    initialTaxRate = initialTaxRate,
+                    initialRoundTrip = initialRoundTrip,
+                    initialCalculationMode = initialCalculationMode,
                     defaultVehicle = "prius",
+                    initialSelectedVehicleId = initialSelectedVehicleId,
+                    initialCustomMpg = initialCustomMpg,
+                    initialCustomMaintenance = initialCustomMaintenance,
+                    initialCustomDepreciation = initialCustomDepreciation,
                     switchAction = "$dispatch('toggle-app', 'doordash')",
                     activeTabName = "uber",
                     verdictContainerId = "uber-verdict-container",
@@ -48,7 +68,7 @@
                             
                             <div id="uber-verdict-container">
                             @if(verdict != null)
-@template.components.verdict_card(verdict = verdict, estimatedTaxes = estimatedTaxes, estimatedVehicleCost = estimatedVehicleCost)
+@template.components.verdict_card(verdict = verdict, calculationResult = calculationResult)
                             @else
                             <!-- Fallback/Default Content if no calculation runs (e.g. direct load without params) -->
                             <section>
@@ -234,8 +254,18 @@
                     initialGross = initialGross,
                     initialMiles = initialMiles,
                     initialHours = initialHours,
+                    initialTips = initialTips,
+                    initialBonuses = initialBonuses,
+                    initialActiveTime = initialActiveTime,
                     initialGasPrice = initialGasPrice,
+                    initialTaxRate = initialTaxRate,
+                    initialRoundTrip = initialRoundTrip,
+                    initialCalculationMode = initialCalculationMode,
                     defaultVehicle = "civic",
+                    initialSelectedVehicleId = initialSelectedVehicleId,
+                    initialCustomMpg = initialCustomMpg,
+                    initialCustomMaintenance = initialCustomMaintenance,
+                    initialCustomDepreciation = initialCustomDepreciation,
                     switchAction = "$dispatch('toggle-app', 'uber')",
                     activeTabName = "doordash",
                     verdictContainerId = "doordash-verdict-container",
@@ -245,7 +275,7 @@
                             
                             <div id="doordash-verdict-container">
                             @if(verdict != null)
-@template.components.verdict_card(verdict = verdict, estimatedTaxes = estimatedTaxes, estimatedVehicleCost = estimatedVehicleCost)
+@template.components.verdict_card(verdict = verdict, calculationResult = calculationResult)
                             @else
                             <section>
                                 <h2 class="text-2xl font-bold text-slate-900 mb-4">Why Dashers earned less than minimum wage in 2026</h2>

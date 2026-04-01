@@ -1,22 +1,36 @@
 package com.gigwager.service;
 
+import com.gigwager.model.GigCalculationRequest;
+import com.gigwager.model.GigCalculationResult;
 import com.gigwager.model.Verdict;
-import org.springframework.stereotype.Service;
-import java.util.List;
 import com.gigwager.util.BrandConstants;
-import com.gigwager.util.AppConstants;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class VerdictService {
 
-        public Verdict calculateVerdict(double gross, double miles, double hours, String appName) {
-                // Core Calculation Logic (Matches Frontend JS)
-                double expenses = miles * AppConstants.IRS_MILEAGE_RATE; // 2026 IRS Rate
-                double profit = gross - expenses;
-                double taxes = Math.max(0, profit * AppConstants.SELF_EMPLOYMENT_TAX_RATE);
-                double netHourly = hours > 0 ? (profit - taxes) / hours : 0.0;
+        private final GigCalculationService gigCalculationService;
 
-                return getVerdictForWage(netHourly, appName);
+        public VerdictService() {
+                this(new GigCalculationService());
+        }
+
+        @Autowired
+        public VerdictService(GigCalculationService gigCalculationService) {
+                this.gigCalculationService = gigCalculationService;
+        }
+
+        public Verdict calculateVerdict(double gross, double miles, double hours, String appName) {
+                GigCalculationResult calculation = gigCalculationService
+                                .calculate(GigCalculationRequest.standard(gross, miles, hours));
+                return calculateVerdict(calculation, appName);
+        }
+
+        public Verdict calculateVerdict(GigCalculationResult calculation, String appName) {
+                return getVerdictForWage(calculation.realHourly(), appName);
         }
 
         private Verdict getVerdictForWage(double wage, String appName) {
@@ -27,7 +41,7 @@ public class VerdictService {
                                         List.of(
                                                         "You are not making a wage. You are liquidating your vehicle's equity for quick cash. Every mile you drive destroys more value in your car than you earn in profit.",
                                                         "After accounting for the IRS standard costs of $"
-                                                                        + AppConstants.IRS_MILEAGE_RATE
+                                                                        + com.gigwager.util.AppConstants.IRS_MILEAGE_RATE
                                                                         + "/mile (gas, depreciation, maintenance), your net profit is effectively zero or negative. You are effectively paying "
                                                                         + appName + " for the privilege of working.",
                                                         "This is not a job; it is a financial trap. The cash in your hand is just a loan from your future car repairs."),

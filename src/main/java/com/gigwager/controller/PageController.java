@@ -1,11 +1,20 @@
 package com.gigwager.controller;
 
+import com.gigwager.model.GigCalculationRequest;
+import com.gigwager.service.GigCalculationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class PageController {
+
+    private final GigCalculationService gigCalculationService;
+
+    public PageController(GigCalculationService gigCalculationService) {
+        this.gigCalculationService = gigCalculationService;
+    }
 
     @GetMapping("/methodology")
     public String methodology(Model model) {
@@ -60,9 +69,51 @@ public class PageController {
     }
 
     @GetMapping("/taxes/quarterly-estimator")
-    public String quarterlyEstimator(Model model) {
+    public String quarterlyEstimator(@RequestParam(name = "app", required = false) String app,
+            @RequestParam(name = "source", required = false) String source,
+            @RequestParam(name = "gross", required = false) Double gross,
+            @RequestParam(name = "miles", required = false) Double miles,
+            @RequestParam(name = "hours", required = false) Double hours,
+            @RequestParam(name = "tips", required = false) Double tips,
+            @RequestParam(name = "bonuses", required = false) Double bonuses,
+            @RequestParam(name = "activeTime", required = false) Double activeTime,
+            @RequestParam(name = "gasPrice", required = false) Double gasPrice,
+            @RequestParam(name = "taxRate", required = false) Double taxRate,
+            @RequestParam(name = "roundTrip", required = false) Boolean roundTrip,
+            @RequestParam(name = "calculationMode", required = false) String calculationMode,
+            @RequestParam(name = "vehicleId", required = false) String vehicleId,
+            @RequestParam(name = "customMpg", required = false) Double customMpg,
+            @RequestParam(name = "customMaintenance", required = false) Double customMaintenance,
+            @RequestParam(name = "customDepreciation", required = false) Double customDepreciation,
+            Model model) {
         model.addAttribute("customTitle", "Quarterly Tax Estimator - Avoid IRS Penalties");
+        applyScenarioAttributes(model, app, source, gross, miles, hours, tips, bonuses, activeTime, gasPrice,
+                taxRate, roundTrip, calculationMode, vehicleId, customMpg, customMaintenance, customDepreciation);
         return "clusters/quarterly-estimator";
+    }
+
+    @GetMapping("/profit-setup-kit")
+    public String profitSetupKit(@RequestParam(name = "app", required = false) String app,
+            @RequestParam(name = "source", required = false) String source,
+            @RequestParam(name = "gross", required = false) Double gross,
+            @RequestParam(name = "miles", required = false) Double miles,
+            @RequestParam(name = "hours", required = false) Double hours,
+            @RequestParam(name = "tips", required = false) Double tips,
+            @RequestParam(name = "bonuses", required = false) Double bonuses,
+            @RequestParam(name = "activeTime", required = false) Double activeTime,
+            @RequestParam(name = "gasPrice", required = false) Double gasPrice,
+            @RequestParam(name = "taxRate", required = false) Double taxRate,
+            @RequestParam(name = "roundTrip", required = false) Boolean roundTrip,
+            @RequestParam(name = "calculationMode", required = false) String calculationMode,
+            @RequestParam(name = "vehicleId", required = false) String vehicleId,
+            @RequestParam(name = "customMpg", required = false) Double customMpg,
+            @RequestParam(name = "customMaintenance", required = false) Double customMaintenance,
+            @RequestParam(name = "customDepreciation", required = false) Double customDepreciation,
+            Model model) {
+        model.addAttribute("customTitle", "Gig Profit Setup Kit - Weekly Take-Home Plan for Gig Drivers");
+        applyScenarioAttributes(model, app, source, gross, miles, hours, tips, bonuses, activeTime, gasPrice,
+                taxRate, roundTrip, calculationMode, vehicleId, customMpg, customMaintenance, customDepreciation);
+        return "clusters/profit-setup-kit";
     }
 
     @GetMapping("/insurance/rideshare-basics")
@@ -132,5 +183,44 @@ public class PageController {
     public String terms(Model model) {
         model.addAttribute("customTitle", "Terms of Service");
         return "terms";
+    }
+
+    private void applyScenarioAttributes(Model model,
+            String app,
+            String source,
+            Double gross,
+            Double miles,
+            Double hours,
+            Double tips,
+            Double bonuses,
+            Double activeTime,
+            Double gasPrice,
+            Double taxRate,
+            Boolean roundTrip,
+            String calculationMode,
+            String vehicleId,
+            Double customMpg,
+            Double customMaintenance,
+            Double customDepreciation) {
+        GigCalculationRequest calculationRequest = GigCalculationRequest.fromInputs(
+                gross,
+                miles,
+                hours,
+                tips,
+                bonuses,
+                activeTime,
+                gasPrice,
+                taxRate,
+                roundTrip,
+                calculationMode,
+                vehicleId,
+                customMpg,
+                customMaintenance,
+                customDepreciation);
+
+        model.addAttribute("scenarioApp", app != null ? app : "gig");
+        model.addAttribute("scenarioSource", source != null ? source : "direct");
+        model.addAttribute("scenarioRequest", calculationRequest);
+        model.addAttribute("scenarioResult", gigCalculationService.calculate(calculationRequest));
     }
 }

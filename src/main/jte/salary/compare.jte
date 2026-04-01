@@ -48,8 +48,8 @@
                     <a href="/uber?gross=${uberScenario.getGrossWeekly()}&miles=${uberScenario.getMiles()}&hours=${uberScenario.getHours()}&gasPrice=${city.getGasPrice()}" class="rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-bold px-5 py-4 transition-colors">
                         Run Uber calculator
                     </a>
-                    <a href="/doordash?gross=${doordashScenario.getGrossWeekly()}&miles=${doordashScenario.getMiles()}&hours=${doordashScenario.getHours()}&gasPrice=${city.getGasPrice()}" class="rounded-2xl bg-red-600 hover:bg-red-700 text-white font-bold px-5 py-4 transition-colors">
-                        Run DoorDash calculator
+                    <a href="/profit-setup-kit?source=compare_page&app=${winningAppName.toLowerCase()}&gross=${winningAppName.equals("Uber") ? uberScenario.getGrossWeekly() : doordashScenario.getGrossWeekly()}&miles=${winningAppName.equals("Uber") ? uberScenario.getMiles() : doordashScenario.getMiles()}&hours=${winningAppName.equals("Uber") ? uberScenario.getHours() : doordashScenario.getHours()}" class="rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-5 py-4 transition-colors">
+                        Build weekly profit plan
                     </a>
                     <a href="/salary/uber/${city.getSlug()}" class="rounded-2xl bg-white border border-slate-200 hover:border-slate-300 text-slate-900 font-bold px-5 py-4 transition-colors">
                         Uber city report

@@ -358,6 +358,171 @@ Primary source: Google Search Console (GA4 property access still pending)
   - If `/uber/where-you-can-drive` is still unknown at the next review, add one stronger internal link from the homepage or the main Uber hub block and consider linking it from another indexed page with recent crawl activity.
   - If `/compare/*` pages keep sitting in positions 3-5 with zero clicks, rewrite titles/heroes to surface a concrete city-specific winner or net-pay delta instead of the generic `Who Nets More?` framing.
 
+### Review Entry
+- Review date: 2026-04-01
+- Current period: 2026-03-01 to 2026-03-29
+- Comparison period: 2026-03-04 to 2026-03-31 vs 2026-02-04 to 2026-03-03
+- Site clicks / impressions / CTR / avg position: 34 / 39,516 / 0.086% / 7.24
+- US-only clicks / impressions / CTR / avg position: 34 / 25,166 / 0.135% / 7.43
+- Top 5 pages by impressions:
+  - `/best-cities/doordash`: 3 clicks / 1,296 impressions / 0.23% CTR / avg pos 7.06
+  - `/best-cities/uber`: 1 click / 496 impressions / 0.20% CTR / avg pos 6.98
+  - `/blog/uber-vs-doordash`: 1 click / 252 impressions / 0.40% CTR / avg pos 8.58
+  - `/compare/dallas/uber-vs-doordash`: 2 clicks / 124 impressions / 1.61% CTR / avg pos 4.80
+  - `/compare/tampa/uber-vs-doordash`: 2 clicks / 85 impressions / 2.35% CTR / avg pos 7.85
+- Top 5 pages by clicks:
+  - `/best-cities/doordash`: 3 clicks / 1,296 impressions / 0.23% CTR / avg pos 7.06
+  - `/compare/austin/uber-vs-doordash`: 2 clicks / 63 impressions / 3.17% CTR / avg pos 7.08
+  - `/compare/charlotte/uber-vs-doordash`: 2 clicks / 51 impressions / 3.92% CTR / avg pos 6.06
+  - `/compare/dallas/uber-vs-doordash`: 2 clicks / 124 impressions / 1.61% CTR / avg pos 4.80
+  - `/compare/tampa/uber-vs-doordash`: 2 clicks / 85 impressions / 2.35% CTR / avg pos 7.85
+- High-impression low-click pages:
+  - `/best-cities/doordash`: 1,296 impressions / 3 clicks / avg pos 7.06
+  - `/best-cities/uber`: 496 impressions / 1 click / avg pos 6.98
+  - `/blog/uber-vs-doordash`: 252 impressions / 1 click / avg pos 8.58
+- Low-CTR queries worth action:
+  - `best cities for doordash drivers 2026` intent variants still dominate `/best-cities/doordash`, but click yield is still weak relative to impressions.
+  - `best cities for uber drivers 2026` intent variants still dominate `/best-cities/uber`, and the page is no longer zero-click but still under-converting.
+- Query migration between related pages:
+  - `/salary/uber` is now indexed, so the Uber hub cluster finally has a real crawl path.
+  - `/uber/where-you-can-drive` is now indexed, but there is still no strong evidence yet that broad `best cities` queries are migrating there.
+- SEO CTA event notes:
+  - GA4 property access is still pending, so live CTA event quality cannot be verified from analytics yet.
+- URL inspection notes:
+  - `/salary/uber` is now `Submitted and indexed` with last crawl `2026-03-24` and rich results passing for `Breadcrumbs` and `FAQ`.
+  - `/uber/where-you-can-drive` is now `Submitted and indexed` with last crawl `2026-03-20` and `FAQ` rich results passing.
+  - `/about` still appears as indexed in Search Console based on an older crawl (`2026-03-04`), even though the live page now returns `noindex,follow`.
+- Structured-data status:
+  - The two biggest previously blocked URLs now inspect cleanly with rich results, which strongly suggests the stale rendered-version issue is clearing.
+- Cannibalization notes:
+  - No meaningful cannibalization was detected in the current review window.
+- Changes shipped since last review:
+  - The `/salary/uber` hub upgrade is live and indexed.
+  - `/uber/where-you-can-drive` is live, in the sitemap, and indexed.
+  - `/about` is live with `noindex,follow` and is absent from the live sitemap.
+  - Compare pages are now collecting real clicks instead of sitting entirely in zero-click territory.
+- Changes still pending deploy:
+  - None from the 2026-03-20 patch set. The main remaining work is measurement and another CTR-focused content pass if list pages stay weak.
+- Recrawl requested for:
+  - Re-check `/about` on the next review to confirm Search Console drops it from the indexed set after the next crawl.
+- Hypothesis for next cycle:
+  - The site has moved out of the indexing-blocker phase and into a snippet / intent-fit phase.
+  - The next visible gains should come from improving click yield on `/best-cities/{app}` pages rather than from fixing crawl discovery.
+- Decision / next action:
+  - Keep `https://gigverdict.com/sitemap.xml` submitted in Search Console.
+  - Re-open the four priority URLs after the next crawl window only if their indexed statuses regress.
+  - Focus the next content pass on `/best-cities/doordash` and `/best-cities/uber` title/description/hero precision, because those pages still carry the largest impression volume with weak CTR.
+  - Verify in the next review that Search Console has refreshed `/about` to reflect the live `noindex,follow` state.
+
+### 2026-04-01 Follow-Up Patch
+- Scope:
+  - Tightened `/best-cities/doordash` and `/best-cities/uber` titles and meta descriptions around `net pay` / `rankings only` language.
+  - Rewrote the hero copy so both pages immediately frame themselves as earnings-ranking pages, not official coverage or supported-cities directories.
+  - Added stronger above-the-fold next-step cards:
+    - both pages now push users toward the main app earnings hub for deeper city detail
+    - `/best-cities/uber` now pushes coverage-intent traffic toward `/uber/where-you-can-drive` much earlier
+    - `/best-cities/doordash` now pushes users straight into the current top-ranked city report
+  - Updated `ItemList` JSON-LD wording to match the new `net pay` framing.
+- Goal:
+  - Raise CTR on the two highest-impression ranking pages without reopening crawl-discovery work that now appears solved.
+- Verification target for next review:
+  - Check whether `/best-cities/doordash` CTR meaningfully improves beyond `0.23%`.
+  - Check whether `/best-cities/uber` CTR meaningfully improves beyond `0.20%`.
+  - Check whether Uber coverage-intent leakage weakens further as `/uber/where-you-can-drive` accumulates more indexed impressions.
+
+### 2026-04-01 Keep-More-Money Refactor
+- Scope:
+  - Repositioned the homepage around a recurring `weekly take-home` question instead of a one-off shock-value calculator pitch.
+  - Added `/profit-setup-kit` as the new primary follow-through page for calculator users and SEO landers.
+  - Rebuilt the verdict card and calculator sidebar so the core outputs now emphasize:
+    - take-home this week
+    - real hourly
+    - weekly tax reserve
+    - biggest leak to fix first
+  - Reframed `/taxes/quarterly-estimator` as a support module inside the weekly system instead of a placeholder standalone promise.
+  - Rewired key SEO CTAs on compare and city-report pages so they can feed the new weekly plan instead of only sending traffic into informational loops.
+  - Added hidden lead-source metadata to the tax / insurance / vehicle cluster forms so Formspree leads can be segmented by intent and source.
+- Goal:
+  - Reduce the gap between SEO click intent, calculator output, and first monetization action.
+  - Create a repeat-use mental model: calculate -> reserve -> fix leak -> return next week.
+- Verification target for next review:
+  - Check whether the new `profit-setup-kit` route starts appearing in user journeys from calculator and SEO pages.
+  - Check whether `/uber` and `/doordash` engagement improves after the verdict/sidebar refactor even before broad ranking movement.
+  - Once GA4 access exists, track whether `profit_setup_kit` CTA clicks materially outperform the old tax-only next-step flow.
+
+### 2026-04-01 Engine Unification And QA Pass
+- Scope:
+  - Unified calculator math so `/uber`, `/doordash`, the verdict fragment, `/profit-setup-kit`, and `/taxes/quarterly-estimator` all use the same shared calculation engine instead of recomputing with separate formulas.
+  - Removed the hidden legacy breakdown sidebar from `components/calculator.jte`.
+  - Deleted dead legacy templates `src/main/jte/uber.jte` and `src/main/jte/doordash.jte` because both routes already render through the shared `pages/calculator.jte` flow.
+  - Cleaned the remaining encoding-corruption / mojibake tokens inside `components/calculator.jte` so Alpine initialization, live number updates, and CTA branching no longer fail on malformed strings.
+  - Kept the new keep-more-money structure but moved it off an additive patch path and onto one shared calculation/data flow.
+- Verification completed:
+  - `.\gradlew test --console=plain`: pass
+  - `EncodingCorruptionGuardTest`: pass
+  - `PlaywrightBetaE2ETest`: pass
+  - Manual Playwright CLI verification on local `http://localhost:8081`:
+    - desktop `/uber?gross=1800&miles=500&hours=35&tips=200&bonuses=100&activeTime=28`
+      - visible `h1` rendered correctly
+      - visible `netHourly` changed from `42.05` to `35.03` after increasing miles from `500` to `900`
+      - `Build my weekly profit plan` preserved the full scenario into `/profit-setup-kit`
+      - `Tax reserve` preserved the full scenario into `/taxes/quarterly-estimator`
+    - mobile `/doordash?gross=900&miles=620&hours=32&tips=80&activeTime=22`
+      - visible `h1` rendered correctly
+      - sticky bottom summary rendered correctly
+      - mobile compact `Quick assumptions` summary exists lower in the page and is visible when scrolled into that section
+    - mobile low-net `/uber?gross=500&miles=1200&hours=45`
+      - `Fix cost per mile first` branch rendered correctly
+      - CTA linked to `/vehicle-cost/cost-per-mile?app=uber&miles=1200&source=calculator_sidebar`
+  - Screenshots captured:
+    - `build/playwright/desktop-uber.png`
+    - `build/playwright/mobile-uber-low-net.png`
+- Why this matters:
+  - The calculator stack no longer shows one number in the main calculator and a different number in the follow-through pages.
+  - The main monetization path now survives scenario handoff without dropping tips / bonuses / active time / vehicle-mode context.
+  - Broken strings are no longer able to silently kill live updates or CTA branching.
+- Realistic expectation:
+  - Do not expect an immediate jump in rankings just from this refactor.
+  - Do expect higher user trust and cleaner movement from calculator -> profit plan / tax reserve because the numbers now stay consistent.
+  - Do expect lower QA / SEO risk on `/uber` and `/doordash` because the pages now expose a valid visible `h1`, working live updates, and no known encoding-corruption markers.
+  - If conversion is going to improve from the calculator surface, this refactor gives that improvement a fair chance to show up in the next measurement window.
+
+### 2026-04-01 Best-Cities CTR Intent Split Pass
+- Scope:
+  - Repositioned `/best-cities/doordash` and `/best-cities/uber` from defensive directory-style ranking pages into answer-first pages.
+  - Rewrote the title / meta / H1 layer around `Highest-Paying Cities for {App} Drivers in 2026` so the search result can lead with the answer, not the disclaimer.
+  - Added an answer box above the fold for both ranking pages:
+    - current #1 city
+    - top 3 markets
+    - lead over #2
+    - total ranked city-report count
+  - Moved the coverage disclaimer below the answer layer so the page still intent-splits without wasting the primary click promise.
+  - Added a dedicated DoorDash availability page at `/doordash/where-you-can-dash` to absorb `supported cities / can I dash there` style intent that had no strong destination before.
+  - Wired both app hubs and both ranking pages to their coverage guides so internal-link meaning is cleaner:
+    - ranking intent -> `/best-cities/{app}`
+    - coverage intent -> `/uber/where-you-can-drive` or `/doordash/where-you-can-dash`
+  - Added FAQ JSON-LD to the ranking pages so the answer intent is visible in both page copy and structured data.
+  - Added the new DoorDash availability page to `sitemap.xml`.
+- Verification completed:
+  - `.\gradlew test --console=plain`: pass
+  - `OrganicMonitoringRegressionTest`: pass after updating the Uber coverage CTA event label assertion to the generalized `open_official_uber_coverage_source`
+  - Local HTML verification on refreshed `http://localhost:8080`:
+    - `/best-cities/doordash` contains the new `Highest-Paying Cities for DoorDash Drivers in 2026` H1 and `DoorDash availability guide`
+    - `/doordash/where-you-can-dash` contains the new `Where You Can Dash for DoorDash in the US` H1 and `DoorDash Dasher signup and availability flow`
+    - `/best-cities/uber` contains the new `Highest-Paying Cities for Uber Drivers in 2026` H1 and `Cities Ranked`
+  - Playwright CLI screenshots captured on the refreshed local app:
+    - `build/playwright/desktop-best-cities-doordash.png`
+    - `build/playwright/desktop-doordash-coverage.png`
+    - `build/playwright/mobile-best-cities-uber.png`
+- Why this matters:
+  - The highest-impression pages now answer the query before they defend against the wrong query.
+  - DoorDash finally has a real coverage-intent destination instead of leaking that demand into the earnings ranking.
+  - The site now distinguishes `ranking`, `coverage`, and `hub` intent more clearly at both the title level and the internal-link level.
+- Realistic expectation:
+  - This is the right move for CTR, but it still depends on recrawl and title/snippet refresh. Do not expect same-day Search Console movement.
+  - If CTR improves next, the most likely pages to show it first are `/best-cities/doordash` and `/best-cities/uber`.
+  - If DoorDash leakage weakens, impressions should spread a little more cleanly between `/best-cities/doordash` and `/doordash/where-you-can-dash` instead of piling onto one ambiguous page.
+
 ## Follow-Up Entry Template
 Copy this block for each new review cycle.
 

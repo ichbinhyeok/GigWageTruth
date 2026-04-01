@@ -44,6 +44,8 @@ public class SitemapController {
             addUrl(xml, AppConstants.BASE_URL + "/salary/" + app, today, "weekly", "0.8");
             if (app.equals("uber")) {
                 addUrl(xml, AppConstants.BASE_URL + "/uber/where-you-can-drive", today, "weekly", "0.8");
+            } else {
+                addUrl(xml, AppConstants.BASE_URL + "/doordash/where-you-can-dash", today, "weekly", "0.8");
             }
             addUrl(xml, AppConstants.BASE_URL + "/best-cities/" + app, today, "weekly", "0.8");
 
@@ -82,6 +84,7 @@ public class SitemapController {
         addUrl(xml, AppConstants.BASE_URL + "/blog/hidden-costs", today, "monthly", "0.7");
 
         // Cluster Pillars
+        addUrl(xml, AppConstants.BASE_URL + "/profit-setup-kit", today, "monthly", "0.8");
         addUrl(xml, AppConstants.BASE_URL + "/taxes", today, "monthly", "0.8");
         addUrl(xml, AppConstants.BASE_URL + "/taxes/quarterly-estimator", today, "monthly", "0.7");
         addUrl(xml, AppConstants.BASE_URL + "/insurance", today, "monthly", "0.8");

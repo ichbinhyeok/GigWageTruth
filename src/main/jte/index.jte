@@ -3,8 +3,8 @@
 @template.layout.main(
     noIndex = noIndex,
     seoMeta = new com.gigwager.model.SeoMeta(
-        "GigWageTruth - The Only Real Net Profit Calculator for Gig Workers",
-        "Stop driving blind. Calculate your net hourly wage for Uber, Lyft, and DoorDash after hidden costs.",
+        "GigWageTruth - Weekly Take-Home Calculator for Gig Drivers",
+        "See what you actually keep from Uber or DoorDash after mileage and self-employment tax, then decide what to fix next.",
         AppConstants.BASE_URL,
         AppConstants.BASE_URL + "/og-image.jpg"
     ),
@@ -53,13 +53,13 @@
 
                 <div class="relative z-10 space-y-6">
                     <h1 class="text-6xl lg:text-8xl font-black tracking-tighter text-slate-900 leading-[0.9]">
-                        DON'T<br>
-                        DRIVE<br>
-                        <span class="text-emerald-600">BLIND.</span>
+                        KEEP<br>
+                        MORE<br>
+                        <span class="text-emerald-600">WEEKLY.</span>
                     </h1>
                     <p class="text-xl lg:text-2xl font-medium text-slate-500 max-w-md leading-relaxed">
-                        You see revenue. We see the truth.<br>
-                        Find your <span class="text-emerald-600 font-bold">Real Hourly Wage</span> in seconds.
+                        Your app shows payout. We show what is left.<br>
+                        Find your <span class="text-emerald-600 font-bold">weekly take-home</span>, then fix the leak dragging it down.
                     </p>
 
                     <div class="pt-8 flex items-center space-x-6 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
@@ -71,12 +71,12 @@
                     <div class="hidden lg:block pt-8 mt-8 border-t border-slate-200/50">
                         <h2 class="text-lg font-bold text-slate-900 mb-2">What is GigWageTruth?</h2>
                         <p class="text-sm text-slate-600 mb-4 max-w-lg leading-relaxed">
-                            GigWageTruth models your true hourly earnings using the 2026 IRS mileage rate, a 15.3% self-employment tax assumption, and city-level market factors. See the Methodology page for formula details.
+                            GigWageTruth is a weekly keep-more-money system for gig workers. We turn your app payout into take-home, tax reserve, and next-step decisions using the 2026 IRS mileage proxy and a 15.3% self-employment tax assumption.
                         </p>
                         <ul class="text-xs font-semibold text-slate-500 space-y-2">
-                            <li class="flex items-center gap-2"><span class="text-emerald-500 flex-shrink-0">+</span> Enter your market and work level</li>
-                            <li class="flex items-center gap-2"><span class="text-emerald-500 flex-shrink-0">+</span> Our engine calculates taxes and vehicle wear</li>
-                            <li class="flex items-center gap-2"><span class="text-emerald-500 flex-shrink-0">+</span> Instantly see your actual net hourly take-home wage</li>
+                            <li class="flex items-center gap-2"><span class="text-emerald-500 flex-shrink-0">+</span> Check what you actually kept from a real week</li>
+                            <li class="flex items-center gap-2"><span class="text-emerald-500 flex-shrink-0">+</span> See what to reserve for taxes before quarter-end</li>
+                            <li class="flex items-center gap-2"><span class="text-emerald-500 flex-shrink-0">+</span> Choose the next leak to fix: miles, coverage, or low-rate work</li>
                         </ul>
                     </div>
                 </div>
@@ -87,8 +87,8 @@
 
                     <div x-data="{ app: 'rideshare', actionUrl: '/uber' }" class="bg-white rounded-3xl border-2 border-slate-100 shadow-2xl shadow-slate-200/50 p-6 md:p-10 relative">
 
-                        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow-lg flex items-center gap-1 whitespace-nowrap">
-                            <span>Secure</span> 100% Anonymous & No Sign-up
+                        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow-lg whitespace-nowrap">
+                            Weekly Take-Home Check
                         </div>
 
                         <div class="grid grid-cols-2 gap-2 mb-8 p-1 bg-slate-100 rounded-xl">
@@ -146,24 +146,24 @@
                             </div>
 
                             <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xl py-5 rounded-xl shadow-lg shadow-emerald-200 transform transition active:scale-[0.98] hover:-translate-y-1">
-                                Calculate My Truth &rarr;
+                                Calculate My Truth & Take-Home &rarr;
                             </button>
                         </form>
 
                         <div class="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                            <p class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-3">Start With A Decision</p>
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-3">Start With The Biggest Leak</p>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+                                <a href="/profit-setup-kit" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
+                                    Gig profit setup kit
+                                </a>
                                 <a href="/net-hourly-calculator" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
                                     Net hourly calculator
                                 </a>
                                 <a href="/taxes/quarterly-estimator" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
-                                    Quarterly tax estimator
+                                    Tax set-aside planner
                                 </a>
                                 <a href="/vehicle-cost/cost-per-mile" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
                                     Cost per mile calculator
-                                </a>
-                                <a href="/blog/multi-apping-guide" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
-                                    Multi-app without deactivation
                                 </a>
                             </div>
                             <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
@@ -176,15 +176,15 @@
                                 <a href="/uber/where-you-can-drive" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
                                     Uber city coverage guide
                                 </a>
-                                <a href="/multi-apping" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
-                                    Multi-app strategy hub
+                                <a href="/blog/multi-apping-guide" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
+                                    Multi-app without deactivation
                                 </a>
                             </div>
                         </div>
 
                         <div class="pt-4 text-center">
                             <p class="text-[10px] text-slate-400 font-medium">
-                                Calculated instantly. No email required. No BS.
+                                Run the calculator free, then grab the setup kit if you want the follow-up plan.
                             </p>
                         </div>
 

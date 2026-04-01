@@ -86,12 +86,13 @@ public class ProgrammaticSeoController {
                                 .findFirst()
                                 .orElse(null);
 
+                String coveragePath = app.equals("uber") ? "/uber/where-you-can-drive" : "/doordash/where-you-can-dash";
+
                 String title = String.format("%s Earnings by City After Expenses: Is It Worth It?", appName);
                 String description = String.format(
-                                "Is %s worth it in your market? Start with %d city reports, compare city winners, run the calculator%s. Updated %s.",
+                                "Is %s worth it in your market? Start with %d city reports, compare city winners, run the calculator, and use the coverage guide before assuming a market is active. Updated %s.",
                                 appName,
                                 indexedCityCount,
-                                app.equals("uber") ? ", and the coverage guide" : "",
                                 monthYear);
                 String canonicalUrl = String.format("%s/salary/%s", AppConstants.BASE_URL, app);
 
@@ -103,7 +104,7 @@ public class ProgrammaticSeoController {
                 model.addAttribute("lastUpdated", monthYear);
                 model.addAttribute("bestCitiesUrl", String.format("/best-cities/%s", app));
                 model.addAttribute("calculatorUrl", "/" + app);
-                model.addAttribute("coverageUrl", app.equals("uber") ? "/uber/where-you-can-drive" : "");
+                model.addAttribute("coverageUrl", coveragePath);
                 model.addAttribute("directoryUrl", "/salary/directory");
                 model.addAttribute("topCityReportUrl",
                                 String.format("/salary/%s/%s", app, topCity.city().getSlug()));
@@ -124,35 +125,32 @@ public class ProgrammaticSeoController {
 
         @GetMapping("/uber/where-you-can-drive")
         public String uberCoveragePage(Model model) {
-                String app = "uber";
-                String appName = "Uber";
+                return renderCoveragePage(
+                                "uber",
+                                "Uber",
+                                "Drive",
+                                "/uber/where-you-can-drive",
+                                "Uber's official city directory",
+                                "Use Uber's own city directory to confirm whether your target city or metro is active before comparing take-home pay.",
+                                "https://www.uber.com/us/en/e/drive/cities/",
+                                "Open Uber's official city directory",
+                                "Use Uber's official driver city directory to confirm current market availability because onboarding and product coverage can change by city and metro area.",
+                                model);
+        }
 
-                List<CityData> coveredCities = Arrays.stream(CityData.values())
-                                .filter(pageIndexPolicyService::isCityReportIndexable)
-                                .sorted((left, right) -> left.getCityName().compareTo(right.getCityName()))
-                                .collect(Collectors.toList());
-
-                java.time.LocalDate now = java.time.LocalDate.now();
-                String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
-                                .format(now);
-
-                String title = String.format("Where You Can Drive for Uber in the US (%s)", monthYear);
-                String description = String.format(
-                                "Use Uber's official driver city directory to confirm coverage, then compare net pay across %d GigVerdict city reports. Updated %s.",
-                                coveredCities.size(),
-                                monthYear);
-                String canonicalUrl = String.format("%s/uber/where-you-can-drive", AppConstants.BASE_URL);
-
-                model.addAttribute("app", app);
-                model.addAttribute("appName", appName);
-                model.addAttribute("lastUpdated", monthYear);
-                model.addAttribute("coveredCityCount", coveredCities.size());
-                model.addAttribute("coverageByRegion", buildCoverageByRegion(coveredCities));
-                model.addAttribute("coverageFaqJsonLd", buildCoverageFaqJsonLd(appName, coveredCities.size()));
-                model.addAttribute("seoMeta",
-                                new SeoMeta(title, description, canonicalUrl, AppConstants.BASE_URL + "/og-image.jpg"));
-
-                return "salary/app-coverage";
+        @GetMapping("/doordash/where-you-can-dash")
+        public String doordashCoveragePage(Model model) {
+                return renderCoveragePage(
+                                "doordash",
+                                "DoorDash",
+                                "Dash",
+                                "/doordash/where-you-can-dash",
+                                "DoorDash Dasher signup and availability flow",
+                                "Use DoorDash's Dasher signup flow to confirm whether your area is open for onboarding and whether you can dash there right now.",
+                                "https://dasher.doordash.com/en-us",
+                                "Open DoorDash's Dasher signup flow",
+                                "Use DoorDash's Dasher signup and local availability flow to confirm whether your area is open for onboarding or active dashing, because market access can change over time.",
+                                model);
         }
 
         @GetMapping("/best-cities/{app}")
@@ -173,25 +171,55 @@ public class ProgrammaticSeoController {
                                 .sorted((c1, c2) -> Double.compare(c2.netHourly(), c1.netHourly()))
                                 .collect(Collectors.toList());
 
+                if (rankedCities.isEmpty()) {
+                        throw new com.gigwager.exception.ResourceNotFoundException("City ranking not available");
+                }
+
+                CityRankingDto topRankedCity = rankedCities.get(0);
+
                 java.time.LocalDate now = java.time.LocalDate.now();
+                int currentYear = now.getYear();
                 String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
                                 .format(now);
 
-                String title = String.format("Best Cities for %s Drivers After Expenses",
-                                appName);
+                String title = String.format("Highest-Paying Cities for %s Drivers in %d | After-Expenses Ranking",
+                                appName,
+                                currentYear);
                 String description = String.format(
-                                "Looking for the best city for %s after expenses? See the ranking by estimated net hourly earnings after mileage and tax assumptions. Updated %s.",
-                                appName, monthYear);
+                                "See which %s cities rank highest in %d based on estimated take-home pay after mileage and self-employment tax. %s currently leads at about $%.2f/hr net. View the top 10 and open your city report.",
+                                appName,
+                                currentYear,
+                                topRankedCity.city().getCityName(),
+                                topRankedCity.netHourly());
                 String canonicalUrl = String.format("%s/best-cities/%s", AppConstants.BASE_URL, app);
+                String coverageUrl = app.equals("uber") ? "/uber/where-you-can-drive" : "/doordash/where-you-can-dash";
+                String coverageGuideTitle = app.equals("uber") ? "Uber coverage guide" : "DoorDash availability guide";
+                String coverageGuideDescription = app.equals("uber")
+                                ? "Verify whether Uber is active in your city first, then come back here when you want the highest-paying markets."
+                                : "Check DoorDash onboarding and local availability first, then come back here when you want the highest-paying markets.";
+                CityRankingDto runnerUpCity = rankedCities.size() > 1 ? rankedCities.get(1) : topRankedCity;
+                double leadOverRunnerUp = Math.max(0, topRankedCity.netHourly() - runnerUpCity.netHourly());
 
                 model.addAttribute("app", app);
                 model.addAttribute("appName", appName);
                 model.addAttribute("rankedCities", rankedCities);
+                model.addAttribute("topRankedCity", topRankedCity);
+                model.addAttribute("runnerUpCity", runnerUpCity);
+                model.addAttribute("leadOverRunnerUp", leadOverRunnerUp);
+                model.addAttribute("rankedCityCount", rankedCities.size());
+                model.addAttribute("topThreeCities", formatTopCityList(rankedCities, 3));
+                model.addAttribute("currentYear", currentYear);
                 model.addAttribute("lastUpdated", monthYear);
+                model.addAttribute("appHubUrl", String.format("/salary/%s", app));
+                model.addAttribute("topCityReportUrl", String.format("/salary/%s/%s", app, topRankedCity.city().getSlug()));
+                model.addAttribute("coverageUrl", coverageUrl);
+                model.addAttribute("coverageGuideTitle", coverageGuideTitle);
+                model.addAttribute("coverageGuideDescription", coverageGuideDescription);
                 model.addAttribute("seoMeta",
                                 new SeoMeta(title, description, canonicalUrl, AppConstants.BASE_URL + "/og-image.jpg"));
                 model.addAttribute("dataLayerService", dataLayerService);
                 model.addAttribute("itemListJsonLd", buildBestCitiesItemListJsonLd(appName, app, rankedCities));
+                model.addAttribute("faqJsonLd", buildBestCitiesFaqJsonLd(appName, app, rankedCities, currentYear));
 
                 return "salary/best-cities";
         }
@@ -589,12 +617,47 @@ public class ProgrammaticSeoController {
                 Map<String, Object> itemList = new LinkedHashMap<>();
                 itemList.put("@context", "https://schema.org");
                 itemList.put("@type", "ItemList");
-                itemList.put("name", String.format("Highest-Paying Cities for %s Drivers", appName));
+                itemList.put("name", String.format("Highest-paying cities for %s drivers in %d", appName,
+                                java.time.LocalDate.now().getYear()));
                 itemList.put("description",
-                                String.format("Rankings of US cities based on %s net hourly earnings after expenses.",
+                                String.format(
+                                                "Rankings of US cities based on estimated %s take-home pay after mileage and self-employment tax assumptions, with city report links for each market.",
                                                 appName));
                 itemList.put("itemListElement", itemListElements);
                 return toJsonLd(itemList);
+        }
+
+        private String buildBestCitiesFaqJsonLd(String appName, String app, List<CityRankingDto> rankedCities,
+                        int currentYear) {
+                CityRankingDto topCity = rankedCities.get(0);
+                int rankedCount = rankedCities.size();
+                String q1 = String.format("What is the highest-paying city for %s drivers in %d?",
+                                appName,
+                                currentYear);
+                String a1 = String.format(
+                                "In GigVerdict's current after-expenses ranking, %s leads at about $%.2f per hour net after mileage and self-employment tax assumptions.",
+                                topCity.city().getCityName(),
+                                topCity.netHourly());
+                String q2 = String.format("Is this a coverage list or an earnings ranking for %s?", appName);
+                String a2 = app.equals("uber")
+                                ? "This page is an earnings ranking. Use the Uber coverage guide and Uber's official city directory when your question is whether a market is active."
+                                : "This page is an earnings ranking. Use the DoorDash availability guide and DoorDash's Dasher signup flow when your question is whether you can dash in a market.";
+                String q3 = String.format("How many %s city reports are ranked here?", appName);
+                String a3 = String.format(
+                                "GigVerdict currently ranks %d U.S. city reports for %s and links each market to a deeper city earnings page.",
+                                rankedCount,
+                                appName);
+
+                List<Map<String, Object>> mainEntity = List.of(
+                                buildFaqQuestion(q1, a1),
+                                buildFaqQuestion(q2, a2),
+                                buildFaqQuestion(q3, a3));
+
+                Map<String, Object> faqPage = new LinkedHashMap<>();
+                faqPage.put("@context", "https://schema.org");
+                faqPage.put("@type", "FAQPage");
+                faqPage.put("mainEntity", mainEntity);
+                return toJsonLd(faqPage);
         }
 
         private String buildAppHubSchemaGraph(String appName, String app, List<CityRankingDto> topCities,
@@ -757,11 +820,9 @@ public class ProgrammaticSeoController {
                 return toJsonLd(faqPage);
         }
 
-        private String buildCoverageFaqJsonLd(String appName, int coveredCityCount) {
+        private String buildCoverageFaqJsonLd(String appName, int coveredCityCount, String officialCoverageAnswer) {
                 String q1 = String.format("Is this an official %s coverage list?", appName);
-                String a1 = String.format(
-                                "No. This page is a navigation guide. Use Uber's official driver city directory to confirm current %s availability because onboarding and product coverage can change by city and metro area.",
-                                appName);
+                String a1 = "No. This page is a navigation guide. " + officialCoverageAnswer;
 
                 String q2 = String.format("How many %s city pay reports does GigVerdict cover right now?", appName);
                 String a2 = String.format(
@@ -784,6 +845,71 @@ public class ProgrammaticSeoController {
                 faqPage.put("@type", "FAQPage");
                 faqPage.put("mainEntity", mainEntity);
                 return toJsonLd(faqPage);
+        }
+
+        private String renderCoveragePage(String app,
+                        String appName,
+                        String coverageVerb,
+                        String canonicalPath,
+                        String officialSourceName,
+                        String officialSourceSummary,
+                        String officialSourceUrl,
+                        String officialSourceCtaLabel,
+                        String officialCoverageFaqAnswer,
+                        Model model) {
+                List<CityData> coveredCities = Arrays.stream(CityData.values())
+                                .filter(pageIndexPolicyService::isCityReportIndexable)
+                                .sorted((left, right) -> left.getCityName().compareTo(right.getCityName()))
+                                .collect(Collectors.toList());
+
+                java.time.LocalDate now = java.time.LocalDate.now();
+                String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
+                                .format(now);
+
+                String title = String.format("Where You Can %s for %s in the US (%s)", coverageVerb, appName, monthYear);
+                String description = String.format(
+                                "%s Compare take-home pay across %d GigVerdict city reports after you verify local availability. Updated %s.",
+                                officialSourceSummary,
+                                coveredCities.size(),
+                                monthYear);
+                String canonicalUrl = String.format("%s%s", AppConstants.BASE_URL, canonicalPath);
+
+                model.addAttribute("app", app);
+                model.addAttribute("appName", appName);
+                model.addAttribute("coverageVerb", coverageVerb);
+                model.addAttribute("lastUpdated", monthYear);
+                model.addAttribute("coveredCityCount", coveredCities.size());
+                model.addAttribute("coverageByRegion", buildCoverageByRegion(coveredCities));
+                model.addAttribute("officialSourceName", officialSourceName);
+                model.addAttribute("officialSourceSummary", officialSourceSummary);
+                model.addAttribute("officialSourceUrl", officialSourceUrl);
+                model.addAttribute("officialSourceCtaLabel", officialSourceCtaLabel);
+                model.addAttribute("coverageFaqJsonLd",
+                                buildCoverageFaqJsonLd(appName, coveredCities.size(), officialCoverageFaqAnswer));
+                model.addAttribute("seoMeta",
+                                new SeoMeta(title, description, canonicalUrl, AppConstants.BASE_URL + "/og-image.jpg"));
+
+                return "salary/app-coverage";
+        }
+
+        private String formatTopCityList(List<CityRankingDto> rankedCities, int limit) {
+                List<String> cityNames = rankedCities.stream()
+                                .limit(limit)
+                                .map(dto -> dto.city().getCityName())
+                                .collect(Collectors.toList());
+
+                if (cityNames.isEmpty()) {
+                        return "";
+                }
+                if (cityNames.size() == 1) {
+                        return cityNames.get(0);
+                }
+                if (cityNames.size() == 2) {
+                        return cityNames.get(0) + " and " + cityNames.get(1);
+                }
+                return String.join(", ", cityNames.subList(0, cityNames.size() - 1))
+                                + ", and "
+                                + cityNames.get(cityNames.size() - 1);
         }
 
         private String buildCalculatorUrl(String app, CityScenario scenario, CityData city) {

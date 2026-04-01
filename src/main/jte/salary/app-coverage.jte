@@ -5,9 +5,14 @@
 
 @param String app
 @param String appName
+@param String coverageVerb = "Drive"
 @param String lastUpdated
 @param int coveredCityCount
 @param Map<String, List<CityData>> coverageByRegion
+@param String officialSourceName = ""
+@param String officialSourceSummary = ""
+@param String officialSourceUrl = ""
+@param String officialSourceCtaLabel = ""
 @param String coverageFaqJsonLd = "{}"
 @param SeoMeta seoMeta
 @param Boolean noIndex = false
@@ -23,18 +28,18 @@
                         Coverage Guide
                     </span>
                     <h1 class="text-4xl lg:text-5xl font-black text-slate-900 mb-6 tracking-tight">
-                        Where You Can Drive for ${appName} in the US
+                        Where You Can ${coverageVerb} for ${appName} in the US
                     </h1>
                     <p class="text-xl text-slate-600 max-w-3xl mx-auto">
-                        Use ${appName}'s official driver city directory to confirm coverage, then compare take-home pay in our covered markets. Updated ${lastUpdated}.
+                        ${officialSourceSummary} Then compare take-home pay in our covered markets. Updated ${lastUpdated}.
                     </p>
                 </div>
 
                 <div class="grid md:grid-cols-3 gap-4 mb-10">
                     <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
                         <p class="text-sm font-semibold uppercase tracking-wide text-slate-500 mb-2">Source of truth</p>
-                        <p class="text-2xl font-black text-slate-900 mb-2">Official Uber city directory</p>
-                        <p class="text-sm text-slate-600">Coverage can change by city and metro area, so confirm availability there first.</p>
+                        <p class="text-2xl font-black text-slate-900 mb-2">${officialSourceName}</p>
+                        <p class="text-sm text-slate-600">${officialSourceSummary}</p>
                     </div>
                     <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
                         <p class="text-sm font-semibold uppercase tracking-wide text-slate-500 mb-2">Covered reports</p>
@@ -52,27 +57,27 @@
                     <section class="bg-white rounded-3xl border border-slate-200 p-8 shadow-sm">
                         <h2 class="text-2xl font-bold text-slate-900 mb-4">Official coverage check</h2>
                         <p class="text-slate-600 mb-4">
-                            If your question is "Is Uber active in my city?" this is the first place to check. Uber maintains its own driver city directory for the United States.
+                            If your question is "Can I ${coverageVerb.toLowerCase()} for ${appName} in my city?" this is the first place to check.
                         </p>
                         <ul class="list-disc pl-5 text-slate-600 space-y-2 mb-6">
-                            <li>Use the official directory to verify the city or metro where you want to drive.</li>
+                            <li>Use the official source to verify the city or metro where you want to work.</li>
                             <li>Check any local onboarding rules or city-specific driver requirements there.</li>
                             <li>Then come back here to compare pay and market tradeoffs.</li>
                         </ul>
-                        <a href="https://www.uber.com/us/en/e/drive/cities/" target="_blank" rel="noopener noreferrer"
-                           onclick="gtag('event', 'cta_click', { 'event_category': 'seo_coverage_hub', 'event_label': 'open_official_uber_directory' })"
+                        <a href="${officialSourceUrl}" target="_blank" rel="noopener noreferrer"
+                           onclick="gtag('event', 'cta_click', { 'event_category': 'seo_coverage_hub', 'event_label': 'open_official_${app}_coverage_source' })"
                            class="inline-flex items-center justify-center px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl transition-colors">
-                            Open Uber's official city directory
+                            ${officialSourceCtaLabel}
                         </a>
                     </section>
 
                     <section class="bg-white rounded-3xl border border-emerald-200 p-8 shadow-sm">
                         <h2 class="text-2xl font-bold text-slate-900 mb-4">What GigVerdict adds</h2>
                         <p class="text-slate-600 mb-4">
-                            The official directory answers availability. Our pages answer the next question: "What might I actually keep after expenses in that market?"
+                            The official source answers availability. Our pages answer the next question: "What might I actually keep after expenses in that market?"
                         </p>
                         <div class="space-y-3">
-                            <a href="/salary/${app}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_coverage_hub', 'event_label': 'open_uber_pay_reports' })" class="flex items-center justify-between rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
+                            <a href="/salary/${app}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_coverage_hub', 'event_label': 'open_${app}_pay_reports' })" class="flex items-center justify-between rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
                                 <span>
                                     <strong class="block text-slate-900">All ${appName} pay reports</strong>
                                     <span class="text-sm text-slate-600">Browse our city hub for estimated net hourly pay.</span>
@@ -102,7 +107,7 @@
                     <div class="grid md:grid-cols-3 gap-4">
                         <div class="rounded-2xl bg-white/10 p-5 border border-white/10">
                             <p class="text-xs uppercase tracking-[0.2em] text-slate-300 mb-2">Step 1</p>
-                            <p class="font-semibold">Confirm availability in Uber's own city directory.</p>
+                            <p class="font-semibold">Confirm availability in the official ${appName} flow first.</p>
                         </div>
                         <div class="rounded-2xl bg-white/10 p-5 border border-white/10">
                             <p class="text-xs uppercase tracking-[0.2em] text-slate-300 mb-2">Step 2</p>
@@ -119,7 +124,7 @@
                     <div class="flex items-end justify-between gap-4 mb-6">
                         <div>
                             <h2 class="text-3xl font-black text-slate-900">Covered ${appName} markets by region</h2>
-                            <p class="text-slate-600 mt-2">These are the city pay reports we currently publish. Availability still needs to be verified in the official Uber directory.</p>
+                            <p class="text-slate-600 mt-2">These are the city pay reports we currently publish. Availability still needs to be verified in the official ${appName} flow.</p>
                         </div>
                     </div>
                     <div class="grid lg:grid-cols-2 gap-6">
@@ -149,11 +154,11 @@
                     <h2 class="text-3xl font-black text-slate-900 mb-6">Frequently Asked Questions</h2>
                     <div class="space-y-6">
                         <div>
-                            <h3 class="text-xl font-bold text-slate-900 mb-2">Is this the official Uber coverage list?</h3>
-                            <p class="text-slate-600">No. This page is a guided hub. Use Uber's official city directory to verify whether Uber is active in your target city or metro area.</p>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Is this the official ${appName} coverage list?</h3>
+                            <p class="text-slate-600">No. This page is a guided hub. Use the official ${appName} flow to verify whether ${appName} is active in your target city or metro area.</p>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-slate-900 mb-2">Does GigVerdict cover every city where Uber operates?</h3>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Does GigVerdict cover every city where ${appName} operates?</h3>
                             <p class="text-slate-600">No. We currently publish ${coveredCityCount} city pay reports. Our coverage focuses on major U.S. markets where we can offer a useful earnings estimate.</p>
                         </div>
                         <div>
@@ -164,7 +169,7 @@
                 </section>
 
                 <div class="text-center">
-                    <a href="/salary/${app}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_coverage_hub', 'event_label': 'browse_all_uber_pay_reports_footer' })" class="inline-flex items-center justify-center px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-lg shadow-emerald-600/20 transition-colors">
+                    <a href="/salary/${app}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_coverage_hub', 'event_label': 'browse_all_${app}_pay_reports_footer' })" class="inline-flex items-center justify-center px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-lg shadow-emerald-600/20 transition-colors">
                         Browse all ${appName} pay reports
                     </a>
                 </div>

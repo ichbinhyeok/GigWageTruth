@@ -7,8 +7,18 @@
 @param Double initialGross
 @param Double initialMiles
 @param Double initialHours
+@param Double initialTips = 0.0
+@param Double initialBonuses = 0.0
+@param Double initialActiveTime = 0.0
 @param Double initialGasPrice
+@param Double initialTaxRate = 15.3
+@param Boolean initialRoundTrip = false
+@param String initialCalculationMode = "standard"
 @param String defaultVehicle
+@param String initialSelectedVehicleId = null
+@param Double initialCustomMpg = 25.0
+@param Double initialCustomMaintenance = 0.12
+@param Double initialCustomDepreciation = 0.15
 @param Content content
 @param String switchAction
 @param String activeTabName
@@ -20,20 +30,26 @@
     gross: '${initialGross}',
     miles: '${initialMiles}',
     hours: '${initialHours}',
+    tips: '${initialTips}',
+    bonuses: '${initialBonuses}',
+    activeTime: '${initialActiveTime}',
     gasPrice: '${initialGasPrice}',
+    taxRate: '${initialTaxRate}',
+    roundTrip: ${initialRoundTrip},
+    calculationMode: '${initialCalculationMode}',
     defaultVehicle: '${defaultVehicle}',
-    targetWeeklyIncome: 1000,
-    shockMessages: ${appName.equals("Uber") ? 
-        "{ tier1: [{emoji:'💀',text:\"Less than Target cashier ($15/hr)\"},{emoji:'🩸',text:\"Bleeding equity\"},{emoji:'👮',text:\"Illegal wage\"}], tier2: [{emoji:'⚠️',text:\"Below min wage\"},{emoji:'🍔',text:\"Better off flipping burgers\"},{emoji:'📉',text:\"Not sustainable\"}], tier3: [{emoji:'✅',text:\"Decent side hustle\"},{emoji:'🤔',text:\"Comparable to warehouse\"},{emoji:'🚗',text:\"Okay with cheap car\"}], tier4: [{emoji:'👑',text:\"Top 10% Driver!\"},{emoji:'🚀',text:\"Great profit!\"},{emoji:'🔥',text:\"Crushing it!\"}] }" :
-        "{ tier1: [{emoji:'💀',text:\"Less than Target cashier ($15/hr)\"},{emoji:'🩸',text:\"Bleeding equity\"},{emoji:'👮',text:\"Illegal wage\"}], tier2: [{emoji:'⚠️',text:\"Below min wage\"},{emoji:'🍔',text:\"Better off flipping burgers\"},{emoji:'📉',text:\"Not sustainable\"}], tier3: [{emoji:'✅',text:\"Decent side hustle\"},{emoji:'🤔',text:\"Comparable to warehouse\"},{emoji:'🚗',text:\"Okay with cheap car\"}], tier4: [{emoji:'👑',text:\"Top 10% Driver!\"},{emoji:'🚀',text:\"Great profit!\"},{emoji:'🔥',text:\"Crushing it!\"}] }" 
-    }
+    selectedVehicleId: '${initialSelectedVehicleId != null ? initialSelectedVehicleId : defaultVehicle}',
+    customMpg: '${initialCustomMpg}',
+    customMaintenance: '${initialCustomMaintenance}',
+    customDepreciation: '${initialCustomDepreciation}',
+    targetWeeklyIncome: 1000
 })">
 
     <!-- Hero Section -->
     <div class="${heroBgClass} pt-16 pb-24 text-center px-6">
         <h1 class="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight">
             <span x-text="heroTitle"></span>
-            <span class="${themeColor == "red" ? "text-red-200" : "text-emerald-400"}" x-show="!heroTitle.includes('Week')">(2026)</span>
+            <span class="${themeColor == "red" ? "text-red-200" : "text-emerald-400"}" x-show="false">(2026)</span>
         </h1>
         <p class="text-lg md:text-xl ${themeColor == "red" ? "text-white/80" : "text-slate-300"} max-w-2xl mx-auto" x-html="heroSubtitle"></p>
     </div>
@@ -72,7 +88,7 @@
                         <div class="h-6 w-px bg-slate-200"></div>
                         <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100">
                             <span class="text-sm font-medium" :class="netHourly < 15 ? 'text-red-600' : 'text-emerald-700'">
-                                <span x-text="shockMessage.emoji"></span>
+                                <span x-text="shockMessage.label"></span>
                                 <span x-text="shockMessage.text"></span>
                             </span>
                         </div>
@@ -104,11 +120,11 @@
                          <div class="flex p-1 bg-slate-100 rounded-xl mb-8">
                             <button @click="${activeTabName.equals("uber") ? "" : switchAction}" 
                                 class="flex-1 py-3 text-sm font-bold rounded-lg flex items-center justify-center gap-2 transition-all ${activeTabName.equals("uber") ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-900 hover:bg-white/50"}">
-                                <span>🚗</span> Uber / Lyft
+                                <span>Ride</span> Uber / Lyft
                             </button>
                             <button @click="${activeTabName.equals("doordash") ? "" : switchAction}" 
                                 class="flex-1 py-3 text-sm font-bold rounded-lg flex items-center justify-center gap-2 transition-all ${activeTabName.equals("doordash") ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-900 hover:bg-white/50"}">
-                                <span>🍔</span> DoorDash
+                                <span>Deliver</span> DoorDash
                             </button>
                          </div>
 
@@ -153,7 +169,7 @@
                                            class="w-full pl-4 pr-12 py-3 bg-slate-50 border border-slate-200 rounded-xl text-lg font-bold text-slate-900 focus:ring-2 focus:ring-${themeColor}-500 focus:border-${themeColor}-500 focus:outline-none transition-all">
                                     <span class="absolute right-4 top-3.5 text-slate-400 font-medium text-sm">hrs</span>
                                 </div>
-                                <p class="text-[10px] text-slate-400 leading-tight" x-html="${activeTabName.equals("doordash") ? "'⚠️ Enter \\'Dash Time\\', NOT \\'Active Time\\'. <br> Waiting is work!'" : "'⚠️ Enter full shift duration (Log on to Log off). <br> Do <strong>not</strong> use \\'Active Time\\'.'" }"></p>
+                                <p class="text-[10px] text-slate-400 leading-tight" x-html="${activeTabName.equals("doordash") ? "'Enter Dash Time, not Active Time.<br>Waiting is still work.'" : "'Enter the full shift duration from log-on to log-off.<br>Do <strong>not</strong> use Active Time.'" }"></p>
                             </div>
                         </div>
                     </div>
@@ -192,10 +208,10 @@
                                                 <div class="bg-${themeColor}-500 h-2.5 rounded-full transition-all duration-500" :style="'width: ' + Math.min(100, (totalNet / targetWeeklyIncome) * 100) + '%'"></div>
                                             </div>
                                             <div class="mt-2 text-xs text-slate-500 bg-slate-100 p-2 rounded-lg">
-                                                <span>💡 To pocket <strong>$<span x-text="targetWeeklyIncome"></span></strong>, your <span x-text="selectedApp"></span> Earnings needs to show <strong>$<span x-text="requiredGrossForGoal.toFixed(0)"></span></strong>.</span>
+                                                <span>To pocket <strong>$<span x-text="targetWeeklyIncome"></span></strong>, your <span x-text="selectedApp"></span> gross needs to show <strong>$<span x-text="requiredGrossForGoal.toFixed(0)"></span></strong>.</span>
                                                 <span class="block text-[10px] text-slate-400 mt-1">(Based on your current expense ratio)</span>
                                             </div>
-                                            <p class="text-sm text-slate-600 mt-2" x-text="(targetWeeklyIncome - totalNet) > 0 ? '$' + (targetWeeklyIncome - totalNet).toFixed(0) + ' (' + hoursToGoal.toFixed(1) + ' hrs) to go!' : 'Goal smashed! 🎉'"></p>
+                                            <p class="text-sm text-slate-600 mt-2" x-text="(targetWeeklyIncome - totalNet) > 0 ? '$' + (targetWeeklyIncome - totalNet).toFixed(0) + ' (' + hoursToGoal.toFixed(1) + ' hrs) to go!' : 'Goal smashed.'"></p>
                                         </div>
                                     </template>
                                     <template x-if="targetWeeklyIncome <= 0">
@@ -303,138 +319,116 @@
 
                 <!-- Right: Results Sidebar -->
                 <div class="lg:col-span-4 space-y-6">
-                    
-                    <!-- Breakdown Card -->
+
                     <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 sticky top-24">
-                        <h3 class="text-base font-bold text-slate-900 mb-4">Weekly Breakdown</h3>
-                        
+                        <h3 class="text-base font-bold text-slate-900 mb-4">This Week's Snapshot</h3>
+
                         <div class="space-y-3">
                             <div class="flex justify-between items-center py-3 border-b border-slate-100">
-                                <span class="text-slate-600">Gross Pay</span>
+                                <span class="text-slate-600">App payout shown</span>
                                 <span class="font-bold text-slate-900">$<span x-text="gross.toFixed(2)"></span></span>
                             </div>
-                            
-                            <!-- Split Expenses -->
-                            <template x-if="calculationMode !== 'standard' && gasCost > 0">
-                                <div class="flex justify-between items-center py-2 border-b border-slate-50">
-                                    <span class="text-sm text-slate-500">⛽ Gas Cost</span>
-                                    <span class="font-bold text-red-500">-$<span x-text="gasCost.toFixed(2)"></span></span>
-                                </div>
-                            </template>
-                            <template x-if="calculationMode !== 'standard'">
-                                <div class="flex justify-between items-center py-2 border-b border-slate-100">
-                                    <div class="flex flex-col">
-                                        <span class="text-sm text-slate-500">📉 Wear & Depr.</span>
-                                    </div>
-                                    <span class="font-bold text-red-400">-$<span x-text="otherCost.toFixed(2)"></span></span>
-                                </div>
-                            </template>
-                            <template x-if="calculationMode === 'standard'">
-                                <div class="flex justify-between items-center py-3 border-b border-slate-100">
-                                    <div class="flex flex-col">
-                                        <span class="text-slate-600">Mileage Deduct.</span>
-                                        <span class="text-xs text-slate-400">IRS Std. Rate</span>
-                                    </div>
-                                    <span class="font-bold text-red-500">-$<span x-text="totalDeduction.toFixed(2)"></span></span>
-                                </div>
-                            </template>
-
-                            <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                            <div class="flex justify-between items-center py-3 border-b border-slate-100">
                                 <div class="flex flex-col">
-                                    <span class="text-slate-600">Est. Taxes</span>
-                                    <span class="text-xs text-slate-400">15.3% SE Tax</span>
+                                    <span class="text-slate-600">Mileage + car cost</span>
+                                    <span class="text-xs text-slate-400">IRS mileage proxy or custom vehicle</span>
+                                </div>
+                                <span class="font-bold text-red-500">-$<span x-text="totalDeduction.toFixed(2)"></span></span>
+                            </div>
+                            <div class="flex justify-between items-center py-3 border-b border-slate-100">
+                                <div class="flex flex-col">
+                                    <span class="text-slate-600">Tax reserve</span>
+                                    <span class="text-xs text-slate-400">15.3% self-employment tax</span>
                                 </div>
                                 <span class="font-bold text-red-500">-$<span x-text="taxCost.toFixed(2)"></span></span>
                             </div>
                             <div class="flex justify-between items-center pt-2">
-                                <span class="text-lg font-bold text-slate-900">Net Profit</span>
+                                <span class="text-lg font-bold text-slate-900">Take-home left</span>
                                 <span class="text-xl font-bold" :class="(totalNet >= 0) ? 'text-emerald-600' : 'text-red-500'">$<span x-text="totalNet.toFixed(2)"></span></span>
                             </div>
                         </div>
 
                         <div class="mt-6 bg-slate-50 rounded-xl p-4 border border-slate-200">
                             <div class="flex justify-between items-center mb-1">
-                                <span class="text-xs font-bold uppercase text-slate-500">Real Hourly Wage</span>
+                                <span class="text-xs font-bold uppercase text-slate-500">Real Take-Home Rate</span>
                             </div>
                             <div class="flex items-baseline gap-1 mb-3">
                                 <span class="text-4xl font-bold text-slate-900">$<span x-text="netHourly.toFixed(2)"></span></span>
                                 <span class="text-sm font-medium text-slate-400">/hr</span>
                             </div>
 
-                             <!-- W-2 Equivalent (New Feature) -->
-                            <div class="mb-3 flex items-center justify-between text-xs bg-slate-100 p-2 rounded-lg border border-slate-200">
-                                <span class="font-semibold text-slate-600">🆚 W-2 Job Equiv:</span>
-                                <span class="font-bold text-slate-800">$<span x-text="w2Equivalent.toFixed(2)"></span>/hr</span>
+                            <div class="mb-3 grid grid-cols-2 gap-2 text-xs">
+                                <div class="rounded-lg border border-slate-200 bg-white p-3">
+                                    <p class="font-semibold text-slate-500 uppercase tracking-wide">Tax reserve</p>
+                                    <p class="mt-1 font-black text-amber-700">$<span x-text="taxCost.toFixed(0)"></span></p>
+                                </div>
+                                <div class="rounded-lg border border-slate-200 bg-white p-3">
+                                    <p class="font-semibold text-slate-500 uppercase tracking-wide" x-text="biggestLeakLabel"></p>
+                                    <p class="mt-1 font-black text-rose-700">$<span x-text="biggestLeakAmount.toFixed(0)"></span></p>
+                                </div>
                             </div>
                             <p class="text-[10px] text-slate-400 mb-3 leading-tight">
-                                *Comparing to a job with benefits (Health, PTO), your gig wage is worth less.
+                                The week improves only if you protect the reserve and attack the largest leak first.
                             </p>
 
-                             <!-- Wait Time Analysis (Only if wait time entered) -->
                             <template x-if="waitTime > 0">
                                 <div class="mb-4 bg-orange-50 rounded-lg p-3 border border-orange-100">
                                     <div class="flex justify-between items-center mb-1">
-                                        <span class="text-xs font-bold uppercase text-orange-600">The "Active" Illusion</span>
+                                        <span class="text-xs font-bold uppercase text-orange-600">The active-time illusion</span>
                                     </div>
                                     <div class="flex justify-between items-end">
                                         <div class="text-right">
-                                            <span class="block text-xs text-slate-500">Only Driving</span>
+                                            <span class="block text-xs text-slate-500">Only driving</span>
                                             <span class="block font-bold text-slate-900">$<span x-text="activeHourly.toFixed(2)"></span>/hr</span>
                                         </div>
                                         <div class="text-xs text-orange-400 font-bold px-2 mb-1">vs</div>
                                         <div>
-                                            <span class="block text-xs text-slate-500">Real Reality</span>
+                                            <span class="block text-xs text-slate-500">Real reality</span>
                                             <span class="block font-bold text-red-600">$<span x-text="netHourly.toFixed(2)"></span>/hr</span>
                                         </div>
                                     </div>
                                     <p class="text-[10px] text-orange-700 mt-2 leading-tight">
-                                        You spent <strong x-text="waitTime"></strong> hrs waiting for free. That unpaid time dragged your wage down by $<span x-text="(activeHourly - netHourly).toFixed(2)"></span>/hr.
+                                        Waiting still counts. That unpaid time dragged your week down by $<span x-text="(activeHourly - netHourly).toFixed(2)"></span>/hr.
                                     </p>
                                 </div>
                             </template>
 
-                             <!-- Shock Message (Verdict) - Redesigned as a "Fact Check Box" -->
-                            <div class="mt-4 rounded-lg p-4 border transition-colors duration-300" 
+                            <div class="mt-4 rounded-lg p-4 border transition-colors duration-300"
                                  :class="netHourly < 15 ? 'bg-red-100 border-red-200' : 'bg-emerald-100 border-emerald-200'">
                                 <div class="flex items-center gap-2 mb-2">
                                     <svg x-show="netHourly < 15" class="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
                                     <svg x-show="netHourly >= 15" class="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                                    <span class="text-xs font-black uppercase tracking-widest" :class="netHourly < 15 ? 'text-red-700' : 'text-emerald-700'">Verdict</span>
+                                    <span class="text-xs font-black uppercase tracking-widest" :class="netHourly < 15 ? 'text-red-700' : 'text-emerald-700'">Decision Signal</span>
                                 </div>
-                                <p class="text-base font-bold leading-snug" 
-                                   :class="netHourly < 15 ? 'text-red-900' : 'text-emerald-900'" 
+                                <p class="text-base font-bold leading-snug"
+                                   :class="netHourly < 15 ? 'text-red-900' : 'text-emerald-900'"
                                    x-text="shockMessage.text">
                                 </p>
                             </div>
 
                             <div class="mt-4 bg-white rounded-lg p-4 border border-slate-200">
-                                <h4 class="text-xs font-black uppercase tracking-widest text-slate-700 mb-3">Recommended Next Step</h4>
-                                <template x-if="netHourly < 12">
-                                    <a :href="'/vehicle-cost/cost-per-mile?app=' + selectedApp + '&miles=' + miles"
-                                       class="block w-full text-center px-3 py-2.5 rounded-lg bg-red-600 text-white text-sm font-bold hover:bg-red-700 transition">
-                                        1) Fix cost per mile first
-                                    </a>
-                                </template>
-                                <template x-if="netHourly >= 12 && netHourly < 18">
-                                    <a :href="'/taxes/quarterly-estimator?app=' + selectedApp + '&gross=' + gross"
-                                       class="block w-full text-center px-3 py-2.5 rounded-lg bg-amber-600 text-white text-sm font-bold hover:bg-amber-700 transition">
-                                        1) Lock your tax buffer now
-                                    </a>
-                                </template>
-                                <template x-if="netHourly >= 18">
-                                    <a :href="'/blog/multi-apping-guide?app=' + selectedApp"
-                                       class="block w-full text-center px-3 py-2.5 rounded-lg bg-emerald-600 text-white text-sm font-bold hover:bg-emerald-700 transition">
-                                        1) Scale with multi-app strategy
-                                    </a>
-                                </template>
+                                <h4 class="text-xs font-black uppercase tracking-widest text-slate-700 mb-2">Recommended Next Step</h4>
+                                <p class="text-sm text-slate-600 mb-3">Turn this result into a weekly operating plan instead of starting over next week.</p>
+                                <a :href="netHourly < 12 ? buildScenarioUrl('/vehicle-cost/cost-per-mile', { source: 'calculator_sidebar' }, ['app', 'miles']) : buildScenarioUrl('/profit-setup-kit', { source: 'calculator_sidebar' })"
+                                   class="block w-full text-center px-3 py-3 rounded-lg bg-slate-900 text-white text-sm font-bold hover:bg-slate-800 transition">
+                                    <span x-text="netHourly < 12 ? 'Fix cost per mile first' : 'Build my weekly profit plan'"></span>
+                                </a>
                                 <div class="grid grid-cols-2 gap-2 mt-2">
-                                    <a :href="'/taxes/quarterly-estimator?app=' + selectedApp + '&gross=' + gross"
+                                    <a :href="buildScenarioUrl('/taxes/quarterly-estimator', { source: 'calculator_sidebar' })"
                                        class="text-center px-3 py-2 rounded-lg border border-slate-300 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition">
-                                        Tax plan
+                                        Tax reserve
                                     </a>
-                                    <a :href="'/insurance/rideshare-basics?app=' + selectedApp"
+                                    <a :href="buildScenarioUrl('/vehicle-cost/cost-per-mile', { source: 'calculator_sidebar' }, ['app', 'miles'])"
                                        class="text-center px-3 py-2 rounded-lg border border-slate-300 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition">
-                                        Coverage check
+                                        Miles cost
+                                    </a>
+                                    <a :href="buildScenarioUrl('/insurance/rideshare-basics', { source: 'calculator_sidebar' }, ['app'])"
+                                       class="text-center px-3 py-2 rounded-lg border border-slate-300 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition">
+                                        Coverage
+                                    </a>
+                                    <a :href="buildScenarioUrl('/blog/multi-apping-guide', { source: 'calculator_sidebar' }, ['app'])"
+                                       class="text-center px-3 py-2 rounded-lg border border-slate-300 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition">
+                                        Multi-app
                                     </a>
                                 </div>
                             </div>
@@ -449,8 +443,8 @@
                                 <p class="text-[10px] text-slate-400 mt-2">Educational estimate only, not tax or legal advice.</p>
                             </div>
                         </div>
-
                     </div>
+                    
                 </div>
                 
             </div>
@@ -481,7 +475,7 @@
 
             <div class="text-center mb-6">
                 <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-${themeColor}-100 text-${themeColor}-600 mb-4">
-                    <span class="text-2xl">📢</span>
+                    <span class="text-2xl">Share</span>
                 </div>
                 <h3 class="text-xl font-bold text-slate-900">Share the Truth</h3>
                 <p class="text-slate-500 mt-1">Help other drivers see their real wage.</p>

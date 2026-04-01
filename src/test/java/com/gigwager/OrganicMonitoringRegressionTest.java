@@ -152,7 +152,7 @@ public class OrganicMonitoringRegressionTest {
                 "Coverage guide should point to Uber's official city directory");
         assertTrue(html.contains("/salary/uber"),
                 "Coverage guide should connect users back to Uber pay reports");
-        assertTrue(html.contains("open_official_uber_directory"),
+        assertTrue(html.contains("open_official_uber_coverage_source"),
                 "Coverage guide should track official-directory CTA clicks");
     }
 

@@ -74,14 +74,17 @@
                     <a href="${calculatorUrl}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_city_report', 'event_label': 'open_prefilled_calculator' })" class="rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-5 py-4 transition-colors shadow-lg shadow-emerald-500/20">
                         Run this scenario in the calculator
                     </a>
-                    <a href="${taxEstimatorUrl}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_city_report', 'event_label': 'estimate_quarterly_taxes' })" class="rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-bold px-5 py-4 transition-colors">
-                        Estimate quarterly taxes
+                    <a href="/profit-setup-kit?source=city_report&app=${app}&gross=${featuredScenario.getGrossWeekly()}&miles=${featuredScenario.getMiles()}&hours=${featuredScenario.getHours()}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_city_report', 'event_label': 'open_profit_setup_kit' })" class="rounded-2xl bg-white text-slate-900 hover:bg-slate-100 font-bold px-5 py-4 transition-colors">
+                        Build weekly profit plan
                     </a>
                     @if (compareUrl != null && !compareUrl.isBlank())
                         <a href="${compareUrl}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_city_report', 'event_label': 'open_compare_page' })" class="rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-bold px-5 py-4 transition-colors">
                             Compare Uber vs DoorDash here
                         </a>
                     @endif
+                    <a href="${taxEstimatorUrl}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_city_report', 'event_label': 'estimate_quarterly_taxes' })" class="rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-bold px-5 py-4 transition-colors">
+                        Estimate quarterly taxes
+                    </a>
                     <a href="${bestCitiesUrl}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_city_report', 'event_label': 'compare_best_cities' })" class="rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-bold px-5 py-4 transition-colors">
                         Compare highest-paying cities
                     </a>

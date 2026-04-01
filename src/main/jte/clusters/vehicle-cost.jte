@@ -59,6 +59,8 @@
                     <h2 class="text-3xl font-bold text-white mb-4">Need a cheaper car payment?</h2>
                     <p class="text-slate-300 mb-8 max-w-xl mx-auto">Stop destroying your personal vehicle. Look into flexible, short-term car rentals specifically designed for rideshare and delivery drivers.</p>
                     <form action="https://formspree.io/f/mqkenryp" method="POST" class="flex flex-col sm:flex-row gap-2 max-w-xl" onsubmit="gtag('event','cta_click',{'event_category':'lead','event_label':'vehicle_rental'});">
+                        <input type="hidden" name="lead_type" value="vehicle_strategy">
+                        <input type="hidden" name="source_page" value="vehicle_cost_cluster">
                         <input type="email" name="email" placeholder="Enter your email..." required class="flex-1 px-6 py-4 rounded-xl border-2 border-slate-200 focus:outline-none focus:border-orange-500 text-slate-900 font-medium">
                         <button type="submit" class="bg-orange-600 hover:bg-orange-500 text-white font-bold px-8 py-4 rounded-xl transition duration-200 whitespace-nowrap">View Rental Deals &rarr;</button>
                     </form>
