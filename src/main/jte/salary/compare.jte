@@ -149,7 +149,13 @@
                 </div>
 
                 <div class="text-center mb-16">
-                    <a href="/salary/directory" class="text-slate-500 hover:text-slate-800 font-bold underline transition-colors">See all cities</a>
+                    <div class="flex flex-col items-center gap-3">
+                        <a href="/salary/directory" class="text-slate-500 hover:text-slate-800 font-bold underline transition-colors">See all cities</a>
+                        <div class="flex flex-col sm:flex-row gap-3 text-sm">
+                            <a href="/uber/where-you-can-drive" class="text-sky-700 hover:text-sky-900 font-bold underline transition-colors">Need Uber coverage first?</a>
+                            <a href="/doordash/where-you-can-dash" class="text-amber-700 hover:text-amber-900 font-bold underline transition-colors">Need DoorDash availability first?</a>
+                        </div>
+                    </div>
                 </div>
 
                 <section class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm mb-16">

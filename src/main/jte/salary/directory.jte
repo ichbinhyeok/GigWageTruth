@@ -27,6 +27,18 @@
             <!-- Directory Grid -->
             <div class="max-w-6xl mx-auto px-6 -mt-10 relative z-10">
                 <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-8">
+                    <div class="grid md:grid-cols-2 gap-4 mb-8">
+                        <a href="/uber/where-you-can-drive" class="rounded-2xl border border-sky-200 bg-sky-50/70 p-5 hover:bg-sky-50 transition-colors">
+                            <p class="text-xs font-black uppercase tracking-[0.18em] text-sky-700 mb-2">Coverage Intent</p>
+                            <h2 class="text-xl font-black text-slate-900 mb-2">Uber coverage guide</h2>
+                            <p class="text-sm text-slate-600">Use this first if your question is whether Uber is active in a city before comparing pay reports.</p>
+                        </a>
+                        <a href="/doordash/where-you-can-dash" class="rounded-2xl border border-amber-200 bg-amber-50/70 p-5 hover:bg-amber-50 transition-colors">
+                            <p class="text-xs font-black uppercase tracking-[0.18em] text-amber-700 mb-2">Coverage Intent</p>
+                            <h2 class="text-xl font-black text-slate-900 mb-2">DoorDash availability guide</h2>
+                            <p class="text-sm text-slate-600">Use this first if your question is whether you can dash in a market before comparing city earnings.</p>
+                        </a>
+                    </div>
                     
                     <h2 class="text-2xl font-bold text-slate-900 mb-8">Browse by City</h2>
                     

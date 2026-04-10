@@ -21,6 +21,11 @@
 @param String taxEstimatorUrl = ""
 @param String bestCitiesUrl = ""
 @param String compareUrl = ""
+@param String methodologyUrl = "/methodology"
+@param String heroTitlePrimary = ""
+@param String heroTitleSecondary = ""
+@param String heroTitleTertiary = ""
+@param String heroSummary = ""
 @template.layout.main(
     noIndex = noIndex,
     seoMeta = seoMeta,
@@ -60,17 +65,23 @@
                 </div>
                 
                 <h1 class="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
-                    Is ${appName} Worth It in ${city.getCityName()}?
-                    <span class="block text-white">${appName} Earnings After Expenses</span>
-                    <span class="block text-emerald-400 mt-2">Part-Time, Side-Hustle, and Full-Time Views</span>
+                    ${heroTitlePrimary}
+                    <span class="block text-white">${heroTitleSecondary}</span>
+                    <span class="block text-emerald-400 mt-2">${heroTitleTertiary}</span>
                 </h1>
                 
                 <p class="text-xl text-slate-300 max-w-2xl mb-8">
-                    Stop guessing. See whether ${appName} is actually worth it in ${city.getCityName()} after mileage costs
-                    (IRS rate: $0.725/mi), vehicle depreciation, and taxes. Local gas: $${String.format("%.2f", city.getGasPrice())}/gal.
+                    ${heroSummary}
                 </p>
 
-                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
+                <div class="flex flex-wrap items-center gap-3 mb-8 text-xs font-semibold text-slate-300" data-nosnippet>
+                    <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10">Updated ${lastUpdated}</span>
+                    <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10">Average after-expenses estimate</span>
+                    <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10">IRS mileage + SE tax assumptions</span>
+                    <a href="${methodologyUrl}" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 hover:border-emerald-400 hover:text-emerald-300 transition-colors">How we estimate this</a>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-8" data-nosnippet>
                     <a href="${calculatorUrl}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_city_report', 'event_label': 'open_prefilled_calculator' })" class="rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-5 py-4 transition-colors shadow-lg shadow-emerald-500/20">
                         Run this scenario in the calculator
                     </a>
@@ -91,7 +102,7 @@
                 </div>
 
                 <!-- AD SLOT 1: High Visibility (Top) -->
-                <div class="mb-8 p-4 bg-slate-800/50 rounded-xl border border-white/10 text-center min-h-[100px] flex items-center justify-center">
+                <div class="mb-8 p-4 bg-slate-800/50 rounded-xl border border-white/10 text-center min-h-[100px] flex items-center justify-center" data-nosnippet>
                     <!-- AdSense Code Placeholder for Top Slot -->
                     <!-- <ins class="adsbygoogle" style="display:block" ... ></ins> -->
                 </div>
@@ -223,7 +234,7 @@
             </section>
             
             <!-- Internal Link: The Hidden Truth (Orphan Defense) -->
-            <section class="bg-red-50 rounded-2xl p-8 border-2 border-red-200 shadow-sm relative overflow-hidden group">
+            <section class="bg-red-50 rounded-2xl p-8 border-2 border-red-200 shadow-sm relative overflow-hidden group" data-nosnippet>
                 <div class="absolute -right-4 -top-4 text-8xl text-red-500/10 font-black group-hover:scale-110 transition-transform">TRUTH</div>
                 <div class="relative z-10">
                     <h3 class="text-xl font-bold text-red-900 mb-3 flex items-center gap-2">
@@ -240,7 +251,7 @@
             </section>
 
             <!-- AD SLOT 2: In-Content (Middle) -->
-            <div class="w-full bg-slate-50 rounded-xl border border-slate-200 text-center min-h-[150px] flex flex-col items-center justify-center overflow-hidden">
+            <div class="w-full bg-slate-50 rounded-xl border border-slate-200 text-center min-h-[150px] flex flex-col items-center justify-center overflow-hidden" data-nosnippet>
                 <!-- Google AdSense Auto Ads Filler -->
             </div>
 
@@ -417,7 +428,7 @@
             </script>
 
              <!-- Risk Trigger Cards (Loss Aversion) -->
-            <section class="bg-red-50/50 rounded-2xl p-8 border border-red-200 mb-8 mt-8">
+            <section class="bg-red-50/50 rounded-2xl p-8 border border-red-200 mb-8 mt-8" data-nosnippet>
                 <h3 class="text-xl font-bold text-slate-900 mb-2">Risks You Should Check</h3>
                 <p class="text-slate-600 mb-6 text-sm">Based on the ${appName} estimates for ${city.getCityName()}.</p>
                 
@@ -445,7 +456,7 @@
             </section>
 
             <!-- Work-Level Deep-Dive Links (Internal Silo) -->
-            <section class="bg-white rounded-2xl p-8 border border-slate-200 mb-8">
+            <section class="bg-white rounded-2xl p-8 border border-slate-200 mb-8" data-nosnippet>
                 <h3 class="text-2xl font-bold text-slate-900 mb-3">
                     Want a Deep-Dive for Your Work Level?
                 </h3>
@@ -477,7 +488,7 @@
             </section>
 
             <!-- Cross-App Comparison "VS" Table (Higher Engagement) -->
-            <section class="bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl p-8 border-2 border-slate-300 shadow-sm mb-8">
+            <section class="bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl p-8 border-2 border-slate-300 shadow-sm mb-8" data-nosnippet>
                 <div class="flex items-center justify-between mb-6">
                     <h3 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
                         <span class="text-3xl">VS</span> ${appName} vs ${otherAppName} in ${city.getCityName()}
@@ -545,7 +556,7 @@
             </section>
 
             <!-- Internal Linking Silo (Bottom) -->
-            <section class="mb-12">
+            <section class="mb-12" data-nosnippet>
                 <h4 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4 border-b border-slate-200 pb-2">
                     Other High-Demand ${city.getMarketTier()} Markets
                 </h4>
@@ -562,7 +573,7 @@
             </section>
 
             <!-- Internal Linking PR8-4: Hub & Rankings Links -->
-            <section class="mt-8 mb-16 max-w-4xl mx-auto">
+            <section class="mt-8 mb-16 max-w-4xl mx-auto" data-nosnippet>
                 <div class="bg-indigo-50 border border-indigo-100 rounded-3xl p-8 text-center shadow-sm">
                     <h3 class="text-xl font-bold text-indigo-900 mb-4">Want to see how ${city.getCityName()} compares?</h3>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -573,7 +584,7 @@
             </section>
 
             <!-- CTA: Deep Calculator -->
-            <section class="bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-2xl p-10 text-center shadow-xl">
+            <section class="bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-2xl p-10 text-center shadow-xl" data-nosnippet>
                 <h3 class="text-2xl font-bold text-white mb-3">Calculate YOUR Personalized Estimate</h3>
                 <p class="text-emerald-100 mb-6 max-w-xl mx-auto">
                     These scenarios use averages. Want a personalized estimate? Enter your typical miles, hours, and vehicle type.

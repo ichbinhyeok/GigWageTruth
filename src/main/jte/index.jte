@@ -176,8 +176,8 @@
                                 <a href="/uber/where-you-can-drive" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
                                     Uber city coverage guide
                                 </a>
-                                <a href="/blog/multi-apping-guide" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
-                                    Multi-app without deactivation
+                                <a href="/doordash/where-you-can-dash" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
+                                    DoorDash availability guide
                                 </a>
                             </div>
                         </div>

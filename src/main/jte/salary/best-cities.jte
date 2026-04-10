@@ -18,6 +18,7 @@
 @param String topCityReportUrl = ""
 @param String coverageGuideTitle = ""
 @param String coverageGuideDescription = ""
+@param String methodologyUrl = "/methodology"
 @param String topThreeCities = ""
 @param int currentYear = 2026
 @param int rankedCityCount = 0
@@ -34,12 +35,18 @@
                     <h1 class="text-4xl lg:text-5xl font-black text-slate-900 mb-6 tracking-tight">
                         Highest-Paying Cities for ${appName} Drivers in ${currentYear}
                     </h1>
-                    <p class="text-xl text-slate-600 max-w-2xl mx-auto">
-                        ${topRankedCity.city().getCityName()} currently leads our after-expenses model at about <strong>$${String.format("%.2f", topRankedCity.netHourly())}/hr net</strong>. Top markets right now: <strong>${topThreeCities}</strong>.
+                    <p class="text-xl text-slate-600 max-w-2xl mx-auto" id="serp-answer">
+                        The highest-paying city for ${appName} drivers in ${currentYear} is <strong>${topRankedCity.city().getCityName()}</strong> at about <strong>$${String.format("%.2f", topRankedCity.netHourly())}/hr net after expenses</strong>. The current top 3 are <strong>${topThreeCities}</strong>.
                     </p>
                     <p class="text-sm text-slate-500 max-w-2xl mx-auto mt-3">
                         These rankings estimate take-home pay after mileage and self-employment tax assumptions. Updated ${lastUpdated}.
                     </p>
+                    <div class="flex flex-wrap items-center justify-center gap-3 mt-4 text-xs font-semibold text-slate-600" data-nosnippet>
+                        <span class="px-3 py-1 rounded-full bg-white border border-slate-200">Updated ${lastUpdated}</span>
+                        <span class="px-3 py-1 rounded-full bg-white border border-slate-200">After-expenses estimate</span>
+                        <span class="px-3 py-1 rounded-full bg-white border border-slate-200">Mileage + SE tax assumptions</span>
+                        <a href="${methodologyUrl}" class="px-3 py-1 rounded-full bg-white border border-slate-200 hover:border-emerald-300 hover:text-emerald-700 transition-colors">Methodology</a>
+                    </div>
                 </div>
 
                 <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
@@ -65,14 +72,14 @@
                     </div>
                 </div>
 
-                <div class="bg-white border border-slate-200 rounded-2xl p-5 mb-8">
+                <div class="bg-white border border-slate-200 rounded-2xl p-5 mb-8" data-nosnippet>
                     <p class="text-sm text-slate-600">
                         Use this page when your question is <strong>which cities pay the most for ${appName}</strong>.
                         If your real question is <strong>whether a market is active</strong>, use the coverage guide first and then come back here for the earnings ranking.
                     </p>
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-4 mb-8">
+                <div class="grid md:grid-cols-3 gap-4 mb-8" data-nosnippet>
                     <a href="${appHubUrl}" class="block bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:border-emerald-200 hover:bg-emerald-50/40 transition-colors text-left">
                         <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-600 mb-2">Need More Context?</p>
                         <h2 class="text-xl font-black text-slate-900 mb-2">${appName} Earnings Hub</h2>
@@ -90,7 +97,7 @@
                     </a>
                 </div>
 
-                <div class="bg-blue-50 p-6 rounded-xl border border-blue-200 text-left mb-8">
+                <div class="bg-blue-50 p-6 rounded-xl border border-blue-200 text-left mb-8" data-nosnippet>
                     <h2 class="text-blue-900 font-bold mb-2">How This After-Expenses Ranking Works</h2>
                     <ul class="list-disc pl-5 text-blue-800 text-sm space-y-1">
                         <li><strong>Ranking Criteria:</strong> Sorts strictly by estimated Net Hourly Pay for a "side-hustle" driver.</li>
@@ -102,7 +109,7 @@
                 </div>
 
                 <!-- Top 5 Highlight Cards -->
-                <div class="mb-12">
+                <div class="mb-12" data-nosnippet>
                     <h2 class="text-2xl font-bold text-slate-900 mb-6">Why These Cities Lead The ${appName} Net Pay Ranking</h2>
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         @for(int i = 0; i < Math.min(rankedCities.size(), 5); i++)
@@ -123,7 +130,7 @@
                     </div>
                 </div>
 
-                <div class="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm">
+                <div class="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm" data-nosnippet>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse">
                             <thead>

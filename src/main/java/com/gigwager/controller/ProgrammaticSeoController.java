@@ -215,6 +215,7 @@ public class ProgrammaticSeoController {
                 model.addAttribute("coverageUrl", coverageUrl);
                 model.addAttribute("coverageGuideTitle", coverageGuideTitle);
                 model.addAttribute("coverageGuideDescription", coverageGuideDescription);
+                model.addAttribute("methodologyUrl", "/methodology");
                 model.addAttribute("seoMeta",
                                 new SeoMeta(title, description, canonicalUrl, AppConstants.BASE_URL + "/og-image.jpg"));
                 model.addAttribute("dataLayerService", dataLayerService);
@@ -321,11 +322,24 @@ public class ProgrammaticSeoController {
                 // Build unique SEO meta
                 String appName = app.equals("uber") ? "Uber" : "DoorDash";
 
-                String title = String.format("Is %s Worth It in %s? $%.2f/hr After Expenses",
-                                appName, city.getCityName(), featuredScenario.getNetHourly());
+                String title = String.format("Average %s Driver Earnings in %s (%d): $%.2f/hr After Expenses",
+                                appName, city.getCityName(), now.getYear(), featuredScenario.getNetHourly());
                 String description = String.format(
-                                "Is %s worth it in %s? Side-hustle baseline: about $%.2f/hr net after mileage and SE tax. See PT, SH, and FT scenarios. Updated %s.",
-                                appName, city.getCityName(), featuredScenario.getNetHourly(), monthYear);
+                                "Average %s driver earnings in %s for %d run about $%.2f/hr net in our side-hustle model after mileage and self-employment tax. See part-time, side-hustle, and full-time scenarios. Updated %s.",
+                                appName, city.getCityName(), now.getYear(), featuredScenario.getNetHourly(), monthYear);
+                String heroTitlePrimary = String.format("Average %s Driver Earnings in %s", appName,
+                                city.getCityName());
+                String heroTitleSecondary = String.format("%d After-Expenses Estimate", now.getYear());
+                String heroTitleTertiary = "Part-Time, Side-Hustle, and Full-Time Views";
+                String heroSummary = String.format(
+                                "Average %s driver earnings in %s currently run about $%.2f/hr net in our side-hustle model after mileage, self-employment tax, and local gas costs. Baseline scenario: $%d/week gross, %d mi, %d hrs. Local gas: $%.2f/gal.",
+                                appName,
+                                city.getCityName(),
+                                featuredScenario.getNetHourly(),
+                                featuredScenario.getGrossWeekly(),
+                                featuredScenario.getMiles(),
+                                featuredScenario.getHours(),
+                                city.getGasPrice());
 
                 String canonicalUrl = String.format("%s/salary/%s/%s", AppConstants.BASE_URL, app, citySlug);
                 String appHubCanonicalUrl = String.format("%s/salary/%s", AppConstants.BASE_URL, app);
@@ -344,6 +358,11 @@ public class ProgrammaticSeoController {
                 model.addAttribute("otherApp", otherApp);
                 model.addAttribute("otherAppName", otherAppName);
                 model.addAttribute("otherAppUrl", otherAppUrl);
+                model.addAttribute("heroTitlePrimary", heroTitlePrimary);
+                model.addAttribute("heroTitleSecondary", heroTitleSecondary);
+                model.addAttribute("heroTitleTertiary", heroTitleTertiary);
+                model.addAttribute("heroSummary", heroSummary);
+                model.addAttribute("methodologyUrl", "/methodology");
                 model.addAttribute("calculatorUrl", buildCalculatorUrl(app, featuredScenario, city));
                 model.addAttribute("taxEstimatorUrl", buildTaxEstimatorUrl(app, featuredScenario));
                 model.addAttribute("bestCitiesUrl", String.format("/best-cities/%s", app));

@@ -523,6 +523,94 @@ Primary source: Google Search Console (GA4 property access still pending)
   - If CTR improves next, the most likely pages to show it first are `/best-cities/doordash` and `/best-cities/uber`.
   - If DoorDash leakage weakens, impressions should spread a little more cleanly between `/best-cities/doordash` and `/doordash/where-you-can-dash` instead of piling onto one ambiguous page.
 
+### 2026-04-10 Observation And Discovery Pass
+- Review date: 2026-04-10
+- Current period: 2026-04-01 to 2026-04-08
+- Comparison period: 2026-03-23 to 2026-03-31
+- Site clicks / impressions / CTR / avg position:
+  - current: `3 / 10,248 / 0.029% / 8.42`
+  - previous: `11 / 15,136 / 0.073% / 8.34`
+- Priority page movement:
+  - `/best-cities/doordash`
+    - current window: `1 click / 253 impressions / 0.40% CTR / avg pos 7.81`
+    - previous window: `2 / 392 / 0.51% / 7.45`
+  - `/best-cities/uber`
+    - current window: `0 click / 125 impressions / 0.00% CTR / avg pos 8.97`
+    - previous window: `0 / 118 / 0.00% / 11.94`
+- URL inspection notes:
+  - `/best-cities/doordash`: `Submitted and indexed`, last crawl `2026-04-03`
+  - `/best-cities/uber`: `Submitted and indexed`, last crawl `2026-04-03`
+  - `/uber/where-you-can-drive`: `Submitted and indexed`, last crawl `2026-03-20`
+  - `/doordash/where-you-can-dash`: `Discovered - currently not indexed`
+- Decision:
+  - This is not a pure wait-and-watch moment.
+  - The two ranking pages have already been crawled since the CTR intent split patch, so “nothing has been seen yet” is not a strong enough explanation by itself.
+  - The new DoorDash availability page is still not indexed, so the most urgent gap is discovery / internal linking, not another broad snippet rewrite.
+
+### 2026-04-10 DoorDash Discovery Reinforcement
+- Scope:
+  - Added a direct home-page shortcut to `/doordash/where-you-can-dash` in the main quick-link cluster.
+  - Replaced the DoorDash branch inside `components/related_pages.jte` so DoorDash city reports, the DoorDash after-expenses hub, and any reused related-pages blocks now point to the DoorDash availability guide instead of the multi-app blog.
+  - Added both coverage guides to `/salary/directory` above the city grid so the highest-crawl directory page now explicitly routes coverage-intent users before city browsing.
+  - Added an inline DoorDash availability link to the compare-page lower action area so compare pages can also feed discovery of the new availability URL.
+- Goal:
+  - Increase crawl discovery and internal-link prominence for `/doordash/where-you-can-dash` until Google moves it out of `Discovered - currently not indexed`.
+  - Give DoorDash coverage/support intent a stronger destination before making another CTR-focused copy pass.
+- Verification target for next review:
+  - Check whether `/doordash/where-you-can-dash` becomes `Crawled` or `Indexed`.
+  - Check whether DoorDash coverage/support-intent impressions begin to appear on the new URL instead of pooling on `/best-cities/doordash`.
+  - Re-check `/best-cities/doordash` CTR only after the new availability page is at least crawled once.
+
+### 2026-04-10 CTR Root-Cause Rewrite Pass
+- Why this pass happened:
+  - Deep Search Console review showed the CTR issue is not just `bad title tags`.
+  - US mobile over the last 28 days ran about `21 clicks / 1,963 impressions / 1.07% CTR / avg pos 9.21`, while US desktop ran about `2 / 23,402 / 0.0085% / 8.11`.
+  - Query-page rows also showed many city pages surfacing for `average {app} driver earnings {city} 2026` style searches while the page headline promise was still framed as `Is {app} worth it in {city}?`
+  - Live web search also suggested Google was still willing to rewrite or lag the best-cities snippet layer instead of reflecting the latest answer-first framing cleanly.
+- Scope:
+  - Reworked `/best-cities/doordash` and `/best-cities/uber` so the first visible paragraph is a direct answer sentence:
+    - highest-paying city
+    - current year
+    - after-expenses net rate
+    - top 3 cities
+  - Added `data-nosnippet` to lower-value ranking-page sections that were more likely to confuse the SERP snippet than help it:
+    - coverage-disclaimer block
+    - context / CTA card row
+    - methodology block
+    - top-city narrative cards
+    - large ranking table
+  - Reframed the main city report pages around the language users are actually typing:
+    - from `Is Uber Worth It in Chicago?`
+    - toward `Average Uber Driver Earnings in Chicago (2026)`
+  - The city-report hero summary now leads with the estimated average after-expenses hourly earnings, then supports that with the baseline weekly scenario inputs.
+  - Added a visible trust strip near the top of both ranking pages and city-report pages so users can immediately see:
+    - updated date
+    - after-expenses framing
+    - mileage / self-employment tax assumption
+    - direct methodology link
+  - Added `data-nosnippet` to noisy city-report sections that are useful for users but poor candidates for SERP snippets:
+    - CTA button cluster
+    - ad placeholders
+    - hidden-cost warning block
+    - risk trigger cards
+    - deep-dive card sections
+    - cross-linking / bottom CTA blocks
+- Goal:
+  - Give Google a cleaner answer paragraph to quote for the best-cities pages instead of grabbing stale or lower-signal table / disclaimer text.
+  - Reduce query-language mismatch on main city report pages where Search Console is already showing `average earnings` style impressions.
+  - Improve CTR first on the pages already ranking, before expanding any additional SEO surface.
+- Realistic expectation:
+  - Do not expect same-day movement. This depends on snippet/title refresh after recrawl.
+  - The first pages worth checking next are:
+    - `/best-cities/doordash`
+    - `/best-cities/uber`
+    - `/salary/uber/chicago`
+    - `/salary/uber/seattle`
+    - `/salary/uber/las-vegas`
+    - `/salary/uber/los-angeles`
+    - `/salary/uber/orlando`
+  - If this works, the earliest visible win should be cleaner page-level CTR on high-impression ranking pages and less zero-click waste on the strongest city-report pages.
+
 ## Follow-Up Entry Template
 Copy this block for each new review cycle.
 

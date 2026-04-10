@@ -28,9 +28,9 @@
             <p class="text-xs text-slate-500">Check where Uber actually operates before you compare markets.</p>
         </a>
         @else
-        <a href="/blog/multi-apping-guide" class="bg-slate-50 hover:bg-emerald-50 p-5 rounded-xl border border-slate-200 hover:border-emerald-300 transition-colors group">
-            <h4 class="font-bold text-slate-900 mb-1 group-hover:text-emerald-700">Multi-App Strategy</h4>
-            <p class="text-xs text-slate-500">Learn how Dashers lift hourly earnings without getting deactivated.</p>
+        <a href="/doordash/where-you-can-dash" class="bg-slate-50 hover:bg-emerald-50 p-5 rounded-xl border border-slate-200 hover:border-emerald-300 transition-colors group">
+            <h4 class="font-bold text-slate-900 mb-1 group-hover:text-emerald-700">DoorDash Availability Guide</h4>
+            <p class="text-xs text-slate-500">Check where DoorDash onboarding and active dashing are available before you compare markets.</p>
         </a>
         @endif
     </div>
