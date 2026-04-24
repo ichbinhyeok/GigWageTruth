@@ -611,6 +611,43 @@ Primary source: Google Search Console (GA4 property access still pending)
     - `/salary/uber/orlando`
   - If this works, the earliest visible win should be cleaner page-level CTR on high-impression ranking pages and less zero-click waste on the strongest city-report pages.
 
+### 2026-04-24 Tool-Identity Pivot Test
+- Why this pass happened:
+  - Follow-up Search Console review showed the issue is not page-count expansion. The city footprint is still the same fixed 20-city rich-content surface.
+  - The newest data shows Google is giving the site visibility, but the visible organic surface is still dominated by `/salary/{app}/{city}`, `/best-cities/{app}`, `/salary/directory`, and `/blog/multi-apping-guide`.
+  - Product identity is calculator/tool-first, but SERP identity has been drifting toward information-first city reports.
+- Diagnosis:
+  - This is a search-surface identity mismatch, not a pure indexing problem and not a thin-page expansion problem.
+  - The test is whether pages already receiving impressions can win clicks when the promise changes from `earnings report` to `prefilled pay calculator`.
+- Scope:
+  - Reframed `/salary/{app}/{city}` title, meta description, H1, hero summary, and above-fold module around `Pay Calculator`, `net`, and adjustable gross/miles/hours/gas assumptions.
+  - Moved city pages toward a calculator-result-first hero: prefilled net hourly result, baseline inputs, and primary CTA to adjust the estimate.
+  - Reframed `/salary/{app}/{city}/{workLevel}` around work-level calculators and added a prefilled calculator CTA.
+  - Reframed `/best-cities/{app}` around `Net Pay Calculator Ranking` instead of a generic highest-paying city report.
+  - Reframed `/blog/multi-apping-guide` as a calculator-first guide so the information page points users into Uber, DoorDash, and net-hourly tools before tactical advice.
+  - Changed internal navigation and anchor language from `Reports`, `Salary Directory`, and `Earnings by City` toward `City Pay Calculators`.
+  - Added calculator/tool identity to city and work-level structured data with `WebApplication` JSON-LD, while retaining FAQ and ItemList structured data where visible content supports it.
+- Priority URLs for recrawl and measurement:
+  - `https://gigverdict.com/salary/doordash/phoenix`
+  - `https://gigverdict.com/salary/doordash/phoenix/side-hustle`
+  - `https://gigverdict.com/salary/uber/los-angeles`
+  - `https://gigverdict.com/best-cities/doordash`
+  - `https://gigverdict.com/blog/multi-apping-guide`
+- Measurement plan:
+  - Compare 14-day and 28-day windows after the next crawl refresh.
+  - Use US-only and device splits, especially US desktop CTR.
+  - Track query migration toward `calculator`, `take home`, `net pay`, `after gas`, `after tax`, `after mileage`, and `after expenses`.
+  - Track whether `/uber`, `/doordash`, `/net-hourly-calculator`, and city calculator URLs begin collecting more tool-intent impressions.
+- Success criteria:
+  - Test-page aggregate CTR at least 2x the pre-change baseline.
+  - At least two of the priority zero-click pages receive clicks while maintaining meaningful impressions.
+  - US desktop CTR improves from the near-zero baseline.
+  - Search Console starts exposing more tool-intent query language instead of only generic salary / earnings variants.
+- Failure criteria:
+  - Pages remain in average positions 3-8 with 300+ impressions and near-zero CTR after recrawl.
+  - Query language stays generic salary/earnings only, with no movement toward calculator/take-home/net-pay intent.
+  - If this happens, escalate from snippet/template work to SERP commodity risk and authority/product-positioning work.
+
 ## Follow-Up Entry Template
 Copy this block for each new review cycle.
 

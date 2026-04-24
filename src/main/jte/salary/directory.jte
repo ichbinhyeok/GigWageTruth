@@ -5,8 +5,8 @@
 @template.layout.main(
     noIndex = noIndex,
     seoMeta = new SeoMeta(
-        "Which City Pays Best for Uber or DoorDash? US Directory",
-        "Browse Uber and DoorDash earnings by city, then jump into compare pages, app hubs, rankings, and city reports after expenses.",
+        "Uber and DoorDash City Pay Calculators: US Directory",
+        "Browse Uber and DoorDash city pay calculators, then jump into compare pages, app hubs, rankings, and calculator-based city estimates after expenses.",
         com.gigwager.util.AppConstants.BASE_URL + "/salary/directory",
         com.gigwager.util.AppConstants.BASE_URL + "/og-image.jpg"
     ),
@@ -16,11 +16,11 @@
             <!-- Hero -->
             <div class="bg-slate-900 py-20 text-center px-6">
                 <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
-                    Which City Pays Best for <span class="text-emerald-400">Uber or DoorDash?</span>
+                    Uber and DoorDash <span class="text-emerald-400">City Pay Calculators</span>
                 </h1>
                 <p class="text-lg text-slate-400 max-w-2xl mx-auto">
-                    Browse the full city directory when you want a market list first, then jump into compare pages, app hubs,
-                    rankings, or city reports for deeper after-expenses analysis.
+                    Browse the full city calculator directory when you want a market list first, then jump into compare pages, app hubs,
+                    rankings, or city calculators for deeper after-expenses analysis.
                 </p>
             </div>
 
@@ -40,7 +40,7 @@
                         </a>
                     </div>
                     
-                    <h2 class="text-2xl font-bold text-slate-900 mb-8">Browse by City</h2>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-8">Browse City Pay Calculators</h2>
                     
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         @for(var city : CityData.values())
@@ -77,11 +77,11 @@
                                     <div class="grid grid-cols-2 gap-2">
                                         <a href="/salary/uber/${city.getSlug()}" 
                                            class="text-center px-3 py-2 bg-slate-900 text-white text-sm font-semibold rounded-lg hover:bg-slate-800 transition">
-                                            Uber
+                                            Uber Calculator
                                         </a>
                                         <a href="/salary/doordash/${city.getSlug()}" 
                                            class="text-center px-3 py-2 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition">
-                                            DoorDash
+                                            DoorDash Calculator
                                         </a>
                                     </div>
                                     @if(comparableCitySlugs.contains(city.getSlug()))

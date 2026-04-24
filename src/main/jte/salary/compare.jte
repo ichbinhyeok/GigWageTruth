@@ -40,7 +40,7 @@
                 <div class="bg-white border border-slate-200 rounded-2xl p-5 mb-8">
                     <p class="text-sm text-slate-600">
                         Use this page when your question is <strong>which app pays more in ${city.getCityName()}</strong>.
-                        Open the app-specific city reports below when you want the deeper part-time, side-hustle, and full-time breakdowns.
+                        Open the app-specific city calculators below when you want the deeper part-time, side-hustle, and full-time breakdowns.
                     </p>
                 </div>
 
@@ -52,10 +52,10 @@
                         Build weekly profit plan
                     </a>
                     <a href="/salary/uber/${city.getSlug()}" class="rounded-2xl bg-white border border-slate-200 hover:border-slate-300 text-slate-900 font-bold px-5 py-4 transition-colors">
-                        Uber city report
+                        Uber city calculator
                     </a>
                     <a href="/salary/doordash/${city.getSlug()}" class="rounded-2xl bg-white border border-slate-200 hover:border-slate-300 text-slate-900 font-bold px-5 py-4 transition-colors">
-                        DoorDash city report
+                        DoorDash city calculator
                     </a>
                 </div>
 
@@ -110,7 +110,7 @@
                             </div>
                         </div>
 
-                        <a href="/salary/uber/${city.getSlug()}" class="block w-full text-center py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl transition-all">View Uber Details</a>
+                        <a href="/salary/uber/${city.getSlug()}" class="block w-full text-center py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl transition-all">Open Uber Calculator</a>
                     </div>
 
                     <div class="bg-white rounded-3xl p-8 border-2 ${doordashScenario.getNetHourly() > uberScenario.getNetHourly() ? "border-emerald-400 shadow-xl shadow-emerald-500/10" : "border-slate-200"} relative">
@@ -144,7 +144,7 @@
                             </div>
                         </div>
 
-                        <a href="/salary/doordash/${city.getSlug()}" class="block w-full text-center py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl transition-all">View DoorDash Details</a>
+                        <a href="/salary/doordash/${city.getSlug()}" class="block w-full text-center py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl transition-all">Open DoorDash Calculator</a>
                     </div>
                 </div>
 

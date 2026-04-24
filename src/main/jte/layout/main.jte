@@ -139,7 +139,7 @@
                 <a href="/" class="hover:text-emerald-600 transition">Calculator</a>
                 <a href="/net-hourly-calculator" class="hover:text-emerald-600 transition hidden sm:inline-block">Tools</a>
                 <a href="/blog" class="hover:text-emerald-600 transition">Guides</a>
-                <a href="/salary/directory" class="hover:text-emerald-600 transition hidden sm:inline-block">Cities</a>
+                <a href="/salary/directory" class="hover:text-emerald-600 transition hidden sm:inline-block">City Pay Calculators</a>
             </nav>
         </div>
     </header>
@@ -157,7 +157,7 @@
                 <a href="/net-hourly-calculator" class="hover:text-emerald-600 transition">Net Hourly Tool</a>
                 <a href="/taxes/quarterly-estimator" class="hover:text-emerald-600 transition">Quarterly Taxes</a>
                 <a href="/vehicle-cost/cost-per-mile" class="hover:text-emerald-600 transition">Cost Per Mile</a>
-                <a href="/salary/directory" class="hover:text-emerald-600 transition">Earnings by City</a>
+                <a href="/salary/directory" class="hover:text-emerald-600 transition">City Pay Calculators</a>
                 <a href="/blog" class="hover:text-emerald-600 transition border-b-2 border-emerald-500/20 md:border-0">Blog</a>
                 <a href="/about" class="hover:text-emerald-600 transition">About</a>
                 <a href="/methodology" class="hover:text-emerald-600 transition">Methodology</a>

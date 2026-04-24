@@ -35,6 +35,7 @@
 @param List similarCities
 @param Boolean noIndex = false
 @param String workLevelJsonLd = "{}"
+@param String calculatorUrl = ""
 @template.layout.main(
     noIndex = noIndex,
     seoMeta = seoMeta,
@@ -48,7 +49,7 @@
                 <nav class="text-sm text-slate-400 mb-4 flex items-center gap-2 flex-wrap">
                     <a href="/" class="hover:text-emerald-400 transition">Home</a>
                     <span class="text-slate-600">&gt;</span>
-                    <a href="/salary/directory" class="hover:text-emerald-400 transition">Salary Directory</a>
+                    <a href="/salary/directory" class="hover:text-emerald-400 transition">City Pay Calculators</a>
                     <span class="text-slate-600">&gt;</span>
                     <a href="${parentPageUrl}" class="hover:text-emerald-400 transition">${city.getCityName()} ${appName}</a>
                     <span class="text-slate-600">&gt;</span>
@@ -66,7 +67,7 @@
                 </div>
 
                 <h1 class="text-4xl md:text-6xl font-black text-white mb-4 leading-tight">
-                    ${workLevel.getDisplayName()} ${appName} Earnings in ${city.getCityName()} After Expenses
+                    ${appName} ${city.getCityName()} ${workLevel.getDisplayName()} Calculator
                 </h1>
                 @if(heroHook != null && !heroHook.isBlank())
                     <p class="text-xl text-slate-300 max-w-3xl mb-8">${heroHook}</p>
@@ -101,6 +102,18 @@
                             <div class="text-xl font-bold text-white">${scenario.getMiles()}</div>
                         </div>
                     </div>
+                </div>
+
+                <div class="mt-6 flex flex-wrap gap-3" data-nosnippet>
+                    <a href="${calculatorUrl}"
+                       onclick="gtag('event', 'cta_click', { 'event_category': 'seo_work_level', 'event_label': 'open_prefilled_calculator' })"
+                       class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold transition-colors shadow-lg shadow-emerald-500/20">
+                        Adjust this ${workLevel.getDisplayName().toLowerCase()} estimate
+                    </a>
+                    <a href="${parentPageUrl}"
+                       class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-bold transition-colors">
+                        Back to ${city.getCityName()} city calculator
+                    </a>
                 </div>
 
                 @if(richNetMin != null && richNetMax != null)
@@ -329,7 +342,7 @@
                 </p>
                 <a href="${otherAppUrl}"
                    class="inline-block px-6 py-3 bg-white text-slate-900 font-bold rounded-lg hover:bg-slate-100 transition shadow-lg">
-                    View ${otherAppName} ${workLevel.getDisplayName()} Report
+                    Open ${otherAppName} ${workLevel.getDisplayName()} calculator
                 </a>
             </section>
 
@@ -385,7 +398,7 @@
             <section class="text-center">
                 <a href="${parentPageUrl}"
                    class="inline-block px-8 py-4 bg-slate-200 text-slate-900 font-bold text-lg rounded-xl hover:bg-slate-300 transition">
-                    Back to ${city.getCityName()} ${appName} Overview
+                    Back to ${city.getCityName()} ${appName} Calculator
                 </a>
             </section>
 

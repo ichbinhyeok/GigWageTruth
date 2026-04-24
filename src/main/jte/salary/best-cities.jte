@@ -33,13 +33,13 @@
             <div class="max-w-4xl mx-auto">
                 <div class="text-center mb-12">
                     <h1 class="text-4xl lg:text-5xl font-black text-slate-900 mb-6 tracking-tight">
-                        Highest-Paying Cities for ${appName} Drivers in ${currentYear}
+                        Best ${appName} Cities ${currentYear}: Net Pay Calculator Ranking
                     </h1>
                     <p class="text-xl text-slate-600 max-w-2xl mx-auto" id="serp-answer">
-                        The highest-paying city for ${appName} drivers in ${currentYear} is <strong>${topRankedCity.city().getCityName()}</strong> at about <strong>$${String.format("%.2f", topRankedCity.netHourly())}/hr net after expenses</strong>. The current top 3 are <strong>${topThreeCities}</strong>.
+                        The strongest ${appName} city calculator baseline in ${currentYear} is <strong>${topRankedCity.city().getCityName()}</strong> at about <strong>$${String.format("%.2f", topRankedCity.netHourly())}/hr net after expenses</strong>. The current top 3 are <strong>${topThreeCities}</strong>.
                     </p>
                     <p class="text-sm text-slate-500 max-w-2xl mx-auto mt-3">
-                        These rankings estimate take-home pay after mileage and self-employment tax assumptions. Updated ${lastUpdated}.
+                        These rankings compare prefilled city pay calculators after mileage and self-employment tax assumptions. Updated ${lastUpdated}.
                     </p>
                     <div class="flex flex-wrap items-center justify-center gap-3 mt-4 text-xs font-semibold text-slate-600" data-nosnippet>
                         <span class="px-3 py-1 rounded-full bg-white border border-slate-200">Updated ${lastUpdated}</span>
@@ -68,27 +68,27 @@
                     <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm text-left">
                         <p class="text-xs font-black uppercase tracking-[0.18em] text-slate-500 mb-2">Cities Ranked</p>
                         <h2 class="text-2xl font-black text-slate-900">${rankedCityCount}</h2>
-                        <p class="text-sm text-slate-600 mt-2">Every market links to a deeper city earnings report.</p>
+                        <p class="text-sm text-slate-600 mt-2">Every market links to a deeper city pay calculator.</p>
                     </div>
                 </div>
 
                 <div class="bg-white border border-slate-200 rounded-2xl p-5 mb-8" data-nosnippet>
                     <p class="text-sm text-slate-600">
                         Use this page when your question is <strong>which cities pay the most for ${appName}</strong>.
-                        If your real question is <strong>whether a market is active</strong>, use the coverage guide first and then come back here for the earnings ranking.
+                        If your real question is <strong>whether a market is active</strong>, use the coverage guide first and then come back here for the calculator ranking.
                     </p>
                 </div>
 
                 <div class="grid md:grid-cols-3 gap-4 mb-8" data-nosnippet>
                     <a href="${appHubUrl}" class="block bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:border-emerald-200 hover:bg-emerald-50/40 transition-colors text-left">
                         <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-600 mb-2">Need More Context?</p>
-                        <h2 class="text-xl font-black text-slate-900 mb-2">${appName} Earnings Hub</h2>
-                        <p class="text-sm text-slate-600">Open the market hub for full city reports, calculator paths, and broader pay-by-city context.</p>
+                        <h2 class="text-xl font-black text-slate-900 mb-2">${appName} City Pay Calculators</h2>
+                        <p class="text-sm text-slate-600">Open the market hub for full city calculators, app calculator paths, and broader pay-by-city context.</p>
                     </a>
                     <a href="${topCityReportUrl}" class="block bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:border-amber-200 hover:bg-amber-50/50 transition-colors text-left">
                         <p class="text-xs font-black uppercase tracking-[0.18em] text-amber-600 mb-2">Want The Leader?</p>
-                        <h2 class="text-xl font-black text-slate-900 mb-2">${topRankedCity.city().getCityName()} Full Report</h2>
-                        <p class="text-sm text-slate-600">Jump straight into the current top-ranked ${appName} city report for the local pay and market breakdown.</p>
+                        <h2 class="text-xl font-black text-slate-900 mb-2">${topRankedCity.city().getCityName()} Pay Calculator</h2>
+                        <p class="text-sm text-slate-600">Jump straight into the current top-ranked ${appName} city calculator for the local pay and market breakdown.</p>
                     </a>
                     <a href="${coverageUrl}" class="block bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:border-sky-200 hover:bg-sky-50/50 transition-colors text-left">
                         <p class="text-xs font-black uppercase tracking-[0.18em] text-sky-600 mb-2">Need Coverage First?</p>
@@ -98,7 +98,7 @@
                 </div>
 
                 <div class="bg-blue-50 p-6 rounded-xl border border-blue-200 text-left mb-8" data-nosnippet>
-                    <h2 class="text-blue-900 font-bold mb-2">How This After-Expenses Ranking Works</h2>
+                    <h2 class="text-blue-900 font-bold mb-2">How This Net Pay Calculator Ranking Works</h2>
                     <ul class="list-disc pl-5 text-blue-800 text-sm space-y-1">
                         <li><strong>Ranking Criteria:</strong> Sorts strictly by estimated Net Hourly Pay for a "side-hustle" driver.</li>
                         <li><strong>Input Weights:</strong> We apply a traffic multiplier and a market tier multiplier (demand baseline) to estimate gross hourly revenue.</li>
@@ -139,7 +139,7 @@
                                     <th class="p-4 font-bold">City</th>
                                     <th class="p-4 font-bold">Net Hourly Pay</th>
                                     <th class="p-4 font-bold">Work Level</th>
-                                    <th class="p-4 font-bold text-right">Full Report</th>
+                                    <th class="p-4 font-bold text-right">Calculator</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -151,7 +151,7 @@
                                         <td class="p-4 font-black text-emerald-600">$${String.format("%.2f", ranking.netHourly())}/hr</td>
                                         <td class="p-4 text-slate-600 text-sm">${ranking.workLevel()}</td>
                                         <td class="p-4 text-right">
-                                            <a href="/salary/${app}/${ranking.city().getSlug()}" class="inline-block px-4 py-2 bg-slate-100 hover:bg-emerald-50 text-emerald-700 font-bold rounded-lg text-sm transition-colors border border-slate-200 hover:border-emerald-200">View City</a>
+                                            <a href="/salary/${app}/${ranking.city().getSlug()}" class="inline-block px-4 py-2 bg-slate-100 hover:bg-emerald-50 text-emerald-700 font-bold rounded-lg text-sm transition-colors border border-slate-200 hover:border-emerald-200">Open Calculator</a>
                                         </td>
                                     </tr>
                                 @endfor
@@ -168,12 +168,12 @@
                             <p class="text-slate-600">${topRankedCity.city().getCityName()} currently leads our after-expenses ranking at about $${String.format("%.2f", topRankedCity.netHourly())}/hr net based on mileage and self-employment tax assumptions.</p>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-slate-900 mb-2">Is this a coverage list or an earnings ranking?</h3>
-                            <p class="text-slate-600">This page is an earnings ranking. Use the <a href="${coverageUrl}" class="font-bold underline hover:text-slate-900">${coverageGuideTitle}</a> when your question is whether a market is active.</p>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Is this a coverage list or a calculator ranking?</h3>
+                            <p class="text-slate-600">This page is a net pay calculator ranking. Use the <a href="${coverageUrl}" class="font-bold underline hover:text-slate-900">${coverageGuideTitle}</a> when your question is whether a market is active.</p>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-slate-900 mb-2">How many ${appName} city reports are ranked here?</h3>
-                            <p class="text-slate-600">GigVerdict currently ranks ${rankedCityCount} city reports here, and every row links to a deeper city page with calculator and tax paths.</p>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">How many ${appName} city calculators are ranked here?</h3>
+                            <p class="text-slate-600">GigVerdict currently ranks ${rankedCityCount} city calculators here, and every row links to a deeper city page with calculator and tax paths.</p>
                         </div>
                     </div>
                 </section>

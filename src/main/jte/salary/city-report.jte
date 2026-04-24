@@ -17,6 +17,7 @@
 @param String safeMarketDescription = ""
 @param Boolean noIndex = false
 @param String cityFaqJsonLd = "{}"
+@param String cityCalculatorJsonLd = "{}"
 @param String calculatorUrl = ""
 @param String taxEstimatorUrl = ""
 @param String bestCitiesUrl = ""
@@ -30,22 +31,8 @@
     noIndex = noIndex,
     seoMeta = seoMeta,
     content = @`
-        <!-- Breadcrumb Navigation (Hub & Spoke Silo) -->
         <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          "itemListElement": [{
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Salary Directory",
-            "item": "${AppConstants.BASE_URL}/salary/directory"
-          },{
-            "@type": "ListItem",
-            "position": 2,
-            "name": "${city.getCityName()} ${appName} Earnings"
-          }]
-        }
+        $unsafe{cityCalculatorJsonLd}
         </script>
         <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 pt-20 pb-24 px-6">
             <div class="max-w-4xl mx-auto">
@@ -53,9 +40,9 @@
                 <nav class="text-sm text-slate-400 mb-4 flex items-center gap-2">
                     <a href="/" class="hover:text-emerald-400 transition">Home</a>
                     <span class="text-slate-600">&gt;</span>
-                    <a href="/salary/directory" class="hover:text-emerald-400 transition">Salary Directory</a>
+                    <a href="/salary/directory" class="hover:text-emerald-400 transition">City Pay Calculators</a>
                     <span class="text-slate-600">&gt;</span>
-                    <span class="text-white">${city.getCityName()} ${appName} Earnings</span>
+                    <span class="text-white">${city.getCityName()} ${appName} Pay Calculator</span>
                 </nav>
                 <div class="flex items-center gap-4 mb-6">
                     <div class="inline-block px-4 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-full">
@@ -76,28 +63,70 @@
 
                 <div class="flex flex-wrap items-center gap-3 mb-8 text-xs font-semibold text-slate-300" data-nosnippet>
                     <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10">Updated ${lastUpdated}</span>
-                    <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10">Average after-expenses estimate</span>
+                    <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10">Prefilled net pay calculator</span>
                     <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10">IRS mileage + SE tax assumptions</span>
                     <a href="${methodologyUrl}" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 hover:border-emerald-400 hover:text-emerald-300 transition-colors">How we estimate this</a>
                 </div>
 
+                <div id="city-pay-calculator" class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 md:p-8 mb-6">
+                    <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8">
+                        <div>
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="text-sm font-bold text-slate-400 uppercase tracking-wider">Prefilled Calculator Result</span>
+                                <span class="text-xs px-2 py-1 bg-slate-700 text-slate-300 rounded-md">${featuredScenario.getName()}</span>
+                            </div>
+                            <div class="flex items-baseline gap-2 mb-4">
+                                <span class="text-5xl md:text-6xl font-black text-emerald-400">$${String.format("%.2f", featuredScenario.getNetHourly())}</span>
+                                <span class="text-xl text-slate-400 font-medium">/hr net</span>
+                            </div>
+                            <p class="text-sm text-slate-400 max-w-xl">
+                                Baseline for ${city.getCityName()}, ${city.getState()}: $${featuredScenario.getGrossWeekly()}/week gross,
+                                ${featuredScenario.getMiles()} miles, ${featuredScenario.getHours()} hours, and $${String.format("%.2f", city.getGasPrice())}/gal gas.
+                            </p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3 text-sm min-w-full lg:min-w-[18rem]" data-nosnippet>
+                            <div class="rounded-xl bg-slate-950/40 border border-white/10 p-4">
+                                <p class="text-xs text-slate-500 uppercase tracking-wider mb-1">Gross</p>
+                                <p class="text-xl font-black text-white">$${featuredScenario.getGrossWeekly()}/wk</p>
+                            </div>
+                            <div class="rounded-xl bg-slate-950/40 border border-white/10 p-4">
+                                <p class="text-xs text-slate-500 uppercase tracking-wider mb-1">Miles</p>
+                                <p class="text-xl font-black text-white">${featuredScenario.getMiles()}/wk</p>
+                            </div>
+                            <div class="rounded-xl bg-slate-950/40 border border-white/10 p-4">
+                                <p class="text-xs text-slate-500 uppercase tracking-wider mb-1">Hours</p>
+                                <p class="text-xl font-black text-white">${featuredScenario.getHours()}/wk</p>
+                            </div>
+                            <div class="rounded-xl bg-slate-950/40 border border-white/10 p-4">
+                                <p class="text-xs text-slate-500 uppercase tracking-wider mb-1">Gas</p>
+                                <p class="text-xl font-black text-white">$${String.format("%.2f", city.getGasPrice())}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-3 mt-6" data-nosnippet>
+                        <a href="${calculatorUrl}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_city_report', 'event_label': 'open_prefilled_calculator' })" class="rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-5 py-3 transition-colors shadow-lg shadow-emerald-500/20">
+                            Adjust this city estimate
+                        </a>
+                        <a href="/profit-setup-kit?source=city_report&app=${app}&gross=${featuredScenario.getGrossWeekly()}&miles=${featuredScenario.getMiles()}&hours=${featuredScenario.getHours()}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_city_report', 'event_label': 'open_profit_setup_kit' })" class="rounded-xl bg-white text-slate-900 hover:bg-slate-100 font-bold px-5 py-3 transition-colors">
+                            Build weekly profit plan
+                        </a>
+                        <a href="${taxEstimatorUrl}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_city_report', 'event_label': 'estimate_quarterly_taxes' })" class="rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-bold px-5 py-3 transition-colors">
+                            Estimate quarterly taxes
+                        </a>
+                    </div>
+                </div>
+
                 <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-8" data-nosnippet>
-                    <a href="${calculatorUrl}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_city_report', 'event_label': 'open_prefilled_calculator' })" class="rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-5 py-4 transition-colors shadow-lg shadow-emerald-500/20">
-                        Run this scenario in the calculator
-                    </a>
-                    <a href="/profit-setup-kit?source=city_report&app=${app}&gross=${featuredScenario.getGrossWeekly()}&miles=${featuredScenario.getMiles()}&hours=${featuredScenario.getHours()}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_city_report', 'event_label': 'open_profit_setup_kit' })" class="rounded-2xl bg-white text-slate-900 hover:bg-slate-100 font-bold px-5 py-4 transition-colors">
-                        Build weekly profit plan
-                    </a>
                     @if (compareUrl != null && !compareUrl.isBlank())
-                        <a href="${compareUrl}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_city_report', 'event_label': 'open_compare_page' })" class="rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-bold px-5 py-4 transition-colors">
+                        <a href="${compareUrl}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_city_report', 'event_label': 'open_compare_page' })" class="rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-bold px-5 py-4 transition-colors">
                             Compare Uber vs DoorDash here
                         </a>
                     @endif
-                    <a href="${taxEstimatorUrl}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_city_report', 'event_label': 'estimate_quarterly_taxes' })" class="rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-bold px-5 py-4 transition-colors">
-                        Estimate quarterly taxes
+                    <a href="${bestCitiesUrl}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_city_report', 'event_label': 'compare_best_cities' })" class="rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-bold px-5 py-4 transition-colors">
+                        Compare city pay calculators
                     </a>
-                    <a href="${bestCitiesUrl}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_city_report', 'event_label': 'compare_best_cities' })" class="rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-bold px-5 py-4 transition-colors">
-                        Compare highest-paying cities
+                    <a href="/salary/${app}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_city_report', 'event_label': 'open_app_city_calculators' })" class="rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-bold px-5 py-4 transition-colors">
+                        Browse ${appName} city calculators
                     </a>
                 </div>
 
@@ -105,22 +134,6 @@
                 <div class="mb-8 p-4 bg-slate-800/50 rounded-xl border border-white/10 text-center min-h-[100px] flex items-center justify-center" data-nosnippet>
                     <!-- AdSense Code Placeholder for Top Slot -->
                     <!-- <ins class="adsbygoogle" style="display:block" ... ></ins> -->
-                </div>
-
-                <!-- Featured Scenario Card -->
-                <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
-                    <div class="flex items-baseline gap-3 mb-2">
-                        <span class="text-sm font-bold text-slate-400 uppercase tracking-wider">Estimated Take-Home</span>
-                        <span class="text-xs px-2 py-1 bg-slate-700 text-slate-300 rounded-md">${featuredScenario.getName()}</span>
-                    </div>
-                    <div class="flex items-baseline gap-2 mb-4">
-                        <span class="text-5xl font-black text-emerald-400">$${String.format("%.2f", featuredScenario.getNetHourly())}</span>
-                        <span class="text-xl text-slate-400 font-medium">/hr</span>
-                    </div>
-                    <p class="text-sm text-slate-400">
-                        Based on typical ${city.getCityName()} conditions: $${featuredScenario.getGrossWeekly()}/wk gross, 
-                        ${featuredScenario.getMiles()} mi, ${featuredScenario.getHours()} hrs
-                    </p>
                 </div>
             </div>
         </div>
@@ -288,7 +301,7 @@
 
             <!-- Scenario Comparison Table -->
             <section>
-                <h2 class="text-2xl font-bold text-slate-900 mb-6">Estimated Earnings by Work Level</h2>
+                <h2 class="text-2xl font-bold text-slate-900 mb-6">Calculated Net Pay by Work Level</h2>
                 <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
                     <!-- Mobile: Enable horizontal scroll -->
                     <div class="overflow-x-auto">
@@ -549,7 +562,7 @@
                         @endif
                         <a href="${otherAppUrl}" 
                            class="inline-block px-6 py-3 bg-white border border-slate-300 text-slate-900 font-bold rounded-lg hover:bg-slate-50 transition shadow-sm">
-                            View ${otherAppName} city details &rarr;
+                            Open ${otherAppName} city calculator &rarr;
                         </a>
                     </div>
                 </div>
@@ -566,7 +579,7 @@
                            class="block p-3 bg-white rounded-lg border border-slate-100 hover:border-emerald-300 hover:shadow-sm transition text-center">
                             <div class="text-xl mb-1">City</div>
                             <div class="text-xs font-bold text-slate-700">${simCity.getCityName()}</div>
-                            <div class="text-[10px] text-slate-400">View Earnings</div>
+                            <div class="text-[10px] text-slate-400">Open Calculator</div>
                         </a>
                     @endfor
                 </div>
@@ -577,15 +590,15 @@
                 <div class="bg-indigo-50 border border-indigo-100 rounded-3xl p-8 text-center shadow-sm">
                     <h3 class="text-xl font-bold text-indigo-900 mb-4">Want to see how ${city.getCityName()} compares?</h3>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="/salary/${app}" class="px-6 py-3 bg-white border border-indigo-200 hover:border-indigo-400 text-indigo-800 font-bold rounded-xl transition-colors shadow-sm text-sm">View Top ${appName} Cities Hub</a>
-                        <a href="/best-cities/${app}" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition-colors shadow-sm text-sm">See Best Cities Rankings</a>
+                        <a href="/salary/${app}" class="px-6 py-3 bg-white border border-indigo-200 hover:border-indigo-400 text-indigo-800 font-bold rounded-xl transition-colors shadow-sm text-sm">Browse ${appName} City Calculators</a>
+                        <a href="/best-cities/${app}" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition-colors shadow-sm text-sm">Compare Net Pay Ranking</a>
                     </div>
                 </div>
             </section>
 
             <!-- CTA: Deep Calculator -->
             <section class="bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-2xl p-10 text-center shadow-xl" data-nosnippet>
-                <h3 class="text-2xl font-bold text-white mb-3">Calculate YOUR Personalized Estimate</h3>
+                <h3 class="text-2xl font-bold text-white mb-3">Adjust Your Personalized Estimate</h3>
                 <p class="text-emerald-100 mb-6 max-w-xl mx-auto">
                     These scenarios use averages. Want a personalized estimate? Enter your typical miles, hours, and vehicle type.
                 </p>

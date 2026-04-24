@@ -203,14 +203,60 @@ public class OrganicMonitoringRegressionTest {
                 .andReturn();
 
         String html = result.getResponse().getContentAsString();
-        assertTrue(html.contains("Run this scenario in the calculator"),
+        assertTrue(html.contains("Adjust this city estimate"),
                 "City report hero should expose a prefilled calculator CTA");
         assertTrue(html.contains("/uber?gross="),
                 "City report should link to the app calculator with prefilled query params");
+        assertTrue(html.contains("Prefilled Calculator Result"),
+                "City report hero should lead with the calculator result, not a report-only intro");
+        assertTrue(html.contains("\"@type\":\"WebApplication\""),
+                "City report JSON-LD should expose calculator/tool identity");
         assertTrue(html.contains("estimate_quarterly_taxes"),
                 "City report hero should expose a tracked tax estimator CTA");
         assertTrue(html.contains("compare_best_cities"),
                 "City report hero should expose a tracked best-cities CTA");
+    }
+
+    @Test
+    public void prioritySeoPagesShouldExposeCalculatorFirstLanguage() throws Exception {
+        MvcResult cityResult = mockMvc.perform(get("/salary/doordash/phoenix"))
+                .andExpect(status().isOk())
+                .andReturn();
+        Document cityDoc = Jsoup.parse(cityResult.getResponse().getContentAsString(),
+                AppConstants.BASE_URL + "/salary/doordash/phoenix");
+        assertTrue(cityDoc.title().contains("Pay Calculator"),
+                "Priority city page title should lead with calculator framing");
+        assertTrue(firstH1(cityDoc).contains("Pay Calculator"),
+                "Priority city page H1 should lead with calculator framing");
+
+        MvcResult workLevelResult = mockMvc.perform(get("/salary/doordash/phoenix/side-hustle"))
+                .andExpect(status().isOk())
+                .andReturn();
+        String workLevelHtml = workLevelResult.getResponse().getContentAsString();
+        assertTrue(workLevelHtml.contains("DoorDash Phoenix Side-Hustle Calculator"),
+                "Priority work-level page should expose calculator framing");
+        assertTrue(workLevelHtml.contains("open_prefilled_calculator"),
+                "Priority work-level page should link into the prefilled calculator");
+
+        MvcResult bestCitiesResult = mockMvc.perform(get("/best-cities/doordash"))
+                .andExpect(status().isOk())
+                .andReturn();
+        Document bestCitiesDoc = Jsoup.parse(bestCitiesResult.getResponse().getContentAsString(),
+                AppConstants.BASE_URL + "/best-cities/doordash");
+        assertTrue(bestCitiesDoc.title().contains("Net Pay Calculator Ranking"),
+                "Best-cities page title should frame the page as a calculator ranking");
+        assertTrue(firstH1(bestCitiesDoc).contains("Net Pay Calculator Ranking"),
+                "Best-cities page H1 should frame the page as a calculator ranking");
+
+        MvcResult blogResult = mockMvc.perform(get("/blog/multi-apping-guide"))
+                .andExpect(status().isOk())
+                .andReturn();
+        Document blogDoc = Jsoup.parse(blogResult.getResponse().getContentAsString(),
+                AppConstants.BASE_URL + "/blog/multi-apping-guide");
+        assertTrue(blogDoc.title().contains("Multi-Apping Calculator Guide"),
+                "Multi-apping guide should be framed as a calculator guide");
+        assertTrue(firstH1(blogDoc).contains("Multi-Apping Calculator Guide"),
+                "Multi-apping guide H1 should be framed as a calculator guide");
     }
 
     private void assertCanonicalAndNoIndex(String path, String expectedCanonical) throws Exception {

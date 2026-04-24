@@ -5,8 +5,8 @@
 @template.layout.main(
     noIndex = noIndex,
     seoMeta = new SeoMeta(
-        customTitle != null ? customTitle : "How to Multi-App Uber and DoorDash Without Getting Deactivated (2026)",
-        "Learn clean stacking for Uber and DoorDash so you can reduce dead time, avoid contract violations, and raise net hourly pay without juggling two active jobs at once.",
+        customTitle != null ? customTitle : "Multi-Apping Calculator Guide 2026: Uber, Lyft & DoorDash Net Pay",
+        "Use the calculator-first multi-apping guide to compare Uber, Lyft, and DoorDash net pay, reduce dead time, and avoid dirty stacking risk.",
         AppConstants.BASE_URL + "/blog/multi-apping-guide",
         AppConstants.BASE_URL + "/og-image-multiapping.jpg"
     ),
@@ -22,10 +22,10 @@
             <header class="bg-slate-900 py-20 text-center px-6">
                 <div class="max-w-3xl mx-auto">
                     <div class="inline-block bg-orange-500/20 text-orange-300 text-xs font-bold px-3 py-1 rounded-full mb-4 border border-orange-500/30">
-                        ADVANCED STRATEGY
+                        CALCULATOR GUIDE
                     </div>
                     <h1 class="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
-                        How to Multi-App Uber and DoorDash<br>Without Getting Deactivated
+                        Multi-Apping Calculator Guide:<br>Compare Net Pay Before You Stack
                     </h1>
                     <div class="flex justify-center items-center gap-4 text-slate-400 text-sm">
                         <span>By Gabi</span>
@@ -42,8 +42,20 @@
 
                     <div class="prose prose-slate prose-lg max-w-none">
                         <p class="lead text-xl text-slate-600 font-medium mb-8">
-                            If you only run one app, you accept too much dead time. Clean multi-apping lets you source the next good Uber trip or DoorDash order faster without juggling two active jobs at once.
+                            If you only run one app, you accept too much dead time. Use the calculators first to compare net pay, then use clean multi-apping to source the next good Uber, Lyft, or DoorDash job without juggling two active jobs at once.
                         </p>
+
+                        <div class="bg-orange-50 p-6 rounded-2xl border border-orange-200 mb-10" data-nosnippet>
+                            <h2 class="text-2xl font-bold text-orange-950 mb-3">Start With The Net Pay Calculator</h2>
+                            <p class="text-orange-900 mb-5">
+                                Multi-apping only helps if the next offer beats your real hourly rate after mileage, tax reserve, and wait time.
+                            </p>
+                            <div class="flex flex-wrap gap-3">
+                                <a href="/uber?source=multi_apping_guide" class="inline-block bg-orange-600 text-white px-5 py-3 rounded-lg font-bold hover:bg-orange-700 transition">Run Uber numbers</a>
+                                <a href="/doordash?source=multi_apping_guide" class="inline-block bg-white text-orange-700 px-5 py-3 rounded-lg font-bold border border-orange-300 hover:bg-orange-100 transition">Run DoorDash numbers</a>
+                                <a href="/net-hourly-calculator" class="inline-block bg-white text-orange-700 px-5 py-3 rounded-lg font-bold border border-orange-300 hover:bg-orange-100 transition">Open net hourly tool</a>
+                            </div>
+                        </div>
 
                         <h2>What Multi-Apping Actually Means</h2>
                         <p>
@@ -100,7 +112,7 @@
                             Use a simple filter:
                         </p>
                         <ul>
-                            <li><strong>Check net pay, not gross:</strong> A long ride with dead miles can still lose to a shorter delivery loop.</li>
+                            <li><strong>Check net pay, not gross:</strong> A long ride with dead miles can still lose to a shorter delivery loop. Use the calculator before assuming the bigger payout wins.</li>
                             <li><strong>Protect your next zone:</strong> Do not accept work that drags you far from the next demand cluster unless the pay premium is clear.</li>
                             <li><strong>Keep platform rules intact:</strong> If the next step would make you late on the current job, skip it.</li>
                         </ul>

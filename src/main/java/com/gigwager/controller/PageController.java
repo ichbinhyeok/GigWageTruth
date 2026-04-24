@@ -138,7 +138,7 @@ public class PageController {
 
     @GetMapping("/blog/multi-apping-guide")
     public String multiAppingGuide(Model model) {
-        model.addAttribute("customTitle", "Multi-Apping Guide 2026: Clean Stacking Without Getting Deactivated");
+        model.addAttribute("customTitle", "Multi-Apping Calculator Guide 2026: Uber, Lyft & DoorDash Net Pay");
         return "blog/multi-apping-guide";
     }
 
