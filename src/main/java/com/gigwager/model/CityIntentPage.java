@@ -10,7 +10,13 @@ public enum CityIntentPage {
         ACTIVE_TIME("active-time", "Active Time", "active time versus online or dash time",
                         "Use this when app-reported active time may hide unpaid waiting and repositioning time."),
         WORTH_IT("worth-it", "Worth It", "worth it after expenses",
-                        "Use this when deciding whether the city is worth driving at a realistic side-hustle pace.");
+                        "Use this when deciding whether the city is worth driving at a realistic side-hustle pace."),
+        DAILY_100("100-a-day", "$100 a Day", "make $100 a day",
+                        "Use this when the question is how many real hours and miles it takes to clear a $100 net day."),
+        MONTHLY_1000("1000-a-month", "$1,000 a Month", "make $1,000 a month",
+                        "Use this when planning a monthly side-income target instead of judging one shift."),
+        NIGHTS_WEEKENDS("nights-weekends", "Nights and Weekends", "nights and weekends",
+                        "Use this when the plan is to drive around a 9-to-5 schedule instead of all-day availability.");
 
         private final String slug;
         private final String displayName;

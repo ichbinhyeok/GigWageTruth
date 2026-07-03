@@ -124,6 +124,49 @@
                     </div>
                 </section>
 
+                <section class="bg-white rounded-3xl border border-slate-200 p-6 mb-12 shadow-sm">
+                    <p class="text-xs font-black uppercase tracking-[0.18em] text-indigo-700 mb-2">Goal-based searches</p>
+                    <h2 class="text-2xl font-black text-slate-900 mb-3">Pages for daily and monthly earning targets</h2>
+                    <p class="text-sm text-slate-600 mb-5">These pages answer the money-goal queries drivers actually search before they decide whether a shift is worth starting.</p>
+                    <div class="grid md:grid-cols-2 gap-3">
+                        @if(app.equals("doordash"))
+                            <a href="/salary/doordash/phoenix/100-a-day" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
+                                <strong class="block text-slate-900">Can DoorDash make $100/day in Phoenix?</strong>
+                                <span class="text-sm text-slate-600">Hours, miles, and gross needed for a $100 net day.</span>
+                            </a>
+                            <a href="/salary/doordash/denver/1000-a-month" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
+                                <strong class="block text-slate-900">DoorDash Denver $1,000/month plan</strong>
+                                <span class="text-sm text-slate-600">Weekly hours and mileage required for side income.</span>
+                            </a>
+                            <a href="/salary/doordash/dallas/nights-weekends" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
+                                <strong class="block text-slate-900">DoorDash Dallas nights and weekends</strong>
+                                <span class="text-sm text-slate-600">Weekend mileage and shift-window reality check.</span>
+                            </a>
+                            <a href="/salary/doordash/atlanta/active-time" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
+                                <strong class="block text-slate-900">DoorDash Atlanta active-time check</strong>
+                                <span class="text-sm text-slate-600">Compare active time with dash-time drag.</span>
+                            </a>
+                        @else
+                            <a href="/salary/uber/chicago/100-a-day" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
+                                <strong class="block text-slate-900">Can Uber make $100/day in Chicago?</strong>
+                                <span class="text-sm text-slate-600">Hours, miles, and gross needed for a $100 net day.</span>
+                            </a>
+                            <a href="/salary/uber/los-angeles/1000-a-month" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
+                                <strong class="block text-slate-900">Uber Los Angeles $1,000/month plan</strong>
+                                <span class="text-sm text-slate-600">Weekly hours and mileage required for side income.</span>
+                            </a>
+                            <a href="/salary/uber/nashville/nights-weekends" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
+                                <strong class="block text-slate-900">Uber Nashville nights and weekends</strong>
+                                <span class="text-sm text-slate-600">Weekend and event-window earning check.</span>
+                            </a>
+                            <a href="/salary/uber/portland/worth-it" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
+                                <strong class="block text-slate-900">Is Uber worth it in Portland?</strong>
+                                <span class="text-sm text-slate-600">After-expenses decision page with policy context.</span>
+                            </a>
+                        @endif
+                    </div>
+                </section>
+
                 <div class="grid md:grid-cols-3 gap-4 mb-12">
                     <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
                         <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Top side-hustle market</p>

@@ -674,6 +674,16 @@ public class ProgrammaticSeoController {
                                         appName,
                                         city.getCityName(),
                                         scenario.getNetHourly());
+                        case DAILY_100 -> String.format("Can You Make $100 a Day with %s in %s?",
+                                        appName,
+                                        city.getCityName());
+                        case MONTHLY_1000 -> String.format("Can %s Make $1,000/Month in %s?",
+                                        appName,
+                                        city.getCityName());
+                        case NIGHTS_WEEKENDS -> String.format("%s %s Nights and Weekends: $%.2f/hr Net",
+                                        appName,
+                                        city.getCityName(),
+                                        scenario.getNetHourly());
                 };
         }
 
@@ -709,6 +719,26 @@ public class ProgrammaticSeoController {
                                         appName,
                                         city.getCityName(),
                                         scenario.getNetHourly(),
+                                        monthYear);
+                        case DAILY_100 -> String.format(
+                                        "%s %s $100/day estimate: about %.1f hours and %d miles to clear $100 net after mileage and tax. Updated %s.",
+                                        appName,
+                                        city.getCityName(),
+                                        hoursToNetTarget(scenario, 100),
+                                        milesForHours(scenario, hoursToNetTarget(scenario, 100)),
+                                        monthYear);
+                        case MONTHLY_1000 -> String.format(
+                                        "%s %s $1,000/month estimate: about %.1f hours per week at the current $%.2f/hr net baseline. Updated %s.",
+                                        appName,
+                                        city.getCityName(),
+                                        hoursToNetTarget(scenario, 1000 / 4.33),
+                                        scenario.getNetHourly(),
+                                        monthYear);
+                        case NIGHTS_WEEKENDS -> String.format(
+                                        "%s %s nights and weekends estimate: a 12-hour weekend pace models about $%.0f net after mileage and tax. Updated %s.",
+                                        appName,
+                                        city.getCityName(),
+                                        scenario.getNetHourly() * 12,
                                         monthYear);
                 };
         }
@@ -749,7 +779,68 @@ public class ProgrammaticSeoController {
                                         scenario.getMiles(),
                                         scenario.getHours(),
                                         scenario.getNetHourly());
+                        case DAILY_100 -> {
+                                double targetHours = hoursToNetTarget(scenario, 100);
+                                int targetMiles = milesForHours(scenario, targetHours);
+                                int targetGross = grossForHours(scenario, targetHours);
+                                yield String.format(
+                                                "<p>At the current %s %s side-hustle baseline of <strong>$%.2f/hr net</strong>, a driver would need about <strong>%.1f hours</strong>, roughly <strong>%d miles</strong>, and about <strong>$%d gross</strong> to clear <strong>$100 net</strong> after mileage and tax assumptions.</p><p>This target gets harder when the app is slow, tips are weak, or a route forces unpaid return miles. Treat the $100/day number as a shift plan, not a guaranteed app promise.</p>",
+                                                appName,
+                                                city.getCityName(),
+                                                scenario.getNetHourly(),
+                                                targetHours,
+                                                targetMiles,
+                                                targetGross);
+                        }
+                        case MONTHLY_1000 -> {
+                                double weeklyTarget = 1000 / 4.33;
+                                double targetHours = hoursToNetTarget(scenario, weeklyTarget);
+                                int targetMiles = milesForHours(scenario, targetHours);
+                                yield String.format(
+                                                "<p>To clear <strong>$1,000/month net</strong> with %s in %s, the model requires about <strong>$%.0f/week net</strong>. At <strong>$%.2f/hr net</strong>, that is roughly <strong>%.1f hours/week</strong> and <strong>%d miles/week</strong>.</p><p>The target is most realistic when you can concentrate hours into stronger windows instead of stretching the same miles across slow shifts.</p>",
+                                                appName,
+                                                city.getCityName(),
+                                                weeklyTarget,
+                                                scenario.getNetHourly(),
+                                                targetHours,
+                                                targetMiles);
+                        }
+                        case NIGHTS_WEEKENDS -> {
+                                int weekendHours = 12;
+                                int weekendMiles = milesForHours(scenario, weekendHours);
+                                int weekendGross = grossForHours(scenario, weekendHours);
+                                double weekendNet = scenario.getNetHourly() * weekendHours;
+                                yield String.format(
+                                                "<p>A nights-and-weekends plan for %s in %s works best when the driver can compress demand into dinner, late-night, event, or airport windows. A <strong>%d-hour weekend</strong> at the current baseline models about <strong>$%.0f net</strong>, <strong>$%d gross</strong>, and <strong>%d miles</strong>.</p><p>If those hours spill into slow gaps, the active-time screenshot can still look decent while the real all-in hourly rate falls.</p>",
+                                                appName,
+                                                city.getCityName(),
+                                                weekendHours,
+                                                weekendNet,
+                                                weekendGross,
+                                                weekendMiles);
+                        }
                 };
+        }
+
+        private double hoursToNetTarget(CityScenario scenario, double netTarget) {
+                if (scenario.getNetHourly() <= 0) {
+                        return 0;
+                }
+                return netTarget / scenario.getNetHourly();
+        }
+
+        private int milesForHours(CityScenario scenario, double hours) {
+                if (scenario.getHours() <= 0) {
+                        return 0;
+                }
+                return (int) Math.round((scenario.getMiles() / (double) scenario.getHours()) * hours);
+        }
+
+        private int grossForHours(CityScenario scenario, double hours) {
+                if (scenario.getHours() <= 0) {
+                        return 0;
+                }
+                return (int) Math.round((scenario.getGrossWeekly() / (double) scenario.getHours()) * hours);
         }
 
         private List<CityIntentEvidence> buildCityIntentEvidencePatterns(
@@ -797,6 +888,24 @@ public class ProgrammaticSeoController {
                 String worthItThreadUrl = app.equals("doordash")
                                 ? "https://www.reddit.com/r/doordash_drivers/comments/1rs4kmu/is_it_worth_coming_back_to_dashing_in_2026/"
                                 : "https://www.reddit.com/r/UberEatsDrivers/comments/1q391xs/is_it_worth_being_an_uber_driver_in_2026/";
+                String dailyTargetLabel = app.equals("doordash")
+                                ? "DoorDash $100/day discussion"
+                                : "Uber $100/day discussion";
+                String dailyTargetUrl = app.equals("doordash")
+                                ? "https://www.reddit.com/r/doordash_drivers/comments/1d2utnr/are_people_still_making_100_a_day/"
+                                : "https://www.reddit.com/r/uberdrivers/comments/1qadhre/tired_of_driving_all_day_to_make_100/";
+                String monthlyTargetLabel = app.equals("doordash")
+                                ? "Part-time DoorDash weekly earnings"
+                                : "Uber $1,000/month discussion";
+                String monthlyTargetUrl = app.equals("doordash")
+                                ? "https://www.reddit.com/r/doordash_drivers/comments/1hfrk97/how_much_do_you_make_weekly_as_a_parttime/"
+                                : "https://www.reddit.com/r/uberdrivers/comments/1tc9lv0/realistically_how_much_driving_do_i_need_to_do_to/";
+                String nightsWeekendLabel = app.equals("doordash")
+                                ? "DoorDash nights/weekends discussion"
+                                : "Uber nights/weekends discussion";
+                String nightsWeekendUrl = app.equals("doordash")
+                                ? "https://www.reddit.com/r/doordash_drivers/comments/1oaricl/how_much_can_i_make_on_nightsweekends/"
+                                : "https://www.reddit.com/r/uberdrivers/comments/1p6unzz/how_much_money_do_yall_make/";
 
                 return switch (intentPage) {
                         case AFTER_GAS -> List.of(
@@ -905,6 +1014,98 @@ public class ProgrammaticSeoController {
                                                                         mileageProxy),
                                                         "IRS 2026 mileage rate",
                                                         "https://www.irs.gov/newsroom/irs-sets-2026-business-standard-mileage-rate-at-725-cents-per-mile-up-25-cents"));
+                        case DAILY_100 -> {
+                                double targetHours = hoursToNetTarget(scenario, 100);
+                                int targetMiles = milesForHours(scenario, targetHours);
+                                yield List.of(
+                                                new CityIntentEvidence(
+                                                                "Target-income pattern",
+                                                                "$100/day questions are really hours-and-miles questions",
+                                                                String.format(
+                                                                                "Driver discussions frame $100 as possible but market-dependent. For %s %s, this page translates the target into %.1f modeled hours and %d miles instead of treating the number as a guarantee.",
+                                                                                appName,
+                                                                                city.getCityName(),
+                                                                                targetHours,
+                                                                                targetMiles),
+                                                                dailyTargetLabel,
+                                                                dailyTargetUrl),
+                                                new CityIntentEvidence(
+                                                                "Peak-window pattern",
+                                                                "The target is easier in strong windows than all-day grinding",
+                                                                "Driver-source comments repeatedly separate dinner, late-night, airport, event, and weekend windows from slow all-day availability. That is why this page links the target to hours and mileage.",
+                                                                nightsWeekendLabel,
+                                                                nightsWeekendUrl),
+                                                new CityIntentEvidence(
+                                                                "Cost benchmark",
+                                                                "$100 gross is not $100 net",
+                                                                String.format(
+                                                                                "At %d modeled miles for a $100 net day, the IRS mileage proxy alone represents about $%.0f of vehicle-cost pressure before self-employment tax.",
+                                                                                targetMiles,
+                                                                                targetMiles * AppConstants.IRS_MILEAGE_RATE),
+                                                                "IRS 2026 mileage rate",
+                                                                "https://www.irs.gov/newsroom/irs-sets-2026-business-standard-mileage-rate-at-725-cents-per-mile-up-25-cents"));
+                        }
+                        case MONTHLY_1000 -> {
+                                double weeklyTarget = 1000 / 4.33;
+                                double targetHours = hoursToNetTarget(scenario, weeklyTarget);
+                                int targetMiles = milesForHours(scenario, targetHours);
+                                yield List.of(
+                                                new CityIntentEvidence(
+                                                                "Monthly target pattern",
+                                                                "$1,000/month needs a weekly schedule, not one lucky day",
+                                                                String.format(
+                                                                                "Driver discussions about $1,000/month usually come down to schedule flexibility, market strength, and vehicle cost. For %s %s, the modeled target is %.1f hours/week.",
+                                                                                appName,
+                                                                                city.getCityName(),
+                                                                                targetHours),
+                                                                monthlyTargetLabel,
+                                                                monthlyTargetUrl),
+                                                new CityIntentEvidence(
+                                                                "Mileage load",
+                                                                "A monthly side-income goal still wears the vehicle",
+                                                                String.format(
+                                                                                "The $1,000/month plan implies about %d miles/week at the current city baseline. That is why this URL is separate from the generic city earnings page.",
+                                                                                targetMiles),
+                                                                "IRS 2026 mileage rate",
+                                                                "https://www.irs.gov/newsroom/irs-sets-2026-business-standard-mileage-rate-at-725-cents-per-mile-up-25-cents"),
+                                                new CityIntentEvidence(
+                                                                "Market timing",
+                                                                "Side-income targets are more realistic when hours are concentrated",
+                                                                "Large driver datasets and field reports point to timing, not just city averages. A $1,000/month target is more plausible when the driver can choose stronger windows.",
+                                                                gridwiseLabel,
+                                                                gridwiseUrl));
+                        }
+                        case NIGHTS_WEEKENDS -> {
+                                int weekendHours = 12;
+                                int weekendMiles = milesForHours(scenario, weekendHours);
+                                yield List.of(
+                                                new CityIntentEvidence(
+                                                                "Schedule pattern",
+                                                                "Nights and weekends are a different job than all-day driving",
+                                                                String.format(
+                                                                                "Driver discussions separate weekend/night performance from weekday availability. For %s %s, this page models a %d-hour weekend and its %d-mile load.",
+                                                                                appName,
+                                                                                city.getCityName(),
+                                                                                weekendHours,
+                                                                                weekendMiles),
+                                                                nightsWeekendLabel,
+                                                                nightsWeekendUrl),
+                                                new CityIntentEvidence(
+                                                                "Demand pattern",
+                                                                "Late windows help only if dead time stays low",
+                                                                "The useful check is whether dinner, late-night, airport, event, or bar-close demand offsets waiting and repositioning. Otherwise the shift can look good by active time and weak by all-in time.",
+                                                                platformClockLabel,
+                                                                platformClockUrl),
+                                                new CityIntentEvidence(
+                                                                "Cost benchmark",
+                                                                "Weekend miles still count",
+                                                                String.format(
+                                                                                "A %d-mile weekend has about $%.0f of IRS mileage proxy cost before tax. The page keeps that number visible so weekend earnings do not become gross-only content.",
+                                                                                weekendMiles,
+                                                                                weekendMiles * AppConstants.IRS_MILEAGE_RATE),
+                                                                "IRS 2026 mileage rate",
+                                                                "https://www.irs.gov/newsroom/irs-sets-2026-business-standard-mileage-rate-at-725-cents-per-mile-up-25-cents"));
+                        }
                 };
         }
 
@@ -919,6 +1120,10 @@ public class ProgrammaticSeoController {
                 double allInHourly = allInHours == 0 ? 0 : scenario.getNetProfit() / allInHours;
                 double monthlyNet = scenario.getNetProfit() * 4.33;
                 double minWageGap = scenario.getNetHourly() - city.getMinWage();
+                double hoursToHundred = hoursToNetTarget(scenario, 100);
+                double weeklyTargetForThousand = 1000 / 4.33;
+                double hoursToThousandMonthly = hoursToNetTarget(scenario, weeklyTargetForThousand);
+                int weekendHours = 12;
 
                 return switch (intentPage) {
                         case AFTER_GAS -> List.of(
@@ -955,6 +1160,35 @@ public class ProgrammaticSeoController {
                                         new CityIntentMetric("Annual mileage load", String.format("%,d mi",
                                                         scenario.getMiles() * 52),
                                                         "A side-hustle schedule can still add serious vehicle wear over a year."));
+                        case DAILY_100 -> List.of(
+                                        new CityIntentMetric("Hours to $100 net", String.format("%.1f hrs", hoursToHundred),
+                                                        "Net target divided by the current city net hourly baseline."),
+                                        new CityIntentMetric("Miles to $100 net", String.format("%d mi",
+                                                        milesForHours(scenario, hoursToHundred)),
+                                                        "Modeled mileage load at the hours needed for a $100 net day."),
+                                        new CityIntentMetric("Gross needed", String.format("$%d",
+                                                        grossForHours(scenario, hoursToHundred)),
+                                                        "Approximate app payout before mileage proxy and self-employment tax."));
+                        case MONTHLY_1000 -> List.of(
+                                        new CityIntentMetric("Weekly net target", String.format("$%.0f",
+                                                        weeklyTargetForThousand),
+                                                        "$1,000/month divided across 4.33 average weeks."),
+                                        new CityIntentMetric("Hours per week", String.format("%.1f hrs",
+                                                        hoursToThousandMonthly),
+                                                        "Hours needed at the current city net hourly baseline."),
+                                        new CityIntentMetric("Miles per week", String.format("%d mi",
+                                                        milesForHours(scenario, hoursToThousandMonthly)),
+                                                        "Modeled weekly mileage required for the monthly target."));
+                        case NIGHTS_WEEKENDS -> List.of(
+                                        new CityIntentMetric("12-hour weekend net", String.format("$%.0f",
+                                                        scenario.getNetHourly() * weekendHours),
+                                                        "Modeled net profit if weekend windows match the city baseline."),
+                                        new CityIntentMetric("Weekend miles", String.format("%d mi",
+                                                        milesForHours(scenario, weekendHours)),
+                                                        "Estimated mileage load for a 12-hour nights/weekends block."),
+                                        new CityIntentMetric("Gross per weekend hour", String.format("$%.2f/hr",
+                                                        scenario.getGrossWeekly() / (double) scenario.getHours()),
+                                                        "Gross hourly baseline before expense and tax assumptions."));
                 };
         }
 

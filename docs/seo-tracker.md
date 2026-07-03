@@ -28,6 +28,11 @@ Primary source: Google Search Console (GA4 property access still pending)
   - `worth-it`
 - The intent layer adds roughly 312 additional indexable long-tail URLs across indexable city/app combinations. Local sitemap render now reports 574 `<loc>` entries.
 - Strengthened those intent pages with per-intent `Data-backed checks` and `Evidence patterns` cards, so each URL exposes the exact numeric check and source trail behind its query: after-gas fuel drag, per-mile gross/net, active-time waiting stress tests, worth-it mileage/timing checks, IRS mileage benchmark, platform pay-clock docs, field tests, and driver discussions.
+- Added three more goal-based intent pages per indexable city/app after reviewing driver-source query language around `$100/day`, `$1,000/month`, and nights/weekends:
+  - `/salary/{app}/{city}/100-a-day`
+  - `/salary/{app}/{city}/1000-a-month`
+  - `/salary/{app}/{city}/nights-weekends`
+- These pages translate money goals into hours, miles, gross needed, weekly target, and weekend mileage load, with separate evidence cards from driver discussions, IRS mileage data, platform pay-clock docs, and Gridwise-style driver datasets. App hubs and the salary directory now link directly into representative goal-based pages to speed crawl discovery.
 - Recheck in Search Console after recrawl:
   - `/salary/doordash/phoenix`
   - `/salary/doordash/denver/side-hustle`

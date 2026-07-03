@@ -251,6 +251,10 @@ public class OrganicMonitoringRegressionTest {
         String appHubHtml = appHubResult.getResponse().getContentAsString();
         assertTrue(appHubHtml.contains("/salary/doordash/denver/side-hustle"),
                 "DoorDash app hub should directly link the Denver side-hustle recovery URL");
+        assertTrue(appHubHtml.contains("/salary/doordash/phoenix/100-a-day"),
+                "DoorDash app hub should directly link daily target intent URLs");
+        assertTrue(appHubHtml.contains("Goal-based searches"),
+                "DoorDash app hub should expose goal-based pSEO links");
 
         MvcResult directoryResult = mockMvc.perform(get("/salary/directory"))
                 .andExpect(status().isOk())
@@ -260,6 +264,10 @@ public class OrganicMonitoringRegressionTest {
                 "Directory should expose priority earnings reports");
         assertTrue(directoryHtml.contains("/salary/uber/chicago"),
                 "Directory should directly link the Chicago Uber recovery URL");
+        assertTrue(directoryHtml.contains("/salary/uber/chicago/100-a-day"),
+                "Directory should directly link daily target intent URLs");
+        assertTrue(directoryHtml.contains("/salary/doordash/dallas/nights-weekends"),
+                "Directory should directly link nights/weekends intent URLs");
 
         MvcResult bestCitiesResult = mockMvc.perform(get("/best-cities/doordash"))
                 .andExpect(status().isOk())
@@ -304,6 +312,26 @@ public class OrganicMonitoringRegressionTest {
                 "Active-time page should include waiting-time stress-test metrics");
         assertTrue(activeTimeHtml.contains("Uber earnings guide"),
                 "Active-time page should cite official platform clock/source material");
+
+        MvcResult dailyTargetResult = mockMvc.perform(get("/salary/doordash/phoenix/100-a-day"))
+                .andExpect(status().isOk())
+                .andReturn();
+        String dailyTargetHtml = dailyTargetResult.getResponse().getContentAsString();
+        assertTrue(dailyTargetHtml.contains("DoorDash Phoenix $100 a Day"),
+                "Daily target intent page should expose target-matched H1 language");
+        assertTrue(dailyTargetHtml.contains("Hours to $100 net"),
+                "Daily target intent page should expose target-hour metric cards");
+        assertTrue(dailyTargetHtml.contains("DoorDash $100/day discussion"),
+                "Daily target intent page should cite target-specific driver discussion");
+
+        MvcResult monthlyTargetResult = mockMvc.perform(get("/salary/uber/los-angeles/1000-a-month"))
+                .andExpect(status().isOk())
+                .andReturn();
+        String monthlyTargetHtml = monthlyTargetResult.getResponse().getContentAsString();
+        assertTrue(monthlyTargetHtml.contains("Uber Los Angeles $1,000 a Month"),
+                "Monthly target intent page should expose monthly target H1 language");
+        assertTrue(monthlyTargetHtml.contains("Weekly net target"),
+                "Monthly target intent page should expose weekly target metric cards");
     }
 
     @Test

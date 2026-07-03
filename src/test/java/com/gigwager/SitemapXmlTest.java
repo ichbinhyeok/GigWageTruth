@@ -64,6 +64,10 @@ public class SitemapXmlTest {
                                 "Sitemap should contain city intent pages");
                 assertTrue(xmlContent.contains("/salary/uber/chicago/active-time"),
                                 "Sitemap should contain Uber city intent pages");
+                assertTrue(xmlContent.contains("/salary/doordash/phoenix/100-a-day"),
+                                "Sitemap should contain daily target intent pages");
+                assertTrue(xmlContent.contains("/salary/uber/nashville/nights-weekends"),
+                                "Sitemap should contain nights and weekends intent pages");
 
                 assertTrue(xmlContent.contains("/taxes"), "Sitemap should contain /taxes");
                 assertTrue(xmlContent.contains("/insurance"), "Sitemap should contain /insurance");

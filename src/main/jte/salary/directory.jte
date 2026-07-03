@@ -63,6 +63,38 @@
                             </a>
                         </div>
                     </section>
+
+                    <section class="bg-indigo-50 rounded-2xl border border-indigo-100 p-6 mb-8">
+                        <p class="text-xs font-black uppercase tracking-[0.18em] text-indigo-700 mb-2">Daily click targets</p>
+                        <h2 class="text-2xl font-black text-slate-900 mb-3">Goal-based earnings pages</h2>
+                        <p class="text-sm text-slate-600 mb-5">These links give Google a direct crawl path into the new $100/day, $1,000/month, and nights/weekends pages.</p>
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+                            <a href="/salary/doordash/phoenix/100-a-day" class="rounded-xl bg-white border border-indigo-100 px-4 py-3 hover:border-indigo-200 transition-colors">
+                                <strong class="block text-slate-900">DoorDash Phoenix $100/day</strong>
+                                <span class="text-xs text-slate-600">Daily net target</span>
+                            </a>
+                            <a href="/salary/uber/chicago/100-a-day" class="rounded-xl bg-white border border-indigo-100 px-4 py-3 hover:border-indigo-200 transition-colors">
+                                <strong class="block text-slate-900">Uber Chicago $100/day</strong>
+                                <span class="text-xs text-slate-600">Daily net target</span>
+                            </a>
+                            <a href="/salary/doordash/denver/1000-a-month" class="rounded-xl bg-white border border-indigo-100 px-4 py-3 hover:border-indigo-200 transition-colors">
+                                <strong class="block text-slate-900">DoorDash Denver $1,000/month</strong>
+                                <span class="text-xs text-slate-600">Monthly side-income plan</span>
+                            </a>
+                            <a href="/salary/uber/los-angeles/1000-a-month" class="rounded-xl bg-white border border-indigo-100 px-4 py-3 hover:border-indigo-200 transition-colors">
+                                <strong class="block text-slate-900">Uber Los Angeles $1,000/month</strong>
+                                <span class="text-xs text-slate-600">Monthly side-income plan</span>
+                            </a>
+                            <a href="/salary/doordash/dallas/nights-weekends" class="rounded-xl bg-white border border-indigo-100 px-4 py-3 hover:border-indigo-200 transition-colors">
+                                <strong class="block text-slate-900">DoorDash Dallas nights/weekends</strong>
+                                <span class="text-xs text-slate-600">Shift-window plan</span>
+                            </a>
+                            <a href="/salary/uber/nashville/nights-weekends" class="rounded-xl bg-white border border-indigo-100 px-4 py-3 hover:border-indigo-200 transition-colors">
+                                <strong class="block text-slate-900">Uber Nashville nights/weekends</strong>
+                                <span class="text-xs text-slate-600">Shift-window plan</span>
+                            </a>
+                        </div>
+                    </section>
                     
                     <h2 class="text-2xl font-bold text-slate-900 mb-8">Browse City Earnings Reports</h2>
                     
