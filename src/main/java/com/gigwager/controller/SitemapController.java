@@ -2,6 +2,7 @@ package com.gigwager.controller;
 
 import com.gigwager.util.AppConstants;
 import com.gigwager.model.CityData;
+import com.gigwager.model.CityIntentPage;
 import com.gigwager.model.WorkLevel;
 import com.gigwager.service.DataLayerService;
 import com.gigwager.service.PageIndexPolicyService;
@@ -65,6 +66,11 @@ public class SitemapController {
                             addUrl(xml, AppConstants.BASE_URL + "/salary/" + app + "/" + city.getSlug() + "/"
                                     + workLevel.getSlug(), today, "monthly", "0.7");
                         }
+                    }
+
+                    for (CityIntentPage intentPage : CityIntentPage.values()) {
+                        addUrl(xml, AppConstants.BASE_URL + "/salary/" + app + "/" + city.getSlug() + "/"
+                                + intentPage.getSlug(), today, "monthly", "0.6");
                     }
                 }
             }

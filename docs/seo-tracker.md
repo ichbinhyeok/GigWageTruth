@@ -1,8 +1,39 @@
 # SEO Tracker
 
-Last updated: 2026-03-22  
+Last updated: 2026-07-03
 Owner: GigWageTruth  
 Primary source: Google Search Console (GA4 property access still pending)
+
+## Recovery Patch Prepared On 2026-07-03
+- Wide Search Console review showed the real break was impression loss, not only CTR: monthly impressions fell from `43,040` in 2026-03 and `33,885` in 2026-04 to `4,008` in 2026-06.
+- Main suspected cause: the 2026-04-24 tool-identity pivot changed indexed pages from `driver earnings / average pay / after expenses` language toward `pay calculator` language, then Google reduced the matching impression pool around 2026-05-19.
+- Reverted the organic promise without changing URL structure:
+  - `/salary/{app}` now leads with `{App} Driver Earnings by City After Expenses`.
+  - `/salary/{app}/{city}` now leads with `{App} Driver Earnings in {City} {Year}: ${Net}/hr Net`.
+  - `/salary/{app}/{city}/{workLevel}` now leads with work-level driver earnings language.
+  - `/best-cities/{app}` now leads with `Highest-Paying Cities for {App} Drivers`.
+- Kept calculators as on-page tools and CTAs, but removed them as the primary SERP identity for city, app-hub, directory, compare, and best-cities pages.
+- Relaxed `data-nosnippet` on the unique best-cities ranking/table and city hero metric grid so Google has more high-value numeric passage candidates.
+- Updated regression coverage so priority SEO pages must expose earnings-first language while still preserving tracked calculator CTAs.
+- Added a source-backed `Driver field notes` section to city earnings and work-level pages. The section turns unstructured driver evidence into practical checks: gross vs net, active/online time, dollar-per-mile floors, peak-window timing, platform-fee pressure, and city-specific notes for Chicago, Los Angeles, Nashville, Portland, Denver, Atlanta, and Dallas priority pages.
+- Strengthened crawl paths to the priority recovery URLs:
+  - `/salary/{app}` now links directly to high-signal city reports.
+  - `/salary/directory` now links directly to priority earnings reports.
+  - `/best-cities/{app}` now links each ranked city to both the city earnings page and the side-hustle detail page.
+- Added a visible FAQ + JSON-LD FAQ question about what drivers should check before trusting an earnings estimate.
+- Added a new long-tail pSEO intent layer at `/salary/{app}/{city}/{intent}` for:
+  - `after-gas`
+  - `per-mile`
+  - `active-time`
+  - `worth-it`
+- The intent layer adds roughly 312 additional indexable long-tail URLs across indexable city/app combinations. Local sitemap render now reports 574 `<loc>` entries.
+- Strengthened those intent pages with per-intent `Data-backed checks` and `Evidence patterns` cards, so each URL exposes the exact numeric check and source trail behind its query: after-gas fuel drag, per-mile gross/net, active-time waiting stress tests, worth-it mileage/timing checks, IRS mileage benchmark, platform pay-clock docs, field tests, and driver discussions.
+- Recheck in Search Console after recrawl:
+  - `/salary/doordash/phoenix`
+  - `/salary/doordash/denver/side-hustle`
+  - `/salary/uber/chicago`
+  - `/best-cities/doordash`
+  - `/salary/doordash`
 
 ## Current Verdict
 - Indexing and canonical health: mostly good

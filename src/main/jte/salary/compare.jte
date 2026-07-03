@@ -40,7 +40,7 @@
                 <div class="bg-white border border-slate-200 rounded-2xl p-5 mb-8">
                     <p class="text-sm text-slate-600">
                         Use this page when your question is <strong>which app pays more in ${city.getCityName()}</strong>.
-                        Open the app-specific city calculators below when you want the deeper part-time, side-hustle, and full-time breakdowns.
+                        Open the app-specific city earnings pages below when you want the deeper part-time, side-hustle, and full-time breakdowns.
                     </p>
                 </div>
 
@@ -52,10 +52,10 @@
                         Build weekly profit plan
                     </a>
                     <a href="/salary/uber/${city.getSlug()}" class="rounded-2xl bg-white border border-slate-200 hover:border-slate-300 text-slate-900 font-bold px-5 py-4 transition-colors">
-                        Uber city calculator
+                        Uber city earnings
                     </a>
                     <a href="/salary/doordash/${city.getSlug()}" class="rounded-2xl bg-white border border-slate-200 hover:border-slate-300 text-slate-900 font-bold px-5 py-4 transition-colors">
-                        DoorDash city calculator
+                        DoorDash city earnings
                     </a>
                 </div>
 

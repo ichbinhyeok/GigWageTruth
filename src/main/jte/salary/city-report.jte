@@ -1,6 +1,7 @@
 @import com.gigwager.model.SeoMeta
 @import com.gigwager.model.CityData
 @import com.gigwager.model.CityScenario
+@import com.gigwager.model.DriverFieldNote
 @import com.gigwager.util.AppConstants
 @import java.util.List
 @param SeoMeta seoMeta
@@ -27,6 +28,7 @@
 @param String heroTitleSecondary = ""
 @param String heroTitleTertiary = ""
 @param String heroSummary = ""
+@param List<DriverFieldNote> driverFieldNotes = java.util.List.of()
 @template.layout.main(
     noIndex = noIndex,
     seoMeta = seoMeta,
@@ -40,9 +42,9 @@
                 <nav class="text-sm text-slate-400 mb-4 flex items-center gap-2">
                     <a href="/" class="hover:text-emerald-400 transition">Home</a>
                     <span class="text-slate-600">&gt;</span>
-                    <a href="/salary/directory" class="hover:text-emerald-400 transition">City Pay Calculators</a>
+                    <a href="/salary/directory" class="hover:text-emerald-400 transition">City Earnings Reports</a>
                     <span class="text-slate-600">&gt;</span>
-                    <span class="text-white">${city.getCityName()} ${appName} Pay Calculator</span>
+                    <span class="text-white">${city.getCityName()} ${appName} Driver Earnings</span>
                 </nav>
                 <div class="flex items-center gap-4 mb-6">
                     <div class="inline-block px-4 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-full">
@@ -63,7 +65,7 @@
 
                 <div class="flex flex-wrap items-center gap-3 mb-8 text-xs font-semibold text-slate-300" data-nosnippet>
                     <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10">Updated ${lastUpdated}</span>
-                    <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10">Prefilled net pay calculator</span>
+                    <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10">After-expenses earnings estimate</span>
                     <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10">IRS mileage + SE tax assumptions</span>
                     <a href="${methodologyUrl}" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 hover:border-emerald-400 hover:text-emerald-300 transition-colors">How we estimate this</a>
                 </div>
@@ -72,7 +74,7 @@
                     <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8">
                         <div>
                             <div class="flex items-center gap-3 mb-3">
-                                <span class="text-sm font-bold text-slate-400 uppercase tracking-wider">Prefilled Calculator Result</span>
+                                <span class="text-sm font-bold text-slate-400 uppercase tracking-wider">Estimated Net Earnings Result</span>
                                 <span class="text-xs px-2 py-1 bg-slate-700 text-slate-300 rounded-md">${featuredScenario.getName()}</span>
                             </div>
                             <div class="flex items-baseline gap-2 mb-4">
@@ -84,7 +86,7 @@
                                 ${featuredScenario.getMiles()} miles, ${featuredScenario.getHours()} hours, and $${String.format("%.2f", city.getGasPrice())}/gal gas.
                             </p>
                         </div>
-                        <div class="grid grid-cols-2 gap-3 text-sm min-w-full lg:min-w-[18rem]" data-nosnippet>
+                        <div class="grid grid-cols-2 gap-3 text-sm min-w-full lg:min-w-[18rem]">
                             <div class="rounded-xl bg-slate-950/40 border border-white/10 p-4">
                                 <p class="text-xs text-slate-500 uppercase tracking-wider mb-1">Gross</p>
                                 <p class="text-xl font-black text-white">$${featuredScenario.getGrossWeekly()}/wk</p>
@@ -123,10 +125,10 @@
                         </a>
                     @endif
                     <a href="${bestCitiesUrl}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_city_report', 'event_label': 'compare_best_cities' })" class="rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-bold px-5 py-4 transition-colors">
-                        Compare city pay calculators
+                        Compare highest-paying cities
                     </a>
                     <a href="/salary/${app}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_city_report', 'event_label': 'open_app_city_calculators' })" class="rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-bold px-5 py-4 transition-colors">
-                        Browse ${appName} city calculators
+                        Browse ${appName} city earnings
                     </a>
                 </div>
 
@@ -201,6 +203,13 @@
                 </div>
             </div>
         </section>
+
+        @template.components.driver_field_notes(
+            appName = appName,
+            cityName = city.getCityName(),
+            netHourly = featuredScenario.getNetHourly(),
+            driverFieldNotes = driverFieldNotes
+        )
 
         <!-- Main Content -->
         <div class="max-w-4xl mx-auto px-6 py-16 space-y-16">
@@ -417,6 +426,10 @@
                         <p class="text-slate-600 mt-3">We estimate net profit by starting with gross income levels typical for ${city.getMarketTier()} markets, then subtracting fuel costs ($${String.format("%.2f", city.getGasPrice())}/gal local average), vehicle depreciation (using the 2026 IRS standard mileage rate of $0.725/mile), and estimated self-employment taxes (15.3%). The result is your estimated take-home pay per hour.</p>
                     </details>
                     <details class="group border border-slate-200 rounded-xl p-4">
+                        <summary class="font-semibold text-slate-900 cursor-pointer">What should I check before trusting this ${appName} earnings estimate?</summary>
+                        <p class="text-slate-600 mt-3">Check total miles, active time versus online or dash time, dollar-per-mile floor, tips, and whether your shift matches the strongest local windows. The driver field notes above show why the $${String.format("%.2f", featuredScenario.getNetHourly())}/hr net estimate should be treated as a planning baseline, not a guaranteed payout.</p>
+                    </details>
+                    <details class="group border border-slate-200 rounded-xl p-4">
                         <summary class="font-semibold text-slate-900 cursor-pointer">What is the best car for ${appName} driving in ${city.getCityName()}?</summary>
                         <p class="text-slate-600 mt-3">${city.isHighTraffic() ? "In " + city.getCityName() + "'s stop-and-go traffic, a hybrid like the Toyota Prius (57 MPG) or Corolla Hybrid (52 MPG) is ideal because city driving actually improves hybrid efficiency. Gas-only SUVs can drop to 15-18 MPG in congestion, destroying your margins." : "For " + city.getCityName() + "'s driving conditions, a Toyota Prius (57 MPG) or Camry Hybrid (51 MPG) offers the best cost-per-mile. If you need SUV capacity for XL rides, the RAV4 Hybrid (39 MPG) is the most efficient option."}</p>
                     </details>
@@ -562,7 +575,7 @@
                         @endif
                         <a href="${otherAppUrl}" 
                            class="inline-block px-6 py-3 bg-white border border-slate-300 text-slate-900 font-bold rounded-lg hover:bg-slate-50 transition shadow-sm">
-                            Open ${otherAppName} city calculator &rarr;
+                            Open ${otherAppName} city earnings &rarr;
                         </a>
                     </div>
                 </div>
@@ -579,7 +592,7 @@
                            class="block p-3 bg-white rounded-lg border border-slate-100 hover:border-emerald-300 hover:shadow-sm transition text-center">
                             <div class="text-xl mb-1">City</div>
                             <div class="text-xs font-bold text-slate-700">${simCity.getCityName()}</div>
-                            <div class="text-[10px] text-slate-400">Open Calculator</div>
+                            <div class="text-[10px] text-slate-400">Open earnings page</div>
                         </a>
                     @endfor
                 </div>
@@ -590,8 +603,8 @@
                 <div class="bg-indigo-50 border border-indigo-100 rounded-3xl p-8 text-center shadow-sm">
                     <h3 class="text-xl font-bold text-indigo-900 mb-4">Want to see how ${city.getCityName()} compares?</h3>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="/salary/${app}" class="px-6 py-3 bg-white border border-indigo-200 hover:border-indigo-400 text-indigo-800 font-bold rounded-xl transition-colors shadow-sm text-sm">Browse ${appName} City Calculators</a>
-                        <a href="/best-cities/${app}" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition-colors shadow-sm text-sm">Compare Net Pay Ranking</a>
+                        <a href="/salary/${app}" class="px-6 py-3 bg-white border border-indigo-200 hover:border-indigo-400 text-indigo-800 font-bold rounded-xl transition-colors shadow-sm text-sm">Browse ${appName} City Earnings</a>
+                        <a href="/best-cities/${app}" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition-colors shadow-sm text-sm">Compare highest-paying cities</a>
                     </div>
                 </div>
             </section>

@@ -1,7 +1,11 @@
 package com.gigwager.controller;
 
 import com.gigwager.model.CityData;
+import com.gigwager.model.CityIntentEvidence;
+import com.gigwager.model.CityIntentMetric;
+import com.gigwager.model.CityIntentPage;
 import com.gigwager.model.CityScenario;
+import com.gigwager.model.DriverFieldNote;
 import com.gigwager.model.SeoMeta;
 import com.gigwager.model.WorkLevel;
 import com.gigwager.model.CityLocalData;
@@ -88,11 +92,13 @@ public class ProgrammaticSeoController {
 
                 String coveragePath = app.equals("uber") ? "/uber/where-you-can-drive" : "/doordash/where-you-can-dash";
 
-                String title = String.format("%s City Pay Calculators: Net Earnings After Expenses", appName);
+                String title = String.format("%s Driver Earnings by City After Expenses", appName);
                 String description = String.format(
-                                "Use %d %s city pay calculators to compare net hourly earnings after mileage and self-employment tax, then adjust the calculator for your own miles and hours. Updated %s.",
-                                indexedCityCount,
+                                "Compare estimated %s driver earnings across %d cities after mileage and self-employment tax. %s currently leads at about $%.2f/hr net. Updated %s.",
                                 appName,
+                                indexedCityCount,
+                                topCity.city().getCityName(),
+                                topCity.netHourly(),
                                 monthYear);
                 String canonicalUrl = String.format("%s/salary/%s", AppConstants.BASE_URL, app);
 
@@ -182,11 +188,11 @@ public class ProgrammaticSeoController {
                 String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
                                 .format(now);
 
-                String title = String.format("Best %s Cities %d: Net Pay Calculator Ranking",
+                String title = String.format("Highest-Paying Cities for %s Drivers %d",
                                 appName,
                                 currentYear);
                 String description = String.format(
-                                "Compare %s cities by estimated net hourly pay after mileage and self-employment tax. %s leads at about $%.2f/hr net; open any city calculator to adjust your numbers.",
+                                "Ranked by estimated %s driver earnings after mileage and self-employment tax. %s leads at about $%.2f/hr net; each city page includes an adjustable calculator.",
                                 appName,
                                 topRankedCity.city().getCityName(),
                                 topRankedCity.netHourly());
@@ -321,21 +327,22 @@ public class ProgrammaticSeoController {
                 // Build unique SEO meta
                 String appName = app.equals("uber") ? "Uber" : "DoorDash";
 
-                String title = String.format("%s %s, %s Pay Calculator %d: $%.2f/hr Net",
-                                appName, city.getCityName(), city.getState(), now.getYear(),
+                String title = String.format("%s Driver Earnings in %s %d: $%.2f/hr Net",
+                                appName, city.getCityName(), now.getYear(),
                                 featuredScenario.getNetHourly());
                 String description = String.format(
-                                "Use the %s %s pay calculator to adjust gross, miles, hours, and gas. Baseline estimate: $%.2f/hr net after mileage and self-employment tax. Updated %s.",
+                                "Estimated %s driver earnings in %s: $%.2f/hr net after mileage and SE tax on a 25-hour baseline. Adjust gross, miles, hours, and gas. Updated %s.",
                                 appName, city.getCityName(), featuredScenario.getNetHourly(), monthYear);
-                String heroTitlePrimary = String.format("%s %s Pay Calculator", appName,
+                String heroTitlePrimary = String.format("%s Driver Earnings in %s", appName,
                                 city.getCityName());
                 String heroTitleSecondary = String.format("$%.2f/hr Net After Expenses",
                                 featuredScenario.getNetHourly());
-                String heroTitleTertiary = "Adjust Gross, Miles, Hours, and Gas";
+                String heroTitleTertiary = "Average Pay After Mileage and Tax";
                 String heroSummary = String.format(
-                                "This prefilled %s calculator starts with a %s baseline of $%d/week gross, %d mi, %d hrs, and $%.2f/gal gas so you can quickly judge your real take-home pay.",
+                                "Estimated %s driver earnings in %s start at $%.2f/hr net in our side-hustle model. The baseline uses $%d/week gross, %d mi, %d hrs, and $%.2f/gal gas; use the calculator below to adjust your own numbers.",
                                 appName,
                                 city.getCityName(),
+                                featuredScenario.getNetHourly(),
                                 featuredScenario.getGrossWeekly(),
                                 featuredScenario.getMiles(),
                                 featuredScenario.getHours(),
@@ -363,6 +370,7 @@ public class ProgrammaticSeoController {
                 model.addAttribute("heroTitleSecondary", heroTitleSecondary);
                 model.addAttribute("heroTitleTertiary", heroTitleTertiary);
                 model.addAttribute("heroSummary", heroSummary);
+                model.addAttribute("driverFieldNotes", buildDriverFieldNotes(app, appName, city, featuredScenario));
                 model.addAttribute("methodologyUrl", "/methodology");
                 model.addAttribute("calculatorUrl", calculatorUrl);
                 model.addAttribute("taxEstimatorUrl", buildTaxEstimatorUrl(app, featuredScenario));
@@ -430,6 +438,17 @@ public class ProgrammaticSeoController {
                                 .orElseThrow(() -> new com.gigwager.exception.ResourceNotFoundException(
                                                 "City not found"));
 
+                java.time.LocalDate now = java.time.LocalDate.now();
+                String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
+                                .format(now);
+
+                String appName = app.equals("uber") ? "Uber" : "DoorDash";
+
+                java.util.Optional<CityIntentPage> intentPage = CityIntentPage.fromSlug(workLevelSlug);
+                if (intentPage.isPresent()) {
+                        return cityIntentPage(app, appName, city, intentPage.get(), monthYear, model);
+                }
+
                 // Resolve work level from slug
                 WorkLevel workLevel;
                 try {
@@ -441,20 +460,15 @@ public class ProgrammaticSeoController {
                 // Generate scenario for this specific work level
                 CityScenario scenario = generateScenarioByWorkLevel(city, app, workLevel);
 
-                java.time.LocalDate now = java.time.LocalDate.now();
-                String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
-                                .format(now);
-
                 // Build unique SEO meta
-                String appName = app.equals("uber") ? "Uber" : "DoorDash";
                 String otherApp = app.equals("uber") ? "doordash" : "uber";
                 String otherAppName = app.equals("uber") ? "DoorDash" : "Uber";
 
-                String title = String.format("%s %s %s Calculator: $%.2f/hr Net",
+                String title = String.format("%s Driver Earnings in %s %s: $%.2f/hr Net",
                                 appName, city.getCityName(), workLevel.getDisplayName(),
                                 scenario.getNetHourly());
                 String description = String.format(
-                                "Prefilled %s %s calculator for %s: adjust gross, miles, hours, and gas from a $%.2f/hr net baseline after mileage and SE tax.",
+                                "Estimated %s %s earnings in %s: $%.2f/hr net after mileage and self-employment tax, with a prefilled calculator for your own miles and hours.",
                                 appName, workLevel.getDisplayName(), city.getCityName(),
                                 scenario.getNetHourly());
 
@@ -535,6 +549,7 @@ public class ProgrammaticSeoController {
                 model.addAttribute("otherAppUrl", otherAppUrl);
                 model.addAttribute("parentPageUrl", parentPageUrl);
                 model.addAttribute("calculatorUrl", calculatorUrl);
+                model.addAttribute("driverFieldNotes", buildDriverFieldNotes(app, appName, city, scenario));
 
                 boolean workLevelIndexable = pageIndexPolicyService.isWorkLevelReportIndexable(city, workLevel)
                                 && scenario.getNetHourly() >= 6.0
@@ -590,11 +605,527 @@ public class ProgrammaticSeoController {
                 return "salary/city-work-level";
         }
 
+        private String cityIntentPage(String app,
+                        String appName,
+                        CityData city,
+                        CityIntentPage intentPage,
+                        String monthYear,
+                        Model model) {
+                CityScenario scenario = generateScenarioByWorkLevel(city, app, WorkLevel.SIDE_HUSTLE);
+                String canonicalUrl = String.format("%s/salary/%s/%s/%s",
+                                AppConstants.BASE_URL,
+                                app,
+                                city.getSlug(),
+                                intentPage.getSlug());
+                String parentPageUrl = String.format("/salary/%s/%s", app, city.getSlug());
+                String title = buildCityIntentTitle(appName, city, intentPage, scenario);
+                String description = buildCityIntentDescription(appName, city, intentPage, scenario, monthYear);
+                String answerHtml = buildCityIntentAnswerHtml(appName, city, intentPage, scenario);
+
+                boolean indexable = pageIndexPolicyService.isCityReportIndexable(city)
+                                && scenario.getNetHourly() >= 6.0
+                                && scenario.getNetHourly() <= 45.0;
+                if (!indexable) {
+                        model.addAttribute("noIndex", true);
+                        canonicalUrl = String.format("%s/salary/%s", AppConstants.BASE_URL, app);
+                }
+
+                model.addAttribute("app", app);
+                model.addAttribute("appName", appName);
+                model.addAttribute("city", city);
+                model.addAttribute("intentPage", intentPage);
+                model.addAttribute("scenario", scenario);
+                model.addAttribute("lastUpdated", monthYear);
+                model.addAttribute("parentPageUrl", parentPageUrl);
+                model.addAttribute("calculatorUrl", buildCalculatorUrl(app, scenario, city));
+                model.addAttribute("bestCitiesUrl", String.format("/best-cities/%s", app));
+                model.addAttribute("driverFieldNotes", buildDriverFieldNotes(app, appName, city, scenario));
+                model.addAttribute("intentMetrics", buildCityIntentMetrics(city, intentPage, scenario));
+                model.addAttribute("intentEvidencePatterns",
+                                buildCityIntentEvidencePatterns(app, appName, city, intentPage, scenario));
+                model.addAttribute("answerHtml", answerHtml);
+                model.addAttribute("cityIntentJsonLd",
+                                buildCityIntentJsonLd(appName, city, intentPage, scenario, canonicalUrl));
+                model.addAttribute("seoMeta", new SeoMeta(title, description, canonicalUrl,
+                                AppConstants.BASE_URL + "/og-image.jpg"));
+
+                return "salary/city-intent";
+        }
+
+        private String buildCityIntentTitle(
+                        String appName,
+                        CityData city,
+                        CityIntentPage intentPage,
+                        CityScenario scenario) {
+                return switch (intentPage) {
+                        case AFTER_GAS -> String.format("%s %s After Gas: $%.2f/hr Net",
+                                        appName,
+                                        city.getCityName(),
+                                        scenario.getNetHourly());
+                        case PER_MILE -> String.format("%s %s Pay Per Mile: $%.2f/hr Net",
+                                        appName,
+                                        city.getCityName(),
+                                        scenario.getNetHourly());
+                        case ACTIVE_TIME -> String.format("%s %s Active Time Pay: $%.2f/hr Net",
+                                        appName,
+                                        city.getCityName(),
+                                        scenario.getNetHourly());
+                        case WORTH_IT -> String.format("Is %s Worth It in %s? $%.2f/hr Net",
+                                        appName,
+                                        city.getCityName(),
+                                        scenario.getNetHourly());
+                };
+        }
+
+        private String buildCityIntentDescription(
+                        String appName,
+                        CityData city,
+                        CityIntentPage intentPage,
+                        CityScenario scenario,
+                        String monthYear) {
+                return switch (intentPage) {
+                        case AFTER_GAS -> String.format(
+                                        "%s %s after gas and mileage: $%.2f/hr net on a 25-hour baseline, with fuel, miles, tax, and driver field notes. Updated %s.",
+                                        appName,
+                                        city.getCityName(),
+                                        scenario.getNetHourly(),
+                                        monthYear);
+                        case PER_MILE -> String.format(
+                                        "%s %s pay per mile reality check: compare $%d/week gross, %d miles, and $%.2f/hr net before accepting low-mileage offers. Updated %s.",
+                                        appName,
+                                        city.getCityName(),
+                                        scenario.getGrossWeekly(),
+                                        scenario.getMiles(),
+                                        scenario.getNetHourly(),
+                                        monthYear);
+                        case ACTIVE_TIME -> String.format(
+                                        "%s %s active-time pay estimate: $%.2f/hr net after mileage and tax, with online-time and dash-time checks. Updated %s.",
+                                        appName,
+                                        city.getCityName(),
+                                        scenario.getNetHourly(),
+                                        monthYear);
+                        case WORTH_IT -> String.format(
+                                        "Is %s worth it in %s after expenses? Side-hustle estimate: $%.2f/hr net after mileage and SE tax. Updated %s.",
+                                        appName,
+                                        city.getCityName(),
+                                        scenario.getNetHourly(),
+                                        monthYear);
+                };
+        }
+
+        private String buildCityIntentAnswerHtml(
+                        String appName,
+                        CityData city,
+                        CityIntentPage intentPage,
+                        CityScenario scenario) {
+                return switch (intentPage) {
+                        case AFTER_GAS -> String.format(
+                                        "<p>After gas, mileage, and self-employment tax assumptions, the %s side-hustle baseline in %s is <strong>$%.2f/hr net</strong>. The model starts from <strong>$%d/week gross</strong>, <strong>%d miles/week</strong>, <strong>%d hours/week</strong>, and local gas around <strong>$%.2f/gal</strong>.</p><p>The key driver check is whether your actual route mix stays near this mileage load. If restaurant waits, airport queues, or suburb returns add miles without pay, the after-gas number drops before the app payout looks bad.</p>",
+                                        appName,
+                                        city.getCityName(),
+                                        scenario.getNetHourly(),
+                                        scenario.getGrossWeekly(),
+                                        scenario.getMiles(),
+                                        scenario.getHours(),
+                                        city.getGasPrice());
+                        case PER_MILE -> String.format(
+                                        "<p>The %s %s side-hustle baseline uses <strong>$%d/week gross</strong> over <strong>%d miles</strong>, then converts the result into <strong>$%.2f/hr net</strong> after mileage and tax assumptions.</p><p>For drivers, the practical question is not only hourly pay. A shift can look good by the hour and still fail a dollar-per-mile floor if it sends you across zones, into deadhead miles, or back home unpaid.</p>",
+                                        appName,
+                                        city.getCityName(),
+                                        scenario.getGrossWeekly(),
+                                        scenario.getMiles(),
+                                        scenario.getNetHourly());
+                        case ACTIVE_TIME -> String.format(
+                                        "<p>The %s %s estimate is based on <strong>%d hours/week</strong>, but drivers should compare that against active time, online time, dash time, and waiting time. The current side-hustle baseline is <strong>$%.2f/hr net</strong>.</p><p>If the app shows strong active-time earnings but you spent extra time waiting, repositioning, or driving home, your real hourly rate is lower than the active-time screenshot.</p>",
+                                        appName,
+                                        city.getCityName(),
+                                        scenario.getHours(),
+                                        scenario.getNetHourly());
+                        case WORTH_IT -> String.format(
+                                        "<p>%s in %s looks worth testing when your real shifts can stay near the side-hustle baseline: <strong>$%d/week gross</strong>, <strong>%d miles</strong>, <strong>%d hours</strong>, and about <strong>$%.2f/hr net</strong> after expenses.</p><p>It is less attractive if your market timing forces long waits, low-tip orders, long pickups, or high deadhead miles. Use the field notes below before treating this as a guaranteed wage.</p>",
+                                        appName,
+                                        city.getCityName(),
+                                        scenario.getGrossWeekly(),
+                                        scenario.getMiles(),
+                                        scenario.getHours(),
+                                        scenario.getNetHourly());
+                };
+        }
+
+        private List<CityIntentEvidence> buildCityIntentEvidencePatterns(
+                        String app,
+                        String appName,
+                        CityData city,
+                        CityIntentPage intentPage,
+                        CityScenario scenario) {
+                double weeklyFuelCost = (scenario.getMiles() / 25.0) * city.getGasPrice();
+                double mileageProxy = scenario.getMiles() * AppConstants.IRS_MILEAGE_RATE;
+                double grossPerMile = scenario.getMiles() == 0 ? 0
+                                : scenario.getGrossWeekly() / (double) scenario.getMiles();
+                double netPerMile = scenario.getMiles() == 0 ? 0
+                                : scenario.getNetProfit() / scenario.getMiles();
+                double allInHours = scenario.getHours() * 1.2;
+                double allInHourly = allInHours == 0 ? 0 : scenario.getNetProfit() / allInHours;
+
+                String fieldTestLabel = app.equals("doordash")
+                                ? "NerdWallet DoorDash field test"
+                                : "NerdWallet Uber field test";
+                String fieldTestUrl = app.equals("doordash")
+                                ? "https://www.nerdwallet.com/finance/learn/how-much-does-doordash-pay"
+                                : "https://www.nerdwallet.com/finance/learn/how-much-does-an-uber-driver-make";
+                String platformClockLabel = app.equals("doordash")
+                                ? "DoorDash Earn by Time help"
+                                : "Uber earnings guide";
+                String platformClockUrl = app.equals("doordash")
+                                ? "https://help.doordash.com/en-us/dashers/article/time-earnings-mode"
+                                : "https://www.uber.com/us/en/deliver/earnings/";
+                String gridwiseLabel = app.equals("doordash")
+                                ? "Gridwise DoorDash 2026 pay data"
+                                : "Gridwise Uber 2026 pay data";
+                String gridwiseUrl = app.equals("doordash")
+                                ? "https://gridwise.io/blog/how-much-do-doordash-drivers-make"
+                                : "https://gridwise.io/blog/how-much-do-uber-drivers-make";
+                String mileThreadLabel = app.equals("doordash")
+                                ? "DoorDash driver $/mile discussion"
+                                : "Uber driver $/mile discussion";
+                String mileThreadUrl = app.equals("doordash")
+                                ? "https://www.reddit.com/r/doordash_drivers/comments/1s39uhj/whats_your_minimum_mile_to_accept_doordash_orders/"
+                                : "https://www.reddit.com/r/uberdrivers/comments/1s39ymq/whats_your_minimum_mile_to_accept_orders_in_2026/";
+                String worthItThreadLabel = app.equals("doordash")
+                                ? "DoorDash 2026 worth-it discussion"
+                                : "Uber 2026 worth-it discussion";
+                String worthItThreadUrl = app.equals("doordash")
+                                ? "https://www.reddit.com/r/doordash_drivers/comments/1rs4kmu/is_it_worth_coming_back_to_dashing_in_2026/"
+                                : "https://www.reddit.com/r/UberEatsDrivers/comments/1q391xs/is_it_worth_being_an_uber_driver_in_2026/";
+
+                return switch (intentPage) {
+                        case AFTER_GAS -> List.of(
+                                        new CityIntentEvidence(
+                                                        "Field-test pattern",
+                                                        "Gross screenshots need an expense filter",
+                                                        String.format(
+                                                                        "%s %s starts with $%.2f/hr net because field tests report app payout before fuel, vehicle wear, and tax. This page exposes the modeled $%.0f weekly fuel drag before the broader mileage proxy.",
+                                                                        appName,
+                                                                        city.getCityName(),
+                                                                        scenario.getNetHourly(),
+                                                                        weeklyFuelCost),
+                                                        fieldTestLabel,
+                                                        fieldTestUrl),
+                                        new CityIntentEvidence(
+                                                        "Cost benchmark",
+                                                        "Mileage is larger than the pump receipt",
+                                                        String.format(
+                                                                        "The IRS 2026 business mileage benchmark is $0.725/mi. At %d modeled miles/week, that is about $%.0f of vehicle-cost pressure before self-employment tax.",
+                                                                        scenario.getMiles(),
+                                                                        mileageProxy),
+                                                        "IRS 2026 mileage rate",
+                                                        "https://www.irs.gov/newsroom/irs-sets-2026-business-standard-mileage-rate-at-725-cents-per-mile-up-25-cents"),
+                                        new CityIntentEvidence(
+                                                        "Operating pattern",
+                                                        "Dead miles and slow windows decide whether gas matters",
+                                                        String.format(
+                                                                        "Large driver datasets separate peak-window strategy from all-day grinding. That is why the %s page shows gross after fuel, miles/week, and the calculator link instead of only a single hourly headline.",
+                                                                        city.getCityName()),
+                                                        gridwiseLabel,
+                                                        gridwiseUrl));
+                        case PER_MILE -> List.of(
+                                        new CityIntentEvidence(
+                                                        "Acceptance floor",
+                                                        "Drivers compare offers by mile before hourly math",
+                                                        String.format(
+                                                                        "%s %s is modeled at $%.2f gross/mi and $%.2f net/mi. That mirrors driver-source behavior: screen weak offers by dollars per mile before trusting an hourly total.",
+                                                                        appName,
+                                                                        city.getCityName(),
+                                                                        grossPerMile,
+                                                                        netPerMile),
+                                                        mileThreadLabel,
+                                                        mileThreadUrl),
+                                        new CityIntentEvidence(
+                                                        "Cost benchmark",
+                                                        "A good offer still has to clear vehicle-cost pressure",
+                                                        "The same $0.725/mi IRS proxy used across the site gives this page a hard comparison line. If the offer barely beats the cost proxy, the gross payout is not enough.",
+                                                        "IRS 2026 mileage rate",
+                                                        "https://www.irs.gov/newsroom/irs-sets-2026-business-standard-mileage-rate-at-725-cents-per-mile-up-25-cents"),
+                                        new CityIntentEvidence(
+                                                        "Winner pattern",
+                                                        "Top pSEO pages make the query-specific comparison visible",
+                                                        "Good pSEO examples expose the exact data point the searcher came for. Here, the page puts gross-per-mile, net-per-mile, and the mileage proxy next to the source trail.",
+                                                        gridwiseLabel,
+                                                        gridwiseUrl));
+                        case ACTIVE_TIME -> List.of(
+                                        new CityIntentEvidence(
+                                                        "Clock definition",
+                                                        "Active time is not the same as total work time",
+                                                        String.format(
+                                                                        "%s documentation separates app clocks from total availability. This page stress-tests %d modeled hours as %.0f all-in hours to catch waiting and repositioning time.",
+                                                                        appName,
+                                                                        scenario.getHours(),
+                                                                        allInHours),
+                                                        platformClockLabel,
+                                                        platformClockUrl),
+                                        new CityIntentEvidence(
+                                                        "Driver behavior",
+                                                        "Online summaries need a waiting-time haircut",
+                                                        String.format(
+                                                                        "At a 20%% waiting buffer, the %s %s baseline drops to $%.2f/hr all-in. That is the number a driver should compare against screenshots that only show active or booked time.",
+                                                                        appName,
+                                                                        city.getCityName(),
+                                                                        allInHourly),
+                                                        gridwiseLabel,
+                                                        gridwiseUrl),
+                                        new CityIntentEvidence(
+                                                        "Page uniqueness",
+                                                        "The active-time page answers a different query than the city page",
+                                                        "Instead of duplicating the city earnings page, this URL isolates the active-time risk: unpaid waiting, repositioning, and the clock definition used by the platform.",
+                                                        platformClockLabel,
+                                                        platformClockUrl));
+                        case WORTH_IT -> List.of(
+                                        new CityIntentEvidence(
+                                                        "Decision pattern",
+                                                        "Worth-it searches are really gross-vs-net checks",
+                                                        String.format(
+                                                                        "%s %s currently clears the side-hustle baseline at $%.2f/hr net, but the useful decision is whether your actual hours and miles stay close to the model.",
+                                                                        appName,
+                                                                        city.getCityName(),
+                                                                        scenario.getNetHourly()),
+                                                        worthItThreadLabel,
+                                                        worthItThreadUrl),
+                                        new CityIntentEvidence(
+                                                        "Market timing",
+                                                        "The same city can be good or bad by shift window",
+                                                        "Driver-source data repeatedly points to peak windows, events, airport flows, and slow weekday gaps. The page links into city notes so the answer is not just a static average.",
+                                                        gridwiseLabel,
+                                                        gridwiseUrl),
+                                        new CityIntentEvidence(
+                                                        "Cost benchmark",
+                                                        "A yes/no answer has to include mileage and tax",
+                                                        String.format(
+                                                                        "The modeled %d miles/week creates about $%.0f in IRS mileage proxy cost before tax. That is why the page routes users to the adjustable calculator after the direct answer.",
+                                                                        scenario.getMiles(),
+                                                                        mileageProxy),
+                                                        "IRS 2026 mileage rate",
+                                                        "https://www.irs.gov/newsroom/irs-sets-2026-business-standard-mileage-rate-at-725-cents-per-mile-up-25-cents"));
+                };
+        }
+
+        private List<CityIntentMetric> buildCityIntentMetrics(
+                        CityData city,
+                        CityIntentPage intentPage,
+                        CityScenario scenario) {
+                double weeklyFuelCost = (scenario.getMiles() / 25.0) * city.getGasPrice();
+                double grossPerMile = scenario.getMiles() == 0 ? 0 : scenario.getGrossWeekly() / (double) scenario.getMiles();
+                double netPerMile = scenario.getMiles() == 0 ? 0 : scenario.getNetProfit() / scenario.getMiles();
+                double allInHours = scenario.getHours() * 1.2;
+                double allInHourly = allInHours == 0 ? 0 : scenario.getNetProfit() / allInHours;
+                double monthlyNet = scenario.getNetProfit() * 4.33;
+                double minWageGap = scenario.getNetHourly() - city.getMinWage();
+
+                return switch (intentPage) {
+                        case AFTER_GAS -> List.of(
+                                        new CityIntentMetric("Estimated weekly fuel", String.format("$%.0f", weeklyFuelCost),
+                                                        String.format("Uses %d miles/week, 25 MPG, and $%.2f/gal local gas.",
+                                                                        scenario.getMiles(),
+                                                                        city.getGasPrice())),
+                                        new CityIntentMetric("Gross after fuel", String.format("$%.0f",
+                                                        scenario.getGrossWeekly() - weeklyFuelCost),
+                                                        "This is before mileage depreciation proxy and self-employment tax."),
+                                        new CityIntentMetric("Net hourly", String.format("$%.2f/hr", scenario.getNetHourly()),
+                                                        "The model still uses the IRS mileage proxy because gas is only one vehicle cost."));
+                        case PER_MILE -> List.of(
+                                        new CityIntentMetric("Gross per mile", String.format("$%.2f/mi", grossPerMile),
+                                                        "Gross payout divided by modeled weekly miles."),
+                                        new CityIntentMetric("Net profit per mile", String.format("$%.2f/mi", netPerMile),
+                                                        "Net profit after mileage and tax assumptions divided by modeled weekly miles."),
+                                        new CityIntentMetric("IRS mileage proxy", "$0.725/mi",
+                                                        "A benchmark for vehicle operating cost pressure in 2026."));
+                        case ACTIVE_TIME -> List.of(
+                                        new CityIntentMetric("Modeled hours", scenario.getHours() + " hrs/wk",
+                                                        "The baseline hour count used in this city estimate."),
+                                        new CityIntentMetric("20% waiting buffer", String.format("%.0f hrs/wk", allInHours),
+                                                        "Stress test for online or dash time exceeding active work time."),
+                                        new CityIntentMetric("All-in hourly stress test", String.format("$%.2f/hr", allInHourly),
+                                                        "Net profit divided by modeled hours plus the 20% waiting buffer."));
+                        case WORTH_IT -> List.of(
+                                        new CityIntentMetric("Monthly net estimate", String.format("$%.0f", monthlyNet),
+                                                        "Weekly net profit multiplied by 4.33 weeks."),
+                                        new CityIntentMetric("Local min wage gap", String.format("%s$%.2f/hr",
+                                                        minWageGap >= 0 ? "+" : "-",
+                                                        Math.abs(minWageGap)),
+                                                        "Net hourly estimate compared with the local minimum wage."),
+                                        new CityIntentMetric("Annual mileage load", String.format("%,d mi",
+                                                        scenario.getMiles() * 52),
+                                                        "A side-hustle schedule can still add serious vehicle wear over a year."));
+                };
+        }
+
+        private String buildCityIntentJsonLd(
+                        String appName,
+                        CityData city,
+                        CityIntentPage intentPage,
+                        CityScenario scenario,
+                        String canonicalUrl) {
+                Map<String, Object> breadcrumb = new LinkedHashMap<>();
+                breadcrumb.put("@type", "BreadcrumbList");
+                breadcrumb.put("itemListElement", List.of(
+                                buildBreadcrumbItem(1, "Home", AppConstants.BASE_URL + "/"),
+                                buildBreadcrumbItem(2, "City Earnings Reports",
+                                                AppConstants.BASE_URL + "/salary/directory"),
+                                buildBreadcrumbItem(3,
+                                                String.format("%s %s Driver Earnings", city.getCityName(), appName),
+                                                String.format("%s/salary/%s/%s",
+                                                                AppConstants.BASE_URL,
+                                                                appName.toLowerCase(java.util.Locale.US),
+                                                                city.getSlug())),
+                                buildBreadcrumbItem(4, intentPage.getDisplayName(), canonicalUrl)));
+
+                Map<String, Object> article = new LinkedHashMap<>();
+                article.put("@type", "Article");
+                article.put("headline", buildCityIntentTitle(appName, city, intentPage, scenario));
+                article.put("url", canonicalUrl);
+                article.put("description", String.format(
+                                "%s %s %s estimate with net hourly pay, mileage assumptions, driver field notes, and calculator links.",
+                                appName,
+                                city.getCityName(),
+                                intentPage.getSearchPhrase()));
+                article.put("isAccessibleForFree", true);
+
+                Map<String, Object> graph = new LinkedHashMap<>();
+                graph.put("@context", "https://schema.org");
+                graph.put("@graph", List.of(breadcrumb, article));
+                return toJsonLd(graph);
+        }
+
         private String chooseNonBlank(String primary, String fallback) {
                 if (primary != null && !primary.isBlank()) {
                         return primary;
                 }
                 return fallback;
+        }
+
+        private List<DriverFieldNote> buildDriverFieldNotes(
+                        String app,
+                        String appName,
+                        CityData city,
+                        CityScenario featuredScenario) {
+                List<DriverFieldNote> notes = new ArrayList<>();
+
+                if ("doordash".equals(app)) {
+                        notes.add(new DriverFieldNote(
+                                        "Field test",
+                                        "Gross payout is not the number drivers keep",
+                                        String.format(
+                                                        "A recent DoorDash field test logged 6.5 hours and 90 miles for $86 gross before fuel and vehicle costs. Read the $%.2f/hr %s estimate here as a net baseline, not as an app-payout screenshot.",
+                                                        featuredScenario.getNetHourly(),
+                                                        city.getCityName()),
+                                        "NerdWallet DoorDash pay test",
+                                        "https://www.nerdwallet.com/finance/learn/how-much-does-doordash-pay"));
+                        notes.add(new DriverFieldNote(
+                                        "Pay mode",
+                                        "Earn-by-time still depends on active delivery time",
+                                        "DoorDash says Dasher pay combines base pay, tips, and promotions. Drivers still need to separate active delivery time from total time logged in the zone before judging an hourly result.",
+                                        "DoorDash Earn by Time help",
+                                        "https://help.doordash.com/en-us/dashers/article/time-earnings-mode"));
+                } else {
+                        notes.add(new DriverFieldNote(
+                                        "Field test",
+                                        "Miles can overwhelm a strong Uber fare day",
+                                        String.format(
+                                                        "A recent Uber field test reported about 10 active hours, 10 trips, and 305 miles. For %s, the mileage load is why this page starts with $%.2f/hr net instead of gross fare totals.",
+                                                        city.getCityName(),
+                                                        featuredScenario.getNetHourly()),
+                                        "NerdWallet Uber pay test",
+                                        "https://www.nerdwallet.com/finance/learn/how-much-does-an-uber-driver-make"));
+                        notes.add(new DriverFieldNote(
+                                        "Online time",
+                                        "Drivers judge waiting time, not only booked trips",
+                                        "Uber's earnings tools show session summaries with online time, offers, and completed trips. That is the right mental model for comparing a city: unpaid waiting and repositioning time change the real hourly rate.",
+                                        "Uber delivery earnings guide",
+                                        "https://www.uber.com/deliver/earnings/"));
+                }
+
+                addCitySpecificDriverFieldNotes(notes, app, city);
+
+                notes.add(new DriverFieldNote(
+                                "Mileage floor",
+                                "A low dollar-per-mile offer can erase the shift",
+                                String.format(
+                                                "Driver threads often use a dollar-per-mile floor before accepting work. The 2026 IRS business mileage rate is $0.725/mi, so %s drivers should compare every offer against miles, not only dollars.",
+                                                city.getCityName()),
+                                "IRS 2026 mileage rate",
+                                "https://www.irs.gov/forms-pubs/the-standard-mileage-rates-and-maximum-automobile-fair-market-values-have-been-updated-for-2026"));
+
+                notes.add(new DriverFieldNote(
+                                "Market timing",
+                                "Peak windows beat all-day availability",
+                                "Recent driver discussions keep repeating the same pattern: good markets can work at peak windows, while summer, school breaks, slow months, and driver saturation make all-day grinding much less reliable.",
+                                "Driver discussion on 2026 demand",
+                                "https://www.reddit.com/r/doordash_drivers/comments/1tydq5v/is_doordash_still_worth_it_in_2026/"));
+
+                notes.add(new DriverFieldNote(
+                                "Platform spread",
+                                "Customer prices can rise while driver pay barely moves",
+                                "Gridwise reported customer rideshare prices up 9.6% and platform fees up 33.2%, while driver gross pay per hour rose 4.1%. That gap is why net earnings pages need cost and time assumptions.",
+                                "Gridwise 2026 gig mobility report",
+                                "https://www.prnewswire.com/news-releases/gridwise-analytics-annual-gig-mobility-report-finds-customer-rideshare-prices-rose-nearly-10-as-platform-fees-surged-and-driver-pay-lagged-302704761.html"));
+
+                return notes;
+        }
+
+        private void addCitySpecificDriverFieldNotes(List<DriverFieldNote> notes, String app, CityData city) {
+                String citySlug = city.getSlug();
+                if ("uber".equals(app)) {
+                        switch (citySlug) {
+                                case "chicago" -> notes.add(new DriverFieldNote(
+                                                "Chicago pattern",
+                                                "Airport and bar-close windows beat generic 12-hour days",
+                                                "Chicago driver discussions point to early airport business trips and late weekend bar-close demand as stronger lanes, but also call out rapid vehicle mileage accumulation. Treat high gross days as conditional on timing and car replacement costs.",
+                                                "AskChicago Uber/Lyft summer thread",
+                                                "https://www.reddit.com/r/AskChicago/comments/1rep6pm/do_chicago_lyftuber_drivers_make_good_money_in/"));
+                                case "los-angeles" -> notes.add(new DriverFieldNote(
+                                                "Los Angeles pattern",
+                                                "Night shifts and low fuel cost change the LA math",
+                                                "Los Angeles driver reports often separate graveyard/airport strategy from daytime traffic. A hybrid or EV can make the same gross payout look better, while daytime congestion can push net hourly far below the headline number.",
+                                                "LA driver weekly earnings discussion",
+                                                "https://www.reddit.com/r/lyftdrivers/comments/1pl9p05/who_is_actually_still_making_1k_or_more_a_week/"));
+                                case "nashville" -> notes.add(new DriverFieldNote(
+                                                "Nashville pattern",
+                                                "Supply and event timing matter more than the city average",
+                                                "Recent Nashville driver discussion frames the market as sensitive to out-of-state driver supply, weak regulation, and app transparency differences. For this page, the city average should be treated as a starting point, not a promise for random weekday hours.",
+                                                "Nashville Uber/Lyft market discussion",
+                                                "https://www.reddit.com/r/uberdrivers/comments/1qwnmas/hows_the_nashville_uberlyft_market_right_now/"));
+                                case "portland" -> notes.add(new DriverFieldNote(
+                                                "Portland pattern",
+                                                "Local policy debate is a pay signal",
+                                                "Portland is actively debating ride-hail driver pay and platform take rates. That matters for earnings pages because rider cost and driver take-home can move in different directions even when trip demand looks stable.",
+                                                "NW Labor Press Portland pay-cap report",
+                                                "https://nwlaborpress.org/2026/06/portland-may-look-at-capping-uber-lyfts-grab-of-driver-earnings/"));
+                                default -> {
+                                }
+                        }
+                } else if ("doordash".equals(app)) {
+                        switch (citySlug) {
+                                case "denver" -> notes.add(new DriverFieldNote(
+                                                "Denver pattern",
+                                                "Centennial and suburb runs can pull the average down",
+                                                "Denver-area dasher discussion specifically calls out a drop from stronger 2024 hourly results to roughly $12-$15/hr in Centennial-style suburban work. That is why the Denver estimate needs a mileage and zone check before a driver trusts it.",
+                                                "Denver DoorDash driver discussion",
+                                                "https://www.reddit.com/r/doordash_drivers/comments/1j4uofw/is_anybody_dashing_around_denver_area_if_yes_how/"));
+                                case "atlanta" -> notes.add(new DriverFieldNote(
+                                                "Georgia pattern",
+                                                "Active time can hide the real dash-time rate",
+                                                "A Georgia dasher earnings post showed $560.31 across 74 deliveries with 19h 24m active time and 23h 39m dash time. Atlanta drivers should compare both clocks before deciding whether a shift really clears the local net target.",
+                                                "Georgia DoorDash active-time post",
+                                                "https://www.reddit.com/r/DoorDashDrivers/comments/1r0oqfo/560_week_in_ga_not_atlanta_74_del_19_active_hrs/"));
+                                case "dallas" -> notes.add(new DriverFieldNote(
+                                                "Dallas pattern",
+                                                "DFW zone crossings make home-to-home miles matter",
+                                                "Dallas/DFW delivery discussions repeatedly come back to dollar-per-mile discipline and zone crossing. In a spread-out metro, count miles from home to home, not only the restaurant-to-dropoff route.",
+                                                "DoorDash dollar-per-mile discussion",
+                                                "https://www.reddit.com/r/doordash_drivers/comments/1s39uhj/whats_your_minimum_mile_to_accept_doordash_orders/"));
+                                default -> {
+                                }
+                        }
+                }
         }
 
         private Map<String, List<CityData>> buildCoverageByRegion(List<CityData> coveredCities) {
@@ -647,11 +1178,11 @@ public class ProgrammaticSeoController {
                 Map<String, Object> itemList = new LinkedHashMap<>();
                 itemList.put("@context", "https://schema.org");
                 itemList.put("@type", "ItemList");
-                itemList.put("name", String.format("%s city net pay calculator ranking in %d", appName,
+                itemList.put("name", String.format("%s driver earnings ranking by city in %d", appName,
                                 java.time.LocalDate.now().getYear()));
                 itemList.put("description",
                                 String.format(
-                                                "Ranking of US city pay calculators based on estimated %s net hourly pay after mileage and self-employment tax assumptions.",
+                                                "Ranking of US cities based on estimated %s driver earnings after mileage and self-employment tax assumptions.",
                                                 appName));
                 itemList.put("itemListElement", itemListElements);
                 return toJsonLd(itemList);
@@ -661,20 +1192,20 @@ public class ProgrammaticSeoController {
                         int currentYear) {
                 CityRankingDto topCity = rankedCities.get(0);
                 int rankedCount = rankedCities.size();
-                String q1 = String.format("What is the strongest %s city pay calculator baseline in %d?",
+                String q1 = String.format("What is the highest-paying city for %s drivers in %d?",
                                 appName,
                                 currentYear);
                 String a1 = String.format(
-                                "In GigVerdict's current net pay calculator ranking, %s leads at about $%.2f per hour net after mileage and self-employment tax assumptions.",
+                                "In GigVerdict's current after-expenses earnings ranking, %s leads at about $%.2f per hour net after mileage and self-employment tax assumptions.",
                                 topCity.city().getCityName(),
                                 topCity.netHourly());
-                String q2 = String.format("Is this a coverage list or a calculator ranking for %s?", appName);
+                String q2 = String.format("Is this a coverage list or an earnings ranking for %s?", appName);
                 String a2 = app.equals("uber")
-                                ? "This page is a net pay calculator ranking. Use the Uber coverage guide and Uber's official city directory when your question is whether a market is active."
-                                : "This page is a net pay calculator ranking. Use the DoorDash availability guide and DoorDash's Dasher signup flow when your question is whether you can dash in a market.";
-                String q3 = String.format("How many %s city calculators are ranked here?", appName);
+                                ? "This page is an after-expenses earnings ranking. Use the Uber coverage guide and Uber's official city directory when your question is whether a market is active."
+                                : "This page is an after-expenses earnings ranking. Use the DoorDash availability guide and DoorDash's Dasher signup flow when your question is whether you can dash in a market.";
+                String q3 = String.format("How many %s city earnings pages are ranked here?", appName);
                 String a3 = String.format(
-                                "GigVerdict currently ranks %d U.S. city calculators for %s and links each market to a deeper calculator-backed city page.",
+                                "GigVerdict currently ranks %d U.S. city earnings pages for %s and links each market to a deeper page with an adjustable calculator.",
                                 rankedCount,
                                 appName);
 
@@ -694,9 +1225,9 @@ public class ProgrammaticSeoController {
                         long indexedCityCount) {
                 List<Map<String, Object>> breadcrumbItems = new ArrayList<>();
                 breadcrumbItems.add(buildBreadcrumbItem(1, "Home", AppConstants.BASE_URL + "/"));
-                breadcrumbItems.add(buildBreadcrumbItem(2, "City Pay Calculators", AppConstants.BASE_URL + "/salary/directory"));
+                breadcrumbItems.add(buildBreadcrumbItem(2, "City Earnings Reports", AppConstants.BASE_URL + "/salary/directory"));
                 breadcrumbItems.add(buildBreadcrumbItem(3,
-                                String.format("%s City Pay Calculators", appName),
+                                String.format("%s Driver Earnings by City", appName),
                                 String.format("%s/salary/%s", AppConstants.BASE_URL, app)));
 
                 Map<String, Object> breadcrumb = new LinkedHashMap<>();
@@ -720,15 +1251,15 @@ public class ProgrammaticSeoController {
 
                 Map<String, Object> itemList = new LinkedHashMap<>();
                 itemList.put("@type", "ItemList");
-                itemList.put("name", String.format("%s city pay calculators", appName));
+                itemList.put("name", String.format("%s driver earnings by city", appName));
                 itemList.put("itemListOrder", "https://schema.org/ItemListOrderDescending");
                 itemList.put("numberOfItems", itemListElements.size());
                 itemList.put("itemListElement", itemListElements);
 
                 CityRankingDto topCity = topCities.get(0);
-                String q1 = String.format("How do %s city pay calculators compare in 2026?", appName);
+                String q1 = String.format("How do %s driver earnings compare by city in 2026?", appName);
                 String a1 = String.format(
-                                "GigVerdict currently tracks %d %s city pay calculators. In the current side-hustle ranking, %s leads at about $%.2f per hour net after mileage and self-employment tax assumptions. Open any city calculator to compare part-time, side-hustle, and full-time scenarios.",
+                                "GigVerdict currently tracks %d %s city earnings pages. In the current side-hustle ranking, %s leads at about $%.2f per hour net after mileage and self-employment tax assumptions. Open any city page to compare part-time, side-hustle, and full-time scenarios.",
                                 indexedCityCount,
                                 appName,
                                 topCity.city().getCityName(),
@@ -736,11 +1267,11 @@ public class ProgrammaticSeoController {
 
                 String q2 = String.format("Is this an official %s coverage list?", appName);
                 String a2 = app.equals("uber")
-                                ? "No. This hub compares calculator-based pay estimates by city. Use the separate Uber coverage guide and Uber's official city directory to confirm that a market is active before assuming coverage."
-                                : "No. This hub compares calculator-based pay estimates by city and is not an official coverage directory. Check DoorDash's own onboarding flow or local app availability to confirm that a market is active.";
+                                ? "No. This hub compares estimated driver earnings by city. Use the separate Uber coverage guide and Uber's official city directory to confirm that a market is active before assuming coverage."
+                                : "No. This hub compares estimated driver earnings by city and is not an official coverage directory. Check DoorDash's own onboarding flow or local app availability to confirm that a market is active.";
 
-                String q3 = String.format("What does each %s city calculator include?", appName);
-                String a3 = "Each city calculator includes part-time, side-hustle, and full-time earnings scenarios, mileage-based cost assumptions, quarterly tax context, and links to the app calculator so you can adjust the numbers for your own routine.";
+                String q3 = String.format("What does each %s city earnings page include?", appName);
+                String a3 = "Each city earnings page includes part-time, side-hustle, and full-time earnings scenarios, mileage-based cost assumptions, quarterly tax context, and links to the app calculator so you can adjust the numbers for your own routine.";
 
                 Map<String, Object> faqPage = new LinkedHashMap<>();
                 faqPage.put("@type", "FAQPage");
@@ -756,7 +1287,7 @@ public class ProgrammaticSeoController {
         }
 
         private String buildCityFaqJsonLd(String appName, CityData city, CityScenario featuredScenario) {
-                String q1 = String.format("What does the %s %s pay calculator estimate after expenses in 2026?",
+                String q1 = String.format("How much do %s drivers make in %s after expenses in 2026?",
                                 appName,
                                 city.getCityName());
                 String a1 = String.format(
@@ -779,7 +1310,7 @@ public class ProgrammaticSeoController {
                                 featuredScenario.getNetHourly(),
                                 viability);
 
-                String q3 = String.format("How does this %s pay calculator work?", appName);
+                String q3 = String.format("How are these %s driver earnings calculated?", appName);
                 String a3 = String.format(
                                 "We estimate net profit by starting with gross income levels typical for %s markets, then subtracting fuel costs ($%.2f/gal local average), vehicle depreciation (using the 2026 IRS standard mileage rate of $0.725/mile), and estimated self-employment taxes (15.3%%). The result is your estimated take-home pay per hour.",
                                 city.getMarketTier(),
@@ -794,6 +1325,11 @@ public class ProgrammaticSeoController {
                                                 "For %s driving conditions, a Toyota Prius (57 MPG) or Camry Hybrid (51 MPG) offers strong cost-per-mile performance. If SUV capacity is required for XL rides, the RAV4 Hybrid (39 MPG) is typically the most efficient option.",
                                                 city.getCityName());
 
+                String q4b = String.format("What should I check before trusting this %s earnings estimate?", appName);
+                String a4b = String.format(
+                                "Check total miles, active time versus online or dash time, dollar-per-mile floor, tips, and whether your shift matches the strongest local windows. The driver field notes on this page show why the $%.2f/hr net estimate should be treated as a planning baseline, not a guaranteed payout.",
+                                featuredScenario.getNetHourly());
+
                 String q5 = String.format("How much should a %s driver in %s save for taxes?",
                                 appName,
                                 city.getCityName());
@@ -806,7 +1342,7 @@ public class ProgrammaticSeoController {
                                 featuredScenario.getGrossWeekly(),
                                 quarterlyTax);
 
-                String q6 = String.format("Why does the %s calculator estimate for %s differ from other cities?",
+                String q6 = String.format("Why do %s driver earnings in %s differ from other cities?",
                                 appName,
                                 city.getCityName());
                 String trafficDescriptor = city.isHighTraffic()
@@ -839,6 +1375,7 @@ public class ProgrammaticSeoController {
                                 buildFaqQuestion(q2, a2),
                                 buildFaqQuestion(q3, a3),
                                 buildFaqQuestion(q4, a4),
+                                buildFaqQuestion(q4b, a4b),
                                 buildFaqQuestion(q5, a5),
                                 buildFaqQuestion(q6, a6),
                                 buildFaqQuestion(q7, a7));
@@ -854,15 +1391,15 @@ public class ProgrammaticSeoController {
                 String q1 = String.format("Is this an official %s coverage list?", appName);
                 String a1 = "No. This page is a navigation guide. " + officialCoverageAnswer;
 
-                String q2 = String.format("How many %s city pay calculators does GigVerdict cover right now?", appName);
+                String q2 = String.format("How many %s city earnings pages does GigVerdict cover right now?", appName);
                 String a2 = String.format(
-                                "GigVerdict currently links %d covered city pay calculators for %s. Each calculator focuses on net hourly earnings after mileage, fuel, and self-employment tax assumptions.",
+                                "GigVerdict currently links %d covered city earnings pages for %s. Each page focuses on net hourly earnings after mileage, fuel, and self-employment tax assumptions.",
                                 coveredCityCount,
                                 appName);
 
                 String q3 = String.format("What should I do after I confirm my %s city is active?", appName);
                 String a3 = String.format(
-                                "Open the matching GigVerdict city pay calculator to compare estimated take-home pay, then review the best-cities ranking if you are deciding between markets or planning a move for %s work.",
+                                "Open the matching GigVerdict city earnings page to compare estimated take-home pay, then review the best-cities ranking if you are deciding between markets or planning a move for %s work.",
                                 appName);
 
                 List<Map<String, Object>> mainEntity = List.of(
@@ -898,7 +1435,7 @@ public class ProgrammaticSeoController {
 
                 String title = String.format("Where You Can %s for %s in the US (%s)", coverageVerb, appName, monthYear);
                 String description = String.format(
-                                "Verify current %s availability, then compare %d city pay calculators for estimated net hourly pay after expenses. Updated %s.",
+                                "Verify current %s availability, then compare %d city earnings pages for estimated net hourly pay after expenses. Updated %s.",
                                 appName,
                                 coveredCities.size(),
                                 monthYear);
@@ -969,10 +1506,10 @@ public class ProgrammaticSeoController {
                 breadcrumb.put("@type", "BreadcrumbList");
                 breadcrumb.put("itemListElement", List.of(
                                 buildBreadcrumbItem(1, "Home", AppConstants.BASE_URL + "/"),
-                                buildBreadcrumbItem(2, "City Pay Calculators",
+                                buildBreadcrumbItem(2, "City Earnings Reports",
                                                 AppConstants.BASE_URL + "/salary/directory"),
                                 buildBreadcrumbItem(3,
-                                                String.format("%s %s Pay Calculator", city.getCityName(), appName),
+                                                String.format("%s %s Driver Earnings", city.getCityName(), appName),
                                                 canonicalUrl)));
 
                 Map<String, Object> offer = new LinkedHashMap<>();
@@ -982,7 +1519,7 @@ public class ProgrammaticSeoController {
 
                 Map<String, Object> webApplication = new LinkedHashMap<>();
                 webApplication.put("@type", "WebApplication");
-                webApplication.put("name", String.format("%s %s, %s Pay Calculator",
+                webApplication.put("name", String.format("%s %s, %s Driver Earnings Estimate",
                                 appName,
                                 city.getCityName(),
                                 city.getState()));
@@ -992,7 +1529,7 @@ public class ProgrammaticSeoController {
                 webApplication.put("url", canonicalUrl);
                 webApplication.put("sameAs", AppConstants.BASE_URL + calculatorUrl);
                 webApplication.put("description", String.format(
-                                "Prefilled %s city pay calculator for %s, %s with a baseline estimate of $%.2f per hour net after mileage and self-employment tax.",
+                                "Estimated %s driver earnings for %s, %s with a baseline of $%.2f per hour net after mileage and self-employment tax plus a prefilled calculator link.",
                                 appName,
                                 city.getCityName(),
                                 city.getState(),
@@ -1024,14 +1561,14 @@ public class ProgrammaticSeoController {
                 Map<String, Object> crumb1 = new LinkedHashMap<>();
                 crumb1.put("@type", "ListItem");
                 crumb1.put("position", 1);
-                crumb1.put("name", "City Pay Calculators");
+                crumb1.put("name", "City Earnings Reports");
                 crumb1.put("item", AppConstants.BASE_URL + "/salary/directory");
                 breadcrumbItems.add(crumb1);
 
                 Map<String, Object> crumb2 = new LinkedHashMap<>();
                 crumb2.put("@type", "ListItem");
                 crumb2.put("position", 2);
-                crumb2.put("name", String.format("%s %s Pay Calculator", city.getCityName(), appName));
+                crumb2.put("name", String.format("%s %s Driver Earnings", city.getCityName(), appName));
                 crumb2.put("item", AppConstants.BASE_URL + parentPageUrl);
                 breadcrumbItems.add(crumb2);
 
@@ -1052,7 +1589,7 @@ public class ProgrammaticSeoController {
 
                 Map<String, Object> webApplication = new LinkedHashMap<>();
                 webApplication.put("@type", "WebApplication");
-                webApplication.put("name", String.format("%s %s %s Calculator",
+                webApplication.put("name", String.format("%s %s %s Earnings Estimate",
                                 appName,
                                 city.getCityName(),
                                 workLevel.getDisplayName()));
@@ -1062,7 +1599,7 @@ public class ProgrammaticSeoController {
                 webApplication.put("url", canonicalUrl);
                 webApplication.put("sameAs", AppConstants.BASE_URL + calculatorUrl);
                 webApplication.put("description", String.format(
-                                "Prefilled %s calculator for %s %s driving with a $%.2f per hour net baseline.",
+                                "Estimated %s earnings for %s %s driving with a $%.2f per hour net baseline and a prefilled calculator link.",
                                 appName,
                                 workLevel.getDisplayName().toLowerCase(java.util.Locale.US),
                                 city.getCityName(),
@@ -1078,7 +1615,7 @@ public class ProgrammaticSeoController {
                 Map<String, Object> q1 = new LinkedHashMap<>();
                 q1.put("@type", "Question");
                 q1.put("name",
-                                String.format("How much does the %s %s calculator estimate for %s?",
+                                String.format("How much does a %s %s driver make in %s?",
                                                 workLevel.getDisplayName(),
                                                 appName,
                                                 city.getCityName()));

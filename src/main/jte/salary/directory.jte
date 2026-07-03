@@ -5,8 +5,8 @@
 @template.layout.main(
     noIndex = noIndex,
     seoMeta = new SeoMeta(
-        "Uber and DoorDash City Pay Calculators: US Directory",
-        "Browse Uber and DoorDash city pay calculators, then jump into compare pages, app hubs, rankings, and calculator-based city estimates after expenses.",
+        "Uber and DoorDash Driver Earnings by City: US Directory",
+        "Browse Uber and DoorDash city earnings pages, then jump into compare pages, app hubs, rankings, and calculator-based estimates after expenses.",
         com.gigwager.util.AppConstants.BASE_URL + "/salary/directory",
         com.gigwager.util.AppConstants.BASE_URL + "/og-image.jpg"
     ),
@@ -16,11 +16,11 @@
             <!-- Hero -->
             <div class="bg-slate-900 py-20 text-center px-6">
                 <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
-                    Uber and DoorDash <span class="text-emerald-400">City Pay Calculators</span>
+                    Uber and DoorDash <span class="text-emerald-400">Driver Earnings by City</span>
                 </h1>
                 <p class="text-lg text-slate-400 max-w-2xl mx-auto">
-                    Browse the full city calculator directory when you want a market list first, then jump into compare pages, app hubs,
-                    rankings, or city calculators for deeper after-expenses analysis.
+                    Browse the full city earnings directory when you want a market list first, then jump into compare pages, app hubs,
+                    rankings, or city pages for deeper after-expenses analysis.
                 </p>
             </div>
 
@@ -39,8 +39,32 @@
                             <p class="text-sm text-slate-600">Use this first if your question is whether you can dash in a market before comparing city earnings.</p>
                         </a>
                     </div>
+
+                    <section class="bg-slate-900 rounded-2xl p-6 mb-8 text-white">
+                        <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-300 mb-2">Priority earnings reports</p>
+                        <h2 class="text-2xl font-black mb-3">Start with the pages that have driver evidence</h2>
+                        <p class="text-sm text-slate-300 mb-5">These pages are the fastest path into city-specific field notes, active-time checks, and after-expenses estimates.</p>
+                        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
+                            <a href="/salary/doordash/denver/side-hustle" class="rounded-xl bg-white/5 border border-white/10 px-4 py-3 hover:bg-white/10 transition-colors">
+                                <strong class="block">DoorDash Denver side-hustle</strong>
+                                <span class="text-xs text-slate-300">Suburb mileage check</span>
+                            </a>
+                            <a href="/salary/doordash/phoenix" class="rounded-xl bg-white/5 border border-white/10 px-4 py-3 hover:bg-white/10 transition-colors">
+                                <strong class="block">DoorDash Phoenix</strong>
+                                <span class="text-xs text-slate-300">Heat and spread check</span>
+                            </a>
+                            <a href="/salary/uber/chicago" class="rounded-xl bg-white/5 border border-white/10 px-4 py-3 hover:bg-white/10 transition-colors">
+                                <strong class="block">Uber Chicago</strong>
+                                <span class="text-xs text-slate-300">Airport and bar-close check</span>
+                            </a>
+                            <a href="/best-cities/doordash" class="rounded-xl bg-white/5 border border-white/10 px-4 py-3 hover:bg-white/10 transition-colors">
+                                <strong class="block">DoorDash highest-paying cities</strong>
+                                <span class="text-xs text-slate-300">Ranking intent page</span>
+                            </a>
+                        </div>
+                    </section>
                     
-                    <h2 class="text-2xl font-bold text-slate-900 mb-8">Browse City Pay Calculators</h2>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-8">Browse City Earnings Reports</h2>
                     
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         @for(var city : CityData.values())
@@ -77,11 +101,11 @@
                                     <div class="grid grid-cols-2 gap-2">
                                         <a href="/salary/uber/${city.getSlug()}" 
                                            class="text-center px-3 py-2 bg-slate-900 text-white text-sm font-semibold rounded-lg hover:bg-slate-800 transition">
-                                            Uber Calculator
+                                            Uber Earnings
                                         </a>
                                         <a href="/salary/doordash/${city.getSlug()}" 
                                            class="text-center px-3 py-2 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition">
-                                            DoorDash Calculator
+                                            DoorDash Earnings
                                         </a>
                                     </div>
                                     @if(comparableCitySlugs.contains(city.getSlug()))

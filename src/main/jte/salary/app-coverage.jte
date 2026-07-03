@@ -44,12 +44,12 @@
                     <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
                         <p class="text-sm font-semibold uppercase tracking-wide text-slate-500 mb-2">Covered calculators</p>
                         <p class="text-2xl font-black text-emerald-600 mb-2">${coveredCityCount} city pages</p>
-                        <p class="text-sm text-slate-600">Each city calculator estimates net hourly pay after mileage, fuel, and self-employment tax assumptions.</p>
+                        <p class="text-sm text-slate-600">Each city earnings page estimates net hourly pay after mileage, fuel, and self-employment tax assumptions.</p>
                     </div>
                     <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
                         <p class="text-sm font-semibold uppercase tracking-wide text-slate-500 mb-2">Best next step</p>
                         <p class="text-2xl font-black text-slate-900 mb-2">Verify first, compare second</p>
-                        <p class="text-sm text-slate-600">Check official availability, then open your city calculator or the net pay ranking.</p>
+                        <p class="text-sm text-slate-600">Check official availability, then open your city earnings page or the net pay ranking.</p>
                     </div>
                 </div>
 
@@ -79,7 +79,7 @@
                         <div class="space-y-3">
                             <a href="/salary/${app}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_coverage_hub', 'event_label': 'open_${app}_pay_reports' })" class="flex items-center justify-between rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
                                 <span>
-                                    <strong class="block text-slate-900">All ${appName} city calculators</strong>
+                                    <strong class="block text-slate-900">All ${appName} city earnings pages</strong>
                                     <span class="text-sm text-slate-600">Browse our city hub for estimated net hourly pay.</span>
                                 </span>
                                 <span class="font-bold text-emerald-700">Open</span>
@@ -93,7 +93,7 @@
                             </a>
                             <a href="/salary/directory" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_coverage_hub', 'event_label': 'open_full_city_directory' })" class="flex items-center justify-between rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
                                 <span>
-                                    <strong class="block text-slate-900">Full city calculator directory</strong>
+                                    <strong class="block text-slate-900">Full city earnings directory</strong>
                                     <span class="text-sm text-slate-600">Jump straight to any covered market across both apps.</span>
                                 </span>
                                 <span class="font-bold text-emerald-700">Browse</span>
@@ -111,7 +111,7 @@
                         </div>
                         <div class="rounded-2xl bg-white/10 p-5 border border-white/10">
                             <p class="text-xs uppercase tracking-[0.2em] text-slate-300 mb-2">Step 2</p>
-                            <p class="font-semibold">Open the matching GigVerdict city pay calculator for your market.</p>
+                            <p class="font-semibold">Open the matching GigVerdict city earnings page for your market.</p>
                         </div>
                         <div class="rounded-2xl bg-white/10 p-5 border border-white/10">
                             <p class="text-xs uppercase tracking-[0.2em] text-slate-300 mb-2">Step 3</p>
@@ -124,7 +124,7 @@
                     <div class="flex items-end justify-between gap-4 mb-6">
                         <div>
                             <h2 class="text-3xl font-black text-slate-900">Covered ${appName} markets by region</h2>
-                            <p class="text-slate-600 mt-2">These are the city pay calculators we currently publish. Availability still needs to be verified in the official ${appName} flow.</p>
+                            <p class="text-slate-600 mt-2">These are the city earnings pages we currently publish. Availability still needs to be verified in the official ${appName} flow.</p>
                         </div>
                     </div>
                     <div class="grid lg:grid-cols-2 gap-6">
@@ -159,18 +159,18 @@
                         </div>
                         <div>
                             <h3 class="text-xl font-bold text-slate-900 mb-2">Does GigVerdict cover every city where ${appName} operates?</h3>
-                            <p class="text-slate-600">No. We currently publish ${coveredCityCount} city pay calculators. Our coverage focuses on major U.S. markets where we can offer a useful earnings estimate.</p>
+                            <p class="text-slate-600">No. We currently publish ${coveredCityCount} city earnings pages. Our coverage focuses on major U.S. markets where we can offer a useful earnings estimate.</p>
                         </div>
                         <div>
                             <h3 class="text-xl font-bold text-slate-900 mb-2">What should I read after I confirm my city is active?</h3>
-                            <p class="text-slate-600">Open the matching city pay calculator first. If you are comparing multiple markets, use the best-cities ranking to see which locations produce stronger estimated net pay.</p>
+                            <p class="text-slate-600">Open the matching city earnings page first. If you are comparing multiple markets, use the best-cities ranking to see which locations produce stronger estimated net pay.</p>
                         </div>
                     </div>
                 </section>
 
                 <div class="text-center">
                     <a href="/salary/${app}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_coverage_hub', 'event_label': 'browse_all_${app}_pay_reports_footer' })" class="inline-flex items-center justify-center px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-lg shadow-emerald-600/20 transition-colors">
-                        Browse all ${appName} city calculators
+                        Browse all ${appName} city earnings
                     </a>
                 </div>
             </div>

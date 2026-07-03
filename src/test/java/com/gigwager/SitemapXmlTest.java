@@ -60,6 +60,10 @@ public class SitemapXmlTest {
                 assertTrue(xmlContent.contains("/doordash"), "Sitemap should contain /doordash");
                 assertTrue(xmlContent.contains("/uber/where-you-can-drive"),
                                 "Sitemap should contain the Uber coverage guide");
+                assertTrue(xmlContent.contains("/salary/doordash/denver/after-gas"),
+                                "Sitemap should contain city intent pages");
+                assertTrue(xmlContent.contains("/salary/uber/chicago/active-time"),
+                                "Sitemap should contain Uber city intent pages");
 
                 assertTrue(xmlContent.contains("/taxes"), "Sitemap should contain /taxes");
                 assertTrue(xmlContent.contains("/insurance"), "Sitemap should contain /insurance");

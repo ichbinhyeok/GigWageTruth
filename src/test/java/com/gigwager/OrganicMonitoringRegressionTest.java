@@ -167,7 +167,8 @@ public class OrganicMonitoringRegressionTest {
                 "/uber/where-you-can-drive",
                 "/best-cities/doordash",
                 "/salary/doordash/denver",
-                "/salary/doordash/denver/side-hustle");
+                "/salary/doordash/denver/side-hustle",
+                "/salary/doordash/denver/after-gas");
         List<String> failures = new ArrayList<>();
 
         for (String path : paths) {
@@ -207,34 +208,122 @@ public class OrganicMonitoringRegressionTest {
                 "City report hero should expose a prefilled calculator CTA");
         assertTrue(html.contains("/uber?gross="),
                 "City report should link to the app calculator with prefilled query params");
-        assertTrue(html.contains("Prefilled Calculator Result"),
-                "City report hero should lead with the calculator result, not a report-only intro");
+        assertTrue(html.contains("Estimated Net Earnings Result"),
+                "City report hero should lead with the earnings result, not a generic calculator intro");
         assertTrue(html.contains("\"@type\":\"WebApplication\""),
                 "City report JSON-LD should expose calculator/tool identity");
         assertTrue(html.contains("estimate_quarterly_taxes"),
                 "City report hero should expose a tracked tax estimator CTA");
         assertTrue(html.contains("compare_best_cities"),
                 "City report hero should expose a tracked best-cities CTA");
+        assertTrue(html.contains("Driver field notes"),
+                "City report should expose source-backed driver field notes");
+        assertTrue(html.contains("NerdWallet Uber pay test"),
+                "City report field notes should include app-specific field-test evidence");
     }
 
     @Test
-    public void prioritySeoPagesShouldExposeCalculatorFirstLanguage() throws Exception {
+    public void priorityCityPagesShouldExposeCitySpecificDriverEvidence() throws Exception {
+        MvcResult denverResult = mockMvc.perform(get("/salary/doordash/denver/side-hustle"))
+                .andExpect(status().isOk())
+                .andReturn();
+        String denverHtml = denverResult.getResponse().getContentAsString();
+        assertTrue(denverHtml.contains("Denver pattern"),
+                "Denver work-level page should expose city-specific DoorDash evidence");
+        assertTrue(denverHtml.contains("Denver DoorDash driver discussion"),
+                "Denver work-level page should link the city-specific source");
+
+        MvcResult chicagoResult = mockMvc.perform(get("/salary/uber/chicago"))
+                .andExpect(status().isOk())
+                .andReturn();
+        String chicagoHtml = chicagoResult.getResponse().getContentAsString();
+        assertTrue(chicagoHtml.contains("Chicago pattern"),
+                "Chicago city page should expose city-specific Uber evidence");
+        assertTrue(chicagoHtml.contains("AskChicago Uber/Lyft summer thread"),
+                "Chicago city page should link the city-specific source");
+    }
+
+    @Test
+    public void priorityRecoveryUrlsShouldHaveStrongInternalLinks() throws Exception {
+        MvcResult appHubResult = mockMvc.perform(get("/salary/doordash"))
+                .andExpect(status().isOk())
+                .andReturn();
+        String appHubHtml = appHubResult.getResponse().getContentAsString();
+        assertTrue(appHubHtml.contains("/salary/doordash/denver/side-hustle"),
+                "DoorDash app hub should directly link the Denver side-hustle recovery URL");
+
+        MvcResult directoryResult = mockMvc.perform(get("/salary/directory"))
+                .andExpect(status().isOk())
+                .andReturn();
+        String directoryHtml = directoryResult.getResponse().getContentAsString();
+        assertTrue(directoryHtml.contains("Priority earnings reports"),
+                "Directory should expose priority earnings reports");
+        assertTrue(directoryHtml.contains("/salary/uber/chicago"),
+                "Directory should directly link the Chicago Uber recovery URL");
+
+        MvcResult bestCitiesResult = mockMvc.perform(get("/best-cities/doordash"))
+                .andExpect(status().isOk())
+                .andReturn();
+        String bestCitiesHtml = bestCitiesResult.getResponse().getContentAsString();
+        assertTrue(bestCitiesHtml.contains("/salary/doordash/denver/side-hustle"),
+                "Best-cities table should link side-hustle detail pages");
+    }
+
+    @Test
+    public void cityIntentPagesShouldRenderLongTailEarningsAnswers() throws Exception {
+        MvcResult afterGasResult = mockMvc.perform(get("/salary/doordash/denver/after-gas"))
+                .andExpect(status().isOk())
+                .andReturn();
+        String afterGasHtml = afterGasResult.getResponse().getContentAsString();
+        assertTrue(afterGasHtml.contains("DoorDash Denver After Gas"),
+                "After-gas intent page should expose intent-matched H1 language");
+        assertTrue(afterGasHtml.contains("Direct answer"),
+                "City intent page should lead with a direct answer section");
+        assertTrue(afterGasHtml.contains("Data-backed checks"),
+                "City intent page should include intent-specific metric cards");
+        assertTrue(afterGasHtml.contains("Estimated weekly fuel"),
+                "After-gas page should include after-gas metric cards");
+        assertTrue(afterGasHtml.contains("Evidence patterns"),
+                "City intent page should include source-backed evidence-pattern cards");
+        assertTrue(afterGasHtml.contains("IRS 2026 mileage rate"),
+                "After-gas page should cite the 2026 mileage benchmark");
+        assertTrue(afterGasHtml.contains("Driver field notes"),
+                "City intent page should reuse driver field evidence");
+        assertTrue(afterGasHtml.contains("/salary/doordash/denver/per-mile"),
+                "City intent page should internally link related intent pages");
+
+        MvcResult activeTimeResult = mockMvc.perform(get("/salary/uber/chicago/active-time"))
+                .andExpect(status().isOk())
+                .andReturn();
+        String activeTimeHtml = activeTimeResult.getResponse().getContentAsString();
+        assertTrue(activeTimeHtml.contains("Uber Chicago Active Time"),
+                "Active-time intent page should expose intent-matched H1 language");
+        assertTrue(activeTimeHtml.contains("Chicago pattern"),
+                "Active-time intent page should include city-specific field evidence");
+        assertTrue(activeTimeHtml.contains("All-in hourly stress test"),
+                "Active-time page should include waiting-time stress-test metrics");
+        assertTrue(activeTimeHtml.contains("Uber earnings guide"),
+                "Active-time page should cite official platform clock/source material");
+    }
+
+    @Test
+    public void prioritySeoPagesShouldExposeEarningsFirstLanguage() throws Exception {
         MvcResult cityResult = mockMvc.perform(get("/salary/doordash/phoenix"))
                 .andExpect(status().isOk())
                 .andReturn();
         Document cityDoc = Jsoup.parse(cityResult.getResponse().getContentAsString(),
                 AppConstants.BASE_URL + "/salary/doordash/phoenix");
-        assertTrue(cityDoc.title().contains("Pay Calculator"),
-                "Priority city page title should lead with calculator framing");
-        assertTrue(firstH1(cityDoc).contains("Pay Calculator"),
-                "Priority city page H1 should lead with calculator framing");
+        assertTrue(cityDoc.title().contains("Driver Earnings"),
+                "Priority city page title should lead with earnings framing");
+        assertTrue(firstH1(cityDoc).contains("Driver Earnings"),
+                "Priority city page H1 should lead with earnings framing");
 
         MvcResult workLevelResult = mockMvc.perform(get("/salary/doordash/phoenix/side-hustle"))
                 .andExpect(status().isOk())
                 .andReturn();
         String workLevelHtml = workLevelResult.getResponse().getContentAsString();
-        assertTrue(workLevelHtml.contains("DoorDash Phoenix Side-Hustle Calculator"),
-                "Priority work-level page should expose calculator framing");
+        assertTrue(workLevelHtml.contains("DoorDash Driver Earnings in Phoenix for Side-Hustle"),
+                "Priority work-level page should expose earnings framing");
         assertTrue(workLevelHtml.contains("open_prefilled_calculator"),
                 "Priority work-level page should link into the prefilled calculator");
 
@@ -243,10 +332,10 @@ public class OrganicMonitoringRegressionTest {
                 .andReturn();
         Document bestCitiesDoc = Jsoup.parse(bestCitiesResult.getResponse().getContentAsString(),
                 AppConstants.BASE_URL + "/best-cities/doordash");
-        assertTrue(bestCitiesDoc.title().contains("Net Pay Calculator Ranking"),
-                "Best-cities page title should frame the page as a calculator ranking");
-        assertTrue(firstH1(bestCitiesDoc).contains("Net Pay Calculator Ranking"),
-                "Best-cities page H1 should frame the page as a calculator ranking");
+        assertTrue(bestCitiesDoc.title().contains("Highest-Paying Cities"),
+                "Best-cities page title should frame the page as an earnings ranking");
+        assertTrue(firstH1(bestCitiesDoc).contains("Highest-Paying Cities"),
+                "Best-cities page H1 should frame the page as an earnings ranking");
 
         MvcResult blogResult = mockMvc.perform(get("/blog/multi-apping-guide"))
                 .andExpect(status().isOk())
