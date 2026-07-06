@@ -34,6 +34,7 @@ Primary source: Google Search Console (GA4 property access still pending)
   - `/salary/{app}/{city}/nights-weekends`
 - These pages translate money goals into hours, miles, gross needed, weekly target, and weekend mileage load, with separate evidence cards from driver discussions, IRS mileage data, platform pay-clock docs, and Gridwise-style driver datasets. App hubs and the salary directory now link directly into representative goal-based pages to speed crawl discovery.
 - Added another city-specific evidence pass to reduce the remaining pSEO moat gap versus winners like Wise, Zapier, Nomad List, and G2. New field-note coverage now includes Phoenix DoorDash slowdown/$100-day risk, San Jose Prop 22 active-time ambiguity, Minneapolis/St. Paul suburb strategy, Austin DoorDash zone/wait-time tradeoffs, Austin Uber selectivity, Seattle Uber saturation, Las Vegas event/Strip traffic, Orlando weekend/fuel checks, and New Orleans Uber tier/seasonality.
+- Added a reusable `Driver report intake` form to city, work-level, and intent pages. The form posts structured first-party reports through the existing Formspree pipeline with source URL, app, city, modeled net hourly, gross, miles, active hours, online/dash hours, shift window, and editorial-review status. This is the first step toward a defensible first-party data moat instead of relying only on external Reddit/forum evidence.
 - Recheck in Search Console after recrawl:
   - `/salary/doordash/phoenix`
   - `/salary/doordash/denver/side-hustle`

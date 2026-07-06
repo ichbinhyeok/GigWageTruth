@@ -164,6 +164,17 @@
             sectionClass = "max-w-5xl mx-auto px-6 mt-12 mb-0"
         )
 
+        @template.components.driver_report_form(
+            app = app,
+            appName = appName,
+            cityName = city.getCityName(),
+            citySlug = city.getSlug(),
+            sourcePage = "work_level_report",
+            sourcePath = "/salary/" + app + "/" + city.getSlug() + "/" + workLevel.getSlug(),
+            netHourly = scenario.getNetHourly(),
+            sectionClass = "max-w-5xl mx-auto px-6 mt-8 mb-0"
+        )
+
         <div class="max-w-4xl mx-auto px-6 py-16 space-y-12">
 
             @if("TYPE_B".equals(pageStructureType))

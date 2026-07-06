@@ -211,6 +211,16 @@
             driverFieldNotes = driverFieldNotes
         )
 
+        @template.components.driver_report_form(
+            app = app,
+            appName = appName,
+            cityName = city.getCityName(),
+            citySlug = city.getSlug(),
+            sourcePage = "city_report",
+            sourcePath = "/salary/" + app + "/" + city.getSlug(),
+            netHourly = featuredScenario.getNetHourly()
+        )
+
         <!-- Main Content -->
         <div class="max-w-4xl mx-auto px-6 py-16 space-y-16">
 

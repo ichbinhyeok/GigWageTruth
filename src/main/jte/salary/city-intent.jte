@@ -133,6 +133,17 @@
                 sectionClass = "max-w-4xl mx-auto"
             )
 
+            @template.components.driver_report_form(
+                app = app,
+                appName = appName,
+                cityName = city.getCityName(),
+                citySlug = city.getSlug(),
+                sourcePage = "city_intent_" + intentPage.getSlug(),
+                sourcePath = "/salary/" + app + "/" + city.getSlug() + "/" + intentPage.getSlug(),
+                netHourly = scenario.getNetHourly(),
+                sectionClass = "max-w-4xl mx-auto"
+            )
+
             <section class="bg-slate-50 rounded-3xl border border-slate-200 p-8">
                 <h2 class="text-2xl font-black text-slate-900 mb-4">Use the next page by intent</h2>
                 <div class="grid md:grid-cols-2 gap-3">

@@ -220,6 +220,12 @@ public class OrganicMonitoringRegressionTest {
                 "City report should expose source-backed driver field notes");
         assertTrue(html.contains("NerdWallet Uber pay test"),
                 "City report field notes should include app-specific field-test evidence");
+        assertTrue(html.contains("Share a real Uber shift in Miami"),
+                "City report should collect first-party driver reports");
+        assertTrue(html.contains("name=\"lead_type\" value=\"driver_earnings_report\""),
+                "Driver report form should identify report submissions");
+        assertTrue(html.contains("name=\"source_path\" value=\"/salary/uber/miami\""),
+                "Driver report form should preserve source URL context");
     }
 
     @Test
@@ -232,6 +238,10 @@ public class OrganicMonitoringRegressionTest {
                 "Denver work-level page should expose city-specific DoorDash evidence");
         assertTrue(denverHtml.contains("Denver DoorDash driver discussion"),
                 "Denver work-level page should link the city-specific source");
+        assertTrue(denverHtml.contains("Share a real DoorDash shift in Denver"),
+                "Work-level page should collect first-party driver reports");
+        assertTrue(denverHtml.contains("name=\"source_path\" value=\"/salary/doordash/denver/side-hustle\""),
+                "Work-level driver report form should preserve source URL context");
 
         MvcResult chicagoResult = mockMvc.perform(get("/salary/uber/chicago"))
                 .andExpect(status().isOk())
@@ -324,6 +334,10 @@ public class OrganicMonitoringRegressionTest {
                 "After-gas page should cite the 2026 mileage benchmark");
         assertTrue(afterGasHtml.contains("Driver field notes"),
                 "City intent page should reuse driver field evidence");
+        assertTrue(afterGasHtml.contains("Share a real DoorDash shift in Denver"),
+                "City intent page should collect first-party driver reports");
+        assertTrue(afterGasHtml.contains("name=\"source_page\" value=\"city_intent_after-gas\""),
+                "City intent driver report form should preserve intent context");
         assertTrue(afterGasHtml.contains("/salary/doordash/denver/per-mile"),
                 "City intent page should internally link related intent pages");
 
