@@ -241,6 +241,33 @@ public class OrganicMonitoringRegressionTest {
                 "Chicago city page should expose city-specific Uber evidence");
         assertTrue(chicagoHtml.contains("AskChicago Uber/Lyft summer thread"),
                 "Chicago city page should link the city-specific source");
+
+        MvcResult phoenixResult = mockMvc.perform(get("/salary/doordash/phoenix/100-a-day"))
+                .andExpect(status().isOk())
+                .andReturn();
+        String phoenixHtml = phoenixResult.getResponse().getContentAsString();
+        assertTrue(phoenixHtml.contains("Phoenix pattern"),
+                "Phoenix daily-target page should expose Phoenix-specific DoorDash evidence");
+        assertTrue(phoenixHtml.contains("Phoenix DoorDash slowdown discussion"),
+                "Phoenix daily-target page should cite the city-specific slowdown source");
+
+        MvcResult seattleResult = mockMvc.perform(get("/salary/uber/seattle"))
+                .andExpect(status().isOk())
+                .andReturn();
+        String seattleHtml = seattleResult.getResponse().getContentAsString();
+        assertTrue(seattleHtml.contains("Seattle pattern"),
+                "Seattle city page should expose Seattle-specific Uber evidence");
+        assertTrue(seattleHtml.contains("Seattle Uber weekly pay discussion"),
+                "Seattle city page should cite the city-specific Uber source");
+
+        MvcResult sanJoseResult = mockMvc.perform(get("/salary/doordash/san-jose"))
+                .andExpect(status().isOk())
+                .andReturn();
+        String sanJoseHtml = sanJoseResult.getResponse().getContentAsString();
+        assertTrue(sanJoseHtml.contains("San Jose pattern"),
+                "San Jose city page should expose California active-time evidence");
+        assertTrue(sanJoseHtml.contains("San Jose Prop 22 driver discussion"),
+                "San Jose city page should cite the Prop 22 source");
     }
 
     @Test

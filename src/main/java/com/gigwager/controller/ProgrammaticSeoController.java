@@ -1321,12 +1321,42 @@ public class ProgrammaticSeoController {
                                                 "Los Angeles driver reports often separate graveyard/airport strategy from daytime traffic. A hybrid or EV can make the same gross payout look better, while daytime congestion can push net hourly far below the headline number.",
                                                 "LA driver weekly earnings discussion",
                                                 "https://www.reddit.com/r/lyftdrivers/comments/1pl9p05/who_is_actually_still_making_1k_or_more_a_week/"));
+                                case "austin" -> notes.add(new DriverFieldNote(
+                                                "Austin pattern",
+                                                "Selective acceptance matters more than the city average",
+                                                "Austin driver discussion shows a wide gap between high-performing selective shifts and monthly averages after gas, mileage, insurance, and weak weeks. Treat strong weekend claims as a strategy signal, not the default baseline.",
+                                                "Austin Uber earnings discussion",
+                                                "https://www.reddit.com/r/uberdrivers/comments/1rlrq6h/1750_a_week_in_austin/"));
+                                case "seattle" -> notes.add(new DriverFieldNote(
+                                                "Seattle pattern",
+                                                "Saturation makes weekend testing more useful than old weekly claims",
+                                                "Seattle-area driver discussion points to lower weekly pay than prior years, more driver supply, and advice to test Friday/Saturday evening windows before assuming the market still supports old full-time numbers.",
+                                                "Seattle Uber weekly pay discussion",
+                                                "https://www.reddit.com/r/uberdrivers/comments/1ok6xj2/seattle_area_drivers_whats_your_average_weekly_pay/"));
+                                case "las-vegas" -> notes.add(new DriverFieldNote(
+                                                "Las Vegas pattern",
+                                                "Strip and event traffic can make active-hour screenshots misleading",
+                                                "Las Vegas driver discussion around the Strip and EDC-style event weekends shows why active-hour earnings need a traffic and dead-time check. High gross event windows can still depend on avoiding rides that burn too much time.",
+                                                "Las Vegas Uber driver event discussion",
+                                                "https://www.reddit.com/r/uberdrivers/comments/1tgdvff/vegas_drivers_tell_me_how_your_edc_weekend_has/"));
+                                case "orlando" -> notes.add(new DriverFieldNote(
+                                                "Orlando pattern",
+                                                "Weekend tourism demand needs a fuel and hour check",
+                                                "Orlando driver discussion reports strong Friday-Sunday gross totals, but the same thread immediately raises fuel cost. That is why the Orlando estimate should be checked against real weekend hours and mileage.",
+                                                "Orlando Uber weekend earnings discussion",
+                                                "https://www.reddit.com/r/uberdrivers/comments/somguu/how_much_are_uber_drivers_making_in_orlando_with/"));
                                 case "nashville" -> notes.add(new DriverFieldNote(
                                                 "Nashville pattern",
                                                 "Supply and event timing matter more than the city average",
                                                 "Recent Nashville driver discussion frames the market as sensitive to out-of-state driver supply, weak regulation, and app transparency differences. For this page, the city average should be treated as a starting point, not a promise for random weekday hours.",
                                                 "Nashville Uber/Lyft market discussion",
                                                 "https://www.reddit.com/r/uberdrivers/comments/1qwnmas/hows_the_nashville_uberlyft_market_right_now/"));
+                                case "new-orleans" -> notes.add(new DriverFieldNote(
+                                                "New Orleans pattern",
+                                                "Vehicle tier and season can change the loop",
+                                                "New Orleans driver discussion separates stronger XL/surge windows from lower-value X loops that add vehicle miles. Read the city estimate as an all-in baseline before assuming tourist demand alone makes every ride profitable.",
+                                                "New Orleans Uber tier discussion",
+                                                "https://www.reddit.com/r/uberdrivers/comments/9n86pd/do_you_make_more_money_driving_for_uber_xl_as/"));
                                 case "portland" -> notes.add(new DriverFieldNote(
                                                 "Portland pattern",
                                                 "Local policy debate is a pay signal",
@@ -1338,12 +1368,36 @@ public class ProgrammaticSeoController {
                         }
                 } else if ("doordash".equals(app)) {
                         switch (citySlug) {
+                                case "austin" -> notes.add(new DriverFieldNote(
+                                                "Austin pattern",
+                                                "Zone choice changes the DoorDash math",
+                                                "Austin dasher discussion separates Central Austin density, South Austin demand, and West Austin wait-time/mileage drag. This is why a city average needs a zone check before a driver trusts the estimate.",
+                                                "Austin DoorDash zone discussion",
+                                                "https://www.reddit.com/r/doordash_drivers/comments/1lspql5/austin_dashing/"));
                                 case "denver" -> notes.add(new DriverFieldNote(
                                                 "Denver pattern",
                                                 "Centennial and suburb runs can pull the average down",
                                                 "Denver-area dasher discussion specifically calls out a drop from stronger 2024 hourly results to roughly $12-$15/hr in Centennial-style suburban work. That is why the Denver estimate needs a mileage and zone check before a driver trusts it.",
                                                 "Denver DoorDash driver discussion",
                                                 "https://www.reddit.com/r/doordash_drivers/comments/1j4uofw/is_anybody_dashing_around_denver_area_if_yes_how/"));
+                                case "phoenix" -> notes.add(new DriverFieldNote(
+                                                "Phoenix pattern",
+                                                "$100 days can disappear when the market slows",
+                                                "Phoenix-area dasher discussion specifically frames the pain as not being able to make $100/day when order volume slows. For Phoenix, the $100/day page should be treated as a hours-and-miles plan, not a routine expectation.",
+                                                "Phoenix DoorDash slowdown discussion",
+                                                "https://www.reddit.com/r/doordash_drivers/comments/nb6oi7/doordash_been_slow_lately_its_been_hard_to_get/"));
+                                case "san-jose" -> notes.add(new DriverFieldNote(
+                                                "San Jose pattern",
+                                                "Prop 22 changes active-time math, not total waiting time",
+                                                "San Jose/California driver discussion shows confusion around minimum wage, active miles, and Prop 22 calculations. California pages need active-time and waiting-time checks instead of a simple gross screenshot.",
+                                                "San Jose Prop 22 driver discussion",
+                                                "https://www.reddit.com/r/doordash_drivers/comments/p5m8is/minimum_wage_ca/"));
+                                case "minneapolis" -> notes.add(new DriverFieldNote(
+                                                "Minneapolis pattern",
+                                                "Suburb strategy can beat downtown parking friction",
+                                                "Minneapolis/St. Paul dasher discussion points to stronger results in surrounding areas such as Saint Paul, Woodbury, White Bear, and Eagan, while warning that parking and dense-city friction can hurt downtown runs.",
+                                                "Minnesota DoorDash market discussion",
+                                                "https://www.reddit.com/r/doordash_drivers/comments/14u1c5e/does_anyone_dash_in_minnesota_i_moved_from/"));
                                 case "atlanta" -> notes.add(new DriverFieldNote(
                                                 "Georgia pattern",
                                                 "Active time can hide the real dash-time rate",

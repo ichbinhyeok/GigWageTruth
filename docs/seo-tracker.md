@@ -1,6 +1,6 @@
 # SEO Tracker
 
-Last updated: 2026-07-03
+Last updated: 2026-07-06
 Owner: GigWageTruth  
 Primary source: Google Search Console (GA4 property access still pending)
 
@@ -33,6 +33,7 @@ Primary source: Google Search Console (GA4 property access still pending)
   - `/salary/{app}/{city}/1000-a-month`
   - `/salary/{app}/{city}/nights-weekends`
 - These pages translate money goals into hours, miles, gross needed, weekly target, and weekend mileage load, with separate evidence cards from driver discussions, IRS mileage data, platform pay-clock docs, and Gridwise-style driver datasets. App hubs and the salary directory now link directly into representative goal-based pages to speed crawl discovery.
+- Added another city-specific evidence pass to reduce the remaining pSEO moat gap versus winners like Wise, Zapier, Nomad List, and G2. New field-note coverage now includes Phoenix DoorDash slowdown/$100-day risk, San Jose Prop 22 active-time ambiguity, Minneapolis/St. Paul suburb strategy, Austin DoorDash zone/wait-time tradeoffs, Austin Uber selectivity, Seattle Uber saturation, Las Vegas event/Strip traffic, Orlando weekend/fuel checks, and New Orleans Uber tier/seasonality.
 - Recheck in Search Console after recrawl:
   - `/salary/doordash/phoenix`
   - `/salary/doordash/denver/side-hustle`
