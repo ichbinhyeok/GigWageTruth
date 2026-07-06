@@ -64,6 +64,38 @@
                         </div>
                     </section>
 
+                    <section class="bg-emerald-50 rounded-2xl border border-emerald-100 p-6 mb-8">
+                        <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-700 mb-2">Hourly earnings quick wins</p>
+                        <h2 class="text-2xl font-black text-slate-900 mb-3">Uber city hourly earnings pages to check first</h2>
+                        <p class="text-sm text-slate-600 mb-5">These city pages answer the hourly earnings and rideshare driver earnings questions drivers usually compare before choosing a market.</p>
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+                            <a href="/salary/uber/atlanta" class="rounded-xl bg-white border border-emerald-100 px-4 py-3 hover:border-emerald-300 transition-colors">
+                                <strong class="block text-slate-900">Uber driver hourly earnings Atlanta GA 2026</strong>
+                                <span class="text-xs text-slate-600">After-expenses hourly pay estimate.</span>
+                            </a>
+                            <a href="/salary/uber/los-angeles" class="rounded-xl bg-white border border-emerald-100 px-4 py-3 hover:border-emerald-300 transition-colors">
+                                <strong class="block text-slate-900">Rideshare driver hourly earnings Los Angeles CA</strong>
+                                <span class="text-xs text-slate-600">Traffic, miles, and net hourly reality check.</span>
+                            </a>
+                            <a href="/salary/uber/austin" class="rounded-xl bg-white border border-emerald-100 px-4 py-3 hover:border-emerald-300 transition-colors">
+                                <strong class="block text-slate-900">Uber driver hourly earnings Austin TX 2026</strong>
+                                <span class="text-xs text-slate-600">Weekend and selective-shift planning.</span>
+                            </a>
+                            <a href="/salary/uber/chicago" class="rounded-xl bg-white border border-emerald-100 px-4 py-3 hover:border-emerald-300 transition-colors">
+                                <strong class="block text-slate-900">Uber driver hourly earnings Chicago IL 2026</strong>
+                                <span class="text-xs text-slate-600">Airport and bar-close earning checks.</span>
+                            </a>
+                            <a href="/salary/uber/houston" class="rounded-xl bg-white border border-emerald-100 px-4 py-3 hover:border-emerald-300 transition-colors">
+                                <strong class="block text-slate-900">Rideshare driver hourly earnings Houston TX</strong>
+                                <span class="text-xs text-slate-600">Mileage and spread-out market check.</span>
+                            </a>
+                            <a href="/salary/uber/orlando" class="rounded-xl bg-white border border-emerald-100 px-4 py-3 hover:border-emerald-300 transition-colors">
+                                <strong class="block text-slate-900">Uber driver earnings Orlando Florida 2026</strong>
+                                <span class="text-xs text-slate-600">Tourism demand and fuel-cost baseline.</span>
+                            </a>
+                        </div>
+                    </section>
+
                     <section class="bg-indigo-50 rounded-2xl border border-indigo-100 p-6 mb-8">
                         <p class="text-xs font-black uppercase tracking-[0.18em] text-indigo-700 mb-2">Daily click targets</p>
                         <h2 class="text-2xl font-black text-slate-900 mb-3">Goal-based earnings pages</h2>

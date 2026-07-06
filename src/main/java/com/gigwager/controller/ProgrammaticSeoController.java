@@ -93,9 +93,9 @@ public class ProgrammaticSeoController {
 
                 String coveragePath = app.equals("uber") ? "/uber/where-you-can-drive" : "/doordash/where-you-can-dash";
 
-                String title = String.format("%s Driver Earnings by City After Expenses", appName);
+                String title = String.format("%s Driver Earnings by City: Hourly Pay After Expenses", appName);
                 String description = String.format(
-                                "Compare estimated %s driver earnings across %d cities after mileage and self-employment tax. %s currently leads at about $%.2f/hr net. Updated %s.",
+                                "Compare estimated %s driver hourly earnings across %d cities after mileage and self-employment tax. %s currently leads at about $%.2f/hr net. Updated %s.",
                                 appName,
                                 indexedCityCount,
                                 topCity.city().getCityName(),
@@ -328,22 +328,24 @@ public class ProgrammaticSeoController {
                 // Build unique SEO meta
                 String appName = app.equals("uber") ? "Uber" : "DoorDash";
 
-                String title = String.format("%s Driver Earnings in %s %d: $%.2f/hr Net",
-                                appName, city.getCityName(), now.getYear(),
-                                featuredScenario.getNetHourly());
+                String title = String.format("%s Driver Earnings in %s: $%.2f/hr Net Hourly %d",
+                                appName, city.getCityName(),
+                                featuredScenario.getNetHourly(), now.getYear());
                 String description = String.format(
-                                "Estimated %s driver earnings in %s: $%.2f/hr net after mileage and SE tax on a 25-hour baseline. Adjust gross, miles, hours, and gas. Updated %s.",
-                                appName, city.getCityName(), featuredScenario.getNetHourly(), monthYear);
+                                "Estimated %s driver hourly earnings in %s for %d: $%.2f/hr net after mileage and SE tax on a 25-hour baseline. Updated %s.",
+                                appName, city.getCityName(), now.getYear(),
+                                featuredScenario.getNetHourly(), monthYear);
                 String heroTitlePrimary = String.format("%s Driver Earnings in %s", appName,
                                 city.getCityName());
-                String heroTitleSecondary = String.format("$%.2f/hr Net After Expenses",
+                String heroTitleSecondary = String.format("$%.2f/hr Net Hourly After Expenses",
                                 featuredScenario.getNetHourly());
-                String heroTitleTertiary = "Average Pay After Mileage and Tax";
+                String heroTitleTertiary = String.format("%d Rideshare Driver Hourly Earnings", now.getYear());
                 String heroSummary = String.format(
-                                "Estimated %s driver earnings in %s start at $%.2f/hr net in our side-hustle model. The baseline uses $%d/week gross, %d mi, %d hrs, and $%.2f/gal gas; use the calculator below to adjust your own numbers.",
+                                "Estimated %s driver hourly earnings in %s start at $%.2f/hr net in our %d side-hustle model. The baseline uses $%d/week gross, %d mi, %d hrs, and $%.2f/gal gas; use the calculator below to adjust your own numbers.",
                                 appName,
                                 city.getCityName(),
                                 featuredScenario.getNetHourly(),
+                                now.getYear(),
                                 featuredScenario.getGrossWeekly(),
                                 featuredScenario.getMiles(),
                                 featuredScenario.getHours(),

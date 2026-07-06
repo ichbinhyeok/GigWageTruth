@@ -104,21 +104,29 @@
                                 <span class="text-sm text-slate-600">Dash time vs active time reality check.</span>
                             </a>
                         @else
-                            <a href="/salary/uber/chicago" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
-                                <strong class="block text-slate-900">Uber Chicago driver earnings</strong>
-                                <span class="text-sm text-slate-600">Airport, bar-close, and vehicle mileage pressure.</span>
+                            <a href="/salary/uber/atlanta" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
+                                <strong class="block text-slate-900">Uber driver hourly earnings Atlanta GA 2026</strong>
+                                <span class="text-sm text-slate-600">Hourly earnings after expenses.</span>
                             </a>
                             <a href="/salary/uber/los-angeles" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
-                                <strong class="block text-slate-900">Uber Los Angeles driver earnings</strong>
-                                <span class="text-sm text-slate-600">LAX, night shifts, and daytime traffic drag.</span>
+                                <strong class="block text-slate-900">Uber driver earnings Los Angeles 2026</strong>
+                                <span class="text-sm text-slate-600">Rideshare hourly earnings and traffic drag.</span>
                             </a>
-                            <a href="/salary/uber/nashville" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
-                                <strong class="block text-slate-900">Uber Nashville driver earnings</strong>
-                                <span class="text-sm text-slate-600">Event timing and driver-supply sensitivity.</span>
+                            <a href="/salary/uber/austin" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
+                                <strong class="block text-slate-900">Rideshare driver hourly earnings Austin TX</strong>
+                                <span class="text-sm text-slate-600">Selective acceptance and weekend strategy.</span>
                             </a>
-                            <a href="/salary/uber/portland" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
-                                <strong class="block text-slate-900">Uber Portland driver earnings</strong>
-                                <span class="text-sm text-slate-600">Policy pressure and take-rate context.</span>
+                            <a href="/salary/uber/chicago" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
+                                <strong class="block text-slate-900">Uber driver hourly earnings Chicago IL 2026</strong>
+                                <span class="text-sm text-slate-600">Airport, bar-close, and vehicle mileage pressure.</span>
+                            </a>
+                            <a href="/salary/uber/houston" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
+                                <strong class="block text-slate-900">Rideshare driver hourly earnings Houston TX</strong>
+                                <span class="text-sm text-slate-600">Spread-out mileage and net hourly stress test.</span>
+                            </a>
+                            <a href="/salary/uber/orlando" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
+                                <strong class="block text-slate-900">Uber driver earnings Orlando Florida 2026</strong>
+                                <span class="text-sm text-slate-600">Tourism weekend demand and fuel check.</span>
                             </a>
                         @endif
                     </div>

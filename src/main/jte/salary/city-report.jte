@@ -206,6 +206,38 @@
             </div>
         </section>
 
+        @if(app.equals("uber") && ("atlanta".equals(city.getSlug()) || "los-angeles".equals(city.getSlug()) || "austin".equals(city.getSlug()) || "chicago".equals(city.getSlug()) || "houston".equals(city.getSlug()) || "orlando".equals(city.getSlug())))
+            <section class="max-w-5xl mx-auto px-6 mb-12">
+                <div class="bg-emerald-50 rounded-3xl border border-emerald-200 p-8 shadow-sm">
+                    <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-700 mb-2">Priority hourly earnings cluster</p>
+                    <h2 class="text-3xl font-black text-slate-900 mb-3">
+                        Uber driver hourly earnings in ${city.getCityName()}, ${city.getState()} for 2026
+                    </h2>
+                    <p class="text-slate-700 max-w-3xl mb-5">
+                        This report is built for drivers comparing <strong>Uber driver hourly earnings ${city.getCityName()} ${city.getState()} 2025 2026</strong> and <strong>rideshare driver hourly earnings ${city.getCityName()} ${city.getState()} 2025 2026</strong>. The useful answer is the net hourly result after mileage, local gas, unpaid time, and self-employment tax pressure.
+                    </p>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
+                        <a href="/salary/uber/${city.getSlug()}/after-gas" class="rounded-2xl bg-white border border-emerald-100 px-4 py-3 hover:border-emerald-300 transition-colors">
+                            <strong class="block text-slate-900">Uber ${city.getCityName()} after gas</strong>
+                            <span class="text-xs text-slate-600">Fuel, mileage, and net hourly check.</span>
+                        </a>
+                        <a href="/salary/uber/${city.getSlug()}/active-time" class="rounded-2xl bg-white border border-emerald-100 px-4 py-3 hover:border-emerald-300 transition-colors">
+                            <strong class="block text-slate-900">Uber ${city.getCityName()} active time</strong>
+                            <span class="text-xs text-slate-600">Compare booked time with real online time.</span>
+                        </a>
+                        <a href="/salary/uber/${city.getSlug()}/100-a-day" class="rounded-2xl bg-white border border-emerald-100 px-4 py-3 hover:border-emerald-300 transition-colors">
+                            <strong class="block text-slate-900">Can Uber make $100/day in ${city.getCityName()}?</strong>
+                            <span class="text-xs text-slate-600">Hours and miles for a daily net target.</span>
+                        </a>
+                        <a href="/salary/uber/${city.getSlug()}/side-hustle" class="rounded-2xl bg-white border border-emerald-100 px-4 py-3 hover:border-emerald-300 transition-colors">
+                            <strong class="block text-slate-900">Uber ${city.getCityName()} side-hustle earnings</strong>
+                            <span class="text-xs text-slate-600">25-hour weekly planning baseline.</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        @endif
+
         @template.components.search_result_patterns(
             appName = appName,
             cityName = city.getCityName(),
