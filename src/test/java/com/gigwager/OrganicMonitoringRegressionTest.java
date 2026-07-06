@@ -165,6 +165,7 @@ public class OrganicMonitoringRegressionTest {
 
         List<String> paths = List.of(
                 "/uber/where-you-can-drive",
+                "/reports/uber-driver-hourly-earnings-2026",
                 "/best-cities/doordash",
                 "/salary/doordash/denver",
                 "/salary/doordash/denver/side-hustle",
@@ -305,6 +306,8 @@ public class OrganicMonitoringRegressionTest {
         String uberHubHtml = uberHubResult.getResponse().getContentAsString();
         assertTrue(uberHubHtml.contains("Uber driver hourly earnings Atlanta GA 2026"),
                 "Uber app hub should directly reinforce the Atlanta hourly earnings quick-win query");
+        assertTrue(uberHubHtml.contains("/reports/uber-driver-hourly-earnings-2026"),
+                "Uber app hub should link the shareable hourly earnings report");
         assertTrue(uberHubHtml.contains("/salary/uber/houston"),
                 "Uber app hub should link Houston hourly earnings quick-win page");
         assertTrue(uberHubHtml.contains("/salary/uber/orlando"),
@@ -324,6 +327,8 @@ public class OrganicMonitoringRegressionTest {
                 "Directory should directly link nights/weekends intent URLs");
         assertTrue(directoryHtml.contains("Hourly earnings quick wins"),
                 "Directory should expose the hourly earnings quick-win cluster");
+        assertTrue(directoryHtml.contains("/reports/uber-driver-hourly-earnings-2026"),
+                "Directory should link the Uber hourly earnings report");
         assertTrue(directoryHtml.contains("Uber driver hourly earnings Atlanta GA 2026"),
                 "Directory should reinforce the Atlanta hourly earnings anchor text");
         assertTrue(directoryHtml.contains("Rideshare driver hourly earnings Houston TX"),
@@ -431,6 +436,24 @@ public class OrganicMonitoringRegressionTest {
                 "Uber Atlanta should include the exact GSC quick-win query phrase");
         assertTrue(uberQuickWinDoc.html().contains("/salary/uber/atlanta/after-gas"),
                 "Uber Atlanta should link from city page into the after-gas intent page");
+
+        MvcResult reportResult = mockMvc.perform(get("/reports/uber-driver-hourly-earnings-2026"))
+                .andExpect(status().isOk())
+                .andReturn();
+        Document reportDoc = Jsoup.parse(reportResult.getResponse().getContentAsString(),
+                AppConstants.BASE_URL + "/reports/uber-driver-hourly-earnings-2026");
+        assertTrue(reportDoc.title().contains("Uber Driver Hourly Earnings 2026"),
+                "Hourly earnings report should target the broad Uber 2026 query");
+        assertTrue(firstH1(reportDoc).contains("Uber Driver Hourly Earnings 2026"),
+                "Hourly earnings report should expose a query-matched H1");
+        assertTrue(reportDoc.text().contains("uber driver hourly earnings atlanta ga 2025 2026"),
+                "Hourly earnings report should include the strongest GSC quick-win query");
+        assertTrue(reportDoc.html().contains("/salary/uber/atlanta"),
+                "Hourly earnings report should link into Atlanta city report");
+        assertTrue(reportDoc.html().contains("/salary/uber/orlando/100-a-day"),
+                "Hourly earnings report should link into Orlando daily-target report");
+        assertTrue(reportDoc.text().contains("Suggested citation"),
+                "Hourly earnings report should include a shareable citation block");
 
         MvcResult workLevelResult = mockMvc.perform(get("/salary/doordash/phoenix/side-hustle"))
                 .andExpect(status().isOk())

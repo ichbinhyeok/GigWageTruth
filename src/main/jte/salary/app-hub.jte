@@ -104,6 +104,10 @@
                                 <span class="text-sm text-slate-600">Dash time vs active time reality check.</span>
                             </a>
                         @else
+                            <a href="/reports/uber-driver-hourly-earnings-2026" class="rounded-2xl border border-emerald-200 bg-emerald-50 px-5 py-4 hover:border-emerald-300 transition-colors">
+                                <strong class="block text-slate-900">Uber driver hourly earnings 2026 report</strong>
+                                <span class="text-sm text-slate-600">One comparison page for the six city hourly-earnings targets.</span>
+                            </a>
                             <a href="/salary/uber/atlanta" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
                                 <strong class="block text-slate-900">Uber driver hourly earnings Atlanta GA 2026</strong>
                                 <span class="text-sm text-slate-600">Hourly earnings after expenses.</span>

@@ -37,6 +37,7 @@ public class SitemapController {
 
         // Salary directory (Hub page - highest priority)
         addUrl(xml, AppConstants.BASE_URL + "/salary/directory", today, "weekly", "0.9");
+        addUrl(xml, AppConstants.BASE_URL + "/reports/uber-driver-hourly-earnings-2026", today, "weekly", "0.9");
 
         // Quality Gate: Programmatic SEO pages (City & Work-Level)
         // Add only those that pass the PageIndexPolicyService

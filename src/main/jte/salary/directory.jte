@@ -69,6 +69,10 @@
                         <h2 class="text-2xl font-black text-slate-900 mb-3">Uber city hourly earnings pages to check first</h2>
                         <p class="text-sm text-slate-600 mb-5">These city pages answer the hourly earnings and rideshare driver earnings questions drivers usually compare before choosing a market.</p>
                         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+                            <a href="/reports/uber-driver-hourly-earnings-2026" class="rounded-xl bg-white border border-emerald-200 px-4 py-3 hover:border-emerald-300 transition-colors">
+                                <strong class="block text-slate-900">Uber driver hourly earnings 2026 report</strong>
+                                <span class="text-xs text-slate-600">Six-city comparison and citation page.</span>
+                            </a>
                             <a href="/salary/uber/atlanta" class="rounded-xl bg-white border border-emerald-100 px-4 py-3 hover:border-emerald-300 transition-colors">
                                 <strong class="block text-slate-900">Uber driver hourly earnings Atlanta GA 2026</strong>
                                 <span class="text-xs text-slate-600">After-expenses hourly pay estimate.</span>

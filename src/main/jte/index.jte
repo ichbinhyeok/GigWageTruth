@@ -170,6 +170,9 @@
                                 <a href="/uber-after-expenses" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
                                     Uber after expenses
                                 </a>
+                                <a href="/reports/uber-driver-hourly-earnings-2026" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
+                                    Uber hourly earnings report
+                                </a>
                                 <a href="/doordash-after-expenses" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
                                     DoorDash after expenses
                                 </a>

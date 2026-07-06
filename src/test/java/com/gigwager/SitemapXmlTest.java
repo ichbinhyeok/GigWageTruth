@@ -56,6 +56,8 @@ public class SitemapXmlTest {
                                 xmlContent.contains("<loc>https://gigverdict.com/</loc>"),
                                 "Sitemap should contain home page with correct domain");
                 assertTrue(xmlContent.contains("/salary/directory"), "Sitemap should contain /salary/directory");
+                assertTrue(xmlContent.contains("/reports/uber-driver-hourly-earnings-2026"),
+                                "Sitemap should contain the Uber hourly earnings report");
                 assertTrue(xmlContent.contains("/uber"), "Sitemap should contain /uber");
                 assertTrue(xmlContent.contains("/doordash"), "Sitemap should contain /doordash");
                 assertTrue(xmlContent.contains("/uber/where-you-can-drive"),

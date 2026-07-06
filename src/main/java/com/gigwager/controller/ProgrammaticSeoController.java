@@ -1,6 +1,7 @@
 package com.gigwager.controller;
 
 import com.gigwager.model.CityData;
+import com.gigwager.model.CityEarningsSnapshot;
 import com.gigwager.model.CityIntentEvidence;
 import com.gigwager.model.CityIntentMetric;
 import com.gigwager.model.CityIntentPage;
@@ -128,6 +129,43 @@ public class ProgrammaticSeoController {
                                 new SeoMeta(title, description, canonicalUrl, AppConstants.BASE_URL + "/og-image.jpg"));
 
                 return "salary/app-hub";
+        }
+
+        @GetMapping("/reports/uber-driver-hourly-earnings-2026")
+        public String uberHourlyEarningsReport(Model model) {
+                List<CityEarningsSnapshot> snapshots = buildUberHourlyEarningsSnapshots();
+                if (snapshots.isEmpty()) {
+                        throw new com.gigwager.exception.ResourceNotFoundException("Uber hourly earnings report not available");
+                }
+
+                CityEarningsSnapshot topSnapshot = snapshots.stream()
+                                .max((left, right) -> Double.compare(
+                                                left.scenario().getNetHourly(),
+                                                right.scenario().getNetHourly()))
+                                .orElse(snapshots.get(0));
+                double averageNetHourly = snapshots.stream()
+                                .mapToDouble(snapshot -> snapshot.scenario().getNetHourly())
+                                .average()
+                                .orElse(0);
+
+                java.time.LocalDate now = java.time.LocalDate.now();
+                String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
+                                .format(now);
+                String canonicalUrl = AppConstants.BASE_URL + "/reports/uber-driver-hourly-earnings-2026";
+                String title = "Uber Driver Hourly Earnings 2026: City Net Pay Report";
+                String description = String.format(
+                                "Compare Uber driver hourly earnings in Atlanta, Los Angeles, Austin, Chicago, Houston, and Orlando after mileage and tax assumptions. Updated %s.",
+                                monthYear);
+
+                model.addAttribute("snapshots", snapshots);
+                model.addAttribute("topSnapshot", topSnapshot);
+                model.addAttribute("averageNetHourly", averageNetHourly);
+                model.addAttribute("lastUpdated", monthYear);
+                model.addAttribute("reportJsonLd", buildUberHourlyReportJsonLd(snapshots, canonicalUrl));
+                model.addAttribute("seoMeta",
+                                new SeoMeta(title, description, canonicalUrl, AppConstants.BASE_URL + "/og-image.jpg"));
+
+                return "reports/uber-hourly-earnings-2026";
         }
 
         @GetMapping("/uber/where-you-can-drive")
@@ -1931,6 +1969,100 @@ public class ProgrammaticSeoController {
                                 new SeoMeta(title, description, canonicalUrl, AppConstants.BASE_URL + "/og-image.jpg"));
 
                 return "salary/app-coverage";
+        }
+
+        private List<CityEarningsSnapshot> buildUberHourlyEarningsSnapshots() {
+                return List.of(
+                                buildUberHourlyEarningsSnapshot(
+                                                "atlanta",
+                                                "uber driver hourly earnings atlanta ga 2025 2026",
+                                                "rideshare driver hourly earnings atlanta ga 2025 2026",
+                                                "Atlanta is the clearest current quick-win city: two hourly-earnings query variants are already close to page one."),
+                                buildUberHourlyEarningsSnapshot(
+                                                "los-angeles",
+                                                "uber driver earnings los angeles 2025 2026",
+                                                "rideshare driver hourly earnings los angeles ca 2025 2026",
+                                                "Los Angeles needs a traffic and mileage explanation because broad earnings claims can hide long online time."),
+                                buildUberHourlyEarningsSnapshot(
+                                                "austin",
+                                                "uber driver hourly earnings austin tx 2025 2026",
+                                                "rideshare driver hourly earnings austin tx 2025 2026",
+                                                "Austin is useful for selective-shift searches where drivers compare weekend upside against weak weeks."),
+                                buildUberHourlyEarningsSnapshot(
+                                                "chicago",
+                                                "uber driver hourly earnings chicago il 2025 2026",
+                                                "rideshare driver hourly earnings chicago il 2025 2026 uber lyft",
+                                                "Chicago connects hourly earnings intent with airport, business-trip, and bar-close timing questions."),
+                                buildUberHourlyEarningsSnapshot(
+                                                "houston",
+                                                "uber driver hourly earnings houston tx 2025 2026",
+                                                "rideshare driver hourly earnings houston tx 2025 2026",
+                                                "Houston needs a spread-out-market explanation because home-to-home miles can pull down hourly pay."),
+                                buildUberHourlyEarningsSnapshot(
+                                                "orlando",
+                                                "uber driver earnings orlando florida 2026",
+                                                "rideshare driver hourly earnings orlando florida 2026",
+                                                "Orlando is the tourism-demand test case: weekend gross can look strong until fuel and online time are counted."));
+        }
+
+        private CityEarningsSnapshot buildUberHourlyEarningsSnapshot(
+                        String citySlug,
+                        String primaryQuery,
+                        String secondaryQuery,
+                        String acquisitionNote) {
+                CityData city = CityData.fromSlug(citySlug)
+                                .orElseThrow(() -> new com.gigwager.exception.ResourceNotFoundException(
+                                                "City not found"));
+                CityScenario scenario = generateScenarioByWorkLevel(city, "uber", WorkLevel.SIDE_HUSTLE);
+                return new CityEarningsSnapshot(city, scenario, primaryQuery, secondaryQuery, acquisitionNote);
+        }
+
+        private String buildUberHourlyReportJsonLd(
+                        List<CityEarningsSnapshot> snapshots,
+                        String canonicalUrl) {
+                Map<String, Object> breadcrumb = new LinkedHashMap<>();
+                breadcrumb.put("@type", "BreadcrumbList");
+                breadcrumb.put("itemListElement", List.of(
+                                buildBreadcrumbItem(1, "Home", AppConstants.BASE_URL + "/"),
+                                buildBreadcrumbItem(2, "City Earnings Reports",
+                                                AppConstants.BASE_URL + "/salary/directory"),
+                                buildBreadcrumbItem(3, "Uber Driver Hourly Earnings 2026", canonicalUrl)));
+
+                List<Map<String, Object>> itemListElements = new ArrayList<>();
+                for (int i = 0; i < snapshots.size(); i++) {
+                        CityEarningsSnapshot snapshot = snapshots.get(i);
+                        Map<String, Object> listItem = new LinkedHashMap<>();
+                        listItem.put("@type", "ListItem");
+                        listItem.put("position", i + 1);
+                        listItem.put("name", String.format(
+                                        "Uber driver hourly earnings in %s, %s",
+                                        snapshot.city().getCityName(),
+                                        snapshot.city().getState()));
+                        listItem.put("url", String.format(
+                                        "%s/salary/uber/%s",
+                                        AppConstants.BASE_URL,
+                                        snapshot.city().getSlug()));
+                        itemListElements.add(listItem);
+                }
+
+                Map<String, Object> itemList = new LinkedHashMap<>();
+                itemList.put("@type", "ItemList");
+                itemList.put("name", "Uber driver hourly earnings city snapshots");
+                itemList.put("itemListElement", itemListElements);
+
+                Map<String, Object> article = new LinkedHashMap<>();
+                article.put("@type", "Article");
+                article.put("headline", "Uber Driver Hourly Earnings 2026: City Net Pay Report");
+                article.put("url", canonicalUrl);
+                article.put("dateModified", AppConstants.SITEMAP_LASTMOD_DATE);
+                article.put("description",
+                                "City-level Uber driver hourly earnings estimates after mileage and self-employment tax assumptions.");
+                article.put("isAccessibleForFree", true);
+
+                Map<String, Object> graph = new LinkedHashMap<>();
+                graph.put("@context", "https://schema.org");
+                graph.put("@graph", List.of(breadcrumb, article, itemList));
+                return toJsonLd(graph);
         }
 
         private String formatTopCityList(List<CityRankingDto> rankedCities, int limit) {
