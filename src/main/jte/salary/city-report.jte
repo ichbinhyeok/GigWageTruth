@@ -2,6 +2,7 @@
 @import com.gigwager.model.CityData
 @import com.gigwager.model.CityScenario
 @import com.gigwager.model.DriverFieldNote
+@import com.gigwager.model.SearchResultPattern
 @import com.gigwager.util.AppConstants
 @import java.util.List
 @param SeoMeta seoMeta
@@ -29,6 +30,7 @@
 @param String heroTitleTertiary = ""
 @param String heroSummary = ""
 @param List<DriverFieldNote> driverFieldNotes = java.util.List.of()
+@param List<SearchResultPattern> searchResultPatterns = java.util.List.of()
 @template.layout.main(
     noIndex = noIndex,
     seoMeta = seoMeta,
@@ -203,6 +205,14 @@
                 </div>
             </div>
         </section>
+
+        @template.components.search_result_patterns(
+            appName = appName,
+            cityName = city.getCityName(),
+            netHourly = featuredScenario.getNetHourly(),
+            searchResultPatterns = searchResultPatterns,
+            sectionClass = "max-w-5xl mx-auto px-6 mb-12"
+        )
 
         @template.components.driver_field_notes(
             appName = appName,

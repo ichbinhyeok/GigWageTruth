@@ -220,6 +220,12 @@ public class OrganicMonitoringRegressionTest {
                 "City report should expose source-backed driver field notes");
         assertTrue(html.contains("NerdWallet Uber pay test"),
                 "City report field notes should include app-specific field-test evidence");
+        assertTrue(html.contains("Top-result comparison"),
+                "City report should explain how it competes with ranking result types");
+        assertTrue(html.contains("Official pay docs"),
+                "City report competitor section should include official pay docs as a search-result pattern");
+        assertTrue(html.contains("Usually missing:"),
+                "City report competitor section should state the missing check GigVerdict answers");
         assertTrue(html.contains("Share a real Uber shift in Miami"),
                 "City report should collect first-party driver reports");
         assertTrue(html.contains("name=\"lead_type\" value=\"driver_earnings_report\""),
@@ -364,6 +370,12 @@ public class OrganicMonitoringRegressionTest {
                 "Daily target intent page should expose target-hour metric cards");
         assertTrue(dailyTargetHtml.contains("DoorDash $100/day discussion"),
                 "Daily target intent page should cite target-specific driver discussion");
+        assertTrue(dailyTargetHtml.contains("Top-result comparison"),
+                "Daily target page should show the competitor result-pattern comparison");
+        assertTrue(dailyTargetHtml.contains("Creator SERP"),
+                "Daily target page should compare against creator-style target searches");
+        assertTrue(dailyTargetHtml.contains("Gridwise DoorDash pay data"),
+                "Daily target page should include the large-dataset competitor pattern");
 
         MvcResult monthlyTargetResult = mockMvc.perform(get("/salary/uber/los-angeles/1000-a-month"))
                 .andExpect(status().isOk())

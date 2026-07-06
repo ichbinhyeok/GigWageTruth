@@ -4,6 +4,7 @@
 @import com.gigwager.model.CityIntentPage
 @import com.gigwager.model.CityScenario
 @import com.gigwager.model.DriverFieldNote
+@import com.gigwager.model.SearchResultPattern
 @import com.gigwager.model.SeoMeta
 @import java.util.List
 
@@ -22,6 +23,7 @@
 @param List<DriverFieldNote> driverFieldNotes = java.util.List.of()
 @param List<CityIntentMetric> intentMetrics = java.util.List.of()
 @param List<CityIntentEvidence> intentEvidencePatterns = java.util.List.of()
+@param List<SearchResultPattern> searchResultPatterns = java.util.List.of()
 @param Boolean noIndex = false
 
 @template.layout.main(
@@ -124,6 +126,15 @@
                     </div>
                 </section>
             @endif
+
+            @template.components.search_result_patterns(
+                appName = appName,
+                cityName = city.getCityName(),
+                intentLabel = intentPage.getDisplayName(),
+                netHourly = scenario.getNetHourly(),
+                searchResultPatterns = searchResultPatterns,
+                sectionClass = "max-w-4xl mx-auto"
+            )
 
             @template.components.driver_field_notes(
                 appName = appName,

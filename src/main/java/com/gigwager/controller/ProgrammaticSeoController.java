@@ -7,6 +7,7 @@ import com.gigwager.model.CityIntentPage;
 import com.gigwager.model.CityScenario;
 import com.gigwager.model.DriverFieldNote;
 import com.gigwager.model.SeoMeta;
+import com.gigwager.model.SearchResultPattern;
 import com.gigwager.model.WorkLevel;
 import com.gigwager.model.CityLocalData;
 import com.gigwager.model.content.CityRichContent;
@@ -371,6 +372,8 @@ public class ProgrammaticSeoController {
                 model.addAttribute("heroTitleTertiary", heroTitleTertiary);
                 model.addAttribute("heroSummary", heroSummary);
                 model.addAttribute("driverFieldNotes", buildDriverFieldNotes(app, appName, city, featuredScenario));
+                model.addAttribute("searchResultPatterns",
+                                buildSearchResultPatterns(app, appName, city, null, featuredScenario));
                 model.addAttribute("methodologyUrl", "/methodology");
                 model.addAttribute("calculatorUrl", calculatorUrl);
                 model.addAttribute("taxEstimatorUrl", buildTaxEstimatorUrl(app, featuredScenario));
@@ -643,6 +646,8 @@ public class ProgrammaticSeoController {
                 model.addAttribute("intentMetrics", buildCityIntentMetrics(city, intentPage, scenario));
                 model.addAttribute("intentEvidencePatterns",
                                 buildCityIntentEvidencePatterns(app, appName, city, intentPage, scenario));
+                model.addAttribute("searchResultPatterns",
+                                buildSearchResultPatterns(app, appName, city, intentPage, scenario));
                 model.addAttribute("answerHtml", answerHtml);
                 model.addAttribute("cityIntentJsonLd",
                                 buildCityIntentJsonLd(appName, city, intentPage, scenario, canonicalUrl));
@@ -841,6 +846,185 @@ public class ProgrammaticSeoController {
                         return 0;
                 }
                 return (int) Math.round((scenario.getGrossWeekly() / (double) scenario.getHours()) * hours);
+        }
+
+        private List<SearchResultPattern> buildSearchResultPatterns(
+                        String app,
+                        String appName,
+                        CityData city,
+                        CityIntentPage intentPage,
+                        CityScenario scenario) {
+                String intentLabel = intentPage == null ? "city earnings" : intentPage.getSearchPhrase();
+                String officialPayLabel = app.equals("doordash")
+                                ? "DoorDash official pay docs"
+                                : "Uber official pay docs";
+                String officialPayUrl = app.equals("doordash")
+                                ? "https://dasher.doordash.com/en-us/about/pay"
+                                : "https://www.uber.com/us/en/drive/how-much-drivers-make/";
+                String officialCoverageLabel = app.equals("doordash")
+                                ? "DoorDash Dasher signup"
+                                : "Uber official city directory";
+                String officialCoverageUrl = app.equals("doordash")
+                                ? "https://dasher.doordash.com/en-us"
+                                : "https://www.uber.com/us/en/e/drive/cities/";
+                String fieldTestLabel = app.equals("doordash")
+                                ? "NerdWallet DoorDash field test"
+                                : "NerdWallet Uber field test";
+                String fieldTestUrl = app.equals("doordash")
+                                ? "https://www.nerdwallet.com/finance/learn/how-much-does-doordash-pay"
+                                : "https://www.nerdwallet.com/finance/learn/how-much-does-an-uber-driver-make";
+                String gridwiseLabel = app.equals("doordash")
+                                ? "Gridwise DoorDash pay data"
+                                : "Gridwise Uber pay data";
+                String gridwiseUrl = app.equals("doordash")
+                                ? "https://gridwise.io/blog/how-much-do-doordash-drivers-make"
+                                : "https://gridwise.io/blog/how-much-do-uber-drivers-make";
+                String expertLabel = app.equals("doordash")
+                                ? "The Rideshare Guy DoorDash guide"
+                                : "The Rideshare Guy Uber guide";
+                String expertUrl = app.equals("doordash")
+                                ? "https://therideshareguy.com/how-much-do-doordash-drivers-make/"
+                                : "https://therideshareguy.com/how-much-do-uber-drivers-make/";
+                String salaryLabel = app.equals("doordash")
+                                ? "Indeed DoorDash salary data"
+                                : "Indeed Uber Driver salary data";
+                String salaryUrl = app.equals("doordash")
+                                ? "https://www.indeed.com/cmp/Doordash/salaries/Delivery-Driver"
+                                : "https://www.indeed.com/cmp/Uber-Drivers/salaries/Driver";
+                String discussionLabel = app.equals("doordash")
+                                ? "DoorDash driver discussion"
+                                : "Uber driver discussion";
+                String discussionUrl = app.equals("doordash")
+                                ? "https://www.reddit.com/r/doordash_drivers/comments/1tydq5v/is_doordash_still_worth_it_in_2026/"
+                                : "https://www.reddit.com/r/uberdrivers/comments/1paewc1/how_much_do_you_make_driving_for_uber/";
+                String tacticalLabel = app.equals("doordash")
+                                ? "ShiftTracker DoorDash pay guide"
+                                : "ShiftTracker Uber driver guide";
+                String tacticalUrl = app.equals("doordash")
+                                ? "https://shifttrackerapp.com/blog/doordash-pay-guide-2026-avg-net-real-driver-earnings"
+                                : "https://shifttrackerapp.com/blog/uber-eats-uber-driver-guide-2026-boost-pay-track-expenses-and-work-smarter";
+                String policyLabel = app.equals("doordash")
+                                ? "PayUp DoorDash report"
+                                : "Seattle Driver Union pay calculator";
+                String policyUrl = app.equals("doordash")
+                                ? "https://payup.wtf/doordash/no-free-lunch-report"
+                                : "https://www.driversunionwa.org/pay-calculator";
+                String videoLabel = app.equals("doordash")
+                                ? "DoorDash pay creator SERP"
+                                : "Uber pay creator SERP";
+                String videoUrl = app.equals("doordash")
+                                ? "https://www.youtube.com/results?search_query=how+much+do+doordash+drivers+make+2026"
+                                : "https://www.youtube.com/results?search_query=how+much+do+uber+drivers+make+2026";
+
+                return List.of(
+                                new SearchResultPattern(
+                                                "Official pay docs",
+                                                officialPayLabel,
+                                                "Ranks because it is the source of truth for pay components.",
+                                                String.format(
+                                                                "Official pages explain how %s pay works, but they do not answer whether %s in %s clears expenses.",
+                                                                appName,
+                                                                intentLabel,
+                                                                city.getCityName()),
+                                                String.format(
+                                                                "Keep the official pay components visible, then convert the %s baseline into $%.2f/hr net after mileage and self-employment tax.",
+                                                                city.getCityName(),
+                                                                scenario.getNetHourly()),
+                                                officialPayLabel,
+                                                officialPayUrl),
+                                new SearchResultPattern(
+                                                "Coverage docs",
+                                                officialCoverageLabel,
+                                                "Wins availability intent before any earnings estimate matters.",
+                                                String.format(
+                                                                "Coverage pages confirm whether the platform is active, but they do not model a %d-mile week, local gas, or take-home pay.",
+                                                                scenario.getMiles()),
+                                                String.format(
+                                                                "Link users to the official availability check, then bring them back to the %s earnings model and calculator.",
+                                                                city.getCityName()),
+                                                officialCoverageLabel,
+                                                officialCoverageUrl),
+                                new SearchResultPattern(
+                                                "Field test",
+                                                fieldTestLabel,
+                                                "Wins trust by showing a real drive instead of a generic average.",
+                                                "One field test is vivid, but it is not a city-by-city planning system and may not match this market, schedule, or vehicle.",
+                                                String.format(
+                                                                "Use field-test friction as evidence, while keeping the %s page specific to $%d gross, %d miles, and %d hours.",
+                                                                city.getCityName(),
+                                                                scenario.getGrossWeekly(),
+                                                                scenario.getMiles(),
+                                                                scenario.getHours()),
+                                                fieldTestLabel,
+                                                fieldTestUrl),
+                                new SearchResultPattern(
+                                                "Large dataset",
+                                                gridwiseLabel,
+                                                "Wins by aggregating many driver records and showing platform-level direction.",
+                                                String.format(
+                                                                "Large app-wide datasets are strong, but they usually flatten %s timing, traffic, and vehicle-cost differences.",
+                                                                city.getCityName()),
+                                                "Use large-data context as a sanity check, then expose local net hourly, per-mile, and target-hour calculations.",
+                                                gridwiseLabel,
+                                                gridwiseUrl),
+                                new SearchResultPattern(
+                                                "Expert guide",
+                                                expertLabel,
+                                                "Wins because experienced driver publishers explain tactics and pay ranges.",
+                                                "Expert guides are useful, but broad app advice often stops before a city-specific after-expenses answer.",
+                                                String.format(
+                                                                "Translate the broad tactic into a %s planning page: hours, miles, gross needed, tax pressure, and related intent links.",
+                                                                city.getCityName()),
+                                                expertLabel,
+                                                expertUrl),
+                                new SearchResultPattern(
+                                                "Salary aggregate",
+                                                salaryLabel,
+                                                "Wins freshness and volume with constantly updated salary snippets.",
+                                                "Salary aggregators mix regions, worker types, and reporting methods, and rarely separate gross pay from 1099 costs.",
+                                                String.format(
+                                                                "Show a transparent 1099 model instead: $%.2f/hr net after the 2026 mileage proxy and self-employment tax.",
+                                                                scenario.getNetHourly()),
+                                                salaryLabel,
+                                                salaryUrl),
+                                new SearchResultPattern(
+                                                "Driver forum",
+                                                discussionLabel,
+                                                "Wins because drivers search for current pain, saturation, and real shift stories.",
+                                                "Forum answers are fast and candid, but they are noisy, unstructured, and often hard to compare across cities.",
+                                                String.format(
+                                                                "Turn the driver pain points into structured checks for %s: active time, dead miles, target hours, and market timing.",
+                                                                city.getCityName()),
+                                                discussionLabel,
+                                                discussionUrl),
+                                new SearchResultPattern(
+                                                "Tactical app blog",
+                                                tacticalLabel,
+                                                "Wins with practical 2026 advice around boosts, tracking, and expenses.",
+                                                "Tactical posts help drivers operate, but they usually do not give a clean city URL for a single earnings question.",
+                                                String.format(
+                                                                "Make the page match one high-intent query, then point users into the calculator when their %s routine differs.",
+                                                                city.getCityName()),
+                                                tacticalLabel,
+                                                tacticalUrl),
+                                new SearchResultPattern(
+                                                "Policy report",
+                                                policyLabel,
+                                                "Wins when the user wants take-rate, labor, and fairness context.",
+                                                "Policy pages explain why driver pay can feel broken, but they are usually not a shift-level earnings planner.",
+                                                "Keep policy and take-rate pressure as context while answering the practical net-pay question on the page.",
+                                                policyLabel,
+                                                policyUrl),
+                                new SearchResultPattern(
+                                                "Creator SERP",
+                                                videoLabel,
+                                                "Wins attention with screenshots, daily goals, and relatable shift narratives.",
+                                                "Videos are persuasive, but they are slow to scan and rarely expose a reusable city calculator or source trail.",
+                                                String.format(
+                                                                "Answer the creator-style money question in text: whether %s can reach the target, how many hours it takes, and what miles it costs.",
+                                                                city.getCityName()),
+                                                videoLabel,
+                                                videoUrl));
         }
 
         private List<CityIntentEvidence> buildCityIntentEvidencePatterns(
