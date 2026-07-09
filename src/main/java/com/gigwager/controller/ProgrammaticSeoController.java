@@ -6,6 +6,7 @@ import com.gigwager.model.CityIntentEvidence;
 import com.gigwager.model.CityIntentMetric;
 import com.gigwager.model.CityIntentPage;
 import com.gigwager.model.CityScenario;
+import com.gigwager.model.DoorDashDurationEstimate;
 import com.gigwager.model.DriverFieldNote;
 import com.gigwager.model.DriverShiftReport;
 import com.gigwager.model.SeoMeta;
@@ -221,6 +222,89 @@ public class ProgrammaticSeoController {
                 return "reports/doordash-hourly-pay-2026";
         }
 
+        @GetMapping("/reports/doordash-driver-shift-evidence-2026")
+        public String doordashDriverShiftEvidenceReport(Model model) {
+                List<DriverShiftReport> reports = driverShiftReportService.getReportsForApp("doordash");
+                if (reports.isEmpty()) {
+                        throw new com.gigwager.exception.ResourceNotFoundException("DoorDash shift evidence not available");
+                }
+
+                long netCheckCount = reports.stream()
+                                .filter(DriverShiftReport::hasEstimatedNetCheck)
+                                .count();
+                double averageReportedNetHourly = reports.stream()
+                                .filter(DriverShiftReport::hasEstimatedNetCheck)
+                                .mapToDouble(DriverShiftReport::estimatedNetHourlyAfterMileageAndTax)
+                                .average()
+                                .orElse(0);
+                long citySpecificCount = reports.stream()
+                                .filter(report -> !"benchmark".equals(report.citySlug()))
+                                .count();
+
+                java.time.LocalDate now = java.time.LocalDate.now();
+                String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
+                                .format(now);
+                String canonicalUrl = AppConstants.BASE_URL + "/reports/doordash-driver-shift-evidence-2026";
+                String title = "DoorDash Driver Shift Evidence 2026: Gross, Miles, Active Time";
+                String description = String.format(
+                                "Reviewed DoorDash shift evidence for gross pay, miles, active time, dash time, and estimated net pay after mileage. Updated %s.",
+                                monthYear);
+
+                model.addAttribute("driverShiftReports", reports);
+                model.addAttribute("reportCount", reports.size());
+                model.addAttribute("citySpecificCount", citySpecificCount);
+                model.addAttribute("netCheckCount", netCheckCount);
+                model.addAttribute("averageReportedNetHourly", averageReportedNetHourly);
+                model.addAttribute("lastUpdated", monthYear);
+                model.addAttribute("evidenceJsonLd", buildDoorDashShiftEvidenceJsonLd(reports, canonicalUrl));
+                model.addAttribute("seoMeta",
+                                new SeoMeta(title, description, canonicalUrl, AppConstants.BASE_URL + "/og-image.jpg"));
+
+                return "reports/doordash-shift-evidence-2026";
+        }
+
+        @GetMapping("/doordash/how-much-can-you-make-in-{durationSlug}")
+        public String doordashDurationEarningsPage(@PathVariable("durationSlug") String durationSlug, Model model) {
+                DoorDashDurationEstimate estimate = buildDoorDashDurationEstimates().stream()
+                                .filter(item -> item.slug().equals(durationSlug))
+                                .findFirst()
+                                .orElseThrow(() -> new com.gigwager.exception.ResourceNotFoundException(
+                                                "DoorDash duration estimate not found"));
+
+                java.time.LocalDate now = java.time.LocalDate.now();
+                String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
+                                .format(now);
+                String canonicalUrl = AppConstants.BASE_URL + "/doordash/how-much-can-you-make-in-" + estimate.slug();
+                String title = String.format("How Much Can You Make with DoorDash in %s? 2026 Net Pay",
+                                estimate.displayName());
+                String description = estimate.isWeekly()
+                                ? String.format(
+                                                "DoorDash weekly earnings estimate: $%d-$%d gross and about $%d-$%d net after mileage and tax reserves. Updated %s.",
+                                                estimate.grossLow(),
+                                                estimate.grossHigh(),
+                                                estimate.netLow(),
+                                                estimate.netHigh(),
+                                                monthYear)
+                                : String.format(
+                                                "DoorDash %s earnings estimate: $%d-$%d gross and about $%d-$%d net after mileage and tax reserves. Updated %s.",
+                                                estimate.displayName().toLowerCase(java.util.Locale.US),
+                                                estimate.grossLow(),
+                                                estimate.grossHigh(),
+                                                estimate.netLow(),
+                                                estimate.netHigh(),
+                                                monthYear);
+
+                model.addAttribute("estimate", estimate);
+                model.addAttribute("allEstimates", buildDoorDashDurationEstimates());
+                model.addAttribute("driverShiftReports", driverShiftReportService.getReportsForApp("doordash"));
+                model.addAttribute("lastUpdated", monthYear);
+                model.addAttribute("durationJsonLd", buildDoorDashDurationJsonLd(estimate, canonicalUrl));
+                model.addAttribute("seoMeta",
+                                new SeoMeta(title, description, canonicalUrl, AppConstants.BASE_URL + "/og-image.jpg"));
+
+                return "reports/doordash-duration-earnings";
+        }
+
         @GetMapping("/uber/where-you-can-drive")
         public String uberCoveragePage(Model model) {
                 return renderCoveragePage(
@@ -368,18 +452,18 @@ public class ProgrammaticSeoController {
                 String title;
                 String description;
                 if (nearlyTied) {
-                        title = String.format("Uber vs DoorDash in %s: Which Pays More?",
+                        title = String.format("Uber Eats vs DoorDash in %s: Which Pays More?",
                                         city.getCityName());
                         description = String.format(
-                                        "Which app is worth it in %s? Side-hustle estimates put Uber and DoorDash near $%.2f/hr net after mileage and tax assumptions. Updated %s.",
+                                        "Uber Eats vs DoorDash in %s: delivery-style side-hustle estimates land near $%.2f/hr net after mileage and tax assumptions. Updated %s.",
                                         city.getCityName(),
                                         winningNetHourly,
                                         monthYear);
                 } else {
-                        title = String.format("Uber vs DoorDash in %s: Which Pays More?",
+                        title = String.format("Uber Eats vs DoorDash in %s: Which Pays More?",
                                         city.getCityName());
                         description = String.format(
-                                        "Which app is worth it in %s? Current side-hustle estimates put %s at $%.2f/hr net, about $%.2f/hr ahead of %s after mileage and tax assumptions. Updated %s.",
+                                        "Uber Eats vs DoorDash in %s: current delivery-style estimates put %s at $%.2f/hr net, about $%.2f/hr ahead of %s after mileage and tax assumptions. Updated %s.",
                                         city.getCityName(),
                                         winningAppName,
                                         winningNetHourly,
@@ -398,6 +482,8 @@ public class ProgrammaticSeoController {
                 model.addAttribute("netHourlyGap", netHourlyGap);
                 model.addAttribute("nearlyTied", nearlyTied);
                 model.addAttribute("lastUpdated", monthYear);
+                model.addAttribute("localData", dataLayerService.getLocalData(citySlug));
+                model.addAttribute("driverShiftReports", driverShiftReportService.getReportsForCity("doordash", citySlug));
                 model.addAttribute("seoMeta",
                                 new SeoMeta(title, description, canonicalUrl, AppConstants.BASE_URL + "/og-image.jpg"));
 
@@ -2328,6 +2414,162 @@ public class ProgrammaticSeoController {
                                                 "uber driver earnings orlando florida 2026",
                                                 "rideshare driver hourly earnings orlando florida 2026",
                                                 "Orlando is the tourism-demand test case: weekend gross can look strong until fuel and online time are counted."));
+        }
+
+        private List<DoorDashDurationEstimate> buildDoorDashDurationEstimates() {
+                return List.of(
+                                new DoorDashDurationEstimate(
+                                                "3-hours",
+                                                "3 Hours",
+                                                "how much can you make with DoorDash in 3 hours",
+                                                3.0,
+                                                60,
+                                                90,
+                                                90,
+                                                130,
+                                                35,
+                                                60,
+                                                "Friday or Saturday dinner, roughly 5 p.m. to 8 p.m.",
+                                                "Mid-afternoon gaps after lunch and before dinner.",
+                                                "A 3-hour DoorDash shift works only when the whole block sits inside a peak window; otherwise the first unpaid wait can wreck the hourly result."),
+                                new DoorDashDurationEstimate(
+                                                "4-hours",
+                                                "4 Hours",
+                                                "how much can you make with DoorDash in 4 hours",
+                                                4.0,
+                                                70,
+                                                105,
+                                                90,
+                                                140,
+                                                45,
+                                                70,
+                                                "Dinner plus one shoulder hour, roughly 5 p.m. to 9 p.m.",
+                                                "Late morning or late night without nearby restaurant density.",
+                                                "The fourth hour usually earns less than the peak core, so the best 4-hour plan starts before dinner demand fully spikes."),
+                                new DoorDashDurationEstimate(
+                                                "6-hours",
+                                                "6 Hours",
+                                                "how much can you make with DoorDash in 6 hours",
+                                                6.0,
+                                                115,
+                                                170,
+                                                180,
+                                                220,
+                                                75,
+                                                115,
+                                                "Lunch plus dinner, with a break between slow periods.",
+                                                "One continuous off-peak block that forces waiting.",
+                                                "A 6-hour DoorDash shift needs two good windows or one strong market; otherwise the slow middle hours pull down net hourly pay."),
+                                new DoorDashDurationEstimate(
+                                                "8-hours",
+                                                "8 Hours",
+                                                "how much can you make with DoorDash in 8 hours",
+                                                8.0,
+                                                140,
+                                                220,
+                                                210,
+                                                280,
+                                                90,
+                                                150,
+                                                "Lunch, dinner, and late weekend demand with planned downtime.",
+                                                "All-day grinding through weak order volume.",
+                                                "Eight hours can produce a bigger gross number, but it usually lowers hourly efficiency unless the driver avoids dead miles and slow gaps."),
+                                new DoorDashDurationEstimate(
+                                                "a-week",
+                                                "a Week",
+                                                "how much can you make with DoorDash in a week",
+                                                20.0,
+                                                300,
+                                                500,
+                                                700,
+                                                1100,
+                                                190,
+                                                340,
+                                                "15-20 peak-focused hours across Friday, Saturday, Sunday, and two dinner shifts.",
+                                                "Spreading the same hours across random weekdays.",
+                                                "Weekly DoorDash earnings depend more on shift selection than raw availability; concentrated peak hours usually beat more total hours in weak windows."));
+        }
+
+        private String buildDoorDashShiftEvidenceJsonLd(List<DriverShiftReport> reports, String canonicalUrl) {
+                Map<String, Object> breadcrumb = new LinkedHashMap<>();
+                breadcrumb.put("@type", "BreadcrumbList");
+                breadcrumb.put("itemListElement", List.of(
+                                buildBreadcrumbItem(1, "Home", AppConstants.BASE_URL + "/"),
+                                buildBreadcrumbItem(2, "City Earnings Reports",
+                                                AppConstants.BASE_URL + "/salary/directory"),
+                                buildBreadcrumbItem(3, "DoorDash Driver Shift Evidence 2026", canonicalUrl)));
+
+                List<Map<String, Object>> itemListElements = new ArrayList<>();
+                for (int i = 0; i < reports.size(); i++) {
+                        DriverShiftReport report = reports.get(i);
+                        Map<String, Object> listItem = new LinkedHashMap<>();
+                        listItem.put("@type", "ListItem");
+                        listItem.put("position", i + 1);
+                        listItem.put("name", report.cityName() + " " + report.reportedResult());
+                        listItem.put("url", report.sourceUrl());
+                        itemListElements.add(listItem);
+                }
+
+                Map<String, Object> itemList = new LinkedHashMap<>();
+                itemList.put("@type", "ItemList");
+                itemList.put("name", "DoorDash driver shift evidence");
+                itemList.put("numberOfItems", reports.size());
+                itemList.put("itemListElement", itemListElements);
+
+                Map<String, Object> article = new LinkedHashMap<>();
+                article.put("@type", "Article");
+                article.put("headline", "DoorDash Driver Shift Evidence 2026");
+                article.put("url", canonicalUrl);
+                article.put("description",
+                                "Reviewed DoorDash shift evidence with gross pay, miles, active time, dash time, and estimated net checks.");
+                article.put("isAccessibleForFree", true);
+
+                Map<String, Object> graph = new LinkedHashMap<>();
+                graph.put("@context", "https://schema.org");
+                graph.put("@graph", List.of(breadcrumb, article, itemList));
+                return toJsonLd(graph);
+        }
+
+        private String buildDoorDashDurationJsonLd(DoorDashDurationEstimate estimate, String canonicalUrl) {
+                Map<String, Object> breadcrumb = new LinkedHashMap<>();
+                breadcrumb.put("@type", "BreadcrumbList");
+                breadcrumb.put("itemListElement", List.of(
+                                buildBreadcrumbItem(1, "Home", AppConstants.BASE_URL + "/"),
+                                buildBreadcrumbItem(2, "DoorDash", AppConstants.BASE_URL + "/doordash"),
+                                buildBreadcrumbItem(3, estimate.searchPhrase(), canonicalUrl)));
+
+                Map<String, Object> article = new LinkedHashMap<>();
+                article.put("@type", "Article");
+                article.put("headline", String.format("How Much Can You Make with DoorDash in %s?",
+                                estimate.displayName()));
+                article.put("url", canonicalUrl);
+                article.put("description", String.format(
+                                "%s estimate with gross pay range, net pay range, best shift window, and mileage/tax caveats.",
+                                estimate.searchPhrase()));
+                article.put("isAccessibleForFree", true);
+
+                Map<String, Object> faqPage = new LinkedHashMap<>();
+                faqPage.put("@type", "FAQPage");
+                faqPage.put("mainEntity", List.of(
+                                buildFaqQuestion(
+                                                String.format("How much can you make with DoorDash in %s?",
+                                                                estimate.displayName().toLowerCase(java.util.Locale.US)),
+                                                String.format(
+                                                                "A typical DoorDash %s block models about $%d-$%d gross and $%d-$%d net after mileage and tax reserves, depending on market density and shift timing.",
+                                                                estimate.displayName().toLowerCase(java.util.Locale.US),
+                                                                estimate.grossLow(),
+                                                                estimate.grossHigh(),
+                                                                estimate.netLow(),
+                                                                estimate.netHigh())),
+                                buildFaqQuestion("What is the best time to DoorDash for this target?",
+                                                estimate.bestWindow()),
+                                buildFaqQuestion("What makes this estimate fall apart?",
+                                                estimate.weakWindow() + " " + estimate.strategyNote())));
+
+                Map<String, Object> graph = new LinkedHashMap<>();
+                graph.put("@context", "https://schema.org");
+                graph.put("@graph", List.of(breadcrumb, article, faqPage));
+                return toJsonLd(graph);
         }
 
         private CityEarningsSnapshot buildUberHourlyEarningsSnapshot(

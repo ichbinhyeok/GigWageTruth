@@ -109,6 +109,10 @@
                                 <span class="block text-xs font-black uppercase tracking-[0.16em] text-slate-500 mb-1">Step 3</span>
                                 <span class="block font-black text-slate-900">Check where you can dash</span>
                             </a>
+                            <a href="/reports/doordash-driver-shift-evidence-2026" class="block p-4 rounded-xl border border-slate-200 hover:border-emerald-300 hover:bg-emerald-50 transition-colors md:col-span-3">
+                                <span class="block text-xs font-black uppercase tracking-[0.16em] text-slate-500 mb-1">Evidence layer</span>
+                                <span class="block font-black text-slate-900">Open DoorDash driver shift evidence: gross, miles, active time, dash time, and net checks</span>
+                            </a>
                         </div>
                     </section>
 

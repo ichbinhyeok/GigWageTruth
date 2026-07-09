@@ -69,6 +69,10 @@
                                 <strong class="block">DoorDash hourly pay 2026 report</strong>
                                 <span class="text-xs text-slate-300">City pay dataset</span>
                             </a>
+                            <a href="/reports/doordash-driver-shift-evidence-2026" class="rounded-xl bg-white/5 border border-white/10 px-4 py-3 hover:bg-white/10 transition-colors">
+                                <strong class="block">DoorDash shift evidence</strong>
+                                <span class="text-xs text-slate-300">Reported gross, miles, clocks</span>
+                            </a>
                         </div>
                     </section>
 
@@ -84,6 +88,10 @@
                             <a href="/reports/doordash-driver-hourly-pay-2026" class="rounded-xl bg-white border border-emerald-200 px-4 py-3 hover:border-emerald-300 transition-colors">
                                 <strong class="block text-slate-900">DoorDash driver hourly pay 2026 report</strong>
                                 <span class="text-xs text-slate-600">Eight-city pay dataset and $100/day bridge.</span>
+                            </a>
+                            <a href="/reports/doordash-driver-shift-evidence-2026" class="rounded-xl bg-white border border-emerald-200 px-4 py-3 hover:border-emerald-300 transition-colors">
+                                <strong class="block text-slate-900">DoorDash driver shift evidence 2026</strong>
+                                <span class="text-xs text-slate-600">Reported shift table with modeled net checks.</span>
                             </a>
                             <a href="/salary/doordash/denver/hourly-pay" class="rounded-xl bg-white border border-emerald-100 px-4 py-3 hover:border-emerald-300 transition-colors">
                                 <strong class="block text-slate-900">DoorDash hourly pay Denver CO</strong>
@@ -128,6 +136,14 @@
                             <a href="/salary/doordash/phoenix/100-a-day" class="rounded-xl bg-white border border-indigo-100 px-4 py-3 hover:border-indigo-200 transition-colors">
                                 <strong class="block text-slate-900">DoorDash Phoenix $100/day</strong>
                                 <span class="text-xs text-slate-600">Daily net target</span>
+                            </a>
+                            <a href="/doordash/how-much-can-you-make-in-3-hours" class="rounded-xl bg-white border border-indigo-100 px-4 py-3 hover:border-indigo-200 transition-colors">
+                                <strong class="block text-slate-900">DoorDash 3-hour earnings</strong>
+                                <span class="text-xs text-slate-600">Short shift estimate</span>
+                            </a>
+                            <a href="/doordash/how-much-can-you-make-in-a-week" class="rounded-xl bg-white border border-indigo-100 px-4 py-3 hover:border-indigo-200 transition-colors">
+                                <strong class="block text-slate-900">DoorDash weekly earnings</strong>
+                                <span class="text-xs text-slate-600">15-20 hour plan</span>
                             </a>
                             <a href="/salary/uber/chicago/100-a-day" class="rounded-xl bg-white border border-indigo-100 px-4 py-3 hover:border-indigo-200 transition-colors">
                                 <strong class="block text-slate-900">Uber Chicago $100/day</strong>

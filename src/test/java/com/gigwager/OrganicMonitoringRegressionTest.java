@@ -167,6 +167,8 @@ public class OrganicMonitoringRegressionTest {
                 "/uber/where-you-can-drive",
                 "/reports/uber-driver-hourly-earnings-2026",
                 "/reports/doordash-driver-hourly-pay-2026",
+                "/reports/doordash-driver-shift-evidence-2026",
+                "/doordash/how-much-can-you-make-in-3-hours",
                 "/best-cities/doordash",
                 "/salary/doordash/denver",
                 "/salary/doordash/denver/side-hustle",
@@ -319,6 +321,12 @@ public class OrganicMonitoringRegressionTest {
                 "DoorDash app hub should expose goal-based pSEO links");
         assertTrue(appHubHtml.contains("/reports/doordash-driver-hourly-pay-2026"),
                 "DoorDash app hub should link the DoorDash hourly pay report");
+        assertTrue(appHubHtml.contains("/reports/doordash-driver-shift-evidence-2026"),
+                "DoorDash app hub should link the DoorDash shift evidence hub");
+        assertTrue(appHubHtml.contains("/doordash/how-much-can-you-make-in-3-hours"),
+                "DoorDash app hub should link short duration earning pages");
+        assertTrue(appHubHtml.contains("/doordash/how-much-can-you-make-in-8-hours"),
+                "DoorDash app hub should link full-day duration earning pages");
 
         MvcResult uberHubResult = mockMvc.perform(get("/salary/uber"))
                 .andExpect(status().isOk())
@@ -359,6 +367,12 @@ public class OrganicMonitoringRegressionTest {
                 "Directory should link the Uber hourly earnings report");
         assertTrue(directoryHtml.contains("/reports/doordash-driver-hourly-pay-2026"),
                 "Directory should link the DoorDash hourly pay report");
+        assertTrue(directoryHtml.contains("/reports/doordash-driver-shift-evidence-2026"),
+                "Directory should link the DoorDash shift evidence hub");
+        assertTrue(directoryHtml.contains("/doordash/how-much-can-you-make-in-3-hours"),
+                "Directory should link DoorDash duration earning pages");
+        assertTrue(directoryHtml.contains("/doordash/how-much-can-you-make-in-a-week"),
+                "Directory should link DoorDash weekly earning pages");
         assertTrue(directoryHtml.contains("Uber driver hourly earnings Atlanta GA 2026"),
                 "Directory should reinforce the Atlanta hourly earnings anchor text");
         assertTrue(directoryHtml.contains("DoorDash driver hourly pay 2026 report"),
@@ -376,6 +390,8 @@ public class OrganicMonitoringRegressionTest {
                 "Best-cities table should link DoorDash hourly-pay intent pages");
         assertTrue(bestCitiesHtml.contains("/salary/doordash/denver/best-areas"),
                 "Best-cities table should link DoorDash best-area intent pages");
+        assertTrue(bestCitiesHtml.contains("/reports/doordash-driver-shift-evidence-2026"),
+                "Best-cities page should link the DoorDash shift evidence hub");
     }
 
     @Test
@@ -573,6 +589,40 @@ public class OrganicMonitoringRegressionTest {
                 "DoorDash hourly pay report should link into best-area intent reports");
         assertTrue(doordashReportDoc.html().contains("/salary/doordash/chicago/uber-eats-vs-doordash"),
                 "DoorDash hourly pay report should link into app-comparison intent reports");
+        assertTrue(doordashReportDoc.html().contains("/reports/doordash-driver-shift-evidence-2026"),
+                "DoorDash hourly pay report should link into the shift evidence hub");
+        assertTrue(doordashReportDoc.html().contains("/doordash/how-much-can-you-make-in-3-hours"),
+                "DoorDash hourly pay report should link into duration earning pages");
+
+        MvcResult evidenceHubResult = mockMvc.perform(get("/reports/doordash-driver-shift-evidence-2026"))
+                .andExpect(status().isOk())
+                .andReturn();
+        Document evidenceHubDoc = Jsoup.parse(evidenceHubResult.getResponse().getContentAsString(),
+                AppConstants.BASE_URL + "/reports/doordash-driver-shift-evidence-2026");
+        assertTrue(evidenceHubDoc.title().contains("DoorDash Driver Shift Evidence 2026"),
+                "Shift evidence hub should target the evidence dataset query");
+        assertTrue(firstH1(evidenceHubDoc).contains("DoorDash Driver Shift Evidence 2026"),
+                "Shift evidence hub should expose a query-matched H1");
+        assertTrue(evidenceHubDoc.text().contains("Modeled vs reported"),
+                "Shift evidence hub should separate modeled estimates from reported evidence");
+        assertTrue(evidenceHubDoc.text().contains("Gross, Miles, Active Time, Net Checks"),
+                "Shift evidence hub should expose the table dimensions in page copy");
+        assertTrue(evidenceHubDoc.html().contains("/doordash/how-much-can-you-make-in-3-hours"),
+                "Shift evidence hub should link into duration earning pages");
+
+        MvcResult durationResult = mockMvc.perform(get("/doordash/how-much-can-you-make-in-3-hours"))
+                .andExpect(status().isOk())
+                .andReturn();
+        Document durationDoc = Jsoup.parse(durationResult.getResponse().getContentAsString(),
+                AppConstants.BASE_URL + "/doordash/how-much-can-you-make-in-3-hours");
+        assertTrue(durationDoc.title().contains("How Much Can You Make with DoorDash in 3 Hours"),
+                "Duration page should target the exact earning-duration query");
+        assertTrue(firstH1(durationDoc).contains("How Much Can You Make with DoorDash in 3 Hours"),
+                "Duration page should expose query-matched H1 language");
+        assertTrue(durationDoc.text().contains("$35-$60 Net Estimate"),
+                "Duration page should answer with a net pay range above the fold");
+        assertTrue(durationDoc.html().contains("/doordash/how-much-can-you-make-in-8-hours"),
+                "Duration page should link adjacent duration earning pages");
 
         MvcResult workLevelResult = mockMvc.perform(get("/salary/doordash/phoenix/side-hustle"))
                 .andExpect(status().isOk())

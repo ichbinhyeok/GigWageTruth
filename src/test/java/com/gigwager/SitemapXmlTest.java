@@ -60,6 +60,14 @@ public class SitemapXmlTest {
                                 "Sitemap should contain the Uber hourly earnings report");
                 assertTrue(xmlContent.contains("/reports/doordash-driver-hourly-pay-2026"),
                                 "Sitemap should contain the DoorDash hourly pay report");
+                assertTrue(xmlContent.contains("/reports/doordash-driver-shift-evidence-2026"),
+                                "Sitemap should contain the DoorDash shift evidence report");
+                assertTrue(xmlContent.contains("/doordash/how-much-can-you-make-in-3-hours"),
+                                "Sitemap should contain DoorDash duration earning pages");
+                assertTrue(xmlContent.contains("/doordash/how-much-can-you-make-in-8-hours"),
+                                "Sitemap should contain DoorDash full-day duration earning pages");
+                assertTrue(xmlContent.contains("/doordash/how-much-can-you-make-in-a-week"),
+                                "Sitemap should contain DoorDash weekly earning pages");
                 assertTrue(xmlContent.contains("/uber"), "Sitemap should contain /uber");
                 assertTrue(xmlContent.contains("/doordash"), "Sitemap should contain /doordash");
                 assertTrue(xmlContent.contains("/uber/where-you-can-drive"),

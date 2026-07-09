@@ -125,6 +125,37 @@
                 sectionClass = "max-w-5xl mx-auto"
             )
 
+            <section class="bg-white rounded-3xl border border-slate-200 p-8 shadow-sm">
+                <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-700 mb-2">Evidence and duration cluster</p>
+                <h2 class="text-3xl font-black text-slate-900 mb-4">Turn hourly pay into real shift math</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+                    <a href="/reports/doordash-driver-shift-evidence-2026" class="rounded-2xl bg-slate-50 border border-slate-200 px-5 py-4 hover:border-emerald-300 transition-colors">
+                        <strong class="block text-slate-900">DoorDash driver shift evidence 2026</strong>
+                        <span class="text-sm text-slate-600">Gross, miles, active time, dash time, and modeled net checks.</span>
+                    </a>
+                    <a href="/doordash/how-much-can-you-make-in-3-hours" class="rounded-2xl bg-slate-50 border border-slate-200 px-5 py-4 hover:border-emerald-300 transition-colors">
+                        <strong class="block text-slate-900">DoorDash 3-hour earnings</strong>
+                        <span class="text-sm text-slate-600">Peak-window gross and net estimate.</span>
+                    </a>
+                    <a href="/doordash/how-much-can-you-make-in-4-hours" class="rounded-2xl bg-slate-50 border border-slate-200 px-5 py-4 hover:border-emerald-300 transition-colors">
+                        <strong class="block text-slate-900">DoorDash 4-hour earnings</strong>
+                        <span class="text-sm text-slate-600">Dinner block estimate with net pay range.</span>
+                    </a>
+                    <a href="/doordash/how-much-can-you-make-in-6-hours" class="rounded-2xl bg-slate-50 border border-slate-200 px-5 py-4 hover:border-emerald-300 transition-colors">
+                        <strong class="block text-slate-900">DoorDash 6-hour earnings</strong>
+                        <span class="text-sm text-slate-600">Lunch plus dinner shift math.</span>
+                    </a>
+                    <a href="/doordash/how-much-can-you-make-in-8-hours" class="rounded-2xl bg-slate-50 border border-slate-200 px-5 py-4 hover:border-emerald-300 transition-colors">
+                        <strong class="block text-slate-900">DoorDash 8-hour earnings</strong>
+                        <span class="text-sm text-slate-600">Full-day gross, net, and slow-window risk.</span>
+                    </a>
+                    <a href="/doordash/how-much-can-you-make-in-a-week" class="rounded-2xl bg-slate-50 border border-slate-200 px-5 py-4 hover:border-emerald-300 transition-colors">
+                        <strong class="block text-slate-900">DoorDash weekly earnings</strong>
+                        <span class="text-sm text-slate-600">15-20 hour weekly earning plan.</span>
+                    </a>
+                </div>
+            </section>
+
             <section class="bg-emerald-50 rounded-3xl border border-emerald-200 p-8">
                 <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-700 mb-2">Driver decision paths</p>
                 <h2 class="text-3xl font-black text-slate-900 mb-4">Use the right page for the job you are trying to answer</h2>

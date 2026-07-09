@@ -39,6 +39,12 @@ public class SitemapController {
         addUrl(xml, AppConstants.BASE_URL + "/salary/directory", today, "weekly", "0.9");
         addUrl(xml, AppConstants.BASE_URL + "/reports/uber-driver-hourly-earnings-2026", today, "weekly", "0.9");
         addUrl(xml, AppConstants.BASE_URL + "/reports/doordash-driver-hourly-pay-2026", today, "weekly", "0.9");
+        addUrl(xml, AppConstants.BASE_URL + "/reports/doordash-driver-shift-evidence-2026", today, "weekly", "0.9");
+        addUrl(xml, AppConstants.BASE_URL + "/doordash/how-much-can-you-make-in-3-hours", today, "weekly", "0.8");
+        addUrl(xml, AppConstants.BASE_URL + "/doordash/how-much-can-you-make-in-4-hours", today, "weekly", "0.8");
+        addUrl(xml, AppConstants.BASE_URL + "/doordash/how-much-can-you-make-in-6-hours", today, "weekly", "0.8");
+        addUrl(xml, AppConstants.BASE_URL + "/doordash/how-much-can-you-make-in-8-hours", today, "weekly", "0.8");
+        addUrl(xml, AppConstants.BASE_URL + "/doordash/how-much-can-you-make-in-a-week", today, "weekly", "0.8");
 
         // Quality Gate: Programmatic SEO pages (City & Work-Level)
         // Add only those that pass the PageIndexPolicyService

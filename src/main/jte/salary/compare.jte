@@ -1,7 +1,10 @@
 @import com.gigwager.model.SeoMeta
 @import com.gigwager.model.CityData
+@import com.gigwager.model.CityLocalData
 @import com.gigwager.model.CityScenario
+@import com.gigwager.model.DriverShiftReport
 @import com.gigwager.util.AppConstants
+@import java.util.List
 
 @param CityData city
 @param CityScenario uberScenario
@@ -12,6 +15,8 @@
 @param double netHourlyGap
 @param boolean nearlyTied
 @param String lastUpdated
+@param CityLocalData localData
+@param List<DriverShiftReport> driverShiftReports = java.util.List.of()
 @param SeoMeta seoMeta
 @param Boolean noIndex = false
 
@@ -26,21 +31,21 @@
                         ${city.getCityName()} Comparison
                     </span>
                     <h1 class="text-4xl lg:text-5xl font-black text-slate-900 mb-6 tracking-tight">
-                        Uber vs DoorDash Earnings in ${city.getCityName()} After Expenses
+                        Uber Eats vs DoorDash Pay in ${city.getCityName()} After Expenses
                     </h1>
                     <p class="text-xl text-slate-600 max-w-2xl mx-auto">
                         @if (nearlyTied)
-                            Side-hustle estimates in ${city.getCityName()} are effectively tied, with both apps landing near $${String.format("%.2f", winningNetHourly)}/hr net after IRS mileage proxy and self-employment tax assumptions.
+                            Delivery-style side-hustle estimates in ${city.getCityName()} are effectively tied, with both app paths landing near $${String.format("%.2f", winningNetHourly)}/hr net after IRS mileage proxy and self-employment tax assumptions.
                         @else
-                            Current side-hustle estimates show <strong>${winningAppName}</strong> ahead by <strong>$${String.format("%.2f", netHourlyGap)}/hr net</strong> in ${city.getCityName()} after IRS mileage proxy and self-employment tax assumptions.
+                            Current delivery-style estimates show <strong>${winningAppName}</strong> ahead by <strong>$${String.format("%.2f", netHourlyGap)}/hr net</strong> in ${city.getCityName()} after IRS mileage proxy and self-employment tax assumptions.
                         @endif
                     </p>
                 </div>
 
                 <div class="bg-white border border-slate-200 rounded-2xl p-5 mb-8">
                     <p class="text-sm text-slate-600">
-                        Use this page when your question is <strong>which app pays more in ${city.getCityName()}</strong>.
-                        Open the app-specific city earnings pages below when you want the deeper part-time, side-hustle, and full-time breakdowns.
+                        Use this page when your question is <strong>Uber Eats vs DoorDash pay in ${city.getCityName()}</strong>.
+                        The Uber column is the closest GigVerdict model for Uber-platform earning power; the delivery decision still depends on restaurant density, tips, active time, and mileage.
                     </p>
                 </div>
 
@@ -77,6 +82,39 @@
                         @endif
                     </p>
                 </div>
+
+                <section class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm mb-12">
+                    <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-700 mb-2">Delivery-only decision grid</p>
+                    <h2 class="text-2xl font-black text-slate-900 mb-5">When Uber Eats or DoorDash is more likely to win in ${city.getCityName()}</h2>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <article class="rounded-2xl bg-slate-50 border border-slate-200 p-5">
+                            <p class="text-xs font-black uppercase tracking-[0.16em] text-slate-500 mb-2">Lunch</p>
+                            <h3 class="font-bold text-slate-900 mb-2">DoorDash volume edge</h3>
+                            <p class="text-sm text-slate-600">DoorDash is more likely to win when office, retail, and quick-service clusters around ${localData.shoppingDistrict()} keep pickup waits low.</p>
+                        </article>
+                        <article class="rounded-2xl bg-slate-50 border border-slate-200 p-5">
+                            <p class="text-xs font-black uppercase tracking-[0.16em] text-slate-500 mb-2">Dinner</p>
+                            <h3 class="font-bold text-slate-900 mb-2">Compare tips and route length</h3>
+                            <p class="text-sm text-slate-600">Dinner is the strongest test window because both apps can show enough demand for a fair gross-per-mile comparison.</p>
+                        </article>
+                        <article class="rounded-2xl bg-slate-50 border border-slate-200 p-5">
+                            <p class="text-xs font-black uppercase tracking-[0.16em] text-slate-500 mb-2">Late night</p>
+                            <h3 class="font-bold text-slate-900 mb-2">Zone density decides it</h3>
+                            <p class="text-sm text-slate-600">${localData.nightlifeDistrict()} can work only if pickups stay close and parking does not turn the shift into unpaid waiting.</p>
+                        </article>
+                        <article class="rounded-2xl bg-slate-50 border border-slate-200 p-5">
+                            <p class="text-xs font-black uppercase tracking-[0.16em] text-slate-500 mb-2">Suburbs</p>
+                            <h3 class="font-bold text-slate-900 mb-2">Dead miles are the risk</h3>
+                            <p class="text-sm text-slate-600">If the route pushes you back onto ${localData.majorHighway()} unpaid, the higher gross app can still lose on net hourly.</p>
+                        </article>
+                    </div>
+                    <div class="mt-6 rounded-2xl bg-emerald-50 border border-emerald-100 p-5">
+                        <p class="text-sm text-emerald-900">
+                            Best practice: test both apps over the same dinner window, log gross pay, active time, online time, and miles, then compare net hourly instead of trusting app screenshots.
+                            <a href="/reports/doordash-driver-shift-evidence-2026" class="font-bold underline">Open the DoorDash shift evidence table</a>.
+                        </p>
+                    </div>
+                </section>
 
                 <div class="grid md:grid-cols-2 gap-8 mb-12">
                     <div class="bg-white rounded-3xl p-8 border-2 ${uberScenario.getNetHourly() >= doordashScenario.getNetHourly() ? "border-emerald-400 shadow-xl shadow-emerald-500/10" : "border-slate-200"} relative">

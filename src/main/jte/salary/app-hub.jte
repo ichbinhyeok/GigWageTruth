@@ -87,6 +87,10 @@
                     <p class="text-sm text-slate-600 mb-5">These reports combine the net estimate with field-test context, active-time checks, dollar-per-mile pressure, and city-specific driver evidence.</p>
                     <div class="grid md:grid-cols-2 gap-3">
                         @if(app.equals("doordash"))
+                            <a href="/reports/doordash-driver-shift-evidence-2026" class="rounded-2xl border border-emerald-200 bg-white px-5 py-4 hover:border-emerald-300 hover:bg-emerald-50 transition-colors">
+                                <strong class="block text-slate-900">DoorDash driver shift evidence 2026</strong>
+                                <span class="text-sm text-slate-600">Gross, miles, active time, dash time, and modeled net checks.</span>
+                            </a>
                             <a href="/reports/doordash-driver-hourly-pay-2026" class="rounded-2xl border border-emerald-200 bg-emerald-50 px-5 py-4 hover:border-emerald-300 transition-colors">
                                 <strong class="block text-slate-900">DoorDash driver hourly pay 2026 report</strong>
                                 <span class="text-sm text-slate-600">Eight-city dataset for hourly pay, $100/day, and after-expenses searches.</span>
@@ -157,6 +161,14 @@
                             <a href="/salary/doordash/phoenix/how-much-can-you-make" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
                                 <strong class="block text-slate-900">How much can you make DoorDashing in Phoenix?</strong>
                                 <span class="text-sm text-slate-600">Weekly, monthly, and $100/day math in one page.</span>
+                            </a>
+                            <a href="/doordash/how-much-can-you-make-in-3-hours" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
+                                <strong class="block text-slate-900">How much can you make with DoorDash in 3 hours?</strong>
+                                <span class="text-sm text-slate-600">Short peak-window gross and net estimate.</span>
+                            </a>
+                            <a href="/doordash/how-much-can-you-make-in-8-hours" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
+                                <strong class="block text-slate-900">How much can you make with DoorDash in 8 hours?</strong>
+                                <span class="text-sm text-slate-600">Full-day gross, net, and slow-window risk.</span>
                             </a>
                             <a href="/salary/doordash/dallas/best-areas" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
                                 <strong class="block text-slate-900">Best areas to DoorDash in Dallas</strong>
