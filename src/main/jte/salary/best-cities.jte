@@ -109,6 +109,28 @@
                             </a>
                         </div>
                     </section>
+
+                    <section class="bg-slate-900 rounded-3xl p-6 mb-8 text-white">
+                        <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-300 mb-2">DoorDash city pay dataset</p>
+                        <h2 class="text-3xl font-black mb-4">Not just a list: compare net hourly, hours to $100, weekly net, and local demand signals</h2>
+                        <p class="text-slate-300 max-w-3xl mb-6">
+                            Generic search results usually stop at "best DoorDash cities" without showing the math. This table exposes the actual side-hustle baseline behind the ranking: after-expenses net hourly, the estimated hours needed to clear $100, the 20-hour weekly net proxy, mileage pressure, and the local zones that can make or break active time.
+                        </p>
+                        <div class="grid md:grid-cols-3 gap-3">
+                            <div class="rounded-2xl bg-white/5 border border-white/10 p-5">
+                                <p class="text-xs font-black uppercase tracking-[0.16em] text-emerald-300 mb-2">Click reason</p>
+                                <p class="font-bold">Drivers can see whether a nearby city is actually worth testing before opening the full report.</p>
+                            </div>
+                            <div class="rounded-2xl bg-white/5 border border-white/10 p-5">
+                                <p class="text-xs font-black uppercase tracking-[0.16em] text-emerald-300 mb-2">Quality gate</p>
+                                <p class="font-bold">Every city links to a deeper earnings page, not a dead-end keyword page.</p>
+                            </div>
+                            <div class="rounded-2xl bg-white/5 border border-white/10 p-5">
+                                <p class="text-xs font-black uppercase tracking-[0.16em] text-emerald-300 mb-2">Use case</p>
+                                <p class="font-bold">Best cities to DoorDash, highest paying DoorDash cities near me, and $100/day planning.</p>
+                            </div>
+                        </div>
+                    </section>
                 @endif
 
                 <div class="bg-white border border-slate-200 rounded-2xl p-5 mb-8" data-nosnippet>
@@ -147,6 +169,27 @@
                     </ul>
                 </div>
 
+                @if(app.equals("doordash"))
+                    <section class="bg-white rounded-3xl border border-slate-200 p-6 mb-10 shadow-sm">
+                        <p class="text-xs font-black uppercase tracking-[0.18em] text-amber-700 mb-2">Search-result gap check</p>
+                        <h2 class="text-2xl font-black text-slate-900 mb-4">What this page answers that thin DoorDash city lists usually skip</h2>
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div class="rounded-2xl border border-slate-200 p-5">
+                                <h3 class="font-black text-slate-900 mb-2">Pay ranking is not enough</h3>
+                                <p class="text-sm text-slate-600">A high gross market can still be weak after mileage, parking, wait time, and self-employment tax.</p>
+                            </div>
+                            <div class="rounded-2xl border border-slate-200 p-5">
+                                <h3 class="font-black text-slate-900 mb-2">Near me needs a decision rule</h3>
+                                <p class="text-sm text-slate-600">Use the closest metro in the table, then compare hours to $100 and the 20-hour weekly net before changing zones.</p>
+                            </div>
+                            <div class="rounded-2xl border border-slate-200 p-5">
+                                <h3 class="font-black text-slate-900 mb-2">Availability still matters</h3>
+                                <p class="text-sm text-slate-600">The best-paying city is only useful if DoorDash onboarding and local dash zones are active for you.</p>
+                            </div>
+                        </div>
+                    </section>
+                @endif
+
                 <!-- Top 5 Highlight Cards -->
                 <div class="mb-12">
                     <h2 class="text-2xl font-bold text-slate-900 mb-6">Why These Cities Lead The ${appName} Net Pay Ranking</h2>
@@ -170,29 +213,50 @@
                 </div>
 
                 <div id="ranking-table" class="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm">
+                    <div class="bg-slate-900 px-6 py-5">
+                        <h2 class="text-2xl font-black text-white">${appName} city earnings dataset</h2>
+                        <p class="text-sm text-slate-300 mt-1">Side-hustle baseline with after-expenses net pay, target hours, mileage pressure, and city-specific demand notes.</p>
+                    </div>
                     <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse">
+                        <table class="w-full min-w-[72rem] text-left border-collapse">
                             <thead>
                                 <tr class="bg-slate-900 text-white border-b border-slate-700">
                                     <th class="p-4 font-bold w-16 text-center">Rank</th>
                                     <th class="p-4 font-bold">City</th>
                                     <th class="p-4 font-bold">Net Hourly Pay</th>
-                                    <th class="p-4 font-bold">Work Level</th>
+                                    <th class="p-4 font-bold">Hours to $100</th>
+                                    <th class="p-4 font-bold">20-hour weekly net</th>
+                                    <th class="p-4 font-bold">Mileage pressure</th>
+                                    <th class="p-4 font-bold">Local demand signal</th>
                                     <th class="p-4 font-bold text-right">Details</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @for(int i = 0; i < rankedCities.size(); i++)
                                     !{CityRankingDto ranking = rankedCities.get(i);}
+                                    !{com.gigwager.model.CityScenario scenario = ranking.scenario();}
+                                    !{com.gigwager.model.CityLocalData local = dataLayerService.getLocalData(ranking.city().getSlug());}
+                                    !{double hoursToHundred = ranking.netHourly() > 0 ? 100.0 / ranking.netHourly() : 0;}
+                                    !{double weeklyNetAtTwenty = ranking.netHourly() * 20.0;}
+                                    !{int weeklyMiles = scenario != null ? scenario.getMiles() : 250;}
                                     <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
                                         <td class="p-4 font-bold text-center text-slate-400">#${i + 1}</td>
-                                        <td class="p-4 font-bold text-slate-900">${ranking.city().getCityName()}</td>
+                                        <td class="p-4">
+                                            <strong class="block text-slate-900">${ranking.city().getCityName()}, ${ranking.city().getState()}</strong>
+                                            <span class="text-xs text-slate-500">${ranking.workLevel()} baseline</span>
+                                        </td>
                                         <td class="p-4 font-black text-emerald-600">$${String.format("%.2f", ranking.netHourly())}/hr</td>
-                                        <td class="p-4 text-slate-600 text-sm">${ranking.workLevel()}</td>
+                                        <td class="p-4 text-slate-700 font-bold">${String.format("%.1f", hoursToHundred)} hrs</td>
+                                        <td class="p-4 text-slate-700 font-bold">$${String.format("%.0f", weeklyNetAtTwenty)}</td>
+                                        <td class="p-4 text-slate-600 text-sm">${weeklyMiles} mi/wk</td>
+                                        <td class="p-4 text-slate-600 text-sm">
+                                            ${local.nightlifeDistrict()} + ${local.shoppingDistrict()}
+                                        </td>
                                         <td class="p-4 text-right">
                                             <div class="flex flex-col items-end gap-2">
                                                 <a href="/salary/${app}/${ranking.city().getSlug()}" class="inline-block px-4 py-2 bg-slate-100 hover:bg-emerald-50 text-emerald-700 font-bold rounded-lg text-sm transition-colors border border-slate-200 hover:border-emerald-200">Open city earnings</a>
                                                 <a href="/salary/${app}/${ranking.city().getSlug()}/side-hustle" class="text-xs font-bold text-slate-500 hover:text-emerald-700 underline decoration-slate-300">Side-hustle detail</a>
+                                                <a href="/salary/${app}/${ranking.city().getSlug()}/100-a-day" class="text-xs font-bold text-slate-500 hover:text-emerald-700 underline decoration-slate-300">$100/day path</a>
                                             </div>
                                         </td>
                                     </tr>
@@ -217,6 +281,12 @@
                             <h3 class="text-xl font-bold text-slate-900 mb-2">How many ${appName} city earnings pages are ranked here?</h3>
                             <p class="text-slate-600">GigVerdict currently ranks ${rankedCityCount} city earnings pages here, and every row links to a deeper city page with calculator and tax paths.</p>
                         </div>
+                        @if(app.equals("doordash"))
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-900 mb-2">How should I use this if I only want to make $100 a day with DoorDash?</h3>
+                                <p class="text-slate-600">Use the hours-to-$100 column first, then open the matching $100/day path for your closest city. A lower-ranked nearby market can beat a top-ranked distant market once commute miles and zone access are counted.</p>
+                            </div>
+                        @endif
                     </div>
                 </section>
             </div>

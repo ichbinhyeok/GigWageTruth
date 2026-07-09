@@ -66,7 +66,7 @@ public class ProgrammaticSeoController {
                                 .map(city -> {
                                         CityScenario scenario = calculateScenario("Side-Hustle",
                                                         city.getMarketTier().getSideHustleGross(), 250, 25, city, app);
-                                        return new CityRankingDto(city, scenario.getNetHourly(), "Side-Hustle");
+                                        return new CityRankingDto(city, scenario.getNetHourly(), "Side-Hustle", scenario);
                                 })
                                 .filter(dto -> dto.netHourly() >= 6.0 && dto.netHourly() <= 45.0) // Sanity Gate
                                 .sorted((c1, c2) -> Double.compare(c2.netHourly(), c1.netHourly()))
@@ -168,6 +168,43 @@ public class ProgrammaticSeoController {
                 return "reports/uber-hourly-earnings-2026";
         }
 
+        @GetMapping("/reports/doordash-driver-hourly-pay-2026")
+        public String doordashHourlyPayReport(Model model) {
+                List<CityEarningsSnapshot> snapshots = buildDoorDashHourlyPaySnapshots();
+                if (snapshots.isEmpty()) {
+                        throw new com.gigwager.exception.ResourceNotFoundException("DoorDash hourly pay report not available");
+                }
+
+                CityEarningsSnapshot topSnapshot = snapshots.stream()
+                                .max((left, right) -> Double.compare(
+                                                left.scenario().getNetHourly(),
+                                                right.scenario().getNetHourly()))
+                                .orElse(snapshots.get(0));
+                double averageNetHourly = snapshots.stream()
+                                .mapToDouble(snapshot -> snapshot.scenario().getNetHourly())
+                                .average()
+                                .orElse(0);
+
+                java.time.LocalDate now = java.time.LocalDate.now();
+                String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
+                                .format(now);
+                String canonicalUrl = AppConstants.BASE_URL + "/reports/doordash-driver-hourly-pay-2026";
+                String title = "DoorDash Driver Hourly Pay 2026: City Earnings Report";
+                String description = String.format(
+                                "Compare DoorDash driver hourly pay in New York, Denver, Phoenix, Indianapolis, San Jose, Dallas, Los Angeles, and Chicago after mileage and tax assumptions. Updated %s.",
+                                monthYear);
+
+                model.addAttribute("snapshots", snapshots);
+                model.addAttribute("topSnapshot", topSnapshot);
+                model.addAttribute("averageNetHourly", averageNetHourly);
+                model.addAttribute("lastUpdated", monthYear);
+                model.addAttribute("reportJsonLd", buildDoorDashHourlyReportJsonLd(snapshots, canonicalUrl));
+                model.addAttribute("seoMeta",
+                                new SeoMeta(title, description, canonicalUrl, AppConstants.BASE_URL + "/og-image.jpg"));
+
+                return "reports/doordash-hourly-pay-2026";
+        }
+
         @GetMapping("/uber/where-you-can-drive")
         public String uberCoveragePage(Model model) {
                 return renderCoveragePage(
@@ -210,7 +247,7 @@ public class ProgrammaticSeoController {
                                 .map(city -> {
                                         CityScenario scenario = calculateScenario("Side-Hustle",
                                                         city.getMarketTier().getSideHustleGross(), 250, 25, city, app);
-                                        return new CityRankingDto(city, scenario.getNetHourly(), "Side-Hustle");
+                                        return new CityRankingDto(city, scenario.getNetHourly(), "Side-Hustle", scenario);
                                 })
                                 .filter(dto -> dto.netHourly() >= 6.0 && dto.netHourly() <= 45.0) // Sanity Gate
                                 .sorted((c1, c2) -> Double.compare(c2.netHourly(), c1.netHourly()))
@@ -2030,6 +2067,62 @@ public class ProgrammaticSeoController {
                 return new CityEarningsSnapshot(city, scenario, primaryQuery, secondaryQuery, acquisitionNote);
         }
 
+        private List<CityEarningsSnapshot> buildDoorDashHourlyPaySnapshots() {
+                return List.of(
+                                buildDoorDashHourlyPaySnapshot(
+                                                "new-york",
+                                                "doordash hourly pay nyc 2026",
+                                                "average doordash earnings per hour 2025 2026",
+                                                "New York catches broad hourly-pay searches, but the page needs to explain congestion, e-bike economics, and local pay floors instead of quoting a flat national average."),
+                                buildDoorDashHourlyPaySnapshot(
+                                                "denver",
+                                                "doordash driver hourly pay denver 2026",
+                                                "doordash denver side hustle earnings after expenses",
+                                                "Denver is the field-note anchor: it has city-specific DoorDash evidence and suburb mileage context."),
+                                buildDoorDashHourlyPaySnapshot(
+                                                "phoenix",
+                                                "can you make 100 a day with doordash phoenix",
+                                                "doordash phoenix 100 a day earnings 2026",
+                                                "Phoenix ties hourly pay to a daily target because heat, spread, and grocery orders change the number of active hours needed."),
+                                buildDoorDashHourlyPaySnapshot(
+                                                "indianapolis",
+                                                "doordash indianapolis side hustle earnings",
+                                                "how much can you make with doordash in indianapolis",
+                                                "Indianapolis already has an indexed side-hustle page with early query traction, so it belongs in the acquisition set."),
+                                buildDoorDashHourlyPaySnapshot(
+                                                "san-jose",
+                                                "doordash driver pay per hour san jose 2026",
+                                                "doordash prop 22 active time earnings san jose",
+                                                "San Jose needs a California active-time explanation because Prop 22 style searches do not behave like normal hourly-pay searches."),
+                                buildDoorDashHourlyPaySnapshot(
+                                                "dallas",
+                                                "doordash dallas nights and weekends earnings",
+                                                "best city to doordash in dallas fort worth",
+                                                "Dallas connects city-pay intent with nights/weekends planning and DFW zone-crossing decisions."),
+                                buildDoorDashHourlyPaySnapshot(
+                                                "los-angeles",
+                                                "doordash driver pay per hour los angeles 2026",
+                                                "average doordash pay in los angeles after expenses",
+                                                "Los Angeles needs a zone-based explanation because mileage and parking can erase a strong gross order market."),
+                                buildDoorDashHourlyPaySnapshot(
+                                                "chicago",
+                                                "doordash driver hourly pay chicago 2026",
+                                                "how much do doordash drivers make in chicago after expenses",
+                                                "Chicago is useful for comparing dense restaurant demand against parking tickets, winter slowdown, and active-time friction."));
+        }
+
+        private CityEarningsSnapshot buildDoorDashHourlyPaySnapshot(
+                        String citySlug,
+                        String primaryQuery,
+                        String secondaryQuery,
+                        String acquisitionNote) {
+                CityData city = CityData.fromSlug(citySlug)
+                                .orElseThrow(() -> new com.gigwager.exception.ResourceNotFoundException(
+                                                "City not found"));
+                CityScenario scenario = generateScenarioByWorkLevel(city, "doordash", WorkLevel.SIDE_HUSTLE);
+                return new CityEarningsSnapshot(city, scenario, primaryQuery, secondaryQuery, acquisitionNote);
+        }
+
         private String buildUberHourlyReportJsonLd(
                         List<CityEarningsSnapshot> snapshots,
                         String canonicalUrl) {
@@ -2070,6 +2163,54 @@ public class ProgrammaticSeoController {
                 article.put("dateModified", AppConstants.SITEMAP_LASTMOD_DATE);
                 article.put("description",
                                 "City-level Uber driver hourly earnings estimates after mileage and self-employment tax assumptions.");
+                article.put("isAccessibleForFree", true);
+
+                Map<String, Object> graph = new LinkedHashMap<>();
+                graph.put("@context", "https://schema.org");
+                graph.put("@graph", List.of(breadcrumb, article, itemList));
+                return toJsonLd(graph);
+        }
+
+        private String buildDoorDashHourlyReportJsonLd(
+                        List<CityEarningsSnapshot> snapshots,
+                        String canonicalUrl) {
+                Map<String, Object> breadcrumb = new LinkedHashMap<>();
+                breadcrumb.put("@type", "BreadcrumbList");
+                breadcrumb.put("itemListElement", List.of(
+                                buildBreadcrumbItem(1, "Home", AppConstants.BASE_URL + "/"),
+                                buildBreadcrumbItem(2, "City Earnings Reports",
+                                                AppConstants.BASE_URL + "/salary/directory"),
+                                buildBreadcrumbItem(3, "DoorDash Driver Hourly Pay 2026", canonicalUrl)));
+
+                List<Map<String, Object>> itemListElements = new ArrayList<>();
+                for (int i = 0; i < snapshots.size(); i++) {
+                        CityEarningsSnapshot snapshot = snapshots.get(i);
+                        Map<String, Object> listItem = new LinkedHashMap<>();
+                        listItem.put("@type", "ListItem");
+                        listItem.put("position", i + 1);
+                        listItem.put("name", String.format(
+                                        "DoorDash driver hourly pay in %s, %s",
+                                        snapshot.city().getCityName(),
+                                        snapshot.city().getState()));
+                        listItem.put("url", String.format(
+                                        "%s/salary/doordash/%s",
+                                        AppConstants.BASE_URL,
+                                        snapshot.city().getSlug()));
+                        itemListElements.add(listItem);
+                }
+
+                Map<String, Object> itemList = new LinkedHashMap<>();
+                itemList.put("@type", "ItemList");
+                itemList.put("name", "DoorDash driver hourly pay city snapshots");
+                itemList.put("itemListElement", itemListElements);
+
+                Map<String, Object> article = new LinkedHashMap<>();
+                article.put("@type", "Article");
+                article.put("headline", "DoorDash Driver Hourly Pay 2026: City Earnings Report");
+                article.put("url", canonicalUrl);
+                article.put("dateModified", AppConstants.SITEMAP_LASTMOD_DATE);
+                article.put("description",
+                                "City-level DoorDash driver hourly pay estimates after mileage and self-employment tax assumptions.");
                 article.put("isAccessibleForFree", true);
 
                 Map<String, Object> graph = new LinkedHashMap<>();

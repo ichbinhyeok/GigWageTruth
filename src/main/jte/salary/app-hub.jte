@@ -87,6 +87,10 @@
                     <p class="text-sm text-slate-600 mb-5">These reports combine the net estimate with field-test context, active-time checks, dollar-per-mile pressure, and city-specific driver evidence.</p>
                     <div class="grid md:grid-cols-2 gap-3">
                         @if(app.equals("doordash"))
+                            <a href="/reports/doordash-driver-hourly-pay-2026" class="rounded-2xl border border-emerald-200 bg-emerald-50 px-5 py-4 hover:border-emerald-300 transition-colors">
+                                <strong class="block text-slate-900">DoorDash driver hourly pay 2026 report</strong>
+                                <span class="text-sm text-slate-600">Eight-city dataset for hourly pay, $100/day, and after-expenses searches.</span>
+                            </a>
                             <a href="/salary/doordash/denver/side-hustle" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
                                 <strong class="block text-slate-900">DoorDash Denver side-hustle earnings</strong>
                                 <span class="text-sm text-slate-600">Suburban mileage and active-time pressure.</span>

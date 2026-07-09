@@ -61,17 +61,25 @@
                                 <strong class="block">DoorDash highest-paying cities</strong>
                                 <span class="text-xs text-slate-300">Ranking intent page</span>
                             </a>
+                            <a href="/reports/doordash-driver-hourly-pay-2026" class="rounded-xl bg-white/5 border border-white/10 px-4 py-3 hover:bg-white/10 transition-colors">
+                                <strong class="block">DoorDash hourly pay 2026 report</strong>
+                                <span class="text-xs text-slate-300">City pay dataset</span>
+                            </a>
                         </div>
                     </section>
 
                     <section class="bg-emerald-50 rounded-2xl border border-emerald-100 p-6 mb-8">
                         <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-700 mb-2">Hourly earnings quick wins</p>
-                        <h2 class="text-2xl font-black text-slate-900 mb-3">Uber city hourly earnings pages to check first</h2>
-                        <p class="text-sm text-slate-600 mb-5">These city pages answer the hourly earnings and rideshare driver earnings questions drivers usually compare before choosing a market.</p>
+                        <h2 class="text-2xl font-black text-slate-900 mb-3">Hourly pay reports to check first</h2>
+                        <p class="text-sm text-slate-600 mb-5">These reports answer the hourly earnings, city pay, and after-expenses questions drivers usually compare before choosing a market.</p>
                         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
                             <a href="/reports/uber-driver-hourly-earnings-2026" class="rounded-xl bg-white border border-emerald-200 px-4 py-3 hover:border-emerald-300 transition-colors">
                                 <strong class="block text-slate-900">Uber driver hourly earnings 2026 report</strong>
                                 <span class="text-xs text-slate-600">Six-city comparison and citation page.</span>
+                            </a>
+                            <a href="/reports/doordash-driver-hourly-pay-2026" class="rounded-xl bg-white border border-emerald-200 px-4 py-3 hover:border-emerald-300 transition-colors">
+                                <strong class="block text-slate-900">DoorDash driver hourly pay 2026 report</strong>
+                                <span class="text-xs text-slate-600">Eight-city pay dataset and $100/day bridge.</span>
                             </a>
                             <a href="/salary/uber/atlanta" class="rounded-xl bg-white border border-emerald-100 px-4 py-3 hover:border-emerald-300 transition-colors">
                                 <strong class="block text-slate-900">Uber driver hourly earnings Atlanta GA 2026</strong>
