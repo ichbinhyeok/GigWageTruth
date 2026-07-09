@@ -155,6 +155,8 @@
             <p class="text-slate-900 font-semibold mb-2">GigWageTruth</p>
             <div class="flex flex-col md:flex-row flex-wrap justify-center items-center gap-x-6 gap-y-3 mb-6 text-sm text-slate-500">
                 <a href="/net-hourly-calculator" class="hover:text-emerald-600 transition">Net Hourly Tool</a>
+                <a href="/doordash/earnings-calculator" class="hover:text-emerald-600 transition">DoorDash Earnings Calculator</a>
+                <a href="/uber/pay-calculator" class="hover:text-emerald-600 transition">Uber Pay Calculator</a>
                 <a href="/taxes/quarterly-estimator" class="hover:text-emerald-600 transition">Quarterly Taxes</a>
                 <a href="/vehicle-cost/cost-per-mile" class="hover:text-emerald-600 transition">Cost Per Mile</a>
                 <a href="/salary/directory" class="hover:text-emerald-600 transition">City Earnings</a>

@@ -76,6 +76,38 @@
                         </div>
                     </section>
 
+                    <section class="bg-white rounded-2xl border border-slate-200 p-6 mb-8">
+                        <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-700 mb-2">Calculator intent shortcuts</p>
+                        <h2 class="text-2xl font-black text-slate-900 mb-3">Use a calculator page when the query asks for inputs</h2>
+                        <p class="text-sm text-slate-600 mb-5">These pages catch calculator searches that should not land on a generic directory or city page.</p>
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+                            <a href="/doordash/earnings-calculator" class="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 hover:border-emerald-300 transition-colors">
+                                <strong class="block text-slate-900">DoorDash earnings calculator</strong>
+                                <span class="text-xs text-slate-600">Net pay after gas, miles, and tax reserve.</span>
+                            </a>
+                            <a href="/doordash/gas-calculator" class="rounded-xl border border-slate-200 px-4 py-3 hover:border-emerald-300 hover:bg-emerald-50 transition-colors">
+                                <strong class="block text-slate-900">DoorDash gas calculator</strong>
+                                <span class="text-xs text-slate-600">Fuel cost plus full mileage pressure.</span>
+                            </a>
+                            <a href="/doordash/mileage-deduction-calculator" class="rounded-xl border border-slate-200 px-4 py-3 hover:border-emerald-300 hover:bg-emerald-50 transition-colors">
+                                <strong class="block text-slate-900">DoorDash mileage deduction calculator</strong>
+                                <span class="text-xs text-slate-600">IRS mile math and tax-reserve routing.</span>
+                            </a>
+                            <a href="/uber/pay-calculator" class="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 hover:border-emerald-300 transition-colors">
+                                <strong class="block text-slate-900">Uber pay calculator</strong>
+                                <span class="text-xs text-slate-600">Driver pay after expenses and dead miles.</span>
+                            </a>
+                            <a href="/uber/income-calculator" class="rounded-xl border border-slate-200 px-4 py-3 hover:border-emerald-300 hover:bg-emerald-50 transition-colors">
+                                <strong class="block text-slate-900">Uber income calculator</strong>
+                                <span class="text-xs text-slate-600">Weekly take-home instead of gross screenshots.</span>
+                            </a>
+                            <a href="/uber/tlc-pay-calculator" class="rounded-xl border border-slate-200 px-4 py-3 hover:border-emerald-300 hover:bg-emerald-50 transition-colors">
+                                <strong class="block text-slate-900">TLC pay calculator</strong>
+                                <span class="text-xs text-slate-600">NYC Uber/TLC hours, miles, and car cost.</span>
+                            </a>
+                        </div>
+                    </section>
+
                     <section class="bg-emerald-50 rounded-2xl border border-emerald-100 p-6 mb-8">
                         <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-700 mb-2">Hourly earnings quick wins</p>
                         <h2 class="text-2xl font-black text-slate-900 mb-3">Hourly pay reports to check first</h2>

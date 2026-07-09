@@ -159,6 +159,12 @@
                                 <a href="/net-hourly-calculator" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
                                     Net hourly calculator
                                 </a>
+                                <a href="/uber/pay-calculator" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
+                                    Uber pay calculator
+                                </a>
+                                <a href="/doordash/earnings-calculator" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
+                                    DoorDash earnings calculator
+                                </a>
                                 <a href="/taxes/quarterly-estimator" class="rounded-xl border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition-colors">
                                     Tax set-aside planner
                                 </a>

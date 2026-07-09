@@ -24,6 +24,7 @@ import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -41,7 +42,7 @@ public class OrganicMonitoringRegressionTest {
                 .andReturn();
         String sitemap = sitemapResult.getResponse().getContentAsString();
 
-        List<String> topUrls = extractLocUrls(sitemap).stream()
+        List<String> topUrls = extractPageUrlsFromSitemap(sitemap).stream()
                 .filter(url -> url.startsWith(AppConstants.BASE_URL + "/"))
                 .limit(20)
                 .toList();
@@ -173,6 +174,12 @@ public class OrganicMonitoringRegressionTest {
                 "/doordash/how-much-can-you-make-in-a-day",
                 "/doordash/can-you-make-100-a-day",
                 "/doordash/after-gas",
+                "/doordash/earnings-calculator",
+                "/doordash/gas-calculator",
+                "/doordash/mileage-deduction-calculator",
+                "/uber/pay-calculator",
+                "/uber/income-calculator",
+                "/uber/tlc-pay-calculator",
                 "/best-cities/doordash",
                 "/salary/doordash/denver",
                 "/salary/doordash/denver/side-hustle",
@@ -229,6 +236,116 @@ public class OrganicMonitoringRegressionTest {
         mockMvc.perform(get("/uber/pay-per-mile"))
                 .andExpect(status().isMovedPermanently())
                 .andExpect(redirectedUrl("/salary/uber/chicago/per-mile"));
+        mockMvc.perform(get("/doordash/doordash-calculator"))
+                .andExpect(status().isMovedPermanently())
+                .andExpect(redirectedUrl("/doordash/earnings-calculator"));
+        mockMvc.perform(get("/doordash/gas-cost-calculator"))
+                .andExpect(status().isMovedPermanently())
+                .andExpect(redirectedUrl("/doordash/gas-calculator"));
+        mockMvc.perform(get("/doordash/irs-mileage-calculator"))
+                .andExpect(status().isMovedPermanently())
+                .andExpect(redirectedUrl("/doordash/mileage-deduction-calculator"));
+        mockMvc.perform(get("/uber/driver-pay-calculator"))
+                .andExpect(status().isMovedPermanently())
+                .andExpect(redirectedUrl("/uber/pay-calculator"));
+        mockMvc.perform(get("/uber/salary-calculator"))
+                .andExpect(status().isMovedPermanently())
+                .andExpect(redirectedUrl("/uber/income-calculator"));
+        mockMvc.perform(get("/tlc-pay-calculator"))
+                .andExpect(status().isMovedPermanently())
+                .andExpect(redirectedUrl("/uber/tlc-pay-calculator"));
+    }
+
+    @Test
+    public void calculatorIntentPagesShouldMatchGscQueriesAndLinkIntoTools() throws Exception {
+        MvcResult doordashResult = mockMvc.perform(get("/doordash/earnings-calculator"))
+                .andExpect(status().isOk())
+                .andReturn();
+        Document doordashDoc = Jsoup.parse(doordashResult.getResponse().getContentAsString(),
+                AppConstants.BASE_URL + "/doordash/earnings-calculator");
+        assertTrue(doordashDoc.title().contains("DoorDash Earnings Calculator"),
+                "DoorDash calculator page should target the exact earnings calculator query");
+        assertTrue(firstH1(doordashDoc).contains("DoorDash Earnings Calculator"),
+                "DoorDash calculator page should expose query-matched H1");
+        assertTrue(doordashDoc.html().contains("/doordash?gross="),
+                "DoorDash calculator page should link to a prefilled calculator");
+        assertTrue(doordashDoc.html().contains("/doordash/gas-calculator"),
+                "DoorDash calculator page should link adjacent calculator intent");
+
+        MvcResult uberResult = mockMvc.perform(get("/uber/pay-calculator"))
+                .andExpect(status().isOk())
+                .andReturn();
+        Document uberDoc = Jsoup.parse(uberResult.getResponse().getContentAsString(),
+                AppConstants.BASE_URL + "/uber/pay-calculator");
+        assertTrue(uberDoc.title().contains("Uber Pay Calculator"),
+                "Uber pay calculator page should target the exact pay calculator query");
+        assertTrue(firstH1(uberDoc).contains("Uber Pay Calculator"),
+                "Uber pay calculator page should expose query-matched H1");
+        assertTrue(uberDoc.html().contains("/uber?gross="),
+                "Uber pay calculator page should link to a prefilled calculator");
+        assertTrue(uberDoc.text().contains("Frequently Asked Questions"),
+                "Calculator intent pages should render visible FAQ for FAQPage schema");
+    }
+
+    @Test
+    public void sitemapShouldStageCoreReportsCityAndLongtailUrls() throws Exception {
+        String sitemapIndex = mockMvc.perform(get("/sitemap.xml"))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+        assertTrue(sitemapIndex.contains("/sitemap-core.xml"), "Sitemap index should include core sitemap");
+        assertTrue(sitemapIndex.contains("/sitemap-reports.xml"), "Sitemap index should include reports sitemap");
+        assertTrue(sitemapIndex.contains("/sitemap-city.xml"), "Sitemap index should include city sitemap");
+        assertTrue(sitemapIndex.contains("/sitemap-longtail.xml"), "Sitemap index should include longtail sitemap");
+
+        String core = mockMvc.perform(get("/sitemap-core.xml"))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+        assertTrue(core.contains("/doordash/earnings-calculator"),
+                "Core sitemap should include high-intent calculator pages");
+        assertTrue(core.contains("/uber/pay-calculator"),
+                "Core sitemap should include Uber calculator intent pages");
+        assertTrue(!core.contains("<priority>") && !core.contains("<changefreq>"),
+                "Sitemaps should not emit ignored priority/changefreq hints");
+
+        String city = mockMvc.perform(get("/sitemap-city.xml"))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+        assertTrue(city.contains("<lastmod>2026-07-06</lastmod>"),
+                "City sitemap should keep a city-data lastmod instead of marking every URL fresh today");
+    }
+
+    @Test
+    public void driverReportFormShouldPostToInternalReviewQueue() throws Exception {
+        mockMvc.perform(post("/driver-reports/submit")
+                .param("source_page", "city_report")
+                .param("source_path", "/salary/doordash/denver")
+                .param("app", "doordash")
+                .param("app_name", "DoorDash")
+                .param("city", "Denver")
+                .param("city_slug", "denver")
+                .param("modeled_net_hourly", "18.42")
+                .param("weekly_gross", "560")
+                .param("weekly_miles", "210")
+                .param("weekly_hours", "24")
+                .param("driver_note", "Dinner shifts had long waits."))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/driver-report-submitted"));
+
+        MvcResult result = mockMvc.perform(get("/driver-report-submitted"))
+                .andExpect(status().isOk())
+                .andReturn();
+        Document doc = Jsoup.parse(result.getResponse().getContentAsString(),
+                AppConstants.BASE_URL + "/driver-report-submitted");
+        assertTrue(metaContent(doc, "robots").contains("noindex"),
+                "Submitted page should stay noindex");
+        assertTrue(doc.text().contains("queued for editorial review"),
+                "Submitted page should explain the review queue");
     }
 
     @Test
@@ -820,6 +937,23 @@ public class OrganicMonitoringRegressionTest {
         assertTrue(robots != null && robots.contains("noindex"), path + " should be noindex");
         assertTrue(expectedCanonical.equals(canonical),
                 path + " canonical mismatch. expected=" + expectedCanonical + ", actual=" + canonical);
+    }
+
+    private List<String> extractPageUrlsFromSitemap(String sitemap) throws Exception {
+        List<String> urls = extractLocUrls(sitemap);
+        if (!sitemap.contains("<sitemapindex")) {
+            return urls;
+        }
+
+        List<String> pageUrls = new ArrayList<>();
+        for (String sitemapUrl : urls) {
+            String path = sitemapUrl.replace(AppConstants.BASE_URL, "");
+            MvcResult child = mockMvc.perform(get(path))
+                    .andExpect(status().isOk())
+                    .andReturn();
+            pageUrls.addAll(extractLocUrls(child.getResponse().getContentAsString()));
+        }
+        return pageUrls;
     }
 
     private static List<String> extractLocUrls(String sitemap) {

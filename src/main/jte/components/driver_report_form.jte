@@ -28,7 +28,7 @@
                 </div>
             </div>
 
-            <form action="https://formspree.io/f/mqkenryp" method="POST" class="grid sm:grid-cols-2 gap-4" onsubmit="gtag('event','cta_click',{'event_category':'driver_report','event_label':'submit_driver_report'});">
+            <form action="/driver-reports/submit" method="POST" class="grid sm:grid-cols-2 gap-4" onsubmit="gtag('event','cta_click',{'event_category':'driver_report','event_label':'submit_driver_report'});">
                 <input type="hidden" name="lead_type" value="driver_earnings_report">
                 <input type="hidden" name="source_page" value="${sourcePage}">
                 <input type="hidden" name="source_path" value="${sourcePath}">

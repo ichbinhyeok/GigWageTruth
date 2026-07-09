@@ -292,7 +292,7 @@ public class PlaywrightBetaE2ETest {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder(URI.create(baseUrl + "/sitemap.xml")).GET().build();
         HttpResponse<String> sitemapResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
-        List<String> urls = extractLocUrls(sitemapResponse.body());
+        List<String> urls = extractPageUrlsFromSitemap(sitemapResponse.body(), client);
         List<String> top20 = urls.stream().limit(20).toList();
 
         List<String> failures = new ArrayList<>();
@@ -383,6 +383,21 @@ public class PlaywrightBetaE2ETest {
             urls.add(matcher.group(1).trim().replace("https://gigverdict.com", baseUrl));
         }
         return urls;
+    }
+
+    private List<String> extractPageUrlsFromSitemap(String xml, HttpClient client) throws Exception {
+        List<String> urls = extractLocUrls(xml);
+        if (!xml.contains("<sitemapindex")) {
+            return urls;
+        }
+
+        List<String> pageUrls = new ArrayList<>();
+        for (String sitemapUrl : urls) {
+            HttpRequest request = HttpRequest.newBuilder(URI.create(sitemapUrl)).GET().build();
+            HttpResponse<String> child = client.send(request, HttpResponse.BodyHandlers.ofString());
+            pageUrls.addAll(extractLocUrls(child.body()));
+        }
+        return pageUrls;
     }
 
     private static String attrOrEmpty(Page page, String selector, String attr) {

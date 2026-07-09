@@ -1,17 +1,23 @@
 package com.gigwager.controller;
 
-import com.gigwager.util.AppConstants;
+import com.gigwager.model.CalculatorIntentPage;
 import com.gigwager.model.CityData;
 import com.gigwager.model.CityIntentPage;
 import com.gigwager.model.WorkLevel;
 import com.gigwager.service.DataLayerService;
 import com.gigwager.service.PageIndexPolicyService;
+import com.gigwager.util.AppConstants;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class SitemapController {
+
+    private static final String CORE_LASTMOD = AppConstants.SITEMAP_LASTMOD_DATE;
+    private static final String REPORT_LASTMOD = AppConstants.SITEMAP_LASTMOD_DATE;
+    private static final String CITY_DATA_LASTMOD = "2026-07-06";
+    private static final String EVERGREEN_LASTMOD = "2026-07-06";
 
     private final PageIndexPolicyService pageIndexPolicyService;
     private final DataLayerService dataLayerService;
@@ -22,110 +28,148 @@ public class SitemapController {
     }
 
     @GetMapping(value = "/sitemap.xml", produces = MediaType.APPLICATION_XML_VALUE)
-    public String sitemap() {
+    public String sitemapIndex() {
         StringBuilder xml = new StringBuilder();
         xml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-        xml.append("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n");
+        xml.append("<sitemapindex xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n");
+        addSitemap(xml, "/sitemap-core.xml", CORE_LASTMOD);
+        addSitemap(xml, "/sitemap-reports.xml", REPORT_LASTMOD);
+        addSitemap(xml, "/sitemap-city.xml", CITY_DATA_LASTMOD);
+        addSitemap(xml, "/sitemap-longtail.xml", CITY_DATA_LASTMOD);
+        xml.append("</sitemapindex>");
+        return xml.toString();
+    }
 
-        // Keep lastmod tied to actual content/data refresh, not calendar rollover.
-        String today = AppConstants.SITEMAP_LASTMOD_DATE;
+    @GetMapping(value = "/sitemap-core.xml", produces = MediaType.APPLICATION_XML_VALUE)
+    public String coreSitemap() {
+        StringBuilder xml = startUrlset();
 
-        // Main pages
-        addUrl(xml, AppConstants.BASE_URL + "/", today, "weekly", "1.0");
-        addUrl(xml, AppConstants.BASE_URL + "/uber", today, "weekly", "0.9");
-        addUrl(xml, AppConstants.BASE_URL + "/doordash", today, "weekly", "0.9");
+        addUrl(xml, "/", CORE_LASTMOD);
+        addUrl(xml, "/uber", CORE_LASTMOD);
+        addUrl(xml, "/doordash", CORE_LASTMOD);
+        addUrl(xml, "/salary/directory", CORE_LASTMOD);
+        addUrl(xml, "/salary/uber", CORE_LASTMOD);
+        addUrl(xml, "/salary/doordash", CORE_LASTMOD);
+        addUrl(xml, "/best-cities/uber", CORE_LASTMOD);
+        addUrl(xml, "/best-cities/doordash", CORE_LASTMOD);
+        addUrl(xml, "/uber/where-you-can-drive", CORE_LASTMOD);
+        addUrl(xml, "/doordash/where-you-can-dash", CORE_LASTMOD);
 
-        // Salary directory (Hub page - highest priority)
-        addUrl(xml, AppConstants.BASE_URL + "/salary/directory", today, "weekly", "0.9");
-        addUrl(xml, AppConstants.BASE_URL + "/reports/uber-driver-hourly-earnings-2026", today, "weekly", "0.9");
-        addUrl(xml, AppConstants.BASE_URL + "/reports/doordash-driver-hourly-pay-2026", today, "weekly", "0.9");
-        addUrl(xml, AppConstants.BASE_URL + "/reports/doordash-driver-shift-evidence-2026", today, "weekly", "0.9");
-        addUrl(xml, AppConstants.BASE_URL + "/doordash/how-much-can-you-make-in-3-hours", today, "weekly", "0.8");
-        addUrl(xml, AppConstants.BASE_URL + "/doordash/how-much-can-you-make-in-4-hours", today, "weekly", "0.8");
-        addUrl(xml, AppConstants.BASE_URL + "/doordash/how-much-can-you-make-in-6-hours", today, "weekly", "0.8");
-        addUrl(xml, AppConstants.BASE_URL + "/doordash/how-much-can-you-make-in-8-hours", today, "weekly", "0.8");
-        addUrl(xml, AppConstants.BASE_URL + "/doordash/how-much-can-you-make-in-a-day", today, "weekly", "0.8");
-        addUrl(xml, AppConstants.BASE_URL + "/doordash/how-much-can-you-make-in-a-week", today, "weekly", "0.8");
-        addUrl(xml, AppConstants.BASE_URL + "/doordash/can-you-make-100-a-day", today, "weekly", "0.8");
-        addUrl(xml, AppConstants.BASE_URL + "/doordash/can-you-make-200-a-day", today, "weekly", "0.8");
-        addUrl(xml, AppConstants.BASE_URL + "/doordash/after-gas", today, "weekly", "0.8");
-        addUrl(xml, AppConstants.BASE_URL + "/doordash/pay-per-mile", today, "weekly", "0.8");
+        for (CalculatorIntentPage intentPage : CalculatorIntentPage.values()) {
+            addUrl(xml, intentPage.path(), CORE_LASTMOD);
+        }
 
-        // Quality Gate: Programmatic SEO pages (City & Work-Level)
-        // Add only those that pass the PageIndexPolicyService
+        addUrl(xml, "/uber-after-expenses", EVERGREEN_LASTMOD);
+        addUrl(xml, "/doordash-after-expenses", EVERGREEN_LASTMOD);
+        addUrl(xml, "/net-hourly-calculator", CORE_LASTMOD);
+        addUrl(xml, "/multi-apping", EVERGREEN_LASTMOD);
+        addUrl(xml, "/profit-setup-kit", EVERGREEN_LASTMOD);
+        addUrl(xml, "/taxes", EVERGREEN_LASTMOD);
+        addUrl(xml, "/taxes/quarterly-estimator", EVERGREEN_LASTMOD);
+        addUrl(xml, "/insurance", EVERGREEN_LASTMOD);
+        addUrl(xml, "/insurance/rideshare-basics", EVERGREEN_LASTMOD);
+        addUrl(xml, "/vehicle-cost", EVERGREEN_LASTMOD);
+        addUrl(xml, "/vehicle-cost/cost-per-mile", EVERGREEN_LASTMOD);
+        addUrl(xml, "/blog", EVERGREEN_LASTMOD);
+        addUrl(xml, "/blog/multi-apping-guide", EVERGREEN_LASTMOD);
+        addUrl(xml, "/blog/tax-guide", EVERGREEN_LASTMOD);
+        addUrl(xml, "/blog/uber-vs-doordash", EVERGREEN_LASTMOD);
+        addUrl(xml, "/blog/hidden-costs", EVERGREEN_LASTMOD);
+        addUrl(xml, "/methodology", EVERGREEN_LASTMOD);
+
+        return endUrlset(xml);
+    }
+
+    @GetMapping(value = "/sitemap-reports.xml", produces = MediaType.APPLICATION_XML_VALUE)
+    public String reportSitemap() {
+        StringBuilder xml = startUrlset();
+
+        addUrl(xml, "/reports/uber-driver-hourly-earnings-2026", REPORT_LASTMOD);
+        addUrl(xml, "/reports/doordash-driver-hourly-pay-2026", REPORT_LASTMOD);
+        addUrl(xml, "/reports/doordash-driver-shift-evidence-2026", REPORT_LASTMOD);
+        addUrl(xml, "/doordash/how-much-can-you-make-in-3-hours", REPORT_LASTMOD);
+        addUrl(xml, "/doordash/how-much-can-you-make-in-4-hours", REPORT_LASTMOD);
+        addUrl(xml, "/doordash/how-much-can-you-make-in-6-hours", REPORT_LASTMOD);
+        addUrl(xml, "/doordash/how-much-can-you-make-in-8-hours", REPORT_LASTMOD);
+        addUrl(xml, "/doordash/how-much-can-you-make-in-a-day", REPORT_LASTMOD);
+        addUrl(xml, "/doordash/how-much-can-you-make-in-a-week", REPORT_LASTMOD);
+        addUrl(xml, "/doordash/can-you-make-100-a-day", REPORT_LASTMOD);
+        addUrl(xml, "/doordash/can-you-make-200-a-day", REPORT_LASTMOD);
+        addUrl(xml, "/doordash/after-gas", REPORT_LASTMOD);
+        addUrl(xml, "/doordash/pay-per-mile", REPORT_LASTMOD);
+
+        return endUrlset(xml);
+    }
+
+    @GetMapping(value = "/sitemap-city.xml", produces = MediaType.APPLICATION_XML_VALUE)
+    public String citySitemap() {
+        StringBuilder xml = startUrlset();
+
         for (String app : new String[] { "uber", "doordash" }) {
-            // App Hubs
-            addUrl(xml, AppConstants.BASE_URL + "/salary/" + app, today, "weekly", "0.8");
-            if (app.equals("uber")) {
-                addUrl(xml, AppConstants.BASE_URL + "/uber/where-you-can-drive", today, "weekly", "0.8");
-            } else {
-                addUrl(xml, AppConstants.BASE_URL + "/doordash/where-you-can-dash", today, "weekly", "0.8");
-            }
-            addUrl(xml, AppConstants.BASE_URL + "/best-cities/" + app, today, "weekly", "0.8");
-
             for (CityData city : CityData.values()) {
                 if (pageIndexPolicyService.isCityReportIndexable(city)) {
-                    addUrl(xml, AppConstants.BASE_URL + "/salary/" + app + "/" + city.getSlug(), today, "weekly",
-                            "0.8");
+                    addUrl(xml, "/salary/" + app + "/" + city.getSlug(), CITY_DATA_LASTMOD);
 
-                    // Add Compare pages
                     if (app.equals("uber") && dataLayerService.hasRichLocalData(city.getSlug())) {
-                        addUrl(xml, AppConstants.BASE_URL + "/compare/" + city.getSlug() + "/uber-vs-doordash", today,
-                                "monthly", "0.7");
+                        addUrl(xml, "/compare/" + city.getSlug() + "/uber-vs-doordash", CITY_DATA_LASTMOD);
                     }
+                }
+            }
+        }
 
+        return endUrlset(xml);
+    }
+
+    @GetMapping(value = "/sitemap-longtail.xml", produces = MediaType.APPLICATION_XML_VALUE)
+    public String longtailSitemap() {
+        StringBuilder xml = startUrlset();
+
+        for (String app : new String[] { "uber", "doordash" }) {
+            for (CityData city : CityData.values()) {
+                if (pageIndexPolicyService.isCityReportIndexable(city)) {
                     for (WorkLevel workLevel : WorkLevel.values()) {
                         if (pageIndexPolicyService.isWorkLevelReportIndexable(city, workLevel)) {
-                            addUrl(xml, AppConstants.BASE_URL + "/salary/" + app + "/" + city.getSlug() + "/"
-                                    + workLevel.getSlug(), today, "monthly", "0.7");
+                            addUrl(xml, "/salary/" + app + "/" + city.getSlug() + "/" + workLevel.getSlug(),
+                                    CITY_DATA_LASTMOD);
                         }
                     }
 
                     for (CityIntentPage intentPage : CityIntentPage.values()) {
                         if (intentPage.isSupportedForApp(app)) {
-                            addUrl(xml, AppConstants.BASE_URL + "/salary/" + app + "/" + city.getSlug() + "/"
-                                    + intentPage.getSlug(), today, "monthly", "0.6");
+                            addUrl(xml, "/salary/" + app + "/" + city.getSlug() + "/" + intentPage.getSlug(),
+                                    CITY_DATA_LASTMOD);
                         }
                     }
                 }
             }
         }
 
-        // Phase 2 Intent Hubs
-        addUrl(xml, AppConstants.BASE_URL + "/uber-after-expenses", today, "monthly", "0.9");
-        addUrl(xml, AppConstants.BASE_URL + "/doordash-after-expenses", today, "monthly", "0.9");
-        addUrl(xml, AppConstants.BASE_URL + "/net-hourly-calculator", today, "monthly", "0.9");
-        addUrl(xml, AppConstants.BASE_URL + "/multi-apping", today, "monthly", "0.8");
+        return endUrlset(xml);
+    }
 
-        // Blog
-        addUrl(xml, AppConstants.BASE_URL + "/blog", today, "monthly", "0.8");
-        addUrl(xml, AppConstants.BASE_URL + "/blog/multi-apping-guide", today, "monthly", "0.7");
-        addUrl(xml, AppConstants.BASE_URL + "/blog/tax-guide", today, "monthly", "0.7");
-        addUrl(xml, AppConstants.BASE_URL + "/blog/uber-vs-doordash", today, "monthly", "0.7");
-        addUrl(xml, AppConstants.BASE_URL + "/blog/hidden-costs", today, "monthly", "0.7");
+    private StringBuilder startUrlset() {
+        StringBuilder xml = new StringBuilder();
+        xml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+        xml.append("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n");
+        return xml;
+    }
 
-        // Cluster Pillars
-        addUrl(xml, AppConstants.BASE_URL + "/profit-setup-kit", today, "monthly", "0.8");
-        addUrl(xml, AppConstants.BASE_URL + "/taxes", today, "monthly", "0.8");
-        addUrl(xml, AppConstants.BASE_URL + "/taxes/quarterly-estimator", today, "monthly", "0.7");
-        addUrl(xml, AppConstants.BASE_URL + "/insurance", today, "monthly", "0.8");
-        addUrl(xml, AppConstants.BASE_URL + "/insurance/rideshare-basics", today, "monthly", "0.7");
-        addUrl(xml, AppConstants.BASE_URL + "/vehicle-cost", today, "monthly", "0.8");
-        addUrl(xml, AppConstants.BASE_URL + "/vehicle-cost/cost-per-mile", today, "monthly", "0.7");
-
-        // Static pages
-        addUrl(xml, AppConstants.BASE_URL + "/methodology", today, "yearly", "0.5");
-
+    private String endUrlset(StringBuilder xml) {
         xml.append("</urlset>");
         return xml.toString();
     }
 
-    private void addUrl(StringBuilder xml, String loc, String lastmod, String changefreq, String priority) {
-        xml.append("    <url>\n");
-        xml.append("        <loc>").append(loc).append("</loc>\n");
+    private void addSitemap(StringBuilder xml, String path, String lastmod) {
+        xml.append("    <sitemap>\n");
+        xml.append("        <loc>").append(AppConstants.BASE_URL).append(path).append("</loc>\n");
         xml.append("        <lastmod>").append(lastmod).append("</lastmod>\n");
-        xml.append("        <changefreq>").append(changefreq).append("</changefreq>\n");
-        xml.append("        <priority>").append(priority).append("</priority>\n");
+        xml.append("    </sitemap>\n");
+    }
+
+    private void addUrl(StringBuilder xml, String path, String lastmod) {
+        xml.append("    <url>\n");
+        xml.append("        <loc>").append(AppConstants.BASE_URL).append(path).append("</loc>\n");
+        xml.append("        <lastmod>").append(lastmod).append("</lastmod>\n");
         xml.append("    </url>\n");
     }
 }
