@@ -3,7 +3,7 @@
 
 !{
     var seoMeta = new SeoMeta(
-        "Page Not Found - GigWageTruth",
+        "Page Not Found - GigVerdict",
         "The page you are looking for does not exist.",
         com.gigwager.util.AppConstants.BASE_URL + "/404",
         com.gigwager.util.AppConstants.BASE_URL + "/og-image.jpg"

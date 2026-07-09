@@ -5,13 +5,13 @@
     noIndex = noIndex,
     seoMeta = new SeoMeta(
         customTitle,
-        "Meet Gabi and the team behind GigWageTruth. We reveal the hidden costs of gig work.",
+        "Meet Gabi and the team behind GigVerdict. We reveal the hidden costs of gig work.",
         com.gigwager.util.AppConstants.BASE_URL + "/about",
         com.gigwager.util.AppConstants.BASE_URL + "/og-image.jpg"
     ),
     content = @`
         <div class="max-w-3xl mx-auto px-6 py-12">
-            <h1 class="text-4xl font-bold text-slate-900 mb-6">About GigWageTruth</h1>
+            <h1 class="text-4xl font-bold text-slate-900 mb-6">About GigVerdict</h1>
 
             <div class="prose prose-slate max-w-none">
                 <p class="text-lg text-slate-600 mb-8">
@@ -45,7 +45,7 @@
 
                 <h2 class="text-2xl font-bold text-slate-900 mt-12 mb-4">Our Mission</h2>
                 <p class="mb-4">
-                    I built <strong>GigWageTruth</strong> to give every driver the tool I built for my friends.
+                    I built <strong>GigVerdict</strong> to give every driver the tool I built for my friends.
                     We are not here to discourage you from gig work. We are here to arm you with the <strong>truth</strong>.
                 </p>
                 <p class="mb-4">

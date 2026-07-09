@@ -293,6 +293,12 @@ public class OrganicMonitoringRegressionTest {
                 "Adjustment page should include the Seattle adjusted pay rule");
         assertTrue(adjustmentDoc.text().contains("Pay adjustment estimate"),
                 "Adjustment page should expose the calculator result label");
+        assertTrue(adjustmentDoc.text().contains("Selected market"),
+                "Adjustment page summary should reflect the currently selected preset instead of a stale default market");
+        assertTrue(adjustmentDoc.html().contains("id=\"adjustment-direct-answer\""),
+                "Adjustment direct-answer copy should be updated by the selected market and live inputs");
+        assertTrue(adjustmentDoc.html().contains("data-market=\"New York City\""),
+                "Adjustment presets should carry market labels for live summary updates");
         assertTrue(adjustmentDoc.html().contains("https://help.doordash.com/en-us/dashers/article/california-dashers"),
                 "Adjustment page should cite the official DoorDash Prop 22 guide");
         assertTrue(adjustmentDoc.html().contains("/reports/doordash-driver-hourly-pay-2026"),
@@ -391,6 +397,18 @@ public class OrganicMonitoringRegressionTest {
                 "Submitted page should stay noindex");
         assertTrue(doc.text().contains("queued for editorial review"),
                 "Submitted page should explain the review queue");
+    }
+
+    @Test
+    public void driverReportFormShouldRejectBlankMoneyInputs() throws Exception {
+        mockMvc.perform(post("/driver-reports/submit")
+                .param("source_page", "city_report")
+                .param("source_path", "/salary/doordash/denver")
+                .param("app", "doordash")
+                .param("app_name", "DoorDash")
+                .param("city", "Denver")
+                .param("city_slug", "denver"))
+                .andExpect(status().isBadRequest());
     }
 
     @Test
@@ -685,8 +703,10 @@ public class OrganicMonitoringRegressionTest {
                 "Daily target page should compare against creator-style target searches");
         assertTrue(dailyTargetHtml.contains("Gridwise DoorDash pay data"),
                 "Daily target page should include the large-dataset competitor pattern");
-        assertTrue(dailyTargetHtml.contains("/salary/doordash/las-vegas/100-a-day"),
-                "Daily target page should link adjacent high-intent city combinations");
+        assertTrue(dailyTargetHtml.contains("Stay in this Phoenix DoorDash cluster"),
+                "Daily target page should keep adjacent routes inside the current city cluster");
+        assertTrue(dailyTargetHtml.contains("/salary/doordash/phoenix/after-gas"),
+                "Daily target page should link the same-city after-gas route instead of a template-leaked city");
 
         MvcResult hourlyPayResult = mockMvc.perform(get("/salary/doordash/denver/hourly-pay"))
                 .andExpect(status().isOk())

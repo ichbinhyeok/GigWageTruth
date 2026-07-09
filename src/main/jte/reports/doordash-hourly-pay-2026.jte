@@ -83,18 +83,18 @@
                     <table class="w-full min-w-[66rem] text-sm">
                         <thead>
                             <tr class="bg-slate-50 border-b border-slate-200">
-                                <th scope="col" class="px-4 py-3 text-left text-xs font-bold text-slate-500 uppercase">City</th>
+                                <th scope="col" class="sticky left-0 z-20 bg-slate-50 px-4 py-3 text-left text-xs font-bold text-slate-500 uppercase shadow-[1px_0_0_0_rgba(148,163,184,0.25)]">City</th>
                                 <th scope="col" class="px-4 py-3 text-right text-xs font-bold text-slate-500 uppercase">Net hourly</th>
                                 <th scope="col" class="px-4 py-3 text-right text-xs font-bold text-slate-500 uppercase">Net/wk</th>
                                 <th scope="col" class="px-4 py-3 text-right text-xs font-bold text-slate-500 uppercase">Hours to $100</th>
-                                <th scope="col" class="px-4 py-3 text-left text-xs font-bold text-slate-500 uppercase">Search query to defend</th>
+                                <th scope="col" class="px-4 py-3 text-left text-xs font-bold text-slate-500 uppercase">Reader question</th>
                                 <th scope="col" class="px-4 py-3 text-right text-xs font-bold text-slate-500 uppercase">Report</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100">
                             @for(CityEarningsSnapshot snapshot : snapshots)
                                 <tr>
-                                    <td class="px-4 py-4">
+                                    <td class="sticky left-0 z-10 bg-white px-4 py-4 shadow-[1px_0_0_0_rgba(226,232,240,1)]">
                                         <strong class="block text-slate-900">${snapshot.city().getCityName()}, ${snapshot.city().getState()}</strong>
                                         <span class="text-xs text-slate-500">${snapshot.acquisitionNote()}</span>
                                     </td>

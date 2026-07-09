@@ -33,6 +33,13 @@
                     <p class="text-xl text-slate-600 max-w-3xl mx-auto">
                         ${officialSourceSummary} Then compare take-home pay in our covered markets. Updated ${lastUpdated}.
                     </p>
+                    <div class="mt-6 flex justify-center">
+                        <a href="${officialSourceUrl}" target="_blank" rel="noopener noreferrer"
+                           onclick="gtag('event', 'cta_click', { 'event_category': 'seo_coverage_hub', 'event_label': 'open_official_${app}_coverage_source_hero' })"
+                           class="inline-flex items-center justify-center px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl transition-colors">
+                            ${officialSourceCtaLabel}
+                        </a>
+                    </div>
                 </div>
 
                 <div class="grid md:grid-cols-3 gap-4 mb-10">

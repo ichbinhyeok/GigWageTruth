@@ -28,7 +28,7 @@
                 </div>
             </div>
 
-            <form action="/driver-reports/submit" method="POST" class="grid sm:grid-cols-2 gap-4" onsubmit="gtag('event','cta_click',{'event_category':'driver_report','event_label':'submit_driver_report'});">
+            <form action="/driver-reports/submit" method="POST" class="grid sm:grid-cols-2 gap-4" onsubmit="if (window.gtag) gtag('event','cta_click',{'event_category':'driver_report','event_label':'submit_driver_report'});">
                 <input type="hidden" name="lead_type" value="driver_earnings_report">
                 <input type="hidden" name="source_page" value="${sourcePage}">
                 <input type="hidden" name="source_path" value="${sourcePath}">
@@ -41,23 +41,23 @@
 
                 <label class="block">
                     <span class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">Weekly gross</span>
-                    <input name="weekly_gross" type="number" min="0" step="1" placeholder="650" class="w-full rounded-xl border border-white/10 bg-white text-slate-900 px-4 py-3 text-sm">
+                    <input name="weekly_gross" type="number" min="1" step="1" placeholder="650" required class="w-full rounded-xl border border-white/10 bg-white text-slate-900 px-4 py-3 text-sm">
                 </label>
                 <label class="block">
                     <span class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">Miles driven</span>
-                    <input name="weekly_miles" type="number" min="0" step="1" placeholder="250" class="w-full rounded-xl border border-white/10 bg-white text-slate-900 px-4 py-3 text-sm">
+                    <input name="weekly_miles" type="number" min="0" step="1" placeholder="250" required class="w-full rounded-xl border border-white/10 bg-white text-slate-900 px-4 py-3 text-sm">
                 </label>
                 <label class="block">
                     <span class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">Active hours</span>
-                    <input name="active_hours" type="number" min="0" step="0.5" placeholder="18.5" class="w-full rounded-xl border border-white/10 bg-white text-slate-900 px-4 py-3 text-sm">
+                    <input name="weekly_hours" type="number" min="0.5" step="0.5" placeholder="18.5" required class="w-full rounded-xl border border-white/10 bg-white text-slate-900 px-4 py-3 text-sm">
                 </label>
                 <label class="block">
                     <span class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">Online/dash hours</span>
-                    <input name="online_hours" type="number" min="0" step="0.5" placeholder="24" class="w-full rounded-xl border border-white/10 bg-white text-slate-900 px-4 py-3 text-sm">
+                    <input name="active_time" type="number" min="0" step="0.5" placeholder="24" class="w-full rounded-xl border border-white/10 bg-white text-slate-900 px-4 py-3 text-sm">
                 </label>
                 <label class="block">
                     <span class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">Shift window</span>
-                    <select name="shift_window" class="w-full rounded-xl border border-white/10 bg-white text-slate-900 px-4 py-3 text-sm">
+                    <select name="shift_window" required class="w-full rounded-xl border border-white/10 bg-white text-slate-900 px-4 py-3 text-sm">
                         <option value="dinner">Dinner</option>
                         <option value="lunch">Lunch</option>
                         <option value="nights_weekends">Nights/weekends</option>

@@ -5,7 +5,7 @@
     noIndex = noIndex,
     seoMeta = new SeoMeta(
         customTitle,
-        "Contact GigWageTruth.",
+        "Contact GigVerdict.",
         com.gigwager.util.AppConstants.BASE_URL + "/contact",
         com.gigwager.util.AppConstants.BASE_URL + "/og-image.jpg"
     ),

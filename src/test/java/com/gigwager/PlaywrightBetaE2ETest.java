@@ -114,6 +114,87 @@ public class PlaywrightBetaE2ETest {
     }
 
     @Test
+    public void calculatorShouldClampNegativeInputsBeforeRenderingMoneyResults() {
+        try (BrowserContext context = browser.newContext();
+                Page page = context.newPage()) {
+            page.navigate(baseUrl + "/doordash?gross=650&miles=320&hours=25");
+            page.waitForLoadState();
+
+            page.locator("input[x-model='rawGross']:visible").first().fill("-50");
+            page.locator("input[x-model='rawMiles']:visible").first().fill("-10");
+            page.locator("input[x-model='rawHours']:visible").first().fill("-5");
+            page.waitForTimeout(300);
+
+            assertEquals("0.00", page.locator("span[x-text='gross.toFixed(2)']:visible").first().innerText().trim(),
+                    "Negative gross should render as zero in money outputs");
+            assertEquals("0.00", page.locator("span[x-text='netHourly.toFixed(2)']:visible").first().innerText().trim(),
+                    "Negative hours should not produce an impossible hourly result");
+            String taxHref = page.locator("a:has-text('Tax reserve')").first().getAttribute("href");
+            assertTrue(taxHref != null
+                    && !taxHref.contains("gross=-")
+                    && !taxHref.contains("miles=-")
+                    && !taxHref.contains("hours=-"),
+                    "Downstream calculator links should not preserve negative query values");
+        }
+    }
+
+    @Test
+    public void adjustmentCalculatorShouldUpdateSelectedMarketSummaryAndClampNegatives() {
+        try (BrowserContext context = browser.newContext();
+                Page page = context.newPage()) {
+            page.navigate(baseUrl + "/doordash/adjustment-pay-calculator");
+            page.waitForLoadState();
+
+            page.locator("button:has-text('New York City')").click();
+            assertEquals("New York City", page.locator("#adjustment-selected-market").innerText().trim(),
+                    "Preset switch should update the above-fold market label");
+            assertEquals("$110.65", page.locator("#adjustment-summary-guarantee").innerText().trim(),
+                    "Preset switch should update the above-fold guarantee");
+            assertEquals("$40.65", page.locator("#adjustment-summary-amount").innerText().trim(),
+                    "Preset switch should update the above-fold adjustment");
+            assertEquals("$160.65", page.locator("#adjustment-summary-total").innerText().trim(),
+                    "Preset switch should update the above-fold total");
+            assertTrue(page.locator("#adjustment-direct-answer").innerText().contains("New York City"),
+                    "Direct answer should reflect the selected market instead of a stale California example");
+
+            page.locator("#adjustment-active-hours").fill("-1");
+            page.locator("#adjustment-active-miles").fill("-25");
+            page.locator("#adjustment-doordash-pay").fill("-10");
+            page.locator("#adjustment-tips").fill("-5");
+            page.locator("#adjustment-hourly-rate").fill("-20");
+            page.locator("#adjustment-mileage-rate").fill("-0.5");
+            page.waitForTimeout(300);
+
+            assertEquals("$0.00", page.locator("#adjustment-summary-guarantee").innerText().trim(),
+                    "Negative guarantee inputs should clamp to zero");
+            assertEquals("$0.00", page.locator("#adjustment-summary-amount").innerText().trim(),
+                    "Negative pay inputs should not create a fake adjustment");
+            assertEquals("$0.00", page.locator("#adjustment-summary-total").innerText().trim(),
+                    "Negative tips should not create a negative or fake total");
+        }
+    }
+
+    @Test
+    public void mobileCalculatorShareButtonShouldHaveAccessibleName() {
+        try (BrowserContext context = browser.newContext(new Browser.NewContextOptions()
+                .setViewportSize(390, 844)
+                .setDeviceScaleFactor(3)
+                .setUserAgent(
+                        "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1")
+                .setIsMobile(true)
+                .setHasTouch(true));
+                Page page = context.newPage()) {
+            page.navigate(baseUrl + "/doordash?gross=650&miles=320&hours=25");
+            page.waitForLoadState();
+
+            Locator shareButton = page.locator("button[aria-label='Share result']").first();
+            assertTrue(page.locator("button[aria-label='Share result']").count() > 0,
+                    "Mobile sticky share button should expose an accessible name in the DOM");
+            assertEquals("Share result", shareButton.getAttribute("aria-label"));
+        }
+    }
+
+    @Test
     public void cityAndWorkLevelPagesShouldShowTrustAndFaqSignals() {
         try (BrowserContext context = browser.newContext();
                 Page page = context.newPage()) {

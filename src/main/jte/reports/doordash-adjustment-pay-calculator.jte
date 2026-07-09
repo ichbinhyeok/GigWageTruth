@@ -42,20 +42,20 @@
             <div class="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
                 <div class="grid md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-slate-100">
                     <div class="p-6">
-                        <p class="text-xs font-black uppercase tracking-wider text-slate-500 mb-1">Default market</p>
-                        <p class="text-3xl font-black text-slate-900">${defaultScenario.marketLabel()}</p>
+                        <p class="text-xs font-black uppercase tracking-wider text-slate-500 mb-1">Selected market</p>
+                        <p id="adjustment-selected-market" class="text-3xl font-black text-slate-900">${defaultScenario.marketLabel()}</p>
                     </div>
                     <div class="p-6">
                         <p class="text-xs font-black uppercase tracking-wider text-slate-500 mb-1">Guaranteed minimum</p>
-                        <p class="text-3xl font-black text-slate-900">$${String.format("%.2f", defaultScenario.guaranteedMinimum())}</p>
+                        <p id="adjustment-summary-guarantee" class="text-3xl font-black text-slate-900">$${String.format("%.2f", defaultScenario.guaranteedMinimum())}</p>
                     </div>
                     <div class="p-6">
                         <p class="text-xs font-black uppercase tracking-wider text-slate-500 mb-1">Pay adjustment</p>
-                        <p class="text-3xl font-black text-emerald-700">$${String.format("%.2f", defaultScenario.estimatedAdjustment())}</p>
+                        <p id="adjustment-summary-amount" class="text-3xl font-black text-emerald-700">$${String.format("%.2f", defaultScenario.estimatedAdjustment())}</p>
                     </div>
                     <div class="p-6">
                         <p class="text-xs font-black uppercase tracking-wider text-slate-500 mb-1">With tips</p>
-                        <p class="text-3xl font-black text-slate-900">$${String.format("%.2f", defaultScenario.totalWithTips())}</p>
+                        <p id="adjustment-summary-total" class="text-3xl font-black text-slate-900">$${String.format("%.2f", defaultScenario.totalWithTips())}</p>
                     </div>
                 </div>
             </div>
@@ -65,7 +65,7 @@
             <section class="bg-white rounded-3xl border border-slate-200 p-8 shadow-sm">
                 <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-700 mb-2">Direct answer</p>
                 <h2 class="text-3xl font-black text-slate-900 mb-4">How DoorDash adjustment pay is calculated</h2>
-                <p class="text-slate-700 leading-relaxed max-w-4xl">
+                <p id="adjustment-direct-answer" class="text-slate-700 leading-relaxed max-w-4xl">
                     DoorDash adjustment pay is the difference between the local guaranteed earnings floor and DoorDash pay before tips. If the guaranteed minimum is $239.80 and DoorDash pay before tips is $190.00, the adjustment is $49.80. Tips are added after that comparison in the official California and NYC examples.
                 </p>
             </section>
@@ -110,7 +110,9 @@
                                     data-pay="${String.format("%.2f", scenario.doordashPayBeforeTips())}"
                                     data-tips="${String.format("%.2f", scenario.tips())}"
                                     data-hourly="${String.format("%.2f", scenario.minimumHourlyRate())}"
-                                    data-mileage="${String.format("%.2f", scenario.mileageRate())}">
+                                    data-mileage="${String.format("%.2f", scenario.mileageRate())}"
+                                    data-market="${scenario.marketLabel()}"
+                                    data-rule="${scenario.ruleLabel()}">
                                 ${scenario.marketLabel()}
                             </button>
                         @endfor
@@ -260,7 +262,14 @@
             function numberValue(id) {
                 var element = document.getElementById(id);
                 var parsed = parseFloat(element ? element.value : "0");
-                return Number.isFinite(parsed) ? parsed : 0;
+                if (!Number.isFinite(parsed)) {
+                    return 0;
+                }
+                if (parsed < 0) {
+                    element.value = "0";
+                    return 0;
+                }
+                return parsed;
             }
 
             function money(value) {
@@ -268,6 +277,7 @@
             }
 
             function updateAdjustment() {
+                var selectedMarket = document.getElementById("adjustment-selected-market").textContent || "selected market";
                 var activeHours = numberValue("adjustment-active-hours");
                 var activeMiles = numberValue("adjustment-active-miles");
                 var doordashPay = numberValue("adjustment-doordash-pay");
@@ -278,9 +288,17 @@
                 var adjustment = Math.max(0, guarantee - doordashPay);
                 var total = doordashPay + adjustment + tips;
 
+                document.getElementById("adjustment-summary-guarantee").textContent = money(guarantee);
+                document.getElementById("adjustment-summary-amount").textContent = money(adjustment);
+                document.getElementById("adjustment-summary-total").textContent = money(total);
                 document.getElementById("adjustment-guarantee").textContent = money(guarantee);
                 document.getElementById("adjustment-amount").textContent = money(adjustment);
                 document.getElementById("adjustment-total").textContent = money(total);
+                document.getElementById("adjustment-direct-answer").textContent =
+                    "For the selected " + selectedMarket + " inputs, the guaranteed minimum is " + money(guarantee) +
+                    ". DoorDash pay before tips is " + money(doordashPay) +
+                    ", so the estimated adjustment is " + money(adjustment) +
+                    ". Tips are added after that comparison, putting the total at " + money(total) + ".";
                 document.getElementById("adjustment-formula").textContent =
                     "Guaranteed minimum = " + activeHours.toFixed(2) + " active hours x " + money(hourlyRate) +
                     " + " + activeMiles.toFixed(1) + " active miles x " + money(mileageRate) +
@@ -294,6 +312,7 @@
                 document.getElementById("adjustment-tips").value = button.dataset.tips;
                 document.getElementById("adjustment-hourly-rate").value = button.dataset.hourly;
                 document.getElementById("adjustment-mileage-rate").value = button.dataset.mileage;
+                document.getElementById("adjustment-selected-market").textContent = button.dataset.market || "Selected market";
                 updateAdjustment();
             }
 

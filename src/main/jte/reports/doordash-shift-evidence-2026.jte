@@ -82,7 +82,7 @@
                     <table class="w-full min-w-[78rem] text-sm">
                         <thead>
                             <tr class="bg-slate-50 border-b border-slate-200">
-                                <th scope="col" class="px-4 py-3 text-left text-xs font-bold text-slate-500 uppercase">Market</th>
+                                <th scope="col" class="sticky left-0 z-20 bg-slate-50 px-4 py-3 text-left text-xs font-bold text-slate-500 uppercase shadow-[1px_0_0_0_rgba(148,163,184,0.25)]">Market</th>
                                 <th scope="col" class="px-4 py-3 text-left text-xs font-bold text-slate-500 uppercase">Reported result</th>
                                 <th scope="col" class="px-4 py-3 text-right text-xs font-bold text-slate-500 uppercase">Gross</th>
                                 <th scope="col" class="px-4 py-3 text-right text-xs font-bold text-slate-500 uppercase">Active</th>
@@ -96,7 +96,7 @@
                         <tbody class="divide-y divide-slate-100">
                             @for(DriverShiftReport report : driverShiftReports)
                                 <tr>
-                                    <td class="px-4 py-4">
+                                    <td class="sticky left-0 z-10 bg-white px-4 py-4 shadow-[1px_0_0_0_rgba(226,232,240,1)]">
                                         <strong class="block text-slate-900">${report.cityName()}, ${report.state()}</strong>
                                         <span class="text-xs text-slate-500">${report.shiftWindow()}</span>
                                     </td>

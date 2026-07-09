@@ -131,7 +131,7 @@
                                     </details>
                                 </div>
                                 <div class="prose prose-sm text-slate-600 max-w-none hidden md:block">
-                                    <p>Most earning calculators are misleading because they only subtract gas. GigWageTruth uses a comprehensive <strong>Total Cost of Ownership (TCO)</strong> model.</p>
+                                    <p>Most earning calculators are misleading because they only subtract gas. GigVerdict uses a comprehensive <strong>Total Cost of Ownership (TCO)</strong> model.</p>
                                     <table class="w-full mt-4 text-left border-collapse">
                                         <tbody class="align-top">
                                             <tr class="border-b border-slate-100 last:border-0">
@@ -337,7 +337,7 @@
                                     </details>
                                 </div>
                                 <div class="prose prose-sm text-slate-600 max-w-none hidden md:block">
-                                    <p>DoorDash "Active Time" is a vanity metric. GigWageTruth calculates your <strong>Real Hourly Wage</strong> by accounting for the full picture.</p>
+                                    <p>DoorDash "Active Time" is a vanity metric. GigVerdict calculates your <strong>Real Hourly Wage</strong> by accounting for the full picture.</p>
                                     <table class="w-full mt-4 text-left border-collapse">
                                         <tbody class="align-top">
                                             <tr class="border-b border-slate-100 last:border-0">

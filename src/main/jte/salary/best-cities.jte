@@ -275,6 +275,7 @@
                                         <td class="p-4">
                                             <strong class="block text-slate-900">${ranking.city().getCityName()}, ${ranking.city().getState()}</strong>
                                             <span class="text-xs text-slate-500">${ranking.workLevel()} baseline</span>
+                                            <a href="/salary/${app}/${ranking.city().getSlug()}" class="mt-2 inline-flex lg:hidden px-3 py-2 bg-slate-100 hover:bg-emerald-50 text-emerald-700 font-bold rounded-lg text-xs transition-colors border border-slate-200 hover:border-emerald-200">Open city earnings</a>
                                         </td>
                                         <td class="p-4 font-black text-emerald-600">$${String.format("%.2f", ranking.netHourly())}/hr</td>
                                         <td class="p-4 text-slate-700 font-bold">${String.format("%.1f", hoursToHundred)} hrs</td>

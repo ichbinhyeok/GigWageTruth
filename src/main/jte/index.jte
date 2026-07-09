@@ -3,7 +3,7 @@
 @template.layout.main(
     noIndex = noIndex,
     seoMeta = new com.gigwager.model.SeoMeta(
-        "GigWageTruth - Weekly Take-Home Calculator for Gig Drivers",
+        "GigVerdict - Weekly Take-Home Calculator for Gig Drivers",
         "See what you actually keep from Uber or DoorDash after mileage and self-employment tax, then decide what to fix next.",
         AppConstants.BASE_URL,
         AppConstants.BASE_URL + "/og-image.jpg"
@@ -69,9 +69,9 @@
                     </div>
 
                     <div class="hidden lg:block pt-8 mt-8 border-t border-slate-200/50">
-                        <h2 class="text-lg font-bold text-slate-900 mb-2">What is GigWageTruth?</h2>
+                        <h2 class="text-lg font-bold text-slate-900 mb-2">What is GigVerdict?</h2>
                         <p class="text-sm text-slate-600 mb-4 max-w-lg leading-relaxed">
-                            GigWageTruth is a weekly keep-more-money system for gig workers. We turn your app payout into take-home, tax reserve, and next-step decisions using the 2026 IRS mileage proxy and a 15.3% self-employment tax assumption.
+                            GigVerdict is a weekly keep-more-money system for gig workers. We turn your app payout into take-home, tax reserve, and next-step decisions using the 2026 IRS mileage proxy and a 15.3% self-employment tax assumption.
                         </p>
                         <ul class="text-xs font-semibold text-slate-500 space-y-2">
                             <li class="flex items-center gap-2"><span class="text-emerald-500 flex-shrink-0">+</span> Check what you actually kept from a real week</li>
@@ -212,11 +212,11 @@
           "@context": "https://schema.org",
           "@graph": [{
             "@type": "WebSite",
-            "name": "GigWageTruth",
+            "name": "GigVerdict",
             "url": "${AppConstants.BASE_URL}"
           }, {
             "@type": "Organization",
-            "name": "GigWageTruth",
+            "name": "GigVerdict",
             "url": "${AppConstants.BASE_URL}",
             "logo": "${AppConstants.BASE_URL}/favicon.png"
           }]

@@ -62,9 +62,9 @@
         <main class="max-w-5xl mx-auto px-6 pb-16 space-y-12">
             <section class="bg-white rounded-3xl border border-slate-200 p-8 shadow-sm">
                 <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-700 mb-2">Direct answer</p>
-                <h2 class="text-3xl font-black text-slate-900 mb-4">Which Uber city hourly earnings pages should get checked first?</h2>
+                <h2 class="text-3xl font-black text-slate-900 mb-4">What is the average Uber driver hourly earnings in 2026?</h2>
                 <p class="text-slate-700 leading-relaxed max-w-3xl">
-                    Start with Atlanta, Los Angeles, Austin, Chicago, Houston, and Orlando. These cities already have search demand around Uber driver hourly earnings, rideshare driver hourly earnings, and 2026 city pay checks. Each row below links to the city report and the highest-intent follow-up pages.
+                    In this GigVerdict city sample, estimated Uber net hourly earnings average <strong>$${String.format("%.2f", averageNetHourly)}/hr after mileage and self-employment tax assumptions</strong>. Start with Atlanta, Los Angeles, Austin, Chicago, Houston, and Orlando because airport timing, traffic, event demand, and home-to-home miles change the real take-home number.
                 </p>
             </section>
 
@@ -77,18 +77,18 @@
                     <table class="w-full min-w-[56rem] text-sm">
                         <thead>
                             <tr class="bg-slate-50 border-b border-slate-200">
-                                <th scope="col" class="px-4 py-3 text-left text-xs font-bold text-slate-500 uppercase">City</th>
+                                <th scope="col" class="sticky left-0 z-20 bg-slate-50 px-4 py-3 text-left text-xs font-bold text-slate-500 uppercase shadow-[1px_0_0_0_rgba(148,163,184,0.25)]">City</th>
                                 <th scope="col" class="px-4 py-3 text-right text-xs font-bold text-slate-500 uppercase">Net hourly</th>
                                 <th scope="col" class="px-4 py-3 text-right text-xs font-bold text-slate-500 uppercase">Gross/wk</th>
                                 <th scope="col" class="px-4 py-3 text-right text-xs font-bold text-slate-500 uppercase">Miles/wk</th>
-                                <th scope="col" class="px-4 py-3 text-left text-xs font-bold text-slate-500 uppercase">Search query to defend</th>
+                                <th scope="col" class="px-4 py-3 text-left text-xs font-bold text-slate-500 uppercase">Reader question</th>
                                 <th scope="col" class="px-4 py-3 text-right text-xs font-bold text-slate-500 uppercase">Report</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100">
                             @for(CityEarningsSnapshot snapshot : snapshots)
                                 <tr>
-                                    <td class="px-4 py-4">
+                                    <td class="sticky left-0 z-10 bg-white px-4 py-4 shadow-[1px_0_0_0_rgba(226,232,240,1)]">
                                         <strong class="block text-slate-900">${snapshot.city().getCityName()}, ${snapshot.city().getState()}</strong>
                                         <span class="text-xs text-slate-500">${snapshot.acquisitionNote()}</span>
                                     </td>

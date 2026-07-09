@@ -157,22 +157,22 @@
             @if(app.equals("doordash"))
                 <section class="bg-emerald-50 rounded-3xl border border-emerald-100 p-8 shadow-sm">
                     <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-700 mb-2">High-intent city routes</p>
-                    <h2 class="text-3xl font-black text-slate-900 mb-4">Use the adjacent DoorDash query</h2>
+                    <h2 class="text-3xl font-black text-slate-900 mb-4">Stay in this ${city.getCityName()} DoorDash cluster</h2>
                     <div class="grid md:grid-cols-2 gap-3">
-                        <a href="/salary/doordash/phoenix/after-gas" class="rounded-2xl bg-white border border-emerald-100 px-5 py-4 hover:border-emerald-300 transition-colors">
-                            <strong class="block text-slate-900">DoorDash pay in Phoenix after gas</strong>
+                        <a href="/salary/doordash/${city.getSlug()}/after-gas" class="rounded-2xl bg-white border border-emerald-100 px-5 py-4 hover:border-emerald-300 transition-colors">
+                            <strong class="block text-slate-900">DoorDash pay in ${city.getCityName()} after gas</strong>
                             <span class="text-sm text-slate-600">Fuel, miles, and take-home estimate.</span>
                         </a>
-                        <a href="/salary/doordash/dallas/nights-weekends" class="rounded-2xl bg-white border border-emerald-100 px-5 py-4 hover:border-emerald-300 transition-colors">
-                            <strong class="block text-slate-900">Best DoorDash hours in Dallas</strong>
+                        <a href="/salary/doordash/${city.getSlug()}/nights-weekends" class="rounded-2xl bg-white border border-emerald-100 px-5 py-4 hover:border-emerald-300 transition-colors">
+                            <strong class="block text-slate-900">Best DoorDash hours in ${city.getCityName()}</strong>
                             <span class="text-sm text-slate-600">Dinner, weekend, and slow-window check.</span>
                         </a>
-                        <a href="/salary/doordash/las-vegas/100-a-day" class="rounded-2xl bg-white border border-emerald-100 px-5 py-4 hover:border-emerald-300 transition-colors">
-                            <strong class="block text-slate-900">Can you make $100/day in Las Vegas?</strong>
-                            <span class="text-sm text-slate-600">Tourism-market daily target math.</span>
+                        <a href="/salary/doordash/${city.getSlug()}/100-a-day" class="rounded-2xl bg-white border border-emerald-100 px-5 py-4 hover:border-emerald-300 transition-colors">
+                            <strong class="block text-slate-900">Can you make $100/day in ${city.getCityName()}?</strong>
+                            <span class="text-sm text-slate-600">Daily target math for this market.</span>
                         </a>
-                        <a href="/salary/doordash/chicago/uber-eats-vs-doordash" class="rounded-2xl bg-white border border-emerald-100 px-5 py-4 hover:border-emerald-300 transition-colors">
-                            <strong class="block text-slate-900">Uber Eats vs DoorDash in Chicago</strong>
+                        <a href="/salary/doordash/${city.getSlug()}/uber-eats-vs-doordash" class="rounded-2xl bg-white border border-emerald-100 px-5 py-4 hover:border-emerald-300 transition-colors">
+                            <strong class="block text-slate-900">Uber Eats vs DoorDash in ${city.getCityName()}</strong>
                             <span class="text-sm text-slate-600">Delivery-app comparison after expenses.</span>
                         </a>
                     </div>

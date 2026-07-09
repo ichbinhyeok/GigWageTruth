@@ -5,7 +5,7 @@
     noIndex = noIndex,
     seoMeta = new SeoMeta(
         customTitle,
-        "Privacy Policy for GigWageTruth.",
+        "Privacy Policy for GigVerdict.",
         com.gigwager.util.AppConstants.BASE_URL + "/privacy",
         com.gigwager.util.AppConstants.BASE_URL + "/og-image.jpg"
     ),

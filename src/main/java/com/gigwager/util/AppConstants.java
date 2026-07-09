@@ -24,7 +24,7 @@ public class AppConstants {
     public static final double MIN_WAGE_AMAZON = 17.00;
 
     // SEO & Meta
-    public static final String SITE_NAME = "GigWageTruth";
+    public static final String SITE_NAME = "GigVerdict";
     public static final String BASE_URL = "https://gigverdict.com";
     public static final String DEFAULT_DESCRIPTION = "Discover your TRUE hourly wage as a gig worker. Don't let gross revenue fool you.";
     public static final int CURRENT_YEAR = java.time.LocalDate.now().getYear();

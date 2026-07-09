@@ -29,17 +29,17 @@ window.createGigCalculator = function (initialData) {
         verdictContainerId: initialData.verdictContainerId,
         debounceTimer: null,
 
-        get gross() { return Number(this.rawGross) || 0; },
-        get miles() { return Number(this.rawMiles) || 0; },
-        get hours() { return Number(this.rawHours) || 0; },
-        get tips() { return Number(this.rawTips) || 0; },
-        get bonuses() { return Number(this.rawBonuses) || 0; },
-        get activeTime() { return Number(this.rawActiveTime) || 0; },
-        get customMpg() { return Number(this.rawCustomMpg) || 0; },
-        get customMaintenance() { return Number(this.rawCustomMaintenance) || 0; },
-        get customDepreciation() { return Number(this.rawCustomDepreciation) || 0; },
-        get gasPrice() { return Number(this.rawGasPrice) || 0; },
-        get targetWeeklyIncome() { return Number(this.rawTargetWeeklyIncome) || 0; },
+        get gross() { return this.nonNegativeNumber(this.rawGross); },
+        get miles() { return this.nonNegativeNumber(this.rawMiles); },
+        get hours() { return this.nonNegativeNumber(this.rawHours); },
+        get tips() { return this.nonNegativeNumber(this.rawTips); },
+        get bonuses() { return this.nonNegativeNumber(this.rawBonuses); },
+        get activeTime() { return Math.min(this.nonNegativeNumber(this.rawActiveTime), this.hours); },
+        get customMpg() { return this.positiveNumber(this.rawCustomMpg, 25); },
+        get customMaintenance() { return this.nonNegativeNumber(this.rawCustomMaintenance); },
+        get customDepreciation() { return this.nonNegativeNumber(this.rawCustomDepreciation); },
+        get gasPrice() { return this.nonNegativeNumber(this.rawGasPrice); },
+        get targetWeeklyIncome() { return this.nonNegativeNumber(this.rawTargetWeeklyIncome); },
 
         async init() {
             try {
@@ -139,6 +139,23 @@ window.createGigCalculator = function (initialData) {
         buildScenarioUrl(path, extra = {}, includeKeys = null) {
             const params = this.buildScenarioParams(extra, includeKeys).toString();
             return params ? `${path}?${params}` : path;
+        },
+
+        nonNegativeNumber(value) {
+            const parsed = Number(value);
+            return Number.isFinite(parsed) && parsed > 0 ? parsed : 0;
+        },
+
+        positiveNumber(value, fallback) {
+            const parsed = Number(value);
+            return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
+        },
+
+        clampInput(value, min = 0, max = null) {
+            const parsed = Number(value);
+            if (!Number.isFinite(parsed)) return String(min);
+            const upperBound = max === null || max === undefined ? parsed : Math.min(parsed, max);
+            return String(Math.max(min, upperBound));
         },
 
         updateGasPriceFromPreset() {

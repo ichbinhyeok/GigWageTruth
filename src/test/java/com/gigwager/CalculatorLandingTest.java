@@ -27,6 +27,16 @@ public class CalculatorLandingTest {
         String content = result.getResponse().getContentAsString();
         assertTrue(content.contains("href=\"https://gigverdict.com/uber\""),
                 "Uber page should self-canonicalize to /uber");
+        assertTrue(content.contains("Uber weekly take-home calculator"),
+                "Uber page should expose server-rendered H1 text before JavaScript runs");
+        assertTrue(content.contains("aria-label=\"Share result\""),
+                "Mobile sticky share action should expose an accessible name");
+        assertTrue(content.contains("x-model=\"rawGross\" min=\"0\""),
+                "Calculator should constrain gross pay to non-negative values");
+        assertTrue(content.contains("x-model=\"rawMiles\" min=\"0\""),
+                "Calculator should constrain miles to non-negative values");
+        assertTrue(content.contains("x-model=\"rawHours\" min=\"0\""),
+                "Calculator should constrain hours to non-negative values");
     }
 
     @Test
@@ -38,6 +48,9 @@ public class CalculatorLandingTest {
         String content = result.getResponse().getContentAsString();
         assertTrue(content.contains("href=\"https://gigverdict.com/doordash\""),
                 "DoorDash page should self-canonicalize to /doordash");
+        assertTrue(content.contains("DoorDash weekly take-home calculator"),
+                "DoorDash page should expose server-rendered H1 text before JavaScript runs");
+        assertTrue(content.contains("clampInput(rawGross)"),
+                "DoorDash calculator should clamp negative money inputs before producing scenario links");
     }
 }
-

@@ -130,7 +130,7 @@
             <!-- Logo -->
             <a href="/" class="flex items-center space-x-2 group">
                 <span class="text-xl font-bold tracking-tight text-slate-900 group-hover:text-emerald-600 transition-colors">
-                    GigWageTruth
+                    GigVerdict
                 </span>
             </a>
 
@@ -152,7 +152,7 @@
     <!-- Footer -->
     <footer class="bg-white border-t border-slate-200 py-12 mt-12">
         <div class="max-w-5xl mx-auto px-4 text-center">
-            <p class="text-slate-900 font-semibold mb-2">GigWageTruth</p>
+            <p class="text-slate-900 font-semibold mb-2">GigVerdict</p>
             <div class="flex flex-col md:flex-row flex-wrap justify-center items-center gap-x-6 gap-y-3 mb-6 text-sm text-slate-500">
                 <a href="/net-hourly-calculator" class="hover:text-emerald-600 transition">Net Hourly Tool</a>
                 <a href="/doordash/earnings-calculator" class="hover:text-emerald-600 transition">DoorDash Earnings Calculator</a>
@@ -171,7 +171,7 @@
                 Revealing the true cost of the gig economy.
             </p>
             <p class="text-xs text-slate-400">
-                &copy; ${AppConstants.CURRENT_YEAR} GigWageTruth. All rights reserved. <br>
+                &copy; ${AppConstants.CURRENT_YEAR} GigVerdict. All rights reserved. <br>
                 Calculations based on ${AppConstants.CURRENT_YEAR} IRS Standard Mileage Rate ($0.725/mile). Not financial advice.
             </p>
         </div>

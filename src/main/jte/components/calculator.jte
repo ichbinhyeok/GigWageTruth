@@ -48,10 +48,12 @@
     <!-- Hero Section -->
     <div class="${heroBgClass} pt-16 pb-24 text-center px-6">
         <h1 class="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight">
-            <span x-text="heroTitle"></span>
+            <span x-text="heroTitle">${appName} weekly take-home calculator</span>
             <span class="${themeColor == "red" ? "text-red-200" : "text-emerald-400"}" x-show="false">(2026)</span>
         </h1>
-        <p class="text-lg md:text-xl ${themeColor == "red" ? "text-white/80" : "text-slate-300"} max-w-2xl mx-auto" x-html="heroSubtitle"></p>
+        <p class="text-lg md:text-xl ${themeColor == "red" ? "text-white/80" : "text-slate-300"} max-w-2xl mx-auto" x-html="heroSubtitle">
+            See your weekly take-home, the tax reserve to protect, and the biggest leak pulling down this week.
+        </p>
     </div>
 
     <!-- Calculator UI Container -->
@@ -67,7 +69,7 @@
                  <span class="text-xl font-bold" :class="netHourly < 0 ? 'text-red-600' : 'text-slate-900'">
                      $<span x-text="netHourly.toFixed(2)"></span>
                 </span>
-                <button @click="shareResult()" class="ml-4 p-2 text-slate-400 hover:text-slate-900">
+                <button @click="shareResult()" aria-label="Share result" class="ml-4 p-2 text-slate-400 hover:text-slate-900">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
                 </button>
             </div>
@@ -140,7 +142,7 @@
                                 </div>
                                 <div class="relative">
                                     <span class="absolute left-4 top-3.5 text-slate-400 font-medium">$</span>
-                                    <input type="number" x-model="rawGross" 
+                                    <input type="number" x-model="rawGross" min="0" step="0.01" @blur="rawGross = clampInput(rawGross)"
                                            class="w-full pl-8 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-lg font-bold text-slate-900 focus:ring-2 focus:ring-${themeColor}-500 focus:border-${themeColor}-500 focus:outline-none transition-all">
                                 </div>
                             </div>
@@ -154,7 +156,7 @@
                                     </label>
                                 </div>
                                 <div class="relative">
-                                    <input type="number" x-model="rawMiles" 
+                                    <input type="number" x-model="rawMiles" min="0" step="0.1" @blur="rawMiles = clampInput(rawMiles)"
                                            class="w-full pl-4 pr-12 py-3 bg-slate-50 border border-slate-200 rounded-xl text-lg font-bold text-slate-900 focus:ring-2 focus:ring-${themeColor}-500 focus:border-${themeColor}-500 focus:outline-none transition-all">
                                     <span class="absolute right-4 top-3.5 text-slate-400 font-medium text-sm">mi</span>
                                 </div>
@@ -165,7 +167,7 @@
                                     <label class="text-xs font-semibold uppercase tracking-wide text-slate-500 leading-none">Total Time Online</label>
                                 </div>
                                 <div class="relative">
-                                    <input type="number" x-model="rawHours" 
+                                    <input type="number" x-model="rawHours" min="0" step="0.1" @blur="rawHours = clampInput(rawHours)"
                                            class="w-full pl-4 pr-12 py-3 bg-slate-50 border border-slate-200 rounded-xl text-lg font-bold text-slate-900 focus:ring-2 focus:ring-${themeColor}-500 focus:border-${themeColor}-500 focus:outline-none transition-all">
                                     <span class="absolute right-4 top-3.5 text-slate-400 font-medium text-sm">hrs</span>
                                 </div>
@@ -192,7 +194,7 @@
                                     <label class="block text-xs font-semibold uppercase tracking-wide text-slate-500 mb-2">Target Weekly Income</label>
                                     <div class="relative">
                                         <span class="absolute left-4 top-3.5 text-slate-400 font-medium">$</span>
-                                        <input type="number" x-model="rawTargetWeeklyIncome" 
+                                        <input type="number" x-model="rawTargetWeeklyIncome" min="0" step="1" @blur="rawTargetWeeklyIncome = clampInput(rawTargetWeeklyIncome)"
                                             class="w-full pl-8 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900 focus:ring-2 focus:ring-${themeColor}-500 focus:border-${themeColor}-500">
                                     </div>
                                 </div>
@@ -262,14 +264,14 @@
                             <div class="grid grid-cols-2 gap-6" x-show="selectedVehicle && selectedVehicle.type !== 'electric'">
                                 <div x-show="selectedVehicleId === 'custom'">
                                     <label class="block text-xs font-semibold uppercase tracking-wide text-slate-500 mb-2">MPG</label>
-                                    <input type="number" x-model="rawCustomMpg" 
+                                    <input type="number" x-model="rawCustomMpg" min="1" step="0.1" @blur="rawCustomMpg = clampInput(rawCustomMpg, 1)"
                                            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50">
                                 </div>
                                 <div class="col-span-2 md:col-span-1">
                                     <label class="block text-xs font-semibold uppercase tracking-wide text-slate-500 mb-2">Gas ($/gal)</label>
                                     <div class="relative">
                                          <span class="absolute left-4 top-3.5 text-slate-400 font-medium">$</span>
-                                        <input type="number" x-model="rawGasPrice" step="0.01" 
+                                        <input type="number" x-model="rawGasPrice" min="0" step="0.01" @blur="rawGasPrice = clampInput(rawGasPrice)"
                                                class="w-full pl-8 pr-4 py-3 bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-${themeColor}-500 font-bold text-slate-900">
                                     </div>
                                 </div>
@@ -294,9 +296,10 @@
                                 <div>
                                     <label class="block text-xs font-semibold uppercase tracking-wide text-slate-500 mb-2">Active Time (Optional)</label>
                                     <div class="relative">
-                                        <input type="number" x-model="rawActiveTime" 
+                                        <input type="number" x-model="rawActiveTime" min="0"
                                             :max="hours"
                                             step="0.1"
+                                            @blur="rawActiveTime = clampInput(rawActiveTime, 0, hours)"
                                             class="w-full pr-12 pl-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900 focus:ring-2 focus:ring-${themeColor}-500 focus:border-${themeColor}-500">
                                         <span class="absolute right-4 top-3.5 text-slate-400 font-medium text-sm">hrs</span>
                                     </div>
@@ -306,7 +309,7 @@
                                     <label class="block text-xs font-semibold uppercase tracking-wide text-slate-500 mb-2">Cash Tips / Bonuses</label>
                                     <div class="relative">
                                         <span class="absolute left-4 top-3.5 text-slate-400 font-medium">$</span>
-                                        <input type="number" x-model="rawTips" 
+                                        <input type="number" x-model="rawTips" min="0" step="0.01" @blur="rawTips = clampInput(rawTips)"
                                             class="w-full pl-8 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900 focus:ring-2 focus:ring-${themeColor}-500 focus:border-${themeColor}-500">
                                     </div>
                                     <p class="text-[10px] text-slate-400 mt-1">Extra earnings not in app total.</p>

@@ -162,7 +162,7 @@ public class PageController {
 
     @GetMapping("/about")
     public String about(Model model) {
-        model.addAttribute("customTitle", "About Us - The GigWageTruth Story");
+        model.addAttribute("customTitle", "About Us - The GigVerdict Story");
         model.addAttribute("noIndex", true);
         return "about";
     }

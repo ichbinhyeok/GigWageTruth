@@ -1393,10 +1393,10 @@ public class ProgrammaticSeoController {
                                 ? "https://gridwise.io/blog/how-much-do-doordash-drivers-make"
                                 : "https://gridwise.io/blog/how-much-do-uber-drivers-make";
                 String expertLabel = app.equals("doordash")
-                                ? "The Rideshare Guy DoorDash guide"
+                                ? "DoorDash pay model guide"
                                 : "The Rideshare Guy Uber guide";
                 String expertUrl = app.equals("doordash")
-                                ? "https://therideshareguy.com/how-much-do-doordash-drivers-make/"
+                                ? "https://help.doordash.com/en-us/dashers/article/how-is-dasher-pay-calculated"
                                 : "https://therideshareguy.com/how-much-do-uber-drivers-make/";
                 String salaryLabel = app.equals("doordash")
                                 ? "Indeed DoorDash salary data"
@@ -1414,7 +1414,7 @@ public class ProgrammaticSeoController {
                                 ? "ShiftTracker DoorDash pay guide"
                                 : "ShiftTracker Uber driver guide";
                 String tacticalUrl = app.equals("doordash")
-                                ? "https://shifttrackerapp.com/blog/doordash-pay-guide-2026-avg-net-real-driver-earnings"
+                                ? "https://shifttrackerapp.com/blog/how-do-doordash-drivers-get-paid-2026"
                                 : "https://shifttrackerapp.com/blog/uber-eats-uber-driver-guide-2026-boost-pay-track-expenses-and-work-smarter";
                 String policyLabel = app.equals("doordash")
                                 ? "PayUp DoorDash report"
@@ -2620,7 +2620,7 @@ public class ProgrammaticSeoController {
                                                 "atlanta",
                                                 "uber driver hourly earnings atlanta ga 2025 2026",
                                                 "rideshare driver hourly earnings atlanta ga 2025 2026",
-                                                "Atlanta is the clearest current quick-win city: two hourly-earnings query variants are already close to page one."),
+                                                "Atlanta has two hourly-earnings variants with enough demand to justify a dedicated city check."),
                                 buildUberHourlyEarningsSnapshot(
                                                 "los-angeles",
                                                 "uber driver earnings los angeles 2025 2026",
@@ -3078,7 +3078,7 @@ public class ProgrammaticSeoController {
                                                 "indianapolis",
                                                 "doordash indianapolis side hustle earnings",
                                                 "how much can you make with doordash in indianapolis",
-                                                "Indianapolis already has an indexed side-hustle page with early query traction, so it belongs in the acquisition set."),
+                                                "Indianapolis has early side-hustle demand, so the page should explain realistic pay after mileage instead of only gross screenshots."),
                                 buildDoorDashHourlyPaySnapshot(
                                                 "san-jose",
                                                 "doordash driver pay per hour san jose 2026",

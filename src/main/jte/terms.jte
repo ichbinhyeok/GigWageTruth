@@ -5,7 +5,7 @@
     noIndex = noIndex,
     seoMeta = new SeoMeta(
         customTitle,
-        "Terms of Service for GigWageTruth.",
+        "Terms of Service for GigVerdict.",
         com.gigwager.util.AppConstants.BASE_URL + "/terms",
         com.gigwager.util.AppConstants.BASE_URL + "/og-image.jpg"
     ),
@@ -16,13 +16,13 @@
                 <p>Last updated: January 13, 2026</p>
                 
                 <h3>1. Acceptance of Terms</h3>
-                <p>By accessing GigWageTruth, you agree to be bound by these Terms of Service.</p>
+                <p>By accessing GigVerdict, you agree to be bound by these Terms of Service.</p>
 
                 <h3>2. Disclaimer (Not Financial Advice)</h3>
-                <p><strong>GigWageTruth is for informational purposes only.</strong> The calculations provided are estimates based on user inputs and averages. We do not provide financial, legal, or tax advice. You should consult with a qualified professional before making financial decisions.</p>
+                <p><strong>GigVerdict is for informational purposes only.</strong> The calculations provided are estimates based on user inputs and averages. We do not provide financial, legal, or tax advice. You should consult with a qualified professional before making financial decisions.</p>
 
                 <h3>3. Limitation of Liability</h3>
-                <p>In no event shall GigWageTruth or its owners be liable for any direct, indirect, incidental, or consequential damages arising out of the use of our website or calculators.</p>
+                <p>In no event shall GigVerdict or its owners be liable for any direct, indirect, incidental, or consequential damages arising out of the use of our website or calculators.</p>
 
                 <h3>4. Changes to Terms</h3>
                 <p>We reserve the right to modify these terms at any time. Your continued use of the site constitutes acceptance of those changes.</p>
