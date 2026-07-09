@@ -471,8 +471,18 @@ public class OrganicMonitoringRegressionTest {
                 AppConstants.BASE_URL + "/best-cities/doordash");
         assertTrue(bestCitiesDoc.title().contains("Highest-Paying Cities"),
                 "Best-cities page title should frame the page as an earnings ranking");
+        assertTrue(bestCitiesDoc.title().contains("Best Cities to Dash"),
+                "DoorDash best-cities title should target click-driven dash-city queries");
         assertTrue(firstH1(bestCitiesDoc).contains("Highest-Paying Cities"),
                 "Best-cities page H1 should frame the page as an earnings ranking");
+        assertTrue(bestCitiesDoc.text().contains("highest paying DoorDash cities near me"),
+                "DoorDash best-cities page should answer near-me earnings ranking intent");
+        assertTrue(bestCitiesDoc.text().contains("Best cities to DoorDash near me"),
+                "DoorDash best-cities page should expose query-matched guidance");
+        assertTrue(bestCitiesDoc.html().contains("id=\"ranking-table\""),
+                "DoorDash best-cities page should expose a ranking-table jump target");
+        assertTrue(bestCitiesDoc.html().contains("/doordash/where-you-can-dash"),
+                "DoorDash best-cities page should bridge pay ranking to availability intent");
 
         MvcResult blogResult = mockMvc.perform(get("/blog/multi-apping-guide"))
                 .andExpect(status().isOk())

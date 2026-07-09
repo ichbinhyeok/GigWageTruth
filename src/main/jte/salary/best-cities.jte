@@ -33,10 +33,19 @@
             <div class="max-w-4xl mx-auto">
                 <div class="text-center mb-12">
                     <h1 class="text-4xl lg:text-5xl font-black text-slate-900 mb-6 tracking-tight">
-                        Highest-Paying Cities for ${appName} Drivers in ${currentYear}
+                        @if(app.equals("doordash"))
+                            Highest-Paying Cities for DoorDash in ${currentYear}
+                            <span class="block text-emerald-600">Best Cities to Dash After Expenses</span>
+                        @else
+                            Highest-Paying Cities for ${appName} Drivers in ${currentYear}
+                        @endif
                     </h1>
                     <p class="text-xl text-slate-600 max-w-2xl mx-auto" id="serp-answer">
-                        The highest-paying ${appName} city in ${currentYear} is <strong>${topRankedCity.city().getCityName()}</strong> at about <strong>$${String.format("%.2f", topRankedCity.netHourly())}/hr net after expenses</strong>. The current top 3 are <strong>${topThreeCities}</strong>.
+                        @if(app.equals("doordash"))
+                            If you searched for <strong>highest paying DoorDash cities near me</strong> or <strong>best cities to DoorDash</strong>, start with the closest metro in this after-expenses ranking. <strong>${topRankedCity.city().getCityName()}</strong> currently leads at about <strong>$${String.format("%.2f", topRankedCity.netHourly())}/hr net</strong>, and the top 3 are <strong>${topThreeCities}</strong>.
+                        @else
+                            The highest-paying ${appName} city in ${currentYear} is <strong>${topRankedCity.city().getCityName()}</strong> at about <strong>$${String.format("%.2f", topRankedCity.netHourly())}/hr net after expenses</strong>. The current top 3 are <strong>${topThreeCities}</strong>.
+                        @endif
                     </p>
                     <p class="text-sm text-slate-500 max-w-2xl mx-auto mt-3">
                         These rankings compare estimated driver earnings after mileage and self-employment tax assumptions. Updated ${lastUpdated}.
@@ -51,7 +60,13 @@
 
                 <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
                     <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm text-left">
-                        <p class="text-xs font-black uppercase tracking-[0.18em] text-slate-500 mb-2">#1 City</p>
+                        <p class="text-xs font-black uppercase tracking-[0.18em] text-slate-500 mb-2">
+                            @if(app.equals("doordash"))
+                                Best City to Dash
+                            @else
+                                #1 City
+                            @endif
+                        </p>
                         <h2 class="text-2xl font-black text-slate-900">${topRankedCity.city().getCityName()}</h2>
                         <p class="text-sm text-emerald-600 font-bold mt-2">$${String.format("%.2f", topRankedCity.netHourly())}/hr net</p>
                     </div>
@@ -71,6 +86,30 @@
                         <p class="text-sm text-slate-600 mt-2">Every market links to a deeper city earnings page.</p>
                     </div>
                 </div>
+
+                @if(app.equals("doordash"))
+                    <section class="bg-white border border-emerald-200 rounded-2xl p-6 mb-8 text-left">
+                        <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-600 mb-2">DoorDash city search guide</p>
+                        <h2 class="text-2xl font-black text-slate-900 mb-3">Best cities to DoorDash near me: use pay first, then availability</h2>
+                        <p class="text-slate-600 mb-4">
+                            The fastest way to use this list is to find your nearest metro in the ranking, open its city earnings page, then confirm whether DoorDash is accepting or active in that market. A city can look strong on net hourly pay and still be a bad target if onboarding or zone access is limited.
+                        </p>
+                        <div class="grid md:grid-cols-3 gap-3">
+                            <a href="#ranking-table" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_best_cities', 'event_label': 'jump_to_doordash_city_ranking' })" class="block p-4 rounded-xl border border-slate-200 hover:border-emerald-300 hover:bg-emerald-50 transition-colors">
+                                <span class="block text-xs font-black uppercase tracking-[0.16em] text-slate-500 mb-1">Step 1</span>
+                                <span class="block font-black text-slate-900">Compare all ranked cities</span>
+                            </a>
+                            <a href="${topCityReportUrl}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_best_cities', 'event_label': 'open_top_doordash_city_report' })" class="block p-4 rounded-xl border border-slate-200 hover:border-amber-300 hover:bg-amber-50 transition-colors">
+                                <span class="block text-xs font-black uppercase tracking-[0.16em] text-slate-500 mb-1">Step 2</span>
+                                <span class="block font-black text-slate-900">Open ${topRankedCity.city().getCityName()} pay details</span>
+                            </a>
+                            <a href="${coverageUrl}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_best_cities', 'event_label': 'check_doordash_availability_after_ranking' })" class="block p-4 rounded-xl border border-slate-200 hover:border-sky-300 hover:bg-sky-50 transition-colors">
+                                <span class="block text-xs font-black uppercase tracking-[0.16em] text-slate-500 mb-1">Step 3</span>
+                                <span class="block font-black text-slate-900">Check where you can dash</span>
+                            </a>
+                        </div>
+                    </section>
+                @endif
 
                 <div class="bg-white border border-slate-200 rounded-2xl p-5 mb-8" data-nosnippet>
                     <p class="text-sm text-slate-600">
@@ -130,7 +169,7 @@
                     </div>
                 </div>
 
-                <div class="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm">
+                <div id="ranking-table" class="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm">
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse">
                             <thead>

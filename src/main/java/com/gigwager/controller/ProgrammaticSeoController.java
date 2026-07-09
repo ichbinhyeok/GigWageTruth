@@ -227,14 +227,27 @@ public class ProgrammaticSeoController {
                 String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
                                 .format(now);
 
-                String title = String.format("Highest-Paying Cities for %s Drivers %d",
-                                appName,
-                                currentYear);
-                String description = String.format(
-                                "Ranked by estimated %s driver earnings after mileage and self-employment tax. %s leads at about $%.2f/hr net; each city page includes an adjustable calculator.",
-                                appName,
-                                topRankedCity.city().getCityName(),
-                                topRankedCity.netHourly());
+                String title;
+                String description;
+                if (app.equals("doordash")) {
+                        title = String.format("Highest-Paying Cities for DoorDash %d: Best Cities to Dash",
+                                        currentYear);
+                        description = String.format(
+                                        "Best cities to DoorDash in %d ranked by estimated net hourly pay after expenses. %s leads at about $%.2f/hr; compare %d markets.",
+                                        currentYear,
+                                        topRankedCity.city().getCityName(),
+                                        topRankedCity.netHourly(),
+                                        rankedCities.size());
+                } else {
+                        title = String.format("Highest-Paying Cities for %s Drivers %d",
+                                        appName,
+                                        currentYear);
+                        description = String.format(
+                                        "Ranked by estimated %s driver earnings after mileage and self-employment tax. %s leads at about $%.2f/hr net; each city page includes an adjustable calculator.",
+                                        appName,
+                                        topRankedCity.city().getCityName(),
+                                        topRankedCity.netHourly());
+                }
                 String canonicalUrl = String.format("%s/best-cities/%s", AppConstants.BASE_URL, app);
                 String coverageUrl = app.equals("uber") ? "/uber/where-you-can-drive" : "/doordash/where-you-can-dash";
                 String coverageGuideTitle = app.equals("uber") ? "Uber coverage guide" : "DoorDash availability guide";
