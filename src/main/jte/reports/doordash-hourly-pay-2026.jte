@@ -149,9 +149,29 @@
                         <strong class="block text-slate-900">DoorDash 8-hour earnings</strong>
                         <span class="text-sm text-slate-600">Full-day gross, net, and slow-window risk.</span>
                     </a>
+                    <a href="/doordash/how-much-can-you-make-in-a-day" class="rounded-2xl bg-slate-50 border border-slate-200 px-5 py-4 hover:border-emerald-300 transition-colors">
+                        <strong class="block text-slate-900">DoorDash daily earnings</strong>
+                        <span class="text-sm text-slate-600">Full-day shift estimate after expenses.</span>
+                    </a>
                     <a href="/doordash/how-much-can-you-make-in-a-week" class="rounded-2xl bg-slate-50 border border-slate-200 px-5 py-4 hover:border-emerald-300 transition-colors">
                         <strong class="block text-slate-900">DoorDash weekly earnings</strong>
                         <span class="text-sm text-slate-600">15-20 hour weekly earning plan.</span>
+                    </a>
+                    <a href="/doordash/can-you-make-100-a-day" class="rounded-2xl bg-slate-50 border border-slate-200 px-5 py-4 hover:border-emerald-300 transition-colors">
+                        <strong class="block text-slate-900">Can DoorDash make $100/day?</strong>
+                        <span class="text-sm text-slate-600">Hours, miles, and gross needed.</span>
+                    </a>
+                    <a href="/doordash/can-you-make-200-a-day" class="rounded-2xl bg-slate-50 border border-slate-200 px-5 py-4 hover:border-emerald-300 transition-colors">
+                        <strong class="block text-slate-900">Can DoorDash make $200/day?</strong>
+                        <span class="text-sm text-slate-600">Aggressive two-peak target plan.</span>
+                    </a>
+                    <a href="/doordash/after-gas" class="rounded-2xl bg-slate-50 border border-slate-200 px-5 py-4 hover:border-emerald-300 transition-colors">
+                        <strong class="block text-slate-900">DoorDash after gas</strong>
+                        <span class="text-sm text-slate-600">Gross-to-net expense check.</span>
+                    </a>
+                    <a href="/doordash/pay-per-mile" class="rounded-2xl bg-slate-50 border border-slate-200 px-5 py-4 hover:border-emerald-300 transition-colors">
+                        <strong class="block text-slate-900">DoorDash pay per mile</strong>
+                        <span class="text-sm text-slate-600">Offer floor and dead-mile check.</span>
                     </a>
                 </div>
             </section>
@@ -168,6 +188,7 @@
                                 <a href="/salary/doordash/${snapshot.city().getSlug()}/hourly-pay" class="block text-slate-700 hover:text-emerald-800">Hourly pay after expenses</a>
                                 <a href="/salary/doordash/${snapshot.city().getSlug()}/how-much-can-you-make" class="block text-slate-700 hover:text-emerald-800">How much can you make?</a>
                                 <a href="/salary/doordash/${snapshot.city().getSlug()}/best-areas" class="block text-slate-700 hover:text-emerald-800">Best areas to dash</a>
+                                <a href="/salary/doordash/${snapshot.city().getSlug()}/nights-weekends" class="block text-slate-700 hover:text-emerald-800">Best hours to dash</a>
                                 <a href="/salary/doordash/${snapshot.city().getSlug()}/uber-eats-vs-doordash" class="block text-slate-700 hover:text-emerald-800">Uber Eats vs DoorDash</a>
                                 <a href="/salary/doordash/${snapshot.city().getSlug()}/after-gas" class="block text-slate-700 hover:text-emerald-800">After gas and mileage</a>
                                 <a href="/salary/doordash/${snapshot.city().getSlug()}/active-time" class="block text-slate-700 hover:text-emerald-800">Active time vs dash time</a>

@@ -113,6 +113,18 @@
                                 <span class="block text-xs font-black uppercase tracking-[0.16em] text-slate-500 mb-1">Evidence layer</span>
                                 <span class="block font-black text-slate-900">Open DoorDash driver shift evidence: gross, miles, active time, dash time, and net checks</span>
                             </a>
+                            <a href="/doordash/can-you-make-100-a-day" class="block p-4 rounded-xl border border-slate-200 hover:border-emerald-300 hover:bg-emerald-50 transition-colors">
+                                <span class="block text-xs font-black uppercase tracking-[0.16em] text-slate-500 mb-1">Daily target</span>
+                                <span class="block font-black text-slate-900">Can you make $100/day with DoorDash?</span>
+                            </a>
+                            <a href="/doordash/after-gas" class="block p-4 rounded-xl border border-slate-200 hover:border-emerald-300 hover:bg-emerald-50 transition-colors">
+                                <span class="block text-xs font-black uppercase tracking-[0.16em] text-slate-500 mb-1">Expense check</span>
+                                <span class="block font-black text-slate-900">DoorDash after gas and mileage</span>
+                            </a>
+                            <a href="/doordash/pay-per-mile" class="block p-4 rounded-xl border border-slate-200 hover:border-emerald-300 hover:bg-emerald-50 transition-colors">
+                                <span class="block text-xs font-black uppercase tracking-[0.16em] text-slate-500 mb-1">Offer floor</span>
+                                <span class="block font-black text-slate-900">DoorDash pay per mile</span>
+                            </a>
                         </div>
                     </section>
 

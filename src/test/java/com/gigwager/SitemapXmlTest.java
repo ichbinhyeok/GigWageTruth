@@ -66,8 +66,18 @@ public class SitemapXmlTest {
                                 "Sitemap should contain DoorDash duration earning pages");
                 assertTrue(xmlContent.contains("/doordash/how-much-can-you-make-in-8-hours"),
                                 "Sitemap should contain DoorDash full-day duration earning pages");
+                assertTrue(xmlContent.contains("/doordash/how-much-can-you-make-in-a-day"),
+                                "Sitemap should contain DoorDash daily earning pages");
                 assertTrue(xmlContent.contains("/doordash/how-much-can-you-make-in-a-week"),
                                 "Sitemap should contain DoorDash weekly earning pages");
+                assertTrue(xmlContent.contains("/doordash/can-you-make-100-a-day"),
+                                "Sitemap should contain DoorDash $100/day money-intent pages");
+                assertTrue(xmlContent.contains("/doordash/can-you-make-200-a-day"),
+                                "Sitemap should contain DoorDash $200/day money-intent pages");
+                assertTrue(xmlContent.contains("/doordash/after-gas"),
+                                "Sitemap should contain DoorDash after-gas money-intent pages");
+                assertTrue(xmlContent.contains("/doordash/pay-per-mile"),
+                                "Sitemap should contain DoorDash pay-per-mile money-intent pages");
                 assertTrue(xmlContent.contains("/uber"), "Sitemap should contain /uber");
                 assertTrue(xmlContent.contains("/doordash"), "Sitemap should contain /doordash");
                 assertTrue(xmlContent.contains("/uber/where-you-can-drive"),

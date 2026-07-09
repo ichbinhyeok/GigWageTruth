@@ -170,13 +170,41 @@
                                 <strong class="block text-slate-900">How much can you make with DoorDash in 8 hours?</strong>
                                 <span class="text-sm text-slate-600">Full-day gross, net, and slow-window risk.</span>
                             </a>
+                            <a href="/doordash/how-much-can-you-make-in-a-day" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
+                                <strong class="block text-slate-900">How much can you make with DoorDash in a day?</strong>
+                                <span class="text-sm text-slate-600">Lunch plus dinner, full-day gross and net.</span>
+                            </a>
+                            <a href="/doordash/can-you-make-100-a-day" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
+                                <strong class="block text-slate-900">Can you make $100/day with DoorDash?</strong>
+                                <span class="text-sm text-slate-600">Hours, miles, and gross needed for the target.</span>
+                            </a>
+                            <a href="/doordash/can-you-make-200-a-day" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
+                                <strong class="block text-slate-900">Can you make $200/day with DoorDash?</strong>
+                                <span class="text-sm text-slate-600">Long-shift stretch plan and failure modes.</span>
+                            </a>
+                            <a href="/doordash/after-gas" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
+                                <strong class="block text-slate-900">DoorDash after gas</strong>
+                                <span class="text-sm text-slate-600">Gross-to-net pay after vehicle cost pressure.</span>
+                            </a>
+                            <a href="/doordash/pay-per-mile" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
+                                <strong class="block text-slate-900">DoorDash pay per mile</strong>
+                                <span class="text-sm text-slate-600">Offer floor, dead miles, and route quality.</span>
+                            </a>
                             <a href="/salary/doordash/dallas/best-areas" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
                                 <strong class="block text-slate-900">Best areas to DoorDash in Dallas</strong>
                                 <span class="text-sm text-slate-600">Zone choice, mileage pressure, and local demand checks.</span>
                             </a>
+                            <a href="/salary/doordash/dallas/nights-weekends" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
+                                <strong class="block text-slate-900">Best DoorDash hours in Dallas</strong>
+                                <span class="text-sm text-slate-600">Dinner, late-night, and weekend timing checks.</span>
+                            </a>
                             <a href="/salary/doordash/chicago/uber-eats-vs-doordash" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
                                 <strong class="block text-slate-900">Uber Eats vs DoorDash in Chicago</strong>
                                 <span class="text-sm text-slate-600">Compare delivery-app net pay and active-time risk.</span>
+                            </a>
+                            <a href="/salary/doordash/las-vegas/100-a-day" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
+                                <strong class="block text-slate-900">Can DoorDash make $100/day in Las Vegas?</strong>
+                                <span class="text-sm text-slate-600">Daily target math in a tourism market.</span>
                             </a>
                             <a href="/salary/doordash/denver/1000-a-month" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
                                 <strong class="block text-slate-900">DoorDash Denver $1,000/month plan</strong>

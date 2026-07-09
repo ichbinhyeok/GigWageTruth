@@ -145,6 +145,26 @@
                                 <strong class="block text-slate-900">DoorDash weekly earnings</strong>
                                 <span class="text-xs text-slate-600">15-20 hour plan</span>
                             </a>
+                            <a href="/doordash/how-much-can-you-make-in-a-day" class="rounded-xl bg-white border border-indigo-100 px-4 py-3 hover:border-indigo-200 transition-colors">
+                                <strong class="block text-slate-900">DoorDash daily earnings</strong>
+                                <span class="text-xs text-slate-600">Full-day gross and net</span>
+                            </a>
+                            <a href="/doordash/can-you-make-100-a-day" class="rounded-xl bg-white border border-indigo-100 px-4 py-3 hover:border-indigo-200 transition-colors">
+                                <strong class="block text-slate-900">Can DoorDash make $100/day?</strong>
+                                <span class="text-xs text-slate-600">Hours, miles, gross needed</span>
+                            </a>
+                            <a href="/doordash/can-you-make-200-a-day" class="rounded-xl bg-white border border-indigo-100 px-4 py-3 hover:border-indigo-200 transition-colors">
+                                <strong class="block text-slate-900">Can DoorDash make $200/day?</strong>
+                                <span class="text-xs text-slate-600">Stretch-goal shift plan</span>
+                            </a>
+                            <a href="/doordash/after-gas" class="rounded-xl bg-white border border-indigo-100 px-4 py-3 hover:border-indigo-200 transition-colors">
+                                <strong class="block text-slate-900">DoorDash after gas</strong>
+                                <span class="text-xs text-slate-600">Take-home after costs</span>
+                            </a>
+                            <a href="/doordash/pay-per-mile" class="rounded-xl bg-white border border-indigo-100 px-4 py-3 hover:border-indigo-200 transition-colors">
+                                <strong class="block text-slate-900">DoorDash pay per mile</strong>
+                                <span class="text-xs text-slate-600">Offer floor and dead miles</span>
+                            </a>
                             <a href="/salary/uber/chicago/100-a-day" class="rounded-xl bg-white border border-indigo-100 px-4 py-3 hover:border-indigo-200 transition-colors">
                                 <strong class="block text-slate-900">Uber Chicago $100/day</strong>
                                 <span class="text-xs text-slate-600">Daily net target</span>
@@ -168,6 +188,14 @@
                             <a href="/salary/doordash/chicago/uber-eats-vs-doordash" class="rounded-xl bg-white border border-indigo-100 px-4 py-3 hover:border-indigo-200 transition-colors">
                                 <strong class="block text-slate-900">Uber Eats vs DoorDash Chicago</strong>
                                 <span class="text-xs text-slate-600">Delivery-app comparison</span>
+                            </a>
+                            <a href="/salary/doordash/phoenix/after-gas" class="rounded-xl bg-white border border-indigo-100 px-4 py-3 hover:border-indigo-200 transition-colors">
+                                <strong class="block text-slate-900">DoorDash Phoenix after gas</strong>
+                                <span class="text-xs text-slate-600">City fuel and net check</span>
+                            </a>
+                            <a href="/salary/doordash/las-vegas/100-a-day" class="rounded-xl bg-white border border-indigo-100 px-4 py-3 hover:border-indigo-200 transition-colors">
+                                <strong class="block text-slate-900">DoorDash Las Vegas $100/day</strong>
+                                <span class="text-xs text-slate-600">Tourism-market target</span>
                             </a>
                             <a href="/salary/uber/nashville/nights-weekends" class="rounded-xl bg-white border border-indigo-100 px-4 py-3 hover:border-indigo-200 transition-colors">
                                 <strong class="block text-slate-900">Uber Nashville nights/weekends</strong>

@@ -26,6 +26,12 @@
 @param List<CityIntentMetric> intentMetrics = java.util.List.of()
 @param List<CityIntentEvidence> intentEvidencePatterns = java.util.List.of()
 @param List<SearchResultPattern> searchResultPatterns = java.util.List.of()
+@param double daily100Hours = 0
+@param int daily100Miles = 0
+@param int daily100Gross = 0
+@param double daily200Hours = 0
+@param int daily200Miles = 0
+@param int daily200Gross = 0
 @param Boolean noIndex = false
 
 @template.layout.main(
@@ -52,6 +58,8 @@
                 <h1 class="text-4xl md:text-6xl font-black leading-tight mb-5">
                     @if(intentPage == CityIntentPage.APP_COMPARISON)
                         Uber Eats vs DoorDash in ${city.getCityName()}
+                    @elseif(intentPage == CityIntentPage.NIGHTS_WEEKENDS && app.equals("doordash"))
+                        Best Hours to DoorDash in ${city.getCityName()}
                     @else
                         ${appName} ${city.getCityName()} ${intentPage.getDisplayName()}
                     @endif
@@ -94,6 +102,75 @@
                     $unsafe{answerHtml}
                 </div>
             </section>
+
+            <section class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <div class="bg-slate-900 px-6 py-4">
+                    <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-300 mb-2">Goal math</p>
+                    <h2 class="text-2xl font-black text-white">${city.getCityName()} ${appName} target calculator</h2>
+                    <p class="text-sm text-slate-300 mt-1">The useful answer is not only pay per hour. It is how many real hours and miles the target requires.</p>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full min-w-[48rem] text-sm">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-200">
+                                <th scope="col" class="px-4 py-3 text-left text-xs font-bold text-slate-500 uppercase">Target</th>
+                                <th scope="col" class="px-4 py-3 text-right text-xs font-bold text-slate-500 uppercase">Modeled hours</th>
+                                <th scope="col" class="px-4 py-3 text-right text-xs font-bold text-slate-500 uppercase">Modeled miles</th>
+                                <th scope="col" class="px-4 py-3 text-right text-xs font-bold text-slate-500 uppercase">Gross needed</th>
+                                <th scope="col" class="px-4 py-3 text-left text-xs font-bold text-slate-500 uppercase">Best use</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr>
+                                <td class="px-4 py-4 font-bold text-slate-900">$100 net day</td>
+                                <td class="px-4 py-4 text-right text-slate-700">${String.format("%.1f", daily100Hours)} hrs</td>
+                                <td class="px-4 py-4 text-right text-slate-700">${daily100Miles} mi</td>
+                                <td class="px-4 py-4 text-right font-black text-emerald-700">$${daily100Gross}</td>
+                                <td class="px-4 py-4 text-slate-600">Dinner, weekend, or two short peaks.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-4 font-bold text-slate-900">$200 net day</td>
+                                <td class="px-4 py-4 text-right text-slate-700">${String.format("%.1f", daily200Hours)} hrs</td>
+                                <td class="px-4 py-4 text-right text-slate-700">${daily200Miles} mi</td>
+                                <td class="px-4 py-4 text-right font-black text-emerald-700">$${daily200Gross}</td>
+                                <td class="px-4 py-4 text-slate-600">Long stretch goal; compare against fatigue and dead miles.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-4 font-bold text-slate-900">Per-mile floor</td>
+                                <td class="px-4 py-4 text-right text-slate-700">${scenario.getHours()} hrs/wk</td>
+                                <td class="px-4 py-4 text-right text-slate-700">${scenario.getMiles()} mi/wk</td>
+                                <td class="px-4 py-4 text-right font-black text-emerald-700">$${String.format("%.2f", scenario.getGrossWeekly() / (double) scenario.getMiles())}/mi</td>
+                                <td class="px-4 py-4 text-slate-600">Reject offers that look busy but fail after route miles.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            @if(app.equals("doordash"))
+                <section class="bg-emerald-50 rounded-3xl border border-emerald-100 p-8 shadow-sm">
+                    <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-700 mb-2">High-intent city routes</p>
+                    <h2 class="text-3xl font-black text-slate-900 mb-4">Use the adjacent DoorDash query</h2>
+                    <div class="grid md:grid-cols-2 gap-3">
+                        <a href="/salary/doordash/phoenix/after-gas" class="rounded-2xl bg-white border border-emerald-100 px-5 py-4 hover:border-emerald-300 transition-colors">
+                            <strong class="block text-slate-900">DoorDash pay in Phoenix after gas</strong>
+                            <span class="text-sm text-slate-600">Fuel, miles, and take-home estimate.</span>
+                        </a>
+                        <a href="/salary/doordash/dallas/nights-weekends" class="rounded-2xl bg-white border border-emerald-100 px-5 py-4 hover:border-emerald-300 transition-colors">
+                            <strong class="block text-slate-900">Best DoorDash hours in Dallas</strong>
+                            <span class="text-sm text-slate-600">Dinner, weekend, and slow-window check.</span>
+                        </a>
+                        <a href="/salary/doordash/las-vegas/100-a-day" class="rounded-2xl bg-white border border-emerald-100 px-5 py-4 hover:border-emerald-300 transition-colors">
+                            <strong class="block text-slate-900">Can you make $100/day in Las Vegas?</strong>
+                            <span class="text-sm text-slate-600">Tourism-market daily target math.</span>
+                        </a>
+                        <a href="/salary/doordash/chicago/uber-eats-vs-doordash" class="rounded-2xl bg-white border border-emerald-100 px-5 py-4 hover:border-emerald-300 transition-colors">
+                            <strong class="block text-slate-900">Uber Eats vs DoorDash in Chicago</strong>
+                            <span class="text-sm text-slate-600">Delivery-app comparison after expenses.</span>
+                        </a>
+                    </div>
+                </section>
+            @endif
 
             @if(intentMetrics != null && !intentMetrics.isEmpty())
                 <section class="bg-slate-900 rounded-3xl border border-slate-800 p-8 text-white shadow-sm">

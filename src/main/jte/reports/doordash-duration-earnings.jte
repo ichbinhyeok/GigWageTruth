@@ -1,4 +1,5 @@
 @import com.gigwager.model.DoorDashDurationEstimate
+@import com.gigwager.model.DoorDashMoneyIntent
 @import com.gigwager.model.DriverShiftReport
 @import com.gigwager.model.SeoMeta
 @import java.util.List
@@ -6,6 +7,7 @@
 @param SeoMeta seoMeta
 @param DoorDashDurationEstimate estimate
 @param List<DoorDashDurationEstimate> allEstimates
+@param List<DoorDashMoneyIntent> moneyIntents = java.util.List.of()
 @param List<DriverShiftReport> driverShiftReports = java.util.List.of()
 @param String lastUpdated
 @param String durationJsonLd = "{}"
@@ -119,6 +121,56 @@
                             @endfor
                         </tbody>
                     </table>
+                </div>
+            </section>
+
+            <section class="bg-white rounded-3xl border border-slate-200 p-8 shadow-sm">
+                <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-700 mb-2">Money-intent bridge</p>
+                <h2 class="text-3xl font-black text-slate-900 mb-4">If the real question is the cash target</h2>
+                <p class="text-slate-600 max-w-3xl mb-6">
+                    Strong pSEO pages do not leave the next question unanswered. Use these pages when the searcher cares less about ${estimate.displayName().toLowerCase(java.util.Locale.US)} and more about the daily target, gas drag, or per-mile floor.
+                </p>
+                <div class="grid md:grid-cols-2 gap-3">
+                    @for(DoorDashMoneyIntent item : moneyIntents)
+                        <a href="${item.path()}" class="rounded-2xl bg-slate-50 border border-slate-200 px-5 py-4 hover:border-emerald-300 transition-colors">
+                            <strong class="block text-slate-900">${item.headline()}</strong>
+                            <span class="text-sm text-slate-600">${item.netRange()} net | ${item.hourRange()} | ${item.mileRange()}</span>
+                        </a>
+                    @endfor
+                </div>
+            </section>
+
+            <section class="bg-slate-900 rounded-3xl border border-slate-800 p-8 text-white shadow-sm">
+                <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-300 mb-2">Goal stress test</p>
+                <h2 class="text-3xl font-black mb-5">Can this shift support $100/day or $200/day?</h2>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <article class="rounded-2xl bg-white/5 border border-white/10 p-5">
+                        <p class="text-xs font-black uppercase tracking-[0.16em] text-slate-400 mb-2">$100/day check</p>
+                        <p class="text-3xl font-black text-emerald-300 mb-2">
+                            @if(estimate.netHigh() >= 100)
+                                Possible
+                            @else
+                                Needs more time
+                            @endif
+                        </p>
+                        <p class="text-sm text-slate-300">This ${estimate.displayName().toLowerCase(java.util.Locale.US)} model nets $${estimate.netLow()}-$${estimate.netHigh()}; a $100 net day needs the upper end or a second peak block.</p>
+                    </article>
+                    <article class="rounded-2xl bg-white/5 border border-white/10 p-5">
+                        <p class="text-xs font-black uppercase tracking-[0.16em] text-slate-400 mb-2">$200/day check</p>
+                        <p class="text-3xl font-black text-emerald-300 mb-2">
+                            @if(estimate.netHigh() >= 200)
+                                Stretch
+                            @else
+                                Not enough
+                            @endif
+                        </p>
+                        <p class="text-sm text-slate-300">$200 net usually needs a long two-peak plan, not just one ${estimate.displayName().toLowerCase(java.util.Locale.US)} shift.</p>
+                    </article>
+                    <article class="rounded-2xl bg-white/5 border border-white/10 p-5">
+                        <p class="text-xs font-black uppercase tracking-[0.16em] text-slate-400 mb-2">After-gas check</p>
+                        <p class="text-3xl font-black text-emerald-300 mb-2">$${String.format("%.2f", estimate.netHourlyLow())}-$${String.format("%.2f", estimate.netHourlyHigh())}/hr</p>
+                        <p class="text-sm text-slate-300">This is the modeled net hourly range after mileage and tax pressure, not only the app payout.</p>
+                    </article>
                 </div>
             </section>
 

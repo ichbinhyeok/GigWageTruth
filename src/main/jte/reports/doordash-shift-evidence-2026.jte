@@ -175,6 +175,18 @@
                     <strong class="block text-slate-900 text-lg mb-2">DoorDash 3-hour shift estimate</strong>
                     <span class="text-sm text-slate-600">Translate shift evidence into a short peak-window earnings plan.</span>
                 </a>
+                <a href="/doordash/can-you-make-100-a-day" class="rounded-3xl bg-white border border-slate-200 p-6 hover:border-emerald-300 transition-colors">
+                    <strong class="block text-slate-900 text-lg mb-2">Can DoorDash make $100/day?</strong>
+                    <span class="text-sm text-slate-600">Use the evidence table to check hours, miles, and gross needed for the target.</span>
+                </a>
+                <a href="/doordash/after-gas" class="rounded-3xl bg-white border border-slate-200 p-6 hover:border-emerald-300 transition-colors">
+                    <strong class="block text-slate-900 text-lg mb-2">DoorDash after gas</strong>
+                    <span class="text-sm text-slate-600">Translate public gross reports into take-home math.</span>
+                </a>
+                <a href="/doordash/pay-per-mile" class="rounded-3xl bg-white border border-slate-200 p-6 hover:border-emerald-300 transition-colors">
+                    <strong class="block text-slate-900 text-lg mb-2">DoorDash pay per mile</strong>
+                    <span class="text-sm text-slate-600">Compare reported miles with offer-floor logic.</span>
+                </a>
             </section>
 
             <section class="bg-slate-50 rounded-3xl border border-slate-200 p-8">

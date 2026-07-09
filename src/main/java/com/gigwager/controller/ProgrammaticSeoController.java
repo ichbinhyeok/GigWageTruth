@@ -7,6 +7,7 @@ import com.gigwager.model.CityIntentMetric;
 import com.gigwager.model.CityIntentPage;
 import com.gigwager.model.CityScenario;
 import com.gigwager.model.DoorDashDurationEstimate;
+import com.gigwager.model.DoorDashMoneyIntent;
 import com.gigwager.model.DriverFieldNote;
 import com.gigwager.model.DriverShiftReport;
 import com.gigwager.model.SeoMeta;
@@ -296,6 +297,7 @@ public class ProgrammaticSeoController {
 
                 model.addAttribute("estimate", estimate);
                 model.addAttribute("allEstimates", buildDoorDashDurationEstimates());
+                model.addAttribute("moneyIntents", buildDoorDashMoneyIntents());
                 model.addAttribute("driverShiftReports", driverShiftReportService.getReportsForApp("doordash"));
                 model.addAttribute("lastUpdated", monthYear);
                 model.addAttribute("durationJsonLd", buildDoorDashDurationJsonLd(estimate, canonicalUrl));
@@ -303,6 +305,41 @@ public class ProgrammaticSeoController {
                                 new SeoMeta(title, description, canonicalUrl, AppConstants.BASE_URL + "/og-image.jpg"));
 
                 return "reports/doordash-duration-earnings";
+        }
+
+        @GetMapping("/doordash/{moneySlug:can-you-make-100-a-day|can-you-make-200-a-day|after-gas|pay-per-mile}")
+        public String doordashMoneyIntentPage(@PathVariable("moneySlug") String moneySlug, Model model) {
+                DoorDashMoneyIntent intent = buildDoorDashMoneyIntents().stream()
+                                .filter(item -> item.slug().equals(moneySlug))
+                                .findFirst()
+                                .orElseThrow(() -> new com.gigwager.exception.ResourceNotFoundException(
+                                                "DoorDash money intent not found"));
+
+                java.time.LocalDate now = java.time.LocalDate.now();
+                String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
+                                .format(now);
+                String canonicalUrl = AppConstants.BASE_URL + intent.path();
+                String title = intent.headline() + " 2026";
+                String description = String.format(
+                                "%s: %s Typical gross %s, net %s, %s, and %s. Updated %s.",
+                                intent.searchPhrase(),
+                                intent.answerLead(),
+                                intent.grossRange(),
+                                intent.netRange(),
+                                intent.hourRange(),
+                                intent.mileRange(),
+                                monthYear);
+
+                model.addAttribute("intent", intent);
+                model.addAttribute("moneyIntents", buildDoorDashMoneyIntents());
+                model.addAttribute("durationEstimates", buildDoorDashDurationEstimates());
+                model.addAttribute("driverShiftReports", driverShiftReportService.getReportsForApp("doordash"));
+                model.addAttribute("lastUpdated", monthYear);
+                model.addAttribute("moneyIntentJsonLd", buildDoorDashMoneyIntentJsonLd(intent, canonicalUrl));
+                model.addAttribute("seoMeta",
+                                new SeoMeta(title, description, canonicalUrl, AppConstants.BASE_URL + "/og-image.jpg"));
+
+                return "reports/doordash-money-intent";
         }
 
         @GetMapping("/uber/where-you-can-drive")
@@ -847,6 +884,12 @@ public class ProgrammaticSeoController {
                                 buildCityIntentEvidencePatterns(app, appName, city, intentPage, scenario));
                 model.addAttribute("searchResultPatterns",
                                 buildSearchResultPatterns(app, appName, city, intentPage, scenario));
+                model.addAttribute("daily100Hours", hoursToNetTarget(scenario, 100));
+                model.addAttribute("daily100Miles", milesForHours(scenario, hoursToNetTarget(scenario, 100)));
+                model.addAttribute("daily100Gross", grossForHours(scenario, hoursToNetTarget(scenario, 100)));
+                model.addAttribute("daily200Hours", hoursToNetTarget(scenario, 200));
+                model.addAttribute("daily200Miles", milesForHours(scenario, hoursToNetTarget(scenario, 200)));
+                model.addAttribute("daily200Gross", grossForHours(scenario, hoursToNetTarget(scenario, 200)));
                 model.addAttribute("answerHtml", answerHtml);
                 model.addAttribute("cityIntentJsonLd",
                                 buildCityIntentJsonLd(appName, city, intentPage, scenario, canonicalUrl));
@@ -895,10 +938,14 @@ public class ProgrammaticSeoController {
                         case MONTHLY_1000 -> String.format("Can %s Make $1,000/Month in %s?",
                                         appName,
                                         city.getCityName());
-                        case NIGHTS_WEEKENDS -> String.format("%s %s Nights and Weekends: $%.2f/hr Net",
-                                        appName,
-                                        city.getCityName(),
-                                        scenario.getNetHourly());
+                        case NIGHTS_WEEKENDS -> appName.equals("DoorDash")
+                                        ? String.format("Best Hours to DoorDash in %s: $%.2f/hr Net",
+                                                        city.getCityName(),
+                                                        scenario.getNetHourly())
+                                        : String.format("%s %s Nights and Weekends: $%.2f/hr Net",
+                                                        appName,
+                                                        city.getCityName(),
+                                                        scenario.getNetHourly());
                 };
         }
 
@@ -971,12 +1018,18 @@ public class ProgrammaticSeoController {
                                         hoursToNetTarget(scenario, 1000 / 4.33),
                                         scenario.getNetHourly(),
                                         monthYear);
-                        case NIGHTS_WEEKENDS -> String.format(
-                                        "%s %s nights and weekends estimate: a 12-hour weekend pace models about $%.0f net after mileage and tax. Updated %s.",
-                                        appName,
-                                        city.getCityName(),
-                                        scenario.getNetHourly() * 12,
-                                        monthYear);
+                        case NIGHTS_WEEKENDS -> appName.equals("DoorDash")
+                                        ? String.format(
+                                                        "Best hours to DoorDash in %s: a 12-hour nights/weekends plan models about $%.0f net after mileage and tax. Updated %s.",
+                                                        city.getCityName(),
+                                                        scenario.getNetHourly() * 12,
+                                                        monthYear)
+                                        : String.format(
+                                                        "%s %s nights and weekends estimate: a 12-hour weekend pace models about $%.0f net after mileage and tax. Updated %s.",
+                                                        appName,
+                                                        city.getCityName(),
+                                                        scenario.getNetHourly() * 12,
+                                                        monthYear);
                 };
         }
 
@@ -1097,6 +1150,15 @@ public class ProgrammaticSeoController {
                                 int weekendMiles = milesForHours(scenario, weekendHours);
                                 int weekendGross = grossForHours(scenario, weekendHours);
                                 double weekendNet = scenario.getNetHourly() * weekendHours;
+                                if (appName.equals("DoorDash")) {
+                                        yield String.format(
+                                                        "<p>The best hours to DoorDash in %s are usually dinner, weekend, late-night, event, or dense lunch windows where pickup waits stay low. A <strong>%d-hour nights/weekends plan</strong> at the current baseline models about <strong>$%.0f net</strong>, <strong>$%d gross</strong>, and <strong>%d miles</strong>.</p><p>If those hours spill into slow gaps, the active-time screenshot can still look decent while the real all-in hourly rate falls. Treat this as a schedule test, not just a citywide average.</p>",
+                                                        city.getCityName(),
+                                                        weekendHours,
+                                                        weekendNet,
+                                                        weekendGross,
+                                                        weekendMiles);
+                                }
                                 yield String.format(
                                                 "<p>A nights-and-weekends plan for %s in %s works best when the driver can compress demand into dinner, late-night, event, or airport windows. A <strong>%d-hour weekend</strong> at the current baseline models about <strong>$%.0f net</strong>, <strong>$%d gross</strong>, and <strong>%d miles</strong>.</p><p>If those hours spill into slow gaps, the active-time screenshot can still look decent while the real all-in hourly rate falls.</p>",
                                                 appName,
@@ -2475,6 +2537,20 @@ public class ProgrammaticSeoController {
                                                 "All-day grinding through weak order volume.",
                                                 "Eight hours can produce a bigger gross number, but it usually lowers hourly efficiency unless the driver avoids dead miles and slow gaps."),
                                 new DoorDashDurationEstimate(
+                                                "a-day",
+                                                "a Day",
+                                                "how much can you make with DoorDash in a day",
+                                                9.0,
+                                                150,
+                                                250,
+                                                220,
+                                                320,
+                                                95,
+                                                165,
+                                                "Lunch plus dinner, with a real break before the dinner peak.",
+                                                "Starting too early and staying online through long idle windows.",
+                                                "A full DoorDash day is less about being online all day and more about stacking lunch, dinner, and late demand while cutting off weak hours."),
+                                new DoorDashDurationEstimate(
                                                 "a-week",
                                                 "a Week",
                                                 "how much can you make with DoorDash in a week",
@@ -2488,6 +2564,94 @@ public class ProgrammaticSeoController {
                                                 "15-20 peak-focused hours across Friday, Saturday, Sunday, and two dinner shifts.",
                                                 "Spreading the same hours across random weekdays.",
                                                 "Weekly DoorDash earnings depend more on shift selection than raw availability; concentrated peak hours usually beat more total hours in weak windows."));
+        }
+
+        private List<DoorDashMoneyIntent> buildDoorDashMoneyIntents() {
+                return List.of(
+                                new DoorDashMoneyIntent(
+                                                "can-you-make-100-a-day",
+                                                "$100 a Day",
+                                                "can you make $100 a day with DoorDash",
+                                                "Can You Make $100 a Day with DoorDash?",
+                                                "$100 net is realistic in many markets, but it usually requires a planned peak-window shift rather than random all-day availability.",
+                                                "Typical net target",
+                                                "$100",
+                                                "Modeled time",
+                                                "5.5-8.5 hrs",
+                                                145,
+                                                175,
+                                                100,
+                                                115,
+                                                5.5,
+                                                8.5,
+                                                65,
+                                                110,
+                                                "Dinner plus one shoulder hour, or lunch plus dinner in a dense zone.",
+                                                "Slow weekday gaps, long pickups, and unpaid return miles can turn $100 gross into a weak net day.",
+                                                "Start with a $1.50-$2.00 per mile floor, stop accepting orders that pull you away from restaurants, and measure the result after gas and mileage."),
+                                new DoorDashMoneyIntent(
+                                                "can-you-make-200-a-day",
+                                                "$200 a Day",
+                                                "can you make $200 a day with DoorDash",
+                                                "Can You Make $200 a Day with DoorDash?",
+                                                "$200 net is an aggressive target; the page treats it as a long two-peak plan, not a normal short shift.",
+                                                "Typical net target",
+                                                "$200",
+                                                "Modeled time",
+                                                "10.0-13.0 hrs",
+                                                285,
+                                                340,
+                                                190,
+                                                220,
+                                                10.0,
+                                                13.0,
+                                                130,
+                                                210,
+                                                "Friday or Saturday with lunch, dinner, and late demand stacked together.",
+                                                "A $200 day breaks when the driver grinds low-order hours or accepts high-mileage orders to keep moving.",
+                                                "Use $200/day only as a dense-market or weekend stretch goal, then compare the plan against the $100/day and 8-hour pages."),
+                                new DoorDashMoneyIntent(
+                                                "after-gas",
+                                                "After Gas",
+                                                "DoorDash after gas",
+                                                "DoorDash After Gas: Real Net Pay",
+                                                "After gas, mileage, and tax reserves, many DoorDash shifts keep roughly 55%-70% of gross payout as modeled take-home.",
+                                                "Typical net",
+                                                "$90-$150",
+                                                "Gross kept",
+                                                "55%-70%",
+                                                140,
+                                                220,
+                                                90,
+                                                150,
+                                                8.0,
+                                                10.0,
+                                                80,
+                                                145,
+                                                "Short pickup loops during lunch and dinner, especially when drop-offs stay near restaurants.",
+                                                "Long suburb returns and apartment waits can erase the difference between a good payout and a good net hour.",
+                                                "Check gas separately, but do not stop there: compare every shift against mileage cost, tax reserve, and unpaid repositioning time."),
+                                new DoorDashMoneyIntent(
+                                                "pay-per-mile",
+                                                "Pay Per Mile",
+                                                "DoorDash pay per mile",
+                                                "DoorDash Pay Per Mile: Acceptance Floor",
+                                                "DoorDash pay per mile matters because a shift can look fine by the hour while failing after miles, gas, and vehicle cost.",
+                                                "Offer floor",
+                                                "$1.50-$2.00/mi",
+                                                "Modeled net",
+                                                "$0.65-$1.10/mi",
+                                                140,
+                                                220,
+                                                90,
+                                                150,
+                                                8.0,
+                                                10.0,
+                                                80,
+                                                145,
+                                                "Dense restaurants where pickups and drop-offs keep the driver inside the same earning zone.",
+                                                "Orders that cross zones, require unpaid returns, or barely clear the IRS mileage proxy.",
+                                                "Use dollars per mile as the first filter, then confirm the shift still clears the hourly target after waiting time."));
         }
 
         private String buildDoorDashShiftEvidenceJsonLd(List<DriverShiftReport> reports, String canonicalUrl) {
@@ -2565,6 +2729,45 @@ public class ProgrammaticSeoController {
                                                 estimate.bestWindow()),
                                 buildFaqQuestion("What makes this estimate fall apart?",
                                                 estimate.weakWindow() + " " + estimate.strategyNote())));
+
+                Map<String, Object> graph = new LinkedHashMap<>();
+                graph.put("@context", "https://schema.org");
+                graph.put("@graph", List.of(breadcrumb, article, faqPage));
+                return toJsonLd(graph);
+        }
+
+        private String buildDoorDashMoneyIntentJsonLd(DoorDashMoneyIntent intent, String canonicalUrl) {
+                Map<String, Object> breadcrumb = new LinkedHashMap<>();
+                breadcrumb.put("@type", "BreadcrumbList");
+                breadcrumb.put("itemListElement", List.of(
+                                buildBreadcrumbItem(1, "Home", AppConstants.BASE_URL + "/"),
+                                buildBreadcrumbItem(2, "DoorDash", AppConstants.BASE_URL + "/doordash"),
+                                buildBreadcrumbItem(3, intent.displayName(), canonicalUrl)));
+
+                Map<String, Object> article = new LinkedHashMap<>();
+                article.put("@type", "Article");
+                article.put("headline", intent.headline());
+                article.put("url", canonicalUrl);
+                article.put("description", String.format(
+                                "%s with gross range, net range, hours, miles, best-window guidance, and failure modes.",
+                                intent.searchPhrase()));
+                article.put("isAccessibleForFree", true);
+
+                Map<String, Object> faqPage = new LinkedHashMap<>();
+                faqPage.put("@type", "FAQPage");
+                faqPage.put("mainEntity", List.of(
+                                buildFaqQuestion(intent.headline(),
+                                                String.format(
+                                                                "%s Typical gross is %s and typical net is %s across about %s and %s.",
+                                                                intent.answerLead(),
+                                                                intent.grossRange(),
+                                                                intent.netRange(),
+                                                                intent.hourRange(),
+                                                                intent.mileRange())),
+                                buildFaqQuestion("What makes this DoorDash estimate fail?",
+                                                intent.failureMode()),
+                                buildFaqQuestion("What rule should a driver use first?",
+                                                intent.decisionRule())));
 
                 Map<String, Object> graph = new LinkedHashMap<>();
                 graph.put("@context", "https://schema.org");
