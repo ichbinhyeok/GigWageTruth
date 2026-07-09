@@ -2,6 +2,7 @@
 @import com.gigwager.model.CityData
 @import com.gigwager.model.CityScenario
 @import com.gigwager.model.DriverFieldNote
+@import com.gigwager.model.DriverShiftReport
 @import com.gigwager.model.SearchResultPattern
 @import com.gigwager.util.AppConstants
 @import java.util.List
@@ -30,6 +31,7 @@
 @param String heroTitleTertiary = ""
 @param String heroSummary = ""
 @param List<DriverFieldNote> driverFieldNotes = java.util.List.of()
+@param List<DriverShiftReport> driverShiftReports = java.util.List.of()
 @param List<SearchResultPattern> searchResultPatterns = java.util.List.of()
 @template.layout.main(
     noIndex = noIndex,
@@ -251,6 +253,13 @@
             cityName = city.getCityName(),
             netHourly = featuredScenario.getNetHourly(),
             driverFieldNotes = driverFieldNotes
+        )
+
+        @template.components.driver_shift_reports(
+            appName = appName,
+            cityName = city.getCityName(),
+            modeledNetHourly = featuredScenario.getNetHourly(),
+            driverShiftReports = driverShiftReports
         )
 
         @template.components.driver_report_form(

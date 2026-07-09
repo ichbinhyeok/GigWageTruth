@@ -220,6 +220,10 @@ public class OrganicMonitoringRegressionTest {
                 "City report hero should expose a tracked best-cities CTA");
         assertTrue(html.contains("Driver field notes"),
                 "City report should expose source-backed driver field notes");
+        assertTrue(html.contains("Published shift evidence"),
+                "City report should expose reviewed public shift evidence");
+        assertTrue(html.contains("Real Uber shift signals"),
+                "City report should frame shift evidence as real-world checks");
         assertTrue(html.contains("NerdWallet Uber pay test"),
                 "City report field notes should include app-specific field-test evidence");
         assertTrue(html.contains("Top-result comparison"),
@@ -246,6 +250,10 @@ public class OrganicMonitoringRegressionTest {
                 "Denver work-level page should expose city-specific DoorDash evidence");
         assertTrue(denverHtml.contains("Denver DoorDash driver discussion"),
                 "Denver work-level page should link the city-specific source");
+        assertTrue(denverHtml.contains("Published shift evidence"),
+                "Denver work-level page should expose shift evidence");
+        assertTrue(denverHtml.contains("$12-$15/hr around Centennial-style suburban work"),
+                "Denver work-level page should expose the reported local earnings range");
         assertTrue(denverHtml.contains("Share a real DoorDash shift in Denver"),
                 "Work-level page should collect first-party driver reports");
         assertTrue(denverHtml.contains("name=\"source_path\" value=\"/salary/doordash/denver/side-hustle\""),
@@ -369,6 +377,10 @@ public class OrganicMonitoringRegressionTest {
                 "After-gas page should cite the 2026 mileage benchmark");
         assertTrue(afterGasHtml.contains("Driver field notes"),
                 "City intent page should reuse driver field evidence");
+        assertTrue(afterGasHtml.contains("Published shift evidence"),
+                "City intent page should expose shift evidence");
+        assertTrue(afterGasHtml.contains("$86 gross over 6.5 hours and 90 miles"),
+                "City intent page should expose the DoorDash field-test shift benchmark");
         assertTrue(afterGasHtml.contains("Share a real DoorDash shift in Denver"),
                 "City intent page should collect first-party driver reports");
         assertTrue(afterGasHtml.contains("name=\"source_page\" value=\"city_intent_after-gas\""),
@@ -473,6 +485,10 @@ public class OrganicMonitoringRegressionTest {
                 "DoorDash hourly pay report should expose a query-matched H1");
         assertTrue(doordashReportDoc.text().contains("average doordash earnings per hour 2025 2026"),
                 "DoorDash hourly pay report should include the GSC query phrase");
+        assertTrue(doordashReportDoc.text().contains("Published shift evidence"),
+                "DoorDash hourly pay report should expose public shift evidence");
+        assertTrue(doordashReportDoc.text().contains("$86 gross over 6.5 hours and 90 miles"),
+                "DoorDash hourly pay report should expose the field-test shift benchmark");
         assertTrue(doordashReportDoc.html().contains("/best-cities/doordash"),
                 "DoorDash hourly pay report should bridge into the city ranking");
         assertTrue(doordashReportDoc.html().contains("/salary/doordash/phoenix/100-a-day"),
@@ -510,6 +526,10 @@ public class OrganicMonitoringRegressionTest {
                 "DoorDash best-cities page should expose weekly net math");
         assertTrue(bestCitiesDoc.text().contains("local demand signals"),
                 "DoorDash best-cities page should expose city-specific demand signals");
+        assertTrue(bestCitiesDoc.text().contains("Published shift evidence"),
+                "DoorDash best-cities page should expose public shift evidence");
+        assertTrue(bestCitiesDoc.text().contains("Modeled net check from reported gross + miles"),
+                "DoorDash best-cities page should show reported-shift net checks when miles are available");
         assertTrue(bestCitiesDoc.html().contains("id=\"ranking-table\""),
                 "DoorDash best-cities page should expose a ranking-table jump target");
         assertTrue(bestCitiesDoc.html().contains("/doordash/where-you-can-dash"),

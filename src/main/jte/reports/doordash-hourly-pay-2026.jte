@@ -1,4 +1,5 @@
 @import com.gigwager.model.CityEarningsSnapshot
+@import com.gigwager.model.DriverShiftReport
 @import com.gigwager.model.SeoMeta
 @import com.gigwager.util.AppConstants
 @import java.util.List
@@ -8,6 +9,7 @@
 @param CityEarningsSnapshot topSnapshot
 @param double averageNetHourly
 @param String lastUpdated
+@param List<DriverShiftReport> driverShiftReports = java.util.List.of()
 @param String reportJsonLd = "{}"
 @param Boolean noIndex = false
 
@@ -114,6 +116,14 @@
                     </table>
                 </div>
             </section>
+
+            @template.components.driver_shift_reports(
+                appName = "DoorDash",
+                cityName = "the 2026 hourly pay sample",
+                modeledNetHourly = averageNetHourly,
+                driverShiftReports = driverShiftReports,
+                sectionClass = "max-w-5xl mx-auto"
+            )
 
             <section class="bg-emerald-50 rounded-3xl border border-emerald-200 p-8">
                 <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-700 mb-2">Driver decision paths</p>

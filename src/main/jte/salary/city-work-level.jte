@@ -2,6 +2,7 @@
 @import com.gigwager.model.CityData
 @import com.gigwager.model.CityScenario
 @import com.gigwager.model.DriverFieldNote
+@import com.gigwager.model.DriverShiftReport
 @import com.gigwager.model.WorkLevel
 @import com.gigwager.model.content.PersonaQuote
 @import com.gigwager.model.content.SourceCitation
@@ -38,6 +39,7 @@
 @param String workLevelJsonLd = "{}"
 @param String calculatorUrl = ""
 @param List<DriverFieldNote> driverFieldNotes = java.util.List.of()
+@param List<DriverShiftReport> driverShiftReports = java.util.List.of()
 @template.layout.main(
     noIndex = noIndex,
     seoMeta = seoMeta,
@@ -162,6 +164,14 @@
             netHourly = scenario.getNetHourly(),
             driverFieldNotes = driverFieldNotes,
             sectionClass = "max-w-5xl mx-auto px-6 mt-12 mb-0"
+        )
+
+        @template.components.driver_shift_reports(
+            appName = appName,
+            cityName = city.getCityName(),
+            modeledNetHourly = scenario.getNetHourly(),
+            driverShiftReports = driverShiftReports,
+            sectionClass = "max-w-5xl mx-auto px-6 mt-8 mb-0"
         )
 
         @template.components.driver_report_form(

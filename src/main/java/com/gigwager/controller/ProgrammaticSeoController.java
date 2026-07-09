@@ -7,6 +7,7 @@ import com.gigwager.model.CityIntentMetric;
 import com.gigwager.model.CityIntentPage;
 import com.gigwager.model.CityScenario;
 import com.gigwager.model.DriverFieldNote;
+import com.gigwager.model.DriverShiftReport;
 import com.gigwager.model.SeoMeta;
 import com.gigwager.model.SearchResultPattern;
 import com.gigwager.model.WorkLevel;
@@ -16,11 +17,13 @@ import com.gigwager.model.content.WorkLevelRichContent;
 import com.gigwager.util.AppConstants;
 import com.gigwager.service.CityRichContentRepository;
 import com.gigwager.service.DataLayerService;
+import com.gigwager.service.DriverShiftReportService;
 import com.gigwager.service.HtmlSanitizerService;
 import com.gigwager.service.PageIndexPolicyService;
 import com.gigwager.dto.CityRankingDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,15 +46,27 @@ public class ProgrammaticSeoController {
         private final PageIndexPolicyService pageIndexPolicyService;
         private final CityRichContentRepository cityRichContentRepository;
         private final HtmlSanitizerService htmlSanitizerService;
+        private final DriverShiftReportService driverShiftReportService;
 
+        @Autowired
         public ProgrammaticSeoController(DataLayerService dataLayerService,
                         PageIndexPolicyService pageIndexPolicyService,
                         CityRichContentRepository cityRichContentRepository,
                         HtmlSanitizerService htmlSanitizerService) {
+                this(dataLayerService, pageIndexPolicyService, cityRichContentRepository, htmlSanitizerService,
+                                new DriverShiftReportService());
+        }
+
+        public ProgrammaticSeoController(DataLayerService dataLayerService,
+                        PageIndexPolicyService pageIndexPolicyService,
+                        CityRichContentRepository cityRichContentRepository,
+                        HtmlSanitizerService htmlSanitizerService,
+                        DriverShiftReportService driverShiftReportService) {
                 this.dataLayerService = dataLayerService;
                 this.pageIndexPolicyService = pageIndexPolicyService;
                 this.cityRichContentRepository = cityRichContentRepository;
                 this.htmlSanitizerService = htmlSanitizerService;
+                this.driverShiftReportService = driverShiftReportService;
         }
 
         @GetMapping("/salary/{app}")
@@ -198,6 +213,7 @@ public class ProgrammaticSeoController {
                 model.addAttribute("topSnapshot", topSnapshot);
                 model.addAttribute("averageNetHourly", averageNetHourly);
                 model.addAttribute("lastUpdated", monthYear);
+                model.addAttribute("driverShiftReports", driverShiftReportService.getReportsForApp("doordash"));
                 model.addAttribute("reportJsonLd", buildDoorDashHourlyReportJsonLd(snapshots, canonicalUrl));
                 model.addAttribute("seoMeta",
                                 new SeoMeta(title, description, canonicalUrl, AppConstants.BASE_URL + "/og-image.jpg"));
@@ -310,6 +326,7 @@ public class ProgrammaticSeoController {
                 model.addAttribute("coverageGuideTitle", coverageGuideTitle);
                 model.addAttribute("coverageGuideDescription", coverageGuideDescription);
                 model.addAttribute("methodologyUrl", "/methodology");
+                model.addAttribute("driverShiftReports", driverShiftReportService.getReportsForApp(app));
                 model.addAttribute("seoMeta",
                                 new SeoMeta(title, description, canonicalUrl, AppConstants.BASE_URL + "/og-image.jpg"));
                 model.addAttribute("dataLayerService", dataLayerService);
@@ -462,6 +479,7 @@ public class ProgrammaticSeoController {
                 model.addAttribute("heroTitleTertiary", heroTitleTertiary);
                 model.addAttribute("heroSummary", heroSummary);
                 model.addAttribute("driverFieldNotes", buildDriverFieldNotes(app, appName, city, featuredScenario));
+                model.addAttribute("driverShiftReports", driverShiftReportService.getReportsForCity(app, citySlug));
                 model.addAttribute("searchResultPatterns",
                                 buildSearchResultPatterns(app, appName, city, null, featuredScenario));
                 model.addAttribute("methodologyUrl", "/methodology");
@@ -643,6 +661,7 @@ public class ProgrammaticSeoController {
                 model.addAttribute("parentPageUrl", parentPageUrl);
                 model.addAttribute("calculatorUrl", calculatorUrl);
                 model.addAttribute("driverFieldNotes", buildDriverFieldNotes(app, appName, city, scenario));
+                model.addAttribute("driverShiftReports", driverShiftReportService.getReportsForCity(app, citySlug));
 
                 boolean workLevelIndexable = pageIndexPolicyService.isWorkLevelReportIndexable(city, workLevel)
                                 && scenario.getNetHourly() >= 6.0
@@ -733,6 +752,7 @@ public class ProgrammaticSeoController {
                 model.addAttribute("calculatorUrl", buildCalculatorUrl(app, scenario, city));
                 model.addAttribute("bestCitiesUrl", String.format("/best-cities/%s", app));
                 model.addAttribute("driverFieldNotes", buildDriverFieldNotes(app, appName, city, scenario));
+                model.addAttribute("driverShiftReports", driverShiftReportService.getReportsForCity(app, city.getSlug()));
                 model.addAttribute("intentMetrics", buildCityIntentMetrics(city, intentPage, scenario));
                 model.addAttribute("intentEvidencePatterns",
                                 buildCityIntentEvidencePatterns(app, appName, city, intentPage, scenario));

@@ -4,6 +4,7 @@
 @import com.gigwager.model.CityIntentPage
 @import com.gigwager.model.CityScenario
 @import com.gigwager.model.DriverFieldNote
+@import com.gigwager.model.DriverShiftReport
 @import com.gigwager.model.SearchResultPattern
 @import com.gigwager.model.SeoMeta
 @import java.util.List
@@ -21,6 +22,7 @@
 @param String answerHtml
 @param String cityIntentJsonLd = "{}"
 @param List<DriverFieldNote> driverFieldNotes = java.util.List.of()
+@param List<DriverShiftReport> driverShiftReports = java.util.List.of()
 @param List<CityIntentMetric> intentMetrics = java.util.List.of()
 @param List<CityIntentEvidence> intentEvidencePatterns = java.util.List.of()
 @param List<SearchResultPattern> searchResultPatterns = java.util.List.of()
@@ -141,6 +143,14 @@
                 cityName = city.getCityName(),
                 netHourly = scenario.getNetHourly(),
                 driverFieldNotes = driverFieldNotes,
+                sectionClass = "max-w-4xl mx-auto"
+            )
+
+            @template.components.driver_shift_reports(
+                appName = appName,
+                cityName = city.getCityName(),
+                modeledNetHourly = scenario.getNetHourly(),
+                driverShiftReports = driverShiftReports,
                 sectionClass = "max-w-4xl mx-auto"
             )
 

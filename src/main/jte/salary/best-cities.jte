@@ -1,5 +1,6 @@
 @import com.gigwager.model.SeoMeta
 @import com.gigwager.dto.CityRankingDto
+@import com.gigwager.model.DriverShiftReport
 @import java.util.List
 @import com.gigwager.util.AppConstants
 
@@ -24,6 +25,7 @@
 @param int rankedCityCount = 0
 @param double leadOverRunnerUp = 0
 @param CityRankingDto runnerUpCity
+@param List<DriverShiftReport> driverShiftReports = java.util.List.of()
 
 @template.layout.main(
     seoMeta = seoMeta,
@@ -131,6 +133,14 @@
                             </div>
                         </div>
                     </section>
+
+                    @template.components.driver_shift_reports(
+                        appName = "DoorDash",
+                        cityName = "top DoorDash cities",
+                        modeledNetHourly = topRankedCity.netHourly(),
+                        driverShiftReports = driverShiftReports,
+                        sectionClass = "mb-10"
+                    )
                 @endif
 
                 <div class="bg-white border border-slate-200 rounded-2xl p-5 mb-8" data-nosnippet>
