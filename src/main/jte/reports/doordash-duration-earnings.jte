@@ -209,6 +209,10 @@
                     <strong class="block text-slate-900 text-lg mb-2">DoorDash hourly pay 2026</strong>
                     <span class="text-sm text-slate-600">City-by-city pay dataset after mileage and tax assumptions.</span>
                 </a>
+                <a href="/doordash/adjustment-pay-calculator" class="rounded-3xl bg-white border border-slate-200 p-6 hover:border-emerald-300 transition-colors">
+                    <strong class="block text-slate-900 text-lg mb-2">DoorDash adjustment pay calculator</strong>
+                    <span class="text-sm text-slate-600">Check whether active-time minimum pay changes the shift result.</span>
+                </a>
                 <a href="/salary/doordash/phoenix/how-much-can-you-make" class="rounded-3xl bg-white border border-slate-200 p-6 hover:border-emerald-300 transition-colors">
                     <strong class="block text-slate-900 text-lg mb-2">City-specific earning path</strong>
                     <span class="text-sm text-slate-600">Compare the general duration estimate against a local city model.</span>

@@ -170,6 +170,7 @@ public class OrganicMonitoringRegressionTest {
                 "/reports/uber-driver-hourly-earnings-2026",
                 "/reports/doordash-driver-hourly-pay-2026",
                 "/reports/doordash-driver-shift-evidence-2026",
+                "/doordash/adjustment-pay-calculator",
                 "/doordash/how-much-can-you-make-in-3-hours",
                 "/doordash/how-much-can-you-make-in-a-day",
                 "/doordash/can-you-make-100-a-day",
@@ -227,6 +228,9 @@ public class OrganicMonitoringRegressionTest {
         mockMvc.perform(get("/doordash/best-time-to-doordash"))
                 .andExpect(status().isMovedPermanently())
                 .andExpect(redirectedUrl("/doordash/how-much-can-you-make-in-a-day"));
+        mockMvc.perform(get("/doordash/prop-22-calculator"))
+                .andExpect(status().isMovedPermanently())
+                .andExpect(redirectedUrl("/doordash/adjustment-pay-calculator"));
         mockMvc.perform(get("/uber/after-gas"))
                 .andExpect(status().isMovedPermanently())
                 .andExpect(redirectedUrl("/uber-after-expenses"));
@@ -272,6 +276,30 @@ public class OrganicMonitoringRegressionTest {
         assertTrue(doordashDoc.html().contains("/doordash/gas-calculator"),
                 "DoorDash calculator page should link adjacent calculator intent");
 
+        MvcResult adjustmentResult = mockMvc.perform(get("/doordash/adjustment-pay-calculator"))
+                .andExpect(status().isOk())
+                .andReturn();
+        Document adjustmentDoc = Jsoup.parse(adjustmentResult.getResponse().getContentAsString(),
+                AppConstants.BASE_URL + "/doordash/adjustment-pay-calculator");
+        assertTrue(adjustmentDoc.title().contains("DoorDash Adjustment Pay Calculator"),
+                "Adjustment page should target the exact adjustment pay calculator query");
+        assertTrue(firstH1(adjustmentDoc).contains("DoorDash Adjustment Pay Calculator"),
+                "Adjustment page should expose query-matched H1");
+        assertTrue(adjustmentDoc.text().contains("California Prop 22"),
+                "Adjustment page should include the Prop 22 market rule");
+        assertTrue(adjustmentDoc.text().contains("NYC minimum earnings"),
+                "Adjustment page should include the NYC minimum earnings rule");
+        assertTrue(adjustmentDoc.text().contains("Seattle adjusted pay"),
+                "Adjustment page should include the Seattle adjusted pay rule");
+        assertTrue(adjustmentDoc.text().contains("Pay adjustment estimate"),
+                "Adjustment page should expose the calculator result label");
+        assertTrue(adjustmentDoc.html().contains("https://help.doordash.com/en-us/dashers/article/california-dashers"),
+                "Adjustment page should cite the official DoorDash Prop 22 guide");
+        assertTrue(adjustmentDoc.html().contains("/reports/doordash-driver-hourly-pay-2026"),
+                "Adjustment page should link back into the DoorDash hourly report");
+        assertTrue(adjustmentDoc.html().contains("/salary/doordash/san-francisco/hourly-pay"),
+                "Adjustment page should link into California city hourly-pay pages");
+
         MvcResult uberResult = mockMvc.perform(get("/uber/pay-calculator"))
                 .andExpect(status().isOk())
                 .andReturn();
@@ -301,6 +329,8 @@ public class OrganicMonitoringRegressionTest {
                 "Root sitemap should include Uber calculator intent pages");
         assertTrue(sitemap.contains("/reports/doordash-driver-shift-evidence-2026"),
                 "Root sitemap should include evidence reports");
+        assertTrue(sitemap.contains("/doordash/adjustment-pay-calculator"),
+                "Root sitemap should include adjustment pay calculator page");
         assertTrue(sitemap.contains("/salary/doordash/denver/after-gas"),
                 "Root sitemap should include city intent pages");
 
@@ -484,6 +514,8 @@ public class OrganicMonitoringRegressionTest {
                 "DoorDash app hub should link the DoorDash hourly pay report");
         assertTrue(appHubHtml.contains("/reports/doordash-driver-shift-evidence-2026"),
                 "DoorDash app hub should link the DoorDash shift evidence hub");
+        assertTrue(appHubHtml.contains("/doordash/adjustment-pay-calculator"),
+                "DoorDash app hub should link the adjustment pay calculator");
         assertTrue(appHubHtml.contains("/doordash/how-much-can-you-make-in-3-hours"),
                 "DoorDash app hub should link short duration earning pages");
         assertTrue(appHubHtml.contains("/doordash/how-much-can-you-make-in-8-hours"),
@@ -542,6 +574,8 @@ public class OrganicMonitoringRegressionTest {
                 "Directory should link the DoorDash hourly pay report");
         assertTrue(directoryHtml.contains("/reports/doordash-driver-shift-evidence-2026"),
                 "Directory should link the DoorDash shift evidence hub");
+        assertTrue(directoryHtml.contains("/doordash/adjustment-pay-calculator"),
+                "Directory should link the adjustment pay calculator");
         assertTrue(directoryHtml.contains("/doordash/how-much-can-you-make-in-3-hours"),
                 "Directory should link DoorDash duration earning pages");
         assertTrue(directoryHtml.contains("/doordash/how-much-can-you-make-in-a-week"),
@@ -577,6 +611,8 @@ public class OrganicMonitoringRegressionTest {
                 "Best-cities table should link DoorDash best-area intent pages");
         assertTrue(bestCitiesHtml.contains("/reports/doordash-driver-shift-evidence-2026"),
                 "Best-cities page should link the DoorDash shift evidence hub");
+        assertTrue(bestCitiesHtml.contains("/doordash/adjustment-pay-calculator"),
+                "Best-cities page should link the DoorDash adjustment pay calculator");
         assertTrue(bestCitiesHtml.contains("/doordash/can-you-make-100-a-day"),
                 "Best-cities page should link DoorDash money-intent pages");
         assertTrue(bestCitiesHtml.contains("/doordash/after-gas"),
@@ -809,6 +845,8 @@ public class OrganicMonitoringRegressionTest {
                 "DoorDash hourly pay report should link into app-comparison intent reports");
         assertTrue(doordashReportDoc.html().contains("/reports/doordash-driver-shift-evidence-2026"),
                 "DoorDash hourly pay report should link into the shift evidence hub");
+        assertTrue(doordashReportDoc.html().contains("/doordash/adjustment-pay-calculator"),
+                "DoorDash hourly pay report should link into the adjustment pay calculator");
         assertTrue(doordashReportDoc.html().contains("/doordash/how-much-can-you-make-in-3-hours"),
                 "DoorDash hourly pay report should link into duration earning pages");
         assertTrue(doordashReportDoc.html().contains("/doordash/can-you-make-100-a-day"),
@@ -833,6 +871,8 @@ public class OrganicMonitoringRegressionTest {
                 "Shift evidence hub should expose the table dimensions in page copy");
         assertTrue(evidenceHubDoc.html().contains("/doordash/how-much-can-you-make-in-3-hours"),
                 "Shift evidence hub should link into duration earning pages");
+        assertTrue(evidenceHubDoc.html().contains("/doordash/adjustment-pay-calculator"),
+                "Shift evidence hub should link into the adjustment pay calculator");
         assertTrue(evidenceHubDoc.html().contains("/doordash/can-you-make-100-a-day"),
                 "Shift evidence hub should link into $100/day money-intent pages");
         assertTrue(evidenceHubDoc.html().contains("/doordash/after-gas"),
@@ -855,6 +895,8 @@ public class OrganicMonitoringRegressionTest {
                 "Duration page should expose target feasibility checks");
         assertTrue(durationDoc.html().contains("/doordash/can-you-make-100-a-day"),
                 "Duration page should link into money-intent pages");
+        assertTrue(durationDoc.html().contains("/doordash/adjustment-pay-calculator"),
+                "Duration page should link into adjustment pay calculator");
 
         MvcResult dailyDurationResult = mockMvc.perform(get("/doordash/how-much-can-you-make-in-a-day"))
                 .andExpect(status().isOk())
@@ -883,6 +925,8 @@ public class OrganicMonitoringRegressionTest {
                 "Money-intent page should link city-specific target combinations");
         assertTrue(moneyIntentDoc.html().contains("/doordash/pay-per-mile"),
                 "Money-intent page should link adjacent pay-per-mile page");
+        assertTrue(moneyIntentDoc.html().contains("/doordash/adjustment-pay-calculator"),
+                "Money-intent page should link into adjustment pay calculator");
         assertTrue(moneyIntentDoc.text().contains("Frequently Asked Questions"),
                 "Money-intent page should render visible FAQ for its FAQPage schema");
 

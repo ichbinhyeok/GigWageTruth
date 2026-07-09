@@ -88,6 +88,8 @@ public class SitemapXmlTest {
                                 "Sitemaps should contain the DoorDash hourly pay report");
                 assertTrue(xmlContent.contains("/reports/doordash-driver-shift-evidence-2026"),
                                 "Sitemaps should contain the DoorDash shift evidence report");
+                assertTrue(xmlContent.contains("/doordash/adjustment-pay-calculator"),
+                                "Sitemaps should contain the DoorDash adjustment pay calculator");
                 assertTrue(xmlContent.contains("/doordash/how-much-can-you-make-in-3-hours"),
                                 "Sitemaps should contain DoorDash duration earning pages");
                 assertTrue(xmlContent.contains("/doordash/how-much-can-you-make-in-8-hours"),

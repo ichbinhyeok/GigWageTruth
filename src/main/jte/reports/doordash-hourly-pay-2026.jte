@@ -133,6 +133,10 @@
                         <strong class="block text-slate-900">DoorDash driver shift evidence 2026</strong>
                         <span class="text-sm text-slate-600">Gross, miles, active time, dash time, and modeled net checks.</span>
                     </a>
+                    <a href="/doordash/adjustment-pay-calculator" class="rounded-2xl bg-slate-50 border border-slate-200 px-5 py-4 hover:border-emerald-300 transition-colors">
+                        <strong class="block text-slate-900">DoorDash adjustment pay calculator</strong>
+                        <span class="text-sm text-slate-600">Prop 22, NYC, and Seattle active-time minimum-pay rules.</span>
+                    </a>
                     <a href="/doordash/how-much-can-you-make-in-3-hours" class="rounded-2xl bg-slate-50 border border-slate-200 px-5 py-4 hover:border-emerald-300 transition-colors">
                         <strong class="block text-slate-900">DoorDash 3-hour earnings</strong>
                         <span class="text-sm text-slate-600">Peak-window gross and net estimate.</span>

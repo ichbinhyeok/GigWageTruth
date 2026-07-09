@@ -126,6 +126,10 @@
                                 <span class="block text-xs font-black uppercase tracking-[0.16em] text-slate-500 mb-1">Offer floor</span>
                                 <span class="block font-black text-slate-900">DoorDash pay per mile</span>
                             </a>
+                            <a href="/doordash/adjustment-pay-calculator" class="block p-4 rounded-xl border border-slate-200 hover:border-emerald-300 hover:bg-emerald-50 transition-colors md:col-span-3">
+                                <span class="block text-xs font-black uppercase tracking-[0.16em] text-slate-500 mb-1">Adjustment pay</span>
+                                <span class="block font-black text-slate-900">Calculate DoorDash Prop 22, NYC, or Seattle adjustment pay before comparing cities</span>
+                            </a>
                         </div>
                     </section>
 

@@ -6,6 +6,7 @@ import com.gigwager.model.CityIntentEvidence;
 import com.gigwager.model.CityIntentMetric;
 import com.gigwager.model.CityIntentPage;
 import com.gigwager.model.CityScenario;
+import com.gigwager.model.DoorDashAdjustmentScenario;
 import com.gigwager.model.DoorDashDurationEstimate;
 import com.gigwager.model.DoorDashMoneyIntent;
 import com.gigwager.model.DriverFieldNote;
@@ -277,6 +278,28 @@ public class ProgrammaticSeoController {
                 return "reports/doordash-shift-evidence-2026";
         }
 
+        @GetMapping("/doordash/adjustment-pay-calculator")
+        public String doordashAdjustmentPayCalculator(Model model) {
+                List<DoorDashAdjustmentScenario> scenarios = buildDoorDashAdjustmentScenarios();
+
+                java.time.LocalDate now = java.time.LocalDate.now();
+                String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
+                                .format(now);
+                String canonicalUrl = AppConstants.BASE_URL + "/doordash/adjustment-pay-calculator";
+                String title = "DoorDash Adjustment Pay Calculator: Prop 22, NYC, Seattle";
+                String description = String.format(
+                                "Estimate DoorDash adjustment pay for California Prop 22, NYC minimum earnings, and Seattle adjusted pay using active time, active miles, DoorDash pay before tips, and official formulas. Updated %s.",
+                                monthYear);
+
+                model.addAttribute("scenarios", scenarios);
+                model.addAttribute("lastUpdated", monthYear);
+                model.addAttribute("adjustmentJsonLd", buildDoorDashAdjustmentPayJsonLd(canonicalUrl));
+                model.addAttribute("seoMeta",
+                                new SeoMeta(title, description, canonicalUrl, AppConstants.BASE_URL + "/og-image.jpg"));
+
+                return "reports/doordash-adjustment-pay-calculator";
+        }
+
         @GetMapping("/doordash/how-much-can-you-make-in-{durationSlug}")
         public String doordashDurationEarningsPage(@PathVariable("durationSlug") String durationSlug, Model model) {
                 DoorDashDurationEstimate estimate = buildDoorDashDurationEstimates().stream()
@@ -408,6 +431,17 @@ public class ProgrammaticSeoController {
         })
         public RedirectView redirectDoorDashDayAndTimingAliases() {
                 return permanentRedirect("/doordash/how-much-can-you-make-in-a-day");
+        }
+
+        @GetMapping({
+                        "/doordash/adjustment-pay",
+                        "/doordash/prop-22-calculator",
+                        "/doordash/prop-22-pay-calculator",
+                        "/doordash/nyc-adjustment-pay",
+                        "/doordash/seattle-adjusted-pay"
+        })
+        public RedirectView redirectDoorDashAdjustmentPayAliases() {
+                return permanentRedirect("/doordash/adjustment-pay-calculator");
         }
 
         @GetMapping({
@@ -2790,6 +2824,49 @@ public class ProgrammaticSeoController {
                                                 "Use dollars per mile as the first filter, then confirm the shift still clears the hourly target after waiting time."));
         }
 
+        private List<DoorDashAdjustmentScenario> buildDoorDashAdjustmentScenarios() {
+                return List.of(
+                                new DoorDashAdjustmentScenario(
+                                                "California",
+                                                "Prop 22 weekly pay adjustment",
+                                                "California Prop 22 uses active time from acceptance to completion plus active miles for qualifying pickups. Tips do not count against the guaranteed earnings floor.",
+                                                10.0,
+                                                100.0,
+                                                190.00,
+                                                110.50,
+                                                20.28,
+                                                0.37,
+                                                "DoorDash's California example produces a $239.80 guarantee, a $49.80 pay adjustment, and $350.30 total with tips.",
+                                                "DoorDash Prop 22 guide",
+                                                "https://help.doordash.com/en-us/dashers/article/california-dashers"),
+                                new DoorDashAdjustmentScenario(
+                                                "New York City",
+                                                "NYC minimum earnings adjustment",
+                                                "NYC applies the minimum earnings standard to qualifying active time on orders picked up or dropped off in New York City.",
+                                                5.0,
+                                                0.0,
+                                                70.00,
+                                                50.00,
+                                                22.13,
+                                                0.0,
+                                                "DoorDash's NYC example produces a $110.65 minimum, a $40.65 pay adjustment, and $160.65 total with tips.",
+                                                "DoorDash NYC earnings standard",
+                                                "https://help.doordash.com/en-us/dashers/article/guide-to-the-new-york-city-earnings-standard"),
+                                new DoorDashAdjustmentScenario(
+                                                "Seattle",
+                                                "Seattle adjusted pay",
+                                                "Seattle recalculates offer pay from active minutes and active miles, then pays the difference when the recalculated amount is higher than offered pay.",
+                                                0.55,
+                                                6.3,
+                                                18.90,
+                                                5.00,
+                                                28.20,
+                                                0.80,
+                                                "DoorDash's Seattle example works out to $20.55 guaranteed DoorDash pay, including a $1.65 adjusted pay difference before tips.",
+                                                "DoorDash Seattle regulations",
+                                                "https://help.doordash.com/en-us/dashers/article/guide-to-seattle-dasher-regulations"));
+        }
+
         private String buildDoorDashMoneyIntentTitle(DoorDashMoneyIntent intent) {
                 return switch (intent.slug()) {
                         case "can-you-make-100-a-day" ->
@@ -2802,6 +2879,42 @@ public class ProgrammaticSeoController {
                                 "DoorDash Pay Per Mile: The Offer Floor That Matters";
                         default -> intent.headline() + " 2026";
                 };
+        }
+
+        private String buildDoorDashAdjustmentPayJsonLd(String canonicalUrl) {
+                Map<String, Object> breadcrumb = new LinkedHashMap<>();
+                breadcrumb.put("@type", "BreadcrumbList");
+                breadcrumb.put("itemListElement", List.of(
+                                buildBreadcrumbItem(1, "Home", AppConstants.BASE_URL + "/"),
+                                buildBreadcrumbItem(2, "DoorDash", AppConstants.BASE_URL + "/doordash"),
+                                buildBreadcrumbItem(3, "DoorDash Adjustment Pay Calculator", canonicalUrl)));
+
+                Map<String, Object> app = new LinkedHashMap<>();
+                app.put("@type", "WebApplication");
+                app.put("name", "DoorDash Adjustment Pay Calculator");
+                app.put("applicationCategory", "FinanceApplication");
+                app.put("operatingSystem", "Any");
+                app.put("url", canonicalUrl);
+                app.put("description",
+                                "Calculator for estimating DoorDash adjustment pay from active time, active miles, DoorDash pay before tips, and local guaranteed earnings rules.");
+                app.put("isAccessibleForFree", true);
+
+                Map<String, Object> faqPage = new LinkedHashMap<>();
+                faqPage.put("@type", "FAQPage");
+                faqPage.put("mainEntity", List.of(
+                                buildFaqQuestion("What is DoorDash adjustment pay?",
+                                                "DoorDash adjustment pay is the difference between a local guaranteed earnings floor and DoorDash pay before tips when the guaranteed amount is higher."),
+                                buildFaqQuestion("How do I calculate DoorDash adjustment pay?",
+                                                "Estimate the local guarantee from active time and, where the rule includes it, active miles. Then subtract DoorDash pay before tips. If the result is below zero, the adjustment is zero."),
+                                buildFaqQuestion("Do tips reduce DoorDash adjustment pay?",
+                                                "In the official DoorDash examples for California Prop 22 and NYC, tips are added on top of the adjusted DoorDash pay rather than reducing the guaranteed earnings comparison."),
+                                buildFaqQuestion("Where does DoorDash adjustment pay apply?",
+                                                "The calculator covers the official examples for California Prop 22, New York City minimum earnings, and Seattle adjusted pay. Other markets may use the normal DoorDash pay model unless a local rule applies.")));
+
+                Map<String, Object> graph = new LinkedHashMap<>();
+                graph.put("@context", "https://schema.org");
+                graph.put("@graph", List.of(breadcrumb, app, faqPage));
+                return toJsonLd(graph);
         }
 
         private RedirectView permanentRedirect(String targetUrl) {

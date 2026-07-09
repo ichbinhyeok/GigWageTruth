@@ -100,6 +100,7 @@ public class SitemapController {
         addUrl(xml, "/reports/uber-driver-hourly-earnings-2026", REPORT_LASTMOD);
         addUrl(xml, "/reports/doordash-driver-hourly-pay-2026", REPORT_LASTMOD);
         addUrl(xml, "/reports/doordash-driver-shift-evidence-2026", REPORT_LASTMOD);
+        addUrl(xml, "/doordash/adjustment-pay-calculator", REPORT_LASTMOD);
         addUrl(xml, "/doordash/how-much-can-you-make-in-3-hours", REPORT_LASTMOD);
         addUrl(xml, "/doordash/how-much-can-you-make-in-4-hours", REPORT_LASTMOD);
         addUrl(xml, "/doordash/how-much-can-you-make-in-6-hours", REPORT_LASTMOD);

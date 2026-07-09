@@ -91,6 +91,10 @@
                                 <strong class="block text-slate-900">DoorDash earnings calculator</strong>
                                 <span class="text-sm text-slate-600">Net pay after gas, miles, and tax reserve.</span>
                             </a>
+                            <a href="/doordash/adjustment-pay-calculator" class="rounded-2xl border border-emerald-200 bg-white px-5 py-4 hover:border-emerald-300 hover:bg-emerald-50 transition-colors">
+                                <strong class="block text-slate-900">DoorDash adjustment pay calculator</strong>
+                                <span class="text-sm text-slate-600">Prop 22, NYC, and Seattle minimum-pay math.</span>
+                            </a>
                             <a href="/doordash/gas-calculator" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
                                 <strong class="block text-slate-900">DoorDash gas calculator</strong>
                                 <span class="text-sm text-slate-600">Shift fuel cost plus full mileage pressure.</span>

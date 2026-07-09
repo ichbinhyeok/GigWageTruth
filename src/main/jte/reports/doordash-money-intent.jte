@@ -173,6 +173,17 @@
                 </div>
             </section>
 
+            <section class="bg-emerald-50 rounded-3xl border border-emerald-200 p-8 shadow-sm">
+                <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-700 mb-2">Local minimum pay bridge</p>
+                <h2 class="text-3xl font-black text-slate-900 mb-4">If the missing piece is adjustment pay</h2>
+                <p class="text-slate-700 leading-relaxed max-w-4xl mb-5">
+                    California Prop 22, New York City, and Seattle can change the answer because adjustment pay compares local guaranteed earnings against DoorDash pay before tips. Use the dedicated calculator before treating a gross payout as the final result.
+                </p>
+                <a href="/doordash/adjustment-pay-calculator" class="inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-3 text-white font-bold hover:bg-slate-800 transition-colors">
+                    Open DoorDash adjustment pay calculator
+                </a>
+            </section>
+
             @template.components.driver_shift_reports(
                 appName = "DoorDash",
                 cityName = intent.displayName() + " money-intent checks",

@@ -167,6 +167,10 @@
                     <strong class="block text-slate-900 text-lg mb-2">DoorDash hourly pay report</strong>
                     <span class="text-sm text-slate-600">Eight-city modeled pay dataset that uses this evidence layer for trust checks.</span>
                 </a>
+                <a href="/doordash/adjustment-pay-calculator" class="rounded-3xl bg-white border border-slate-200 p-6 hover:border-emerald-300 transition-colors">
+                    <strong class="block text-slate-900 text-lg mb-2">DoorDash adjustment pay calculator</strong>
+                    <span class="text-sm text-slate-600">Official Prop 22, NYC, and Seattle examples with active-time math.</span>
+                </a>
                 <a href="/best-cities/doordash" class="rounded-3xl bg-white border border-slate-200 p-6 hover:border-emerald-300 transition-colors">
                     <strong class="block text-slate-900 text-lg mb-2">Highest-paying DoorDash cities</strong>
                     <span class="text-sm text-slate-600">Compare net hourly rankings after mileage and tax assumptions.</span>
