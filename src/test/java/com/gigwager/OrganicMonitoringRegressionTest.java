@@ -24,6 +24,7 @@ import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -203,6 +204,31 @@ public class OrganicMonitoringRegressionTest {
         }
 
         assertTrue(failures.isEmpty(), "JSON-LD validation failures:\n - " + String.join("\n - ", failures));
+    }
+
+    @Test
+    public void keywordAliasUrlsShouldPermanentlyRedirectToCanonicalPages() throws Exception {
+        mockMvc.perform(get("/doordash/100-dollars-a-day"))
+                .andExpect(status().isMovedPermanently())
+                .andExpect(redirectedUrl("/doordash/can-you-make-100-a-day"));
+        mockMvc.perform(get("/doordash/does-doordash-pay-for-gas"))
+                .andExpect(status().isMovedPermanently())
+                .andExpect(redirectedUrl("/doordash/after-gas"));
+        mockMvc.perform(get("/doordash/how-much-does-doordash-pay-per-mile"))
+                .andExpect(status().isMovedPermanently())
+                .andExpect(redirectedUrl("/doordash/pay-per-mile"));
+        mockMvc.perform(get("/doordash/best-time-to-doordash"))
+                .andExpect(status().isMovedPermanently())
+                .andExpect(redirectedUrl("/doordash/how-much-can-you-make-in-a-day"));
+        mockMvc.perform(get("/uber/after-gas"))
+                .andExpect(status().isMovedPermanently())
+                .andExpect(redirectedUrl("/uber-after-expenses"));
+        mockMvc.perform(get("/uber/can-you-make-100-a-day"))
+                .andExpect(status().isMovedPermanently())
+                .andExpect(redirectedUrl("/salary/uber/chicago/100-a-day"));
+        mockMvc.perform(get("/uber/pay-per-mile"))
+                .andExpect(status().isMovedPermanently())
+                .andExpect(redirectedUrl("/salary/uber/chicago/per-mile"));
     }
 
     @Test
@@ -703,6 +729,8 @@ public class OrganicMonitoringRegressionTest {
                 AppConstants.BASE_URL + "/doordash/can-you-make-100-a-day");
         assertTrue(moneyIntentDoc.title().contains("Can You Make $100 a Day with DoorDash"),
                 "Money-intent page should target the exact $100/day query");
+        assertTrue(moneyIntentDoc.title().contains("Real Hours + Miles"),
+                "Money-intent page title should use CTR-focused hours and miles language");
         assertTrue(firstH1(moneyIntentDoc).contains("Can You Make $100 a Day with DoorDash"),
                 "Money-intent page should expose query-matched H1 language");
         assertTrue(moneyIntentDoc.text().contains("DoorDash money-intent calculator table"),
@@ -713,6 +741,22 @@ public class OrganicMonitoringRegressionTest {
                 "Money-intent page should link adjacent pay-per-mile page");
         assertTrue(moneyIntentDoc.text().contains("Frequently Asked Questions"),
                 "Money-intent page should render visible FAQ for its FAQPage schema");
+
+        MvcResult afterGasMoneyResult = mockMvc.perform(get("/doordash/after-gas"))
+                .andExpect(status().isOk())
+                .andReturn();
+        Document afterGasMoneyDoc = Jsoup.parse(afterGasMoneyResult.getResponse().getContentAsString(),
+                AppConstants.BASE_URL + "/doordash/after-gas");
+        assertTrue(afterGasMoneyDoc.title().contains("What Drivers Actually Keep"),
+                "After-gas page title should use CTR-focused take-home language");
+
+        MvcResult perMileMoneyResult = mockMvc.perform(get("/doordash/pay-per-mile"))
+                .andExpect(status().isOk())
+                .andReturn();
+        Document perMileMoneyDoc = Jsoup.parse(perMileMoneyResult.getResponse().getContentAsString(),
+                AppConstants.BASE_URL + "/doordash/pay-per-mile");
+        assertTrue(perMileMoneyDoc.title().contains("The Offer Floor That Matters"),
+                "Pay-per-mile page title should use CTR-focused offer-floor language");
 
         MvcResult workLevelResult = mockMvc.perform(get("/salary/doordash/phoenix/side-hustle"))
                 .andExpect(status().isOk())

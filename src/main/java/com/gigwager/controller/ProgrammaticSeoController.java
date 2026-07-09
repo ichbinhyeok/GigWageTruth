@@ -25,11 +25,13 @@ import com.gigwager.service.PageIndexPolicyService;
 import com.gigwager.dto.CityRankingDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -319,7 +321,7 @@ public class ProgrammaticSeoController {
                 String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
                                 .format(now);
                 String canonicalUrl = AppConstants.BASE_URL + intent.path();
-                String title = intent.headline() + " 2026";
+                String title = buildDoorDashMoneyIntentTitle(intent);
                 String description = String.format(
                                 "%s: %s Typical gross %s, net %s, %s, and %s. Updated %s.",
                                 intent.searchPhrase(),
@@ -340,6 +342,90 @@ public class ProgrammaticSeoController {
                                 new SeoMeta(title, description, canonicalUrl, AppConstants.BASE_URL + "/og-image.jpg"));
 
                 return "reports/doordash-money-intent";
+        }
+
+        @GetMapping({
+                        "/doordash/100-dollars-a-day",
+                        "/doordash/make-100-a-day",
+                        "/doordash/make-100-dollars-a-day",
+                        "/doordash/can-doordash-make-100-a-day",
+                        "/doordash/how-to-make-100-a-day"
+        })
+        public RedirectView redirectDoorDashHundredDayAliases() {
+                return permanentRedirect("/doordash/can-you-make-100-a-day");
+        }
+
+        @GetMapping({
+                        "/doordash/200-dollars-a-day",
+                        "/doordash/make-200-a-day",
+                        "/doordash/make-200-dollars-a-day",
+                        "/doordash/can-doordash-make-200-a-day",
+                        "/doordash/how-to-make-200-a-day"
+        })
+        public RedirectView redirectDoorDashTwoHundredDayAliases() {
+                return permanentRedirect("/doordash/can-you-make-200-a-day");
+        }
+
+        @GetMapping({
+                        "/doordash/does-doordash-pay-for-gas",
+                        "/doordash/how-much-does-doordash-pay-after-gas",
+                        "/doordash/how-much-do-you-make-after-gas",
+                        "/doordash/doordash-after-gas",
+                        "/doordash/does-doordash-pay-for-mileage"
+        })
+        public RedirectView redirectDoorDashAfterGasAliases() {
+                return permanentRedirect("/doordash/after-gas");
+        }
+
+        @GetMapping({
+                        "/doordash/how-much-does-doordash-pay-per-mile",
+                        "/doordash/dollars-per-mile",
+                        "/doordash/dollar-per-mile",
+                        "/doordash/mileage-pay",
+                        "/doordash/best-orders-per-mile"
+        })
+        public RedirectView redirectDoorDashPayPerMileAliases() {
+                return permanentRedirect("/doordash/pay-per-mile");
+        }
+
+        @GetMapping({
+                        "/doordash/how-much-can-you-make-in-one-day",
+                        "/doordash/how-much-can-you-make-in-1-day",
+                        "/doordash/how-much-can-you-make-in-a-full-day",
+                        "/doordash/how-much-can-you-make-in-10-hours",
+                        "/doordash/best-time-to-doordash"
+        })
+        public RedirectView redirectDoorDashDayAndTimingAliases() {
+                return permanentRedirect("/doordash/how-much-can-you-make-in-a-day");
+        }
+
+        @GetMapping({
+                        "/uber/after-gas",
+                        "/uber/driver-after-expenses",
+                        "/uber/how-much-do-drivers-make-after-gas",
+                        "/uber/does-uber-pay-for-gas"
+        })
+        public RedirectView redirectUberAfterExpenseAliases() {
+                return permanentRedirect("/uber-after-expenses");
+        }
+
+        @GetMapping({
+                        "/uber/100-dollars-a-day",
+                        "/uber/make-100-a-day",
+                        "/uber/can-you-make-100-a-day",
+                        "/uber/how-to-make-100-a-day"
+        })
+        public RedirectView redirectUberHundredDayAliases() {
+                return permanentRedirect("/salary/uber/chicago/100-a-day");
+        }
+
+        @GetMapping({
+                        "/uber/pay-per-mile",
+                        "/uber/dollars-per-mile",
+                        "/uber/mileage-pay"
+        })
+        public RedirectView redirectUberPayPerMileAliases() {
+                return permanentRedirect("/salary/uber/chicago/per-mile");
         }
 
         @GetMapping("/uber/where-you-can-drive")
@@ -2652,6 +2738,27 @@ public class ProgrammaticSeoController {
                                                 "Dense restaurants where pickups and drop-offs keep the driver inside the same earning zone.",
                                                 "Orders that cross zones, require unpaid returns, or barely clear the IRS mileage proxy.",
                                                 "Use dollars per mile as the first filter, then confirm the shift still clears the hourly target after waiting time."));
+        }
+
+        private String buildDoorDashMoneyIntentTitle(DoorDashMoneyIntent intent) {
+                return switch (intent.slug()) {
+                        case "can-you-make-100-a-day" ->
+                                "Can You Make $100 a Day with DoorDash? Real Hours + Miles";
+                        case "can-you-make-200-a-day" ->
+                                "Can You Make $200 a Day with DoorDash? Hours, Miles, Risk";
+                        case "after-gas" ->
+                                "DoorDash After Gas: What Drivers Actually Keep";
+                        case "pay-per-mile" ->
+                                "DoorDash Pay Per Mile: The Offer Floor That Matters";
+                        default -> intent.headline() + " 2026";
+                };
+        }
+
+        private RedirectView permanentRedirect(String targetUrl) {
+                RedirectView redirectView = new RedirectView(targetUrl);
+                redirectView.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
+                redirectView.setExposeModelAttributes(false);
+                return redirectView;
         }
 
         private String buildDoorDashShiftEvidenceJsonLd(List<DriverShiftReport> reports, String canonicalUrl) {
