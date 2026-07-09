@@ -70,6 +70,16 @@ public class SitemapXmlTest {
                                 "Sitemap should contain Uber city intent pages");
                 assertTrue(xmlContent.contains("/salary/doordash/phoenix/100-a-day"),
                                 "Sitemap should contain daily target intent pages");
+                assertTrue(xmlContent.contains("/salary/doordash/denver/hourly-pay"),
+                                "Sitemap should contain DoorDash hourly-pay intent pages");
+                assertTrue(xmlContent.contains("/salary/doordash/phoenix/how-much-can-you-make"),
+                                "Sitemap should contain DoorDash how-much-can-you-make intent pages");
+                assertTrue(xmlContent.contains("/salary/doordash/dallas/best-areas"),
+                                "Sitemap should contain DoorDash best-area intent pages");
+                assertTrue(xmlContent.contains("/salary/doordash/chicago/uber-eats-vs-doordash"),
+                                "Sitemap should contain DoorDash app-comparison intent pages");
+                org.junit.jupiter.api.Assertions.assertFalse(xmlContent.contains("/salary/uber/chicago/uber-eats-vs-doordash"),
+                                "Sitemap should not contain DoorDash-only comparison intent under Uber");
                 assertTrue(xmlContent.contains("/salary/uber/nashville/nights-weekends"),
                                 "Sitemap should contain nights and weekends intent pages");
 

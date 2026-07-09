@@ -134,6 +134,10 @@
                             <h3 class="text-lg font-bold text-slate-900 mb-2">${snapshot.city().getCityName()} DoorDash pay path</h3>
                             <div class="space-y-2 text-sm">
                                 <a href="/salary/doordash/${snapshot.city().getSlug()}" class="block font-bold text-emerald-700 hover:text-emerald-800">City earnings report</a>
+                                <a href="/salary/doordash/${snapshot.city().getSlug()}/hourly-pay" class="block text-slate-700 hover:text-emerald-800">Hourly pay after expenses</a>
+                                <a href="/salary/doordash/${snapshot.city().getSlug()}/how-much-can-you-make" class="block text-slate-700 hover:text-emerald-800">How much can you make?</a>
+                                <a href="/salary/doordash/${snapshot.city().getSlug()}/best-areas" class="block text-slate-700 hover:text-emerald-800">Best areas to dash</a>
+                                <a href="/salary/doordash/${snapshot.city().getSlug()}/uber-eats-vs-doordash" class="block text-slate-700 hover:text-emerald-800">Uber Eats vs DoorDash</a>
                                 <a href="/salary/doordash/${snapshot.city().getSlug()}/after-gas" class="block text-slate-700 hover:text-emerald-800">After gas and mileage</a>
                                 <a href="/salary/doordash/${snapshot.city().getSlug()}/active-time" class="block text-slate-700 hover:text-emerald-800">Active time vs dash time</a>
                                 <a href="/salary/doordash/${snapshot.city().getSlug()}/100-a-day" class="block text-slate-700 hover:text-emerald-800">$100/day target</a>

@@ -95,6 +95,10 @@
                                 <strong class="block text-slate-900">DoorDash Denver side-hustle earnings</strong>
                                 <span class="text-sm text-slate-600">Suburban mileage and active-time pressure.</span>
                             </a>
+                            <a href="/salary/doordash/denver/hourly-pay" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
+                                <strong class="block text-slate-900">DoorDash Denver hourly pay</strong>
+                                <span class="text-sm text-slate-600">City hourly pay after expenses, miles, and shift evidence.</span>
+                            </a>
                             <a href="/salary/doordash/phoenix" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
                                 <strong class="block text-slate-900">DoorDash Phoenix driver earnings</strong>
                                 <span class="text-sm text-slate-600">Heat, spread, and after-expenses baseline.</span>
@@ -149,6 +153,18 @@
                             <a href="/salary/doordash/phoenix/100-a-day" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
                                 <strong class="block text-slate-900">Can DoorDash make $100/day in Phoenix?</strong>
                                 <span class="text-sm text-slate-600">Hours, miles, and gross needed for a $100 net day.</span>
+                            </a>
+                            <a href="/salary/doordash/phoenix/how-much-can-you-make" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
+                                <strong class="block text-slate-900">How much can you make DoorDashing in Phoenix?</strong>
+                                <span class="text-sm text-slate-600">Weekly, monthly, and $100/day math in one page.</span>
+                            </a>
+                            <a href="/salary/doordash/dallas/best-areas" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
+                                <strong class="block text-slate-900">Best areas to DoorDash in Dallas</strong>
+                                <span class="text-sm text-slate-600">Zone choice, mileage pressure, and local demand checks.</span>
+                            </a>
+                            <a href="/salary/doordash/chicago/uber-eats-vs-doordash" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
+                                <strong class="block text-slate-900">Uber Eats vs DoorDash in Chicago</strong>
+                                <span class="text-sm text-slate-600">Compare delivery-app net pay and active-time risk.</span>
                             </a>
                             <a href="/salary/doordash/denver/1000-a-month" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-indigo-200 hover:bg-indigo-50 transition-colors">
                                 <strong class="block text-slate-900">DoorDash Denver $1,000/month plan</strong>

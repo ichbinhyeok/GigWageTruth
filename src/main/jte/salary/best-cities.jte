@@ -266,6 +266,10 @@
                                             <div class="flex flex-col items-end gap-2">
                                                 <a href="/salary/${app}/${ranking.city().getSlug()}" class="inline-block px-4 py-2 bg-slate-100 hover:bg-emerald-50 text-emerald-700 font-bold rounded-lg text-sm transition-colors border border-slate-200 hover:border-emerald-200">Open city earnings</a>
                                                 <a href="/salary/${app}/${ranking.city().getSlug()}/side-hustle" class="text-xs font-bold text-slate-500 hover:text-emerald-700 underline decoration-slate-300">Side-hustle detail</a>
+                                                @if(app.equals("doordash"))
+                                                    <a href="/salary/${app}/${ranking.city().getSlug()}/hourly-pay" class="text-xs font-bold text-slate-500 hover:text-emerald-700 underline decoration-slate-300">Hourly pay page</a>
+                                                    <a href="/salary/${app}/${ranking.city().getSlug()}/best-areas" class="text-xs font-bold text-slate-500 hover:text-emerald-700 underline decoration-slate-300">Best areas page</a>
+                                                @endif
                                                 <a href="/salary/${app}/${ranking.city().getSlug()}/100-a-day" class="text-xs font-bold text-slate-500 hover:text-emerald-700 underline decoration-slate-300">$100/day path</a>
                                             </div>
                                         </td>

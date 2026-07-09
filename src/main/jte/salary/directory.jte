@@ -49,6 +49,10 @@
                                 <strong class="block">DoorDash Denver side-hustle</strong>
                                 <span class="text-xs text-slate-300">Suburb mileage check</span>
                             </a>
+                            <a href="/salary/doordash/denver/hourly-pay" class="rounded-xl bg-white/5 border border-white/10 px-4 py-3 hover:bg-white/10 transition-colors">
+                                <strong class="block">DoorDash Denver hourly pay</strong>
+                                <span class="text-xs text-slate-300">City pay query page</span>
+                            </a>
                             <a href="/salary/doordash/phoenix" class="rounded-xl bg-white/5 border border-white/10 px-4 py-3 hover:bg-white/10 transition-colors">
                                 <strong class="block">DoorDash Phoenix</strong>
                                 <span class="text-xs text-slate-300">Heat and spread check</span>
@@ -80,6 +84,14 @@
                             <a href="/reports/doordash-driver-hourly-pay-2026" class="rounded-xl bg-white border border-emerald-200 px-4 py-3 hover:border-emerald-300 transition-colors">
                                 <strong class="block text-slate-900">DoorDash driver hourly pay 2026 report</strong>
                                 <span class="text-xs text-slate-600">Eight-city pay dataset and $100/day bridge.</span>
+                            </a>
+                            <a href="/salary/doordash/denver/hourly-pay" class="rounded-xl bg-white border border-emerald-100 px-4 py-3 hover:border-emerald-300 transition-colors">
+                                <strong class="block text-slate-900">DoorDash hourly pay Denver CO</strong>
+                                <span class="text-xs text-slate-600">City-specific hourly pay after expenses.</span>
+                            </a>
+                            <a href="/salary/doordash/phoenix/how-much-can-you-make" class="rounded-xl bg-white border border-emerald-100 px-4 py-3 hover:border-emerald-300 transition-colors">
+                                <strong class="block text-slate-900">How much can you make DoorDashing in Phoenix?</strong>
+                                <span class="text-xs text-slate-600">Weekly, monthly, and daily target math.</span>
                             </a>
                             <a href="/salary/uber/atlanta" class="rounded-xl bg-white border border-emerald-100 px-4 py-3 hover:border-emerald-300 transition-colors">
                                 <strong class="block text-slate-900">Uber driver hourly earnings Atlanta GA 2026</strong>
@@ -132,6 +144,14 @@
                             <a href="/salary/doordash/dallas/nights-weekends" class="rounded-xl bg-white border border-indigo-100 px-4 py-3 hover:border-indigo-200 transition-colors">
                                 <strong class="block text-slate-900">DoorDash Dallas nights/weekends</strong>
                                 <span class="text-xs text-slate-600">Shift-window plan</span>
+                            </a>
+                            <a href="/salary/doordash/dallas/best-areas" class="rounded-xl bg-white border border-indigo-100 px-4 py-3 hover:border-indigo-200 transition-colors">
+                                <strong class="block text-slate-900">Best areas to DoorDash in Dallas</strong>
+                                <span class="text-xs text-slate-600">Zone and mileage plan</span>
+                            </a>
+                            <a href="/salary/doordash/chicago/uber-eats-vs-doordash" class="rounded-xl bg-white border border-indigo-100 px-4 py-3 hover:border-indigo-200 transition-colors">
+                                <strong class="block text-slate-900">Uber Eats vs DoorDash Chicago</strong>
+                                <span class="text-xs text-slate-600">Delivery-app comparison</span>
                             </a>
                             <a href="/salary/uber/nashville/nights-weekends" class="rounded-xl bg-white border border-indigo-100 px-4 py-3 hover:border-indigo-200 transition-colors">
                                 <strong class="block text-slate-900">Uber Nashville nights/weekends</strong>

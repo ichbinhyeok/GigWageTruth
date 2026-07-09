@@ -170,7 +170,8 @@ public class OrganicMonitoringRegressionTest {
                 "/best-cities/doordash",
                 "/salary/doordash/denver",
                 "/salary/doordash/denver/side-hustle",
-                "/salary/doordash/denver/after-gas");
+                "/salary/doordash/denver/after-gas",
+                "/salary/doordash/denver/hourly-pay");
         List<String> failures = new ArrayList<>();
 
         for (String path : paths) {
@@ -306,6 +307,14 @@ public class OrganicMonitoringRegressionTest {
                 "DoorDash app hub should directly link the Denver side-hustle recovery URL");
         assertTrue(appHubHtml.contains("/salary/doordash/phoenix/100-a-day"),
                 "DoorDash app hub should directly link daily target intent URLs");
+        assertTrue(appHubHtml.contains("/salary/doordash/denver/hourly-pay"),
+                "DoorDash app hub should directly link city hourly-pay query URLs");
+        assertTrue(appHubHtml.contains("/salary/doordash/phoenix/how-much-can-you-make"),
+                "DoorDash app hub should directly link how-much-can-you-make query URLs");
+        assertTrue(appHubHtml.contains("/salary/doordash/dallas/best-areas"),
+                "DoorDash app hub should directly link best-area query URLs");
+        assertTrue(appHubHtml.contains("/salary/doordash/chicago/uber-eats-vs-doordash"),
+                "DoorDash app hub should directly link delivery-app comparison URLs");
         assertTrue(appHubHtml.contains("Goal-based searches"),
                 "DoorDash app hub should expose goal-based pSEO links");
         assertTrue(appHubHtml.contains("/reports/doordash-driver-hourly-pay-2026"),
@@ -336,6 +345,14 @@ public class OrganicMonitoringRegressionTest {
                 "Directory should directly link daily target intent URLs");
         assertTrue(directoryHtml.contains("/salary/doordash/dallas/nights-weekends"),
                 "Directory should directly link nights/weekends intent URLs");
+        assertTrue(directoryHtml.contains("/salary/doordash/denver/hourly-pay"),
+                "Directory should directly link DoorDash hourly-pay intent URLs");
+        assertTrue(directoryHtml.contains("/salary/doordash/phoenix/how-much-can-you-make"),
+                "Directory should directly link DoorDash how-much-can-you-make intent URLs");
+        assertTrue(directoryHtml.contains("/salary/doordash/dallas/best-areas"),
+                "Directory should directly link DoorDash best-area intent URLs");
+        assertTrue(directoryHtml.contains("/salary/doordash/chicago/uber-eats-vs-doordash"),
+                "Directory should directly link DoorDash app-comparison intent URLs");
         assertTrue(directoryHtml.contains("Hourly earnings quick wins"),
                 "Directory should expose the hourly earnings quick-win cluster");
         assertTrue(directoryHtml.contains("/reports/uber-driver-hourly-earnings-2026"),
@@ -355,6 +372,10 @@ public class OrganicMonitoringRegressionTest {
         String bestCitiesHtml = bestCitiesResult.getResponse().getContentAsString();
         assertTrue(bestCitiesHtml.contains("/salary/doordash/denver/side-hustle"),
                 "Best-cities table should link side-hustle detail pages");
+        assertTrue(bestCitiesHtml.contains("/salary/doordash/denver/hourly-pay"),
+                "Best-cities table should link DoorDash hourly-pay intent pages");
+        assertTrue(bestCitiesHtml.contains("/salary/doordash/denver/best-areas"),
+                "Best-cities table should link DoorDash best-area intent pages");
     }
 
     @Test
@@ -417,6 +438,57 @@ public class OrganicMonitoringRegressionTest {
                 "Daily target page should compare against creator-style target searches");
         assertTrue(dailyTargetHtml.contains("Gridwise DoorDash pay data"),
                 "Daily target page should include the large-dataset competitor pattern");
+
+        MvcResult hourlyPayResult = mockMvc.perform(get("/salary/doordash/denver/hourly-pay"))
+                .andExpect(status().isOk())
+                .andReturn();
+        String hourlyPayHtml = hourlyPayResult.getResponse().getContentAsString();
+        assertTrue(hourlyPayHtml.contains("DoorDash Denver Hourly Pay"),
+                "Hourly-pay intent page should expose query-matched H1 language");
+        assertTrue(hourlyPayHtml.contains("Gross hourly"),
+                "Hourly-pay intent page should expose hourly-specific metrics");
+        assertTrue(hourlyPayHtml.contains("Published shift evidence"),
+                "Hourly-pay intent page should expose public shift evidence");
+        assertTrue(hourlyPayHtml.contains("$86 gross over 6.5 hours and 90 miles"),
+                "Hourly-pay intent page should expose the DoorDash field-test shift benchmark");
+        assertTrue(hourlyPayHtml.contains("/salary/doordash/denver/how-much-can-you-make"),
+                "Hourly-pay intent page should internally link the adjacent how-much query page");
+
+        MvcResult howMuchResult = mockMvc.perform(get("/salary/doordash/phoenix/how-much-can-you-make"))
+                .andExpect(status().isOk())
+                .andReturn();
+        String howMuchHtml = howMuchResult.getResponse().getContentAsString();
+        assertTrue(howMuchHtml.contains("DoorDash Phoenix How Much Can You Make"),
+                "How-much intent page should expose query-matched H1 language");
+        assertTrue(howMuchHtml.contains("Weekly net estimate"),
+                "How-much intent page should expose weekly earning metrics");
+        assertTrue(howMuchHtml.contains("how much can you make with DoorDash in Phoenix"),
+                "How-much intent page should include the exact query-style answer phrase");
+
+        MvcResult bestAreasResult = mockMvc.perform(get("/salary/doordash/dallas/best-areas"))
+                .andExpect(status().isOk())
+                .andReturn();
+        String bestAreasHtml = bestAreasResult.getResponse().getContentAsString();
+        assertTrue(bestAreasHtml.contains("DoorDash Dallas Best Areas"),
+                "Best-areas intent page should expose query-matched H1 language");
+        assertTrue(bestAreasHtml.contains("Primary demand zone"),
+                "Best-areas intent page should expose zone-selection metrics");
+        assertTrue(bestAreasHtml.contains("best areas to DoorDash in Dallas"),
+                "Best-areas intent page should include the query-style answer phrase");
+
+        MvcResult appComparisonResult = mockMvc.perform(get("/salary/doordash/chicago/uber-eats-vs-doordash"))
+                .andExpect(status().isOk())
+                .andReturn();
+        String appComparisonHtml = appComparisonResult.getResponse().getContentAsString();
+        assertTrue(appComparisonHtml.contains("Uber Eats vs DoorDash in Chicago"),
+                "App-comparison intent page should expose comparison H1 language");
+        assertTrue(appComparisonHtml.contains("DoorDash net hourly"),
+                "App-comparison page should show DoorDash-specific comparison metrics");
+        assertTrue(appComparisonHtml.contains("Uber model net hourly"),
+                "App-comparison page should show the comparison app metric");
+
+        mockMvc.perform(get("/salary/uber/chicago/uber-eats-vs-doordash"))
+                .andExpect(status().isNotFound());
 
         MvcResult monthlyTargetResult = mockMvc.perform(get("/salary/uber/los-angeles/1000-a-month"))
                 .andExpect(status().isOk())
@@ -493,6 +565,14 @@ public class OrganicMonitoringRegressionTest {
                 "DoorDash hourly pay report should bridge into the city ranking");
         assertTrue(doordashReportDoc.html().contains("/salary/doordash/phoenix/100-a-day"),
                 "DoorDash hourly pay report should link into daily-target city reports");
+        assertTrue(doordashReportDoc.html().contains("/salary/doordash/denver/hourly-pay"),
+                "DoorDash hourly pay report should link into city hourly-pay intent reports");
+        assertTrue(doordashReportDoc.html().contains("/salary/doordash/phoenix/how-much-can-you-make"),
+                "DoorDash hourly pay report should link into how-much-can-you-make intent reports");
+        assertTrue(doordashReportDoc.html().contains("/salary/doordash/dallas/best-areas"),
+                "DoorDash hourly pay report should link into best-area intent reports");
+        assertTrue(doordashReportDoc.html().contains("/salary/doordash/chicago/uber-eats-vs-doordash"),
+                "DoorDash hourly pay report should link into app-comparison intent reports");
 
         MvcResult workLevelResult = mockMvc.perform(get("/salary/doordash/phoenix/side-hustle"))
                 .andExpect(status().isOk())

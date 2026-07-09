@@ -557,6 +557,9 @@ public class ProgrammaticSeoController {
 
                 java.util.Optional<CityIntentPage> intentPage = CityIntentPage.fromSlug(workLevelSlug);
                 if (intentPage.isPresent()) {
+                        if (!intentPage.get().isSupportedForApp(app)) {
+                                throw new com.gigwager.exception.ResourceNotFoundException("Intent page not found");
+                        }
                         return cityIntentPage(app, appName, city, intentPage.get(), monthYear, model);
                 }
 
@@ -792,6 +795,17 @@ public class ProgrammaticSeoController {
                         case DAILY_100 -> String.format("Can You Make $100 a Day with %s in %s?",
                                         appName,
                                         city.getCityName());
+                        case HOURLY_PAY -> String.format("%s %s Hourly Pay 2026: $%.2f/hr Net",
+                                        appName,
+                                        city.getCityName(),
+                                        scenario.getNetHourly());
+                        case HOW_MUCH_CAN_YOU_MAKE -> String.format("How Much Can You Make with %s in %s?",
+                                        appName,
+                                        city.getCityName());
+                        case BEST_AREAS -> String.format("Best Areas to DoorDash in %s: Pay Zones",
+                                        city.getCityName());
+                        case APP_COMPARISON -> String.format("Uber Eats vs DoorDash in %s: Which Pays More?",
+                                        city.getCityName());
                         case MONTHLY_1000 -> String.format("Can %s Make $1,000/Month in %s?",
                                         appName,
                                         city.getCityName());
@@ -842,6 +856,28 @@ public class ProgrammaticSeoController {
                                         hoursToNetTarget(scenario, 100),
                                         milesForHours(scenario, hoursToNetTarget(scenario, 100)),
                                         monthYear);
+                        case HOURLY_PAY -> String.format(
+                                        "%s %s hourly pay estimate: $%.2f/hr net after mileage and tax, with gross weekly, miles, and public driver-shift evidence. Updated %s.",
+                                        appName,
+                                        city.getCityName(),
+                                        scenario.getNetHourly(),
+                                        monthYear);
+                        case HOW_MUCH_CAN_YOU_MAKE -> String.format(
+                                        "How much can you make with %s in %s? Compare $%d/week gross, $%.2f/hr net, $100/day math, and mileage pressure. Updated %s.",
+                                        appName,
+                                        city.getCityName(),
+                                        scenario.getGrossWeekly(),
+                                        scenario.getNetHourly(),
+                                        monthYear);
+                        case BEST_AREAS -> String.format(
+                                        "Best areas to DoorDash in %s: compare local demand zones, mileage pressure, $%.2f/hr net pay, and what to check before dashing. Updated %s.",
+                                        city.getCityName(),
+                                        scenario.getNetHourly(),
+                                        monthYear);
+                        case APP_COMPARISON -> String.format(
+                                        "Uber Eats vs DoorDash in %s: compare delivery-app net hourly pay, active-time risk, mileage, and city-specific shift evidence. Updated %s.",
+                                        city.getCityName(),
+                                        monthYear);
                         case MONTHLY_1000 -> String.format(
                                         "%s %s $1,000/month estimate: about %.1f hours per week at the current $%.2f/hr net baseline. Updated %s.",
                                         appName,
@@ -863,6 +899,7 @@ public class ProgrammaticSeoController {
                         CityData city,
                         CityIntentPage intentPage,
                         CityScenario scenario) {
+                CityLocalData localData = dataLayerService.getLocalData(city.getSlug());
                 return switch (intentPage) {
                         case AFTER_GAS -> String.format(
                                         "<p>After gas, mileage, and self-employment tax assumptions, the %s side-hustle baseline in %s is <strong>$%.2f/hr net</strong>. The model starts from <strong>$%d/week gross</strong>, <strong>%d miles/week</strong>, <strong>%d hours/week</strong>, and local gas around <strong>$%.2f/gal</strong>.</p><p>The key driver check is whether your actual route mix stays near this mileage load. If restaurant waits, airport queues, or suburb returns add miles without pay, the after-gas number drops before the app payout looks bad.</p>",
@@ -906,6 +943,55 @@ public class ProgrammaticSeoController {
                                                 targetHours,
                                                 targetMiles,
                                                 targetGross);
+                        }
+                        case HOURLY_PAY -> String.format(
+                                        "<p>The practical %s hourly pay estimate in %s is <strong>$%.2f/hr net</strong> after mileage and self-employment tax assumptions. The modeled shift base is <strong>$%d/week gross</strong>, <strong>%d hours/week</strong>, and <strong>%d miles/week</strong>, so this page treats hourly pay as take-home math, not an app screenshot.</p><p>Use this page when searching <strong>%s hourly pay %s</strong> and then sanity-check it against the public shift evidence below, including reports that separate active time, dash time, gross payout, and mileage.</p>",
+                                        appName,
+                                        city.getCityName(),
+                                        scenario.getNetHourly(),
+                                        scenario.getGrossWeekly(),
+                                        scenario.getHours(),
+                                        scenario.getMiles(),
+                                        appName,
+                                        city.getCityName());
+                        case HOW_MUCH_CAN_YOU_MAKE -> {
+                                double targetHours = hoursToNetTarget(scenario, 100);
+                                int targetMiles = milesForHours(scenario, targetHours);
+                                double monthlyNet = scenario.getNetProfit() * 4.33;
+                                yield String.format(
+                                                "<p>At the current %s %s side-hustle baseline, the model shows about <strong>$%d/week gross</strong>, <strong>$%.0f/week net</strong>, and <strong>$%.0f/month net</strong> before you change the calculator inputs.</p><p>For the common question <strong>how much can you make with %s in %s</strong>, the sharper answer is this: a <strong>$100 net day</strong> requires about <strong>%.1f hours</strong> and roughly <strong>%d miles</strong> at the current baseline. If your actual shift has weaker tips, longer pickups, or unpaid return miles, the number falls fast.</p>",
+                                                appName,
+                                                city.getCityName(),
+                                                scenario.getGrossWeekly(),
+                                                scenario.getNetProfit(),
+                                                monthlyNet,
+                                                appName,
+                                                city.getCityName(),
+                                                targetHours,
+                                                targetMiles);
+                        }
+                        case BEST_AREAS -> String.format(
+                                        "<p>The best areas to DoorDash in %s are usually not the whole city. Start by testing restaurant density around <strong>%s</strong> and retail/order volume near <strong>%s</strong>, then compare the result against the modeled <strong>$%.2f/hr net</strong> baseline.</p><p>The trap is crossing too many zones or using <strong>%s</strong> as unpaid repositioning. A good DoorDash area should reduce pickup waits, keep drop-offs close enough to return quickly, and avoid turning a decent gross payout into a high-mileage shift.</p>",
+                                        city.getCityName(),
+                                        localData.nightlifeDistrict(),
+                                        localData.shoppingDistrict(),
+                                        scenario.getNetHourly(),
+                                        localData.majorHighway());
+                        case APP_COMPARISON -> {
+                                CityScenario uberScenario = generateScenarioByWorkLevel(city, "uber", WorkLevel.SIDE_HUSTLE);
+                                CityScenario doordashScenario = generateScenarioByWorkLevel(city, "doordash",
+                                                WorkLevel.SIDE_HUSTLE);
+                                double gap = doordashScenario.getNetHourly() - uberScenario.getNetHourly();
+                                String leader = gap >= 0 ? "DoorDash" : "Uber/Uber Eats-style driving";
+                                yield String.format(
+                                                "<p>For an <strong>Uber Eats vs DoorDash in %s</strong> comparison, use net hourly and mileage pressure first. The current DoorDash side-hustle model is <strong>$%.2f/hr net</strong>, while the Uber city model is <strong>$%.2f/hr net</strong>. On this model, <strong>%s leads by $%.2f/hr</strong>.</p><p>This does not mean one app always wins. DoorDash can win when restaurant density around %s keeps pickup time low; Uber or Uber Eats-style work can win when trip flow, airport timing, or stacked demand reduces idle time. The right comparison is the shift you can actually run in %s.</p>",
+                                                city.getCityName(),
+                                                doordashScenario.getNetHourly(),
+                                                uberScenario.getNetHourly(),
+                                                leader,
+                                                Math.abs(gap),
+                                                localData.shoppingDistrict(),
+                                                city.getCityName());
                         }
                         case MONTHLY_1000 -> {
                                 double weeklyTarget = 1000 / 4.33;
@@ -1151,6 +1237,7 @@ public class ProgrammaticSeoController {
                                 : scenario.getNetProfit() / scenario.getMiles();
                 double allInHours = scenario.getHours() * 1.2;
                 double allInHourly = allInHours == 0 ? 0 : scenario.getNetProfit() / allInHours;
+                CityLocalData localData = dataLayerService.getLocalData(city.getSlug());
 
                 String fieldTestLabel = app.equals("doordash")
                                 ? "NerdWallet DoorDash field test"
@@ -1339,6 +1426,128 @@ public class ProgrammaticSeoController {
                                                                 "IRS 2026 mileage rate",
                                                                 "https://www.irs.gov/newsroom/irs-sets-2026-business-standard-mileage-rate-at-725-cents-per-mile-up-25-cents"));
                         }
+                        case HOURLY_PAY -> List.of(
+                                        new CityIntentEvidence(
+                                                        "Hourly-pay pattern",
+                                                        "The ranking page has to answer net hourly, not only gross pay",
+                                                        String.format(
+                                                                        "%s %s shows $%.2f/hr net after mileage and tax because hourly-pay searches are usually trying to reconcile app screenshots with take-home money.",
+                                                                        appName,
+                                                                        city.getCityName(),
+                                                                        scenario.getNetHourly()),
+                                                        fieldTestLabel,
+                                                        fieldTestUrl),
+                                        new CityIntentEvidence(
+                                                        "Published-shift pattern",
+                                                        "Single shifts win trust when miles and clock time are visible",
+                                                        String.format(
+                                                                        "The public shift block below gives this URL a concrete cross-check for %d modeled miles/week and %d modeled hours/week instead of relying on a national average.",
+                                                                        scenario.getMiles(),
+                                                                        scenario.getHours()),
+                                                        gridwiseLabel,
+                                                        gridwiseUrl),
+                                        new CityIntentEvidence(
+                                                        "Cost benchmark",
+                                                        "Hourly pay changes after the vehicle-cost proxy",
+                                                        String.format(
+                                                                        "At %d modeled miles/week, the IRS mileage proxy creates about $%.0f of weekly vehicle-cost pressure before tax.",
+                                                                        scenario.getMiles(),
+                                                                        mileageProxy),
+                                                        "IRS 2026 mileage rate",
+                                                        "https://www.irs.gov/newsroom/irs-sets-2026-business-standard-mileage-rate-at-725-cents-per-mile-up-25-cents"));
+                        case HOW_MUCH_CAN_YOU_MAKE -> {
+                                double targetHours = hoursToNetTarget(scenario, 100);
+                                int targetMiles = milesForHours(scenario, targetHours);
+                                yield List.of(
+                                                new CityIntentEvidence(
+                                                                "Earnings-range pattern",
+                                                                "How-much searches need weekly, daily, and hourly answers together",
+                                                                String.format(
+                                                                                "%s %s is modeled at $%d/week gross and $%.0f/week net, then translated into a %.1f-hour $100/day path.",
+                                                                                appName,
+                                                                                city.getCityName(),
+                                                                                scenario.getGrossWeekly(),
+                                                                                scenario.getNetProfit(),
+                                                                                targetHours),
+                                                                dailyTargetLabel,
+                                                                dailyTargetUrl),
+                                                new CityIntentEvidence(
+                                                                "Mileage-load pattern",
+                                                                "The answer is capped by miles, not only demand",
+                                                                String.format(
+                                                                                "The $100/day path implies about %d miles at the current city baseline. That is why this page keeps the mileage and calculator links visible.",
+                                                                                targetMiles),
+                                                                "IRS 2026 mileage rate",
+                                                                "https://www.irs.gov/newsroom/irs-sets-2026-business-standard-mileage-rate-at-725-cents-per-mile-up-25-cents"),
+                                                new CityIntentEvidence(
+                                                                "Driver-source pattern",
+                                                                "Reported earnings vary because shifts are not equal",
+                                                                "Driver discussions repeatedly separate strong dinner or weekend windows from slow all-day availability. This URL answers with a baseline and shows where that baseline can break.",
+                                                                nightsWeekendLabel,
+                                                                nightsWeekendUrl));
+                        }
+                        case BEST_AREAS -> List.of(
+                                        new CityIntentEvidence(
+                                                        "Zone-selection pattern",
+                                                        "Best-area searches are local demand questions",
+                                                        String.format(
+                                                                        "For %s, the page names %s and %s because DoorDash performance depends on restaurant density, order batching, and short returns, not just citywide average pay.",
+                                                                        city.getCityName(),
+                                                                        localData.nightlifeDistrict(),
+                                                                        localData.shoppingDistrict()),
+                                                        "DoorDash Dasher signup",
+                                                        "https://dasher.doordash.com/en-us"),
+                                        new CityIntentEvidence(
+                                                        "Mileage pattern",
+                                                        "The wrong zone turns pay into dead miles",
+                                                        String.format(
+                                                                        "The modeled side-hustle week already carries %d miles. A better DoorDash area should keep pickups close and avoid using %s as unpaid repositioning.",
+                                                                        scenario.getMiles(),
+                                                                        localData.majorHighway()),
+                                                        mileThreadLabel,
+                                                        mileThreadUrl),
+                                        new CityIntentEvidence(
+                                                        "Shift-evidence pattern",
+                                                        "Good area advice needs real shift friction",
+                                                        "The published-shift cards below keep the page from becoming generic local advice by tying zone selection back to active time, dash time, gross pay, and mileage.",
+                                                        fieldTestLabel,
+                                                        fieldTestUrl));
+                        case APP_COMPARISON -> {
+                                CityScenario uberScenario = generateScenarioByWorkLevel(city, "uber", WorkLevel.SIDE_HUSTLE);
+                                CityScenario doordashScenario = generateScenarioByWorkLevel(city, "doordash",
+                                                WorkLevel.SIDE_HUSTLE);
+                                String comparisonUrl = dataLayerService.hasRichLocalData(city.getSlug())
+                                                ? String.format("%s/compare/%s/uber-vs-doordash",
+                                                                AppConstants.BASE_URL,
+                                                                city.getSlug())
+                                                : AppConstants.BASE_URL + "/blog/uber-vs-doordash";
+                                yield List.of(
+                                                new CityIntentEvidence(
+                                                                "Comparison pattern",
+                                                                "The winner is the app with stronger net hourly after miles",
+                                                                String.format(
+                                                                                "DoorDash models at $%.2f/hr net in %s versus $%.2f/hr for the Uber city model. The useful comparison is net pay after vehicle cost, not the highest gross screenshot.",
+                                                                                doordashScenario.getNetHourly(),
+                                                                                city.getCityName(),
+                                                                                uberScenario.getNetHourly()),
+                                                                "GigVerdict city compare page",
+                                                                comparisonUrl),
+                                                new CityIntentEvidence(
+                                                                "Clock-risk pattern",
+                                                                "Uber Eats and DoorDash both overstate pay if waiting time is ignored",
+                                                                "Official pay docs explain pay components, but the driver decision needs online time, active time, dash time, and idle gaps in the same comparison.",
+                                                                platformClockLabel,
+                                                                platformClockUrl),
+                                                new CityIntentEvidence(
+                                                                "Local-fit pattern",
+                                                                "Restaurant density can beat broad app averages",
+                                                                String.format(
+                                                                                "DoorDash can outperform when %s and %s produce short pickups; Uber or Uber Eats-style work can outperform when trip flow and airport timing reduce idle time.",
+                                                                                localData.nightlifeDistrict(),
+                                                                                localData.shoppingDistrict()),
+                                                                gridwiseLabel,
+                                                                gridwiseUrl));
+                        }
                         case MONTHLY_1000 -> {
                                 double weeklyTarget = 1000 / 4.33;
                                 double targetHours = hoursToNetTarget(scenario, weeklyTarget);
@@ -1418,6 +1627,7 @@ public class ProgrammaticSeoController {
                 double weeklyTargetForThousand = 1000 / 4.33;
                 double hoursToThousandMonthly = hoursToNetTarget(scenario, weeklyTargetForThousand);
                 int weekendHours = 12;
+                CityLocalData localData = dataLayerService.getLocalData(city.getSlug());
 
                 return switch (intentPage) {
                         case AFTER_GAS -> List.of(
@@ -1463,6 +1673,51 @@ public class ProgrammaticSeoController {
                                         new CityIntentMetric("Gross needed", String.format("$%d",
                                                         grossForHours(scenario, hoursToHundred)),
                                                         "Approximate app payout before mileage proxy and self-employment tax."));
+                        case HOURLY_PAY -> List.of(
+                                        new CityIntentMetric("Net hourly", String.format("$%.2f/hr",
+                                                        scenario.getNetHourly()),
+                                                        "Take-home estimate after mileage and self-employment tax assumptions."),
+                                        new CityIntentMetric("Gross hourly", String.format("$%.2f/hr",
+                                                        scenario.getGrossWeekly() / (double) scenario.getHours()),
+                                                        "App payout baseline before vehicle-cost and tax assumptions."),
+                                        new CityIntentMetric("Miles per hour", String.format("%.1f mi/hr",
+                                                        scenario.getMiles() / (double) scenario.getHours()),
+                                                        "Mileage intensity behind the hourly pay estimate."));
+                        case HOW_MUCH_CAN_YOU_MAKE -> List.of(
+                                        new CityIntentMetric("Weekly net estimate", String.format("$%.0f",
+                                                        scenario.getNetProfit()),
+                                                        "Modeled weekly take-home after mileage and tax assumptions."),
+                                        new CityIntentMetric("Monthly net estimate", String.format("$%.0f",
+                                                        monthlyNet),
+                                                        "Weekly net multiplied by 4.33 average weeks."),
+                                        new CityIntentMetric("Hours to $100 net", String.format("%.1f hrs",
+                                                        hoursToHundred),
+                                                        "Daily target divided by this city's current net hourly baseline."));
+                        case BEST_AREAS -> List.of(
+                                        new CityIntentMetric("Primary demand zone", localData.nightlifeDistrict(),
+                                                        "Use this as a first test for restaurant and evening order density."),
+                                        new CityIntentMetric("Retail/order zone", localData.shoppingDistrict(),
+                                                        "Check whether retail and restaurant clusters reduce pickup dead time."),
+                                        new CityIntentMetric("Mileage pressure", String.format("%.1f mi/hr",
+                                                        scenario.getMiles() / (double) scenario.getHours()),
+                                                        "High miles per hour means the best area must keep returns short."));
+                        case APP_COMPARISON -> {
+                                CityScenario uberScenario = generateScenarioByWorkLevel(city, "uber", WorkLevel.SIDE_HUSTLE);
+                                CityScenario doordashScenario = generateScenarioByWorkLevel(city, "doordash",
+                                                WorkLevel.SIDE_HUSTLE);
+                                double gap = doordashScenario.getNetHourly() - uberScenario.getNetHourly();
+                                yield List.of(
+                                                new CityIntentMetric("DoorDash net hourly", String.format("$%.2f/hr",
+                                                                doordashScenario.getNetHourly()),
+                                                                "DoorDash side-hustle baseline after mileage and tax assumptions."),
+                                                new CityIntentMetric("Uber model net hourly", String.format("$%.2f/hr",
+                                                                uberScenario.getNetHourly()),
+                                                                "Uber city baseline used as the closest comparable app model."),
+                                                new CityIntentMetric("Modeled gap", String.format("%s$%.2f/hr",
+                                                                gap >= 0 ? "+" : "-",
+                                                                Math.abs(gap)),
+                                                                "Positive means DoorDash leads on this modeled side-hustle baseline."));
+                        }
                         case MONTHLY_1000 -> List.of(
                                         new CityIntentMetric("Weekly net target", String.format("$%.0f",
                                                         weeklyTargetForThousand),

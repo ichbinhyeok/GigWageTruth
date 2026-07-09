@@ -71,8 +71,10 @@ public class SitemapController {
                     }
 
                     for (CityIntentPage intentPage : CityIntentPage.values()) {
-                        addUrl(xml, AppConstants.BASE_URL + "/salary/" + app + "/" + city.getSlug() + "/"
-                                + intentPage.getSlug(), today, "monthly", "0.6");
+                        if (intentPage.isSupportedForApp(app)) {
+                            addUrl(xml, AppConstants.BASE_URL + "/salary/" + app + "/" + city.getSlug() + "/"
+                                    + intentPage.getSlug(), today, "monthly", "0.6");
+                        }
                     }
                 }
             }

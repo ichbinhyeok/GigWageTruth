@@ -13,6 +13,14 @@ public enum CityIntentPage {
                         "Use this when deciding whether the city is worth driving at a realistic side-hustle pace."),
         DAILY_100("100-a-day", "$100 a Day", "make $100 a day",
                         "Use this when the question is how many real hours and miles it takes to clear a $100 net day."),
+        HOURLY_PAY("hourly-pay", "Hourly Pay", "hourly pay",
+                        "Use this when the question is the city-specific hourly pay number after mileage, tax, and waiting time."),
+        HOW_MUCH_CAN_YOU_MAKE("how-much-can-you-make", "How Much Can You Make", "how much can you make",
+                        "Use this when comparing realistic weekly, daily, and hourly DoorDash earnings in one city."),
+        BEST_AREAS("best-areas", "Best Areas", "best areas to work",
+                        "Use this when choosing zones inside a city instead of trusting a citywide average."),
+        APP_COMPARISON("uber-eats-vs-doordash", "Uber Eats vs DoorDash", "Uber Eats vs DoorDash pay",
+                        "Use this when comparing delivery-app pay, mileage, active time, and availability in the same city."),
         MONTHLY_1000("1000-a-month", "$1,000 a Month", "make $1,000 a month",
                         "Use this when planning a monthly side-income target instead of judging one shift."),
         NIGHTS_WEEKENDS("nights-weekends", "Nights and Weekends", "nights and weekends",
@@ -44,6 +52,16 @@ public enum CityIntentPage {
 
         public String getUserIntent() {
                 return userIntent;
+        }
+
+        public boolean isSupportedForApp(String app) {
+                if ("doordash".equalsIgnoreCase(app)) {
+                        return true;
+                }
+                return switch (this) {
+                        case HOURLY_PAY, HOW_MUCH_CAN_YOU_MAKE, BEST_AREAS, APP_COMPARISON -> false;
+                        default -> true;
+                };
         }
 
         public static Optional<CityIntentPage> fromSlug(String slug) {

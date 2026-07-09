@@ -50,7 +50,11 @@
 
                 <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-300 mb-3">${city.getCityName()}, ${city.getState()} | Updated ${lastUpdated}</p>
                 <h1 class="text-4xl md:text-6xl font-black leading-tight mb-5">
-                    ${appName} ${city.getCityName()} ${intentPage.getDisplayName()}
+                    @if(intentPage == CityIntentPage.APP_COMPARISON)
+                        Uber Eats vs DoorDash in ${city.getCityName()}
+                    @else
+                        ${appName} ${city.getCityName()} ${intentPage.getDisplayName()}
+                    @endif
                     <span class="block text-emerald-300">$${String.format("%.2f", scenario.getNetHourly())}/hr Net</span>
                 </h1>
                 <p class="text-xl text-slate-300 max-w-3xl">${intentPage.getUserIntent()}</p>
@@ -191,7 +195,7 @@
                 <h2 class="text-2xl font-black text-slate-900 mb-4">Related ${city.getCityName()} ${appName} questions</h2>
                 <div class="grid md:grid-cols-2 gap-3">
                     @for(CityIntentPage relatedIntent : CityIntentPage.values())
-                        @if(relatedIntent != intentPage)
+                        @if(relatedIntent != intentPage && relatedIntent.isSupportedForApp(app))
                             <a href="/salary/${app}/${city.getSlug()}/${relatedIntent.getSlug()}" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
                                 <strong class="block text-slate-900">${relatedIntent.getDisplayName()}</strong>
                                 <span class="text-sm text-slate-600">${relatedIntent.getUserIntent()}</span>
