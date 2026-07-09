@@ -126,6 +126,12 @@ public class SitemapXmlTest {
                                 "Sitemaps should not contain DoorDash-only comparison intent under Uber");
                 assertTrue(xmlContent.contains("/salary/uber/nashville/nights-weekends"),
                                 "Sitemaps should contain nights and weekends intent pages");
+                assertFalse(xmlContent.contains("/salary/uber/orlando/after-gas"),
+                                "Sitemaps should not contain non-rich city intent pages");
+                assertFalse(xmlContent.contains("/salary/doordash/denver/1000-a-month"),
+                                "Sitemaps should not contain lower-priority monthly target permutations");
+                assertFalse(xmlContent.contains("/salary/doordash/denver/worth-it"),
+                                "Sitemaps should not contain broad worth-it permutations");
                 assertTrue(xmlContent.contains("/taxes"), "Sitemaps should contain /taxes");
                 assertTrue(xmlContent.contains("/insurance"), "Sitemaps should contain /insurance");
                 assertTrue(xmlContent.contains("/vehicle-cost"), "Sitemaps should contain /vehicle-cost");
@@ -144,6 +150,10 @@ public class SitemapXmlTest {
                         assertFalse(locUrl.contains("&"), "Sitemap loc must NOT contain ampersand params, found: " + locUrl);
                 }
                 assertTrue(locUrls.size() >= 10, "Should have found at least 10 loc entries");
+                List<String> rootLocUrls = extractLocUrls(rootSitemap);
+                assertTrue(rootLocUrls.size() < 650,
+                                "Root sitemap should stay focused on evidence-backed pSEO pages, found: "
+                                                + rootLocUrls.size());
                 assertFalse(xmlContent.contains("gigwagetruth.com"),
                                 "Sitemap must NOT reference old domain gigwagetruth.com");
                 assertFalse(xmlContent.contains("<priority>"), "Sitemaps should not emit ignored priority hints");

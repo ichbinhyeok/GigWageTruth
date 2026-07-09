@@ -5,6 +5,7 @@
 @import com.gigwager.model.CityScenario
 @import com.gigwager.model.DriverFieldNote
 @import com.gigwager.model.DriverShiftReport
+@import com.gigwager.model.PageEvidenceProfile
 @import com.gigwager.model.SearchResultPattern
 @import com.gigwager.model.SeoMeta
 @import java.util.List
@@ -26,6 +27,7 @@
 @param List<CityIntentMetric> intentMetrics = java.util.List.of()
 @param List<CityIntentEvidence> intentEvidencePatterns = java.util.List.of()
 @param List<SearchResultPattern> searchResultPatterns = java.util.List.of()
+@param PageEvidenceProfile pageEvidenceProfile = null
 @param double daily100Hours = 0
 @param int daily100Miles = 0
 @param int daily100Gross = 0
@@ -91,6 +93,11 @@
                 </div>
             </div>
         </section>
+
+        @template.components.page_evidence_profile(
+            pageEvidenceProfile = pageEvidenceProfile,
+            sectionClass = "max-w-4xl mx-auto px-6 mt-8 mb-0"
+        )
 
         <main class="max-w-4xl mx-auto px-6 py-12 space-y-10">
             <section class="bg-white rounded-3xl border border-slate-200 p-8 shadow-sm">

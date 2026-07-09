@@ -3,6 +3,7 @@
 @import com.gigwager.model.CityScenario
 @import com.gigwager.model.DriverFieldNote
 @import com.gigwager.model.DriverShiftReport
+@import com.gigwager.model.PageEvidenceProfile
 @import com.gigwager.model.WorkLevel
 @import com.gigwager.model.content.PersonaQuote
 @import com.gigwager.model.content.SourceCitation
@@ -40,6 +41,7 @@
 @param String calculatorUrl = ""
 @param List<DriverFieldNote> driverFieldNotes = java.util.List.of()
 @param List<DriverShiftReport> driverShiftReports = java.util.List.of()
+@param PageEvidenceProfile pageEvidenceProfile = null
 @template.layout.main(
     noIndex = noIndex,
     seoMeta = seoMeta,
@@ -157,6 +159,11 @@
                 @endif
             </div>
         </div>
+
+        @template.components.page_evidence_profile(
+            pageEvidenceProfile = pageEvidenceProfile,
+            sectionClass = "max-w-5xl mx-auto px-6 mt-12 mb-0"
+        )
 
         @template.components.driver_field_notes(
             appName = appName,

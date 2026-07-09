@@ -3,6 +3,7 @@
 @import com.gigwager.model.CityScenario
 @import com.gigwager.model.DriverFieldNote
 @import com.gigwager.model.DriverShiftReport
+@import com.gigwager.model.PageEvidenceProfile
 @import com.gigwager.model.SearchResultPattern
 @import com.gigwager.util.AppConstants
 @import java.util.List
@@ -33,6 +34,7 @@
 @param List<DriverFieldNote> driverFieldNotes = java.util.List.of()
 @param List<DriverShiftReport> driverShiftReports = java.util.List.of()
 @param List<SearchResultPattern> searchResultPatterns = java.util.List.of()
+@param PageEvidenceProfile pageEvidenceProfile = null
 @template.layout.main(
     noIndex = noIndex,
     seoMeta = seoMeta,
@@ -207,6 +209,11 @@
                 </div>
             </div>
         </section>
+
+        @template.components.page_evidence_profile(
+            pageEvidenceProfile = pageEvidenceProfile,
+            sectionClass = "max-w-4xl mx-auto px-6 mb-10"
+        )
 
         @if(app.equals("uber") && ("atlanta".equals(city.getSlug()) || "los-angeles".equals(city.getSlug()) || "austin".equals(city.getSlug()) || "chicago".equals(city.getSlug()) || "houston".equals(city.getSlug()) || "orlando".equals(city.getSlug())))
             <section class="max-w-5xl mx-auto px-6 mb-12">

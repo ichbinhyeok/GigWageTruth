@@ -10,6 +10,7 @@ import com.gigwager.model.DoorDashDurationEstimate;
 import com.gigwager.model.DoorDashMoneyIntent;
 import com.gigwager.model.DriverFieldNote;
 import com.gigwager.model.DriverShiftReport;
+import com.gigwager.model.PageEvidenceProfile;
 import com.gigwager.model.SeoMeta;
 import com.gigwager.model.SearchResultPattern;
 import com.gigwager.model.WorkLevel;
@@ -21,6 +22,7 @@ import com.gigwager.service.CityRichContentRepository;
 import com.gigwager.service.DataLayerService;
 import com.gigwager.service.DriverShiftReportService;
 import com.gigwager.service.HtmlSanitizerService;
+import com.gigwager.service.PageEvidenceService;
 import com.gigwager.service.PageIndexPolicyService;
 import com.gigwager.dto.CityRankingDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -51,26 +53,34 @@ public class ProgrammaticSeoController {
         private final CityRichContentRepository cityRichContentRepository;
         private final HtmlSanitizerService htmlSanitizerService;
         private final DriverShiftReportService driverShiftReportService;
+        private final PageEvidenceService pageEvidenceService;
 
-        @Autowired
         public ProgrammaticSeoController(DataLayerService dataLayerService,
                         PageIndexPolicyService pageIndexPolicyService,
                         CityRichContentRepository cityRichContentRepository,
                         HtmlSanitizerService htmlSanitizerService) {
-                this(dataLayerService, pageIndexPolicyService, cityRichContentRepository, htmlSanitizerService,
-                                new DriverShiftReportService());
-        }
-
-        public ProgrammaticSeoController(DataLayerService dataLayerService,
-                        PageIndexPolicyService pageIndexPolicyService,
-                        CityRichContentRepository cityRichContentRepository,
-                        HtmlSanitizerService htmlSanitizerService,
-                        DriverShiftReportService driverShiftReportService) {
+                DriverShiftReportService driverShiftReportService = new DriverShiftReportService();
                 this.dataLayerService = dataLayerService;
                 this.pageIndexPolicyService = pageIndexPolicyService;
                 this.cityRichContentRepository = cityRichContentRepository;
                 this.htmlSanitizerService = htmlSanitizerService;
                 this.driverShiftReportService = driverShiftReportService;
+                this.pageEvidenceService = new PageEvidenceService(cityRichContentRepository, driverShiftReportService);
+        }
+
+        @Autowired
+        public ProgrammaticSeoController(DataLayerService dataLayerService,
+                        PageIndexPolicyService pageIndexPolicyService,
+                        CityRichContentRepository cityRichContentRepository,
+                        HtmlSanitizerService htmlSanitizerService,
+                        DriverShiftReportService driverShiftReportService,
+                        PageEvidenceService pageEvidenceService) {
+                this.dataLayerService = dataLayerService;
+                this.pageIndexPolicyService = pageIndexPolicyService;
+                this.cityRichContentRepository = cityRichContentRepository;
+                this.htmlSanitizerService = htmlSanitizerService;
+                this.driverShiftReportService = driverShiftReportService;
+                this.pageEvidenceService = pageEvidenceService;
         }
 
         @GetMapping("/salary/{app}")
@@ -81,7 +91,7 @@ public class ProgrammaticSeoController {
                 String appName = app.equals("uber") ? "Uber" : "DoorDash";
 
                 List<CityRankingDto> topCities = Arrays.stream(CityData.values())
-                                .filter(pageIndexPolicyService::isCityReportIndexable)
+                                .filter(city -> pageIndexPolicyService.isCityReportIndexable(city, app))
                                 .map(city -> {
                                         CityScenario scenario = calculateScenario("Side-Hustle",
                                                         city.getMarketTier().getSideHustleGross(), 250, 25, city, app);
@@ -98,7 +108,7 @@ public class ProgrammaticSeoController {
 
                 CityRankingDto topCity = topCities.get(0);
                 long indexedCityCount = Arrays.stream(CityData.values())
-                                .filter(pageIndexPolicyService::isCityReportIndexable)
+                                .filter(city -> pageIndexPolicyService.isCityReportIndexable(city, app))
                                 .count();
 
                 // Dynamic Date
@@ -107,7 +117,8 @@ public class ProgrammaticSeoController {
                                 .format(now);
 
                 CityRankingDto comparisonCity = topCities.stream()
-                                .filter(dto -> dataLayerService.hasRichLocalData(dto.city().getSlug()))
+                                .filter(dto -> pageIndexPolicyService.isCityReportIndexable(dto.city(), "uber"))
+                                .filter(dto -> pageIndexPolicyService.isCityReportIndexable(dto.city(), "doordash"))
                                 .findFirst()
                                 .orElse(null);
 
@@ -466,7 +477,7 @@ public class ProgrammaticSeoController {
                 String appName = app.equals("uber") ? "Uber" : "DoorDash";
 
                 List<CityRankingDto> rankedCities = Arrays.stream(CityData.values())
-                                .filter(pageIndexPolicyService::isCityReportIndexable)
+                                .filter(city -> pageIndexPolicyService.isCityReportIndexable(city, app))
                                 .map(city -> {
                                         CityScenario scenario = calculateScenario("Side-Hustle",
                                                         city.getMarketTier().getSideHustleGross(), 250, 25, city, app);
@@ -549,9 +560,10 @@ public class ProgrammaticSeoController {
                                 .orElseThrow(() -> new com.gigwager.exception.ResourceNotFoundException(
                                                 "City not found"));
 
-                // PR8-3: Only generate for cities with rich local data AND passing policy
-                if (!dataLayerService.hasRichLocalData(citySlug)
-                                || !pageIndexPolicyService.isCityReportIndexable(city)) {
+                // Only generate comparisons where both app city reports pass the same
+                // evidence-backed indexing policy.
+                if (!pageIndexPolicyService.isCityReportIndexable(city, "uber")
+                                || !pageIndexPolicyService.isCityReportIndexable(city, "doordash")) {
                         throw new com.gigwager.exception.ResourceNotFoundException(
                                         "Detailed comparison not available for this city yet");
                 }
@@ -673,6 +685,15 @@ public class ProgrammaticSeoController {
                 String otherApp = app.equals("uber") ? "doordash" : "uber";
                 String otherAppName = app.equals("uber") ? "DoorDash" : "Uber";
                 String otherAppUrl = String.format("/salary/%s/%s", otherApp, citySlug);
+                boolean cityIndexable = pageIndexPolicyService.isCityReportIndexable(city, app)
+                                && featuredScenario.getNetHourly() >= 6.0
+                                && featuredScenario.getNetHourly() <= 45.0;
+                PageEvidenceProfile pageEvidenceProfile = pageEvidenceService.cityReport(
+                                app,
+                                appName,
+                                city,
+                                featuredScenario,
+                                cityIndexable);
 
                 model.addAttribute("app", app);
                 model.addAttribute("appName", appName);
@@ -696,15 +717,14 @@ public class ProgrammaticSeoController {
                 model.addAttribute("taxEstimatorUrl", buildTaxEstimatorUrl(app, featuredScenario));
                 model.addAttribute("bestCitiesUrl", String.format("/best-cities/%s", app));
                 model.addAttribute("compareUrl",
-                                dataLayerService.hasRichLocalData(citySlug)
+                                pageIndexPolicyService.isCityReportIndexable(city, "uber")
+                                                && pageIndexPolicyService.isCityReportIndexable(city, "doordash")
                                                 ? String.format("/compare/%s/uber-vs-doordash", citySlug)
                                                 : "");
                 model.addAttribute("safeMarketDescription", htmlSanitizerService.sanitize(city.getMarketDescription()));
                 model.addAttribute("cityFaqJsonLd", buildCityFaqJsonLd(appName, city, featuredScenario));
+                model.addAttribute("pageEvidenceProfile", pageEvidenceProfile);
 
-                boolean cityIndexable = pageIndexPolicyService.isCityReportIndexable(city)
-                                && featuredScenario.getNetHourly() >= 6.0
-                                && featuredScenario.getNetHourly() <= 45.0;
                 if (!cityIndexable) {
                         model.addAttribute("noIndex", true);
                         canonicalUrl = appHubCanonicalUrl;
@@ -723,6 +743,7 @@ public class ProgrammaticSeoController {
                 // Internal Linking Silo: 3 random cities with same MarketTier
                 List<CityData> similarCities = Arrays.stream(CityData.values())
                                 .filter(c -> c.getMarketTier() == city.getMarketTier()) // Same Economy Tier
+                                .filter(c -> pageIndexPolicyService.isCityReportIndexable(c, app))
                                 .filter(c -> !c.equals(city)) // Exclude current city
                                 .sorted((c1, c2) -> {
                                         // Deterministic sorting based on hash of slugs to stabilize internal linking
@@ -875,9 +896,17 @@ public class ProgrammaticSeoController {
                 model.addAttribute("driverFieldNotes", buildDriverFieldNotes(app, appName, city, scenario));
                 model.addAttribute("driverShiftReports", driverShiftReportService.getReportsForCity(app, citySlug));
 
-                boolean workLevelIndexable = pageIndexPolicyService.isWorkLevelReportIndexable(city, workLevel)
+                boolean workLevelIndexable = pageIndexPolicyService.isWorkLevelReportIndexable(city, workLevel, app)
                                 && scenario.getNetHourly() >= 6.0
                                 && scenario.getNetHourly() <= 45.0;
+                PageEvidenceProfile pageEvidenceProfile = pageEvidenceService.workLevelReport(
+                                app,
+                                appName,
+                                city,
+                                workLevel,
+                                scenario,
+                                workLevelIndexable);
+                model.addAttribute("pageEvidenceProfile", pageEvidenceProfile);
                 if (!workLevelIndexable) {
                         model.addAttribute("noIndex", true);
                         canonicalUrl = parentCanonicalUrl;
@@ -915,6 +944,7 @@ public class ProgrammaticSeoController {
                 // Internal Linking Silo: 3 random cities with same MarketTier
                 List<CityData> similarCities = Arrays.stream(CityData.values())
                                 .filter(c -> c.getMarketTier() == city.getMarketTier()) // Same Economy Tier
+                                .filter(c -> pageIndexPolicyService.isWorkLevelReportIndexable(c, workLevel, app))
                                 .filter(c -> !c.equals(city)) // Exclude current city
                                 .sorted((c1, c2) -> {
                                         // Deterministic sorting based on hash of slugs to stabilize internal linking
@@ -946,9 +976,16 @@ public class ProgrammaticSeoController {
                 String description = buildCityIntentDescription(appName, city, intentPage, scenario, monthYear);
                 String answerHtml = buildCityIntentAnswerHtml(appName, city, intentPage, scenario);
 
-                boolean indexable = pageIndexPolicyService.isCityReportIndexable(city)
+                boolean indexable = pageIndexPolicyService.isCityIntentPageIndexable(city, app, intentPage)
                                 && scenario.getNetHourly() >= 6.0
                                 && scenario.getNetHourly() <= 45.0;
+                PageEvidenceProfile pageEvidenceProfile = pageEvidenceService.intentReport(
+                                app,
+                                appName,
+                                city,
+                                intentPage,
+                                scenario,
+                                indexable);
                 if (!indexable) {
                         model.addAttribute("noIndex", true);
                         canonicalUrl = String.format("%s/salary/%s", AppConstants.BASE_URL, app);
@@ -965,6 +1002,7 @@ public class ProgrammaticSeoController {
                 model.addAttribute("bestCitiesUrl", String.format("/best-cities/%s", app));
                 model.addAttribute("driverFieldNotes", buildDriverFieldNotes(app, appName, city, scenario));
                 model.addAttribute("driverShiftReports", driverShiftReportService.getReportsForCity(app, city.getSlug()));
+                model.addAttribute("pageEvidenceProfile", pageEvidenceProfile);
                 model.addAttribute("intentMetrics", buildCityIntentMetrics(city, intentPage, scenario));
                 model.addAttribute("intentEvidencePatterns",
                                 buildCityIntentEvidencePatterns(app, appName, city, intentPage, scenario));
@@ -1750,7 +1788,8 @@ public class ProgrammaticSeoController {
                                 CityScenario uberScenario = generateScenarioByWorkLevel(city, "uber", WorkLevel.SIDE_HUSTLE);
                                 CityScenario doordashScenario = generateScenarioByWorkLevel(city, "doordash",
                                                 WorkLevel.SIDE_HUSTLE);
-                                String comparisonUrl = dataLayerService.hasRichLocalData(city.getSlug())
+                                String comparisonUrl = pageIndexPolicyService.isCityReportIndexable(city, "uber")
+                                                && pageIndexPolicyService.isCityReportIndexable(city, "doordash")
                                                 ? String.format("%s/compare/%s/uber-vs-doordash",
                                                                 AppConstants.BASE_URL,
                                                                 city.getSlug())
@@ -2496,7 +2535,7 @@ public class ProgrammaticSeoController {
                         String officialCoverageFaqAnswer,
                         Model model) {
                 List<CityData> coveredCities = Arrays.stream(CityData.values())
-                                .filter(pageIndexPolicyService::isCityReportIndexable)
+                                .filter(city -> pageIndexPolicyService.isCityReportIndexable(city, app))
                                 .sorted((left, right) -> left.getCityName().compareTo(right.getCityName()))
                                 .collect(Collectors.toList());
 

@@ -82,6 +82,18 @@ public class CityRichContentRepository {
         return city.isPresent() && city.get().workLevels() != null && city.get().workLevels().containsKey(workLevelSlug);
     }
 
+    public boolean hasRichCitedContent(String citySlug) {
+        return sourceCount(citySlug) >= 2;
+    }
+
+    public int sourceCount(String citySlug) {
+        return findBySlug(citySlug)
+                .map(CityRichContent::seo)
+                .map(CitySeoData::sources)
+                .map(List::size)
+                .orElse(0);
+    }
+
     public Collection<CityRichContent> findAll() {
         return cityContentBySlug.values();
     }
@@ -292,4 +304,3 @@ public class CityRichContentRepository {
         return value == null || value.isBlank();
     }
 }
-

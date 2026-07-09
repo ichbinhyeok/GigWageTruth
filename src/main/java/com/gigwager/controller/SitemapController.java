@@ -4,7 +4,6 @@ import com.gigwager.model.CalculatorIntentPage;
 import com.gigwager.model.CityData;
 import com.gigwager.model.CityIntentPage;
 import com.gigwager.model.WorkLevel;
-import com.gigwager.service.DataLayerService;
 import com.gigwager.service.PageIndexPolicyService;
 import com.gigwager.util.AppConstants;
 import org.springframework.http.MediaType;
@@ -20,11 +19,9 @@ public class SitemapController {
     private static final String EVERGREEN_LASTMOD = "2026-07-06";
 
     private final PageIndexPolicyService pageIndexPolicyService;
-    private final DataLayerService dataLayerService;
 
-    public SitemapController(PageIndexPolicyService pageIndexPolicyService, DataLayerService dataLayerService) {
+    public SitemapController(PageIndexPolicyService pageIndexPolicyService) {
         this.pageIndexPolicyService = pageIndexPolicyService;
-        this.dataLayerService = dataLayerService;
     }
 
     @GetMapping(value = "/sitemap.xml", produces = MediaType.APPLICATION_XML_VALUE)
@@ -125,10 +122,11 @@ public class SitemapController {
     private void addCityUrls(StringBuilder xml) {
         for (String app : new String[] { "uber", "doordash" }) {
             for (CityData city : CityData.values()) {
-                if (pageIndexPolicyService.isCityReportIndexable(city)) {
+                if (pageIndexPolicyService.isCityReportIndexable(city, app)) {
                     addUrl(xml, "/salary/" + app + "/" + city.getSlug(), CITY_DATA_LASTMOD);
 
-                    if (app.equals("uber") && dataLayerService.hasRichLocalData(city.getSlug())) {
+                    if (app.equals("uber")
+                            && pageIndexPolicyService.isCityReportIndexable(city, "doordash")) {
                         addUrl(xml, "/compare/" + city.getSlug() + "/uber-vs-doordash", CITY_DATA_LASTMOD);
                     }
                 }
@@ -146,16 +144,16 @@ public class SitemapController {
     private void addLongtailUrls(StringBuilder xml) {
         for (String app : new String[] { "uber", "doordash" }) {
             for (CityData city : CityData.values()) {
-                if (pageIndexPolicyService.isCityReportIndexable(city)) {
+                if (pageIndexPolicyService.isCityReportIndexable(city, app)) {
                     for (WorkLevel workLevel : WorkLevel.values()) {
-                        if (pageIndexPolicyService.isWorkLevelReportIndexable(city, workLevel)) {
+                        if (pageIndexPolicyService.isWorkLevelReportIndexable(city, workLevel, app)) {
                             addUrl(xml, "/salary/" + app + "/" + city.getSlug() + "/" + workLevel.getSlug(),
                                     CITY_DATA_LASTMOD);
                         }
                     }
 
                     for (CityIntentPage intentPage : CityIntentPage.values()) {
-                        if (intentPage.isSupportedForApp(app)) {
+                        if (pageIndexPolicyService.isCityIntentPageIndexable(city, app, intentPage)) {
                             addUrl(xml, "/salary/" + app + "/" + city.getSlug() + "/" + intentPage.getSlug(),
                                     CITY_DATA_LASTMOD);
                         }
