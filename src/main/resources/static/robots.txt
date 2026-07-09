@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Sitemap: https://gigverdict.com/sitemap.xml
+Sitemap: https://gigverdict.com/sitemap-index.xml
 Sitemap: https://gigverdict.com/sitemap-core.xml
 Sitemap: https://gigverdict.com/sitemap-reports.xml
 Sitemap: https://gigverdict.com/sitemap-city.xml

@@ -289,7 +289,22 @@ public class OrganicMonitoringRegressionTest {
 
     @Test
     public void sitemapShouldStageCoreReportsCityAndLongtailUrls() throws Exception {
-        String sitemapIndex = mockMvc.perform(get("/sitemap.xml"))
+        String sitemap = mockMvc.perform(get("/sitemap.xml"))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+        assertTrue(sitemap.contains("<urlset"), "Root sitemap should expose page URLs directly for GSC");
+        assertTrue(sitemap.contains("/doordash/earnings-calculator"),
+                "Root sitemap should include high-intent calculator pages");
+        assertTrue(sitemap.contains("/uber/pay-calculator"),
+                "Root sitemap should include Uber calculator intent pages");
+        assertTrue(sitemap.contains("/reports/doordash-driver-shift-evidence-2026"),
+                "Root sitemap should include evidence reports");
+        assertTrue(sitemap.contains("/salary/doordash/denver/after-gas"),
+                "Root sitemap should include city intent pages");
+
+        String sitemapIndex = mockMvc.perform(get("/sitemap-index.xml"))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse()

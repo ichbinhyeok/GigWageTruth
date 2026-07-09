@@ -38,7 +38,16 @@ public class SitemapXmlTest {
                                 .andExpect(content().contentTypeCompatibleWith("application/xml"))
                                 .andReturn();
 
-                String sitemapIndex = result.getResponse().getContentAsString();
+                String rootSitemap = result.getResponse().getContentAsString();
+                org.w3c.dom.Document rootDoc = parseXml(rootSitemap);
+
+                assertNotNull(rootDoc.getDocumentElement(), "Root element should not be null");
+                assertEquals("urlset", localName(rootDoc));
+
+                NodeList rootUrls = rootDoc.getElementsByTagName("url");
+                assertTrue(rootUrls.getLength() >= 10, "Root sitemap should expose page URLs directly for GSC");
+
+                String sitemapIndex = readPath("/sitemap-index.xml");
                 org.w3c.dom.Document indexDoc = parseXml(sitemapIndex);
 
                 assertNotNull(indexDoc.getDocumentElement(), "Root element should not be null");
@@ -51,7 +60,7 @@ public class SitemapXmlTest {
                 assertTrue(sitemapIndex.contains("/sitemap-city.xml"), "Sitemap index should contain city sitemap");
                 assertTrue(sitemapIndex.contains("/sitemap-longtail.xml"), "Sitemap index should contain longtail sitemap");
 
-                String xmlContent = readChildSitemaps(sitemapIndex);
+                String xmlContent = rootSitemap + "\n" + readChildSitemaps(sitemapIndex);
                 org.w3c.dom.Document coreDoc = parseXml(readPath("/sitemap-core.xml"));
                 assertEquals("urlset", localName(coreDoc));
 

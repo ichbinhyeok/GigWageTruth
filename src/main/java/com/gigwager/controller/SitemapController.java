@@ -28,6 +28,16 @@ public class SitemapController {
     }
 
     @GetMapping(value = "/sitemap.xml", produces = MediaType.APPLICATION_XML_VALUE)
+    public String sitemap() {
+        StringBuilder xml = startUrlset();
+        addCoreUrls(xml);
+        addReportUrls(xml);
+        addCityUrls(xml);
+        addLongtailUrls(xml);
+        return endUrlset(xml);
+    }
+
+    @GetMapping(value = "/sitemap-index.xml", produces = MediaType.APPLICATION_XML_VALUE)
     public String sitemapIndex() {
         StringBuilder xml = new StringBuilder();
         xml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
@@ -43,7 +53,11 @@ public class SitemapController {
     @GetMapping(value = "/sitemap-core.xml", produces = MediaType.APPLICATION_XML_VALUE)
     public String coreSitemap() {
         StringBuilder xml = startUrlset();
+        addCoreUrls(xml);
+        return endUrlset(xml);
+    }
 
+    private void addCoreUrls(StringBuilder xml) {
         addUrl(xml, "/", CORE_LASTMOD);
         addUrl(xml, "/uber", CORE_LASTMOD);
         addUrl(xml, "/doordash", CORE_LASTMOD);
@@ -76,14 +90,16 @@ public class SitemapController {
         addUrl(xml, "/blog/uber-vs-doordash", EVERGREEN_LASTMOD);
         addUrl(xml, "/blog/hidden-costs", EVERGREEN_LASTMOD);
         addUrl(xml, "/methodology", EVERGREEN_LASTMOD);
-
-        return endUrlset(xml);
     }
 
     @GetMapping(value = "/sitemap-reports.xml", produces = MediaType.APPLICATION_XML_VALUE)
     public String reportSitemap() {
         StringBuilder xml = startUrlset();
+        addReportUrls(xml);
+        return endUrlset(xml);
+    }
 
+    private void addReportUrls(StringBuilder xml) {
         addUrl(xml, "/reports/uber-driver-hourly-earnings-2026", REPORT_LASTMOD);
         addUrl(xml, "/reports/doordash-driver-hourly-pay-2026", REPORT_LASTMOD);
         addUrl(xml, "/reports/doordash-driver-shift-evidence-2026", REPORT_LASTMOD);
@@ -97,14 +113,16 @@ public class SitemapController {
         addUrl(xml, "/doordash/can-you-make-200-a-day", REPORT_LASTMOD);
         addUrl(xml, "/doordash/after-gas", REPORT_LASTMOD);
         addUrl(xml, "/doordash/pay-per-mile", REPORT_LASTMOD);
-
-        return endUrlset(xml);
     }
 
     @GetMapping(value = "/sitemap-city.xml", produces = MediaType.APPLICATION_XML_VALUE)
     public String citySitemap() {
         StringBuilder xml = startUrlset();
+        addCityUrls(xml);
+        return endUrlset(xml);
+    }
 
+    private void addCityUrls(StringBuilder xml) {
         for (String app : new String[] { "uber", "doordash" }) {
             for (CityData city : CityData.values()) {
                 if (pageIndexPolicyService.isCityReportIndexable(city)) {
@@ -116,14 +134,16 @@ public class SitemapController {
                 }
             }
         }
-
-        return endUrlset(xml);
     }
 
     @GetMapping(value = "/sitemap-longtail.xml", produces = MediaType.APPLICATION_XML_VALUE)
     public String longtailSitemap() {
         StringBuilder xml = startUrlset();
+        addLongtailUrls(xml);
+        return endUrlset(xml);
+    }
 
+    private void addLongtailUrls(StringBuilder xml) {
         for (String app : new String[] { "uber", "doordash" }) {
             for (CityData city : CityData.values()) {
                 if (pageIndexPolicyService.isCityReportIndexable(city)) {
@@ -143,8 +163,6 @@ public class SitemapController {
                 }
             }
         }
-
-        return endUrlset(xml);
     }
 
     private StringBuilder startUrlset() {
