@@ -501,21 +501,22 @@ public class ProgrammaticSeoController {
                 String title;
                 String description;
                 if (app.equals("doordash")) {
-                        title = String.format("Highest-Paying Cities for DoorDash %d: Best Cities to Dash",
+                        title = String.format("Best Cities for DoorDash Drivers %d: Highest Net Pay",
                                         currentYear);
                         description = String.format(
-                                        "Best cities to DoorDash in %d ranked by estimated net hourly pay after expenses. %s leads at about $%.2f/hr; compare %d markets.",
+                                        "Best cities for DoorDash drivers in %d ranked by estimated net hourly pay after gas, mileage, and tax assumptions. %s leads at about $%.2f/hr; compare %d evidence-backed markets.",
                                         currentYear,
                                         topRankedCity.city().getCityName(),
                                         topRankedCity.netHourly(),
                                         rankedCities.size());
                 } else {
-                        title = String.format("Highest-Paying Cities for %s Drivers %d",
+                        title = String.format("Best Cities for %s Drivers %d: Highest Net Pay",
                                         appName,
                                         currentYear);
                         description = String.format(
-                                        "Ranked by estimated %s driver earnings after mileage and self-employment tax. %s leads at about $%.2f/hr net; each city page includes an adjustable calculator.",
+                                        "Best cities for %s drivers in %d ranked by estimated net hourly pay after mileage and self-employment tax. %s leads at about $%.2f/hr net; each city page includes an adjustable calculator.",
                                         appName,
+                                        currentYear,
                                         topRankedCity.city().getCityName(),
                                         topRankedCity.netHourly());
                 }
@@ -587,18 +588,20 @@ public class ProgrammaticSeoController {
                 String title;
                 String description;
                 if (nearlyTied) {
-                        title = String.format("Uber Eats vs DoorDash in %s: Which Pays More?",
+                        title = String.format("Uber Eats vs DoorDash %s: Same Net Pay After Gas",
                                         city.getCityName());
                         description = String.format(
-                                        "Uber Eats vs DoorDash in %s: delivery-style side-hustle estimates land near $%.2f/hr net after mileage and tax assumptions. Updated %s.",
+                                        "Uber Eats vs DoorDash in %s are effectively tied at about $%.2f/hr net after mileage, gas, and tax assumptions. Compare hours, miles, and city evidence. Updated %s.",
                                         city.getCityName(),
                                         winningNetHourly,
                                         monthYear);
                 } else {
-                        title = String.format("Uber Eats vs DoorDash in %s: Which Pays More?",
-                                        city.getCityName());
+                        title = String.format("Uber Eats vs DoorDash %s: %s by $%.2f/hr Net",
+                                        city.getCityName(),
+                                        winningAppName,
+                                        netHourlyGap);
                         description = String.format(
-                                        "Uber Eats vs DoorDash in %s: current delivery-style estimates put %s at $%.2f/hr net, about $%.2f/hr ahead of %s after mileage and tax assumptions. Updated %s.",
+                                        "Uber Eats vs DoorDash in %s: %s leads at about $%.2f/hr net, $%.2f/hr ahead of %s after mileage, gas, and tax assumptions. Updated %s.",
                                         city.getCityName(),
                                         winningAppName,
                                         winningNetHourly,
@@ -607,6 +610,13 @@ public class ProgrammaticSeoController {
                                         monthYear);
                 }
                 String canonicalUrl = String.format("%s/compare/%s/uber-vs-doordash", AppConstants.BASE_URL, citySlug);
+                PageEvidenceProfile pageEvidenceProfile = pageEvidenceService.comparisonReport(
+                                city,
+                                uberScenario,
+                                doordashScenario,
+                                winningAppName,
+                                netHourlyGap,
+                                true);
 
                 model.addAttribute("city", city);
                 model.addAttribute("uberScenario", uberScenario);
@@ -619,6 +629,7 @@ public class ProgrammaticSeoController {
                 model.addAttribute("lastUpdated", monthYear);
                 model.addAttribute("localData", dataLayerService.getLocalData(citySlug));
                 model.addAttribute("driverShiftReports", driverShiftReportService.getReportsForCity("doordash", citySlug));
+                model.addAttribute("pageEvidenceProfile", pageEvidenceProfile);
                 model.addAttribute("seoMeta",
                                 new SeoMeta(title, description, canonicalUrl, AppConstants.BASE_URL + "/og-image.jpg"));
 

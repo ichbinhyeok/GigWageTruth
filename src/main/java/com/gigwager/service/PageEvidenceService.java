@@ -76,6 +76,48 @@ public class PageEvidenceService {
         return build(app, city, heading, anchor, indexable);
     }
 
+    public PageEvidenceProfile comparisonReport(
+            CityData city,
+            CityScenario uberScenario,
+            CityScenario doordashScenario,
+            String winningAppName,
+            double netHourlyGap,
+            boolean indexable) {
+        String heading = String.format("%s Uber Eats vs DoorDash evidence check", city.getCityName());
+        String anchor = String.format(
+                "Both apps use the same %s-hour, %s-mile side-hustle baseline, %s local gas context, IRS mileage proxy, and SE tax assumption; the modeled gap is %s/hr net.",
+                uberScenario.getHours(),
+                uberScenario.getMiles(),
+                currency(city.getGasPrice()),
+                currency(netHourlyGap));
+        if (netHourlyGap < 0.25) {
+            anchor = String.format(
+                    "Both apps use the same %s-hour, %s-mile side-hustle baseline, %s local gas context, IRS mileage proxy, and SE tax assumption; the current model is effectively tied.",
+                    uberScenario.getHours(),
+                    uberScenario.getMiles(),
+                    currency(city.getGasPrice()));
+        }
+        PageEvidenceProfile base = build("doordash", city, heading, anchor, indexable);
+        String summary = indexable
+                ? String.format(
+                        "Indexed because the comparison sits on the same cited local dataset as the city reports, then shows Uber and DoorDash side by side. Current model winner: %s.",
+                        netHourlyGap < 0.25 ? "effectively tied" : winningAppName)
+                : base.summary();
+        return new PageEvidenceProfile(
+                base.heading(),
+                base.confidenceLabel(),
+                base.confidenceTone(),
+                summary,
+                base.sourceCount(),
+                base.driverReportCount(),
+                base.citySpecificDriverReportCount(),
+                base.lastVerifiedAt(),
+                base.methodologyVersion(),
+                base.uniqueDataAnchor(),
+                base.richCitedContent(),
+                base.indexable());
+    }
+
     private PageEvidenceProfile build(
             String app,
             CityData city,

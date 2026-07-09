@@ -3,6 +3,7 @@
 @import com.gigwager.model.CityLocalData
 @import com.gigwager.model.CityScenario
 @import com.gigwager.model.DriverShiftReport
+@import com.gigwager.model.PageEvidenceProfile
 @import com.gigwager.util.AppConstants
 @import java.util.List
 
@@ -17,6 +18,7 @@
 @param String lastUpdated
 @param CityLocalData localData
 @param List<DriverShiftReport> driverShiftReports = java.util.List.of()
+@param PageEvidenceProfile pageEvidenceProfile = null
 @param SeoMeta seoMeta
 @param Boolean noIndex = false
 
@@ -31,7 +33,7 @@
                         ${city.getCityName()} Comparison
                     </span>
                     <h1 class="text-4xl lg:text-5xl font-black text-slate-900 mb-6 tracking-tight">
-                        Uber Eats vs DoorDash Pay in ${city.getCityName()} After Expenses
+                        Uber Eats vs DoorDash in ${city.getCityName()}: ${winningAppName} ${nearlyTied ? "Is Basically Tied" : "Leads After Expenses"}
                     </h1>
                     <p class="text-xl text-slate-600 max-w-2xl mx-auto">
                         @if (nearlyTied)
@@ -39,6 +41,9 @@
                         @else
                             Current delivery-style estimates show <strong>${winningAppName}</strong> ahead by <strong>$${String.format("%.2f", netHourlyGap)}/hr net</strong> in ${city.getCityName()} after IRS mileage proxy and self-employment tax assumptions.
                         @endif
+                    </p>
+                    <p class="text-sm text-slate-500 max-w-2xl mx-auto mt-3">
+                        Quick answer: Uber models at <strong>$${String.format("%.2f", uberScenario.getNetHourly())}/hr net</strong> and DoorDash models at <strong>$${String.format("%.2f", doordashScenario.getNetHourly())}/hr net</strong> in ${city.getCityName()} after mileage and tax assumptions.
                     </p>
                 </div>
 
@@ -48,6 +53,11 @@
                         The Uber column is the closest GigVerdict model for Uber-platform earning power; the delivery decision still depends on restaurant density, tips, active time, and mileage.
                     </p>
                 </div>
+
+                @template.components.page_evidence_profile(
+                    pageEvidenceProfile = pageEvidenceProfile,
+                    sectionClass = "mb-10"
+                )
 
                 <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-10">
                     <a href="/uber?gross=${uberScenario.getGrossWeekly()}&miles=${uberScenario.getMiles()}&hours=${uberScenario.getHours()}&gasPrice=${city.getGasPrice()}" class="rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-bold px-5 py-4 transition-colors">

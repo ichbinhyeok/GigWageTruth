@@ -36,10 +36,11 @@
                 <div class="text-center mb-12">
                     <h1 class="text-4xl lg:text-5xl font-black text-slate-900 mb-6 tracking-tight">
                         @if(app.equals("doordash"))
-                            Highest-Paying Cities for DoorDash in ${currentYear}
-                            <span class="block text-emerald-600">Best Cities to Dash After Expenses</span>
+                            Best Cities for DoorDash Drivers in ${currentYear}
+                            <span class="block text-emerald-600">Highest Net Pay After Gas and Mileage</span>
                         @else
-                            Highest-Paying Cities for ${appName} Drivers in ${currentYear}
+                            Best Cities for ${appName} Drivers in ${currentYear}
+                            <span class="block text-emerald-600">Highest Net Pay After Expenses</span>
                         @endif
                     </h1>
                     <p class="text-xl text-slate-600 max-w-2xl mx-auto" id="serp-answer">

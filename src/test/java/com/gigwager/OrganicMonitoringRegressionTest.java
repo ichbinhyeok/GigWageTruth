@@ -700,6 +700,18 @@ public class OrganicMonitoringRegressionTest {
         assertTrue(appComparisonHtml.contains("Uber model net hourly"),
                 "App-comparison page should show the comparison app metric");
 
+        MvcResult compareResult = mockMvc.perform(get("/compare/chicago/uber-vs-doordash"))
+                .andExpect(status().isOk())
+                .andReturn();
+        Document compareDoc = Jsoup.parse(compareResult.getResponse().getContentAsString(),
+                AppConstants.BASE_URL + "/compare/chicago/uber-vs-doordash");
+        assertTrue(compareDoc.title().contains("Uber Eats vs DoorDash Chicago"),
+                "Standalone compare page title should be concise enough for CTR testing");
+        assertTrue(compareDoc.text().contains("Quick answer: Uber models"),
+                "Standalone compare page should expose a numeric quick answer near the top");
+        assertTrue(compareDoc.text().contains("Evidence profile"),
+                "Standalone compare page should expose an evidence profile");
+
         mockMvc.perform(get("/salary/uber/chicago/uber-eats-vs-doordash"))
                 .andExpect(status().isNotFound());
 
@@ -904,12 +916,12 @@ public class OrganicMonitoringRegressionTest {
                 .andReturn();
         Document bestCitiesDoc = Jsoup.parse(bestCitiesResult.getResponse().getContentAsString(),
                 AppConstants.BASE_URL + "/best-cities/doordash");
-        assertTrue(bestCitiesDoc.title().contains("Highest-Paying Cities"),
-                "Best-cities page title should frame the page as an earnings ranking");
-        assertTrue(bestCitiesDoc.title().contains("Best Cities to Dash"),
+        assertTrue(bestCitiesDoc.title().contains("Best Cities for DoorDash Drivers"),
+                "Best-cities page title should target driver city queries");
+        assertTrue(bestCitiesDoc.title().contains("Highest Net Pay"),
                 "DoorDash best-cities title should target click-driven dash-city queries");
-        assertTrue(firstH1(bestCitiesDoc).contains("Highest-Paying Cities"),
-                "Best-cities page H1 should frame the page as an earnings ranking");
+        assertTrue(firstH1(bestCitiesDoc).contains("Best Cities for DoorDash Drivers"),
+                "Best-cities page H1 should target best-city driver intent");
         assertTrue(bestCitiesDoc.text().contains("highest paying DoorDash cities near me"),
                 "DoorDash best-cities page should answer near-me earnings ranking intent");
         assertTrue(bestCitiesDoc.text().contains("Best cities to DoorDash near me"),
