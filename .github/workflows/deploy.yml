@@ -18,6 +18,18 @@ jobs:
           java-version: '17'
           cache: gradle
 
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Verify compiled production CSS
+        run: |
+          npm ci
+          npm run build:css
+          git diff --exit-code -- src/main/resources/static/css/app.css
+
       - name: Run test suite (includes pSEO duplication guard)
         run: |
           chmod +x ./gradlew

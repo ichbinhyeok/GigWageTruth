@@ -5,6 +5,10 @@
 @import com.gigwager.model.DriverShiftReport
 @import com.gigwager.model.PageEvidenceProfile
 @import com.gigwager.model.SearchResultPattern
+@import com.gigwager.model.content.CityRichContent
+@import com.gigwager.model.content.PersonaQuote
+@import com.gigwager.model.content.SourceCitation
+@import com.gigwager.model.content.WorkLevelRichContent
 @import com.gigwager.util.AppConstants
 @import java.util.List
 @param SeoMeta seoMeta
@@ -35,6 +39,8 @@
 @param List<DriverShiftReport> driverShiftReports = java.util.List.of()
 @param List<SearchResultPattern> searchResultPatterns = java.util.List.of()
 @param PageEvidenceProfile pageEvidenceProfile = null
+@param CityRichContent localRichContent = null
+@param WorkLevelRichContent localSideHustleContent = null
 @template.layout.main(
     noIndex = noIndex,
     seoMeta = seoMeta,
@@ -322,6 +328,48 @@
                     </div>
                 @endif
             </section>
+
+            @if(localRichContent != null && localRichContent.seo() != null && localSideHustleContent != null)
+                <section class="bg-emerald-50 rounded-2xl p-8 shadow-sm border border-emerald-100">
+                    <p class="text-xs font-black uppercase tracking-[0.16em] text-emerald-700 mb-2">City operating evidence</p>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4">The ${city.getCityName()} conditions behind this estimate</h2>
+                    <p class="text-lg text-slate-800 leading-relaxed mb-4">${localRichContent.seo().heroHook()}</p>
+                    <p class="text-slate-700 leading-relaxed mb-6">${localSideHustleContent.localStrategyText()}</p>
+                    @if(localSideHustleContent.painPoints() != null && !localSideHustleContent.painPoints().isEmpty())
+                        <div class="grid md:grid-cols-3 gap-3 mb-6">
+                            @for(String painPoint : localSideHustleContent.painPoints())
+                                <div class="bg-white rounded-2xl border border-emerald-100 px-5 py-4 text-sm font-semibold text-slate-700">
+                                    ${painPoint}
+                                </div>
+                            @endfor
+                        </div>
+                    @endif
+                    @if(localSideHustleContent.personaQuotes() != null && !localSideHustleContent.personaQuotes().isEmpty())
+                        <div class="grid md:grid-cols-2 gap-4 mb-6">
+                            @for(PersonaQuote quote : localSideHustleContent.personaQuotes())
+                                <blockquote class="bg-slate-950 text-white rounded-2xl px-5 py-5">
+                                    <p class="leading-relaxed text-slate-200 mb-3">&ldquo;${quote.quote()}&rdquo;</p>
+                                    <footer class="text-xs font-bold uppercase tracking-[0.14em] text-emerald-300">
+                                        ${quote.displayName()} | ${quote.attributionType().name().toLowerCase().replace('_', ' ')}
+                                    </footer>
+                                </blockquote>
+                            @endfor
+                        </div>
+                    @endif
+                    @if(localRichContent.seo().sources() != null && !localRichContent.seo().sources().isEmpty())
+                        <div class="border-t border-emerald-200 pt-5">
+                            <p class="text-xs font-black uppercase tracking-[0.14em] text-emerald-800 mb-3">Local sources checked</p>
+                            <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm">
+                                @for(SourceCitation source : localRichContent.seo().sources())
+                                    <a href="${source.url()}" rel="noopener noreferrer" target="_blank" class="font-semibold text-emerald-800 underline decoration-emerald-300 underline-offset-4 hover:text-emerald-950">
+                                        ${source.publisher()}: ${source.title()}
+                                    </a>
+                                @endfor
+                            </div>
+                        </div>
+                    @endif
+                </section>
+            @endif
             
             <!-- Internal Link: The Hidden Truth (Orphan Defense) -->
             <section class="bg-red-50 rounded-2xl p-8 border-2 border-red-200 shadow-sm relative overflow-hidden group" data-nosnippet>

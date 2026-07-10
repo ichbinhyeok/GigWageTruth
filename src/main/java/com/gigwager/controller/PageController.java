@@ -52,7 +52,7 @@ public class PageController {
 
     @GetMapping("/taxes")
     public String taxes(Model model) {
-        model.addAttribute("customTitle", "Gig Worker Tax Guide 2026: Don't Overpay the IRS");
+        model.addAttribute("customTitle", "Gig Worker Taxes 2026: Quarterly Plan & Deductions");
         return "clusters/taxes";
     }
 

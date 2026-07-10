@@ -5,7 +5,7 @@
     seoMeta = new com.gigwager.model.SeoMeta(
         "GigVerdict - Weekly Take-Home Calculator for Gig Drivers",
         "See what you actually keep from Uber or DoorDash after mileage and self-employment tax, then decide what to fix next.",
-        AppConstants.BASE_URL,
+        AppConstants.BASE_URL + "/",
         AppConstants.BASE_URL + "/og-image.jpg"
     ),
     content = @`

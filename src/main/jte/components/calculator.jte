@@ -20,7 +20,6 @@
 @param Double initialCustomMaintenance = 0.12
 @param Double initialCustomDepreciation = 0.15
 @param Content content
-@param String switchAction
 @param String activeTabName
 @param String verdictContainerId
 
@@ -120,14 +119,14 @@
                          
                          <!-- App Switcher Tabs -->
                          <div class="flex p-1 bg-slate-100 rounded-xl mb-8">
-                            <button @click="${activeTabName.equals("uber") ? "" : switchAction}" 
+                            <a href="/uber" aria-current="${activeTabName.equals("uber") ? "page" : "false"}"
                                 class="flex-1 py-3 text-sm font-bold rounded-lg flex items-center justify-center gap-2 transition-all ${activeTabName.equals("uber") ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-900 hover:bg-white/50"}">
                                 <span>Ride</span> Uber / Lyft
-                            </button>
-                            <button @click="${activeTabName.equals("doordash") ? "" : switchAction}" 
+                            </a>
+                            <a href="/doordash" aria-current="${activeTabName.equals("doordash") ? "page" : "false"}"
                                 class="flex-1 py-3 text-sm font-bold rounded-lg flex items-center justify-center gap-2 transition-all ${activeTabName.equals("doordash") ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-900 hover:bg-white/50"}">
                                 <span>Deliver</span> DoorDash
-                            </button>
+                            </a>
                          </div>
 
                          <h3 class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2">

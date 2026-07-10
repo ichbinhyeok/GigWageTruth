@@ -34,11 +34,11 @@
     content = @`
         <script src="/js/calculator-core.js?v=${AppConstants.CACHE_VERSION}"></script>
 
-        <!-- Global State for Tab Switching -->
-        <div x-data="{ activeTab: '${app}' }" @toggle-app="activeTab = $event.detail" class="min-h-screen bg-slate-50">
+        <div class="min-h-screen bg-slate-50">
 
             <!-- Uber Container -->
-            <div x-show="activeTab === 'uber'" style="display: none;">
+            @if(app.equals("uber"))
+            <div>
                 @template.components.calculator(
                     appName = "Uber",
                     appSlug = "uber",
@@ -59,7 +59,6 @@
                     initialCustomMpg = initialCustomMpg,
                     initialCustomMaintenance = initialCustomMaintenance,
                     initialCustomDepreciation = initialCustomDepreciation,
-                    switchAction = "$dispatch('toggle-app', 'doordash')",
                     activeTabName = "uber",
                     verdictContainerId = "uber-verdict-container",
                     content = @`
@@ -245,7 +244,8 @@
             </div>
 
             <!-- DoorDash Container -->
-            <div x-show="activeTab === 'doordash'" style="display: none;">
+            @else
+            <div>
                 @template.components.calculator(
                     appName = "DoorDash",
                     appSlug = "doordash",
@@ -266,7 +266,6 @@
                     initialCustomMpg = initialCustomMpg,
                     initialCustomMaintenance = initialCustomMaintenance,
                     initialCustomDepreciation = initialCustomDepreciation,
-                    switchAction = "$dispatch('toggle-app', 'uber')",
                     activeTabName = "doordash",
                     verdictContainerId = "doordash-verdict-container",
                     content = @`
@@ -289,7 +288,7 @@
                             </div>
 
                             <section>
-                                <h2 class="text-2xl font-bold text-slate-900 mb-6">Dasher FAQ</h2>
+                                <h2 class="text-2xl font-bold text-slate-900 mb-6">Frequently Asked Questions</h2>
                                 <div class="space-y-4">
                                     <div x-data="{ open: false }" class="border border-slate-200 rounded-xl bg-white overflow-hidden">
                                         <button @click="open = !open" class="flex justify-between items-center w-full px-6 py-4 text-left hover:bg-slate-50 transition">
@@ -396,6 +395,7 @@
                                      </a>
                                  </div>
                             </div>
+
                         </article>
 
                         <script type="application/ld+json">
@@ -449,6 +449,7 @@
                     `
                 )
             </div>
+            @endif
 
         </div>
     `

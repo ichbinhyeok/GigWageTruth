@@ -739,6 +739,11 @@ public class ProgrammaticSeoController {
                                 city,
                                 featuredScenario,
                                 cityIndexable);
+                CityRichContent cityReportRichContent = cityRichContentRepository.findBySlug(citySlug).orElse(null);
+                WorkLevelRichContent cityReportSideHustleContent = cityReportRichContent != null
+                                && cityReportRichContent.workLevels() != null
+                                                ? cityReportRichContent.workLevels().get("side-hustle")
+                                                : null;
 
                 model.addAttribute("app", app);
                 model.addAttribute("appName", appName);
@@ -769,6 +774,8 @@ public class ProgrammaticSeoController {
                 model.addAttribute("safeMarketDescription", htmlSanitizerService.sanitize(city.getMarketDescription()));
                 model.addAttribute("cityFaqJsonLd", buildCityFaqJsonLd(appName, city, featuredScenario));
                 model.addAttribute("pageEvidenceProfile", pageEvidenceProfile);
+                model.addAttribute("localRichContent", cityReportRichContent);
+                model.addAttribute("localSideHustleContent", cityReportSideHustleContent);
 
                 if (!cityIndexable) {
                         model.addAttribute("noIndex", true);
@@ -1020,6 +1027,11 @@ public class ProgrammaticSeoController {
                 String title = buildCityIntentTitle(appName, city, intentPage, scenario);
                 String description = buildCityIntentDescription(appName, city, intentPage, scenario, monthYear);
                 String answerHtml = buildCityIntentAnswerHtml(appName, city, intentPage, scenario);
+                CityRichContent localRichContent = cityRichContentRepository.findBySlug(city.getSlug()).orElse(null);
+                WorkLevelRichContent localSideHustleContent = localRichContent != null
+                                && localRichContent.workLevels() != null
+                                                ? localRichContent.workLevels().get("side-hustle")
+                                                : null;
 
                 boolean indexable = pageIndexPolicyService.isCityIntentPageIndexable(city, app, intentPage)
                                 && scenario.getNetHourly() >= 6.0
@@ -1060,6 +1072,8 @@ public class ProgrammaticSeoController {
                 model.addAttribute("daily200Miles", milesForHours(scenario, hoursToNetTarget(scenario, 200)));
                 model.addAttribute("daily200Gross", grossForHours(scenario, hoursToNetTarget(scenario, 200)));
                 model.addAttribute("answerHtml", answerHtml);
+                model.addAttribute("localRichContent", localRichContent);
+                model.addAttribute("localSideHustleContent", localSideHustleContent);
                 model.addAttribute("cityIntentJsonLd",
                                 buildCityIntentJsonLd(appName, city, intentPage, scenario, canonicalUrl));
                 model.addAttribute("seoMeta", new SeoMeta(title, description, canonicalUrl,

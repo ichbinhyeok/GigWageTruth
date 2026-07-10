@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "scripts": {
+    "build:css": "npx --yes tailwindcss@3.4.17 -c tailwind.config.js -i src/main/resources/static/css/tailwind-input.css -o src/main/resources/static/css/app.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.17"
+  }
+}
