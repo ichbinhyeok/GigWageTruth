@@ -535,8 +535,8 @@ public class ProgrammaticSeoController {
                 String title;
                 String description;
                 if (app.equals("doordash")) {
-                        title = String.format("Best Places to DoorDash %d: %d Cities Ranked by Net Pay",
-                                        currentYear, rankedCities.size());
+                        title = String.format("Best Cities for DoorDash Drivers %d: Highest Net Pay | Best Places",
+                                        currentYear);
                         description = String.format(
                                         "Find the best places to DoorDash in %d, ranked by estimated net hourly pay after gas, mileage, and tax assumptions. Start with %s at about $%.2f/hr net, then compare %d city markets and hours to $100.",
                                         currentYear,
