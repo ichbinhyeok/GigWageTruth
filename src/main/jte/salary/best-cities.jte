@@ -133,6 +133,40 @@
                         </div>
                     </section>
 
+                    <section class="bg-white rounded-3xl border border-slate-200 p-6 mb-8 text-left shadow-sm">
+                        <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-700 mb-2">Exact DoorDash earnings answers</p>
+                        <h2 class="text-2xl font-black text-slate-900 mb-3">Open the answer that matches your shift</h2>
+                        <p class="text-slate-600 max-w-3xl mb-5">
+                            “Best city” is only one part of the decision. These focused pages answer the shift-length and take-home questions drivers usually ask next, using the same gross-to-net assumptions as this ranking.
+                        </p>
+                        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                            <a href="/doordash/how-much-can-you-make-in-4-hours" class="rounded-2xl border border-slate-200 px-4 py-4 hover:border-emerald-300 hover:bg-emerald-50 transition-colors">
+                                <strong class="block text-slate-900">How much in 4 hours?</strong>
+                                <span class="text-sm text-slate-600">Short-shift gross and net estimate.</span>
+                            </a>
+                            <a href="/doordash/how-much-can-you-make-in-6-hours" class="rounded-2xl border border-slate-200 px-4 py-4 hover:border-emerald-300 hover:bg-emerald-50 transition-colors">
+                                <strong class="block text-slate-900">How much in 6 hours?</strong>
+                                <span class="text-sm text-slate-600">A realistic long peak-window plan.</span>
+                            </a>
+                            <a href="/doordash/how-much-can-you-make-in-a-day" class="rounded-2xl border border-slate-200 px-4 py-4 hover:border-emerald-300 hover:bg-emerald-50 transition-colors">
+                                <strong class="block text-slate-900">How much in one day?</strong>
+                                <span class="text-sm text-slate-600">Full-day gross, net, and weak-window check.</span>
+                            </a>
+                            <a href="/doordash/can-you-make-100-a-day" class="rounded-2xl border border-slate-200 px-4 py-4 hover:border-emerald-300 hover:bg-emerald-50 transition-colors">
+                                <strong class="block text-slate-900">Can you make $100 a day?</strong>
+                                <span class="text-sm text-slate-600">Hours and miles needed after expenses.</span>
+                            </a>
+                            <a href="/doordash/after-gas" class="rounded-2xl border border-slate-200 px-4 py-4 hover:border-emerald-300 hover:bg-emerald-50 transition-colors">
+                                <strong class="block text-slate-900">DoorDash after gas</strong>
+                                <span class="text-sm text-slate-600">Take-home math beyond the payout screen.</span>
+                            </a>
+                            <a href="/doordash/pay-per-mile" class="rounded-2xl border border-slate-200 px-4 py-4 hover:border-emerald-300 hover:bg-emerald-50 transition-colors">
+                                <strong class="block text-slate-900">Best pay per mile</strong>
+                                <span class="text-sm text-slate-600">A floor for rejecting weak offers.</span>
+                            </a>
+                        </div>
+                    </section>
+
                     <section class="bg-slate-900 rounded-3xl p-6 mb-8 text-white">
                         <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-300 mb-2">DoorDash city pay dataset</p>
                         <h2 class="text-3xl font-black mb-4">Not just a list: compare net hourly, hours to $100, weekly net, and local demand signals</h2>
