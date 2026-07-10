@@ -39,7 +39,7 @@
                             Best Cities for DoorDash Drivers in ${currentYear}
                             <span class="block text-emerald-600">Highest Net Pay After Gas and Mileage</span>
                         @else
-                            Best Cities for ${appName} Drivers in ${currentYear}
+                            Best Cities to ${appName} in ${currentYear}
                             <span class="block text-emerald-600">Highest Net Pay After Expenses</span>
                         @endif
                     </h1>

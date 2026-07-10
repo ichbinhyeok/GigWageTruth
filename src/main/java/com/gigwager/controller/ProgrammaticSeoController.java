@@ -535,21 +535,19 @@ public class ProgrammaticSeoController {
                 String title;
                 String description;
                 if (app.equals("doordash")) {
-                        title = String.format("Best Cities for DoorDash Drivers %d: Highest Net Pay",
-                                        currentYear);
+                        title = String.format("Best Places to DoorDash %d: %d Cities Ranked by Net Pay",
+                                        currentYear, rankedCities.size());
                         description = String.format(
-                                        "Best cities for DoorDash drivers in %d ranked by estimated net hourly pay after gas, mileage, and tax assumptions. %s leads at about $%.2f/hr; compare %d evidence-backed markets.",
+                                        "Find the best places to DoorDash in %d, ranked by estimated net hourly pay after gas, mileage, and tax assumptions. Start with %s at about $%.2f/hr net, then compare %d city markets and hours to $100.",
                                         currentYear,
                                         topRankedCity.city().getCityName(),
                                         topRankedCity.netHourly(),
                                         rankedCities.size());
                 } else {
-                        title = String.format("Best Cities for %s Drivers %d: Highest Net Pay",
-                                        appName,
+                        title = String.format("Best Cities to Uber in %d: Driver Net Pay by Market",
                                         currentYear);
                         description = String.format(
-                                        "Best cities for %s drivers in %d ranked by estimated net hourly pay after mileage and self-employment tax. %s leads at about $%.2f/hr net; each city page includes an adjustable calculator.",
-                                        appName,
+                                        "Compare the best cities to Uber in %d using estimated net hourly pay after mileage and self-employment tax. %s leads at about $%.2f/hr; open each market's calculator before you drive.",
                                         currentYear,
                                         topRankedCity.city().getCityName(),
                                         topRankedCity.netHourly());
