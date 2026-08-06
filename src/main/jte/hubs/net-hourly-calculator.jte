@@ -81,7 +81,7 @@
                     
                     <div class="bg-white p-6 rounded-xl border border-slate-200">
                         <h3 class="text-xl font-bold text-slate-900 mb-2">2. How is Net Profit calculated mathematically?</h3>
-                        <p class="text-slate-600">Net Profit = (Gross Earnings) - (Miles Driven x 0.725 IRS Rate) - (Remaining Profit x 0.153 SE Tax Rate). Divide the final result by the hours you were out of your house (not just active app hours) to find your Net Hourly.</p>
+                        <p class="text-slate-600">Modeled take-home = gross earnings minus miles driven × the current $0.76 IRS mileage proxy, then an estimated SE-tax calculation on 92.35% of the remaining profit. Divide by total online/work hours, not only active app hours.</p>
                     </div>
                     
                     <div class="bg-white p-6 rounded-xl border border-slate-200">
@@ -91,7 +91,7 @@
                     
                     <div class="bg-white p-6 rounded-xl border border-slate-200">
                         <h3 class="text-xl font-bold text-slate-900 mb-2">4. Can I write off my car payment instead of mileage?</h3>
-                        <p class="text-slate-600">Usually you must choose between the Standard Mileage Deduction (the 72.5 cents/mile rate) OR the Actual Expense Method (gas receipts, oil, literal depreciation of purchase price). In 95% of gig-driving cases, the Standard Mileage Deduction yields a higher tax break.</p>
+                        <p class="text-slate-600">Taxpayers generally choose between the standard mileage method and eligible actual vehicle expenses for a vehicle and tax year. The better method depends on your eligibility and records; compare both with a qualified tax professional.</p>
                     </div>
 
                     <div class="bg-white p-6 rounded-xl border border-slate-200">

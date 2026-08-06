@@ -538,13 +538,13 @@ public class ProgrammaticSeoController {
                         title = String.format("Best Cities for DoorDash Drivers %d: Highest Net Pay | Best Places",
                                         currentYear);
                         description = String.format(
-                                        "Find the best places to DoorDash in %d, ranked by estimated net hourly pay after gas, mileage, and tax assumptions. Start with %s at about $%.2f/hr net, then compare %d city markets and hours to $100.",
+                                        "Find the best places to DoorDash in %d, ranked by estimated take-home after the current mileage-cost proxy and tax assumptions. Start with %s at about $%.2f/hr, then compare %d city markets and hours to $100.",
                                         currentYear,
                                         topRankedCity.city().getCityName(),
                                         topRankedCity.netHourly(),
                                         rankedCities.size());
                 } else {
-                        title = String.format("Best Cities to Uber in %d: Driver Net Pay by Market",
+                        title = String.format("Best Cities for Uber Drivers in %d, Ranked by Net Pay",
                                         currentYear);
                         description = String.format(
                                         "Compare the best cities to Uber in %d using estimated net hourly pay after mileage and self-employment tax. %s leads at about $%.2f/hr; open each market's calculator before you drive.",
@@ -697,28 +697,43 @@ public class ProgrammaticSeoController {
                 // Build unique SEO meta
                 String appName = app.equals("uber") ? "Uber" : "DoorDash";
 
-                String title = String.format("%s Driver Earnings in %s: $%.2f/hr Net Hourly %d",
-                                appName, city.getCityName(),
-                                featuredScenario.getNetHourly(), now.getYear());
-                String description = String.format(
-                                "Estimated %s driver hourly earnings in %s for %d: $%.2f/hr net after mileage and SE tax on a 25-hour baseline. Updated %s.",
-                                appName, city.getCityName(), now.getYear(),
-                                featuredScenario.getNetHourly(), monthYear);
-                String heroTitlePrimary = String.format("%s Driver Earnings in %s", appName,
-                                city.getCityName());
-                String heroTitleSecondary = String.format("$%.2f/hr Net Hourly After Expenses",
-                                featuredScenario.getNetHourly());
-                String heroTitleTertiary = String.format("%d Rideshare Driver Hourly Earnings", now.getYear());
-                String heroSummary = String.format(
-                                "Estimated %s driver hourly earnings in %s start at $%.2f/hr net in our %d side-hustle model. The baseline uses $%d/week gross, %d mi, %d hrs, and $%.2f/gal gas; use the calculator below to adjust your own numbers.",
-                                appName,
-                                city.getCityName(),
-                                featuredScenario.getNetHourly(),
-                                now.getYear(),
-                                featuredScenario.getGrossWeekly(),
-                                featuredScenario.getMiles(),
-                                featuredScenario.getHours(),
-                                city.getGasPrice());
+                boolean nycDoorDash = app.equals("doordash") && city == CityData.NEW_YORK;
+                String title = nycDoorDash
+                                ? String.format("DoorDash Pay in NYC: Active-Hour Minimum & Take-Home (%d)", now.getYear())
+                                : String.format("How Much Do %s Drivers Make in %s? (%d)",
+                                                appName, city.getCityName(), now.getYear());
+                String description = nycDoorDash
+                                ? String.format(
+                                                "See NYC DoorDash pay under the $%.2f qualifying active-hour minimum, plus a separate %d-hour take-home estimate after vehicle costs and SE tax. Updated %s.",
+                                                AppConstants.NYC_DOORDASH_ACTIVE_HOUR_MINIMUM,
+                                                featuredScenario.getHours(),
+                                                monthYear)
+                                : String.format(
+                                                "See estimated %s driver pay in %s: $%d/week gross, $%.2f/hr take-home after modeled vehicle costs and SE tax, and the assumptions behind both. Updated %s.",
+                                                appName, city.getCityName(),
+                                                featuredScenario.getGrossWeekly(),
+                                                featuredScenario.getNetHourly(), monthYear);
+                String heroTitlePrimary = nycDoorDash
+                                ? "DoorDash Pay in New York City"
+                                : String.format("How Much Do %s Drivers Make in %s?", appName, city.getCityName());
+                String heroTitleSecondary = nycDoorDash
+                                ? String.format("$%.2f Qualifying Active-Hour Minimum",
+                                                AppConstants.NYC_DOORDASH_ACTIVE_HOUR_MINIMUM)
+                                : "Gross Pay vs. Estimated Take-Home";
+                String heroTitleTertiary = nycDoorDash
+                                ? "Plus a Separate After-Expenses Estimate"
+                                : String.format("%d Driver Pay Guide", now.getYear());
+                String heroSummary = nycDoorDash
+                                ? String.format(
+                                                "NYC's official DoorDash standard applies to qualifying active time, not every online hour. Separately, our %d-hour weekly model estimates $%d gross and $%.2f/hr after the current IRS vehicle-cost proxy and self-employment tax reserve.",
+                                                featuredScenario.getHours(),
+                                                featuredScenario.getGrossWeekly(),
+                                                featuredScenario.getNetHourly())
+                                : String.format(
+                                                "Our %d-hour weekly model estimates $%d gross and $%.2f/hr after the current IRS vehicle-cost proxy and self-employment tax reserve. Adjust the hours, miles, and vehicle inputs for your own shift.",
+                                                featuredScenario.getHours(),
+                                                featuredScenario.getGrossWeekly(),
+                                                featuredScenario.getNetHourly());
 
                 String canonicalUrl = String.format("%s/salary/%s/%s", AppConstants.BASE_URL, app, citySlug);
                 String appHubCanonicalUrl = String.format("%s/salary/%s", AppConstants.BASE_URL, app);
@@ -756,10 +771,10 @@ public class ProgrammaticSeoController {
                 model.addAttribute("heroTitleSecondary", heroTitleSecondary);
                 model.addAttribute("heroTitleTertiary", heroTitleTertiary);
                 model.addAttribute("heroSummary", heroSummary);
+                model.addAttribute("nycDoorDash", nycDoorDash);
+                model.addAttribute("nycActiveHourMinimum", AppConstants.NYC_DOORDASH_ACTIVE_HOUR_MINIMUM);
                 model.addAttribute("driverFieldNotes", buildDriverFieldNotes(app, appName, city, featuredScenario));
                 model.addAttribute("driverShiftReports", driverShiftReportService.getReportsForCity(app, citySlug));
-                model.addAttribute("searchResultPatterns",
-                                buildSearchResultPatterns(app, appName, city, null, featuredScenario));
                 model.addAttribute("methodologyUrl", "/methodology");
                 model.addAttribute("calculatorUrl", calculatorUrl);
                 model.addAttribute("taxEstimatorUrl", buildTaxEstimatorUrl(app, featuredScenario));
@@ -1061,8 +1076,6 @@ public class ProgrammaticSeoController {
                 model.addAttribute("intentMetrics", buildCityIntentMetrics(city, intentPage, scenario));
                 model.addAttribute("intentEvidencePatterns",
                                 buildCityIntentEvidencePatterns(app, appName, city, intentPage, scenario));
-                model.addAttribute("searchResultPatterns",
-                                buildSearchResultPatterns(app, appName, city, intentPage, scenario));
                 model.addAttribute("daily100Hours", hoursToNetTarget(scenario, 100));
                 model.addAttribute("daily100Miles", milesForHours(scenario, hoursToNetTarget(scenario, 100)));
                 model.addAttribute("daily100Gross", grossForHours(scenario, hoursToNetTarget(scenario, 100)));
@@ -1090,14 +1103,13 @@ public class ProgrammaticSeoController {
                                         appName,
                                         city.getCityName(),
                                         scenario.getNetHourly());
-                        case PER_MILE -> String.format("%s %s Pay Per Mile: $%.2f/hr Net",
+                        case PER_MILE -> String.format("%s %s Pay Per Mile: $%.2f Gross/Mile",
                                         appName,
                                         city.getCityName(),
-                                        scenario.getNetHourly());
-                        case ACTIVE_TIME -> String.format("%s %s Active Time Pay: $%.2f/hr Net",
+                                        grossPerMile(scenario));
+                        case ACTIVE_TIME -> String.format("%s %s Active Time vs Online Time Pay",
                                         appName,
-                                        city.getCityName(),
-                                        scenario.getNetHourly());
+                                        city.getCityName());
                         case WORTH_IT -> String.format("Is %s Worth It in %s? $%.2f/hr Net",
                                         appName,
                                         city.getCityName(),
@@ -1105,10 +1117,9 @@ public class ProgrammaticSeoController {
                         case DAILY_100 -> String.format("Can You Make $100 a Day with %s in %s?",
                                         appName,
                                         city.getCityName());
-                        case HOURLY_PAY -> String.format("%s %s Hourly Pay 2026: $%.2f/hr Net",
+                        case HOURLY_PAY -> String.format("%s %s Hourly Pay: Gross vs Take-Home (2026)",
                                         appName,
-                                        city.getCityName(),
-                                        scenario.getNetHourly());
+                                        city.getCityName());
                         case HOW_MUCH_CAN_YOU_MAKE -> String.format("How Much Can You Make with %s in %s?",
                                         appName,
                                         city.getCityName());
@@ -1138,18 +1149,17 @@ public class ProgrammaticSeoController {
                         String monthYear) {
                 return switch (intentPage) {
                         case AFTER_GAS -> String.format(
-                                        "%s %s after gas and mileage: $%.2f/hr net on a 25-hour baseline, with fuel, miles, tax, and driver field notes. Updated %s.",
+                                        "%s %s after vehicle costs: $%.2f/hr estimated take-home on a %d-hour weekly model, with miles, tax, and driver field notes. Updated %s.",
                                         appName,
                                         city.getCityName(),
                                         scenario.getNetHourly(),
+                                        scenario.getHours(),
                                         monthYear);
                         case PER_MILE -> String.format(
-                                        "%s %s pay per mile reality check: compare $%d/week gross, %d miles, and $%.2f/hr net before accepting low-mileage offers. Updated %s.",
+                                        "%s %s pay per mile reality check: about $%.2f gross per total modeled business mile, plus take-home and hourly context. Updated %s.",
                                         appName,
                                         city.getCityName(),
-                                        scenario.getGrossWeekly(),
-                                        scenario.getMiles(),
-                                        scenario.getNetHourly(),
+                                        grossPerMile(scenario),
                                         monthYear);
                         case ACTIVE_TIME -> String.format(
                                         "%s %s active-time pay estimate: $%.2f/hr net after mileage and tax, with online-time and dash-time checks. Updated %s.",
@@ -1231,11 +1241,12 @@ public class ProgrammaticSeoController {
                                         scenario.getHours(),
                                         city.getGasPrice());
                         case PER_MILE -> String.format(
-                                        "<p>The %s %s side-hustle baseline uses <strong>$%d/week gross</strong> over <strong>%d miles</strong>, then converts the result into <strong>$%.2f/hr net</strong> after mileage and tax assumptions.</p><p>For drivers, the practical question is not only hourly pay. A shift can look good by the hour and still fail a dollar-per-mile floor if it sends you across zones, into deadhead miles, or back home unpaid.</p>",
+                                        "<p>The %s %s weekly model uses <strong>$%d gross</strong> over <strong>%d total modeled business miles</strong>, or about <strong>$%.2f gross per mile</strong>. After the mileage-cost proxy and tax reserve, the model is <strong>$%.2f/hr estimated take-home</strong>.</p><p>Count pickup, repositioning, and unpaid return miles in your own total. Leaving those out makes a weak offer look stronger than it is.</p>",
                                         appName,
                                         city.getCityName(),
                                         scenario.getGrossWeekly(),
                                         scenario.getMiles(),
+                                        grossPerMile(scenario),
                                         scenario.getNetHourly());
                         case ACTIVE_TIME -> String.format(
                                         "<p>The %s %s estimate is based on <strong>%d hours/week</strong>, but drivers should compare that against active time, online time, dash time, and waiting time. The current side-hustle baseline is <strong>$%.2f/hr net</strong>.</p><p>If the app shows strong active-time earnings but you spent extra time waiting, repositioning, or driving home, your real hourly rate is lower than the active-time screenshot.</p>",
@@ -1357,6 +1368,12 @@ public class ProgrammaticSeoController {
                         return 0;
                 }
                 return netTarget / scenario.getNetHourly();
+        }
+
+        private double grossPerMile(CityScenario scenario) {
+                return scenario.getMiles() > 0
+                                ? scenario.getGrossWeekly() / (double) scenario.getMiles()
+                                : 0.0;
         }
 
         private int milesForHours(CityScenario scenario, double hours) {
@@ -1634,7 +1651,7 @@ public class ProgrammaticSeoController {
                                                         "Cost benchmark",
                                                         "Mileage is larger than the pump receipt",
                                                         String.format(
-                                                                        "The IRS 2026 business mileage benchmark is $0.725/mi. At %d modeled miles/week, that is about $%.0f of vehicle-cost pressure before self-employment tax.",
+                                                                        "The current IRS 2026 business mileage benchmark is $0.76/mi. At %d modeled miles/week, that is about $%.0f of vehicle-cost pressure before self-employment tax.",
                                                                         scenario.getMiles(),
                                                                         mileageProxy),
                                                         "IRS 2026 mileage rate",
@@ -1662,7 +1679,7 @@ public class ProgrammaticSeoController {
                                         new CityIntentEvidence(
                                                         "Cost benchmark",
                                                         "A good offer still has to clear vehicle-cost pressure",
-                                                        "The same $0.725/mi IRS proxy used across the site gives this page a hard comparison line. If the offer barely beats the cost proxy, the gross payout is not enough.",
+                                                        "The same $0.76/mi IRS proxy used across the site gives this page a consistent comparison line. It is a tax benchmark, not a measurement of the vehicle's actual cash cost.",
                                                         "IRS 2026 mileage rate",
                                                         "https://www.irs.gov/newsroom/irs-sets-2026-business-standard-mileage-rate-at-725-cents-per-mile-up-25-cents"),
                                         new CityIntentEvidence(
@@ -1975,7 +1992,7 @@ public class ProgrammaticSeoController {
                                                         "Gross payout divided by modeled weekly miles."),
                                         new CityIntentMetric("Net profit per mile", String.format("$%.2f/mi", netPerMile),
                                                         "Net profit after mileage and tax assumptions divided by modeled weekly miles."),
-                                        new CityIntentMetric("IRS mileage proxy", "$0.725/mi",
+                                        new CityIntentMetric("IRS mileage proxy", "$0.76/mi",
                                                         "A benchmark for vehicle operating cost pressure in 2026."));
                         case ACTIVE_TIME -> List.of(
                                         new CityIntentMetric("Modeled hours", scenario.getHours() + " hrs/wk",
@@ -2162,7 +2179,7 @@ public class ProgrammaticSeoController {
                                 "Mileage floor",
                                 "A low dollar-per-mile offer can erase the shift",
                                 String.format(
-                                                "Driver threads often use a dollar-per-mile floor before accepting work. The 2026 IRS business mileage rate is $0.725/mi, so %s drivers should compare every offer against miles, not only dollars.",
+                                                "Driver threads often use a dollar-per-mile floor before accepting work. The current 2026 IRS business mileage rate is $0.76/mi, so %s drivers should compare every offer against total business miles, not only dollars.",
                                                 city.getCityName()),
                                 "IRS 2026 mileage rate",
                                 "https://www.irs.gov/forms-pubs/the-standard-mileage-rates-and-maximum-automobile-fair-market-values-have-been-updated-for-2026"));
@@ -2458,9 +2475,10 @@ public class ProgrammaticSeoController {
                                 appName,
                                 city.getCityName());
                 String a1 = String.format(
-                                "Based on our estimates for %s, a side-hustle %s driver (25 hrs/week) earns approximately $%.2f per hour after deducting gas ($%.2f/gal), vehicle depreciation (IRS rate: $0.725/mile), and 15.3%% self-employment tax. This translates to roughly $%.0f in net weekly profit.",
+                                "Based on our estimates for %s, a side-hustle %s driver (%d hrs/week) earns approximately $%.2f per hour after applying the current $0.76/mile IRS vehicle-cost proxy once and estimating self-employment tax. Local gas at $%.2f/gal is context, not a separate standard-mode deduction. This translates to roughly $%.0f in modeled weekly take-home.",
                                 city.getCityName(),
                                 appName,
+                                featuredScenario.getHours(),
                                 featuredScenario.getNetHourly(),
                                 city.getGasPrice(),
                                 featuredScenario.getNetProfit());
@@ -2479,7 +2497,7 @@ public class ProgrammaticSeoController {
 
                 String q3 = String.format("How are these %s driver earnings calculated?", appName);
                 String a3 = String.format(
-                                "We estimate net profit by starting with gross income levels typical for %s markets, then subtracting fuel costs ($%.2f/gal local average), vehicle depreciation (using the 2026 IRS standard mileage rate of $0.725/mile), and estimated self-employment taxes (15.3%%). The result is your estimated take-home pay per hour.",
+                                "We estimate take-home by starting with modeled gross income for %s markets, applying the current $0.76/mile IRS mileage rate once as a vehicle-cost proxy, and estimating self-employment tax on 92.35%% of the remaining profit. Local gas at $%.2f/gal is context, not an additional deduction.",
                                 city.getMarketTier(),
                                 city.getGasPrice());
 
@@ -2500,11 +2518,12 @@ public class ProgrammaticSeoController {
                 String q5 = String.format("How much should a %s driver in %s save for taxes?",
                                 appName,
                                 city.getCityName());
-                double quarterlyTax = Math.max(0,
-                                (featuredScenario.getGrossWeekly() - (featuredScenario.getMiles() * 0.725)) * 0.153)
+                double quarterlyTax = AppConstants.estimateSelfEmploymentTax(
+                                featuredScenario.getGrossWeekly()
+                                                - (featuredScenario.getMiles() * AppConstants.IRS_MILEAGE_RATE))
                                 * 13;
                 String a5 = String.format(
-                                "As an independent contractor (1099), you owe approximately 15.3%% self-employment tax on net profit, plus federal and state income tax. For a side-hustle driver in %s grossing $%d/week, estimated quarterly self-employment tax is about $%.0f. A common rule is to set aside 25-30%% of net profit for taxes and pay quarterly.",
+                                "The federal self-employment-tax calculation generally starts with 92.35%% of net earnings and applies the 15.3%% rate, subject to individual limits and other income. For a side-hustle driver in %s grossing $%d/week, this model estimates about $%.0f per quarter before federal or state income tax.",
                                 city.getCityName(),
                                 featuredScenario.getGrossWeekly(),
                                 quarterlyTax);
@@ -2859,7 +2878,7 @@ public class ProgrammaticSeoController {
                                                 0.0,
                                                 70.00,
                                                 50.00,
-                                                22.13,
+                                                AppConstants.NYC_DOORDASH_ACTIVE_HOUR_MINIMUM,
                                                 0.0,
                                                 "DoorDash's NYC example produces a $110.65 minimum, a $40.65 pay adjustment, and $160.65 total with tips.",
                                                 "DoorDash NYC earnings standard",
@@ -3516,9 +3535,9 @@ public class ProgrammaticSeoController {
                 // Adjust gross using local economy proxy
                 double grossAdjusted = baseGross * wageProxy * appMultiplier;
 
-                // Traffic Factor: < 1.0 means congested in CityData.
-                // Ergo, dividing by trafficFactor INCREASES hours (e.g. 10 / 0.65 = 15.3 hrs).
-                double adjustedHours = baseHours / city.getTrafficFactor();
+                // Hours are the user's scheduled/online work time. Traffic is a qualitative
+                // market-friction signal, not evidence for inventing additional work hours.
+                double adjustedHours = baseHours;
 
                 // Keep miles slightly increased in congested areas due to detours, but mostly
                 // stable
@@ -3530,7 +3549,7 @@ public class ProgrammaticSeoController {
                 double taxableProfit = grossAdjusted - mileageDeduction;
 
                 // Taxes cannot be negative
-                double taxes = Math.max(0, taxableProfit * AppConstants.SELF_EMPLOYMENT_TAX_RATE);
+                double taxes = AppConstants.estimateSelfEmploymentTax(taxableProfit);
 
                 // Final net profit (Gross minus IRS Proxy minus Taxes)
                 double netProfit = grossAdjusted - mileageDeduction - taxes;

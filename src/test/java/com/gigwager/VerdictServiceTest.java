@@ -25,12 +25,9 @@ public class VerdictServiceTest {
     @Test
     public void testNormalCalculation() {
         // $200 gross, 100 miles, 10 hours =>
-        // Expenses = 100 * 0.725 = 72.5
-        // Profit = 200 - 72.5 = 127.5
-        // Taxes = 127.5 * 0.153 = 19.5075
-        // Net = 127.5 - 19.5075 = 107.9925
-        // Net Hourly = 107.9925 / 10 = ~10.79
-        // 10.79 is SURVIVAL ZONE (<15)
+        // Current vehicle-cost proxy = 100 * 0.76 = 76.
+        // The remaining profit still lands in the SURVIVAL ZONE after the service's
+        // conservative tax reserve.
 
         Verdict verdict = service.calculateVerdict(200.0, 100.0, 10.0, "Uber");
         assertEquals("SURVIVAL ZONE", verdict.level(), "Should correctly calculate typical side hustle");

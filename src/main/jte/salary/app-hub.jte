@@ -337,7 +337,7 @@
                         <h3 class="text-xl font-bold mt-6 mb-2">How the model works:</h3>
                         <ul class="list-disc pl-5 mt-2 space-y-2">
                             <li><strong>Gross pay:</strong> Estimated from local market tiers, traffic friction, and wage proxies.</li>
-                            <li><strong>Operating cost proxy:</strong> We deduct the 2026 IRS standard mileage rate of $0.725 per mile as a stand-in for gas, maintenance, and depreciation.</li>
+                            <li><strong>Operating cost proxy:</strong> We apply the current 2026 IRS business rate of $0.76 per mile once as a consistent comparison proxy. It is not a measurement of a specific vehicle's actual cost.</li>
                             <li><strong>Tax drag:</strong> We deduct an estimated 15.3% self-employment tax from taxable profit.</li>
                         </ul>
                         <p class="mt-4 italic text-sm text-slate-500">These are planning estimates built for decision-making, not tax filing or guarantees of platform earnings.</p>

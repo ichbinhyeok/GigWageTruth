@@ -6,7 +6,7 @@
     noIndex = noIndex,
     seoMeta = new SeoMeta(
         customTitle != null ? customTitle : "Gig Worker Tax Guide 2026: Don't Overpay the IRS",
-        "The 2026 IRS mileage rate is 72.5 cents. Learn how to estimate deductions for your car, phone, and hot bags to lower your tax burden.",
+        "The 2026 IRS business mileage rate is 76 cents from July 1 and was 72.5 cents through June. Learn how mileage and actual-expense methods differ.",
         AppConstants.BASE_URL + "/blog/tax-guide",
         AppConstants.BASE_URL + "/og-image-tax.jpg"
     ),
@@ -51,7 +51,7 @@
                         <div class="bg-emerald-50 p-6 rounded-xl border-l-4 border-emerald-500 mb-8 not-prose">
                             <h3 class="font-bold text-emerald-900 mb-2">The Golden Number for 2026</h3>
                             <p class="text-emerald-800">
-                                The IRS Standard Mileage Rate for 2026 is <strong>72.5 cents per mile</strong>. Memorize this number. It is your shield.
+                                The IRS business mileage rate for 2026 is <strong>76 cents per mile from July 1</strong>; the January-June rate was 72.5 cents. Use the rate that applies when the eligible miles were driven.
                             </p>
                         </div>
 
@@ -61,10 +61,10 @@
                         </p>
                         <ol>
                             <li><strong>actual Expenses:</strong> Saving every receipt for gas, oil, tires, insurance, and depreciation. (Painful and usually wrong).</li>
-                            <li><strong>Standard Mileage Deduction:</strong> Deducting 72.5 cents for every business mile drove. (Easy and usually saves you more money).</li>
+                            <li><strong>Standard mileage method:</strong> Apply the IRS rate for the period in which eligible business miles were driven and keep a contemporaneous mileage log.</li>
                         </ol>
                         <p>
-                            Why is the standard deduction better? Because it includes depreciation. Unless you are driving a brand new Hummer, your actual cost to drive is likely closer to 30-40 cents a mile. The IRS lets you deduct 72.5 cents. <strong>That gap is tax-free profit.</strong>
+                            The standard method is simpler for some drivers, while eligible actual expenses may be better for others. A tax deduction is not the same as cash profit, and the better method depends on your vehicle, records, and eligibility.
                         </p>
 
                         <h2>📍 What Counts as a "Business Mile"?</h2>

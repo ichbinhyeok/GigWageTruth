@@ -48,7 +48,7 @@ window.createGigCalculator = function (initialData) {
                 this.updateGasPriceFromPreset();
             } catch (e) {
                 console.error('Failed to load presets', e);
-                this.vehiclePresets = [{ id: 'irs-standard', name: 'IRS Standard', type: 'standard', costPerMile: 0.725 }];
+                this.vehiclePresets = [{ id: 'irs-standard', name: 'IRS Standard', type: 'standard', costPerMile: 0.76 }];
             }
 
             this.$watch('selectedVehicleId', () => this.updateGasPriceFromPreset());
@@ -211,7 +211,7 @@ window.createGigCalculator = function (initialData) {
 
         get otherCost() {
             if (this.calculationMode === 'standard') {
-                return this.effectiveMiles * 0.725;
+                return this.effectiveMiles * 0.76;
             }
 
             const vehicle = this.selectedVehicle;

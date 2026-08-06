@@ -4,7 +4,6 @@
 @import com.gigwager.model.DriverFieldNote
 @import com.gigwager.model.DriverShiftReport
 @import com.gigwager.model.PageEvidenceProfile
-@import com.gigwager.model.SearchResultPattern
 @import com.gigwager.model.content.CityRichContent
 @import com.gigwager.model.content.PersonaQuote
 @import com.gigwager.model.content.SourceCitation
@@ -35,9 +34,10 @@
 @param String heroTitleSecondary = ""
 @param String heroTitleTertiary = ""
 @param String heroSummary = ""
+@param Boolean nycDoorDash = false
+@param double nycActiveHourMinimum = 0.0
 @param List<DriverFieldNote> driverFieldNotes = java.util.List.of()
 @param List<DriverShiftReport> driverShiftReports = java.util.List.of()
-@param List<SearchResultPattern> searchResultPatterns = java.util.List.of()
 @param PageEvidenceProfile pageEvidenceProfile = null
 @param CityRichContent localRichContent = null
 @param WorkLevelRichContent localSideHustleContent = null
@@ -62,7 +62,7 @@
                     <div class="inline-block px-4 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-full">
                         <span class="text-emerald-400 text-sm font-bold uppercase tracking-wider">${city.getCityName()}, ${city.getState()}</span>
                     </div>
-                    <span class="text-slate-400 text-xs font-medium uppercase tracking-wider">Last Updated: ${lastUpdated}</span>
+                    <span class="text-slate-400 text-xs font-medium uppercase tracking-wider">Estimate updated: ${lastUpdated}</span>
                 </div>
                 
                 <h1 class="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
@@ -78,9 +78,20 @@
                 <div class="flex flex-wrap items-center gap-3 mb-8 text-xs font-semibold text-slate-300" data-nosnippet>
                     <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10">Updated ${lastUpdated}</span>
                     <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10">After-expenses earnings estimate</span>
-                    <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10">IRS mileage + SE tax assumptions</span>
+                    <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10">Current IRS mileage proxy + SE tax estimate</span>
                     <a href="${methodologyUrl}" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 hover:border-emerald-400 hover:text-emerald-300 transition-colors">How we estimate this</a>
                 </div>
+
+                @if(nycDoorDash)
+                    <div class="rounded-2xl border border-sky-400/30 bg-sky-400/10 p-6 mb-6 text-sky-50">
+                        <p class="text-xs font-black uppercase tracking-[0.16em] text-sky-300 mb-2">Official NYC pay rule</p>
+                        <h2 class="text-2xl font-black text-white mb-2">$${String.format("%.2f", nycActiveHourMinimum)} per qualifying active hour</h2>
+                        <p class="text-sm leading-relaxed text-sky-100 mb-3">
+                            DoorDash's Standard Method applies this minimum to qualifying active time from accepting an offer through drop-off for deliveries picked up or dropped off in New York City. It is not a guarantee for every hour the app is online. Tips and eligible weekly bonuses are separate.
+                        </p>
+                        <a href="https://help.doordash.com/en-us/dashers/article/guide-to-the-new-york-city-earnings-standard" target="_blank" rel="noopener noreferrer" class="text-sm font-bold underline text-white">Read the official DoorDash NYC earnings standard</a>
+                    </div>
+                @endif
 
                 <div id="city-pay-calculator" class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 md:p-8 mb-6">
                     <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8">
@@ -207,7 +218,7 @@
                     <tfoot>
                         <tr class="bg-slate-50 border-t border-slate-200">
                             <td colspan="${scenarios.size() + 1}" class="px-4 py-2.5 text-xs text-slate-500">
-                                Assumes: Gas at $${String.format("%.2f", city.getGasPrice())}/gal | IRS Mileage Rate $0.725/mi | 15.3% SE Tax | ${city.getCityName()}, ${city.getState()} market conditions. Estimates only, not financial advice.
+                                Uses $${String.format("%.2f", AppConstants.IRS_MILEAGE_RATE)}/mi as the current IRS mileage-cost proxy (effective ${AppConstants.IRS_MILEAGE_RATE_EFFECTIVE_DATE}) and an estimated SE-tax calculation. Local gas at $${String.format("%.2f", city.getGasPrice())}/gal is context, not a separate standard-mode deduction. Estimates only, not financial advice.
                             </td>
                         </tr>
                     </tfoot>
@@ -224,12 +235,12 @@
         @if(app.equals("uber") && ("atlanta".equals(city.getSlug()) || "los-angeles".equals(city.getSlug()) || "austin".equals(city.getSlug()) || "chicago".equals(city.getSlug()) || "houston".equals(city.getSlug()) || "orlando".equals(city.getSlug())))
             <section class="max-w-5xl mx-auto px-6 mb-12">
                 <div class="bg-emerald-50 rounded-3xl border border-emerald-200 p-8 shadow-sm">
-                    <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-700 mb-2">Priority hourly earnings cluster</p>
+                    <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-700 mb-2">Related planning guides</p>
                     <h2 class="text-3xl font-black text-slate-900 mb-3">
-                        Uber driver hourly earnings in ${city.getCityName()}, ${city.getState()} for 2026
+                        Plan an Uber driving week in ${city.getCityName()}
                     </h2>
                     <p class="text-slate-700 max-w-3xl mb-5">
-                        This report is built for drivers comparing <strong>Uber driver hourly earnings ${city.getCityName()} ${city.getState()} 2025 2026</strong> and <strong>rideshare driver hourly earnings ${city.getCityName()} ${city.getState()} 2025 2026</strong>. The useful answer is the net hourly result after mileage, local gas, unpaid time, and self-employment tax pressure.
+                        Compare vehicle-cost pressure, online versus active time, a $100 daily target, and a side-hustle schedule without repeating the same broad earnings answer.
                     </p>
                     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
                         <a href="/salary/uber/${city.getSlug()}/after-gas" class="rounded-2xl bg-white border border-emerald-100 px-4 py-3 hover:border-emerald-300 transition-colors">
@@ -250,16 +261,9 @@
                         </a>
                     </div>
                 </div>
+
             </section>
         @endif
-
-        @template.components.search_result_patterns(
-            appName = appName,
-            cityName = city.getCityName(),
-            netHourly = featuredScenario.getNetHourly(),
-            searchResultPatterns = searchResultPatterns,
-            sectionClass = "max-w-5xl mx-auto px-6 mb-12"
-        )
 
         @template.components.driver_field_notes(
             appName = appName,
@@ -459,7 +463,7 @@
                         Actual results vary by vehicle efficiency, cherry-picking skill, and surge timing.
                     </p>
                     <p class="text-xs text-slate-600">
-                        Net Profit is estimated by deducting the IRS Standard Mileage Rate and an estimated 15.3% Self-Employment Tax from the gross payout. For 2026, the IRS standard mileage rate is 72.5 cents per mile. We use this as an estimation proxy, not tax advice.
+                        Net profit uses the current IRS business mileage rate of $${String.format("%.2f", AppConstants.IRS_MILEAGE_RATE)}/mile as one vehicle-cost proxy, then applies an estimated self-employment-tax calculation to the remaining profit. The mileage rate is a tax deduction benchmark, not your vehicle's measured cash cost.
                     </p>
                 </div>
             </section>
@@ -520,8 +524,7 @@
                         Make sure you have a gap endorsement.
                     </li>
                     <li>
-                        <strong>The Tax Bill:</strong> Remember, the numbers above include 15.3% self-employment tax.
-                        If you don't save this, tax season will be a shock.
+                        <strong>The Tax Bill:</strong> The estimate applies the 15.3% SE-tax rate to 92.35% of modeled net earnings. Income tax and individual limits are not included.
                     </li>
                 </ul>
             </section>
@@ -531,7 +534,7 @@
                 <div class="space-y-4">
                     <details class="group border border-slate-200 rounded-xl p-4">
                         <summary class="font-semibold text-slate-900 cursor-pointer">How much does a ${appName} driver make in ${city.getCityName()} after expenses in 2026?</summary>
-                        <p class="text-slate-600 mt-3">Based on our estimates for ${city.getCityName()}, a side-hustle ${appName} driver (25 hrs/week) earns approximately $${String.format("%.2f", featuredScenario.getNetHourly())} per hour after deducting gas ($${String.format("%.2f", city.getGasPrice())}/gal), vehicle depreciation (IRS rate: $0.725/mile), and 15.3% self-employment tax. This translates to roughly $${String.format("%.0f", featuredScenario.getNetProfit())} in net weekly profit.</p>
+                        <p class="text-slate-600 mt-3">Our ${featuredScenario.getHours()}-hour weekly model estimates about $${String.format("%.2f", featuredScenario.getNetHourly())} per hour after applying one IRS mileage-cost proxy of $${String.format("%.2f", AppConstants.IRS_MILEAGE_RATE)}/mile and an estimated SE-tax calculation. Local gas is shown as context and is not deducted again in standard mode. This translates to roughly $${String.format("%.0f", featuredScenario.getNetProfit())} in modeled weekly take-home.</p>
                     </details>
                     <details class="group border border-slate-200 rounded-xl p-4">
                         <summary class="font-semibold text-slate-900 cursor-pointer">Is ${appName} worth it in ${city.getCityName()} in 2026?</summary>
@@ -539,7 +542,7 @@
                     </details>
                     <details class="group border border-slate-200 rounded-xl p-4">
                         <summary class="font-semibold text-slate-900 cursor-pointer">How are these ${appName} earnings calculated?</summary>
-                        <p class="text-slate-600 mt-3">We estimate net profit by starting with gross income levels typical for ${city.getMarketTier()} markets, then subtracting fuel costs ($${String.format("%.2f", city.getGasPrice())}/gal local average), vehicle depreciation (using the 2026 IRS standard mileage rate of $0.725/mile), and estimated self-employment taxes (15.3%). The result is your estimated take-home pay per hour.</p>
+                        <p class="text-slate-600 mt-3">We start with a modeled gross amount for ${city.getMarketTier()} markets, apply the current IRS business mileage rate once as a vehicle-cost proxy, and estimate self-employment tax on 92.35% of the remaining profit. This is planning math, not a measurement of your car's actual expenses or a guaranteed wage.</p>
                     </details>
                     <details class="group border border-slate-200 rounded-xl p-4">
                         <summary class="font-semibold text-slate-900 cursor-pointer">What should I check before trusting this ${appName} earnings estimate?</summary>
@@ -551,7 +554,7 @@
                     </details>
                     <details class="group border border-slate-200 rounded-xl p-4">
                         <summary class="font-semibold text-slate-900 cursor-pointer">How much should a ${appName} driver in ${city.getCityName()} save for taxes?</summary>
-                        <p class="text-slate-600 mt-3">As an independent contractor (1099), you owe approximately 15.3% self-employment tax on net profit, plus federal and state income tax. For a side-hustle driver in ${city.getCityName()} grossing $${featuredScenario.getGrossWeekly()}/week, the estimated quarterly SE tax alone is about $${String.format("%.0f", Math.max(0, (featuredScenario.getGrossWeekly() - (featuredScenario.getMiles() * 0.725)) * 0.153) * 13)}. A safe rule: set aside 25-30% of your net profit for taxes and pay quarterly to avoid IRS penalties.</p>
+                        <p class="text-slate-600 mt-3">The federal SE-tax calculation generally starts with 92.35% of net earnings and applies the 15.3% rate, subject to individual limits and other income. On this model, the quarterly SE-tax estimate is about $${String.format("%.0f", AppConstants.estimateSelfEmploymentTax(featuredScenario.getGrossWeekly() - (featuredScenario.getMiles() * AppConstants.IRS_MILEAGE_RATE)) * 13)} before federal or state income tax. Use the tax estimator or a qualified professional for your situation.</p>
                     </details>
                     <details class="group border border-slate-200 rounded-xl p-4">
                         <summary class="font-semibold text-slate-900 cursor-pointer">Why do ${appName} earnings in ${city.getCityName()} differ from other cities?</summary>
@@ -578,7 +581,7 @@
                     <!-- Tax Risk Card -->
                     <div class="bg-white p-5 rounded-xl border-2 border-red-100 hover:border-red-500 transition-all">
                         <h4 class="font-bold text-slate-900 flex items-center gap-2 mb-2">Quarterly Tax Risk</h4>
-                        <p class="text-xs text-slate-600 mb-3">You may owe about <strong>$${String.format("%.0f", Math.max(0, (scenarios.get(1).getGrossWeekly() - (scenarios.get(1).getMiles() * AppConstants.IRS_MILEAGE_RATE)) * AppConstants.SELF_EMPLOYMENT_TAX_RATE) * 13 )}</strong> this quarter in self-employment tax. Are you saving for this?</p>
+                        <p class="text-xs text-slate-600 mb-3">This model estimates about <strong>$${String.format("%.0f", AppConstants.estimateSelfEmploymentTax(scenarios.get(1).getGrossWeekly() - (scenarios.get(1).getMiles() * AppConstants.IRS_MILEAGE_RATE)) * 13 )}</strong> in quarterly self-employment tax before income tax and individual limits.</p>
                         <a href="/taxes/quarterly-estimator" class="text-xs font-bold text-red-600 hover:text-red-700">Calculate quarterly estimate</a>
                     </div>
                     <!-- Vehicle Cost Card -->

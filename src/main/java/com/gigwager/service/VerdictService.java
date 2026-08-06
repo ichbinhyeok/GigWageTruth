@@ -40,10 +40,10 @@ public class VerdictService {
                                         "STOP DRIVING IMMEDIATELY. YOU ARE LOSING MONEY.",
                                         List.of(
                                                         "You are not making a wage. You are liquidating your vehicle's equity for quick cash. Every mile you drive destroys more value in your car than you earn in profit.",
-                                                        "After accounting for the IRS standard costs of $"
+                                                        "After applying the current IRS mileage proxy of $"
                                                                         + com.gigwager.util.AppConstants.IRS_MILEAGE_RATE
-                                                                        + "/mile (gas, depreciation, maintenance), your net profit is effectively zero or negative. You are effectively paying "
-                                                                        + appName + " for the privilege of working.",
+                                                                        + "/mile once as a planning benchmark, your modeled profit is effectively zero or negative. Your actual vehicle cost may differ, but this shift still needs review before you keep driving for "
+                                                                        + appName + ".",
                                                         "This is not a job; it is a financial trap. The cash in your hand is just a loan from your future car repairs."),
                                         "Stop driving immediately and secure a W-2 income source.",
                                         "red",

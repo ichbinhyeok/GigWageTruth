@@ -118,7 +118,7 @@ public enum WorkLevel {
                         case PART_TIME -> "<h3 class=\"text-xl font-bold text-slate-900 mb-3\">Tax strategy: keep it simple</h3>"
                                         + "<ul class=\"list-disc pl-5 space-y-2 text-slate-700\">"
                                         + "<li><strong>Report the income:</strong> Reporting thresholds can change, but taxable income still needs to be reported even if a form is not issued.</li>"
-                                        + "<li><strong>Track business miles:</strong> For 2026, the IRS standard mileage rate is 72.5 cents per mile. We use it as an estimation proxy, not tax advice.</li>"
+                                        + "<li><strong>Track business miles:</strong> The 2026 IRS business rate is 76 cents per mile from July 1 (72.5 cents from January through June). We use the current rate as a cost proxy, not a measurement of your car's actual expenses or tax advice.</li>"
                                         + "<li><strong>Separate the money:</strong> Keep gig deposits separate so the work does not disappear into normal spending.</li>"
                                         + "<li><strong>Do not overbuild:</strong> At low hours, a clean mileage log and simple expense folder matter more than forming an entity.</li>"
                                         + "</ul>"

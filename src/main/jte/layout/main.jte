@@ -152,7 +152,7 @@
             </p>
             <p class="text-xs text-slate-400">
                 &copy; ${AppConstants.CURRENT_YEAR} GigVerdict. All rights reserved. <br>
-                Calculations based on ${AppConstants.CURRENT_YEAR} IRS Standard Mileage Rate ($0.725/mile). Not financial advice.
+                Calculations use the current ${AppConstants.CURRENT_YEAR} IRS mileage proxy ($${String.format("%.2f", AppConstants.IRS_MILEAGE_RATE)}/mile, effective ${AppConstants.IRS_MILEAGE_RATE_EFFECTIVE_DATE}). Not financial advice.
             </p>
         </div>
     </footer>

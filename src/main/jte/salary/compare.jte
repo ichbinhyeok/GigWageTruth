@@ -154,7 +154,7 @@
                             </div>
                             <div class="flex justify-between items-center text-sm">
                                 <span class="text-red-500">Tax Risk (Quarterly)</span>
-                                <span class="font-bold text-red-600">~$${String.format("%.0f", Math.max(0, (uberScenario.getGrossWeekly() - (uberScenario.getMiles() * AppConstants.IRS_MILEAGE_RATE)) * AppConstants.SELF_EMPLOYMENT_TAX_RATE) * 13 )}</span>
+                                <span class="font-bold text-red-600">~$${String.format("%.0f", AppConstants.estimateSelfEmploymentTax(uberScenario.getGrossWeekly() - (uberScenario.getMiles() * AppConstants.IRS_MILEAGE_RATE)) * 13 )}</span>
                             </div>
                         </div>
 
@@ -188,7 +188,7 @@
                             </div>
                             <div class="flex justify-between items-center text-sm">
                                 <span class="text-red-500">Tax Risk (Quarterly)</span>
-                                <span class="font-bold text-red-600">~$${String.format("%.0f", Math.max(0, (doordashScenario.getGrossWeekly() - (doordashScenario.getMiles() * AppConstants.IRS_MILEAGE_RATE)) * AppConstants.SELF_EMPLOYMENT_TAX_RATE) * 13 )}</span>
+                                <span class="font-bold text-red-600">~$${String.format("%.0f", AppConstants.estimateSelfEmploymentTax(doordashScenario.getGrossWeekly() - (doordashScenario.getMiles() * AppConstants.IRS_MILEAGE_RATE)) * 13 )}</span>
                             </div>
                         </div>
 

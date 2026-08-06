@@ -79,7 +79,7 @@
                         <div class="bg-red-50 p-6 rounded-xl border-l-4 border-red-500 my-8 not-prose">
                             <h4 class="font-bold text-red-900 mb-2">The Real Math of Destruction</h4>
                             <p class="text-red-800 text-sm">
-                                According to the IRS, it costs <strong>72.5 cents per mile</strong> to operate a vehicle in 2026. If you drive 1,000 miles a week, that's $725 in *real* economic cost. If you only made $1,000 that week, you didn't "earn" $1,000. You earned $275.
+                                The current IRS business mileage rate is <strong>76 cents per mile</strong> from July 1, 2026. We use that tax benchmark as a consistent planning proxy, not as proof that every vehicle actually costs 76 cents per mile. Compare the proxy with your own fuel, maintenance, insurance, and depreciation records.
                             </p>
                         </div>
 

@@ -37,7 +37,7 @@ public class PageEvidenceService {
                 currency(city.getGasPrice()),
                 scenario.getMiles(),
                 scenario.getHours());
-        String heading = String.format("%s %s evidence check", city.getCityName(), appName);
+        String heading = String.format("How this %s %s estimate was built", city.getCityName(), appName);
         return build(app, city, heading, anchor, indexable);
     }
 
@@ -54,7 +54,7 @@ public class PageEvidenceService {
                 scenario.getHours(),
                 scenario.getMiles(),
                 city.getCityName());
-        String heading = String.format("%s %s %s evidence check",
+        String heading = String.format("How this %s %s %s estimate was built",
                 city.getCityName(),
                 appName,
                 workLevel.getDisplayName());
@@ -68,7 +68,7 @@ public class PageEvidenceService {
             CityIntentPage intentPage,
             CityScenario scenario,
             boolean indexable) {
-        String heading = String.format("%s %s %s evidence check",
+        String heading = String.format("How this %s %s %s estimate was built",
                 city.getCityName(),
                 appName,
                 intentPage.getDisplayName());
@@ -83,7 +83,7 @@ public class PageEvidenceService {
             String winningAppName,
             double netHourlyGap,
             boolean indexable) {
-        String heading = String.format("%s Uber Eats vs DoorDash evidence check", city.getCityName());
+        String heading = String.format("How this %s Uber Eats vs DoorDash comparison was built", city.getCityName());
         String anchor = String.format(
                 "Both apps use the same %s-hour, %s-mile side-hustle baseline, %s local gas context, IRS mileage proxy, and SE tax assumption; the modeled gap is %s/hr net.",
                 uberScenario.getHours(),
@@ -100,7 +100,7 @@ public class PageEvidenceService {
         PageEvidenceProfile base = build("doordash", city, heading, anchor, indexable);
         String summary = indexable
                 ? String.format(
-                        "Indexed because the comparison sits on the same cited local dataset as the city reports, then shows Uber and DoorDash side by side. Current model winner: %s.",
+                        "This comparison uses the same cited local inputs for both apps and shows them side by side. Current model result: %s.",
                         netHourlyGap < 0.25 ? "effectively tied" : winningAppName)
                 : base.summary();
         return new PageEvidenceProfile(
@@ -183,11 +183,11 @@ public class PageEvidenceService {
             int driverReportCount,
             int citySpecificDriverReportCount) {
         if (!indexable) {
-            return "This page is available for users but is not submitted for indexing until the city has enough cited local evidence.";
+            return "This is a modeled estimate with limited local evidence. Adjust the inputs and treat the result as a planning range, not a guaranteed wage.";
         }
         if (richCitedContent && citySpecificDriverReportCount > 0) {
             return String.format(
-                    "Indexed because it combines %d cited local sources with %d driver evidence item%s, including %d city-specific report%s.",
+                    "This estimate combines %d cited local sources with %d driver evidence item%s, including %d city-specific report%s.",
                     sourceCount,
                     driverReportCount,
                     plural(driverReportCount),
@@ -196,10 +196,10 @@ public class PageEvidenceService {
         }
         if (richCitedContent) {
             return String.format(
-                    "Indexed because it has %d cited local sources and a city-specific calculation model; driver reports are shown when available.",
+                    "This estimate uses %d cited local sources and a city-specific calculation model; driver reports are shown when available.",
                     sourceCount);
         }
-        return "Published as a calculator fallback, but kept out of the sitemap until stronger local evidence is added.";
+        return "This is a calculator-based estimate. Local driver evidence has not yet been added, so adjust the inputs before relying on the result.";
     }
 
     private String intentAnchor(CityData city, CityIntentPage intentPage, CityScenario scenario) {

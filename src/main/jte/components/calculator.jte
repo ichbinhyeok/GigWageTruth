@@ -244,7 +244,7 @@
                         </div>
 
                          <div x-show="calculationMode === 'standard'" class="text-center py-4">
-                            <p class="text-3xl font-bold text-slate-900 mb-1">$0.725<span class="text-lg text-slate-400 font-medium">/mi</span></p>
+                            <p class="text-3xl font-bold text-slate-900 mb-1">$0.76<span class="text-lg text-slate-400 font-medium">/mi</span></p>
                             <p class="text-sm text-slate-500">2026 IRS Standard Deduction Rate</p>
                             <p class="text-xs text-slate-400 mt-2 max-w-sm mx-auto">Includes gas, depreciation, insurance, and maintenance. Based on standard TCO methodologies.</p>
                         </div>
@@ -438,8 +438,8 @@
                             <div class="mt-3 bg-slate-50 rounded-lg p-4 border border-slate-200">
                                 <h4 class="text-xs font-black uppercase tracking-widest text-slate-700 mb-2">Standard Assumptions</h4>
                                 <ul class="text-xs text-slate-600 space-y-1">
-                                    <li>IRS mileage proxy: <strong>$0.725/mi</strong> (2026).</li>
-                                    <li>Self-employment tax estimate: <strong>15.3%</strong>.</li>
+                                    <li>Current IRS mileage proxy: <strong>$0.76/mi</strong> (effective July 1, 2026).</li>
+                                    <li>Conservative tax reserve: <strong>15.3% of post-mileage profit</strong>. The dedicated tax estimator applies the 92.35% SE-tax earnings factor.</li>
                                     <li>Hourly base uses <strong>total online time</strong> (not active time).</li>
                                 </ul>
                                 <p class="text-[10px] text-slate-400 mt-2">Educational estimate only, not tax or legal advice.</p>

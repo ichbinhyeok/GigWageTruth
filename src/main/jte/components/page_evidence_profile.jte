@@ -8,7 +8,7 @@
         <div class="rounded-2xl border border-slate-200 bg-white p-6 md:p-7 shadow-sm">
             <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-5">
                 <div>
-                    <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-700 mb-2">Evidence profile</p>
+                    <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-700 mb-2">Estimate transparency</p>
                     <h2 class="text-2xl md:text-3xl font-black text-slate-900">${pageEvidenceProfile.heading()}</h2>
                 </div>
                 @if("strong".equals(pageEvidenceProfile.confidenceTone()))
@@ -22,7 +22,7 @@
 
             <p class="text-slate-700 leading-relaxed mb-5">${pageEvidenceProfile.summary()}</p>
             <p class="rounded-xl bg-slate-50 border border-slate-200 px-4 py-3 text-sm text-slate-700 mb-5">
-                <strong class="text-slate-900">Unique data anchor:</strong> ${pageEvidenceProfile.uniqueDataAnchor()}
+                <strong class="text-slate-900">What this estimate uses:</strong> ${pageEvidenceProfile.uniqueDataAnchor()}
             </p>
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 text-sm">
@@ -39,8 +39,7 @@
                     <p class="text-2xl font-black text-slate-900">${pageEvidenceProfile.citySpecificDriverReportCount()}</p>
                 </div>
                 <div class="rounded-xl bg-slate-50 border border-slate-200 p-4">
-                    <p class="text-[11px] font-black uppercase tracking-[0.14em] text-slate-500 mb-1">Method</p>
-                    <p class="text-sm font-black text-slate-900 leading-tight">${pageEvidenceProfile.methodologyVersion()}</p>
+                    <p class="text-[11px] font-black uppercase tracking-[0.14em] text-slate-500 mb-1">Source review</p>
                     @if(pageEvidenceProfile.lastVerifiedAt() != null && !pageEvidenceProfile.lastVerifiedAt().isBlank())
                         <p class="text-xs text-slate-500 mt-1">Checked ${pageEvidenceProfile.lastVerifiedAt()}</p>
                     @endif

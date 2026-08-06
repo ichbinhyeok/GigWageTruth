@@ -68,7 +68,7 @@
                     
                     <div class="bg-white p-6 rounded-xl border border-slate-200">
                         <h3 class="text-xl font-bold text-slate-900 mb-2">2. What is the biggest hidden expense for Uber drivers?</h3>
-                        <p class="text-slate-600">Vehicle depreciation. Most drivers only count gas, but driving 1,000 miles a week destroys your car's resale value and accelerates major repairs. The IRS estimates this total cost at 72.5¢ per mile for 2026.</p>
+                        <p class="text-slate-600">Vehicle depreciation matters, but its size depends on the vehicle, mileage, age, and market. The current IRS business rate is 76¢ per mile from July 1, 2026; we use it as a comparison proxy rather than an estimate of a specific car's resale loss.</p>
                     </div>
                     
                     <div class="bg-white p-6 rounded-xl border border-slate-200">
@@ -88,7 +88,7 @@
 
                     <div class="bg-white p-6 rounded-xl border border-slate-200">
                         <h3 class="text-xl font-bold text-slate-900 mb-2">6. Can I deduct a car wash?</h3>
-                        <p class="text-slate-600">If you take the Standard Mileage Deduction (the 72.5¢ per mile rate), you cannot separately deduct gas, car washes, or repairs. The standard rate is designed to cover all of those operating costs.</p>
+                        <p class="text-slate-600">If you use the standard mileage method, you generally cannot also deduct the vehicle operating expenses already represented by that method. The current rate is 76¢ per mile from July 1, 2026; check IRS eligibility rules for your vehicle and tax year.</p>
                     </div>
 
                     <div class="bg-white p-6 rounded-xl border border-slate-200">

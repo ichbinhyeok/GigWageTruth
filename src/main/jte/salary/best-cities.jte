@@ -171,20 +171,20 @@
                         <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-300 mb-2">DoorDash city pay dataset</p>
                         <h2 class="text-3xl font-black mb-4">Not just a list: compare net hourly, hours to $100, weekly net, and local demand signals</h2>
                         <p class="text-slate-300 max-w-3xl mb-6">
-                            Generic search results usually stop at "best DoorDash cities" without showing the math. This table exposes the actual side-hustle baseline behind the ranking: after-expenses net hourly, the estimated hours needed to clear $100, the 20-hour weekly net proxy, mileage pressure, and the local zones that can make or break active time.
+                            Use the table to compare the same planning inputs across cities: estimated take-home per hour, hours needed to clear $100, a 20-hour weekly estimate, modeled mileage, and local demand zones.
                         </p>
                         <div class="grid md:grid-cols-3 gap-3">
                             <div class="rounded-2xl bg-white/5 border border-white/10 p-5">
-                                <p class="text-xs font-black uppercase tracking-[0.16em] text-emerald-300 mb-2">Click reason</p>
+                                <p class="text-xs font-black uppercase tracking-[0.16em] text-emerald-300 mb-2">Compare nearby markets</p>
                                 <p class="font-bold">Drivers can see whether a nearby city is actually worth testing before opening the full report.</p>
                             </div>
                             <div class="rounded-2xl bg-white/5 border border-white/10 p-5">
-                                <p class="text-xs font-black uppercase tracking-[0.16em] text-emerald-300 mb-2">Quality gate</p>
-                                <p class="font-bold">Every city links to a deeper earnings page, not a dead-end keyword page.</p>
+                                <p class="text-xs font-black uppercase tracking-[0.16em] text-emerald-300 mb-2">Open the assumptions</p>
+                                <p class="font-bold">Every city links to a detailed earnings page with adjustable hours, miles, and costs.</p>
                             </div>
                             <div class="rounded-2xl bg-white/5 border border-white/10 p-5">
-                                <p class="text-xs font-black uppercase tracking-[0.16em] text-emerald-300 mb-2">Use case</p>
-                                <p class="font-bold">Best cities to DoorDash, highest paying DoorDash cities near me, and $100/day planning.</p>
+                                <p class="text-xs font-black uppercase tracking-[0.16em] text-emerald-300 mb-2">Plan a target</p>
+                                <p class="font-bold">Check whether a nearby market can support your $100/day or weekly take-home target.</p>
                             </div>
                         </div>
                     </section>
@@ -227,7 +227,7 @@
                     <h2 class="text-blue-900 font-bold mb-2">How This Driver Earnings Ranking Works</h2>
                     <ul class="list-disc pl-5 text-blue-800 text-sm space-y-1">
                         <li><strong>Ranking Criteria:</strong> Sorts strictly by estimated Net Hourly Pay for a "side-hustle" driver.</li>
-                        <li><strong>Input Weights:</strong> We apply a traffic multiplier and a market tier multiplier (demand baseline) to estimate gross hourly revenue.</li>
+                        <li><strong>Input model:</strong> Scheduled hours stay fixed at 10, 25, or 40. Market tier and a dampened local wage proxy shape modeled gross pay; traffic remains descriptive context rather than invented work hours.</li>
                         <li><strong>Deductions:</strong> We apply the @template.components.irs_rate_snippet() mileage proxy plus an assumed 15.3% SE tax. Local gas prices are shown as market context, not a direct variable in this ranking formula.</li>
                         <li><strong>Answer first:</strong> This page is designed to answer which city pays drivers the most, not whether a market is active.</li>
                         <li><strong>Need coverage instead?</strong> Use the <a href="${coverageUrl}" class="font-bold underline hover:text-blue-900">${coverageGuideTitle}</a> before assuming a market is active.</li>
@@ -236,8 +236,8 @@
 
                 @if(app.equals("doordash"))
                     <section class="bg-white rounded-3xl border border-slate-200 p-6 mb-10 shadow-sm">
-                        <p class="text-xs font-black uppercase tracking-[0.18em] text-amber-700 mb-2">Search-result gap check</p>
-                        <h2 class="text-2xl font-black text-slate-900 mb-4">What this page answers that thin DoorDash city lists usually skip</h2>
+                        <p class="text-xs font-black uppercase tracking-[0.18em] text-amber-700 mb-2">How to use the ranking</p>
+                        <h2 class="text-2xl font-black text-slate-900 mb-4">A high rank is a starting point, not a guaranteed wage</h2>
                         <div class="grid md:grid-cols-3 gap-4">
                             <div class="rounded-2xl border border-slate-200 p-5">
                                 <h3 class="font-black text-slate-900 mb-2">Pay ranking is not enough</h3>

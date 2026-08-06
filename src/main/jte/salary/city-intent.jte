@@ -6,7 +6,6 @@
 @import com.gigwager.model.DriverFieldNote
 @import com.gigwager.model.DriverShiftReport
 @import com.gigwager.model.PageEvidenceProfile
-@import com.gigwager.model.SearchResultPattern
 @import com.gigwager.model.SeoMeta
 @import com.gigwager.model.content.CityRichContent
 @import com.gigwager.model.content.PersonaQuote
@@ -30,7 +29,6 @@
 @param List<DriverShiftReport> driverShiftReports = java.util.List.of()
 @param List<CityIntentMetric> intentMetrics = java.util.List.of()
 @param List<CityIntentEvidence> intentEvidencePatterns = java.util.List.of()
-@param List<SearchResultPattern> searchResultPatterns = java.util.List.of()
 @param PageEvidenceProfile pageEvidenceProfile = null
 @param CityRichContent localRichContent = null
 @param WorkLevelRichContent localSideHustleContent = null
@@ -266,15 +264,6 @@
                     </div>
                 </section>
             @endif
-
-            @template.components.search_result_patterns(
-                appName = appName,
-                cityName = city.getCityName(),
-                intentLabel = intentPage.getDisplayName(),
-                netHourly = scenario.getNetHourly(),
-                searchResultPatterns = searchResultPatterns,
-                sectionClass = "max-w-4xl mx-auto"
-            )
 
             @template.components.driver_field_notes(
                 appName = appName,

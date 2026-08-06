@@ -20,7 +20,7 @@ public class CalculatorService {
         double taxableIncome = grossRevenue - deductibleExpenses;
         if (taxableIncome < 0)
             taxableIncome = 0;
-        return taxableIncome * AppConstants.SELF_EMPLOYMENT_TAX_RATE;
+        return AppConstants.estimateSelfEmploymentTax(taxableIncome);
     }
 
     public double calculateNetProfit(double grossRevenue, double miles, double mpg, double gasPrice,

@@ -70,7 +70,7 @@ public record DriverShiftReport(
         }
         double mileageProxy = miles * AppConstants.IRS_MILEAGE_RATE;
         double taxableProfit = grossPay - mileageProxy;
-        double taxes = Math.max(0, taxableProfit * AppConstants.SELF_EMPLOYMENT_TAX_RATE);
+        double taxes = AppConstants.estimateSelfEmploymentTax(taxableProfit);
         return grossPay - mileageProxy - taxes;
     }
 

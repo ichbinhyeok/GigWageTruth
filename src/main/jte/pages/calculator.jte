@@ -75,7 +75,7 @@
                                 <div class="prose prose-slate max-w-none text-slate-600">
                                     <p>Many Uber drivers are shocked to see their "real" hourly wage drop below minimum wage. The culprit is usually <strong>hidden vehicle costs</strong>.</p>
                                     <p>When you drive for Uber, you are borrowing equity from your car's future value. <strong>Depreciation</strong> costs about $0.15 per mile for the average sedan. Add gas ($0.10-$0.15/mi) and maintenance ($0.09/mi), and your operating costs can easily exceed $0.35 per mile.</p>
-                                    <p>This calculator uses the <strong>2026 IRS Standard Mileage Rate of $0.725/mile</strong> as a baseline, which includes all these factors plus insurance. This is the most accurate way to understand your true "take-home" pay.</p>
+                                    <p>This calculator uses the current <strong>2026 IRS business mileage rate of $0.76/mile</strong> as a consistent planning proxy. It covers multiple operating-cost categories for tax purposes, but it is not a measurement of your specific vehicle's actual cost.</p>
                                 </div>
                             </section>
                             @endif
@@ -90,7 +90,7 @@
                                             <svg class="w-5 h-5 text-slate-400 transition-transform" :class="{'rotate-180': open}" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                                         </button>
                                         <div x-show="open" class="px-6 pb-4 text-slate-600">
-                                            <p>For 2026, the IRS standard mileage rate is <strong>72.5¢/mile ($0.725)</strong>. This rate covers gas, insurance, wear and tear, and depreciation. We use this as an estimation proxy; not tax advice.</p>
+                                            <p>For 2026, the IRS business rate is <strong>76¢/mile from July 1</strong> and was 72.5¢ from January through June. We use the current rate once as a planning proxy; not tax advice.</p>
                                         </div>
                                     </div>
                                     <div x-data="{ open: false }" class="border border-slate-200 rounded-xl bg-white overflow-hidden">
@@ -123,7 +123,7 @@
                                     <details class="group border border-slate-200 rounded-xl p-4 bg-slate-50">
                                         <summary class="cursor-pointer font-semibold text-slate-800">Quick assumptions (tap for full method)</summary>
                                         <ul class="mt-3 text-sm text-slate-600 list-disc pl-5 space-y-1">
-                                            <li>IRS mileage proxy: $0.725/mi (2026)</li>
+                                            <li>Current IRS mileage proxy: $0.76/mi (effective July 1, 2026)</li>
                                             <li>SE tax estimate: 15.3%</li>
                                             <li>Real wage uses total online time</li>
                                         </ul>
@@ -139,7 +139,7 @@
                                             </tr>
                                             <tr class="border-b border-slate-100 last:border-0">
                                                 <td class="py-2 pr-4 font-bold text-slate-900 w-24 shrink-0 whitespace-nowrap">Expenses:</td>
-                                                <td class="py-2 text-slate-600">We use the <strong>2026 IRS Standard Mileage Rate ($0.725/mi)</strong> unless you select a custom vehicle. This covers gas, insurance, tires, maintenance, and depreciation.</td>
+                                                <td class="py-2 text-slate-600">We use the current <strong>2026 IRS business mileage rate ($0.76/mi)</strong> once as a comparison proxy unless you select a custom vehicle. It is not a measured actual-cost estimate.</td>
                                             </tr>
                                             <tr class="border-b border-slate-100 last:border-0">
                                                 <td class="py-2 pr-4 font-bold text-slate-900 w-24 shrink-0 whitespace-nowrap">Taxes:</td>
@@ -172,7 +172,7 @@
                                      </a>
                                      <a href="/vehicle-cost" class="relative group block bg-white p-5 rounded-xl border-2 border-emerald-100 hover:border-emerald-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
                                          <h4 class="font-bold text-slate-900 mb-2 flex items-center gap-2"><span class="text-xl">🚗</span> Vehicle Costs</h4>
-                                         <p class="text-xs text-slate-600 mb-4 leading-relaxed">Your car is dying $0.725 every mile you drive. Discover if you are driving a "profit killer" vehicle and how to source a cheap hybrid instead.</p>
+                                         <p class="text-xs text-slate-600 mb-4 leading-relaxed">Your vehicle's real cost per mile depends on fuel, maintenance, depreciation, insurance, and financing. Compare your actual records with the standard proxy before changing vehicles.</p>
                                          <div class="text-xs font-bold text-emerald-600 group-hover:text-emerald-700 flex items-center gap-1">Stop the bleeding <span class="group-hover:translate-x-1 transition-transform">→</span></div>
                                      </a>
                                      <a href="/insurance" class="relative group block bg-white p-5 rounded-xl border-2 border-emerald-100 hover:border-emerald-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
@@ -227,7 +227,7 @@
                           "mainEntity": [{
                             "@type": "Question",
                             "name": "What is the IRS Standard Mileage Rate for 2026?",
-                            "acceptedAnswer": { "@type": "Answer", "text": "For 2026, the IRS standard mileage rate is 72.5¢/mile ($0.725). This rate covers gas, insurance, wear and tear, and depreciation. We use this as an estimation proxy; not tax advice." }
+                            "acceptedAnswer": { "@type": "Answer", "text": "For 2026, the IRS business rate is 76 cents per mile from July 1 and was 72.5 cents from January through June. We use the current rate once as a planning proxy, not as measured vehicle cost or tax advice." }
                           }, {
                             "@type": "Question",
                             "name": "Is Uber driving worth it in 2026?",
@@ -281,7 +281,7 @@
                                 <div class="prose prose-slate max-w-none text-slate-600">
                                     <p>DoorDash shows you "Active Time" earnings, which look great. But they hide the <strong>unpaid return trips</strong> and <strong>waiting time</strong>.</p>
                                     <p>Furthermore, food delivery takes a massive toll on your vehicle. The frequent start-stop driving accelerates wear on brakes and tires significantly more than highway driving.</p>
-                                    <p>This calculator reveals the truth. We deduct the IRS Standard Mileage Rate ($0.725/mi), which accounts for the invisible depreciation of your car. If you are driving a new car for $2 deliveries, you are likely <strong>losing money</strong>.</p>
+                                    <p>This calculator applies the current IRS business mileage rate ($0.76/mi) once as a consistent cost proxy. Compare it with your own fuel, maintenance, insurance, and depreciation records before deciding whether an order was profitable.</p>
                                 </div>
                             </section>
                             @endif
@@ -296,7 +296,7 @@
                                             <svg class="w-5 h-5 text-slate-400 transition-transform" :class="{'rotate-180': open}" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                                         </button>
                                         <div x-show="open" class="px-6 pb-4 text-slate-600">
-                                            <p>You have two choices: Standard Mileage Deduction OR Actual Expenses (gas, repairs, insurance). You cannot pick both. For most Dashers, the <strong>Standard Mileage Deduction ($0.725/mi)</strong> saves more money and is easier to track.</p>
+                                            <p>Taxpayers generally choose between the standard mileage method and eligible actual vehicle expenses for a vehicle and tax year. Which method is better depends on your records and eligibility; the current standard rate is <strong>$0.76/mi</strong>.</p>
                                         </div>
                                     </div>
                                     <div x-data="{ open: false }" class="border border-slate-200 rounded-xl bg-white overflow-hidden">
@@ -329,7 +329,7 @@
                                     <details class="group border border-slate-200 rounded-xl p-4 bg-slate-50">
                                         <summary class="cursor-pointer font-semibold text-slate-800">Quick assumptions (tap for full method)</summary>
                                         <ul class="mt-3 text-sm text-slate-600 list-disc pl-5 space-y-1">
-                                            <li>IRS mileage proxy: $0.725/mi (2026)</li>
+                                            <li>Current IRS mileage proxy: $0.76/mi (effective July 1, 2026)</li>
                                             <li>SE tax estimate: 15.3%</li>
                                             <li>Real wage uses total online time</li>
                                         </ul>
@@ -345,7 +345,7 @@
                                             </tr>
                                             <tr class="border-b border-slate-100 last:border-0">
                                                 <td class="py-2 pr-4 font-bold text-slate-900 w-24 shrink-0 whitespace-nowrap">Expenses:</td>
-                                                <td class="py-2 text-slate-600">We use the <strong>2026 IRS Standard Mileage Rate ($0.725/mi)</strong>. This deduction is critical because city driving (stop-and-go) destroys brakes and tires faster than highway miles.</td>
+                                                <td class="py-2 text-slate-600">We use the current <strong>2026 IRS business mileage rate ($0.76/mi)</strong> once as a comparison proxy. Your actual city-driving cost may be higher or lower.</td>
                                             </tr>
                                             <tr class="border-b border-slate-100 last:border-0">
                                                 <td class="py-2 pr-4 font-bold text-slate-900 w-24 shrink-0 whitespace-nowrap">Taxes:</td>
@@ -378,7 +378,7 @@
                                      </a>
                                      <a href="/vehicle-cost" class="relative group block bg-white p-5 rounded-xl border-2 border-red-100 hover:border-red-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
                                          <h4 class="font-bold text-slate-900 mb-2 flex items-center gap-2"><span class="text-xl">🚗</span> Vehicle Costs</h4>
-                                         <p class="text-xs text-slate-600 mb-4 leading-relaxed">Your car is dying $0.725 every mile you drive. Discover if you are driving a "profit killer" vehicle and how to source a cheap hybrid instead.</p>
+                                         <p class="text-xs text-slate-600 mb-4 leading-relaxed">Track your real fuel, maintenance, depreciation, insurance, and financing costs before deciding whether a different vehicle would improve profit.</p>
                                          <div class="text-xs font-bold text-red-600 group-hover:text-red-700 flex items-center gap-1">Stop the bleeding <span class="group-hover:translate-x-1 transition-transform">→</span></div>
                                      </a>
                                      <a href="/insurance" class="relative group block bg-white p-5 rounded-xl border-2 border-red-100 hover:border-red-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
@@ -434,7 +434,7 @@
                           "mainEntity": [{
                             "@type": "Question",
                             "name": "Can I write off gas on my taxes?",
-                            "acceptedAnswer": { "@type": "Answer", "text": "You have two choices: Standard Mileage Deduction OR Actual Expenses (gas, repairs, insurance). You cannot pick both. For most Dashers, the Standard Mileage Deduction ($0.725/mi) saves more money and is easier to track." }
+                            "acceptedAnswer": { "@type": "Answer", "text": "Taxpayers generally choose between the standard mileage method and eligible actual vehicle expenses for a vehicle and tax year. The better method depends on eligibility and records; the current 2026 standard rate is $0.76 per mile from July 1." }
                           }, {
                             "@type": "Question",
                             "name": "Does Acceptance Rate matter for earnings?",

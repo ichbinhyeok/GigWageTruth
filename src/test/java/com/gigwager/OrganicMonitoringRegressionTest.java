@@ -438,18 +438,39 @@ public class OrganicMonitoringRegressionTest {
                 "City report should frame shift evidence as real-world checks");
         assertTrue(html.contains("NerdWallet Uber pay test"),
                 "City report field notes should include app-specific field-test evidence");
-        assertTrue(html.contains("Top-result comparison"),
-                "City report should explain how it competes with ranking result types");
-        assertTrue(html.contains("Official pay docs"),
-                "City report competitor section should include official pay docs as a search-result pattern");
-        assertTrue(html.contains("Usually missing:"),
-                "City report competitor section should state the missing check GigVerdict answers");
+        assertTrue(!html.contains("Top-result comparison") && !html.contains("Where GigVerdict has to beat"),
+                "Internal SERP strategy notes must not appear in user-facing city reports");
+        assertTrue(html.contains("How this Miami Uber estimate was built"),
+                "City report should explain its evidence in user-facing language");
         assertTrue(html.contains("Share a real Uber shift in Miami"),
                 "City report should collect first-party driver reports");
         assertTrue(html.contains("name=\"lead_type\" value=\"driver_earnings_report\""),
                 "Driver report form should identify report submissions");
         assertTrue(html.contains("name=\"source_path\" value=\"/salary/uber/miami\""),
                 "Driver report form should preserve source URL context");
+    }
+
+    @Test
+    public void newYorkDoorDashShouldSeparateTheOfficialActiveHourRuleFromTheModel() throws Exception {
+        MvcResult result = mockMvc.perform(get("/salary/doordash/new-york"))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        Document doc = Jsoup.parse(result.getResponse().getContentAsString(),
+                AppConstants.BASE_URL + "/salary/doordash/new-york");
+        String text = doc.text();
+
+        assertTrue(doc.title().contains("DoorDash Pay in NYC: Active-Hour Minimum & Take-Home"));
+        assertTrue(firstH1(doc).contains("DoorDash Pay in New York City"));
+        assertTrue(text.contains("$22.13")
+                        && text.toLowerCase().replace('-', ' ').contains("qualifying active hour"));
+        assertTrue(text.contains("not a guarantee for every hour the app is online"));
+        assertTrue(doc.html().contains("guide-to-the-new-york-city-earnings-standard"));
+        assertTrue(text.contains("Side-Hustle (25 hrs/wk)"));
+        assertTrue(text.contains("25 hrs"));
+        assertTrue(!text.contains("41 hrs"));
+        assertTrue(!text.contains("Indexed because"));
+        assertTrue(!text.contains("Where GigVerdict has to beat"));
     }
 
     @Test
@@ -697,12 +718,9 @@ public class OrganicMonitoringRegressionTest {
                 "Daily target intent page should expose target-hour metric cards");
         assertTrue(dailyTargetHtml.contains("DoorDash $100/day discussion"),
                 "Daily target intent page should cite target-specific driver discussion");
-        assertTrue(dailyTargetHtml.contains("Top-result comparison"),
-                "Daily target page should show the competitor result-pattern comparison");
-        assertTrue(dailyTargetHtml.contains("Creator SERP"),
-                "Daily target page should compare against creator-style target searches");
-        assertTrue(dailyTargetHtml.contains("Gridwise DoorDash pay data"),
-                "Daily target page should include the large-dataset competitor pattern");
+        assertTrue(!dailyTargetHtml.contains("Top-result comparison")
+                        && !dailyTargetHtml.contains("GigVerdict response:"),
+                "Internal SERP strategy notes must not appear on intent pages");
         assertTrue(dailyTargetHtml.contains("Stay in this Phoenix DoorDash cluster"),
                 "Daily target page should keep adjacent routes inside the current city cluster");
         assertTrue(dailyTargetHtml.contains("/salary/doordash/phoenix/after-gas"),
@@ -765,8 +783,8 @@ public class OrganicMonitoringRegressionTest {
                 "Standalone compare page title should be concise enough for CTR testing");
         assertTrue(compareDoc.text().contains("Quick answer: Uber models"),
                 "Standalone compare page should expose a numeric quick answer near the top");
-        assertTrue(compareDoc.text().contains("Evidence profile"),
-                "Standalone compare page should expose an evidence profile");
+        assertTrue(compareDoc.text().contains("Estimate transparency"),
+                "Standalone compare page should expose a user-facing estimate transparency block");
 
         mockMvc.perform(get("/salary/uber/chicago/uber-eats-vs-doordash"))
                 .andExpect(status().isNotFound());
@@ -797,24 +815,24 @@ public class OrganicMonitoringRegressionTest {
                 .andReturn();
         Document cityDoc = Jsoup.parse(cityResult.getResponse().getContentAsString(),
                 AppConstants.BASE_URL + "/salary/doordash/phoenix");
-        assertTrue(cityDoc.title().contains("Driver Earnings"),
-                "Priority city page title should lead with earnings framing");
-        assertTrue(firstH1(cityDoc).contains("Driver Earnings"),
-                "Priority city page H1 should lead with earnings framing");
+        assertTrue(cityDoc.title().contains("How Much Do DoorDash Drivers Make in Phoenix?"),
+                "City title should match the broad driver-pay question");
+        assertTrue(firstH1(cityDoc).contains("How Much Do DoorDash Drivers Make in Phoenix?"),
+                "City H1 should answer the broad driver-pay question naturally");
 
         MvcResult uberQuickWinResult = mockMvc.perform(get("/salary/uber/atlanta"))
                 .andExpect(status().isOk())
                 .andReturn();
         Document uberQuickWinDoc = Jsoup.parse(uberQuickWinResult.getResponse().getContentAsString(),
                 AppConstants.BASE_URL + "/salary/uber/atlanta");
-        assertTrue(uberQuickWinDoc.title().contains("Hourly"),
-                "Uber Atlanta title should target hourly earnings quick-win queries");
-        assertTrue(firstH1(uberQuickWinDoc).contains("Driver Earnings"),
-                "Uber Atlanta H1 should preserve earnings-first language");
-        assertTrue(uberQuickWinDoc.text().contains("Priority hourly earnings cluster"),
-                "Uber Atlanta should expose the hourly earnings query cluster");
-        assertTrue(uberQuickWinDoc.text().contains("Uber driver hourly earnings Atlanta GA 2025 2026"),
-                "Uber Atlanta should include the exact GSC quick-win query phrase");
+        assertTrue(uberQuickWinDoc.title().contains("How Much Do Uber Drivers Make in Atlanta?"),
+                "Uber Atlanta title should match the user question");
+        assertTrue(firstH1(uberQuickWinDoc).contains("How Much Do Uber Drivers Make in Atlanta?"),
+                "Uber Atlanta H1 should use natural question language");
+        assertTrue(uberQuickWinDoc.text().contains("Related planning guides"),
+                "Uber Atlanta should expose distinct adjacent intents without keyword stuffing");
+        assertTrue(!uberQuickWinDoc.text().contains("2025 2026"),
+                "User-facing city content should not repeat year-keyword strings");
         assertTrue(uberQuickWinDoc.html().contains("/salary/uber/atlanta/after-gas"),
                 "Uber Atlanta should link from city page into the after-gas intent page");
 

@@ -98,7 +98,7 @@
 
                     <div class="bg-white p-6 rounded-xl border border-slate-200">
                         <h3 class="text-xl font-bold text-slate-900 mb-2">8. Can delivering food ruin my car?</h3>
-                        <p class="text-slate-600">Yes. Doing 50 short trips a week in a city puts massive strain on your transmission, battery, and brakes compared to standard highway commuting. The IRS 72.5¢ per mile rate exists precisely because cars degrade rapidly when used for commercial service.</p>
+                        <p class="text-slate-600">Frequent short trips can increase wear, but the cost depends on the vehicle and route. The current IRS business rate is 76¢ per mile from July 1, 2026; it is a tax benchmark, not proof of any one car's physical degradation.</p>
                     </div>
                 </div>
             </section>

@@ -8,7 +8,7 @@
             params: new URLSearchParams(window.location.search),
             get fromApp() { return this.params.get('app') || 'gig apps'; },
             get miles() { return parseInt(this.params.get('miles')) || 0; },
-            get estimatedWeeklyCost() { return (this.miles * 0.725).toFixed(0); },
+            get estimatedWeeklyCost() { return (this.miles * 0.76).toFixed(0); },
             get showPersonalizedBanner() { return this.miles > 0; }
         }">
             <div class="max-w-3xl mx-auto">
@@ -53,7 +53,7 @@
                 </div>
 
                 <div class="bg-blue-50 p-6 rounded-xl border border-blue-200 text-left mb-8">
-                    <p class="text-blue-800 font-medium mb-4">For most sedans, you are losing <strong>around 45 cents to 70 cents</strong> per mile driven. For 2026, the IRS standard mileage rate is 72.5¢ per mile. We use this as an estimation proxy, not tax advice. It is actually highly accurate to the real cost if you use a depreciating asset.</p>
+                    <p class="text-blue-800 font-medium mb-4">Vehicle cost per mile varies with fuel economy, maintenance, insurance, financing, and depreciation. The current 2026 IRS business rate is 76¢ per mile from July 1; we use it as a consistent comparison proxy, not a claim about your actual cost or tax advice.</p>
                 </div>
                 
                 <a href="/vehicle-cost" class="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors shadow shadow-blue-500/30">View Vehicle Strategy Guide</a>

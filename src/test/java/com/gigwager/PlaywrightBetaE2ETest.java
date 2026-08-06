@@ -289,10 +289,10 @@ public class PlaywrightBetaE2ETest {
                     "Result area should expose recommended next action");
             assertTrue(page.getByText("Standard Assumptions").first().isVisible(),
                     "Result area should expose fixed assumptions");
-            assertTrue(page.getByText("IRS mileage proxy: $0.725/mi (2026).").first().isVisible(),
+            assertTrue(page.getByText("Current IRS mileage proxy: $0.76/mi (effective July 1, 2026).").first().isVisible(),
                     "Assumption block should include IRS mileage baseline");
-            assertTrue(page.getByText("Self-employment tax estimate: 15.3%.").first().isVisible(),
-                    "Assumption block should include SE tax baseline");
+            assertTrue(page.getByText("Conservative tax reserve:").first().isVisible(),
+                    "Assumption block should distinguish the reserve from the SE-tax calculation");
         }
     }
 

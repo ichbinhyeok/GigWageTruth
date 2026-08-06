@@ -3,7 +3,7 @@
         "id": "irs-standard",
         "name": "IRS Standard Rate 2026 (Recommended)",
         "type": "standard",
-        "costPerMile": 0.725,
+        "costPerMile": 0.76,
         "description": "Official IRS 2026 rate - includes all vehicle costs",
         "icon": "ICON"
     },

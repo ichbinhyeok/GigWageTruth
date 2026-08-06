@@ -38,10 +38,10 @@
                     <h2 class="text-2xl font-bold text-slate-900 mb-4">2. The Magic Eraser: The Standard Mileage Deduction</h2>
                     <div class="prose prose-slate max-w-none text-slate-600">
                         <p>If you made $10,000 driving for Uber, you <strong>do not</strong> pay 15.3% on $10,000. You only pay taxes on the profit <em>after</em> deducting your business expenses.</p>
-                        <p>For most drivers, the easiest and largest deduction is the <strong>IRS Standard Mileage Rate</strong>. For 2026, the IRS standard mileage rate is 72.5¢ per mile (<a href="https://www.irs.gov/tax-professionals/standard-mileage-rates" class="text-emerald-600 hover:text-emerald-700 underline" target="_blank" rel="noopener noreferrer">Official IRS Source</a>). We use this as an estimation proxy, not tax advice.</p>
+                        <p>For many drivers, the standard mileage method is the simplest deduction method. The 2026 business rate is 76¢ per mile from July 1 and was 72.5¢ from January through June (<a href="https://www.irs.gov/tax-professionals/standard-mileage-rates" class="text-emerald-600 hover:text-emerald-700 underline" target="_blank" rel="noopener noreferrer">Official IRS Source</a>). Our current calculator uses 76¢ as a planning proxy, not tax advice.</p>
                         <div class="bg-emerald-50 rounded-xl p-6 mt-6 border border-emerald-100">
                             <h4 class="font-bold text-emerald-900 mb-2">Example:</h4>
-                            <p class="text-emerald-800 text-sm">You drive 10,000 miles to earn that $10,000. Your deduction is 10,000 * 0.725 = $7,250. You only pay SE tax on the remaining <strong>$2,750</strong> profit.</p>
+                            <p class="text-emerald-800 text-sm">At the current 76¢ rate, 10,000 qualifying business miles would produce a $7,600 mileage deduction. Actual tax treatment depends on when the miles were driven and your eligibility.</p>
                         </div>
                         <p class="mt-4 text-sm text-red-600 font-bold">⚠️ Warning: If you claim the standard mileage rate, you cannot also deduct gas, repairs, or depreciation. The rate covers all of that.</p>
                     </div>

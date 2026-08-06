@@ -136,7 +136,7 @@
                         These are estimated scenarios based on typical ${city.getCityName()} conditions. Actual results vary by vehicle efficiency, trip mix, acceptance behavior, and market timing.
                     </p>
                     <p class="text-xs text-slate-400">
-                        Net profit is estimated by applying the IRS standard mileage rate and 15.3% self-employment tax to modeled weekly gross income. For 2026, the IRS standard mileage rate is 72.5 cents per mile. This is educational content, not tax advice.
+                        Modeled take-home applies the current $${String.format("%.2f", AppConstants.IRS_MILEAGE_RATE)}/mile IRS rate once as a vehicle-cost proxy, then estimates self-employment tax on 92.35% of the remaining profit. This is educational planning math, not measured vehicle cost or tax advice.
                     </p>
                 </div>
 
@@ -409,7 +409,7 @@
                     <div class="bg-white p-5 rounded-xl border-2 border-red-100 hover:border-red-500 transition-all">
                         <h4 class="font-bold text-slate-900 mb-2">Quarterly Tax Risk</h4>
                         <p class="text-xs text-slate-600 mb-3">
-                            Estimated quarterly self-employment tax exposure: <strong>$${String.format("%.0f", Math.max(0, (scenario.getGrossWeekly() - (scenario.getMiles() * AppConstants.IRS_MILEAGE_RATE)) * AppConstants.SELF_EMPLOYMENT_TAX_RATE) * 13 )}</strong>.
+                            Estimated quarterly self-employment tax exposure before income tax and individual limits: <strong>$${String.format("%.0f", AppConstants.estimateSelfEmploymentTax(scenario.getGrossWeekly() - (scenario.getMiles() * AppConstants.IRS_MILEAGE_RATE)) * 13 )}</strong>.
                         </p>
                         <a href="/taxes/quarterly-estimator" class="text-xs font-bold text-red-600 hover:text-red-700">Open quarterly estimator</a>
                     </div>

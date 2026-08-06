@@ -45,7 +45,7 @@ public class VehiclePresetCatalog {
                         return preset;
                 }
                 return presets.getOrDefault("irs-standard",
-                                new VehiclePreset("irs-standard", "IRS Standard Rate 2026", "standard", 0.725, null,
+                                new VehiclePreset("irs-standard", "IRS Standard Rate 2026", "standard", 0.76, null,
                                                 null, null, null, null, null));
         }
 

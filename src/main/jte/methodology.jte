@@ -40,7 +40,7 @@
                         <div class="bg-slate-50 p-4 rounded-xl">
                             <h3 class="font-semibold text-slate-900 mb-2">IRS Standard Method</h3>
                             <p class="text-sm text-slate-600">
-                                We use the 2026 IRS Standard Mileage Rate of <strong>$0.725 per mile</strong>. 
+                                We use the current 2026 IRS business mileage rate of <strong>$0.76 per mile</strong>, effective July 1, as a consistent cost proxy. The January-June rate was $0.725.
                                 This is the government's official estimate of what it costs to operate a vehicle for business.
                             </p>
                         </div>

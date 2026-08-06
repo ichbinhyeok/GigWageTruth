@@ -15,10 +15,10 @@ public class GigCalculationServiceTest {
     void standardCalculationUsesSharedTakeHomeMath() {
         GigCalculationResult result = service.calculate(GigCalculationRequest.standard(1000.0, 800.0, 40.0));
 
-        assertEquals(580.0, result.totalDeduction(), 0.0001);
-        assertEquals(64.26, result.taxReserve(), 0.0001);
-        assertEquals(355.74, result.takeHome(), 0.0001);
-        assertEquals(8.8935, result.realHourly(), 0.0001);
+        assertEquals(608.0, result.totalDeduction(), 0.0001);
+        assertEquals(59.976, result.taxReserve(), 0.0001);
+        assertEquals(332.024, result.takeHome(), 0.0001);
+        assertEquals(8.3006, result.realHourly(), 0.0001);
         assertEquals("Mileage + car cost", result.biggestLeakLabel());
     }
 

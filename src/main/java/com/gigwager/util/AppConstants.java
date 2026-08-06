@@ -15,8 +15,13 @@ import java.time.LocalDate;
 public class AppConstants {
 
     // Financial Constants (2026)
-    public static final double IRS_MILEAGE_RATE = 0.725; // 2026 IRS Standard Mileage Rate
-    public static final double SELF_EMPLOYMENT_TAX_RATE = 0.153; // 15.3% (Social Security + Medicare)
+    // Current 2026 business rate, effective July 1, 2026. Jan-Jun 2026 used $0.725/mi.
+    public static final double IRS_MILEAGE_RATE = 0.76;
+    public static final String IRS_MILEAGE_RATE_EFFECTIVE_DATE = "Jul 1, 2026";
+    public static final double NYC_DOORDASH_ACTIVE_HOUR_MINIMUM = 22.13;
+    public static final double IRS_MILEAGE_RATE_FIRST_HALF_2026 = 0.725;
+    public static final double SELF_EMPLOYMENT_TAX_RATE = 0.153; // Social Security + Medicare rate
+    public static final double SELF_EMPLOYMENT_TAXABLE_EARNINGS_FACTOR = 0.9235;
 
     // Comparison Benchmarks
     public static final double MIN_WAGE_BURGER_KING = 16.00; // Example: CA Fast Food Min Wage is $20, but using
@@ -34,6 +39,18 @@ public class AppConstants {
 
     // Asset Versioning (Updates on every restart to bust cache)
     public static final String CACHE_VERSION = String.valueOf(System.currentTimeMillis());
+
+    public static double irsMileageRate(LocalDate date) {
+        if (date != null && date.getYear() == 2026 && date.isBefore(LocalDate.of(2026, 7, 1))) {
+            return IRS_MILEAGE_RATE_FIRST_HALF_2026;
+        }
+        return IRS_MILEAGE_RATE;
+    }
+
+    public static double estimateSelfEmploymentTax(double netEarnings) {
+        return Math.max(0, netEarnings) * SELF_EMPLOYMENT_TAXABLE_EARNINGS_FACTOR
+                * SELF_EMPLOYMENT_TAX_RATE;
+    }
 
     private static String resolveSitemapLastmodDate() {
         String envOverride = System.getenv("SITEMAP_LASTMOD_DATE");
