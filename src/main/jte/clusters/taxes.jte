@@ -28,7 +28,7 @@
                         <ul class="list-disc pl-5 mt-4 space-y-2">
                             <li><strong>Social Security:</strong> 12.4%</li>
                             <li><strong>Medicare:</strong> 2.9%</li>
-                            <li><strong>Total:</strong> 15.3% on your <em>net</em> profit (not gross earnings!)</li>
+                            <li><strong>Total rate:</strong> 15.3%, generally applied to 92.35% of <em>net earnings</em>, subject to individual limits</li>
                         </ul>
                     </div>
                 </section>
@@ -37,7 +37,7 @@
                 <section class="bg-white rounded-3xl p-8 lg:p-12 border border-slate-200 shadow-sm">
                     <h2 class="text-2xl font-bold text-slate-900 mb-4">2. The Magic Eraser: The Standard Mileage Deduction</h2>
                     <div class="prose prose-slate max-w-none text-slate-600">
-                        <p>If you made $10,000 driving for Uber, you <strong>do not</strong> pay 15.3% on $10,000. You only pay taxes on the profit <em>after</em> deducting your business expenses.</p>
+                        <p>If you made $10,000 driving for Uber, you <strong>do not</strong> simply pay 15.3% on $10,000. Eligible business deductions reduce net earnings, and the federal self-employment-tax calculation generally applies the 15.3% rate to 92.35% of that amount. Income tax is separate.</p>
                         <p>For many drivers, the standard mileage method is the simplest deduction method. The 2026 business rate is 76¢ per mile from July 1 and was 72.5¢ from January through June (<a href="https://www.irs.gov/tax-professionals/standard-mileage-rates" class="text-emerald-600 hover:text-emerald-700 underline" target="_blank" rel="noopener noreferrer">Official IRS Source</a>). Our current calculator uses 76¢ as a planning proxy, not tax advice.</p>
                         <div class="bg-emerald-50 rounded-xl p-6 mt-6 border border-emerald-100">
                             <h4 class="font-bold text-emerald-900 mb-2">Example:</h4>

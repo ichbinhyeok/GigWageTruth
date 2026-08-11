@@ -27,6 +27,20 @@ class PricingAssumptionsTest {
     }
 
     @Test
+    void publicTaxCopyDistinguishesPlanningReserveFromTaxCalculation() throws Exception {
+        String calculator = Files.readString(Path.of("src/main/jte/pages/calculator.jte"));
+        String methodology = Files.readString(Path.of("src/main/jte/methodology.jte"));
+        String taxGuide = Files.readString(Path.of("src/main/jte/clusters/taxes.jte"));
+        String ranking = Files.readString(Path.of("src/main/jte/salary/best-cities.jte"));
+
+        assertTrue(calculator.contains("planning reserve, not an exact bill"));
+        assertFalse(calculator.contains("Don't let the IRS take 15.3% of your gross"));
+        assertTrue(methodology.contains("generally applied to 92.35% of net earnings"));
+        assertTrue(taxGuide.contains("15.3% rate to 92.35% of that amount"));
+        assertTrue(ranking.contains("15.3% rate to 92.35% of remaining profit"));
+    }
+
+    @Test
     void browserAndPresetRatesMatchTheServerRate() throws Exception {
         String calculator = Files.readString(Path.of("src/main/resources/static/js/calculator-core.js"));
         String presets = Files.readString(Path.of("src/main/resources/static/vehicle-presets.json"));

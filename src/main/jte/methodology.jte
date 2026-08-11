@@ -64,10 +64,10 @@
                     </h2>
                     <p class="text-slate-600 mb-4">
                         Unlike W-2 employees, gig workers must pay the full FICA tax (Social Security + Medicare).
-                        <br><strong>Rate: 15.3%</strong> of your net profit.
+                        <br><strong>Rate: 15.3%</strong> generally applied to 92.35% of net earnings, subject to individual limits.
                     </p>
                     <div class="bg-amber-50 border border-amber-200 p-4 rounded-xl text-amber-800 text-sm">
-                        <strong>Note:</strong> We apply this tax only to your <em>profit</em> (Revenue - Deductions), which is how the IRS calculates it. 
+                        <strong>Note:</strong> The dedicated tax estimator applies the 92.35% self-employment earnings factor after modeled deductions. Income tax is separate, and this remains planning guidance rather than tax advice.
                         This is why tracking miles is crucial—it lowers your taxable income!
                     </div>
                 </section>

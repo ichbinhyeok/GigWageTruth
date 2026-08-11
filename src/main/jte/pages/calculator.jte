@@ -124,7 +124,7 @@
                                         <summary class="cursor-pointer font-semibold text-slate-800">Quick assumptions (tap for full method)</summary>
                                         <ul class="mt-3 text-sm text-slate-600 list-disc pl-5 space-y-1">
                                             <li>Current IRS mileage proxy: $0.76/mi (effective July 1, 2026)</li>
-                                            <li>SE tax estimate: 15.3%</li>
+                                            <li>Tax buffer: 15.3% of post-mileage profit (planning reserve, not an exact bill)</li>
                                             <li>Real wage uses total online time</li>
                                         </ul>
                                     </details>
@@ -167,7 +167,7 @@
                                      <a href="/taxes" class="relative group block bg-white p-5 rounded-xl border-2 border-emerald-100 hover:border-emerald-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
                                          <div class="absolute -right-2 -top-2 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide">Save $1,500+</div>
                                          <h4 class="font-bold text-slate-900 mb-2 flex items-center gap-2"><span class="text-xl">🏦</span> Tax Guide</h4>
-                                         <p class="text-xs text-slate-600 mb-4 leading-relaxed">Don't let the IRS take 15.3% of your gross. Find out how to legally write off your mileage and avoid a surprise tax bill -> <strong>Download our free tracking setup</strong>.</p>
+                                         <p class="text-xs text-slate-600 mb-4 leading-relaxed">Build a tax reserve from profit, not gross revenue. Track eligible mileage and use the dedicated estimator to reduce surprise-bill risk -> <strong>Download our free tracking setup</strong>.</p>
                                          <div class="text-xs font-bold text-emerald-600 group-hover:text-emerald-700 flex items-center gap-1">Protect your profit <span class="group-hover:translate-x-1 transition-transform">→</span></div>
                                      </a>
                                      <a href="/vehicle-cost" class="relative group block bg-white p-5 rounded-xl border-2 border-emerald-100 hover:border-emerald-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
@@ -330,7 +330,7 @@
                                         <summary class="cursor-pointer font-semibold text-slate-800">Quick assumptions (tap for full method)</summary>
                                         <ul class="mt-3 text-sm text-slate-600 list-disc pl-5 space-y-1">
                                             <li>Current IRS mileage proxy: $0.76/mi (effective July 1, 2026)</li>
-                                            <li>SE tax estimate: 15.3%</li>
+                                            <li>Tax buffer: 15.3% of post-mileage profit (planning reserve, not an exact bill)</li>
                                             <li>Real wage uses total online time</li>
                                         </ul>
                                     </details>
@@ -373,7 +373,7 @@
                                      <a href="/taxes" class="relative group block bg-white p-5 rounded-xl border-2 border-red-100 hover:border-red-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
                                          <div class="absolute -right-2 -top-2 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide">Save $1,500+</div>
                                          <h4 class="font-bold text-slate-900 mb-2 flex items-center gap-2"><span class="text-xl">🏦</span> Tax Guide</h4>
-                                         <p class="text-xs text-slate-600 mb-4 leading-relaxed">Don't let the IRS take 15.3% of your gross. Find out how to legally write off your mileage and avoid a surprise tax bill -> <strong>Download our free tracking setup</strong>.</p>
+                                         <p class="text-xs text-slate-600 mb-4 leading-relaxed">Build a tax reserve from profit, not gross revenue. Track eligible mileage and use the dedicated estimator to reduce surprise-bill risk -> <strong>Download our free tracking setup</strong>.</p>
                                          <div class="text-xs font-bold text-red-600 group-hover:text-red-700 flex items-center gap-1">Protect your profit <span class="group-hover:translate-x-1 transition-transform">→</span></div>
                                      </a>
                                      <a href="/vehicle-cost" class="relative group block bg-white p-5 rounded-xl border-2 border-red-100 hover:border-red-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">

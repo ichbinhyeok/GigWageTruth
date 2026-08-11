@@ -34,8 +34,8 @@
                                 <span class="text-sm font-medium text-red-200">Car Expenses</span>
                             </div>
                             <div class="p-4 bg-red-500/20 rounded-xl border border-red-500/30">
-                                <span class="block text-3xl font-black mb-1">- 15.3%</span>
-                                <span class="text-sm font-medium text-red-200">SE Taxes</span>
+                                <span class="block text-3xl font-black mb-1">15.3% rate</span>
+                                <span class="text-sm font-medium text-red-200">on 92.35% of modeled profit</span>
                             </div>
                         </div>
                         <p class="text-xl lg:text-2xl text-white font-medium">
