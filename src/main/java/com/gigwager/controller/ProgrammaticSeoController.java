@@ -127,7 +127,7 @@ public class ProgrammaticSeoController {
 
                 String title = String.format("%s Driver Earnings by City: Hourly Pay After Expenses", appName);
                 String description = String.format(
-                                "Compare estimated %s driver hourly earnings across %d cities after mileage and self-employment tax. %s currently leads at about $%.2f/hr net. Updated %s.",
+                                "Compare %s earnings across %d cities after mileage and tax assumptions. %s leads at about $%.2f/hr take-home. Updated %s.",
                                 appName,
                                 indexedCityCount,
                                 topCity.city().getCityName(),
@@ -535,20 +535,18 @@ public class ProgrammaticSeoController {
                 String title;
                 String description;
                 if (app.equals("doordash")) {
-                        title = String.format("Best Cities for DoorDash Drivers %d: Highest Net Pay | Best Places",
+                        title = String.format("Best Cities for DoorDash Drivers %d: Net Pay Ranking",
                                         currentYear);
                         description = String.format(
-                                        "Find the best places to DoorDash in %d, ranked by estimated take-home after the current mileage-cost proxy and tax assumptions. Start with %s at about $%.2f/hr, then compare %d city markets and hours to $100.",
-                                        currentYear,
+                                        "Compare %d DoorDash city markets by estimated take-home. %s leads at about $%.2f/hr after mileage and tax assumptions.",
+                                        rankedCities.size(),
                                         topRankedCity.city().getCityName(),
-                                        topRankedCity.netHourly(),
-                                        rankedCities.size());
+                                        topRankedCity.netHourly());
                 } else {
                         title = String.format("Best Cities for Uber Drivers in %d, Ranked by Net Pay",
                                         currentYear);
                         description = String.format(
-                                        "Compare the best cities to Uber in %d using estimated net hourly pay after mileage and self-employment tax. %s leads at about $%.2f/hr; open each market's calculator before you drive.",
-                                        currentYear,
+                                        "Compare Uber city markets by estimated take-home after mileage and tax assumptions. %s leads at about $%.2f/hr in the current model.",
                                         topRankedCity.city().getCityName(),
                                         topRankedCity.netHourly());
                 }
@@ -704,12 +702,12 @@ public class ProgrammaticSeoController {
                                                 appName, city.getCityName(), now.getYear());
                 String description = nycDoorDash
                                 ? String.format(
-                                                "See NYC DoorDash pay under the $%.2f qualifying active-hour minimum, plus a separate %d-hour take-home estimate after vehicle costs and SE tax. Updated %s.",
+                                                "NYC DoorDash pays at least $%.2f per qualifying active hour. Compare that rule with a separate %d-hour take-home estimate. Updated %s.",
                                                 AppConstants.NYC_DOORDASH_ACTIVE_HOUR_MINIMUM,
                                                 featuredScenario.getHours(),
                                                 monthYear)
                                 : String.format(
-                                                "See estimated %s driver pay in %s: $%d/week gross, $%.2f/hr take-home after modeled vehicle costs and SE tax, and the assumptions behind both. Updated %s.",
+                                                "%s drivers in %s: modeled $%d/week gross and $%.2f/hr take-home after vehicle-cost and tax assumptions. Updated %s.",
                                                 appName, city.getCityName(),
                                                 featuredScenario.getGrossWeekly(),
                                                 featuredScenario.getNetHourly(), monthYear);
@@ -2487,8 +2485,8 @@ public class ProgrammaticSeoController {
                                 appName,
                                 city.getCityName());
                 String viability = featuredScenario.getNetHourly() >= 15.0
-                                ? "This is above the federal minimum wage, making it potentially viable as supplemental income."
-                                : "This is close to or below minimum wage in many states, meaning a traditional W-2 job may offer better compensation plus benefits.";
+                                ? "This modeled take-home is above the local minimum-wage input used on this page. Compare benefits and actual costs before deciding."
+                                : "This modeled take-home is below the local minimum-wage input used on this page. This is a planning comparison, not a legal wage determination.";
                 String a2 = String.format(
                                 "It depends on your work level and vehicle. At a side-hustle pace in %s, the estimated net hourly wage is $%.2f/hr. %s Vehicle choice matters: a Toyota Prius (57 MPG) often yields higher net pay than a Ford Explorer (23 MPG).",
                                 city.getCityName(),

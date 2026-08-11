@@ -47,7 +47,7 @@
                     <ul>
                         <li><strong>1. Gross Dash Earnings:</strong> Base pay plus customer tips, estimated by local market tiers (density, average order value).</li>
                         <li><strong>2. Vehicle Deductions:</strong> @template.components.irs_rate_snippet() Delivering food is highly brutal on a car with stop-and-go driving. We subtract the IRS rate from gross revenue to find taxable profit.</li>
-                        <li><strong>3. SE Taxes:</strong> We deduct an estimated 15.3% self-employment tax (FICA) on the remaining profit.</li>
+                        <li><strong>3. SE Taxes:</strong> We estimate self-employment tax by applying the 15.3% rate to 92.35% of remaining profit, before individual limits and income tax.</li>
                     </ul>
                     <p class="italic text-slate-500 mt-4 text-sm">Note: This is an estimated proxy and not personalized tax advice. Driving a 15 MPG SUV vs. a 50 MPG Prius drastically alters reality.</p>
                 </div>
@@ -78,7 +78,7 @@
 
                     <div class="bg-white p-6 rounded-xl border border-slate-200">
                         <h3 class="text-xl font-bold text-slate-900 mb-2">4. How bad is the tax hit for Dashers?</h3>
-                        <p class="text-slate-600">You are an independent contractor, meaning you owe both income tax and a 15.3% self-employment tax on your net profit. If you do not track your business mileage to lower your profit, your tax liability will be devastating.</p>
+                        <p class="text-slate-600">Independent contractors may owe both income tax and self-employment tax. The SE-tax calculation generally applies the 15.3% rate to 92.35% of net earnings, subject to individual limits. Track eligible business mileage and use a tax professional for your filing position.</p>
                     </div>
 
                     <div class="bg-white p-6 rounded-xl border border-slate-200">

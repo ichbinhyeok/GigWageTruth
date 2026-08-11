@@ -35,7 +35,7 @@
                     <p class="text-2xl font-black text-slate-900">${pageEvidenceProfile.driverReportCount()}</p>
                 </div>
                 <div class="rounded-xl bg-slate-50 border border-slate-200 p-4">
-                    <p class="text-[11px] font-black uppercase tracking-[0.14em] text-slate-500 mb-1">City-specific</p>
+                    <p class="text-[11px] font-black uppercase tracking-[0.14em] text-slate-500 mb-1">Local driver reports</p>
                     <p class="text-2xl font-black text-slate-900">${pageEvidenceProfile.citySpecificDriverReportCount()}</p>
                 </div>
                 <div class="rounded-xl bg-slate-50 border border-slate-200 p-4">

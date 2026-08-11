@@ -340,7 +340,7 @@
                             <div class="flex justify-between items-center py-3 border-b border-slate-100">
                                 <div class="flex flex-col">
                                     <span class="text-slate-600">Tax reserve</span>
-                                    <span class="text-xs text-slate-400">15.3% self-employment tax</span>
+                                    <span class="text-xs text-slate-400">Conservative 15.3% planning reserve</span>
                                 </div>
                                 <span class="font-bold text-red-500">-$<span x-text="taxCost.toFixed(2)"></span></span>
                             </div>
@@ -439,7 +439,7 @@
                                 <h4 class="text-xs font-black uppercase tracking-widest text-slate-700 mb-2">Standard Assumptions</h4>
                                 <ul class="text-xs text-slate-600 space-y-1">
                                     <li>Current IRS mileage proxy: <strong>$0.76/mi</strong> (effective July 1, 2026).</li>
-                                    <li>Conservative tax reserve: <strong>15.3% of post-mileage profit</strong>. The dedicated tax estimator applies the 92.35% SE-tax earnings factor.</li>
+                                    <li>Conservative tax reserve: <strong>15.3% of post-mileage profit</strong>. This is a planning buffer, not your exact tax bill; the dedicated tax estimator applies the 92.35% SE-tax earnings factor.</li>
                                     <li>Hourly base uses <strong>total online time</strong> (not active time).</li>
                                 </ul>
                                 <p class="text-[10px] text-slate-400 mt-2">Educational estimate only, not tax or legal advice.</p>

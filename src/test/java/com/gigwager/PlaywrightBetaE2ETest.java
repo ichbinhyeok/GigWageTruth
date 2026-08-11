@@ -114,6 +114,28 @@ public class PlaywrightBetaE2ETest {
     }
 
     @Test
+    public void calculatorShouldTrackPrefillStartAndCompletionWithoutRawInputs() {
+        try (BrowserContext context = browser.newContext();
+                Page page = context.newPage()) {
+            page.navigate(baseUrl + "/uber?gross=1000&miles=700&hours=40");
+            page.waitForFunction(
+                    "() => window.dataLayer && Array.from(window.dataLayer).some(e => e && e[0] === 'event' && e[1] === 'calculator_result_view')");
+
+            page.locator("input[x-model='rawGross']").fill("1100");
+            page.waitForFunction(
+                    "() => window.dataLayer && Array.from(window.dataLayer).some(e => e && e[0] === 'event' && e[1] === 'calculator_complete')");
+
+            boolean hasCompleteFunnel = Boolean.TRUE.equals(page.evaluate(
+                    "() => ['calculator_result_view', 'calculator_start', 'calculator_complete'].every(name => Array.from(window.dataLayer).some(e => e && e[0] === 'event' && e[1] === name))"));
+            boolean leaksRawInputs = Boolean.TRUE.equals(page.evaluate(
+                    "() => Array.from(window.dataLayer).filter(e => e && e[0] === 'event' && String(e[1]).startsWith('calculator_')).some(e => { const p = e[2] || {}; return 'gross' in p || 'miles' in p || 'hours' in p; })"));
+
+            assertTrue(hasCompleteFunnel, "Calculator should emit the complete organic conversion funnel");
+            assertTrue(!leaksRawInputs, "Calculator analytics must not include raw earnings, mileage, or hours");
+        }
+    }
+
+    @Test
     public void calculatorShouldClampNegativeInputsBeforeRenderingMoneyResults() {
         try (BrowserContext context = browser.newContext();
                 Page page = context.newPage()) {

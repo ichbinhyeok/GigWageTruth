@@ -83,7 +83,7 @@ public class OrganicMonitoringRegressionTest {
                 failures.add(path + " missing meta description");
             } else if (description.length() < 70) {
                 warnings.add(path + " short meta description (" + description.length() + ")");
-            } else if (description.length() > 185) {
+            } else if (description.length() > 160) {
                 warnings.add(path + " long meta description (" + description.length() + ")");
             }
 
@@ -367,8 +367,8 @@ public class OrganicMonitoringRegressionTest {
                 .andReturn()
                 .getResponse()
                 .getContentAsString();
-        assertTrue(city.contains("<lastmod>2026-07-06</lastmod>"),
-                "City sitemap should keep a city-data lastmod instead of marking every URL fresh today");
+        assertTrue(city.contains("<lastmod>2026-08-11</lastmod>"),
+                "City sitemap should expose the date of the latest material city-content update");
     }
 
     @Test
@@ -418,6 +418,7 @@ public class OrganicMonitoringRegressionTest {
                 .andReturn();
 
         String html = result.getResponse().getContentAsString();
+        Document doc = Jsoup.parse(html, AppConstants.BASE_URL + "/salary/uber/miami");
         assertTrue(html.contains("Adjust this city estimate"),
                 "City report hero should expose a prefilled calculator CTA");
         assertTrue(html.contains("/uber?gross="),
@@ -434,8 +435,12 @@ public class OrganicMonitoringRegressionTest {
                 "City report should expose source-backed driver field notes");
         assertTrue(html.contains("Published shift evidence"),
                 "City report should expose reviewed public shift evidence");
-        assertTrue(html.contains("Real Uber shift signals"),
-                "City report should frame shift evidence as real-world checks");
+        assertTrue(html.contains("Uber shift benchmarks used for Miami"),
+                "City report should distinguish broader shift benchmarks from local evidence");
+        assertTrue(html.contains("No city-specific driver report is included yet"),
+                "Evidence summary should disclose when only broader app benchmarks are available");
+        assertTrue(doc.select("span:containsOwn(Broader benchmark)").size() == 2,
+                "City reports should limit broader benchmark cards to two");
         assertTrue(html.contains("NerdWallet Uber pay test"),
                 "City report field notes should include app-specific field-test evidence");
         assertTrue(!html.contains("Top-result comparison") && !html.contains("Where GigVerdict has to beat"),
@@ -448,6 +453,19 @@ public class OrganicMonitoringRegressionTest {
                 "Driver report form should identify report submissions");
         assertTrue(html.contains("name=\"source_path\" value=\"/salary/uber/miami\""),
                 "Driver report form should preserve source URL context");
+
+        String localHtml = mockMvc.perform(get("/salary/doordash/atlanta"))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+        Document localDoc = Jsoup.parse(localHtml, AppConstants.BASE_URL + "/salary/doordash/atlanta");
+        assertTrue(localDoc.select("span:containsOwn(Local report)").size() == 1,
+                "A city-specific report should remain visible and labeled as local");
+        assertTrue(localDoc.select("span:containsOwn(Broader benchmark)").size() == 2,
+                "A city with local evidence should still cap broader benchmarks at two");
+        assertTrue(localHtml.contains("including 1 city-specific report"),
+                "Evidence summary should disclose the local report count");
     }
 
     @Test
@@ -461,6 +479,8 @@ public class OrganicMonitoringRegressionTest {
         String text = doc.text();
 
         assertTrue(doc.title().contains("DoorDash Pay in NYC: Active-Hour Minimum & Take-Home"));
+        assertTrue(metaContent(doc, "description").length() <= 160,
+                "NYC meta description should fit a search-result snippet");
         assertTrue(firstH1(doc).contains("DoorDash Pay in New York City"));
         assertTrue(text.contains("$22.13")
                         && text.toLowerCase().replace('-', ' ').contains("qualifying active hour"));
@@ -1000,8 +1020,8 @@ public class OrganicMonitoringRegressionTest {
                 AppConstants.BASE_URL + "/best-cities/doordash");
         assertTrue(bestCitiesDoc.title().contains("Best Cities for DoorDash Drivers"),
                 "Best-cities page title should target driver city queries");
-        assertTrue(bestCitiesDoc.title().contains("Highest Net Pay"),
-                "DoorDash best-cities title should target click-driven dash-city queries");
+        assertTrue(bestCitiesDoc.title().contains("Net Pay Ranking"),
+                "DoorDash best-cities title should state the ranking intent without truncation");
         assertTrue(firstH1(bestCitiesDoc).contains("Best Cities for DoorDash Drivers"),
                 "Best-cities page H1 should target best-city driver intent");
         assertTrue(bestCitiesDoc.text().contains("highest paying DoorDash cities near me"),

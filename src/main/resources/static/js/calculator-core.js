@@ -28,6 +28,8 @@ window.createGigCalculator = function (initialData) {
         savedScenarios: [],
         verdictContainerId: initialData.verdictContainerId,
         debounceTimer: null,
+        calculationStartedTracked: false,
+        calculationCompletedTracked: false,
 
         get gross() { return this.nonNegativeNumber(this.rawGross); },
         get miles() { return this.nonNegativeNumber(this.rawMiles); },
@@ -52,19 +54,25 @@ window.createGigCalculator = function (initialData) {
             }
 
             this.$watch('selectedVehicleId', () => this.updateGasPriceFromPreset());
-            this.$watch('rawGross', () => this.debouncedFetchVerdict());
-            this.$watch('rawMiles', () => this.debouncedFetchVerdict());
-            this.$watch('rawHours', () => this.debouncedFetchVerdict());
-            this.$watch('rawTips', () => this.debouncedFetchVerdict());
-            this.$watch('rawBonuses', () => this.debouncedFetchVerdict());
-            this.$watch('rawActiveTime', () => this.debouncedFetchVerdict());
-            this.$watch('rawGasPrice', () => this.debouncedFetchVerdict());
-            this.$watch('selectedVehicleId', () => this.debouncedFetchVerdict());
-            this.$watch('calculationMode', () => this.debouncedFetchVerdict());
-            this.$watch('isRoundTrip', () => this.debouncedFetchVerdict());
-            this.$watch('rawCustomMpg', () => this.debouncedFetchVerdict());
-            this.$watch('rawCustomMaintenance', () => this.debouncedFetchVerdict());
-            this.$watch('rawCustomDepreciation', () => this.debouncedFetchVerdict());
+            this.$watch('rawGross', () => this.handleCalculatorChange());
+            this.$watch('rawMiles', () => this.handleCalculatorChange());
+            this.$watch('rawHours', () => this.handleCalculatorChange());
+            this.$watch('rawTips', () => this.handleCalculatorChange());
+            this.$watch('rawBonuses', () => this.handleCalculatorChange());
+            this.$watch('rawActiveTime', () => this.handleCalculatorChange());
+            this.$watch('rawGasPrice', () => this.handleCalculatorChange());
+            this.$watch('selectedVehicleId', () => this.handleCalculatorChange());
+            this.$watch('calculationMode', () => this.handleCalculatorChange());
+            this.$watch('isRoundTrip', () => this.handleCalculatorChange());
+            this.$watch('rawCustomMpg', () => this.handleCalculatorChange());
+            this.$watch('rawCustomMaintenance', () => this.handleCalculatorChange());
+            this.$watch('rawCustomDepreciation', () => this.handleCalculatorChange());
+
+            const query = new URLSearchParams(window.location.search);
+            const isPrefilled = ['gross', 'miles', 'hours'].every((key) => query.has(key));
+            if (isPrefilled) {
+                this.trackCalculatorEvent('calculator_result_view', { entry_type: 'prefilled' });
+            }
 
             try {
                 const stored = localStorage.getItem('gigwager_saved_scenarios');
@@ -81,6 +89,25 @@ window.createGigCalculator = function (initialData) {
             this.debounceTimer = setTimeout(() => this.fetchVerdict(), 500);
         },
 
+        handleCalculatorChange() {
+            if (!this.calculationStartedTracked) {
+                this.calculationStartedTracked = true;
+                this.trackCalculatorEvent('calculator_start', { entry_type: 'edited' });
+            }
+            this.debouncedFetchVerdict();
+        },
+
+        trackCalculatorEvent(eventName, extra = {}) {
+            if (typeof window.gtag !== 'function') return;
+
+            window.gtag('event', eventName, {
+                app_name: this.selectedApp.toLowerCase(),
+                calculation_mode: this.calculationMode,
+                result_band: this.resultBand,
+                ...extra
+            });
+        },
+
         async fetchVerdict() {
             if (!this.verdictContainerId) return;
 
@@ -94,6 +121,10 @@ window.createGigCalculator = function (initialData) {
                 const container = document.getElementById(this.verdictContainerId);
                 if (container) {
                     container.innerHTML = html;
+                }
+                if (this.calculationStartedTracked && !this.calculationCompletedTracked) {
+                    this.calculationCompletedTracked = true;
+                    this.trackCalculatorEvent('calculator_complete', { entry_type: 'edited' });
                 }
             } catch (e) {
                 console.error('Failed to fetch verdict fragment', e);
@@ -270,6 +301,14 @@ window.createGigCalculator = function (initialData) {
             if (wage < 25) return { label: 'Working', text: 'This week works, but you should still protect the reserve and mileage routine.' };
             if (wage < 35) return { label: 'Strong', text: 'This week is healthy. Protect the margin and scale selectively.' };
             return { label: 'Elite', text: 'This week is strong enough to scale only if the margin stays disciplined.' };
+        },
+
+        get resultBand() {
+            if (this.netHourly < 12) return 'below_12';
+            if (this.netHourly < 18) return '12_to_18';
+            if (this.netHourly < 25) return '18_to_25';
+            if (this.netHourly < 35) return '25_to_35';
+            return '35_plus';
         },
 
         get annualLossProjection() {

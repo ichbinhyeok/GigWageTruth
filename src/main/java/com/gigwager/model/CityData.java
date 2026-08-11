@@ -25,7 +25,7 @@ public enum CityData {
                                         "<b>Strategy:</b> Avoid Midtown during rush hour at all costs. The real money is in the morning airport runs (JFK/LGA) from the outer boroughs, or working the late-night shifts in Williamsburg and Lower East Side where traffic flows but demand stays high. Watch out for 'Congestion Pricing' zones which will eat into your net profit."),
 
         LOS_ANGELES("los-angeles", "Los Angeles", "CA", 4.60, 16.78, MarketTier.HIGH, 0.70,
-                        "<b>The 'Expert' Reality:</b> LA is not one city; it's 50 cities trenchoat-stacked together. The '405' is a parking lot from 3 PM to 7 PM. Experienced drivers know that 'Prop 22' guarantees you a minimum earning floor, but the real winners are those who master the 'LAXit' airport lot system or stick to the Westside (Santa Monica, WeHo) on Friday nights. <br><br>"
+                        "<b>The local reality:</b> Los Angeles behaves like several separate driving markets. The 405 can become a parking lot from 3 PM to 7 PM. Prop 22 provides an active-time earnings floor, but results still depend on unpaid time, total miles, and zone choice. Experienced drivers often learn the LAXit airport system or stay within one Westside zone instead of chasing surges across town. <br><br>"
                                         +
                                         "<b>Strategy:</b> Don't chase surges across town; you'll spend 45 minutes driving 10 miles. Pick a 'zone' (e.g., The Valley OR The Westside) and stay there. Movie premieres in Hollywood often close streets—check Waze before you start."),
 
