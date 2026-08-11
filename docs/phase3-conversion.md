@@ -18,7 +18,7 @@ To massively boost referral traffic and engagement without setting up heavy back
 - Users passing data via the calculator links propagate their session data deep into the content clusters via query parameters.
 - If a user clicks `Vehicle Costs` from the `verdict_card`, the frontend injects `?app=...&miles=...` into the link.
 - On the `cost-per-mile.jte` (Vehicle Costs) endpoint, an Alpine.js view intercepts `$miles` from the URL to display a hyper-customized risk banner: `"Warning: Based on your Uber stats, you are bleeding $55 in depreciation a week."`
-- The `quarterly-estimator.jte` leverages `$gross` to output an immediate 15.3% IRS estimation. 
+- The `quarterly-estimator.jte` uses the shared scenario engine to estimate self-employment tax by applying the 15.3% rate to 92.35% of modeled net earnings. It is a planning estimate; income tax and individual limits remain separate.
 
 ## Next Steps
 These features complete the lean startup loop. We now acquire traffic from programmatically ranked sites or intent hubs, filter them into the gig wage calculator to "shock them," then seamlessly link contextually tailored affiliate paths via Dynamic CTAs.

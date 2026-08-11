@@ -228,7 +228,7 @@
                     <ul class="list-disc pl-5 text-blue-800 text-sm space-y-1">
                         <li><strong>Ranking Criteria:</strong> Sorts strictly by estimated Net Hourly Pay for a "side-hustle" driver.</li>
                         <li><strong>Input model:</strong> Scheduled hours stay fixed at 10, 25, or 40. Market tier and a dampened local wage proxy shape modeled gross pay; traffic remains descriptive context rather than invented work hours.</li>
-                        <li><strong>Deductions:</strong> We apply the @template.components.irs_rate_snippet() mileage proxy plus an assumed 15.3% SE tax. Local gas prices are shown as market context, not a direct variable in this ranking formula.</li>
+                        <li><strong>Deductions:</strong> We apply the @template.components.irs_rate_snippet() mileage proxy, then estimate SE tax by applying the 15.3% rate to 92.35% of remaining profit. Local gas prices are market context, not a direct variable in this ranking formula.</li>
                         <li><strong>Answer first:</strong> This page is designed to answer which city pays drivers the most, not whether a market is active.</li>
                         <li><strong>Need coverage instead?</strong> Use the <a href="${coverageUrl}" class="font-bold underline hover:text-blue-900">${coverageGuideTitle}</a> before assuming a market is active.</li>
                     </ul>
