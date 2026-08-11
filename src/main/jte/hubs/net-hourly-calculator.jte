@@ -5,7 +5,7 @@
     noIndex = noIndex,
     seoMeta = new com.gigwager.model.SeoMeta(
         customTitle,
-        "Calculate your true net hourly wage across any gig app. Factor in gas, depreciation, and 15.3% self-employment taxes.",
+        "Calculate take-home per hour across gig apps after vehicle costs and a tax reserve. Use total online time, not active time.",
         AppConstants.BASE_URL + "/net-hourly-calculator",
         AppConstants.BASE_URL + "/og-image.jpg"
     ),

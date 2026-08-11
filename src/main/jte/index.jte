@@ -71,7 +71,7 @@
                     <div class="hidden lg:block pt-8 mt-8 border-t border-slate-200/50">
                         <h2 class="text-lg font-bold text-slate-900 mb-2">What is GigVerdict?</h2>
                         <p class="text-sm text-slate-600 mb-4 max-w-lg leading-relaxed">
-                            GigVerdict is a weekly keep-more-money system for gig workers. We turn your app payout into take-home, tax reserve, and next-step decisions using the 2026 IRS mileage proxy and a 15.3% self-employment tax assumption.
+                            GigVerdict is a weekly keep-more-money system for gig workers. We turn your app payout into take-home, a conservative tax reserve, and next-step decisions using the current IRS mileage proxy. The reserve is planning money, not an exact tax bill.
                         </p>
                         <ul class="text-xs font-semibold text-slate-500 space-y-2">
                             <li class="flex items-center gap-2"><span class="text-emerald-500 flex-shrink-0">+</span> Check what you actually kept from a real week</li>

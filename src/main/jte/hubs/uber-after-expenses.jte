@@ -47,7 +47,7 @@
                     <ul>
                         <li><strong>1. Gross Earnings:</strong> We estimate baseline earnings based on local market tiers (traffic thickness and localized minimum wage).</li>
                         <li><strong>2. Vehicle Deductions:</strong> @template.components.irs_rate_snippet() This accounts for gas, maintenance, and vehicle depreciation. It is subtracted from gross to find taxable profit.</li>
-                        <li><strong>3. Taxes:</strong> We deduct an estimated 15.3% self-employment tax (FICA) on the remaining profit.</li>
+                        <li><strong>3. Taxes:</strong> We estimate self-employment tax by applying the 15.3% rate to 92.35% of remaining profit, before individual limits and income tax.</li>
                     </ul>
                     <p class="italic text-slate-500 mt-4 text-sm">Note: This formula provides an estimated proxy, not financial or tax advice. Actual results vary by driving style and vehicle MPG.</p>
                 </div>
@@ -83,7 +83,7 @@
 
                     <div class="bg-white p-6 rounded-xl border border-slate-200">
                         <h3 class="text-xl font-bold text-slate-900 mb-2">5. Do I have to pay taxes on Uber income?</h3>
-                        <p class="text-slate-600">Yes. Regardless of whether you receive a 1099-K form or not, the IRS requires you to report all self-employment income. You are subject to both ordinary income tax and a 15.3% self-employment tax on your net profit.</p>
+                        <p class="text-slate-600">Yes. Regardless of whether you receive a 1099-K, report taxable self-employment income. The self-employment-tax calculation generally applies the 15.3% rate to 92.35% of net earnings, subject to individual limits; ordinary income tax is separate.</p>
                     </div>
 
                     <div class="bg-white p-6 rounded-xl border border-slate-200">

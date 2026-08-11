@@ -15,7 +15,7 @@ public class SitemapController {
 
     private static final String CORE_LASTMOD = AppConstants.SITEMAP_LASTMOD_DATE;
     private static final String REPORT_LASTMOD = AppConstants.SITEMAP_LASTMOD_DATE;
-    private static final String CITY_DATA_LASTMOD = "2026-07-06";
+    private static final String CITY_DATA_LASTMOD = "2026-08-11";
     private static final String EVERGREEN_LASTMOD = "2026-07-06";
 
     private final PageIndexPolicyService pageIndexPolicyService;

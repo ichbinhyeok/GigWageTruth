@@ -9,7 +9,7 @@ public class BrandConstants {
     public static final String WORST_LOSS = "You risk a major vehicle failure you cannot afford to fix.";
 
     // SURVIVAL ZONE
-    public static final String WHY_SURVIVAL = "You are taking 100% of the risk for less than minimum wage returns.";
+    public static final String WHY_SURVIVAL = "Your modeled take-home is below GigVerdict's $15/hr low-margin threshold.";
     public static final String WHO_SURVIVAL = "Only ignore this if flexibility is worth a massive pay cut.";
     public static final String WORST_SURVIVAL = "One accident or major repair could wipe out months of earnings.";
 

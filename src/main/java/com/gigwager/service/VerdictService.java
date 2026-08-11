@@ -54,10 +54,10 @@ public class VerdictService {
                 } else if (wage < 15.0) {
                         return new Verdict(
                                         "SURVIVAL ZONE",
-                                        "YOU ARE EARNING BELOW MINIMUM WAGE.",
+                                        "YOUR TAKE-HOME RATE IS BELOW $15/HR.",
                                         List.of(
                                                         "You are technically profitable, but your earnings are dangerously fragile. One bad repair or a minor accident will wipe out months of profit.",
-                                                        "At this level, you are earning less than a fast-food cashier, but with 100% of the risk. You have no benefits, no overtime, and no safety net.",
+                                                        "This is GigVerdict's low-margin planning threshold, not a legal minimum-wage determination. Compare the result with your local minimum wage and the benefits available from W-2 work.",
                                                         "This income might cover gas and groceries, but it builds no long-term wealth. You are treading water."),
                                         "Recalculate your hours or switch strategies before your car depreciates further.",
                                         "orange",

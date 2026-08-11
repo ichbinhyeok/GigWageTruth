@@ -354,9 +354,18 @@ public class DriverShiftReportService {
     }
 
     public List<DriverShiftReport> getReportsForCity(String app, String citySlug) {
-        return reports.stream()
+        List<DriverShiftReport> localReports = reports.stream()
                 .filter(report -> report.app().equals(app))
-                .filter(report -> "benchmark".equals(report.citySlug()) || report.citySlug().equals(citySlug))
+                .filter(report -> report.citySlug().equals(citySlug))
+                .collect(Collectors.toList());
+
+        List<DriverShiftReport> broaderBenchmarks = reports.stream()
+                .filter(report -> report.app().equals(app))
+                .filter(report -> "benchmark".equals(report.citySlug()))
+                .limit(2)
+                .collect(Collectors.toList());
+
+        return java.util.stream.Stream.concat(localReports.stream(), broaderBenchmarks.stream())
                 .collect(Collectors.toList());
     }
 }

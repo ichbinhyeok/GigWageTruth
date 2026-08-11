@@ -196,8 +196,11 @@ public class PageEvidenceService {
         }
         if (richCitedContent) {
             return String.format(
-                    "This estimate uses %d cited local sources and a city-specific calculation model; driver reports are shown when available.",
-                    sourceCount);
+                    "This estimate uses %d cited source%s for local context. No city-specific driver report is included yet; %d broader app benchmark%s are shown separately.",
+                    sourceCount,
+                    plural(sourceCount),
+                    driverReportCount,
+                    plural(driverReportCount));
         }
         return "This is a calculator-based estimate. Local driver evidence has not yet been added, so adjust the inputs before relying on the result.";
     }

@@ -126,7 +126,7 @@ public enum WorkLevel {
                         case SIDE_HUSTLE -> "<h3 class=\"text-xl font-bold text-slate-900 mb-3\">Tax strategy: get organized</h3>"
                                         + "<ul class=\"list-disc pl-5 space-y-2 text-slate-700\">"
                                         + "<li><strong>Plan for quarterly taxes:</strong> If your total tax bill is large enough, estimated payments may be required. Check current IRS 1040-ES guidance.</li>"
-                                        + "<li><strong>Watch self-employment tax:</strong> Net profit can be subject to 15.3% self-employment tax before regular income tax.</li>"
+                                        + "<li><strong>Watch self-employment tax:</strong> The calculation generally applies the 15.3% rate to 92.35% of net earnings, subject to individual limits; income tax is separate.</li>"
                                         + "<li><strong>Save by default:</strong> Many drivers set aside 25-30% of net profit until they know their personal tax situation.</li>"
                                         + "<li><strong>Deduct carefully:</strong> Phone, tolls, parking, car washes, and delivery gear can matter when they are genuinely business use for "
                                         + appName + ".</li>"

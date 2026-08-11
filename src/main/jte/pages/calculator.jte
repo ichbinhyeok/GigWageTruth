@@ -73,7 +73,7 @@
                             <section>
                                 <h2 class="text-2xl font-bold text-slate-900 mb-4">Why is your real wage so low?</h2>
                                 <div class="prose prose-slate max-w-none text-slate-600">
-                                    <p>Many Uber drivers are shocked to see their "real" hourly wage drop below minimum wage. The culprit is usually <strong>hidden vehicle costs</strong>.</p>
+                                    <p>Many Uber drivers are surprised when their take-home rate falls below their local wage target. The culprit is often <strong>hidden vehicle costs</strong>. Compare the result with the minimum wage where you work; this calculator does not make a legal wage determination.</p>
                                     <p>When you drive for Uber, you are borrowing equity from your car's future value. <strong>Depreciation</strong> costs about $0.15 per mile for the average sedan. Add gas ($0.10-$0.15/mi) and maintenance ($0.09/mi), and your operating costs can easily exceed $0.35 per mile.</p>
                                     <p>This calculator uses the current <strong>2026 IRS business mileage rate of $0.76/mile</strong> as a consistent planning proxy. It covers multiple operating-cost categories for tax purposes, but it is not a measurement of your specific vehicle's actual cost.</p>
                                 </div>
@@ -108,7 +108,7 @@
                                             <svg class="w-5 h-5 text-slate-400 transition-transform" :class="{'rotate-180': open}" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                                         </button>
                                         <div x-show="open" class="px-6 pb-4 text-slate-600">
-                                            <p>Yes. Uber treats you as an independent contractor. You must pay roughly <strong>15.3% Self-Employment Tax</strong> on your profit. This calculator estimates that tax for you so you can save accordingly.</p>
+                                            <p>Usually. Uber treats drivers as independent contractors. Standard mode sets aside a conservative <strong>15.3% planning reserve</strong> from post-mileage profit; it is not your exact tax bill. The tax estimator applies the 92.35% self-employment earnings factor and can provide a closer estimate.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -143,7 +143,7 @@
                                             </tr>
                                             <tr class="border-b border-slate-100 last:border-0">
                                                 <td class="py-2 pr-4 font-bold text-slate-900 w-24 shrink-0 whitespace-nowrap">Taxes:</td>
-                                                <td class="py-2 text-slate-600">We estimate the <strong>15.3% Self-Employment Tax</strong> on your net profit. Note: This does not include Federal/State income tax, which varies by person.</td>
+                                                <td class="py-2 text-slate-600">We set aside a conservative <strong>15.3% planning reserve</strong> from post-mileage profit. This is not an exact tax calculation and does not include federal or state income tax.</td>
                                             </tr>
                                             <tr class="border-b border-slate-100 last:border-0">
                                                 <td class="py-2 pr-4 font-bold text-slate-900 w-24 shrink-0 whitespace-nowrap">Net Hourly:</td>
@@ -235,7 +235,7 @@
                           }, {
                             "@type": "Question",
                             "name": "Do I really need to pay taxes on Uber income?",
-                            "acceptedAnswer": { "@type": "Answer", "text": "Yes. Uber treats you as an independent contractor. You must pay roughly 15.3% Self-Employment Tax on your profit. This calculator estimates that tax for you so you can save accordingly." }
+                            "acceptedAnswer": { "@type": "Answer", "text": "Usually. Uber drivers are independent contractors. Standard mode sets aside a conservative 15.3% planning reserve from post-mileage profit; it is not an exact tax bill. The dedicated tax estimator applies the 92.35% self-employment earnings factor." }
                           }]
                         }
                         </script>
@@ -349,7 +349,7 @@
                                             </tr>
                                             <tr class="border-b border-slate-100 last:border-0">
                                                 <td class="py-2 pr-4 font-bold text-slate-900 w-24 shrink-0 whitespace-nowrap">Taxes:</td>
-                                                <td class="py-2 text-slate-600">Estimated <strong>15.3% Self-Employment Tax</strong>. This is the "employer portion" of Social Security and Medicare that W-2 employees don't see, but you must pay.</td>
+                                                <td class="py-2 text-slate-600">Conservative <strong>15.3% tax reserve</strong> from post-mileage profit. This planning buffer is not your exact self-employment or income tax bill.</td>
                                             </tr>
                                             <tr class="border-b border-slate-100 last:border-0">
                                                 <td class="py-2 pr-4 font-bold text-slate-900 w-24 shrink-0 whitespace-nowrap">Real Wage:</td>

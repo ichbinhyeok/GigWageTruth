@@ -13,10 +13,10 @@
             <div class="mb-6">
                 <p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-700 mb-2">Published shift evidence</p>
                 <h2 class="text-3xl font-black text-slate-900 mb-3">
-                    Real ${appName} shift signals${cityName != null && !cityName.isBlank() ? " for " + cityName : ""}
+                    ${appName} shift benchmarks${cityName != null && !cityName.isBlank() ? " used for " + cityName : ""}
                 </h2>
                 <p class="text-slate-600 max-w-3xl">
-                    These are reviewed public field tests and driver discussions, not scraped personal data. When a source reports gross pay, hours, miles, or deliveries, GigVerdict shows those fields separately so the modeled $${String.format("%.2f", modeledNetHourly)}/hr net estimate can be checked against real-world shift friction.
+                    Local reports are labeled separately from broader app benchmarks. These reviewed public examples do not prove a ${cityName != null && !cityName.isBlank() ? cityName : "local"} wage; they only stress-test whether the modeled $${String.format("%.2f", modeledNetHourly)}/hr estimate survives real mileage and time data.
                 </p>
             </div>
 
@@ -26,6 +26,7 @@
                         <div class="flex flex-wrap items-center gap-2 mb-3">
                             <span class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-black uppercase tracking-[0.12em] text-emerald-800">${report.evidenceType()}</span>
                             <span class="rounded-full bg-white px-3 py-1 text-xs font-bold text-slate-600 border border-slate-200">${report.shiftWindow()}</span>
+                            <span class="rounded-full px-3 py-1 text-xs font-black uppercase tracking-[0.12em] ${"benchmark".equals(report.citySlug()) ? "bg-amber-100 text-amber-800" : "bg-sky-100 text-sky-800"}">${"benchmark".equals(report.citySlug()) ? "Broader benchmark" : "Local report"}</span>
                         </div>
                         <h3 class="text-xl font-black text-slate-900 mb-2">${report.cityName()}</h3>
                         <p class="text-sm font-bold text-slate-700 mb-4">${report.reportedResult()}</p>

@@ -36,4 +36,20 @@ class PricingAssumptionsTest {
         assertTrue(presets.contains("\"costPerMile\": 0.76"));
         assertFalse(calculator.contains("effectiveMiles * 0.725"));
     }
+
+    @Test
+    void calculatorTracksAPrivacySafeOrganicConversionFunnel() throws Exception {
+        String calculator = Files.readString(Path.of("src/main/resources/static/js/calculator-core.js"));
+
+        assertTrue(calculator.contains("calculator_result_view"));
+        assertTrue(calculator.contains("calculator_start"));
+        assertTrue(calculator.contains("calculator_complete"));
+        assertTrue(calculator.contains("result_band"));
+        int trackingMethodStart = calculator.indexOf("trackCalculatorEvent(eventName");
+        int trackingMethodEnd = calculator.indexOf("async fetchVerdict()", trackingMethodStart);
+        String trackingMethod = calculator.substring(trackingMethodStart, trackingMethodEnd);
+        assertFalse(trackingMethod.contains("gross"));
+        assertFalse(trackingMethod.contains("miles"));
+        assertFalse(trackingMethod.contains("hours"));
+    }
 }

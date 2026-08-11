@@ -533,12 +533,12 @@
                 <h2 class="text-2xl font-bold text-slate-900 mb-6">Frequently Asked Questions</h2>
                 <div class="space-y-4">
                     <details class="group border border-slate-200 rounded-xl p-4">
-                        <summary class="font-semibold text-slate-900 cursor-pointer">How much does a ${appName} driver make in ${city.getCityName()} after expenses in 2026?</summary>
+                        <summary class="font-semibold text-slate-900 cursor-pointer">How much does ${app.equals("uber") ? "an" : "a"} ${appName} driver make in ${city.getCityName()} after expenses in 2026?</summary>
                         <p class="text-slate-600 mt-3">Our ${featuredScenario.getHours()}-hour weekly model estimates about $${String.format("%.2f", featuredScenario.getNetHourly())} per hour after applying one IRS mileage-cost proxy of $${String.format("%.2f", AppConstants.IRS_MILEAGE_RATE)}/mile and an estimated SE-tax calculation. Local gas is shown as context and is not deducted again in standard mode. This translates to roughly $${String.format("%.0f", featuredScenario.getNetProfit())} in modeled weekly take-home.</p>
                     </details>
                     <details class="group border border-slate-200 rounded-xl p-4">
                         <summary class="font-semibold text-slate-900 cursor-pointer">Is ${appName} worth it in ${city.getCityName()} in 2026?</summary>
-                        <p class="text-slate-600 mt-3">It depends on your work level and vehicle. At a side-hustle pace in ${city.getCityName()}, the estimated net hourly wage is $${String.format("%.2f", featuredScenario.getNetHourly())}/hr. ${featuredScenario.getNetHourly() >= 15.0 ? "This is above the federal minimum wage, making it potentially viable as supplemental income." : "This is close to or below minimum wage in many states, meaning a traditional W-2 job may offer better compensation plus benefits."} Vehicle choice matters: a Toyota Prius (57 MPG) will yield significantly higher net pay than a Ford Explorer (23 MPG).</p>
+                        <p class="text-slate-600 mt-3">It depends on your work level and vehicle. At a side-hustle pace in ${city.getCityName()}, the estimated take-home rate is $${String.format("%.2f", featuredScenario.getNetHourly())}/hr. Compare that estimate with ${city.getCityName()}'s $${String.format("%.2f", city.getMinWage())}/hr local minimum-wage input and the benefits available from W-2 work. This is a planning comparison, not a legal wage determination. Vehicle choice also changes the result.</p>
                     </details>
                     <details class="group border border-slate-200 rounded-xl p-4">
                         <summary class="font-semibold text-slate-900 cursor-pointer">How are these ${appName} earnings calculated?</summary>
@@ -703,7 +703,7 @@
             <!-- Internal Linking Silo (Bottom) -->
             <section class="mb-12" data-nosnippet>
                 <h4 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4 border-b border-slate-200 pb-2">
-                    Other High-Demand ${city.getMarketTier()} Markets
+                    Other markets to compare
                 </h4>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
                     @for(com.gigwager.model.CityData simCity : similarCities)

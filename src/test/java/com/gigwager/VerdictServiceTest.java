@@ -31,5 +31,10 @@ public class VerdictServiceTest {
 
         Verdict verdict = service.calculateVerdict(200.0, 100.0, 10.0, "Uber");
         assertEquals("SURVIVAL ZONE", verdict.level(), "Should correctly calculate typical side hustle");
+        assertEquals("YOUR TAKE-HOME RATE IS BELOW $15/HR.", verdict.headline());
+        assertFalse(verdict.headline().contains("MINIMUM WAGE"),
+                "A location-free calculator must not make a legal minimum-wage claim");
+        assertTrue(verdict.why().contains("low-margin threshold"),
+                "The $15 boundary should be described as GigVerdict's planning threshold");
     }
 }
