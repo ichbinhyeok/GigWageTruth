@@ -478,7 +478,8 @@ public class OrganicMonitoringRegressionTest {
                 AppConstants.BASE_URL + "/salary/doordash/new-york");
         String text = doc.text();
 
-        assertTrue(doc.title().contains("DoorDash Pay in NYC: Active-Hour Minimum & Take-Home"));
+        assertTrue(doc.title().contains("DoorDash NYC Pay: $22.13 Active")
+                        && doc.title().contains("Net"));
         assertTrue(metaContent(doc, "description").length() <= 160,
                 "NYC meta description should fit a search-result snippet");
         assertTrue(firstH1(doc).contains("DoorDash Pay in New York City"));
@@ -835,26 +836,46 @@ public class OrganicMonitoringRegressionTest {
                 .andReturn();
         Document cityDoc = Jsoup.parse(cityResult.getResponse().getContentAsString(),
                 AppConstants.BASE_URL + "/salary/doordash/phoenix");
-        assertTrue(cityDoc.title().contains("How Much Do DoorDash Drivers Make in Phoenix?"),
-                "City title should match the broad driver-pay question");
-        assertTrue(firstH1(cityDoc).contains("How Much Do DoorDash Drivers Make in Phoenix?"),
-                "City H1 should answer the broad driver-pay question naturally");
+        assertTrue(cityDoc.title().contains("DoorDash Phoenix Pay:"),
+                "Priority city title should put the market and pay figure near the front");
+        assertTrue(cityDoc.title().contains("Reported vs") && cityDoc.title().contains("Net"),
+                "Priority city title should distinguish published pay from modeled net pay");
+        assertTrue(firstH1(cityDoc).contains("DoorDash Pay in Phoenix"),
+                "City H1 should preserve the app-and-market pay query");
+        assertTrue(cityDoc.text().contains("What published sources report vs. estimated take-home"),
+                "Priority city should compare external evidence with the model above the calculator");
+        assertTrue(cityDoc.text().contains("Solo · Tracked total pay")
+                        && cityDoc.text().contains("Through Sep 2, 2026"),
+                "External evidence should expose its source, definition, and fixed observation date");
 
         MvcResult uberQuickWinResult = mockMvc.perform(get("/salary/uber/atlanta"))
                 .andExpect(status().isOk())
                 .andReturn();
         Document uberQuickWinDoc = Jsoup.parse(uberQuickWinResult.getResponse().getContentAsString(),
                 AppConstants.BASE_URL + "/salary/uber/atlanta");
-        assertTrue(uberQuickWinDoc.title().contains("How Much Do Uber Drivers Make in Atlanta?"),
-                "Uber Atlanta title should match the user question");
-        assertTrue(firstH1(uberQuickWinDoc).contains("How Much Do Uber Drivers Make in Atlanta?"),
-                "Uber Atlanta H1 should use natural question language");
+        assertTrue(uberQuickWinDoc.title().contains("Uber Pay in Atlanta:"),
+                "Non-curated city titles should still expose the modeled take-home figure");
+        assertTrue(firstH1(uberQuickWinDoc).contains("Uber Pay in Atlanta"),
+                "Uber Atlanta H1 should preserve the city-pay query");
         assertTrue(uberQuickWinDoc.text().contains("Related planning guides"),
                 "Uber Atlanta should expose distinct adjacent intents without keyword stuffing");
         assertTrue(!uberQuickWinDoc.text().contains("2025 2026"),
                 "User-facing city content should not repeat year-keyword strings");
         assertTrue(uberQuickWinDoc.html().contains("/salary/uber/atlanta/after-gas"),
                 "Uber Atlanta should link from city page into the after-gas intent page");
+
+        MvcResult nashvilleResult = mockMvc.perform(get("/salary/uber/nashville"))
+                .andExpect(status().isOk())
+                .andReturn();
+        Document nashvilleDoc = Jsoup.parse(nashvilleResult.getResponse().getContentAsString(),
+                AppConstants.BASE_URL + "/salary/uber/nashville");
+        assertTrue(nashvilleDoc.title().contains("$25.83 Reported"),
+                "Nashville title should lead with the current official published figure");
+        assertTrue(nashvilleDoc.text().contains("Uber · Median earnings")
+                        && nashvilleDoc.text().contains("Aug 3-31, 2026"),
+                "Official Nashville evidence should retain its metric definition and coverage dates");
+        assertTrue(nashvilleDoc.text().contains("Solo · Tracked total pay"),
+                "Nashville should show tracked evidence next to the official figure and net model");
 
         MvcResult reportResult = mockMvc.perform(get("/reports/uber-driver-hourly-earnings-2026"))
                 .andExpect(status().isOk())
@@ -1054,6 +1075,39 @@ public class OrganicMonitoringRegressionTest {
                 "Multi-apping guide should be framed as a calculator guide");
         assertTrue(firstH1(blogDoc).contains("Multi-Apping Calculator Guide"),
                 "Multi-apping guide H1 should be framed as a calculator guide");
+    }
+
+    @Test
+    public void curatedMarketEvidencePagesShouldKeepSerpCopyCompactAndDated() throws Exception {
+        List<String> paths = List.of(
+                "/salary/uber/los-angeles",
+                "/salary/uber/nashville",
+                "/salary/uber/chicago",
+                "/salary/uber/austin",
+                "/salary/doordash/los-angeles",
+                "/salary/doordash/phoenix",
+                "/salary/doordash/atlanta",
+                "/salary/doordash/boston");
+
+        for (String path : paths) {
+            Document doc = Jsoup.parse(mockMvc.perform(get(path))
+                            .andExpect(status().isOk())
+                            .andReturn()
+                            .getResponse()
+                            .getContentAsString(),
+                    AppConstants.BASE_URL + path);
+
+            assertTrue(doc.title().length() <= 60,
+                    () -> path + " title should stay within the CTR test budget: " + doc.title());
+            assertTrue(metaContent(doc, "description").length() <= 160,
+                    () -> path + " meta description should fit a search snippet");
+            assertTrue(doc.text().contains("What published sources report vs. estimated take-home"),
+                    () -> path + " should expose the evidence comparison above the calculator");
+            assertTrue(doc.text().contains("Model assumptions effective Jul 1, 2026"),
+                    () -> path + " should use a fixed model basis instead of runtime freshness");
+            assertTrue(doc.select("a:containsOwn(Open source)[href^=https]").size() >= 1,
+                    () -> path + " should link directly to its published evidence");
+        }
     }
 
     private void assertCanonicalAndNoIndex(String path, String expectedCanonical) throws Exception {

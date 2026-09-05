@@ -4,6 +4,7 @@
 @import com.gigwager.model.DriverFieldNote
 @import com.gigwager.model.DriverShiftReport
 @import com.gigwager.model.PageEvidenceProfile
+@import com.gigwager.model.MarketPayEvidence
 @import com.gigwager.model.content.CityRichContent
 @import com.gigwager.model.content.PersonaQuote
 @import com.gigwager.model.content.SourceCitation
@@ -16,7 +17,8 @@
 @param CityData city
 @param List<CityScenario> scenarios
 @param CityScenario featuredScenario
-@param String lastUpdated
+@param String modelBasisDate
+@param List<MarketPayEvidence> marketPayEvidence = java.util.List.of()
 @param String otherApp
 @param String otherAppName
 @param String otherAppUrl
@@ -48,7 +50,7 @@
         <script type="application/ld+json">
         $unsafe{cityCalculatorJsonLd}
         </script>
-        <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 pt-20 pb-24 px-6">
+        <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 pt-12 md:pt-20 pb-20 md:pb-24 px-6">
             <div class="max-w-4xl mx-auto">
                 <!-- Visual Breadcrumb Navigation -->
                 <nav class="text-sm text-slate-400 mb-4 flex items-center gap-2">
@@ -62,23 +64,22 @@
                     <div class="inline-block px-4 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-full">
                         <span class="text-emerald-400 text-sm font-bold uppercase tracking-wider">${city.getCityName()}, ${city.getState()}</span>
                     </div>
-                    <span class="text-slate-400 text-xs font-medium uppercase tracking-wider">Estimate updated: ${lastUpdated}</span>
+                    <span class="text-slate-400 text-xs font-medium uppercase tracking-wider">Model rate basis: ${modelBasisDate}</span>
                 </div>
                 
-                <h1 class="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
+                <h1 class="text-3xl md:text-5xl font-black text-white mb-4 md:mb-6 leading-tight">
                     ${heroTitlePrimary}
                     <span class="block text-white">${heroTitleSecondary}</span>
-                    <span class="block text-emerald-400 mt-2">${heroTitleTertiary}</span>
+                    <span class="block text-2xl md:text-4xl text-emerald-400 mt-2">${heroTitleTertiary}</span>
                 </h1>
                 
-                <p class="text-xl text-slate-300 max-w-2xl mb-8">
+                <p class="text-base md:text-lg text-slate-300 max-w-2xl mb-6 md:mb-8">
                     ${heroSummary}
                 </p>
 
                 <div class="flex flex-wrap items-center gap-3 mb-8 text-xs font-semibold text-slate-300" data-nosnippet>
-                    <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10">Updated ${lastUpdated}</span>
-                    <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10">After-expenses earnings estimate</span>
-                    <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10">Current IRS mileage proxy + SE tax estimate</span>
+                    <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10">Model assumptions effective ${modelBasisDate}</span>
+                    <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10">After expenses · IRS mileage + SE tax</span>
                     <a href="${methodologyUrl}" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 hover:border-emerald-400 hover:text-emerald-300 transition-colors">How we estimate this</a>
                 </div>
 
@@ -91,6 +92,43 @@
                         </p>
                         <a href="https://help.doordash.com/en-us/dashers/article/guide-to-the-new-york-city-earnings-standard" target="_blank" rel="noopener noreferrer" class="text-sm font-bold underline text-white">Read the official DoorDash NYC earnings standard</a>
                     </div>
+                @endif
+
+                @if(!marketPayEvidence.isEmpty())
+                    <section class="rounded-2xl border border-white/15 bg-slate-950/35 p-5 md:p-6 mb-6" aria-labelledby="market-pay-comparison">
+                        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-2 mb-4">
+                            <div>
+                                <p class="text-xs font-black uppercase tracking-[0.16em] text-emerald-300 mb-1">Same market, different definitions</p>
+                                <h2 id="market-pay-comparison" class="text-xl font-black text-white">What published sources report vs. estimated take-home</h2>
+                            </div>
+                            <a href="${methodologyUrl}" class="text-xs font-bold text-slate-300 underline hover:text-white">Why these figures differ</a>
+                        </div>
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+                            @for(var evidence : marketPayEvidence)
+                                <article class="rounded-xl bg-white/5 border border-white/10 p-4">
+                                    <div class="flex items-center justify-between gap-2 mb-2">
+                                        <span class="text-[11px] font-black uppercase tracking-wider text-sky-300">${evidence.evidenceType()}</span>
+                                        <span class="text-[11px] text-slate-400">Through ${evidence.observedAt()}</span>
+                                    </div>
+                                    <p class="text-2xl font-black text-white">$${String.format("%.2f", evidence.hourlyPay())}<span class="text-sm text-slate-400">/hr</span></p>
+                                    <p class="text-sm font-bold text-slate-200">${evidence.sourceName()} · ${evidence.payLabel()}</p>
+                                    <p class="text-xs text-slate-400 mt-2">${evidence.marketCoverage()}: ${evidence.definition()}</p>
+                                    <a href="${evidence.sourceUrl()}" target="_blank" rel="noopener noreferrer" class="inline-block mt-3 text-xs font-bold text-emerald-300 underline">Open source</a>
+                                </article>
+                            @endfor
+                            <article class="rounded-xl bg-emerald-400/10 border border-emerald-400/30 p-4">
+                                <div class="flex items-center justify-between gap-2 mb-2">
+                                    <span class="text-[11px] font-black uppercase tracking-wider text-emerald-300">Modeled</span>
+                                    <span class="text-[11px] text-slate-400">Basis ${modelBasisDate}</span>
+                                </div>
+                                <p class="text-2xl font-black text-emerald-300">$${String.format("%.2f", featuredScenario.getNetHourly())}<span class="text-sm text-slate-400">/hr</span></p>
+                                <p class="text-sm font-bold text-white">GigVerdict · Estimated take-home</p>
+                                <p class="text-xs text-slate-300 mt-2">${city.getCityName()}: weekly gross minus the IRS mileage-cost proxy and estimated self-employment tax.</p>
+                                <a href="${calculatorUrl}" class="inline-block mt-3 text-xs font-bold text-emerald-300 underline">Use your own inputs</a>
+                            </article>
+                        </div>
+                        <p class="text-xs text-slate-400 mt-4">Published pay can use active time, tracked app time, tips, a broader metro, or no vehicle-cost deduction. The labels above preserve each source's definition instead of presenting the numbers as interchangeable.</p>
+                    </section>
                 @endif
 
                 <div id="city-pay-calculator" class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 md:p-8 mb-6">
@@ -168,9 +206,9 @@
             <div class="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden">
                 <div class="bg-slate-900 px-6 py-3 flex items-center justify-between">
                     <h2 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
-                        <span>TL;DR</span> ${appName} in ${city.getCityName()} - Quick Summary (${lastUpdated})
+                        <span>TL;DR</span> ${appName} in ${city.getCityName()} - Quick Summary
                     </h2>
-                    <span class="text-xs text-slate-400">Updated ${lastUpdated}</span>
+                    <span class="text-xs text-slate-400">Model basis ${modelBasisDate}</span>
                 </div>
                 <div class="overflow-x-auto">
                 <table class="w-full text-sm" aria-label="${appName} earnings summary for ${city.getCityName()} in 2026">

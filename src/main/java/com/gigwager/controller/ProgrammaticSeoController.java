@@ -12,6 +12,7 @@ import com.gigwager.model.DoorDashMoneyIntent;
 import com.gigwager.model.DriverFieldNote;
 import com.gigwager.model.DriverShiftReport;
 import com.gigwager.model.PageEvidenceProfile;
+import com.gigwager.model.MarketPayEvidence;
 import com.gigwager.model.SeoMeta;
 import com.gigwager.model.SearchResultPattern;
 import com.gigwager.model.WorkLevel;
@@ -25,6 +26,7 @@ import com.gigwager.service.DriverShiftReportService;
 import com.gigwager.service.HtmlSanitizerService;
 import com.gigwager.service.PageEvidenceService;
 import com.gigwager.service.PageIndexPolicyService;
+import com.gigwager.service.MarketPayEvidenceService;
 import com.gigwager.dto.CityRankingDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -55,6 +57,7 @@ public class ProgrammaticSeoController {
         private final HtmlSanitizerService htmlSanitizerService;
         private final DriverShiftReportService driverShiftReportService;
         private final PageEvidenceService pageEvidenceService;
+        private final MarketPayEvidenceService marketPayEvidenceService;
 
         public ProgrammaticSeoController(DataLayerService dataLayerService,
                         PageIndexPolicyService pageIndexPolicyService,
@@ -67,6 +70,7 @@ public class ProgrammaticSeoController {
                 this.htmlSanitizerService = htmlSanitizerService;
                 this.driverShiftReportService = driverShiftReportService;
                 this.pageEvidenceService = new PageEvidenceService(cityRichContentRepository, driverShiftReportService);
+                this.marketPayEvidenceService = new MarketPayEvidenceService();
         }
 
         @Autowired
@@ -75,13 +79,15 @@ public class ProgrammaticSeoController {
                         CityRichContentRepository cityRichContentRepository,
                         HtmlSanitizerService htmlSanitizerService,
                         DriverShiftReportService driverShiftReportService,
-                        PageEvidenceService pageEvidenceService) {
+                        PageEvidenceService pageEvidenceService,
+                        MarketPayEvidenceService marketPayEvidenceService) {
                 this.dataLayerService = dataLayerService;
                 this.pageIndexPolicyService = pageIndexPolicyService;
                 this.cityRichContentRepository = cityRichContentRepository;
                 this.htmlSanitizerService = htmlSanitizerService;
                 this.driverShiftReportService = driverShiftReportService;
                 this.pageEvidenceService = pageEvidenceService;
+                this.marketPayEvidenceService = marketPayEvidenceService;
         }
 
         @GetMapping("/salary/{app}")
@@ -114,8 +120,7 @@ public class ProgrammaticSeoController {
 
                 // Dynamic Date
                 java.time.LocalDate now = java.time.LocalDate.now();
-                String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
-                                .format(now);
+                String monthYear = AppConstants.IRS_MILEAGE_RATE_EFFECTIVE_DATE;
 
                 CityRankingDto comparisonCity = topCities.stream()
                                 .filter(dto -> pageIndexPolicyService.isCityReportIndexable(dto.city(), "uber"))
@@ -127,7 +132,7 @@ public class ProgrammaticSeoController {
 
                 String title = String.format("%s Driver Earnings by City: Hourly Pay After Expenses", appName);
                 String description = String.format(
-                                "Compare %s earnings across %d cities after mileage and tax assumptions. %s leads at about $%.2f/hr take-home. Updated %s.",
+                                "Compare %s earnings across %d cities after mileage and tax assumptions. %s leads at about $%.2f/hr take-home. Model basis %s.",
                                 appName,
                                 indexedCityCount,
                                 topCity.city().getCityName(),
@@ -529,8 +534,7 @@ public class ProgrammaticSeoController {
 
                 java.time.LocalDate now = java.time.LocalDate.now();
                 int currentYear = now.getYear();
-                String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
-                                .format(now);
+                String monthYear = AppConstants.IRS_MILEAGE_RATE_EFFECTIVE_DATE;
 
                 String title;
                 String description;
@@ -687,51 +691,75 @@ public class ProgrammaticSeoController {
 
                 // Select "Featured" scenario (side-hustle level)
                 CityScenario featuredScenario = scenarios.get(1);
+                List<MarketPayEvidence> marketPayEvidence = marketPayEvidenceService.getEvidence(app, citySlug);
+                MarketPayEvidence primaryMarketEvidence = marketPayEvidence.isEmpty() ? null : marketPayEvidence.get(0);
 
                 java.time.LocalDate now = java.time.LocalDate.now();
-                String monthYear = java.time.format.DateTimeFormatter.ofPattern("MMM yyyy", java.util.Locale.US)
-                                .format(now);
+                String modelBasisDate = AppConstants.IRS_MILEAGE_RATE_EFFECTIVE_DATE;
 
                 // Build unique SEO meta
                 String appName = app.equals("uber") ? "Uber" : "DoorDash";
 
                 boolean nycDoorDash = app.equals("doordash") && city == CityData.NEW_YORK;
                 String title = nycDoorDash
-                                ? String.format("DoorDash Pay in NYC: Active-Hour Minimum & Take-Home (%d)", now.getYear())
-                                : String.format("How Much Do %s Drivers Make in %s? (%d)",
-                                                appName, city.getCityName(), now.getYear());
+                                ? String.format("DoorDash NYC Pay: $%.2f Active vs $%.2f Net",
+                                                AppConstants.NYC_DOORDASH_ACTIVE_HOUR_MINIMUM,
+                                                featuredScenario.getNetHourly())
+                                : primaryMarketEvidence != null
+                                                ? String.format("%s %s Pay: $%.2f Reported vs $%.2f Net",
+                                                                appName, city.getCityName(),
+                                                                primaryMarketEvidence.hourlyPay(),
+                                                                featuredScenario.getNetHourly())
+                                                : String.format("%s Pay in %s: $%.2f/hr Est. Take-Home (%d)",
+                                                                appName, city.getCityName(),
+                                                                featuredScenario.getNetHourly(), now.getYear());
                 String description = nycDoorDash
                                 ? String.format(
-                                                "NYC DoorDash pays at least $%.2f per qualifying active hour. Compare that rule with a separate %d-hour take-home estimate. Updated %s.",
+                                                "NYC DoorDash pays at least $%.2f per qualifying active hour. Compare that rule with our separate $%.2f/hr after-expenses model, with definitions shown.",
                                                 AppConstants.NYC_DOORDASH_ACTIVE_HOUR_MINIMUM,
-                                                featuredScenario.getHours(),
-                                                monthYear)
-                                : String.format(
-                                                "%s drivers in %s: modeled $%d/week gross and $%.2f/hr take-home after vehicle-cost and tax assumptions. Updated %s.",
-                                                appName, city.getCityName(),
-                                                featuredScenario.getGrossWeekly(),
-                                                featuredScenario.getNetHourly(), monthYear);
+                                                featuredScenario.getNetHourly())
+                                : primaryMarketEvidence != null
+                                                ? String.format(
+                                                                "%s %s pay: %s reports $%.2f/hr; our input-based model shows $%.2f/hr after vehicle and SE-tax costs. Definitions and dates included.",
+                                                                appName, city.getCityName(),
+                                                                primaryMarketEvidence.sourceName(),
+                                                                primaryMarketEvidence.hourlyPay(),
+                                                                featuredScenario.getNetHourly())
+                                                : String.format(
+                                                                "%s drivers in %s: $%d/week modeled gross and $%.2f/hr estimated take-home after vehicle-cost and SE-tax assumptions. Model basis %s.",
+                                                                appName, city.getCityName(),
+                                                                featuredScenario.getGrossWeekly(),
+                                                                featuredScenario.getNetHourly(), modelBasisDate);
                 String heroTitlePrimary = nycDoorDash
                                 ? "DoorDash Pay in New York City"
-                                : String.format("How Much Do %s Drivers Make in %s?", appName, city.getCityName());
+                                : String.format("%s Pay in %s", appName, city.getCityName());
                 String heroTitleSecondary = nycDoorDash
                                 ? String.format("$%.2f Qualifying Active-Hour Minimum",
                                                 AppConstants.NYC_DOORDASH_ACTIVE_HOUR_MINIMUM)
-                                : "Gross Pay vs. Estimated Take-Home";
+                                : String.format("$%.2f/hr Estimated Take-Home", featuredScenario.getNetHourly());
                 String heroTitleTertiary = nycDoorDash
                                 ? "Plus a Separate After-Expenses Estimate"
-                                : String.format("%d Driver Pay Guide", now.getYear());
+                                : primaryMarketEvidence != null
+                                                ? "Reported Pay vs. Our Net Model"
+                                                : "Gross Pay vs. Our Net Model";
                 String heroSummary = nycDoorDash
                                 ? String.format(
                                                 "NYC's official DoorDash standard applies to qualifying active time, not every online hour. Separately, our %d-hour weekly model estimates $%d gross and $%.2f/hr after the current IRS vehicle-cost proxy and self-employment tax reserve.",
                                                 featuredScenario.getHours(),
                                                 featuredScenario.getGrossWeekly(),
                                                 featuredScenario.getNetHourly())
-                                : String.format(
-                                                "Our %d-hour weekly model estimates $%d gross and $%.2f/hr after the current IRS vehicle-cost proxy and self-employment tax reserve. Adjust the hours, miles, and vehicle inputs for your own shift.",
-                                                featuredScenario.getHours(),
-                                                featuredScenario.getGrossWeekly(),
-                                                featuredScenario.getNetHourly());
+                                : primaryMarketEvidence != null
+                                                ? String.format(
+                                                                "%s reports $%.2f/hr for %s. Our input-based, after-expenses model returns $%.2f/hr. Different time and cost definitions explain the gap.",
+                                                                primaryMarketEvidence.sourceName(),
+                                                                primaryMarketEvidence.hourlyPay(),
+                                                                primaryMarketEvidence.marketCoverage(),
+                                                                featuredScenario.getNetHourly())
+                                                : String.format(
+                                                                "Our %d-hour weekly model estimates $%d gross and $%.2f/hr after the current IRS vehicle-cost proxy and self-employment tax reserve. Adjust the hours, miles, and vehicle inputs for your own shift.",
+                                                                featuredScenario.getHours(),
+                                                                featuredScenario.getGrossWeekly(),
+                                                                featuredScenario.getNetHourly());
 
                 String canonicalUrl = String.format("%s/salary/%s/%s", AppConstants.BASE_URL, app, citySlug);
                 String appHubCanonicalUrl = String.format("%s/salary/%s", AppConstants.BASE_URL, app);
@@ -761,7 +789,8 @@ public class ProgrammaticSeoController {
                 model.addAttribute("city", city);
                 model.addAttribute("scenarios", scenarios);
                 model.addAttribute("featuredScenario", featuredScenario);
-                model.addAttribute("lastUpdated", monthYear);
+                model.addAttribute("modelBasisDate", modelBasisDate);
+                model.addAttribute("marketPayEvidence", marketPayEvidence);
                 model.addAttribute("otherApp", otherApp);
                 model.addAttribute("otherAppName", otherAppName);
                 model.addAttribute("otherAppUrl", otherAppUrl);

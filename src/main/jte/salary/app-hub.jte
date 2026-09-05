@@ -44,7 +44,7 @@
                         @else
                             the main directory.
                         @endif
-                        Every city earnings page shows part-time, side-hustle, and full-time scenarios. Last updated: ${lastUpdated}.
+                        Every city earnings page shows part-time, side-hustle, and full-time scenarios. Model rate basis: ${lastUpdated}.
                     </p>
                     <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
                         <a href="${bestCitiesUrl}" onclick="gtag('event', 'cta_click', { 'event_category': 'seo_app_hub', 'event_label': 'compare_highest_paying_cities' })" class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold transition-colors">
@@ -154,6 +154,14 @@
                                 <strong class="block text-slate-900">DoorDash Atlanta driver earnings</strong>
                                 <span class="text-sm text-slate-600">Dash time vs active time reality check.</span>
                             </a>
+                            <a href="/salary/doordash/los-angeles" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
+                                <strong class="block text-slate-900">DoorDash Los Angeles driver earnings</strong>
+                                <span class="text-sm text-slate-600">Tracked metro pay versus modeled city take-home.</span>
+                            </a>
+                            <a href="/salary/doordash/boston" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
+                                <strong class="block text-slate-900">DoorDash Boston driver earnings</strong>
+                                <span class="text-sm text-slate-600">Tracked hourly pay and after-expenses comparison.</span>
+                            </a>
                         @else
                             <a href="/reports/uber-driver-hourly-earnings-2026" class="rounded-2xl border border-emerald-200 bg-emerald-50 px-5 py-4 hover:border-emerald-300 transition-colors">
                                 <strong class="block text-slate-900">Uber driver hourly earnings 2026 report</strong>
@@ -174,6 +182,10 @@
                             <a href="/salary/uber/chicago" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
                                 <strong class="block text-slate-900">Uber driver hourly earnings Chicago IL 2026</strong>
                                 <span class="text-sm text-slate-600">Airport, bar-close, and vehicle mileage pressure.</span>
+                            </a>
+                            <a href="/salary/uber/nashville" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
+                                <strong class="block text-slate-900">Uber Nashville reported vs net pay</strong>
+                                <span class="text-sm text-slate-600">Official median, tracked pay, and modeled take-home.</span>
                             </a>
                             <a href="/salary/uber/houston" class="rounded-2xl border border-slate-200 px-5 py-4 hover:border-emerald-200 hover:bg-emerald-50 transition-colors">
                                 <strong class="block text-slate-900">Rideshare driver hourly earnings Houston TX</strong>

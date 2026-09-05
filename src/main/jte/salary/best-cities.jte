@@ -51,10 +51,10 @@
                         @endif
                     </p>
                     <p class="text-sm text-slate-500 max-w-2xl mx-auto mt-3">
-                        These rankings compare estimated driver earnings after mileage and self-employment tax assumptions. Updated ${lastUpdated}.
+                        These rankings compare estimated driver earnings after mileage and self-employment tax assumptions. Model rate basis: ${lastUpdated}.
                     </p>
                     <div class="flex flex-wrap items-center justify-center gap-3 mt-4 text-xs font-semibold text-slate-600" data-nosnippet>
-                        <span class="px-3 py-1 rounded-full bg-white border border-slate-200">Updated ${lastUpdated}</span>
+                        <span class="px-3 py-1 rounded-full bg-white border border-slate-200">Model basis ${lastUpdated}</span>
                         <span class="px-3 py-1 rounded-full bg-white border border-slate-200">After-expenses estimate</span>
                         <span class="px-3 py-1 rounded-full bg-white border border-slate-200">Mileage + SE tax assumptions</span>
                         <a href="${methodologyUrl}" class="px-3 py-1 rounded-full bg-white border border-slate-200 hover:border-emerald-300 hover:text-emerald-700 transition-colors">Methodology</a>
